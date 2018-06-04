@@ -1,0 +1,28 @@
+<div class="row pt-3 pb-3" *ngIf="batchId != null">
+	<div class="col-sm-12 col-md-12 col-lg-12">
+		<div class="card">
+			<div class="card-header">Batch Progress</div>
+			<div class="card-body">
+				<div class="text-center" *ngIf="showSpinner"><i class="fa fa-spinner fa-pulse fa-3x"></i></div>
+				<!-- <app-loading-spinner *ngIf="showSpinner"></app-loading-spinner> -->
+				<div *ngIf="!showSpinner">
+					<h5 class="card-title">Progress by Day</h5>
+					{{percentCompleted}}% Days Completed
+					<p><ngb-progressbar class="dashboard-progess" type="info" [value]="percentCompleted" [height]="20">{{percentCompleted}}%</ngb-progressbar></p>
+					<div *ngIf="this.subTopics !=null"><h5 class="card-title">Progress by Subtopic</h5>
+					{{subPercentCompleted}}% Completed/Cancelled
+					<p><ngb-progressbar class="dashboard-progess" type="info" [value]="subPercentCompleted" [height]="20">{{subPercentCompleted}}%</ngb-progressbar></p></div>
+				</div>
+				<div *ngIf="subTopicMissed > 0">
+					<h5 class="card-title">Topics Missed</h5>
+					<p>{{subTopicMissed}} / {{subTopicTotal}} missed topics</p>
+					<div *ngFor="let list of topicArray">
+						{{list.listName}}
+						<ul><li *ngFor="let name of list.listItems">{{name}}</li></ul>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+

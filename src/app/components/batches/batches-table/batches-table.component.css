@@ -1,0 +1,12 @@
+.table{
+    width: 98%;
+    max-width: 100%;
+    background-color: transparent;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: -1px;
+}
+
+.my-pagination /deep/ .ngx-pagination .current {
+    background: var(--orange);
+}

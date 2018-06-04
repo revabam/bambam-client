@@ -1,0 +1,203 @@
+
+<app-alerts></app-alerts>
+
+<div class="container">
+    <div class="row justify-content-end">
+        <div class="col-sm-12 col-md-8 col-lg-8 text-center" *ngIf="selectedCurr">
+            <img src="http://i67.tinypic.com/21mf91z.png" width="75px" height="75px"> {{selectedCurr.name}} Version #{{selectedCurr.version}}</div>
+        </div>
+        <div class="row">
+            <div class="col-sm-12 col-md-4 col-lg-4">
+                <ngb-tabset class="row">
+                    <ngb-tab class="col-sm-6 col-md-6 col-lg-6">
+                        <ng-template ngbTabTitle>
+                            <div (click)="toggle(1)">Course Structures</div>
+                        </ng-template>
+                        <ng-template ngbTabContent></ng-template>
+                    </ngb-tab>
+                    <ngb-tab class="col-sm-6 col-md-6 col-lg-6">
+                        <ng-template ngbTabTitle>
+                            <div (click)="toggle(2)">Topic Pool</div>
+                        </ng-template>
+                        <ng-template ngbTabContent></ng-template>
+                    </ngb-tab>
+                </ngb-tabset>
+            </div>
+        <div class="col-sm-12 col-md-8 col-lg-8">
+            <div class="row">
+                <div *ngIf="isNewVer" class="col-sm-12 col-md-6 col-lg-6">
+                    <button class="btn btn-primary" (click)="openSaveCurriculumModal()">Save Curriculum</button>
+                </div>
+                <div *ngIf="isNewVer" class="col-sm-12 col-md-6 col-lg-6 align-self-end">
+                    <div class="row">
+                        <div class="col"> </div>
+                        <div class="col text-right">
+                            <span (click)="addWeek()">
+                                <i class="cursor fa fa-plus fa-2x"></i>
+                            </span>
+                            <i id="deleteMenu" class="dropdown fa fa-trash fa-2x cursor dropleft" data-toggle="dropdown"></i>
+                            <div class="dropdown-menu">
+                                <div class="dropdown-submenu1">
+                                    <div class="btn btn-block clear-week hover-delete text-left">Clear All Weeks</div>
+                                    <ul class="dropdown-menu">
+                                        <p class="font-weight-bold">Are You Sure?</p>
+                                        <button class="btn btn-primary" (click)="clearAllWeeks()">Yes</button>
+                                        <button class="btn btn-default" >No</button>
+                                    </ul>
+                                </div>
+                                <div class="dropdown-submenu2">
+                                    <div class="btn btn-block clear-subtopic hover-delete text-left">Clear All Subtopics</div>
+                                    <ul class="dropdown-menu">
+                                        <p class="font-weight-bold">Are You Sure?</p>
+                                        <button class="btn btn-primary" (click)="truncateWeeks()">Yes</button>
+                                        <button class="btn btn-default" >No</button>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div *ngIf="!isNewVer" class="row">
+                <div class="col">
+                    <button class="btn btn-block btn-primary" (click)="download()">Export Curriculum</button>
+                </div>
+                <div class="col" *ngIf="selectedCurr">
+                    <!-- <button class="btn btn-block btn-default" (click)="areYouSurePopulateCalendar(selectedCurr.masterVersion)">Populate my Calendar</button> -->
+                </div>
+                <div class="text-center" *ngIf="populatingCalendar">
+                    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+                </div>
+                <div class="col text-right">
+                    <!-- <span (click)="areYouSureDeleteCurr(selectedCurr.masterVersion)">
+                        <i class="cursor fa fa-trash fa-2x"></i>
+                    </span> -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row mb-3">
+        <div class="col-sm-12 col-md-4 col-lg-4 accordian">
+            <app-course-structure *ngIf="toggleTab === 1" (messageEvent)="receiveMessage($event)"></app-course-structure>
+            <app-topic-pool [readOnly]="!isNewVer" *ngIf="toggleTab === 2"></app-topic-pool>
+        </div>
+        <div class="col-sm-12 col-md-8 col-lg-8 accordian">
+            <app-curriculum-week [readOnly]="!isNewVer" *ngFor="let week of allWeeks; let i = index" [weekCurrSubtopics]="week" [weekNum]="i + 1"
+                (removeWeekEvent)="removeWeek($event)"></app-curriculum-week>
+        </div>
+
+    </div>
+
+    <div id="saveCurriculumModal" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Saving Curriculum</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <h6 *ngIf="selectedCurr">Save version #{{selectedCurr.version}} as new {{selectedCurr.name}} curriculum?</h6>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-primary" data-dismiss="modal" (click)="saveCurr(true)">Save</button>
+                    <button class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="makeNewVerMasterModal" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">CHANGE MASTER VERSION</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <h6 *ngIf="selectedCurr">Would you like to make #{{selectedCurr.version}} the new master version of {{selectedCurr.name}}?</h6>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-primary" data-dismiss="modal" (click)="saveCurr(true)">YES, I WOULD LIKE THIS TO BE THE NEW MASTER</button>
+                    <button class="btn btn-default" data-dismiss="modal" (click)="saveCurr(false)">NO</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="areYouSure" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 *ngIf="selectedCurr" class="modal-title">DELETE {{selectedCurr.name}} VERSION #{{selectedCurr.version}}</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <h6 *ngIf="selectedCurr">Are you sure you want to delete the current selected version ({{selectedCurr.name}} version
+                        #{{selectedCurr.version}})?
+                    </h6>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-primary" data-dismiss="modal" (click)="areYouReallySureDeleteCurr()">YES</button>
+                    <button class="btn btn-default" data-dismiss="modal">NO</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="areYouReallySure" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 *ngIf="selectedCurr" class="modal-title">DELETE {{selectedCurr.name}} VERSION #{{selectedCurr.version}}</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <h6 *ngIf="selectedCurr">If you delete this Curriculum Version, you will not be able to get it back</h6>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-primary" data-dismiss="modal" (click)="deleteVersions(selectedCurr)">Continue</button>
+                    <button class="btn btn-default" data-dismiss="modal">Cancel</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Confirmation modal for populating calendar -->
+    <div id="areYouSurePopulateCalendar" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 *ngIf="selectedCurr" class="modal-title">POPULATE CALENDAR WITH {{selectedCurr.name}} VERSION #{{selectedCurr.version}}</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <h6 *ngIf="selectedCurr">This will populate your calendar with the master {{selectedCurr.name}} curriculum. Are you sure?
+                    </h6>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-primary" (click)="areYouReallySurePopulateCalendar()">YES</button>
+                    <button class="btn btn-default" data-dismiss="modal">NO</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Second confirmation modal for popoulating calendar -->
+    <div id="areYouReallySurePopulateCalendar" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 *ngIf="selectedCurr" class="modal-title">POPULATE CALENDAR WITH {{selectedCurr.name}} VERSION #{{selectedCurr.version}}</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <h6 *ngIf="selectedCurr">Warning! Your calendar already has subtopics. Doing this will permanently overwrite it!</h6>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-primary" data-dismiss="modal" (click)="populateCalendar()">Continue</button>
+                    <button class="btn btn-default" data-dismiss="modal">Cancel</button>
+                </div>
+            </div>
+        </div>
+    </div>

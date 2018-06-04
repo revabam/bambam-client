@@ -1,0 +1,32 @@
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <ngb-tabset>
+                <ngb-tab>
+                    <ng-template ngbTabTitle>
+                        <div>All Batches</div>
+                    </ng-template>
+                    <ng-template ngbTabContent></ng-template>
+                </ngb-tab>
+            </ngb-tabset>
+        </div>
+        <div class="col"><app-batches-search *ngIf="batches" (change)="setFilterText($event)" class="pull-right"></app-batches-search></div>
+    </div>
+    <div class="row mt-1 mb-2">
+        <div class="col-sm-12 col-md-12 col-lg-12">
+            <div class="card">
+                <div class="card-header">
+                 All Batches
+             </div>
+                 <div class="card-body">
+                    <app-batches-table *ngIf="batches" [batches]="batches" [title]="'All Batches'" [filterText]="filterText">
+                    </app-batches-table>
+
+                    <div class="text-center" *ngIf="!batches">
+                        <i class="fa fa-spinner fa-pulse fa-5x"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

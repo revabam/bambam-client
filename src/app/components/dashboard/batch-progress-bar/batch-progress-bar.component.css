@@ -1,0 +1,7 @@
+.card-header {
+    background-color:  var(--dark-grey);
+}
+
+::ng-deep .bg-info {
+	background-color:  var(--dark-grey) !important;	
+}

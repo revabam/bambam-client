@@ -1,0 +1,14 @@
+.jumbotron {
+  /* Orange Jumbotron w/ lighten opacity.*/
+  /*background-color: rgba(250, 116, 39, 0.3);*/
+  
+  /* Blue Jumbotron w/ lighten opacity.*/
+  /*background-color: rgba(37, 95, 164, 0.3);*/
+
+  /* Font Color Jumbotron w/ lighten opacity.*/
+  /*background-color: rgba(7, 7, 7, 0.1);*/
+
+  /* Footer Color Jumbotron w/ lighten opacity.*/
+  background-color: rgba(71,76,85, 0.2);
+  color: var(--dark-grey);
+}

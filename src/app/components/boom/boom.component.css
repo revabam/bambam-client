@@ -1,0 +1,12 @@
+.color-complete {
+    background:#ff9945;
+}
+.color-missed {
+    background:#b63e4f;
+}
+.chart-legend {
+    display:inline-block;
+    vertical-align: middle;
+    width:30px;
+    height:10px
+}

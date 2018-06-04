@@ -1,0 +1,18 @@
+
+
+@media (max-width: 768px) {
+	.mobile-removal div:nth-child(even) .card .card-header {
+		display: none;
+	}
+
+	.mobile-removal div:nth-child(even) .card {
+		border-top-right-radius: 0px; 
+		border-top-left-radius:0px;
+	}
+
+	.mobile-removal div:nth-child(odd) .card {
+		border-bottom-right-radius: 0px; 
+		border-bottom-left-radius:0px;
+		border-bottom: none;
+	}
+}

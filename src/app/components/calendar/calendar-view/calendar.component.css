@@ -1,0 +1,73 @@
+.calendar-sidebar {
+    padding-left: 20px;
+    width: 100%;
+    text-align: center;
+    border-left: 1px solid rgba(12, 12, 12, 0.1);
+}
+
+.tooltiptext {
+    z-index: 5;
+    min-width: 150px;
+    display: none;
+    position: absolute;
+    background-color: white;
+    border: 1px solid rgba(12, 12, 12, 0.25);
+    border-radius: 5px;
+    font-size: 12px;
+    padding-top: 3px;
+    padding-left: 5px;
+    padding-right: 5px;
+    padding-bottom: 3px;
+    box-shadow: 1px 1px 1px rgba(12, 12, 12, 0.25);
+}
+
+.tooltiptext span {
+    z-index: 5;
+    position: absolute;
+    padding-left: 3px;
+    padding-right: 3px;
+    border-radius: 3px;
+    color: white;
+}
+
+
+
+/deep/ .fc-content
+{
+  color:white;
+}
+
+/deep/ .fc-content .fc-time
+{
+  color:white;
+  display: none;
+}
+
+/deep/ .ui-button{
+    background: #F26925; 
+    border-color: #F26925;
+}
+
+/deep/ .ui-calendar .ui-calendar-button{
+    background: #F26925; 
+    border-color: #F26925;
+}
+
+/deep/ .ui-calendar .ui-calendar-button:hover{
+    background: #F26925; 
+    border-color: #F26925;
+}
+
+/deep/ .ui-state-highlight{
+    border-color: #F26925;
+    background: #F26925;
+    color: white;
+  }
+.fc-trash {
+    float: left;
+}
+
+.modal-body-buttons {
+    margin: auto;
+    text-align: center;
+}

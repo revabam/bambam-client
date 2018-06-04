@@ -1,0 +1,60 @@
+<div class="container">
+  <div *ngIf="currentBatch != null; else noBatchSelected ">
+  <div *ngIf="associateList.length > 0; else noAssociates">
+    <div class="row">
+      <div class="col-sm-12 col-md-3 col-lg-3 ml-auto">
+        <div class="form-group">
+          <input class="form-control" type="text" [(ngModel)]="searchTerm" placeholder="Search" required="">
+        </div>
+      </div>
+    </div>
+
+    <div class="row mb-2">
+      <div class="col-sm-12 col-md-12 col-lg-12">
+        <div class="card">
+          <div class="card-header">{{currentBatch.name}} Associates</div>
+          <div class="card-body">
+            <table class="table table-hover">
+              <thead>
+                <tr class="associates-header">
+                  <th [class.active]="order === 'lastName'" (click)="setOrder('lastName')" class="head">Name
+                    <span [hidden]="reverse">▼</span>
+                    <span [hidden]="!reverse">▲</span>
+                  </th>
+                  <th class="head">Email</th>
+                  <th class="head">Batch Id</th>
+                  <th class="head">Main Phone</th>
+                  <th class="head">Secondary Phone</th>
+                  <th class="head">Skype</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr class="associates-row" *ngFor="let associate of associateList | orderBy: order:reverse:'case-insensitive'| search : 'all' : searchTerm | paginate: { itemsPerPage: 7, currentPage: p}">
+                  <td class="value lname">{{associate.lastName}}, {{associate.firstName}}</td>
+                  <td class="value email">{{associate.email}}</td>
+                  <td class="value batchId">{{associate.batch.id}}</td>
+                  <td class="value mPhone">{{associate.phone}}</td>
+                  <td class="value sPhone">{{associate.phone2}}</td>
+                  <td class="value skype">{{associate.skype}}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+      </div>
+    </div>
+    <div class="text-center">
+      <pagination-controls class="my-pagination" (pageChange)="p = $event" autoHide="true"></pagination-controls>
+    </div>
+  </div>
+</div>
+
+<ng-template #noBatchSelected>
+  <h2>Batch Has Not Been Selected</h2>
+</ng-template>
+
+<ng-template #noAssociates>
+  <h2>No Associates In Batch</h2>
+</ng-template>
+</div>

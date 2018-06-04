@@ -1,0 +1,77 @@
+<div class="container">
+  <div class="card justify-content-md-center">
+    <div class="card-header col-12 text-center">
+      <h1>Bootcamp Overall Objectives Manager</h1>
+    </div>
+    <div #pieChart class="col-sm-12">
+      <div class="row card-body">
+        <div class="col-lg-6 col-sm-12 p-3">          
+          <h3>Subtopics Completion Chart
+            <input type="text" style="width:50px" (keypress)="checkInput($event,$event.target.value)" (keyup)="changePercent($event,$event.target.value)" value="90">%
+          </h3>
+          <hr>
+          <div *ngIf="pieChartDatasets.length != 0">
+            <p class="text-center">
+              <span class="color-complete chart-legend"></span>
+              {{pieChartData[0]}} {{(percent==100)?'Batch':'Batches'}} {{(percent==100)?'Completed 100%': 'Completed ' + percent + ' - 100%'}}
+              <br><span class="color-missed chart-legend"></span>
+              {{pieChartData[1]}} {{(pieChartData[1]==1)?'Batch':'Batches'}} {{(percent==100)?'Missed 1 or more Subtopics':'Completed less than ' + (percent)+'%'}}
+            </p>
+            <canvas baseChart 
+              [options]="pieChartOptions"
+              [datasets]="pieChartDatasets"
+              [colors]="pieColors"
+              [labels]="pieChartLabels"
+              [legend]="pieChartLegend"
+              [chartType]="pieChartType"></canvas>
+          </div>
+        </div>
+        <div class="col-lg-6 col-sm-12 table-responsive p-3">
+          <h3>Overall Progress</h3>
+          <table class="table">
+            <tr>
+              <th>Batch</th>
+              <th>Trainer</th>
+              <th>Missed</th>
+              <th>Completed</th>
+              <th>Week</th>
+            </tr>
+            <tr *ngFor="let batch of batchOverallArray">
+              <td>{{batch.bName}}</td>
+              <td>{{batch.trainer}}</td>
+              <td><span [class]="batch.missed>0?'text-danger font-weight-bold':''">{{batch.missed}}</span></td>
+              <td><span class="font-weight-bold">{{batch.completed}}</span>/{{batch.total}}</td>
+              <td>{{batch.week}}</td>
+            </tr>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<br>
+<div class="container">
+  <div class="card">
+    <div class="row card-body">
+      <div class="col-12" *ngIf="batchSelectionList.length != 0">
+        <th>View Weekly Progress
+          <select (change)="changeBatch($event.target.value)">
+            <option *ngFor="let batch of batchSelectionList" value="{{batch.id}}">{{batch.name}} - {{batch.trainer.firstName}}</option>
+          </select>
+      </div>
+      <div #barChart class="col-md-12">
+        <p *ngIf="barChartData.length != 0" class="text-center">
+          <span class="color-complete chart-legend"></span> Completed
+          <span class="color-missed chart-legend"></span> Missed
+        </p>
+        <canvas *ngIf="barChartData.length != 0" baseChart
+        [datasets]="barChartData"
+        [colors] = "barColors"
+        [labels]="barChartLabels"
+        [options]="barChartOptions"
+        [legend]="barChartLegend"
+        [chartType]="barChartType"></canvas>
+      </div>
+    </div>
+  </div>
+</div>

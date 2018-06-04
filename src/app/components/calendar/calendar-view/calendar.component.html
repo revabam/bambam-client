@@ -1,0 +1,35 @@
+<div class="container-fluid" #body>
+  <div class="row">
+
+    <div class="col-md-9 calendar-sidebar">
+      <p-schedule [droppable]="true" #fc [events]="events" [editable]="true" (onEventClick)="handleEventClick($event)" (onEventDrop)="handleEventDrop($event)"
+        (onDrop)="handleDrop($event)" (onEventMouseover)="handleEventMouseover($event)" (onEventMouseout)="handleEventMouseout($event)"
+        (onEventDragStart)="handleEventDragStart($event)" (onViewRender)="handleViewRender($event)">
+      </p-schedule>
+      
+    </div>
+    
+    <div class="col-md-2 calendar-sidebar">
+      <p>Currently displaying: Batch {{this.selectedBatch.name}}</p>
+
+      <div class="mb-2">Jump to a particular date</div>
+      <p-calendar #datePicker [(ngModel)]="gotoDateValue" [monthNavigator]="true" [yearNavigator]="true" yearRange="1980:2030"
+        [showIcon]="true" (onSelect)="jumpToDate(gotoDateValue)"></p-calendar>
+      <app-add-subtopic></app-add-subtopic>
+      <img src="/assets/img/delete_orange.png" alt="trashcan" class='fc-trash sticky-top' [style.opacity]="trashOpacity">
+    </div>
+  </div>
+
+  <span #tooltip class="tooltiptext">
+    <div class="text-center mb-2"><strong>{{subtopicTooltip}}</strong></div> 
+    Time: {{timeTooltip}}
+
+    <br>Status:
+    <span #status>{{statusTooltip}}</span>
+  </span>
+</div>
+<app-existing-subtopic-modal [subtopic]="existingSubtopic" (addExistingSubtopicEvent)="handleAddExistingSubtopic($event)"> 
+</app-existing-subtopic-modal>
+
+
+

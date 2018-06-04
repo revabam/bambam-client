@@ -1,0 +1,27 @@
+<div class="col">
+	<div class="table-responsive">
+		<table class="table table-hover">
+			<thead>
+				<tr>
+					<th scope="col">Name</th>
+					<th scope="col">Trainer</th>
+					<th scope="col">Type</th>
+					<th scope="col">Start Date</th>
+					<th scope="col">End Date</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr *ngFor="let batch of batches  | filterBatch: filterText | paginate: { itemsPerPage: 20, currentPage: pageNum}" class="clickable">
+					<td>{{batch.name}}</td>
+					<td *ngIf="batch.trainer != undefined">{{batch.trainer.firstName}} {{batch.trainer.lastName}}</td>
+					<td *ngIf="batch.curriculum != undefined">{{batch.curriculum.name}}</td>
+					<td>{{batch.startDate | date: 'MM/dd/yyyy'}}</td>
+					<td>{{batch.endDate | date: 'MM/dd/yyyy'}}</td>
+				</tr>
+			</tbody>
+		</table>
+		<div class="text-center">
+			<pagination-controls class="my-pagination" (pageChange)="pageNum = $event" autoHide="true"></pagination-controls>
+		</div>
+	</div>	
+</div>

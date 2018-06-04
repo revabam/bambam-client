@@ -1,0 +1,62 @@
+.card {
+    border-color: var(--light-grey);
+}
+
+.card-header {
+    background-color:  var(--light-grey);
+    cursor: pointer;
+}
+
+.btn-link {
+    color: white;
+}
+
+.border {
+    border-color: black !important;
+}
+
+.day-text {
+    font-weight: bolder;
+}
+
+.day {
+    position: relative;
+    width: 20%;
+}
+
+.subtopic {
+    margin-left: 1px;
+    margin-right: -2px;
+    margin-top: 2px;
+    margin-botom: 2px;
+    background: #fbdccd;
+}
+
+.subtopic-selector {
+    margin-right: 0px;
+    margin-left: 0px;
+}
+
+.read-only{
+    color: red;
+    font-weight: 700;
+}
+
+.noTouch {
+    opacity: .7;
+    pointer-events: none;
+}
+
+.progress {
+    width: 100%;
+    font-size: 15px;
+}
+
+.dropdown-menu.show {
+    display: block;
+    text-align: center;
+}
+
+.fa-times-circle:hover {
+    color: var(--danger);
+}
