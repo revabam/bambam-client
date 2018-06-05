@@ -11,53 +11,47 @@ import { BoomComponent } from './components/boom/boom.component';
 
 const routes: Routes = [
     {
-        path: '',
-        component: BamComponent,
-        children: [
-            {
-                path: 'home',
-                component: BamComponent
-            },
-            {
-                path: 'viewAssociates',
-                component: ViewAssociatesComponent
-            },
-            {
-                path: 'myBatches',
-                component: MyBatchesComponent
-            },
-            {
-                path: 'allBatches',
-                component: AllBatchesComponent
-            },
-            {
-                path: 'editBatches',
-                component: EditBatchComponent
-            },
-            {
-                path: 'curriculum',
-                component: MainCurriculumViewComponent
-            },
-            {
-                path: 'calendar',
-                component: CalendarComponent
-            },
-            {
-                path: 'boom',
-                component: BoomComponent
-            },
-            {
-                path: '**',
-                pathMatch: 'full',
-                redirectTo: '/home'
-            },
-        ]
-    }
+        path: 'home',
+        component: BamComponent
+    },
+    {
+        path: 'viewAssociates',
+        component: ViewAssociatesComponent
+    },
+    {
+        path: 'myBatches',
+        component: MyBatchesComponent
+    },
+    {
+        path: 'allBatches',
+        component: AllBatchesComponent
+    },
+    {
+        path: 'editBatches',
+        component: EditBatchComponent
+    },
+    {
+        path: 'curriculum',
+        component: MainCurriculumViewComponent
+    },
+    {
+        path: 'calendar',
+        component: CalendarComponent
+    },
+    {
+        path: 'boom',
+        component: BoomComponent
+    },
+    {
+        path: '**',
+        pathMatch: 'full',
+        redirectTo: '/home'
+    },
 ];
 
 @NgModule({
     imports: [
-        RouterModule.forChild(routes)
+        RouterModule.forRoot(routes)
     ],
     exports: [
         RouterModule
