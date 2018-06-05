@@ -1,9 +1,0 @@
-::ng-deep h1 {
-  font-weight: 300;
-}
-
-::ng-deep .card-header { 
-  background-color: var(--orange); 
-  color: white;
-  font-weight: bold;
-}
