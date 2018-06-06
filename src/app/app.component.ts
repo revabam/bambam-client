@@ -1,3 +1,4 @@
+import { environment } from './../environments/environment';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -6,6 +7,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
+
+  envName = environment.envName;
 
   constructor() {}
 
