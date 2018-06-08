@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "concurrently - kill-others \"npm run mock:server\" \"npm run start:proxy\"",
+    "start": "npm run concat:mocks && concurrently - kill-others \"npm run mock:server\" \"npm run start:proxy\"",
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
