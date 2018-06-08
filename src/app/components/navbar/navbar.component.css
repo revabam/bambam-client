@@ -1,0 +1,16 @@
+.nav-item {
+    cursor: pointer;
+}
+
+.dropdown-menu {
+    background-color: rgba(207, 207, 207, 0.3);
+    border: 0;
+}
+
+.dropdown-menu .nav-link {
+    padding-left: 15px;
+}
+
+.dropdown-menu .nav-link:hover {
+    background-color: rgba(207, 207, 207, 0.45);
+}
