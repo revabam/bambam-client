@@ -4,28 +4,20 @@ import { RouterModule, Routes } from '@angular/router';
 import { appRoutes } from '../routes';
 
 import { AppComponent } from './app.component';
-import { NavbarComponent } from './components/navbar/navbar.component';
-import { HomeComponent } from './components/home/home.component';
-import { AssociatesComponent } from './components/associates/associates.component';
-import { BatchesComponent } from './components/batches/batches.component';
-import { BoomComponent } from './components/boom/boom.component';
-import { ViewAssociatesComponent } from './components/associates/view-associates/view-associates.component';
-import { MyBatchesComponent } from './components/batches/my-batches/my-batches.component';
-import { AllBatchesComponent } from './components/batches/all-batches/all-batches.component';
-import { EditBatchesComponent } from './components/batches/edit-batches/edit-batches.component';
+import { NavbarComponent } from './pages/template/navbar/navbar.component';
+import { DashboardComponent } from './pages/tiles/dashboard/dashboard.component';
+import { CalendarComponent } from './pages/tiles/calendar/calendar.component';
+import { CurriculumEditorComponent } from './pages/tiles/curriculum-editor/curriculum-editor.component';
+import { BoomComponent } from './pages/tiles/boom/boom.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     NavbarComponent,
-    HomeComponent,
-    AssociatesComponent,
-    BatchesComponent,
+    DashboardComponent,
+    CalendarComponent,
+    CurriculumEditorComponent,
     BoomComponent,
-    ViewAssociatesComponent,
-    MyBatchesComponent,
-    AllBatchesComponent,
-    EditBatchesComponent
   ],
   imports: [
     BrowserModule,
