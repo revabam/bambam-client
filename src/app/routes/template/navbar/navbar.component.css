@@ -14,3 +14,7 @@
 .dropdown-menu .nav-link:hover {
     background-color: rgba(207, 207, 207, 0.45);
 }
+
+.icon {
+    width: 35px;
+}
