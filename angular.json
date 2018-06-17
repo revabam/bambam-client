@@ -45,6 +45,23 @@
               "extractLicenses": true,
               "vendorChunk": false,
               "buildOptimizer": true
+            },
+            "uat": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.uat.ts"
+                }
+              ],
+              "optimization": false,
+              "outputHashing": "all",
+              "sourceMap": true,
+              "extractCss": false,
+              "namedChunks": true,
+              "aot": false,
+              "extractLicenses": false,
+              "vendorChunk": true,
+              "buildOptimizer": false
             }
           }
         },
@@ -56,6 +73,9 @@
           "configurations": {
             "production": {
               "browserTarget": "bambam-client:build:production"
+            },
+            "uat": {
+              "browserTarget": "bambam-client:build:uat"
             }
           }
         },

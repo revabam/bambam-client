@@ -26,4 +26,4 @@ import { BoomComponent } from './routes/pages/boom/boom.component';
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {}
