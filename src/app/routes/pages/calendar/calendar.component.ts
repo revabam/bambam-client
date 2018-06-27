@@ -12,6 +12,13 @@ export class CalendarComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+    this.configureMainCalendar();
+  }
+
+  private configureMainCalendar() {
+    $('#main-calendar').fullCalendar({
+      // put your options and callbacks here
+    });
   }
 
 }
