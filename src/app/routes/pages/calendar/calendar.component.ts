@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import * as $ from 'jquery';
+import 'fullcalendar';
 
 @Component({
   selector: 'app-calendar',
