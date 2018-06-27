@@ -217,8 +217,8 @@ export class CalendarComponent implements OnInit {
 }
 
 const eventColor = {
-  red: '#ff2222',
+  red: '#ff0000',
   green: '#00bb5d',
   blue: '#2399e5',
-  orange: '#ff6435'
+  orange: '#fd7850'
 };
