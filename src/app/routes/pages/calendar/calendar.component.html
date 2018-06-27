@@ -75,15 +75,15 @@
     
           <!-- Right Buttons -->
           <div class="col-sm text-right">
-            <a class="btn buttons buttons-today" [ngClass]="{'disabled' : isCurrentDate(viewDate)}">
+            <a class="btn buttons buttons-today" [ngClass]="{'disabled' : isCurrentDate(viewDate)}" (click)="changeView('today')">
               Today
             </a>
 
-            <a class="btn buttons buttons-left">
+            <a class="btn buttons buttons-left" (click)="changeView('prev')">
               <i class="fas fa-chevron-left"></i>
             </a>
             
-            <a class="btn buttons buttons-right">
+            <a class="btn buttons buttons-right" (click)="changeView('next')">
               <i class="fas fa-chevron-right"></i>
             </a>
           </div>

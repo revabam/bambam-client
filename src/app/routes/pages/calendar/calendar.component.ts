@@ -10,29 +10,60 @@ import 'fullcalendar';
 })
 export class CalendarComponent implements OnInit {
 
-  private monthNames = ['January', 'February', 'March', 'April', 'May', 'June',
-  'July', 'August', 'September', 'October', 'November', 'December'];
-
   private topics = ['Java', 'SQL', 'Angular', 'JavaScript', 'Spring', 'DevOps',
   'SOAP', 'REST', 'Microservices', 'Docker', 'Amazon Web Services'];
 
   private subtopics = [];
 
-  private view = 'month';
-  private viewDate = new Date();
+  private view; // $('#main-calendar').fullCalendar('getView').type;
+  private viewDate; // $('#main-calendar').fullCalendar('getDate');
   private activeDayIsOpen  = false;
   private datePickerIsOpen = false;
 
-  private title = $('#main-calendar').fullCalendar('getView').title;
+  private title; // $('#main-calendar').fullCalendar('getView').title;
 
   private events = [
     {
       title: 'Test1',
-      start: new Date()
+      start: new Date(),
+      description: 'This is a cool event',
+      textColor: 'white',
+      color: eventColor.blue
     },
     {
       title: 'Test2',
-      start: new Date('06/25/2018')
+      start: new Date(),
+      description: 'This is a cool event',
+      textColor: 'white',
+      color: eventColor.green
+    },
+    {
+      title: 'Test3',
+      start: new Date(),
+      description: 'This is a cool event',
+      textColor: 'white',
+      color: eventColor.red
+    },
+    {
+      title: 'Test4',
+      start: new Date(),
+      description: 'This is a cool event',
+      textColor: 'white',
+      color: eventColor.orange
+    },
+    {
+      title: 'Test5',
+      start: new Date(),
+      description: 'This is a cool event',
+      textColor: 'white',
+      color: eventColor.blue
+    },
+    {
+      title: 'Test6',
+      start: new Date(),
+      description: 'This is a cool event',
+      textColor: 'white',
+      color: eventColor.blue
     }
   ];
 
@@ -49,16 +80,18 @@ export class CalendarComponent implements OnInit {
     $('#main-calendar').fullCalendar({
       header: false,
       events: this.events,
+      eventLimit: true,
       dayRender: function( date, cell ) {
         // Change background color of today's day
         if (date.format('MM-DD-Y') === moment(new Date()).format('MM-DD-Y')) {
-          // cell.css('background-color', '#f26925');
-          cell.addClass('bg-orange');
+          cell.css('background-color', 'rgb(255, 134, 73)');
         }
       }
     });
 
     this.title = $('#main-calendar').fullCalendar('getView').title;
+    this.viewDate = $('#main-calendar').fullCalendar('getDate');
+    this.view = $('#main-calendar').fullCalendar('getView').type;
   }
 
   /**
@@ -77,33 +110,57 @@ export class CalendarComponent implements OnInit {
   }
 
   /**
-   * Changes the calendar view. Available views: day, week, month, list
+   * Changes the calendar view. Available views: day, week, month, list.
+   * Also changes view based on: today, prev, next
    * @param value Type of view
    */
   private changeView(view: string) {
-    if (view.toLocaleLowerCase() === 'day') {
-      $('#main-calendar').fullCalendar('changeView', 'agendaDay');
-      this.view = 'day';
-    } else if (view.toLocaleLowerCase() === 'week') {
-      $('#main-calendar').fullCalendar('changeView', 'agendaWeek');
-      this.view = 'week';
-    } else if (view.toLocaleLowerCase() === 'month') {
-      $('#main-calendar').fullCalendar('changeView', 'month');
-      this.view = 'month';
-    } else if (view.toLocaleLowerCase() === 'list') {
-      $('#main-calendar').fullCalendar('changeView', 'list');
-      this.view = 'list';
+    switch (view) {
+      case 'day':
+        $('#main-calendar').fullCalendar('changeView', 'agendaDay');
+        this.view = 'day';
+        break;
+
+      case 'week':
+        $('#main-calendar').fullCalendar('changeView', 'agendaWeek');
+        this.view = 'week';
+        break;
+
+      case 'month':
+        $('#main-calendar').fullCalendar('changeView', 'month');
+        this.view = 'month';
+        break;
+
+      case 'list':
+        $('#main-calendar').fullCalendar('changeView', 'list');
+        this.view = 'list';
+        break;
+
+      case 'today':
+        $('#main-calendar').fullCalendar('today');
+        break;
+
+      case 'prev':
+        $('#main-calendar').fullCalendar('prev');
+        break;
+
+      case 'next':
+        $('#main-calendar').fullCalendar('next');
+        break;
     }
+
+    // Set current title and viewDate to reflect changes
     this.title = $('#main-calendar').fullCalendar('getView').title;
+    this.viewDate = $('#main-calendar').fullCalendar('getDate');
   }
 
   /**
    * Returns true if date passed is today's date.
    * @param date Date object
    */
-  private isCurrentDate(date: Date): boolean {
-    const today = new Date();
-    if (date.toLocaleDateString() === today.toLocaleDateString()) {
+  private isCurrentDate(date: moment.Moment): boolean {
+    const today = moment(new Date());
+    if (date.format('MM-DD-Y') === today.format('MM-DD-Y')) {
       return true;
     }
     return false;
@@ -158,3 +215,10 @@ export class CalendarComponent implements OnInit {
   }
 
 }
+
+const eventColor = {
+  red: '#ff2222',
+  green: '#00bb5d',
+  blue: '#2399e5',
+  orange: '#ff6435'
+};
