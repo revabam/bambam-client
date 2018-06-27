@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import * as $ from 'jquery';
+import * as moment from 'moment';
 import 'fullcalendar';
 
 @Component({
@@ -22,6 +23,19 @@ export class CalendarComponent implements OnInit {
   private activeDayIsOpen  = false;
   private datePickerIsOpen = false;
 
+  private title = $('#main-calendar').fullCalendar('getView').title;
+
+  private events = [
+    {
+      title: 'Test1',
+      start: new Date()
+    },
+    {
+      title: 'Test2',
+      start: new Date('06/25/2018')
+    }
+  ];
+
   constructor() { }
 
   ngOnInit() {
@@ -33,10 +47,19 @@ export class CalendarComponent implements OnInit {
    */
   private configureMainCalendar() {
     $('#main-calendar').fullCalendar({
-      // put your options and callbacks here
+      header: false,
+      events: this.events,
+      dayRender: function( date, cell ) {
+        // Change background color of today's day
+        if (date.format('MM-DD-Y') === moment(new Date()).format('MM-DD-Y')) {
+          // cell.css('background-color', '#f26925');
+          cell.addClass('bg-orange');
+        }
+      }
     });
-  }
 
+    this.title = $('#main-calendar').fullCalendar('getView').title;
+  }
 
   /**
    * Toggle button to open or close flatpickr calendar.
@@ -54,13 +77,24 @@ export class CalendarComponent implements OnInit {
   }
 
   /**
-   * Changes the calendar view. Available views: day, week, month
+   * Changes the calendar view. Available views: day, week, month, list
    * @param value Type of view
    */
-  private changeView(value: string) {
-    if (value === 'day' || value === 'week' || value === 'month') {
-      this.view = value;
+  private changeView(view: string) {
+    if (view.toLocaleLowerCase() === 'day') {
+      $('#main-calendar').fullCalendar('changeView', 'agendaDay');
+      this.view = 'day';
+    } else if (view.toLocaleLowerCase() === 'week') {
+      $('#main-calendar').fullCalendar('changeView', 'agendaWeek');
+      this.view = 'week';
+    } else if (view.toLocaleLowerCase() === 'month') {
+      $('#main-calendar').fullCalendar('changeView', 'month');
+      this.view = 'month';
+    } else if (view.toLocaleLowerCase() === 'list') {
+      $('#main-calendar').fullCalendar('changeView', 'list');
+      this.view = 'list';
     }
+    this.title = $('#main-calendar').fullCalendar('getView').title;
   }
 
   /**

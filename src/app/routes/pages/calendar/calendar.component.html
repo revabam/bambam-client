@@ -1,9 +1,12 @@
 <!-- Fixed event option button to show or hide event-panel -->
-<div class="event-options text-center bg-orange">
-  <button class="btn" type="button" (click)="clickEventOptions()">
-    <i class="far fa-calendar-alt"></i>
-  </button>
+<div class="event-options-wrapper">
+  <div class="event-options text-center bg-orange">
+    <button class="btn" type="button" (click)="clickEventOptions()">
+      <i class="far fa-calendar-alt"></i>
+    </button>
+  </div>
 </div>
+
 
 <!-- Main container -->
 <div class="container-fluid padding">
@@ -56,9 +59,44 @@
       <!-- Main Calendar -->
       <div class="container-fluid">
         <div class="row">
+          <h3>{{ title }}</h3>
+        </div>
+
+        <div class="row">
+          <!-- Left Buttons -->
           <div class="col-sm">
-            <div id="main-calendar"></div>
+            <div class="col-sm">
+              <a (click)="changeView('day')" class="btn buttons buttons-left" [ngClass]="{'button-active' : view === 'day'}">Day</a>
+              <a (click)="changeView('week')" class="btn buttons buttons-middle" [ngClass]="{'button-active' : view === 'week'}">Week</a>
+              <a (click)="changeView('month')" class="btn buttons buttons-right" [ngClass]="{'button-active' : view === 'month'}">Month</a>
+              <a (click)="changeView('list')" class="btn buttons buttons-list" [ngClass]="{'button-active' : view === 'list'}">List</a>
+            </div>
           </div>
+    
+          <!-- Right Buttons -->
+          <div class="col-sm text-right">
+            <a class="btn buttons buttons-today" [ngClass]="{'disabled' : isCurrentDate(viewDate)}">
+              Today
+            </a>
+
+            <a class="btn buttons buttons-left">
+              <i class="fas fa-chevron-left"></i>
+            </a>
+            
+            <a class="btn buttons buttons-right">
+              <i class="fas fa-chevron-right"></i>
+            </a>
+          </div>
+
+          <!-- Main Calendar -->
+          <div class="container-fluid">
+            <div class="row">
+              <div class="col-sm">
+                <div id="main-calendar"></div>
+              </div>
+            </div>
+          </div>
+          
         </div>
       </div>
   </div>

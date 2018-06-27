@@ -22,6 +22,10 @@ select[name=topic], select[name=subtopic], input[type=date], .panel-inputs {
     border-radius: 4px;
 }
 
+#main-calendar {
+    padding-top: 15px;
+}
+
 .calendar {
     position: absolute;
     background: #f26925;
@@ -133,13 +137,17 @@ a {
     display: none;
 }
 
+.event-options-wrapper {
+    position: relative;
+    z-index: 2;
+}
+
 .event-options {
     position: fixed;
     border-radius: 50%;
     padding: 12px 4px;
     max-width: 55px;
     max-height: 55px;
-    z-index: 1;
     bottom: 25px;
     left: 25px;
     opacity: 0.6;
