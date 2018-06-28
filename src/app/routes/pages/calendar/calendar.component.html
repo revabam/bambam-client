@@ -75,7 +75,7 @@
     
           <!-- Right Buttons -->
           <div class="col-sm text-right">
-            <a class="btn buttons buttons-today" [ngClass]="{'disabled' : isCurrentDate(viewDate)}" (click)="changeView('today')">
+            <a class="btn buttons buttons-today" [ngClass]="{'disabled' : isToday(viewDate)}" (click)="changeView('today')">
               Today
             </a>
 

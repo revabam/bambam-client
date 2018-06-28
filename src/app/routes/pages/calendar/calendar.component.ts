@@ -16,7 +16,7 @@ export class CalendarComponent implements OnInit {
   private subtopics = [];
 
   private view; // $('#main-calendar').fullCalendar('getView').type;
-  private viewDate; // $('#main-calendar').fullCalendar('getDate');
+  private viewDate: moment.Moment; // $('#main-calendar').fullCalendar('getDate');
   private activeDayIsOpen  = false;
   private datePickerIsOpen = false;
 
@@ -156,9 +156,9 @@ export class CalendarComponent implements OnInit {
 
   /**
    * Returns true if date passed is today's date.
-   * @param date Date object
+   * @param date Date of type Moment
    */
-  private isCurrentDate(date: moment.Moment): boolean {
+  private isToday(date: moment.Moment): boolean {
     const today = moment(new Date());
     if (date.format('MM-DD-Y') === today.format('MM-DD-Y')) {
       return true;
