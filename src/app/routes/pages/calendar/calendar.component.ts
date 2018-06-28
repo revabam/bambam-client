@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef} from '@angular/core';
 import * as $ from 'jquery';
 import * as moment from 'moment';
 import 'fullcalendar';
@@ -15,13 +15,16 @@ export class CalendarComponent implements OnInit {
 
   private subtopics = [];
 
+  private validSubtopic = false;
+  private isToday = true;
+
   // Used for updating the view
   private view: string; // $('#main-calendar').fullCalendar('getView').type;
   private viewDate: moment.Moment; // $('#main-calendar').fullCalendar('getDate');
   private title: string; // $('#main-calendar').fullCalendar('getView').title;
 
   // Used for datepicker and timepicker
-  private bsValue;
+  @ViewChild('datepicker') private bsValue: ElementRef;
   private time: Date;
 
   private events = [
@@ -108,7 +111,6 @@ export class CalendarComponent implements OnInit {
   }
 
   private configureMiniCalendarAndTime() {
-    // this.bsValue = this.viewDate.toDate();
     this.time = this.viewDate.toDate();
     this.time.setHours(8);
     this.time.setMinutes(0);
@@ -157,6 +159,13 @@ export class CalendarComponent implements OnInit {
     // Set current title and viewDate to reflect changes
     this.title = $('#main-calendar').fullCalendar('getView').title;
     this.viewDate = $('#main-calendar').fullCalendar('getDate');
+
+    // Disable or enable Today button
+    if (this.checkToday(this.viewDate)) {
+      this.isToday = true;
+    } else {
+      this.isToday = false;
+    }
   }
 
   private onChangeDatepicker(event) {
@@ -169,7 +178,7 @@ export class CalendarComponent implements OnInit {
    * Returns true if date passed is today's date.
    * @param date Date of type Moment
    */
-  private isToday(date: moment.Moment): boolean {
+  private checkToday(date: moment.Moment): boolean {
     const today = moment(new Date());
     if (date.format('MM-DD-Y') === today.format('MM-DD-Y')) {
       return true;
@@ -215,7 +224,7 @@ export class CalendarComponent implements OnInit {
   /**
    * Returns true or false if subtopic exists within a topic.
    */
-  private validSubtopic() {
+  private checkSubtopic() {
     const subtopic = (<HTMLInputElement>document.getElementById('subtopic')).value;
     for (let i = 0; i < this.subtopics.length; i++) {
       if (subtopic.toLowerCase() === this.subtopics[i].toLowerCase()) {

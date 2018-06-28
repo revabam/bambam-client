@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { appRoutes } from '../app/routes/routes';
 import { FormsModule } from '@angular/forms';
+
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { TimepickerModule } from 'ngx-bootstrap/timepicker';
 
@@ -27,7 +28,7 @@ import { BoomComponent } from './routes/pages/boom/boom.component';
     RouterModule.forRoot(appRoutes),
     FormsModule,
     BsDatepickerModule.forRoot(),
-    TimepickerModule.forRoot()
+    TimepickerModule.forRoot(),
   ],
   providers: [],
   bootstrap: [AppComponent]

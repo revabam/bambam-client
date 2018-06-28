@@ -17,12 +17,12 @@
         <div>Jump to a particular date</div>
         <div class="input-wrapper">
           <div *ngIf="smallScreen()">
-            <input placement="bottom" type="text" #dp="bsDatepicker" bsDatepicker [bsConfig]="{containerClass: 'theme-orange'}" (bsValueChange)="onChangeDatepicker($event)">
+            <input #datepicker placement="bottom" type="text" #dp="bsDatepicker" bsDatepicker [bsConfig]="{containerClass: 'theme-orange', dateInputFormat: 'MM-DD-Y'}" (bsValueChange)="onChangeDatepicker($event)">
             <span class="calendar" (click)="dp.toggle()"><i class="far fa-calendar-alt"></i></span>
           </div>
 
           <div *ngIf="!smallScreen()">
-            <input placement="bottom left" type="text" #dp="bsDatepicker" bsDatepicker [bsConfig]="{containerClass: 'theme-orange'}" (bsValueChange)="onChangeDatepicker($event)">
+            <input #datepicker placement="bottom left" type="text" #dp="bsDatepicker" bsDatepicker [bsConfig]="{containerClass: 'theme-orange', dateInputFormat: 'MM-DD-Y'}" (bsValueChange)="onChangeDatepicker($event)">
             <span class="calendar" (click)="dp.toggle()"><i class="far fa-calendar-alt"></i></span>
           </div>
         </div>
@@ -40,7 +40,7 @@
         <br><br>
         
         <div>Subtopic:</div>
-        <input id="subtopic" name="subtopic" class="panel-inputs" list="subtopics" (keyup)="validSubtopic()" (focusout)="validSubtopic()" disabled>
+        <input id="subtopic" name="subtopic" class="panel-inputs" list="subtopics" (keyup)="checkSubtopic()" (focusout)="checkSubtopic()" disabled>
         <datalist id="subtopics">
           <option *ngFor="let subtopic of subtopics" [value]="subtopic">
         </datalist>
@@ -54,7 +54,7 @@
 
         <br><br>
 
-        <button class="btn bg-orange buttons" [ngClass]="{'disabled' : !validSubtopic()}">Add to Calendar</button>
+        <button class="btn bg-orange buttons" [ngClass]="{'disabled' : !validSubtopic}">Add to Calendar</button>
 
         <div class="delete">
           <i class="fas fa-trash"></i>
@@ -75,17 +75,25 @@
         <div class="row">
           <!-- Left Buttons -->
           <div class="col-sm">
-            <div class="col-sm">
-              <a (click)="changeView('day')" class="btn buttons buttons-left" [ngClass]="{'button-active' : view === 'day'}">Day</a>
-              <a (click)="changeView('week')" class="btn buttons buttons-middle" [ngClass]="{'button-active' : view === 'week'}">Week</a>
-              <a (click)="changeView('month')" class="btn buttons buttons-right" [ngClass]="{'button-active' : view === 'month'}">Month</a>
-              <a (click)="changeView('list')" class="btn buttons buttons-list" [ngClass]="{'button-active' : view === 'list'}">List</a>
+            <div class="btn-group btn-group-toggle" data-toggle="buttons">
+              <label (click)="changeView('day')" class="btn buttons buttons-left">
+                <input type="radio"> Day
+              </label>
+              <label (click)="changeView('week')" class="btn buttons buttons-middle">
+                <input type="radio"> Week
+              </label>
+              <label (click)="changeView('month')" class="btn buttons buttons-right active">
+                <input type="radio"> Month
+              </label>
+              <label (click)="changeView('list')" class="btn buttons buttons-list">
+                <input type="radio"> List
+              </label>
             </div>
           </div>
     
           <!-- Right Buttons -->
           <div class="col-sm text-right">
-            <a class="btn buttons buttons-today" [ngClass]="{'disabled' : isToday(viewDate)}" (click)="changeView('today')">
+            <a class="btn buttons buttons-today" [ngClass]="{'disabled' : isToday}" (click)="changeView('today')">
               Today
             </a>
 
