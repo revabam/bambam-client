@@ -2,6 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { appRoutes } from '../app/routes/routes';
+import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './routes/template/navbar/navbar.component';
@@ -22,6 +23,7 @@ import { BoomComponent } from './routes/pages/boom/boom.component';
   imports: [
     BrowserModule,
     RouterModule.forRoot(appRoutes),
+    BsDatepickerModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]

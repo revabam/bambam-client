@@ -22,6 +22,8 @@ export class CalendarComponent implements OnInit {
 
   private title; // $('#main-calendar').fullCalendar('getView').title;
 
+  private bsValue = new Date();
+
   private events = [
     {
       title: 'Test1',
@@ -71,6 +73,16 @@ export class CalendarComponent implements OnInit {
 
   ngOnInit() {
     this.configureMainCalendar();
+  }
+
+  /**
+   * Returns true if window screen is smaller than 768px.
+   */
+  private smallScreen(): boolean {
+    if (window.innerWidth < 768) {
+      return true;
+    }
+    return false;
   }
 
   /**

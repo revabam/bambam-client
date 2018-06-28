@@ -16,8 +16,16 @@
     <div id="event-panel" class="col-md-3 event-panel">
       <div>Jump to a particular date</div>
       <div class="input-wrapper">
-        <input id="datePicker" type="text" (change)="onChangeDatepicker()">
-        <span class="calendar" (click)="toggleDatePicker()"><i class="far fa-calendar-alt"></i></span>
+        <div *ngIf="smallScreen()">
+          <input  placement="bottom" type="text" #dp="bsDatepicker" bsDatepicker [bsValue]="bsValue" [bsConfig]="{containerClass: 'theme-orange'}">
+          <span class="calendar" (click)="dp.toggle()"><i class="far fa-calendar-alt"></i></span>
+        </div>
+
+        <div *ngIf="!smallScreen()">
+          <input  placement="bottom left" type="text" #dp="bsDatepicker" bsDatepicker [bsValue]="bsValue" [bsConfig]="{containerClass: 'theme-orange'}">
+          <span class="calendar" (click)="dp.toggle()"><i class="far fa-calendar-alt"></i></span>
+        </div>
+        
       </div>
 
       <br>
