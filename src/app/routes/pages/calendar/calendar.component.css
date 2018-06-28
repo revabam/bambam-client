@@ -40,7 +40,7 @@ select[name=topic], select[name=subtopic], input[type=date], .panel-inputs {
 }
 
 .calendar:hover {
-    background: #2399e5;
+    background: #f15000;
 }
 
 .calendar i {
@@ -68,7 +68,7 @@ a {
 }
 
 .buttons:hover {
-    background: #2399e5;
+    background: #f15000;
     border-bottom: 2px solid white;
     -webkit-box-shadow: 0px 2px 3px 0px rgba(0,0,0,0.3);
     -moz-box-shadow: 0px 2px 3px 0px rgba(0,0,0,0.3);
