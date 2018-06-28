@@ -14,49 +14,50 @@
 
     <!-- Left Column - Date Picker and Event Panel-->
     <div id="event-panel" class="col-md-3 event-panel">
-      <div>Jump to a particular date</div>
-      <div class="input-wrapper">
-        <div *ngIf="smallScreen()">
-          <input  placement="bottom" type="text" #dp="bsDatepicker" bsDatepicker [bsValue]="bsValue" [bsConfig]="{containerClass: 'theme-orange'}">
-          <span class="calendar" (click)="dp.toggle()"><i class="far fa-calendar-alt"></i></span>
+      <div class="event-panel-left">
+        <div>Jump to a particular date</div>
+        <div class="input-wrapper">
+          <div *ngIf="smallScreen()">
+            <input placement="bottom" type="text" #dp="bsDatepicker" bsDatepicker [bsValue]="bsValue" [bsConfig]="{containerClass: 'theme-orange'}">
+            <span class="calendar" (click)="dp.toggle()"><i class="far fa-calendar-alt"></i></span>
+          </div>
+
+          <div *ngIf="!smallScreen()">
+            <input placement="bottom left" type="text" #dp="bsDatepicker" bsDatepicker [bsValue]="bsValue" [bsConfig]="{containerClass: 'theme-orange'}">
+            <span class="calendar" (click)="dp.toggle()"><i class="far fa-calendar-alt"></i></span>
+          </div>
         </div>
 
-        <div *ngIf="!smallScreen()">
-          <input  placement="bottom left" type="text" #dp="bsDatepicker" bsDatepicker [bsValue]="bsValue" [bsConfig]="{containerClass: 'theme-orange'}">
-          <span class="calendar" (click)="dp.toggle()"><i class="far fa-calendar-alt"></i></span>
-        </div>
+        <br>
         
-      </div>
+        <div>Add subtopic to calendar</div>
 
-      <br>
-      
-      <div>Add subtopic to calendar</div>
+        <div>Topic:</div>
+        <input id="topic" name="topic" class="panel-inputs" list="topics" (keyup)="getSubtopics()" (focusout)="getSubtopics()">
+        <datalist id="topics">
+          <option *ngFor="let topic of topics" [value]="topic">
+        </datalist>
 
-      <div>Topic:</div>
-      <input id="topic" name="topic" class="panel-inputs" list="topics" (keyup)="getSubtopics()" (focusout)="getSubtopics()">
-      <datalist id="topics">
-        <option *ngFor="let topic of topics" [value]="topic">
-      </datalist>
+        <br><br>
+        
+        <div>Subtopic:</div>
+        <input id="subtopic" name="subtopic" class="panel-inputs" list="subtopics" (keyup)="validSubtopic()" (focusout)="validSubtopic()" disabled>
+        <datalist id="subtopics">
+          <option *ngFor="let subtopic of subtopics" [value]="subtopic">
+        </datalist>
 
-      <br><br>
-      
-      <div>Subtopic:</div>
-      <input id="subtopic" name="subtopic" class="panel-inputs" list="subtopics" (keyup)="validSubtopic()" (focusout)="validSubtopic()" disabled>
-      <datalist id="subtopics">
-        <option *ngFor="let subtopic of subtopics" [value]="subtopic">
-      </datalist>
+        <br><br>
 
-      <br><br>
+        <div>Start:</div>
+        <input id="subtopic-start-date" type="date">
 
-      <div>Start:</div>
-      <input id="subtopic-start-date" type="date">
+        <br><br>
 
-      <br><br>
+        <button class="btn bg-orange buttons" [ngClass]="{'disabled' : !validSubtopic()}">Add to Calendar</button>
 
-      <button class="btn bg-orange buttons" [ngClass]="{'disabled' : !validSubtopic()}">Add to Calendar</button>
-
-      <div class="delete">
-        <i class="fas fa-trash"></i>
+        <div class="delete">
+          <i class="fas fa-trash"></i>
+        </div>
       </div>
     </div>
 

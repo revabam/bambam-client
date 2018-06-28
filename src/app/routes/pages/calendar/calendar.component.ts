@@ -107,21 +107,6 @@ export class CalendarComponent implements OnInit {
   }
 
   /**
-   * Toggle button to open or close flatpickr calendar.
-   * Used for 'Jump to particular date' mini calendar.
-   */
-  private toggleDatePicker() {
-    // const statusOpen = document.getElementById('datePicker').classList.contains('active');
-    // console.log(statusOpen);
-    if (this.datePickerIsOpen) {
-      // this.datePicker.close();
-    } else {
-      // this.datePicker.open();
-    }
-    this.datePickerIsOpen = !this.datePickerIsOpen;
-  }
-
-  /**
    * Changes the calendar view. Available views: day, week, month, list.
    * Also changes view based on: today, prev, next
    * @param value Type of view
