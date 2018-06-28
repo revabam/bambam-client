@@ -24,7 +24,7 @@ export class CalendarComponent implements OnInit {
   private title: string; // $('#main-calendar').fullCalendar('getView').title;
 
   // Used for datepicker and timepicker
-  @ViewChild('datepicker') private bsValue: ElementRef;
+  @ViewChild('datepicker') private datepickerValue: ElementRef;
   private time: Date;
 
   private events = [
