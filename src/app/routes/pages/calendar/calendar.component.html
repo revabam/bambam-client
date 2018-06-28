@@ -7,7 +7,6 @@
   </div>
 </div>
 
-
 <!-- Main container -->
 <div class="container-fluid">
   <div class="row">
@@ -49,7 +48,17 @@
         <br><br>
 
         <div>Start:</div>
-        <input id="subtopic-start-date" type="date">
+        <div class="input-wrapper">
+          <div *ngIf="smallScreen()">
+            <input placement="bottom" type="text" #tp="bsDatepicker" bsDatepicker [bsValue]="bsValue" [bsConfig]="{containerClass: 'theme-orange'}">
+            <span class="calendar" (click)="dp.toggle()"><i class="far fa-clock"></i></span>
+          </div>
+
+          <div *ngIf="!smallScreen()">
+            <input placement="bottom left" type="text" #tp="bsDatepicker" bsDatepicker [bsValue]="bsValue" [bsConfig]="{containerClass: 'theme-orange'}">
+            <span class="calendar" (click)="dp.toggle()"><i class="far fa-clock"></i></span>
+          </div>
+        </div>
 
         <br><br>
 

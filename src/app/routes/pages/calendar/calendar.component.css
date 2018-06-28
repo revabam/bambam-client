@@ -8,17 +8,18 @@
     width: 100%;
 }
 
-input[type=text], select[name=subtopic], input[type=date], .panel-inputs {
-    width: 75%;
-    max-width: 150px;
+input {
+    width: 100%;
+    max-width: 125px;
     padding: 4px;
     border: 1px solid #cccccc;
     border-top-left-radius: 4px;
     border-bottom-left-radius: 4px;
 }
 
-select[name=topic], select[name=subtopic], input[type=date], .panel-inputs {
+input[name=topic], input[name=subtopic] {
     max-width: 200px;
+    width: 100%;
     border-radius: 4px;
 }
 
@@ -59,7 +60,7 @@ select[name=topic], select[name=subtopic], input[type=date], .panel-inputs {
     background: #f26925;
     color: white;
     border-radius: 4px;
-    padding: 4px 8px;
+    padding: 6px 12px;
     border-bottom: 2px solid rgba(0,0,0,0);
 }
 
