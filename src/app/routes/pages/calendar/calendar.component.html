@@ -17,12 +17,12 @@
         <div>Jump to a particular date</div>
         <div class="input-wrapper">
           <div *ngIf="smallScreen()">
-            <input placement="bottom" type="text" #dp="bsDatepicker" bsDatepicker [bsValue]="bsValue" [bsConfig]="{containerClass: 'theme-orange'}">
+            <input placement="bottom" type="text" #dp="bsDatepicker" bsDatepicker [bsConfig]="{containerClass: 'theme-orange'}" (bsValueChange)="onChangeDatepicker($event)">
             <span class="calendar" (click)="dp.toggle()"><i class="far fa-calendar-alt"></i></span>
           </div>
 
           <div *ngIf="!smallScreen()">
-            <input placement="bottom left" type="text" #dp="bsDatepicker" bsDatepicker [bsValue]="bsValue" [bsConfig]="{containerClass: 'theme-orange'}">
+            <input placement="bottom left" type="text" #dp="bsDatepicker" bsDatepicker [bsConfig]="{containerClass: 'theme-orange'}" (bsValueChange)="onChangeDatepicker($event)">
             <span class="calendar" (click)="dp.toggle()"><i class="far fa-calendar-alt"></i></span>
           </div>
         </div>
@@ -48,16 +48,8 @@
         <br><br>
 
         <div>Start:</div>
-        <div class="input-wrapper">
-          <div *ngIf="smallScreen()">
-            <input placement="bottom" type="text" #tp="bsDatepicker" bsDatepicker [bsValue]="bsValue" [bsConfig]="{containerClass: 'theme-orange'}">
-            <span class="calendar" (click)="dp.toggle()"><i class="far fa-clock"></i></span>
-          </div>
-
-          <div *ngIf="!smallScreen()">
-            <input placement="bottom left" type="text" #tp="bsDatepicker" bsDatepicker [bsValue]="bsValue" [bsConfig]="{containerClass: 'theme-orange'}">
-            <span class="calendar" (click)="dp.toggle()"><i class="far fa-clock"></i></span>
-          </div>
+        <div>
+          <timepicker [(ngModel)]="time" [mousewheel]="true" [arrowkeys]="true"></timepicker>
         </div>
 
         <br><br>

@@ -15,14 +15,14 @@ export class CalendarComponent implements OnInit {
 
   private subtopics = [];
 
-  private view; // $('#main-calendar').fullCalendar('getView').type;
+  // Used for updating the view
+  private view: string; // $('#main-calendar').fullCalendar('getView').type;
   private viewDate: moment.Moment; // $('#main-calendar').fullCalendar('getDate');
-  private activeDayIsOpen  = false;
-  private datePickerIsOpen = false;
+  private title: string; // $('#main-calendar').fullCalendar('getView').title;
 
-  private title; // $('#main-calendar').fullCalendar('getView').title;
-
-  private bsValue = new Date();
+  // Used for datepicker and timepicker
+  private bsValue;
+  private time: Date;
 
   private events = [
     {
@@ -73,6 +73,7 @@ export class CalendarComponent implements OnInit {
 
   ngOnInit() {
     this.configureMainCalendar();
+    this.configureMiniCalendarAndTime();
   }
 
   /**
@@ -104,6 +105,13 @@ export class CalendarComponent implements OnInit {
     this.title = $('#main-calendar').fullCalendar('getView').title;
     this.viewDate = $('#main-calendar').fullCalendar('getDate');
     this.view = $('#main-calendar').fullCalendar('getView').type;
+  }
+
+  private configureMiniCalendarAndTime() {
+    // this.bsValue = this.viewDate.toDate();
+    this.time = this.viewDate.toDate();
+    this.time.setHours(8);
+    this.time.setMinutes(0);
   }
 
   /**
@@ -149,6 +157,12 @@ export class CalendarComponent implements OnInit {
     // Set current title and viewDate to reflect changes
     this.title = $('#main-calendar').fullCalendar('getView').title;
     this.viewDate = $('#main-calendar').fullCalendar('getDate');
+  }
+
+  private onChangeDatepicker(event) {
+    const date = moment(event);
+    $('#main-calendar').fullCalendar('gotoDate', date);
+    this.changeView('day');
   }
 
   /**
