@@ -54,7 +54,7 @@
 
         <br><br>
 
-        <button class="btn bg-orange buttons" >Add to Calendar</button>
+        <button class="btn bg-orange buttons" [ngClass]="{'disabled' : !validSubtopic}">Add to Calendar</button>
 
         <div class="delete">
           <i class="fas fa-trash"></i>
@@ -75,25 +75,15 @@
         <div class="row">
           <!-- Left Buttons -->
           <div class="col-sm">
-            <div class="btn-group btn-group-toggle" data-toggle="buttons">
-              <label (click)="changeView('day')" class="btn buttons buttons-left">
-                <input type="radio"> Day
-              </label>
-              <label (click)="changeView('week')" class="btn buttons buttons-middle">
-                <input type="radio"> Week
-              </label>
-              <label (click)="changeView('month')" class="btn buttons buttons-right active">
-                <input type="radio"> Month
-              </label>
-              <label (click)="changeView('list')" class="btn buttons buttons-list">
-                <input type="radio"> List
-              </label>
-            </div>
+            <a (click)="changeView('day')" class="btn buttons buttons-left" [ngClass]="{'active' : view === 'day'}">Day</a>
+            <a (click)="changeView('week')" class="btn buttons buttons-middle" [ngClass]="{'active' : view === 'week'}">Week</a>
+            <a (click)="changeView('month')" class="btn buttons buttons-right" [ngClass]="{'active' : view === 'month'}">Month</a>
+            <a (click)="changeView('list')" class="btn buttons buttons-list" [ngClass]="{'active' : view === 'list'}">List</a>
           </div>
     
           <!-- Right Buttons -->
           <div class="col-sm text-right">
-            <a class="btn buttons buttons-today"  (click)="changeView('today')">
+            <a class="btn buttons buttons-today" [ngClass]="{'disabled': isToday}" (click)="changeView('today')">
               Today
             </a>
 
