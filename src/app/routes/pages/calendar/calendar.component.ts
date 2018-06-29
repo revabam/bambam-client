@@ -24,7 +24,8 @@ export class CalendarComponent implements OnInit {
   private title: string; // $('#main-calendar').fullCalendar('getView').title;
 
   // Used for datepicker and timepicker
-  @ViewChild('datepicker') private datepickerValue: ElementRef;
+  @ViewChild('datepicker') private datepicker: ElementRef;
+  private bsValue: Date;
   private time: Date;
 
   private events = [
@@ -111,6 +112,7 @@ export class CalendarComponent implements OnInit {
   }
 
   private configureMiniCalendarAndTime() {
+    this.bsValue = new Date();
     this.time = this.viewDate.toDate();
     this.time.setHours(8);
     this.time.setMinutes(0);
@@ -149,18 +151,25 @@ export class CalendarComponent implements OnInit {
 
       case 'prev':
         $('#main-calendar').fullCalendar('prev');
+
+        // Increment by 4 hours to avoid getting previous day
+        $('#main-calendar').fullCalendar('incrementDate', { hours: 4 });
         break;
 
       case 'next':
         $('#main-calendar').fullCalendar('next');
+
+        // Increment by 4 hours to avoid getting previous day
+        $('#main-calendar').fullCalendar('incrementDate', { hours: 4 });
         break;
     }
 
     // Set current title and viewDate to reflect changes
     this.title = $('#main-calendar').fullCalendar('getView').title;
     this.viewDate = $('#main-calendar').fullCalendar('getDate');
+    this.bsValue = this.viewDate.toDate();
 
-    // Disable or enable Today button
+    // Disable or enable 'Today' button
     if (this.checkToday(this.viewDate)) {
       this.isToday = true;
     } else {
@@ -168,10 +177,23 @@ export class CalendarComponent implements OnInit {
     }
   }
 
-  private onChangeDatepicker(event) {
-    const date = moment(event);
-    $('#main-calendar').fullCalendar('gotoDate', date);
-    this.changeView('day');
+  /**
+   * Jump to specific date if the date value changes.
+   * 'dateValue' is of type object that contains a date -
+   * e.g. - Wed Jun 20 2018 18:09:17 GMT-0400 (Eastern Daylight Time)
+   * @param dateValue - Object with date
+   */
+  private jumpTo(dateValue) {
+    // this.bsValue contains previous date, dateValue contains new date
+
+    // compare previous date with new date
+    if (this.bsValue.toLocaleDateString() !== (new Date(dateValue).toLocaleDateString())) {
+      $('#main-calendar').fullCalendar('gotoDate', dateValue);
+      this.changeView('day');
+    }
+
+    // Set bsValue to update previous date
+    this.bsValue = new Date(dateValue);
   }
 
   /**
