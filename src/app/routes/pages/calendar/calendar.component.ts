@@ -20,7 +20,7 @@ export class CalendarComponent implements OnInit {
 
   // Used for updating the view
   private view: string; // $('#main-calendar').fullCalendar('getView').type;
-  private viewDate: moment.Moment; // $('#main-calendar').fullCalendar('getDate');
+  private viewDate: Date; // $('#main-calendar').fullCalendar('getDate');
   private title: string; // $('#main-calendar').fullCalendar('getView').title;
 
   // Used for datepicker and timepicker
@@ -74,8 +74,7 @@ export class CalendarComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-    this.configureMainCalendar();
-    this.configureMiniCalendarAndTime();
+    this.configureCalendars();
   }
 
   /**
@@ -91,7 +90,7 @@ export class CalendarComponent implements OnInit {
   /**
    * Configures the main calendar.
    */
-  private configureMainCalendar() {
+  private configureCalendars() {
     $('#main-calendar').fullCalendar({
       header: false,
       events: this.events,
@@ -105,17 +104,14 @@ export class CalendarComponent implements OnInit {
     });
 
     this.title = $('#main-calendar').fullCalendar('getView').title;
-    this.viewDate = $('#main-calendar').fullCalendar('getDate');
+    this.viewDate = $('#main-calendar').fullCalendar('getDate').toDate();
     this.view = $('#main-calendar').fullCalendar('getView').type;
-  }
 
-  /**
-   * Configures the mini calendar ('jump to specific date').
-   */
-  private configureMiniCalendarAndTime() {
-    this.bsValue = new Date();
+    // For datepicker and timepicker
+    this.bsValue = this.viewDate;
     this.bsValue.setHours(8);
     this.bsValue.setMinutes(0);
+    this.bsValue.setSeconds(0);
   }
 
   /**
@@ -166,8 +162,8 @@ export class CalendarComponent implements OnInit {
 
     // Set current title and viewDate to reflect changes
     this.title = $('#main-calendar').fullCalendar('getView').title;
-    this.viewDate = $('#main-calendar').fullCalendar('getDate');
-    this.bsValue = this.viewDate.toDate();
+    this.viewDate = $('#main-calendar').fullCalendar('getDate').toDate();
+    this.bsValue = this.viewDate;
 
     // Disable or enable the 'Today' button
     if (this.checkToday(this.viewDate)) {
@@ -175,6 +171,41 @@ export class CalendarComponent implements OnInit {
     } else {
       this.isToday = false;
     }
+  }
+
+  /**
+   * Sets datepicker input value to current viewDate if dateValue is incorrect.
+   * Else it jumps to date specified.
+   * @param dateValue Object with date
+   */
+  private dateChange(dateValue) {
+    if (!this.isDateValid(dateValue)) {
+      this.bsValue = new Date();
+      this.bsValue.setTime(this.viewDate.getTime());
+    } else {
+      this.jumpTo(dateValue);
+    }
+  }
+
+  /**
+   * Resets timepicker input value if invalid.
+   * @param valid event that returns true if valid or not.
+   */
+  private timeChange() {
+      if (!this.bsValue) {
+        this.bsValue = new Date();
+        this.bsValue.setTime(this.viewDate.getTime());
+        this.bsValue.setHours(8);
+        this.bsValue.setMinutes(0);
+        this.bsValue.setSeconds(0);
+
+        // iterate DOM and remove 'is-invalid' class style
+        // this removes the red border
+        const inputs = document.getElementsByClassName('is-invalid');
+        for (let i = 0; i < inputs.length; i++) {
+          inputs[i].classList.remove('is-invalid');
+        }
+      }
   }
 
   /**
@@ -187,26 +218,35 @@ export class CalendarComponent implements OnInit {
     // this.bsValue contains previous date, dateValue contains new date
 
     // compare previous date with new date
-    if (this.bsValue.toLocaleDateString() !== (new Date(dateValue).toLocaleDateString())) {
-      try {
+    if (dateValue) {
+      if (this.bsValue.toLocaleDateString() !== (new Date(dateValue).toLocaleDateString())) {
         $('#main-calendar').fullCalendar('gotoDate', dateValue);
         this.changeView('day');
-      } catch (err) {
-        // catch error
       }
     }
+  }
 
-    // Set bsValue to update previous date
-    this.bsValue = new Date(dateValue);
+  /**
+   * Returns true if date is valid or not.
+   * @param date Date to be checked
+   */
+  private isDateValid(date): boolean {
+    const validDate = new Date(date);
+
+    // Check if date time is a valid number
+    if (!isNaN(validDate.getTime())) {
+      return true;
+    }
+    return false;
   }
 
   /**
    * Returns true if date passed is today's date.
    * @param date Date of type Moment
    */
-  private checkToday(date: moment.Moment): boolean {
-    const today = moment(new Date());
-    if (date.format('MM-DD-Y') === today.format('MM-DD-Y')) {
+  private checkToday(date: Date): boolean {
+    const today = new Date();
+    if (date.toLocaleDateString() === today.toLocaleDateString()) {
       return true;
     }
     return false;
@@ -262,6 +302,23 @@ export class CalendarComponent implements OnInit {
         this.validSubtopic = false;
       }
     }
+  }
+
+  /**
+   * Returns true if all inputs are valid.
+   */
+  private validateInputs(): boolean {
+    if (this.bsValue instanceof Date && !isNaN(this.bsValue.getTime())) {
+      console.log('valid date');
+    }
+    return false;
+  }
+
+  /**
+   * Adds subtopic to calendar
+   */
+  private addToCalendar() {
+    this.validateInputs();
   }
 
 }
