@@ -91,7 +91,7 @@ export class CalendarComponent implements OnInit {
   }
 
   /**
-   * Configures the main calendar initially.
+   * Configures the main calendar.
    */
   private configureMainCalendar() {
     $('#main-calendar').fullCalendar({
@@ -111,9 +111,12 @@ export class CalendarComponent implements OnInit {
     this.view = $('#main-calendar').fullCalendar('getView').type;
   }
 
+  /**
+   * Configures the mini calendar ('jump to specific date').
+   */
   private configureMiniCalendarAndTime() {
     this.bsValue = new Date();
-    this.time = this.viewDate.toDate();
+    this.time = this.bsValue;
     this.time.setHours(8);
     this.time.setMinutes(0);
   }
@@ -254,10 +257,12 @@ export class CalendarComponent implements OnInit {
     const subtopic = (<HTMLInputElement>document.getElementById('subtopic')).value;
     for (let i = 0; i < this.subtopics.length; i++) {
       if (subtopic.toLowerCase() === this.subtopics[i].toLowerCase()) {
-        return true;
+        this.validSubtopic = true;
+        break;
+      } else {
+        this.validSubtopic = false;
       }
     }
-    return false;
   }
 
 }
