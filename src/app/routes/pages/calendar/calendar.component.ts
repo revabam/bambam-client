@@ -222,9 +222,9 @@ export class CalendarComponent implements OnInit {
   private clickEventOptions() {
     const events = document.getElementById('event-panel');
     const calendar = document.getElementById('calendar-panel');
-    if (events.style.display !== 'block') {
-      events.style.display = 'block';
-      events.scrollIntoView();
+    if (events.style.display !== 'inline-block') {
+      events.style.display = 'inline-block';
+      document.getElementById('menu-navbar').scrollIntoView();
       calendar.classList.remove('col-md-12');
     } else {
       events.style.display = 'none';
