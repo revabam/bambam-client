@@ -49,12 +49,12 @@
 
         <div>Start:</div>
         <div>
-          <timepicker [(ngModel)]="time" [mousewheel]="true" [arrowkeys]="true"></timepicker>
+          <timepicker [(ngModel)]="bsValue" [mousewheel]="true" [arrowkeys]="true"></timepicker>
         </div>
 
         <br><br>
 
-        <button class="btn bg-orange buttons" [ngClass]="{'disabled' : !validSubtopic}">Add to Calendar</button>
+        <a class="btn buttons" [ngClass]="{'disabled' : !validSubtopic}">Add to Calendar</a>
 
         <div class="delete">
           <i class="fas fa-trash"></i>

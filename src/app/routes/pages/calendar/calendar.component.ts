@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, ElementRef} from '@angular/core';
+import { Component, OnInit} from '@angular/core';
 import * as $ from 'jquery';
 import * as moment from 'moment';
 import 'fullcalendar';
@@ -24,9 +24,7 @@ export class CalendarComponent implements OnInit {
   private title: string; // $('#main-calendar').fullCalendar('getView').title;
 
   // Used for datepicker and timepicker
-  @ViewChild('datepicker') private datepicker: ElementRef;
-  private bsValue: Date;
-  private time: Date;
+  private bsValue: Date;  // input value for datepicker and timepicker
 
   private events = [
     {
@@ -116,9 +114,8 @@ export class CalendarComponent implements OnInit {
    */
   private configureMiniCalendarAndTime() {
     this.bsValue = new Date();
-    this.time = this.bsValue;
-    this.time.setHours(8);
-    this.time.setMinutes(0);
+    this.bsValue.setHours(8);
+    this.bsValue.setMinutes(0);
   }
 
   /**
