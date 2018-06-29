@@ -169,7 +169,7 @@ export class CalendarComponent implements OnInit {
     this.viewDate = $('#main-calendar').fullCalendar('getDate');
     this.bsValue = this.viewDate.toDate();
 
-    // Disable or enable 'Today' button
+    // Disable or enable the 'Today' button
     if (this.checkToday(this.viewDate)) {
       this.isToday = true;
     } else {
@@ -188,8 +188,12 @@ export class CalendarComponent implements OnInit {
 
     // compare previous date with new date
     if (this.bsValue.toLocaleDateString() !== (new Date(dateValue).toLocaleDateString())) {
-      $('#main-calendar').fullCalendar('gotoDate', dateValue);
-      this.changeView('day');
+      try {
+        $('#main-calendar').fullCalendar('gotoDate', dateValue);
+        this.changeView('day');
+      } catch (err) {
+        // catch error
+      }
     }
 
     // Set bsValue to update previous date
