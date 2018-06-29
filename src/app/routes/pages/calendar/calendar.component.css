@@ -17,6 +17,10 @@ input {
     border-bottom-left-radius: 4px;
 }
 
+input[name=datepickerInput] {
+    width: 85%
+}
+
 input[name=topic], input[name=subtopic] {
     max-width: 165px;
     width: 100%;
@@ -193,5 +197,13 @@ a {
 @media (max-width: 768px) {
     .event-panel {
         display: inline-block;
+    }
+
+    input {
+        max-width: 100%;
+    }
+
+    input[name=topic], input[name=subtopic] {
+        max-width: 100%;
     }
 }
