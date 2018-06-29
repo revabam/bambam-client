@@ -25,7 +25,7 @@ import { BoomComponent } from './routes/pages/boom/boom.component';
   ],
   imports: [
     BrowserModule,
-    RouterModule.forRoot(appRoutes),
+    RouterModule.forRoot(appRoutes, { useHash: true}),
     FormsModule,
     BsDatepickerModule.forRoot(),
     TimepickerModule.forRoot(),
