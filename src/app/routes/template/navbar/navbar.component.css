@@ -47,7 +47,7 @@
 
 /* Hamburger Menu */
 .bars-container {
-    display: inline-block;
+    display: none;
     cursor: pointer;
 }
 
@@ -71,3 +71,9 @@
     transform: rotate(45deg) translate(-4px, -4px);
 }
 /* End Hamburger Menu */
+
+@media(max-width: 991px) {
+    .bars-container {
+        display: inline-block;
+    }
+}
