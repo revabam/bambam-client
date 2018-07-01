@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, ElementRef} from '@angular/core';
+import { Component, OnInit} from '@angular/core';
 import * as $ from 'jquery';
 import * as moment from 'moment';
 import 'fullcalendar';
@@ -18,14 +18,13 @@ export class CalendarComponent implements OnInit {
   private validSubtopic = false;
   private isToday = true;
 
-  // Used for updating the view
+  // Used for updating the view of the main calendar
   private view: string; // $('#main-calendar').fullCalendar('getView').type;
-  private viewDate: moment.Moment; // $('#main-calendar').fullCalendar('getDate');
+  private viewDate: Date; // $('#main-calendar').fullCalendar('getDate').toDate();
   private title: string; // $('#main-calendar').fullCalendar('getView').title;
 
   // Used for datepicker and timepicker
-  @ViewChild('datepicker') private datepicker: ElementRef;
-  private bsValue: Date;
+  private date: Date;  // input value for datepicker and timepicker
   private time: Date;
 
   private events = [
@@ -76,8 +75,7 @@ export class CalendarComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-    this.configureMainCalendar();
-    this.configureMiniCalendarAndTime();
+    this.configureCalendars();
   }
 
   /**
@@ -93,32 +91,32 @@ export class CalendarComponent implements OnInit {
   /**
    * Configures the main calendar.
    */
-  private configureMainCalendar() {
+  private configureCalendars() {
+    const today = new Date();
+
     $('#main-calendar').fullCalendar({
       header: false,
+      timezone: 'local',
       events: this.events,
       eventLimit: true,
       dayRender: function( date, cell ) {
         // Change background color of today's day
-        if (date.format('MM-DD-Y') === moment(new Date()).format('MM-DD-Y')) {
+        if (date.format('MM-DD-Y') === moment(today).format('MM-DD-Y')) {
           cell.css('background-color', 'rgb(255, 134, 73)');
         }
       }
     });
 
+    // For the main calendar view
     this.title = $('#main-calendar').fullCalendar('getView').title;
-    this.viewDate = $('#main-calendar').fullCalendar('getDate');
+    this.viewDate = $('#main-calendar').fullCalendar('getDate').toDate();
     this.view = $('#main-calendar').fullCalendar('getView').type;
-  }
 
-  /**
-   * Configures the mini calendar ('jump to specific date').
-   */
-  private configureMiniCalendarAndTime() {
-    this.bsValue = new Date();
-    this.time = this.bsValue;
+    // For datepicker and timepicker
+    this.date = this.viewDate;
+    this.time = new Date();
+    this.resetTime(this.time);
     this.time.setHours(8);
-    this.time.setMinutes(0);
   }
 
   /**
@@ -154,23 +152,17 @@ export class CalendarComponent implements OnInit {
 
       case 'prev':
         $('#main-calendar').fullCalendar('prev');
-
-        // Increment by 4 hours to avoid getting previous day
-        $('#main-calendar').fullCalendar('incrementDate', { hours: 4 });
         break;
 
       case 'next':
         $('#main-calendar').fullCalendar('next');
-
-        // Increment by 4 hours to avoid getting previous day
-        $('#main-calendar').fullCalendar('incrementDate', { hours: 4 });
         break;
     }
 
     // Set current title and viewDate to reflect changes
     this.title = $('#main-calendar').fullCalendar('getView').title;
-    this.viewDate = $('#main-calendar').fullCalendar('getDate');
-    this.bsValue = this.viewDate.toDate();
+    this.viewDate = $('#main-calendar').fullCalendar('getDate').toDate();
+    this.date = this.viewDate;
 
     // Disable or enable the 'Today' button
     if (this.checkToday(this.viewDate)) {
@@ -181,35 +173,103 @@ export class CalendarComponent implements OnInit {
   }
 
   /**
+   * Sets datepicker input value to current viewDate if dateValue is invalid.
+   * Else it jumps to date specified.
+   * @param dateValue Object with date
+   */
+  private dateChange(dateValue) {
+    if (!this.isDateValid(dateValue)) {
+      this.date = new Date();
+      this.date.setTime(this.viewDate.getTime());
+    } else {
+      this.jumpTo(dateValue);
+    }
+  }
+
+  /**
+   * Resets time of date to 8:00 AM.
+   * @param date date Object
+   */
+  private resetTime(date: Date) {
+    date.setHours(8);
+    date.setMinutes(0);
+    date.setSeconds(0);
+    date.setMilliseconds(0);
+  }
+
+  /**
+   * Updates the time (hour, minutes, seconds. milliseconds)
+   * of date1 with the time of date2. Used to update time of
+   * datepicker with time of timepicker.
+   * @param date1 Date with old time
+   * @param date2 Date with new time
+   */
+  private updateTime(date1: Date, date2: Date): Date {
+    date1.setHours(date2.getHours());
+    date1.setMinutes(date2.getMinutes());
+    date1.setSeconds(date2.getSeconds());
+    date1.setMilliseconds(date2.getMilliseconds());
+    return date1;
+  }
+
+  /**
+   * Resets timepicker input value if invalid.
+   * @param valid event that returns true if valid or not.
+   */
+  private timeChange() {
+      if (!this.date) {
+        this.date = new Date();
+        this.date.setTime(this.viewDate.getTime());
+
+        // iterate DOM and remove 'is-invalid' class style
+        // this removes the red border in invalid input
+        const inputs = document.getElementsByClassName('is-invalid');
+        for (let i = 0; i < inputs.length; i++) {
+          inputs[i].classList.remove('is-invalid');
+        }
+      }
+  }
+
+  /**
    * Jump to specific date if the date value changes.
    * 'dateValue' is of type object that contains a date -
    * e.g. - Wed Jun 20 2018 18:09:17 GMT-0400 (Eastern Daylight Time)
    * @param dateValue - Object with date
    */
   private jumpTo(dateValue) {
-    // this.bsValue contains previous date, dateValue contains new date
+    // this.date contains previous date, dateValue contains new date
 
     // compare previous date with new date
-    if (this.bsValue.toLocaleDateString() !== (new Date(dateValue).toLocaleDateString())) {
-      try {
-        $('#main-calendar').fullCalendar('gotoDate', dateValue);
+    if (dateValue) {
+      if (this.date.toLocaleDateString() !== (new Date(dateValue).toLocaleDateString())) {
+        const date = moment(dateValue);
+        $('#main-calendar').fullCalendar('gotoDate', date);
         this.changeView('day');
-      } catch (err) {
-        // catch error
       }
     }
+  }
 
-    // Set bsValue to update previous date
-    this.bsValue = new Date(dateValue);
+  /**
+   * Returns true if date is valid or not.
+   * @param date Date to be checked
+   */
+  private isDateValid(date): boolean {
+    const validDate = new Date(date);
+
+    // Check if date time is a valid number
+    if (!isNaN(validDate.getTime())) {
+      return true;
+    }
+    return false;
   }
 
   /**
    * Returns true if date passed is today's date.
    * @param date Date of type Moment
    */
-  private checkToday(date: moment.Moment): boolean {
-    const today = moment(new Date());
-    if (date.format('MM-DD-Y') === today.format('MM-DD-Y')) {
+  private checkToday(date: Date): boolean {
+    const today = new Date();
+    if (date.toLocaleDateString() === today.toLocaleDateString()) {
       return true;
     }
     return false;
@@ -264,6 +324,45 @@ export class CalendarComponent implements OnInit {
       } else {
         this.validSubtopic = false;
       }
+    }
+  }
+
+  /**
+   * Returns true if all inputs are valid.
+   */
+  private validateInputs(): boolean {
+    if (this.isDateValid(this.date.getTime())) {
+      if (this.validSubtopic) {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  /**
+   * Adds subtopic to calendar
+   */
+  private addToCalendar() {
+    const event = {
+      title: 'Test1',
+      start: new Date(),
+      description: 'This is a cool event',
+      textColor: 'white',
+      color: eventColor.blue
+    };
+
+    if (this.validateInputs()) {
+      const title = <HTMLInputElement>document.getElementById('subtopic');
+      this.date = this.updateTime(this.date, this.time);
+
+      event.title = title.value;
+      event.start = this.date;
+      event.description = `Subtopic for: ${event.title}`;
+      this.events.push(event);
+
+      // remove event source and re-add event source to refresh entire calendar
+      $('#main-calendar').fullCalendar( 'removeEventSource', this.events );
+      $('#main-calendar').fullCalendar( 'addEventSource', this.events );
     }
   }
 
