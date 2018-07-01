@@ -32,10 +32,6 @@ input[name=topic], input[name=subtopic] {
     width: 100%;
 }
 
-#main-calendar {
-    padding-top: 15px;
-}
-
 .calendar {
     position: absolute;
     background: #f26925;
@@ -125,7 +121,7 @@ a {
     color: #f15000;
 }
 
-.padding {
+.padding-top {
     padding-top: 15px;
 }
 
