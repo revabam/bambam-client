@@ -18,10 +18,17 @@ export class NavbarComponent implements OnInit {
   /**
    * Click event to close hamburger menu.
    */
-  private clickHamburger() {
+  private clickHamburgerLink() {
     if (window.innerWidth < 991) {
       this.hamburger.nativeElement.click();
     }
+  }
+
+  /**
+   * Click event to toggle hamburger animation.
+   */
+  private toggleHamburgerMenu() {
+    this.hamburger.nativeElement.classList.toggle('change');
   }
 
 }
