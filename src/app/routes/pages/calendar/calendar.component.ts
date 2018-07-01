@@ -284,14 +284,16 @@ export class CalendarComponent implements OnInit {
     const calendar = document.getElementById('calendar-panel');
     if (events.style.display !== 'inline-block') {
       events.style.display = 'inline-block';
-      $('html, body').animate({
-        scrollTop: $('#menu-navbar').offset().top
-    }, 500);
       calendar.classList.remove('col-md-12');
     } else {
       events.style.display = 'none';
       calendar.classList.add('col-md-12');
     }
+
+    // scroll to menu navbar with animation
+    $('html, body').animate({
+      scrollTop: $('#menu-navbar').offset().top
+    }, 500);
   }
 
   /**
