@@ -308,8 +308,18 @@ export class CalendarComponent implements OnInit {
       this.subtopics.push('Inheritance');
       this.subtopics.push('Collections');
       this.subtopics.push('Maps');
+      // this.validSubtopic = true;
+      (<HTMLInputElement>document.getElementById('subtopic')).disabled = false;
+    } else if (topic.toLowerCase() === 'angular'.toLowerCase()) {
+      this.subtopics.push('Directives');
+      this.subtopics.push('Observables');
+      this.subtopics.push('Data Binding');
+      this.subtopics.push('Pipes');
+      // this.validSubtopic = true;
       (<HTMLInputElement>document.getElementById('subtopic')).disabled = false;
     } else {
+      this.validSubtopic = false;
+      (<HTMLInputElement>document.getElementById('subtopic')).value = '';
       (<HTMLInputElement>document.getElementById('subtopic')).disabled = true;
     }
   }
@@ -362,9 +372,7 @@ export class CalendarComponent implements OnInit {
       event.description = `Subtopic for: ${event.title}`;
       this.events.push(event);
 
-      // remove event source and re-add event source to refresh entire calendar
-      $('#main-calendar').fullCalendar( 'removeEventSource', this.events );
-      $('#main-calendar').fullCalendar( 'addEventSource', this.events );
+      $('#main-calendar').fullCalendar( 'renderEvent', event, true );
     }
   }
 

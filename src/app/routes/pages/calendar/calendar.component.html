@@ -32,7 +32,7 @@
         <div>Add subtopic to calendar</div>
 
         <div>Topic:</div>
-        <input id="topic" name="topic" class="panel-inputs" list="topics" (keyup)="getSubtopics()" (focusout)="getSubtopics()">
+        <input id="topic" name="topic" class="panel-inputs" list="topics" (keyup)="getSubtopics()" (change)="getSubtopics()">
         <datalist id="topics">
           <option *ngFor="let topic of topics" [value]="topic">
         </datalist>
@@ -40,7 +40,7 @@
         <br><br>
         
         <div>Subtopic:</div>
-        <input id="subtopic" name="subtopic" class="panel-inputs" list="subtopics" (keyup)="checkSubtopic()" (focusout)="checkSubtopic()" disabled>
+        <input id="subtopic" name="subtopic" class="panel-inputs" list="subtopics" (keyup)="checkSubtopic()" (change)="checkSubtopic()" disabled>
         <datalist id="subtopics">
           <option *ngFor="let subtopic of subtopics" [value]="subtopic">
         </datalist>

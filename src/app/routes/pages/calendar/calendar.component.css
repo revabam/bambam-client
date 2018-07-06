@@ -16,6 +16,7 @@ input {
     border-bottom: 2px solid rgb(242, 105, 37);
     border-bottom-left-radius: 5px;
     border-bottom-right-radius: 5px;
+    text-align: center;
 }
 
 input:focus {
