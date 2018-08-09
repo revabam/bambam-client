@@ -30,7 +30,7 @@ describe('CalendarComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
-
+  
   it('should have <h3> of the title', () => {
     component = fixture.componentInstance;
     const h3: HTMLElement = fixture.nativeElement.querySelector('h3');

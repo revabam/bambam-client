@@ -21,7 +21,7 @@ export class CalendarComponent implements OnInit {
   // Used for updating the view of the main calendar
   private view: string; // $('#main-calendar').fullCalendar('getView').type;
   private viewDate: Date; // $('#main-calendar').fullCalendar('getDate').toDate();
-  public title: string; // $('#main-calendar').fullCalendar('getView').title;
+  private title: string; // $('#main-calendar').fullCalendar('getView').title;
 
   // Used for datepicker and timepicker
   private date: Date;  // input value for datepicker and timepicker
