@@ -6,6 +6,7 @@ import { FormsModule } from '@angular/forms';
 
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { TimepickerModule } from 'ngx-bootstrap/timepicker';
+import { FlatpickrModule } from 'angularx-flatpickr';
 
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './routes/template/navbar/navbar.component';
@@ -52,6 +53,9 @@ import {
   MatTooltipModule,
   MatTreeModule,
 } from '@angular/material';
+import { NgbModalModule } from '../../../../node_modules/@ng-bootstrap/ng-bootstrap/modal/modal.module';
+import { CalendarModule } from '../../node_modules/angular-calendar';
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -63,6 +67,7 @@ import {
     BoomComponent,
   ],
   imports: [
+    NgbModule.forRoot(),
     MatAutocompleteModule,
     MatBadgeModule,
     MatBottomSheetModule,
@@ -103,7 +108,10 @@ import {
     FormsModule,
     BsDatepickerModule.forRoot(),
     TimepickerModule.forRoot(),
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    NgbModalModule.forRoot(),
+    FlatpickrModule.forRoot(),
+    CalendarModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]
