@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { UserService } from '../../../services/user.service';
+import { BamUser } from '../../../models/bam-user';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -7,16 +10,30 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LoginComponent implements OnInit {
 
-  username: string;
+  email: string;
   password: string;
 
-  constructor() { }
+  constructor(
+    private userService: UserService,
+    private router: Router
+  ) { }
 
   ngOnInit() {
   }
 
   login() {
-    console.log('Logging in');
+    this.userService.login(this.email, this.password).subscribe(
+      result => {
+        if (result !== null) {
+          sessionStorage.setItem('user', JSON.stringify(result));
+          this.userService.user.next(result);
+          this.router.navigate(['dashboard']);
+        }
+      },
+      error => {
+        console.log(error);
+      }
+    );
   }
 
 }
