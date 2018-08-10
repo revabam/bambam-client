@@ -52,6 +52,7 @@ import {
   MatTooltipModule,
   MatTreeModule,
 } from '@angular/material';
+import { LoginComponent } from './routes/pages/login/login.component';
 
 @NgModule({
   declarations: [
@@ -61,6 +62,7 @@ import {
     CalendarComponent,
     CurriculumEditorComponent,
     BoomComponent,
+    LoginComponent,
   ],
   imports: [
     MatAutocompleteModule,
