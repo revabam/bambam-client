@@ -1,0 +1,52 @@
+{
+    "topics": [
+        {
+            "id": 1,
+            "name": "Java"
+        },
+        {
+            "id": 2,
+            "name": "SQL"
+        },
+        {
+            "id": 3,
+            "name": "JDBC"
+        },
+        {
+            "id": 4,
+            "name": "HTML"
+        },
+        {
+            "id": 5,
+            "name": "CSS"
+        },
+        {
+            "id": 6,
+            "name": "JavaScript"
+        },
+        {
+            "id": 7,
+            "name": "Angular"
+        },
+        {
+            "id": 8,
+            "name": "DevOps"
+        },
+        {
+            "id": 9,
+            "name": "Hibernate"
+        },
+        {
+            "id": 10,
+            "name": "Spring"
+        },
+        {
+            "id": 11,
+            "name": "Web Services"
+        },
+        {
+            "id": 12,
+            "name": "Microservices"
+        }
+    ]
+}
