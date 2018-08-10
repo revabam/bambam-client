@@ -52,6 +52,7 @@ import {
   MatTooltipModule,
   MatTreeModule,
 } from '@angular/material';
+import { RegisterComponent } from './routes/pages/register/register.component';
 
 @NgModule({
   declarations: [
@@ -61,6 +62,7 @@ import {
     CalendarComponent,
     CurriculumEditorComponent,
     BoomComponent,
+    RegisterComponent
   ],
   imports: [
     MatAutocompleteModule,
