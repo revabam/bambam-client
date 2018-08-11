@@ -4,11 +4,11 @@
       <mat-card-content>
         <mat-card-title>Login</mat-card-title>
         <mat-form-field>
-          <input matInput name="username" placeholder="Username" type="text" [(ngModel)]="username">
+          <input matInput name="email" placeholder="Email" type="email" [(ngModel)]="email" (keyup.enter)="login()">
         </mat-form-field>
         <br/>
         <mat-form-field>
-          <input matInput name="password" placeholder="Password" type="password" [(ngModel)]="password">
+          <input matInput name="password" placeholder="Password" type="password" [(ngModel)]="password" (keyup.enter)="login()">
         </mat-form-field>
       </mat-card-content>
       <mat-card-actions>

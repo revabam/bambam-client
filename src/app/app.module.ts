@@ -53,6 +53,8 @@ import {
   MatTreeModule,
 } from '@angular/material';
 import { LoginComponent } from './routes/pages/login/login.component';
+import { UserService } from './services/user.service';
+import { HttpClient, HttpHandler, HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -65,6 +67,7 @@ import { LoginComponent } from './routes/pages/login/login.component';
     LoginComponent,
   ],
   imports: [
+    HttpClientModule,
     MatAutocompleteModule,
     MatBadgeModule,
     MatBottomSheetModule,
@@ -107,7 +110,9 @@ import { LoginComponent } from './routes/pages/login/login.component';
     TimepickerModule.forRoot(),
     BrowserAnimationsModule
   ],
-  providers: [],
+  providers: [
+    UserService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {}
