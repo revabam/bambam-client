@@ -32,4 +32,9 @@ export class UserService {
     console.log('[LOG] - In UserService.login()');
     return this.http.get<BamUser>(environment.apiUrl + 'users?email=' + email, HTTP_OPTIONS);
   }
+
+  register(user: BamUser): Observable<BamUser> {
+    console.log('[LOG] - In UserService.register()');
+    return this.http.post<BamUser>(environment.apiUrl + 'users', JSON.stringify(user), HTTP_OPTIONS);
+  }
 }
