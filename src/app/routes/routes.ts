@@ -5,6 +5,7 @@ import { CalendarComponent } from '../../app/routes/pages/calendar/calendar.comp
 import { CurriculumEditorComponent } from '../../app/routes/pages/curriculum-editor/curriculum-editor.component';
 import { BoomComponent } from '../../app/routes/pages/boom/boom.component';
 import { LoginComponent } from './pages/login/login.component';
+import { RegisterComponent } from './pages/register/register.component';
 
 export const appRoutes: Routes = [
     // routes go here.
@@ -16,6 +17,11 @@ export const appRoutes: Routes = [
     {
         path: 'login',
         component: LoginComponent
+    },
+
+    {
+        path: 'register',
+        component: RegisterComponent
     },
 
     {
