@@ -37,4 +37,9 @@ export class UserService {
     console.log('[LOG] - In UserService.register()');
     return this.http.post<BamUser>(environment.apiUrl + 'users', JSON.stringify(user), HTTP_OPTIONS);
   }
+
+  deleteById(id: number) {
+    console.log('[LOG] - In UserService.deleteById()');
+    this.http.delete(environment.apiUrl + `users/${id}`);
+  }
 }

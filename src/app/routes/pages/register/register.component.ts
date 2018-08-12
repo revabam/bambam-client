@@ -37,36 +37,42 @@ export class RegisterComponent implements OnInit {
       Last Name: ${this.lastName}
 
     `);
-    let bamUser: BamUser = {
+
+    const bamUser: BamUser = {
       firstName: this.firstName,
       lastName: this.lastName,
       email: this.email,
       role_id: 2,
       status_id: 1
-    }
-    this.userService.register(bamUser);
+    };
+
+    this.userService.register(bamUser).subscribe(
+      result => {
+        console.log(result);
+      }
+    );
   }
 
   emailValid(): boolean {
-    let isValid: boolean = false;
+    let isValid = false;
     // TODO
     return isValid;
   }
 
   passwordValid(): boolean {
-    let isValid: boolean = false;
+    let isValid = false;
     // TODO
     return isValid;
   }
 
   firstNameValid(): boolean {
-    let isValid: boolean = false;
+    let isValid = false;
     // TODO
     return isValid;
   }
 
   lastNameValid(): boolean {
-    let isValid: boolean = false;
+    let isValid = false;
     // TODO
     return isValid;
   }

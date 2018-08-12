@@ -25,6 +25,7 @@ export class LoginComponent implements OnInit {
     this.userService.login(this.email, this.password).subscribe(
       result => {
         if (result !== null) {
+          console.log(result);
           sessionStorage.setItem('user', JSON.stringify(result));
           this.userService.user.next(result);
           this.router.navigate(['dashboard']);
