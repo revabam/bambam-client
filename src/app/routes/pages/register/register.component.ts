@@ -13,6 +13,9 @@ export class RegisterComponent implements OnInit {
   firstName: string;
   lastName: string;
 
+  valid: boolean;
+  message: string;
+
   constructor() { }
 
   ngOnInit() {
@@ -20,11 +23,13 @@ export class RegisterComponent implements OnInit {
 
   register() {
     console.log(`Registering with the following values:
+
       Email: ${this.email}
       Password: ${this.password}
       Confirm Password: ${this.confirmPassword}
       First Name: ${this.firstName}
       Last Name: ${this.lastName}
+
     `);
   }
 
@@ -35,6 +40,24 @@ export class RegisterComponent implements OnInit {
   }
 
   passwordValid(): boolean {
+    let isValid: boolean = false;
+    // TODO
+    return isValid;
+  }
+
+  firstNameValid(): boolean {
+    let isValid: boolean = false;
+    // TODO
+    return isValid;
+  }
+
+  lastNameValid(): boolean {
+    let isValid: boolean = false;
+    // TODO
+    return isValid;
+  }
+
+  passwordConfirmed(): boolean {
     if (this.password !== this.confirmPassword) {
       return false;
     }

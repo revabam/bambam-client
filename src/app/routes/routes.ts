@@ -4,13 +4,18 @@ import { DashboardComponent } from '../../app/routes/pages/dashboard/dashboard.c
 import { CalendarComponent } from '../../app/routes/pages/calendar/calendar.component';
 import { CurriculumEditorComponent } from '../../app/routes/pages/curriculum-editor/curriculum-editor.component';
 import { BoomComponent } from '../../app/routes/pages/boom/boom.component';
-import { RegisterComponent } from './pages/register/register.component';
+import { LoginComponent } from './pages/login/login.component';
 
 export const appRoutes: Routes = [
     // routes go here.
     {
         path: 'dashboard',
         component: DashboardComponent
+    },
+
+    {
+        path: 'login',
+        component: LoginComponent
     },
 
     {
@@ -26,10 +31,6 @@ export const appRoutes: Routes = [
     {
         path: 'boom',
         component: BoomComponent
-    },
-    {
-        path: 'register',
-        component: RegisterComponent
     },
 
     {

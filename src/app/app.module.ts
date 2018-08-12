@@ -52,7 +52,9 @@ import {
   MatTooltipModule,
   MatTreeModule,
 } from '@angular/material';
-import { RegisterComponent } from './routes/pages/register/register.component';
+import { LoginComponent } from './routes/pages/login/login.component';
+import { UserService } from './services/user.service';
+import { HttpClient, HttpHandler, HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -62,9 +64,10 @@ import { RegisterComponent } from './routes/pages/register/register.component';
     CalendarComponent,
     CurriculumEditorComponent,
     BoomComponent,
-    RegisterComponent
+    LoginComponent,
   ],
   imports: [
+    HttpClientModule,
     MatAutocompleteModule,
     MatBadgeModule,
     MatBottomSheetModule,
@@ -107,7 +110,9 @@ import { RegisterComponent } from './routes/pages/register/register.component';
     TimepickerModule.forRoot(),
     BrowserAnimationsModule
   ],
-  providers: [],
+  providers: [
+    UserService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {}
