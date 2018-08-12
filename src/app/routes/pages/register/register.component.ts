@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { UserService } from '../../../services/user.service';
+import { BamUser } from '../../../models/bam-user';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-register',
@@ -16,7 +19,10 @@ export class RegisterComponent implements OnInit {
   valid: boolean;
   message: string;
 
-  constructor() { }
+  constructor(
+    private userService: UserService,
+    private router: Router
+  ) { }
 
   ngOnInit() {
   }
@@ -31,6 +37,14 @@ export class RegisterComponent implements OnInit {
       Last Name: ${this.lastName}
 
     `);
+    let bamUser: BamUser = {
+      firstName: this.firstName,
+      lastName: this.lastName,
+      email: this.email,
+      role_id: 2,
+      status_id: 1
+    }
+    this.userService.register(bamUser);
   }
 
   emailValid(): boolean {
