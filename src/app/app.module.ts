@@ -53,7 +53,7 @@ import {
   MatTooltipModule,
   MatTreeModule,
 } from '@angular/material';
-import { NgbModalModule } from '../../../../node_modules/@ng-bootstrap/ng-bootstrap/modal/modal.module';
+import { NgbModalModule } from '../../node_modules/@ng-bootstrap/ng-bootstrap/modal/modal.module';
 import { CalendarModule } from '../../node_modules/angular-calendar';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 
