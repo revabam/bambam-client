@@ -1,0 +1,24 @@
+version: 0.2
+
+phases:
+    install:
+        commands:
+            - echo Installing source NPM dependencies on `date`
+            - npm install
+            - npm install -g @angular/cli
+            - echo NPM dependencies successfully installed on `date`
+    build:
+        commands:
+            - echo Build started on `date`
+            - ng build --prod
+            - echo Application build successfully on `date`
+    post_build:
+         commands:
+            - echo Moving production files to S3 bucket on `date`
+            - aws s3 sync --delete dist s3://bambam-client
+            - echo Production files successfully moved on `date`
+artifacts:
+    files:
+        - '**/*'
+    base-directory: 'dist*'
+    discard-paths: yes
