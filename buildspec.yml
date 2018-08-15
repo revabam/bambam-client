@@ -15,7 +15,7 @@ phases:
     post_build:
          commands:
             - echo Moving production files to S3 bucket on `date`
-            - aws s3 sync --delete dist s3://bambam-client
+            - aws s3 sync --delete dist/bambam-client s3://bambam-client
             - echo Production files successfully moved on `date`
 artifacts:
     files:
