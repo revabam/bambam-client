@@ -1,0 +1,134 @@
+{
+    "subtopics": [
+        {
+            "id": 1,
+            "name": "Core Java",
+            "parentTopic_id": 1
+        },
+        {
+            "id": 2,
+            "name": "Data Types",
+            "parentTopic_id": 1
+        },
+        {
+            "id": 3,
+            "name": "Inheritance",
+            "parentTopic_id": 1
+        },
+        {
+            "id": 4,
+            "name": "Joins",
+            "parentTopic_id": 2
+        },
+        {
+            "id": 5,
+            "name": "Semantic Elements",
+            "parentTopic_id": 4
+        },
+        {
+            "id": 6,
+            "name": "Basic CSS",
+            "parentTopic_id": 5
+        },
+        {
+            "id": 7,
+            "name": "Core JavaScript",
+            "parentTopic_id": 6
+        },
+        {
+            "id": 8,
+            "name": "TypeScript",
+            "parentTopic_id": 7
+        },
+        {
+            "id": 9,
+            "name": "Directives",
+            "parentTopic_id": 7
+        },
+        {
+            "id": 10,
+            "name": "Binding",
+            "parentTopic_id": 7
+        },
+        {
+            "id": 11,
+            "name": "Observables",
+            "parentTopic_id": 7
+        },
+        {
+            "id": 12,
+            "name": "CI/CD",
+            "parentTopic_id": 8
+        },
+        {
+            "id": 13,
+            "name": "AWS",
+            "parentTopic_id": 8
+        },
+        {
+            "id": 14,
+            "name": "Hibernate Framework",
+            "parentTopic_id": 9
+        },
+        {
+            "id": 15,
+            "name": "HQL",
+            "parentTopic_id": 9
+        },
+        {
+            "id": 16,
+            "name": "Spring Framework",
+            "parentTopic_id": 10
+        },
+        {
+            "id": 17,
+            "name": "Spring Web MVC",
+            "parentTopic_id": 10
+        },
+        {
+            "id": 18,
+            "name": "Spring Boot",
+            "parentTopic_id": 10
+        },
+        {
+            "id": 19,
+            "name": "Spring Data",
+            "parentTopic_id": 10
+        },
+        {
+            "id": 20,
+            "name": "REST",
+            "parentTopic_id": 11
+        },
+        {
+            "id": 21,
+            "name": "SOAP",
+            "parentTopic_id": 11
+        },
+        {
+            "id": 22,
+            "name": "API Gateway / Zuul",
+            "parentTopic_id": 12
+        },
+        {
+            "id": 23,
+            "name": "Discovery Service / Eureka",
+            "parentTopic_id": 12
+        },
+        {
+            "id": 24,
+            "name": "Config Server",
+            "parentTopic_id": 12
+        },
+        {
+            "id": 25,
+            "name": "Rest Template / Feign",
+            "parentTopic_id": 12
+        },
+        {
+            "id": 26,
+            "name": "Circuit Breaker / Hystrix",
+            "parentTopic_id": 12
+        }
+    ]
+}

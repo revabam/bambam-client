@@ -53,9 +53,16 @@ import {
   MatTooltipModule,
   MatTreeModule,
 } from '@angular/material';
+<<<<<<< HEAD
 import { NgbModalModule } from '../../node_modules/@ng-bootstrap/ng-bootstrap/modal/modal.module';
 import { CalendarModule } from '../../node_modules/angular-calendar';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+=======
+import { LoginComponent } from './routes/pages/login/login.component';
+import { UserService } from './services/user.service';
+import { HttpClient, HttpHandler, HttpClientModule } from '@angular/common/http';
+import { RegisterComponent } from './routes/pages/register/register.component';
+>>>>>>> 93c8b15ccb6cc3b2afbc860a035a8ed180c7ad3f
 
 @NgModule({
   declarations: [
@@ -65,9 +72,15 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
     CalendarComponent,
     CurriculumEditorComponent,
     BoomComponent,
+    LoginComponent,
+    RegisterComponent,
   ],
   imports: [
+<<<<<<< HEAD
     NgbModule.forRoot(),
+=======
+    HttpClientModule,
+>>>>>>> 93c8b15ccb6cc3b2afbc860a035a8ed180c7ad3f
     MatAutocompleteModule,
     MatBadgeModule,
     MatBottomSheetModule,
@@ -113,7 +126,9 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
     FlatpickrModule.forRoot(),
     CalendarModule.forRoot()
   ],
-  providers: [],
+  providers: [
+    UserService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {}
