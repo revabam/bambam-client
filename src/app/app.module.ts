@@ -78,8 +78,7 @@ import { LocationStrategy, PathLocationStrategy } from '../../node_modules/@angu
     BrowserAnimationsModule
   ],
   providers: [
-    UserService,
-    {provide: LocationStrategy, useClass: PathLocationStrategy}
+    UserService
   ],
   bootstrap: [AppComponent]
 })
