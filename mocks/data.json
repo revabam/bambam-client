@@ -5,15 +5,15 @@
             "name": "1806-Jun18-USF-Java",
             "startDate": 123456787,
             "endDate": 123456789,
-            "trainer_id": 4,
+            "trainer_id": 1,
             "calendarCurriculum_id": 2
         },
         {
             "id": 2,
             "name": "1807-Jul18-USF-JavaScript",
-            "startDate": 123456787,
-            "endDate": 123456789,
-            "trainer_id": 12,
+            "startDate": 1533528000000,
+            "endDate": 1534737600000,
+            "trainer_id": 1,
             "calendarCurriculum_id": 4
         },
         {

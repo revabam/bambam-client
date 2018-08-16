@@ -25,8 +25,9 @@ export class LoginComponent implements OnInit {
     this.userService.login(this.email, this.password).subscribe(
       result => {
         if (result !== null) {
-          sessionStorage.setItem('user', JSON.stringify(result));
-          this.userService.user.next(result);
+          const user = result[0];
+          sessionStorage.setItem('user', JSON.stringify(user));
+          this.userService.user.next(user);
           this.router.navigate(['dashboard']);
         }
       },
