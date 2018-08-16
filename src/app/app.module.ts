@@ -17,6 +17,7 @@ import { LoginComponent } from './routes/pages/login/login.component';
 import { RegisterComponent } from './routes/pages/register/register.component';
 import { NavbarComponent } from './routes/template/navbar/navbar.component';
 import { UserService } from './services/user.service';
+import { BatchService } from './services/batch/batch.service';
 import { LocationStrategy, PathLocationStrategy } from '../../node_modules/@angular/common';
 
 
@@ -79,6 +80,7 @@ import { LocationStrategy, PathLocationStrategy } from '../../node_modules/@angu
   ],
   providers: [
     UserService,
+    BatchService,
     {provide: LocationStrategy, useClass: PathLocationStrategy}
   ],
   bootstrap: [AppComponent]
