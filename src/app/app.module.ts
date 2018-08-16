@@ -56,6 +56,7 @@ import { LoginComponent } from './routes/pages/login/login.component';
 import { UserService } from './services/user.service';
 import { HttpClient, HttpHandler, HttpClientModule } from '@angular/common/http';
 import { RegisterComponent } from './routes/pages/register/register.component';
+import { CurriculumViewComponent } from './routes/pages/curriculum-view/curriculum-view.component';
 
 @NgModule({
   declarations: [
@@ -67,6 +68,7 @@ import { RegisterComponent } from './routes/pages/register/register.component';
     BoomComponent,
     LoginComponent,
     RegisterComponent,
+    CurriculumViewComponent,
   ],
   imports: [
     HttpClientModule,
