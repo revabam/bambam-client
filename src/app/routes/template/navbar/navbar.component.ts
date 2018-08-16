@@ -10,7 +10,6 @@ export class NavbarComponent implements OnInit {
 
   @ViewChild('hamburger') hamburger: ElementRef;
   private links = document.getElementsByClassName('nav-link');
-  selected = 1;
 
   constructor(private router: Router) { }
 
@@ -33,14 +32,20 @@ export class NavbarComponent implements OnInit {
     this.hamburger.nativeElement.classList.toggle('change');
   }
 
-  getColor(num: number) {
-    return (num === this.selected) ? 'primary' : '';
+  /*
+    Returns the color for the navbar buttons
+
+    @param  path  the path of the navbar button
+    @return       'primary' or '' depending on which page the user is on
+  */
+  getColor(path: string) {
+    return (`/${path}` === window.location.pathname) ? 'primary' : '';
   }
 
-  setSelected(num: number) {
-    this.selected = num;
-  }
-
+  /*
+    Logs the user out by clearing session storage and routing them to the
+    login page
+  */
   logout() {
     sessionStorage.clear();
     this.router.navigate(['login']);
