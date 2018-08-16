@@ -1,4 +1,5 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-navbar',
@@ -11,7 +12,7 @@ export class NavbarComponent implements OnInit {
   private links = document.getElementsByClassName('nav-link');
   selected = 1;
 
-  constructor() { }
+  constructor(private router: Router) { }
 
   ngOnInit() {
   }
@@ -38,5 +39,10 @@ export class NavbarComponent implements OnInit {
 
   setSelected(num: number) {
     this.selected = num;
+  }
+
+  logout() {
+    sessionStorage.clear();
+    this.router.navigate(['login']);
   }
 }
