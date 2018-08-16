@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { Router } from '@angular/router';
+import { UserService } from '../../../services/user.service';
 import { BamUser } from '../../../models/bam-user';
-import { Router } from '../../../../../node_modules/@angular/router';
 
 @Component({
   selector: 'app-navbar',
@@ -11,21 +12,24 @@ export class NavbarComponent implements OnInit {
 
   @ViewChild('hamburger') hamburger: ElementRef;
   private links = document.getElementsByClassName('nav-link');
-  selected = 1;
-  user: BamUser;
+  show = false;
 
-  constructor(private router: Router) { }
+  constructor(
+    private userService: UserService,
+    private router: Router
+  ) { }
 
   ngOnInit() {
-    this.user = JSON.parse(sessionStorage.getItem('user'));
-  }
+    this.userService.user.subscribe(
+      user => {
+        // If user is not logged in, don't show the navbar
+        this.show = user !== null;
 
-  // tslint:disable-next-line:use-life-cycle-interface
-  ngDoCheck() {
-    const sessionUser = JSON.parse(sessionStorage.getItem('user'));
-    if (this.user !== sessionUser) {
-      this.user = sessionUser;
-    }
+        if (!this.show && JSON.parse(sessionStorage.getItem('user'))) {
+          this.userService.user.next(JSON.parse(sessionStorage.getItem('user')));
+        }
+      }
+    );
   }
 
   /**
@@ -44,16 +48,28 @@ export class NavbarComponent implements OnInit {
     this.hamburger.nativeElement.classList.toggle('change');
   }
 
-  getColor(num: number) {
-    return (num === this.selected) ? 'primary' : '';
+  /*
+    Returns the color for the navbar buttons
+
+    @param  path  the path of the navbar button
+    @return       'primary' or '' depending on which page the user is on
+  */
+  getColor(path: string) {
+    return (`/${path}` === window.location.pathname) ? 'primary' : '';
   }
 
-  setSelected(num: number) {
-    this.selected = num;
-  }
-
+  /*
+    Logs the user out by clearing session storage and routing them to the
+    login page
+  */
   logout() {
-    sessionStorage.setItem('user', null);
+    // Clear the user out of session strorage
+    sessionStorage.clear();
+
+    // Push null onto the user subject so that the navbar disappears
+    this.userService.user.next(null);
+
     this.router.navigate(['login']);
   }
+
 }

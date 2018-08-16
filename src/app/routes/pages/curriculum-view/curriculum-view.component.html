@@ -1,0 +1,14 @@
+
+    <mat-accordion>
+        <br />
+        <h1 class="text-center">Week View</h1>
+        <br />
+        <mat-expansion-panel *ngFor="let curriculum of [1,2]"> <!--replace this with numberOfWeeks at some point-->
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+            </mat-panel-title>
+          </mat-expansion-panel-header>
+              <button>Create new version</button>
+          <div *ngFor="let item of ['Content', 'Content']">{{item}}</div>
+        </mat-expansion-panel>
+      </mat-accordion>

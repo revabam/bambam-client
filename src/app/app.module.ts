@@ -8,6 +8,7 @@ import { MatAutocompleteModule, MatBadgeModule, MatBottomSheetModule, MatButtonM
   MatRadioModule, MatRippleModule, MatSelectModule, MatSidenavModule, MatSliderModule, MatSlideToggleModule, MatSnackBarModule,
   MatSortModule, MatStepperModule, MatTableModule, MatTabsModule, MatToolbarModule,
   MatTooltipModule, MatTreeModule } from '@angular/material';
+import { CurriculumViewComponent } from './routes/pages/curriculum-view/curriculum-view.component';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule } from '@angular/router';
@@ -42,6 +43,7 @@ import { RoutesModule } from './routes/routes.module';
     DashboardComponent,
     CalendarComponent,
     CurriculumEditorComponent,
+    CurriculumViewComponent,
     BoomComponent,
     LoginComponent,
     RegisterComponent,

@@ -24,10 +24,11 @@ export class LoginComponent implements OnInit {
   login() {
     this.userService.login(this.email, this.password).subscribe(
       result => {
-        if (result) {
-          const user = result[0];
-          sessionStorage.setItem('user', JSON.stringify(user));
-          this.userService.user.next(user);
+        if (result !== null) {
+          console.log(result);
+          sessionStorage.setItem('user', JSON.stringify(result));
+          this.userService.user.next(result);
+
           this.router.navigate(['dashboard']);
         }
       },

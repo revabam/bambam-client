@@ -1,3 +1,42 @@
-<p>
-  curriculum-editor works!
-</p>
+<br />
+<h1 class="text-center">Curriculum Editor</h1>
+
+<mat-grid-list class="curr-editor" cols="2" rowHeight="550px">
+  <mat-grid-tile>
+    <mat-accordion>
+      <h4 class="text-center">Course Structure</h4>
+      <mat-expansion-panel *ngFor="let cname of curriculumNames">
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            {{cname}}
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+            <button>Create new version</button>
+        
+        <div *ngFor="let curriculum of curriculums">
+          <div *ngIf="curriculum.name == cname">{{curriculum.version}}</div>
+        </div>
+      </mat-expansion-panel>
+    </mat-accordion>
+  </mat-grid-tile>
+  <mat-grid-tile>
+    <mat-accordion>
+      <h4 class="text-center">Topic Pool</h4>
+      <mat-expansion-panel *ngFor="let cname of curriculumNames">
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            {{cname}}
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+        <input type="text"
+          placeholder="Search Topics"
+          [(ngModel)]="topicSearch">
+        <br />
+        <br />
+        <div *ngFor="let topic of getTopicsByCurriculums(cname)">
+          <div *ngIf="!topicSearch || ((topic.name | lowercase).indexOf(topicSearch | lowercase) >= 0)">{{ topic.name }}</div>
+        </div>
+      </mat-expansion-panel>
+    </mat-accordion>
+  </mat-grid-tile>
+</mat-grid-list>
