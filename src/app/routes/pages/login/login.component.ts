@@ -28,6 +28,7 @@ export class LoginComponent implements OnInit {
           console.log(result);
           sessionStorage.setItem('user', JSON.stringify(result));
           this.userService.user.next(result);
+
           this.router.navigate(['dashboard']);
         }
       },

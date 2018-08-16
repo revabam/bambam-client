@@ -8,7 +8,11 @@ import { LoginComponent } from './pages/login/login.component';
 import { RegisterComponent } from './pages/register/register.component';
 
 export const appRoutes: Routes = [
-    // routes go here.
+    {
+        path: '',
+        pathMatch: 'full',
+        redirectTo: 'dashboard'
+    },
     {
         path: 'dashboard',
         component: DashboardComponent
@@ -37,11 +41,5 @@ export const appRoutes: Routes = [
     {
         path: 'boom',
         component: BoomComponent
-    },
-
-    {
-        path: '**',
-        pathMatch: 'full',
-        redirectTo: '/'
     }
 ];

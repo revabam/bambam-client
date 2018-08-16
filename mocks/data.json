@@ -1,481 +1,466 @@
 {
-  "batches": [
-    {
-      "id": 1,
-      "name": "1806-Jun18-USF-Java",
-      "startDate": 123456787,
-      "endDate": 123456789,
-      "trainer_id": 4,
-      "calendarCurriculum_id": 2
-    },
-    {
-      "id": 2,
-      "name": "1807-Jul18-USF-JavaScript",
-      "startDate": 123456787,
-      "endDate": 123456789,
-      "trainer_id": 12,
-      "calendarCurriculum_id": 4
-    },
-    {
-      "id": 3,
-      "name": "1808-Aug18-USF-C++",
-      "startDate": 123456787,
-      "endDate": 123456789,
-      "trainer_id": 7,
-      "calendarCurriculum_id": 1
-    },
-    {
-      "id": 4,
-      "name": "1809-Sep18-USF-Java",
-      "startDate": 123456787,
-      "endDate": 123456789,
-      "trainer_id": 11,
-      "calendarCurriculum_id": 2
-    }
-  ],
-  "calendar-curriculums": [
-    {
-      "id": 1,
-      "curriculum_id": 1,
-      "batch_id": 1
-    },
-    {
-      "id": 2,
-      "curriculum_id": 2,
-      "batch_id": 1
-    },
-    {
-      "id": 3,
-      "curriculum_id": 3,
-      "batch_id": 1
-    },
-    {
-      "id": 4,
-      "curriculum_id": 4,
-      "batch_id": 1
-    },
-    {
-      "id": 5,
-      "curriculum_id": 5,
-      "batch_id": 1
-    }
-  ],
-  "calendar-subtopics": [
-    {
-      "id": 1,
-      "subtopic_id": 1
-    },
-    {
-      "id": 2,
-      "subtopic_id": 2
-    },
-    {
-      "id": 3,
-      "subtopic_id": 3
-    },
-    {
-      "id": 4,
-      "subtopic_id": 4
-    },
-    {
-      "id": 5,
-      "subtopic_id": 5
-    },
-    {
-      "id": 6,
-      "subtopic_id": 6
-    }
-  ],
-  "calendar-events": [
-    {
-      "id": 1,
-      "title": "eventOne",
-      "description": "the first event",
-      "status_id": 2,
-      "startDateTime": 6713691398138,
-      "endDateTime": 634342887095487,
-      "calendarSubtopic_id": 2
-    },
-    {
-      "id": 2,
-      "title": "eventTwo",
-      "description": "the second event",
-      "status_id": 1,
-      "startDateTime": 8129132869,
-      "endDateTime": 6742830928462,
-      "calendarSubtopic_id": 2
-    },
-    {
-      "id": 3,
-      "title": "eventThree",
-      "description": "the third event",
-      "status_id": 1,
-      "startDateTime": 238080293,
-      "endDateTime": 7342723489,
-      "calendarSubtopic_id": 2
-    },
-    {
-      "id": 4,
-      "title": "eventFour",
-      "description": "the fourth event",
-      "status_id": "2",
-      "startDateTime": 376542356,
-      "endDateTime": 478764567765,
-      "calendarSubtopic_id": 1
-    }
-  ],
-  "curriculums": [
-    {
-      "id": 1,
-      "name": "c++",
-      "version": "1",
-      "creator_id": 4,
-      "dateCreated": 99257573426,
-      "numberOfWeeks": 10,
-      "topics": [
-        3,
-        4,
-        5,
-        6
-      ]
-    },
-    {
-      "id": 2,
-      "name": "java",
-      "version": "10",
-      "creator_id": 3,
-      "dateCreated": 734870348,
-      "numberOfWeeks": 14,
-      "topics": [
-        2,
-        4,
-        6,
-        8
-      ]
-    },
-    {
-      "id": 3,
-      "name": "python",
-      "version": "4",
-      "creator_id": 4,
-      "dateCreated": 8989752698,
-      "numberOfWeeks": 10,
-      "topics": [
-        1,
-        3,
-        5,
-        7
-      ]
-    },
-    {
-      "id": 4,
-      "name": "angular",
-      "version": "6",
-      "creator_id": 1,
-      "dateCreated": 463224573,
-      "numberOfWeeks": 10,
-      "topics": [
-        6,
-        3,
-        7,
-        2
-      ]
-    }
-  ],
-  "subtopics": [
-    {
-      "id": 1,
-      "name": "Core Java",
-      "parentTopic_id": 1
-    },
-    {
-      "id": 2,
-      "name": "Data Types",
-      "parentTopic_id": 1
-    },
-    {
-      "id": 3,
-      "name": "Inheritance",
-      "parentTopic_id": 1
-    },
-    {
-      "id": 4,
-      "name": "Joins",
-      "parentTopic_id": 2
-    },
-    {
-      "id": 5,
-      "name": "Semantic Elements",
-      "parentTopic_id": 4
-    },
-    {
-      "id": 6,
-      "name": "Basic CSS",
-      "parentTopic_id": 5
-    },
-    {
-      "id": 7,
-      "name": "Core JavaScript",
-      "parentTopic_id": 6
-    },
-    {
-      "id": 8,
-      "name": "TypeScript",
-      "parentTopic_id": 7
-    },
-    {
-      "id": 9,
-      "name": "Directives",
-      "parentTopic_id": 7
-    },
-    {
-      "id": 10,
-      "name": "Binding",
-      "parentTopic_id": 7
-    },
-    {
-      "id": 11,
-      "name": "Observables",
-      "parentTopic_id": 7
-    },
-    {
-      "id": 12,
-      "name": "CI/CD",
-      "parentTopic_id": 8
-    },
-    {
-      "id": 13,
-      "name": "AWS",
-      "parentTopic_id": 8
-    },
-    {
-      "id": 14,
-      "name": "Hibernate Framework",
-      "parentTopic_id": 9
-    },
-    {
-      "id": 15,
-      "name": "HQL",
-      "parentTopic_id": 9
-    },
-    {
-      "id": 16,
-      "name": "Spring Framework",
-      "parentTopic_id": 10
-    },
-    {
-      "id": 17,
-      "name": "Spring Web MVC",
-      "parentTopic_id": 10
-    },
-    {
-      "id": 18,
-      "name": "Spring Boot",
-      "parentTopic_id": 10
-    },
-    {
-      "id": 19,
-      "name": "Spring Data",
-      "parentTopic_id": 10
-    },
-    {
-      "id": 20,
-      "name": "REST",
-      "parentTopic_id": 11
-    },
-    {
-      "id": 21,
-      "name": "SOAP",
-      "parentTopic_id": 11
-    },
-    {
-      "id": 22,
-      "name": "API Gateway / Zuul",
-      "parentTopic_id": 12
-    },
-    {
-      "id": 23,
-      "name": "Discovery Service / Eureka",
-      "parentTopic_id": 12
-    },
-    {
-      "id": 24,
-      "name": "Config Server",
-      "parentTopic_id": 12
-    },
-    {
-      "id": 25,
-      "name": "Rest Template / Feign",
-      "parentTopic_id": 12
-    },
-    {
-      "id": 26,
-      "name": "Circuit Breaker / Hystrix",
-      "parentTopic_id": 12
-    }
-  ],
-  "users": [
-    {
-      "id": 1,
-      "firstName": "Wezley",
-      "lastName": "Singleton",
-      "email": "wezleysingleton@reva.com",
-      "role_id": 1,
-      "status_id": 1
-    },
-    {
-      "id": 2,
-      "firstName": "Dylan",
-      "lastName": "McBee",
-      "email": "dylanmcbee@reva.com",
-      "role_id": 1,
-      "status_id": 1
-    },
-    {
-      "id": 3,
-      "firstName": "Aaron",
-      "lastName": "Mathews",
-      "email": "aaronmathews@reva.com",
-      "role_id": 2,
-      "status_id": 1
-    },
-    {
-      "id": 4,
-      "firstName": "Algustus",
-      "lastName": "Lee",
-      "email": "algustuslee@reva.com",
-      "role_id": 2,
-      "status_id": 1
-    },
-    {
-      "id": 5,
-      "firstName": "Brandon",
-      "lastName": "Scoggins",
-      "email": "brandonscoggins@reva.com",
-      "role_id": 2,
-      "status_id": 1
-    },
-    {
-      "id": 6,
-      "firstName": "Christian",
-      "lastName": "DeFaria",
-      "email": "christiandefaria@reva.com",
-      "role_id": 2,
-      "status_id": 1
-    },
-    {
-      "id": 7,
-      "firstName": "Derek",
-      "lastName": "Loisel",
-      "email": "derekloisel@reva.com",
-      "role_id": 2,
-      "status_id": 1
-    },
-    {
-      "id": 8,
-      "firstName": "Bradley",
-      "lastName": "Walker",
-      "email": "bradleywalker@reva.com",
-      "role_id": 2,
-      "status_id": 1
-    },
-    {
-      "id": 9,
-      "firstName": "John",
-      "lastName": "Beineke",
-      "email": "johnbeineke@reva.com",
-      "role_id": 2,
-      "status_id": 1
-    },
-    {
-      "id": 10,
-      "firstName": "Karen",
-      "lastName": "Matney",
-      "email": "karenmatney@reva.com",
-      "role_id": 2,
-      "status_id": 1
-    },
-    {
-      "id": 11,
-      "firstName": "Khaleel",
-      "lastName": "Williams",
-      "email": "khaleelwilliams@reva.com",
-      "role_id": 2,
-      "status_id": 1
-    },
-    {
-      "id": 12,
-      "firstName": "Kyle",
-      "lastName": "Smith",
-      "email": "kylesmith@reva.com",
-      "role_id": 2,
-      "status_id": 1
-    },
-    {
-      "id": 13,
-      "firstName": "Thomas",
-      "lastName": "Steyaert",
-      "email": "thomassteyaert@reva.com",
-      "role_id": 2,
-      "status_id": 1
-    },
-    {
-      "id": 14,
-      "firstName": "Andrew",
-      "lastName": "Li",
-      "email": "andrewli@reva.com",
-      "role_id": 2,
-      "status_id": 1
-    }
-  ],
-  "topics": [
-    {
-      "id": 1,
-      "name": "Java"
-    },
-    {
-      "id": 2,
-      "name": "SQL"
-    },
-    {
-      "id": 3,
-      "name": "JDBC"
-    },
-    {
-      "id": 4,
-      "name": "HTML"
-    },
-    {
-      "id": 5,
-      "name": "CSS"
-    },
-    {
-      "id": 6,
-      "name": "JavaScript"
-    },
-    {
-      "id": 7,
-      "name": "Angular"
-    },
-    {
-      "id": 8,
-      "name": "DevOps"
-    },
-    {
-      "id": 9,
-      "name": "Hibernate"
-    },
-    {
-      "id": 10,
-      "name": "Spring"
-    },
-    {
-      "id": 11,
-      "name": "Web Services"
-    },
-    {
-      "id": 12,
-      "name": "Microservices"
-    }
-  ]
+    "batches": [
+        {
+            "id": 1,
+            "name": "1806-Jun18-USF-Java",
+            "startDate": 123456787,
+            "endDate": 123456789,
+            "trainer_id": 1,
+            "calendarCurriculum_id": 2
+        },
+        {
+            "id": 2,
+            "name": "1807-Jul18-USF-JavaScript",
+            "startDate": 1533528000000,
+            "endDate": 1534737600000,
+            "trainer_id": 1,
+            "calendarCurriculum_id": 4
+        },
+        {
+            "id": 3,
+            "name": "1808-Aug18-USF-C++",
+            "startDate": 123456787,
+            "endDate": 123456789,
+            "trainer_id": 7,
+            "calendarCurriculum_id": 1
+        },
+        {
+            "id": 4,
+            "name": "1809-Sep18-USF-Java",
+            "startDate": 123456787,
+            "endDate": 123456789,
+            "trainer_id": 11,
+            "calendarCurriculum_id": 2
+        }
+    ]
+ ,
+    "calendar-subtopics": [
+        {
+            "id": 1,
+            "subtopic_id": 1
+        },
+        {
+            "id": 2,
+            "subtopic_id": 2
+        },
+        {
+            "id": 3,
+            "subtopic_id": 3
+        },
+        {
+            "id": 4,
+            "subtopic_id": 4
+        },
+        {
+            "id": 5,
+            "subtopic_id": 5
+        },
+        {
+            "id": 6,
+            "subtopic_id": 6
+        }
+    ]
+,
+    "calendar-curriculums": [
+        {
+            "id": 1,
+            "curriculum_id": 1,
+            "batch_id": 1
+        },
+        {
+            "id": 2,
+            "curriculum_id": 2,
+            "batch_id": 1
+        },
+        {
+            "id": 3,
+            "curriculum_id": 3,
+            "batch_id": 1
+        },
+        {
+            "id": 4,
+            "curriculum_id": 4,
+            "batch_id": 1
+        },
+        {
+            "id": 5,
+            "curriculum_id": 5,
+            "batch_id": 1
+        }
+    ]
+,
+    "calendar-events":
+    [{
+        "id":1,
+        "title":"eventOne",
+        "description":"the first event",
+        "status_id":2,
+        "startDateTime":6713691398138,
+        "endDateTime":634342887095487,
+        "calendarSubtopic_id":2
+        },
+        {
+        "id":2,
+        "title":"eventTwo",
+        "description":"the second event",
+        "status_id":1,
+        "startDateTime":8129132869,
+        "endDateTime":6742830928462,
+        "calendarSubtopic_id":2
+        },
+        {
+        "id":3,
+        "title":"eventThree",
+        "description":"the third event",
+        "status_id":1,
+        "startDateTime":238080293,
+        "endDateTime":7342723489,
+        "calendarSubtopic_id":2
+        },
+        {
+        "id":4,
+        "title":"eventFour",
+        "description":"the fourth event",
+        "status_id":"2",
+        "startDateTime":376542356,
+        "endDateTime":478764567765,
+        "calendarSubtopic_id":1
+    }]
+,
+    "curriculums":
+    [{
+        "id": 1,
+        "name": "c++",
+        "version": "1",
+        "creator_id": 4,
+        "dateCreated": 99257573426,
+        "numberOfWeeks":10,
+        "topics":[3,4,5,6]
+        },
+        {
+        "id": 2,
+        "name":"java",
+        "version":"10",
+        "creator_id":3,
+        "dateCreated": 734870348,
+        "numberOfWeeks":14,
+        "topics":[2,4,6,8]
+        },
+        {
+        "id": 3,
+        "name":"python",
+        "version":"4",
+        "creator_id":4,
+        "dateCreated":8989752698,
+        "numberOfWeeks":10,
+        "topics":[1,3,5,7]
+        },
+        {
+        "id": 4,
+        "name":"angular",
+        "version":"6",
+        "creator_id":1,
+        "dateCreated":463224573,
+        "numberOfWeeks":10,
+        "topics":[6,3,7,2]
+        }]
+,
+    "subtopics": [
+        {
+            "id": 1,
+            "name": "Core Java",
+            "parentTopic_id": 1
+        },
+        {
+            "id": 2,
+            "name": "Data Types",
+            "parentTopic_id": 1
+        },
+        {
+            "id": 3,
+            "name": "Inheritance",
+            "parentTopic_id": 1
+        },
+        {
+            "id": 4,
+            "name": "Joins",
+            "parentTopic_id": 2
+        },
+        {
+            "id": 5,
+            "name": "Semantic Elements",
+            "parentTopic_id": 4
+        },
+        {
+            "id": 6,
+            "name": "Basic CSS",
+            "parentTopic_id": 5
+        },
+        {
+            "id": 7,
+            "name": "Core JavaScript",
+            "parentTopic_id": 6
+        },
+        {
+            "id": 8,
+            "name": "TypeScript",
+            "parentTopic_id": 7
+        },
+        {
+            "id": 9,
+            "name": "Directives",
+            "parentTopic_id": 7
+        },
+        {
+            "id": 10,
+            "name": "Binding",
+            "parentTopic_id": 7
+        },
+        {
+            "id": 11,
+            "name": "Observables",
+            "parentTopic_id": 7
+        },
+        {
+            "id": 12,
+            "name": "CI/CD",
+            "parentTopic_id": 8
+        },
+        {
+            "id": 13,
+            "name": "AWS",
+            "parentTopic_id": 8
+        },
+        {
+            "id": 14,
+            "name": "Hibernate Framework",
+            "parentTopic_id": 9
+        },
+        {
+            "id": 15,
+            "name": "HQL",
+            "parentTopic_id": 9
+        },
+        {
+            "id": 16,
+            "name": "Spring Framework",
+            "parentTopic_id": 10
+        },
+        {
+            "id": 17,
+            "name": "Spring Web MVC",
+            "parentTopic_id": 10
+        },
+        {
+            "id": 18,
+            "name": "Spring Boot",
+            "parentTopic_id": 10
+        },
+        {
+            "id": 19,
+            "name": "Spring Data",
+            "parentTopic_id": 10
+        },
+        {
+            "id": 20,
+            "name": "REST",
+            "parentTopic_id": 11
+        },
+        {
+            "id": 21,
+            "name": "SOAP",
+            "parentTopic_id": 11
+        },
+        {
+            "id": 22,
+            "name": "API Gateway / Zuul",
+            "parentTopic_id": 12
+        },
+        {
+            "id": 23,
+            "name": "Discovery Service / Eureka",
+            "parentTopic_id": 12
+        },
+        {
+            "id": 24,
+            "name": "Config Server",
+            "parentTopic_id": 12
+        },
+        {
+            "id": 25,
+            "name": "Rest Template / Feign",
+            "parentTopic_id": 12
+        },
+        {
+            "id": 26,
+            "name": "Circuit Breaker / Hystrix",
+            "parentTopic_id": 12
+        }
+    ]
+,
+    "topics": [
+        {
+            "id": 1,
+            "name": "Java"
+        },
+        {
+            "id": 2,
+            "name": "SQL"
+        },
+        {
+            "id": 3,
+            "name": "JDBC"
+        },
+        {
+            "id": 4,
+            "name": "HTML"
+        },
+        {
+            "id": 5,
+            "name": "CSS"
+        },
+        {
+            "id": 6,
+            "name": "JavaScript"
+        },
+        {
+            "id": 7,
+            "name": "Angular"
+        },
+        {
+            "id": 8,
+            "name": "DevOps"
+        },
+        {
+            "id": 9,
+            "name": "Hibernate"
+        },
+        {
+            "id": 10,
+            "name": "Spring"
+        },
+        {
+            "id": 11,
+            "name": "Web Services"
+        },
+        {
+            "id": 12,
+            "name": "Microservices"
+        }
+    ]
+,
+    "users": [
+        {
+            "id":1,
+            "firstName":"Wezley",
+            "lastName":"Singleton",
+            "email":"wezleysingleton@reva.com",
+            "role_id":1,
+            "status_id":1
+        },
+        {
+            "id":2,
+            "firstName":"Dylan",
+            "lastName":"McBee",
+            "email":"dylanmcbee@reva.com",
+            "role_id":1,
+            "status_id":1
+        },
+        {
+            "id":3,
+            "firstName":"Aaron",
+            "lastName":"Mathews",
+            "email":"aaronmathews@reva.com",
+            "role_id":2,
+            "status_id":1
+        },
+        {
+            "id":4,
+            "firstName":"Algustus",
+            "lastName":"Lee",
+            "email":"algustuslee@reva.com",
+            "role_id":2,
+            "status_id":1
+        },
+        {
+            "id":5,
+            "firstName":"Brandon",
+            "lastName":"Scoggins",
+            "email":"brandonscoggins@reva.com",
+            "role_id":2,
+            "status_id":1
+        },
+        {
+            "id":6,
+            "firstName":"Christian",
+            "lastName":"DeFaria",
+            "email":"christiandefaria@reva.com",
+            "role_id":2,
+            "status_id":1
+        },
+        {
+            "id":7,
+            "firstName":"Derek",
+            "lastName":"Loisel",
+            "email":"derekloisel@reva.com",
+            "role_id":2,
+            "status_id":1
+        },
+        {
+            "id":8,
+            "firstName":"Bradley",
+            "lastName":"Walker",
+            "email":"bradleywalker@reva.com",
+            "role_id":2,
+            "status_id":1
+        },
+        {
+            "id":9,
+            "firstName":"John",
+            "lastName":"Beineke",
+            "email":"johnbeineke@reva.com",
+            "role_id":2,
+            "status_id":1
+        },
+        {
+            "id":10,
+            "firstName":"Karen",
+            "lastName":"Matney",
+            "email":"karenmatney@reva.com",
+            "role_id":2,
+            "status_id":1
+        },
+        {
+            "id":11,
+            "firstName":"Khaleel",
+            "lastName":"Williams",
+            "email":"khaleelwilliams@reva.com",
+            "role_id":2,
+            "status_id":1
+        },
+        {
+            "id":12,
+            "firstName":"Kyle",
+            "lastName":"Smith",
+            "email":"kylesmith@reva.com",
+            "role_id":2,
+            "status_id":1
+        },
+        {
+            "id":13,
+            "firstName":"Thomas",
+            "lastName":"Steyaert",
+            "email":"thomassteyaert@reva.com",
+            "role_id":2,
+            "status_id":1
+        },
+        {
+            "id":14,
+            "firstName":"Andrew",
+            "lastName":"Li",
+            "email":"andrewli@reva.com",
+            "role_id":2,
+            "status_id":1
+        }
+    ]
 }
