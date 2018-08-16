@@ -13,6 +13,7 @@
           </mat-panel-title>
         </mat-expansion-panel-header>
             <button>Create new version</button>
+        
         <div *ngFor="let curriculum of curriculums">
           <div *ngIf="curriculum.name == cname">{{curriculum.version}}</div>
         </div>
@@ -22,17 +23,17 @@
   <mat-grid-tile>
     <mat-accordion>
       <h4 class="text-center">Topic Pool</h4>
-      <mat-expansion-panel *ngFor="let curriculum of ['first', 'second']">
+      <mat-expansion-panel *ngFor="let cname of curriculumNames">
         <mat-expansion-panel-header>
           <mat-panel-title>
-            {{curriculum}}
+            {{cname}}
           </mat-panel-title>
         </mat-expansion-panel-header>
         <input type="text" [(ngModel)]="topicSearch">
-        <div *ngFor="let item of ['Fourth', 'Fifth']">
-          <div *ngIf="(item | lowercase) == (topicSearch | lowercase)">
-          {{item}}
-          </div>
+        <br />
+        <br />
+        <div *ngFor="let topic of getTopicsByCurriculums(cname)">
+          {{ topic }}
         </div>
       </mat-expansion-panel>
     </mat-accordion>
