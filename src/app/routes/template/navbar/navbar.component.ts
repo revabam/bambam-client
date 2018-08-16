@@ -12,7 +12,7 @@ export class NavbarComponent implements OnInit {
 
   @ViewChild('hamburger') hamburger: ElementRef;
   private links = document.getElementsByClassName('nav-link');
-  show = false;
+  show = true;
 
   constructor(
     private userService: UserService,
