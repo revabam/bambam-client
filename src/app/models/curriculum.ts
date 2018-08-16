@@ -1,4 +1,4 @@
-import { Topic } from "./topic";
+import { Topic } from './topic';
 
 export class Curriculum {
     id: number;

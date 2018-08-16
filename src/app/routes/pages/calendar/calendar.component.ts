@@ -5,25 +5,22 @@ import {
   Component,
   ChangeDetectionStrategy,
   ViewChild,
-  TemplateRef
+  TemplateRef,
+  OnInit,
+  DoCheck
 } from '@angular/core';
 import {
-  startOfDay,
-  endOfDay,
-  subDays,
-  addDays,
-  endOfMonth,
-  isSameDay,
-  isSameMonth,
-  addHours
+  startOfDay, endOfDay, subDays, addDays, endOfMonth, isSameDay, isSameMonth, addHours
 } from 'date-fns';
-import { Subject } from 'rxjs';
+import { Subject, Observable } from 'rxjs';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap/modal/modal.module';
 import {
   CalendarEvent,
   CalendarEventAction,
   CalendarEventTimesChangedEvent
 } from 'angular-calendar';
+import { CalendarService } from '../../../services/calendar.service';
+import { Curriculum } from '../../../models/curriculum';
 
 const colors: any = {
   red: {
@@ -46,7 +43,14 @@ const colors: any = {
   templateUrl: './calendar.component.html',
   styleUrls: ['./calendar.component.css']
 })
-export class CalendarComponent {
+export class CalendarComponent implements OnInit, DoCheck {
+
+  curriculums: Curriculum[];
+
+  curriculumDataFetched = false;
+  renderCalendar = false;
+  showSideNav = false;
+
   @ViewChild('modalContent') modalContent: TemplateRef<any>;
 
   view = 'month';
@@ -112,7 +116,22 @@ export class CalendarComponent {
 
   activeDayIsOpen = true;
 
-  constructor(private modal: NgbModal) {}
+  constructor(private modal: NgbModal, private calendarService: CalendarService) {}
+
+  ngOnInit() {
+    this.calendarService.getCurriculum().subscribe(response => {
+      this.curriculums = response;
+      this.curriculumDataFetched = true;
+    });
+  }
+
+  ngDoCheck() {
+    this.renderCalendar = this.curriculumDataFetched;
+  }
+
+  toggleSideNav() {
+    this.showSideNav = !this.showSideNav;
+  }
 
   dayClicked({ date, events }: { date: Date; events: CalendarEvent[] }): void {
     if (isSameMonth(date, this.viewDate)) {

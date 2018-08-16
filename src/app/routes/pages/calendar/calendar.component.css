@@ -71,7 +71,7 @@ input[name=topic], input[name=subtopic] {
 }
 
 a {
-    color: white !important;
+    /* color: white !important; */
 }
 
 .buttons:hover {
