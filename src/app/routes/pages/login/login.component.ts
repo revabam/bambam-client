@@ -24,7 +24,7 @@ export class LoginComponent implements OnInit {
   login() {
     this.userService.login(this.email, this.password).subscribe(
       result => {
-        if (result !== null) {
+        if (result) {
           const user = result[0];
           sessionStorage.setItem('user', JSON.stringify(user));
           this.userService.user.next(user);
