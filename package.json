@@ -29,13 +29,7 @@
     "@fortawesome/fontawesome-free": "^5.1.0",
     "@ng-bootstrap/ng-bootstrap": "^2.2.2",
     "@types/jquery": "^3.2.7",
-<<<<<<< HEAD
-    "angular-calendar": "^0.25.2",
-    "angularx-flatpickr": "^6.0.0",
-    "bootstrap": "^4.1.1",
-=======
     "bootstrap": "^4.1.3",
->>>>>>> b156a34109baafc4e854a3d02632bee46f8c6130
     "core-js": "^2.5.4",
     "flatpickr": "^4.5.1",
     "fullcalendar": "^3.9.0",
