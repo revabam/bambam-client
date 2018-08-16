@@ -24,6 +24,10 @@ export class NavbarComponent implements OnInit {
       user => {
         // If user is not logged in, don't show the navbar
         this.show = user !== null;
+
+        if (!this.show && JSON.parse(sessionStorage.getItem('user'))) {
+          this.userService.user.next(JSON.parse(sessionStorage.getItem('user')));
+        }
       }
     );
   }
