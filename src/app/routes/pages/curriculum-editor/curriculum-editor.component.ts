@@ -23,6 +23,7 @@ export class CurriculumEditorComponent implements OnInit {
 
   ngOnInit() {
     this.getAllCurriculums();
+    this.getAllTopics();
   }
 
   getAllCurriculums(): void {
@@ -58,20 +59,28 @@ export class CurriculumEditorComponent implements OnInit {
     let topics: Topic[] = [];
     const currs: Curriculum[] = this.getCurriculumsByName(name);
     for (let i = 0; i < currs.length; i++) {
-      console.log(topics);
-      console.log(currs[i].topics);
       topics = topics.concat(currs[i].topics);
-      console.log(topics);
-      if (topics.length > 0) {
-        console.log(typeof(topics[0]));
-      }
     }
+    // Filter the topics to remove duplicates
     const uniqueTopics = topics.map(topic => topic);
-    return uniqueTopics.filter((x, i, a) => x && a.indexOf(x) === i);
+    const returnedTopics = uniqueTopics.filter((x, i, a) => x && a.indexOf(x) === i);
+    // Convert array of ID's (integers) to array of Topic objects
+    this.convertTopics(returnedTopics);
+    return returnedTopics;
   }
 
-  filterTopics(topicsList: Topic[]): void {
-    for (let i = 0; i < topicsList.length; i++) {}
+  convertTopics(topicsList: Topic[]): void {
+    for (let i = 0; i < topicsList.length; i++) {
+      if (typeof(topicsList[i]) === 'number') {
+        const idConv: any = topicsList[i];
+        const id: number = idConv;
+        for (let j = 0; j < this.topics.length; j++) {
+          if (id === this.topics[j].id) {
+            topicsList[i] = this.topics[j];
+          }
+        }
+      }
+    }
   }
 
 }

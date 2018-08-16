@@ -2,8 +2,8 @@
 <h1 class="text-center">Curriculum Editor</h1>
 <br />
 
-<mat-grid-list cols="2" rowHeight="1:1">
-  <mat-grid-tile>
+<mat-grid-list cols="2" rowHeight="5:1">
+  <mat-grid-tile rowspan="6">
     <mat-accordion>
       <h4 class="text-center">Course Structure</h4>
       <mat-expansion-panel *ngFor="let cname of curriculumNames">
@@ -20,7 +20,7 @@
       </mat-expansion-panel>
     </mat-accordion>
   </mat-grid-tile>
-  <mat-grid-tile>
+  <mat-grid-tile rowspan="6">
     <mat-accordion>
       <h4 class="text-center">Topic Pool</h4>
       <mat-expansion-panel *ngFor="let cname of curriculumNames">
@@ -29,11 +29,13 @@
             {{cname}}
           </mat-panel-title>
         </mat-expansion-panel-header>
-        <input type="text" [(ngModel)]="topicSearch">
+        <input type="text"
+          placeholder="Search Topics"
+          [(ngModel)]="topicSearch">
         <br />
         <br />
         <div *ngFor="let topic of getTopicsByCurriculums(cname)">
-          {{ topic }}
+          <div *ngIf="!topicSearch || ((topic.name | lowercase).indexOf(topicSearch | lowercase) >= 0)">{{ topic.name }}</div>
         </div>
       </mat-expansion-panel>
     </mat-accordion>
