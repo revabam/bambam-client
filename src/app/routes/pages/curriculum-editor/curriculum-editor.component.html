@@ -1,9 +1,8 @@
 <br />
 <h1 class="text-center">Curriculum Editor</h1>
-<br />
 
-<mat-grid-list cols="2" rowHeight="5:1">
-  <mat-grid-tile rowspan="6">
+<mat-grid-list class="curr-editor" cols="2" rowHeight="550px">
+  <mat-grid-tile>
     <mat-accordion>
       <h4 class="text-center">Course Structure</h4>
       <mat-expansion-panel *ngFor="let cname of curriculumNames">
@@ -20,7 +19,7 @@
       </mat-expansion-panel>
     </mat-accordion>
   </mat-grid-tile>
-  <mat-grid-tile rowspan="6">
+  <mat-grid-tile>
     <mat-accordion>
       <h4 class="text-center">Topic Pool</h4>
       <mat-expansion-panel *ngFor="let cname of curriculumNames">
