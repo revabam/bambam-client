@@ -32,7 +32,7 @@
   </div>
 </nav> -->
 
-<mat-toolbar>
+<mat-toolbar *ngIf="user!==null">
     <span style="margin-right: 10px;">
       <a>
         <button mat-raised-button [color]="getColor(1)" (click)="setSelected(1)" routerLink="dashboard">Dashboard</button>
@@ -60,7 +60,7 @@
     <span style="flex: 1 auto;"></span>
     <span>
       <a>
-        <button mat-raised-button>Logout</button>
+        <button mat-raised-button (click)="logout()">Logout</button>
       </a>
     </span>
   </mat-toolbar>
