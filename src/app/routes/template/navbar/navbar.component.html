@@ -32,35 +32,35 @@
   </div>
 </nav> -->
 
-<mat-toolbar>
-    <span style="margin-right: 10px;">
-      <a>
-        <button mat-raised-button [color]="getColor(1)" (click)="setSelected(1)" routerLink="dashboard">Dashboard</button>
-      </a>
-    </span>
-  
-    <span style="margin-right: 10px;">
-     <a>
-       <button mat-raised-button [color]="getColor(2)" (click)="setSelected(2)" routerLink="calendar">Calendar</button>
-     </a>
-    </span>
-  
-    <span style="margin-right: 10px;">
-      <a>
-        <button mat-raised-button [color]="getColor(3)" (click)="setSelected(3)" routerLink="curriculum/editor">Curriculum Editor</button>
-      </a>
-    </span>
-  
-    <span style="margin-right: 10px;">
-      <a>
-        <button mat-raised-button [color]="getColor(4)" (click)="setSelected(4)" routerLink="boom">VP/QC (Boom)</button>
-      </a>
-    </span>
-  
-    <span style="flex: 1 auto;"></span>
-    <span>
-      <a>
-        <button mat-raised-button>Logout</button>
-      </a>
-    </span>
-  </mat-toolbar>
+<mat-toolbar *ngIf="show">
+  <span style="margin-right: 10px;">
+    <a>
+      <button mat-raised-button [color]="getColor('dashboard')" routerLink="dashboard">Dashboard</button>
+    </a>
+  </span>
+
+  <span style="margin-right: 10px;">
+    <a>
+      <button mat-raised-button [color]="getColor('calendar')" routerLink="calendar">Calendar</button>
+    </a>
+  </span>
+
+  <span style="margin-right: 10px;">
+    <a>
+      <button mat-raised-button [color]="getColor('curriculum/editor')" routerLink="curriculum/editor">Curriculum Editor</button>
+    </a>
+  </span>
+
+  <span style="margin-right: 10px;">
+    <a>
+      <button mat-raised-button [color]="getColor('boom')" routerLink="boom">VP/QC (Boom)</button>
+    </a>
+  </span>
+
+  <span style="flex: 1 auto;"></span>
+  <span>
+    <a>
+      <button mat-raised-button (click)="logout()">Logout</button>
+    </a>
+  </span>
+</mat-toolbar>
