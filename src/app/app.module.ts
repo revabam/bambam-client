@@ -106,7 +106,7 @@ import { RegisterComponent } from './routes/pages/register/register.component';
     MatTooltipModule,
     MatTreeModule,
     BrowserModule,
-    RouterModule.forRoot(appRoutes, { useHash: true}),
+    RouterModule.forRoot(appRoutes),
     FormsModule,
     BsDatepickerModule.forRoot(),
     TimepickerModule.forRoot(),
