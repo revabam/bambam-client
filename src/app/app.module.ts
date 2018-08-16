@@ -30,6 +30,7 @@ import { NavbarComponent } from './routes/template/navbar/navbar.component';
 import { UserService } from './services/user.service';
 import { BatchService } from './services/batch/batch.service';
 import { LocationStrategy, PathLocationStrategy } from '../../node_modules/@angular/common';
+import { RoutesModule } from './routes/routes.module';
 
 
 

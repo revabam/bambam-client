@@ -24,31 +24,31 @@ export class DashboardComponent implements OnInit {
   ngOnInit() {
     this.user = JSON.parse(sessionStorage.getItem('user'));
 
-    // if (!this.user) {
-    //   this.router.navigate(['login']);
-    // }
+    if (!this.user) {
+      this.router.navigate(['login']);
+    } else {
+      /*
+        In our sprint, only trainers can use the program so there is no
+        need to check if the user is a trainer or not.
+      */
 
-    /*
-      In our sprint, only trainers can use the program so there is no
-      need to check if the user is a trainer or not.
-    */
+      this.batchService.getBatchesByTrainerId(this.user.id).subscribe(
+        result => {
+          // If the result is not null
+          if (result) {
+            this.batch = result.sort(this.compareBatches)[result.length - 1];
 
-    this.batchService.getBatchesByTrainerId(this.user.id).subscribe(
-      result => {
-        // If the result is not null
-        if (result) {
-          this.batch = result.sort(this.compareBatches)[result.length - 1];
+            // Figure out what week the batch is in
+            this.batchWeek = this.calculateWeeksBetween(new Date(this.batch.startDate), new Date()) + 1;
 
-          // Figure out what week the batch is in
-          this.batchWeek = this.calculateWeeksBetween(new Date(this.batch.startDate), new Date()) + 1;
-
-          // Calculate the % progress
-          const totalTime = new Date(this.batch.endDate).getTime() - new Date(this.batch.startDate).getTime();
-          const elapsedTime = new Date().getTime() - new Date(this.batch.startDate).getTime();
-          this.percentCompletion = (elapsedTime / totalTime) * 100;
+            // Calculate the % progress
+            const totalTime = new Date(this.batch.endDate).getTime() - new Date(this.batch.startDate).getTime();
+            const elapsedTime = new Date().getTime() - new Date(this.batch.startDate).getTime();
+            this.percentCompletion = elapsedTime / totalTime;
+          }
         }
-      }
-    );
+      );
+    }
   }
 
   compareBatches(a: Batch, b: Batch) {
