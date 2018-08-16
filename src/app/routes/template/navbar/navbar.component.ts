@@ -1,5 +1,7 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { Router } from '@angular/router';
+import { UserService } from '../../../services/user.service';
+import { BamUser } from '../../../models/bam-user';
 
 @Component({
   selector: 'app-navbar',
@@ -10,10 +12,20 @@ export class NavbarComponent implements OnInit {
 
   @ViewChild('hamburger') hamburger: ElementRef;
   private links = document.getElementsByClassName('nav-link');
+  show = false;
 
-  constructor(private router: Router) { }
+  constructor(
+    private userService: UserService,
+    private router: Router
+  ) { }
 
   ngOnInit() {
+    this.userService.user.subscribe(
+      user => {
+        // If user is not logged in, don't show the navbar
+        this.show = user !== null;
+      }
+    );
   }
 
   /**
@@ -47,7 +59,12 @@ export class NavbarComponent implements OnInit {
     login page
   */
   logout() {
+    // Clear the user out of session strorage
     sessionStorage.clear();
+
+    // Push null onto the user subject so that the navbar disappears
+    this.userService.user.next(null);
+
     this.router.navigate(['login']);
   }
 }
