@@ -9,6 +9,7 @@ export class NavbarComponent implements OnInit {
 
   @ViewChild('hamburger') hamburger: ElementRef;
   private links = document.getElementsByClassName('nav-link');
+  selected = 1;
 
   constructor() { }
 
@@ -31,4 +32,11 @@ export class NavbarComponent implements OnInit {
     this.hamburger.nativeElement.classList.toggle('change');
   }
 
+  getColor(num: number) {
+    return (num === this.selected) ? 'primary' : '';
+  }
+
+  setSelected(num: number) {
+    this.selected = num;
+  }
 }

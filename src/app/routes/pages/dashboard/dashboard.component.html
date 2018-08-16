@@ -1,4 +1,4 @@
-<div class="container">
+<div *ngIf="this.user" class="container">
   <div class="row">
     <div class="col-sm my-4">
       <mat-card color="primary">
@@ -86,10 +86,10 @@
               <h5>Progress By Day</h5>
             </mat-list-item>
             <mat-list-item>
-              <h6>Days Completed</h6>
+              <h6>{{this.percentCompletion | percent}} Days Completed</h6>
             </mat-list-item>
           </mat-list>
-          <mat-progress-bar mode="determinate" [value]="this.percentCompletion" color="accent"></mat-progress-bar>
+          <mat-progress-bar mode="determinate" [value]="this.percentCompletion * 100" color="accent"></mat-progress-bar>
         </mat-card-content>
       </mat-card>
     </div>
