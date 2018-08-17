@@ -1,3 +1,91 @@
-<p>
-  curriculum-editor works!
-</p>
+<br />
+
+<div class="container">
+  <div class="row justify-content-center">
+    <h1 class="text-center">Curriculum Editor</h1>
+  </div>
+  <div class="row">
+
+    <div class="col-sm-6">
+      <!-- <div class="row justify-content-center my-4">
+        <h4 class="text-center">Course Structure</h4>
+      </div>
+      <button>Create new version</button> -->
+      <mat-toolbar>
+          <span style="flex: 1 1 auto"></span>
+          <span>
+
+            <h4 class="">Course Structure</h4>
+          </span>
+          <span style="flex: 1 1 auto"></span>
+          <span>  
+              <button mat-raised-button color="primary">Create New Version</button>
+          </span>
+          <span style="flex: 1 1 auto"></span>
+        </mat-toolbar>
+      <mat-accordion>
+        <mat-card-content>
+          <mat-expansion-panel *ngFor="let cname of curriculumNames">
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                {{cname}}
+              </mat-panel-title>
+            </mat-expansion-panel-header>
+            <div *ngFor="let curriculum of curriculums">
+              <div *ngIf="curriculum.name == cname">{{curriculum.version}}</div>
+            </div>
+          </mat-expansion-panel>
+        </mat-card-content>
+      </mat-accordion>
+    </div>
+    <div class="col-sm-6">
+      <!--
+      <div class="row mt-4 justify-content-center">
+        <div class="col-6 text-center">
+          <h4 class="">Topic Pool</h4>
+        </div>
+        <div class="col-6">  
+            <mat-form-field class="my-0">
+                <input matInput type="text" placeholder="Search Topic" [(ngModel)]="topicSearch">
+                <button mat-button *ngIf="value" matSuffix mat-icon-button aria-label="Clear" (click)="value=''">
+                  <mat-icon>close</mat-icon>
+                </button>
+            </mat-form-field>
+        </div>
+      </div>
+    -->
+      <mat-toolbar>
+          <span style="flex: 1 1 auto"></span>
+          <span>
+
+            <h4 class="">Topic Pool</h4>
+          </span>
+          <span style="flex: 1 1 auto"></span>
+          <span>  
+              <mat-form-field class="my-0">
+                  <input matInput type="text" placeholder="Search Topic" [(ngModel)]="topicSearch">
+                  <button mat-button *ngIf="value" matSuffix mat-icon-button aria-label="Clear" (click)="value=''">
+                    <mat-icon>close</mat-icon>
+                  </button>
+              </mat-form-field>
+          </span>
+          <span style="flex: 1 1 auto"></span>
+        </mat-toolbar>
+      <mat-accordion>
+        <mat-card-content>
+          <mat-expansion-panel *ngFor="let cname of curriculumNames">
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                {{cname}}
+              </mat-panel-title>
+            </mat-expansion-panel-header>
+            <br />
+            <br />
+            <div *ngFor="let topic of getTopicsByCurriculums(cname)">
+              <div *ngIf="!topicSearch || ((topic.name | lowercase).indexOf(topicSearch | lowercase) >= 0)">{{ topic.name }}</div>
+            </div>
+          </mat-expansion-panel>
+        </mat-card-content>
+      </mat-accordion>
+    </div>
+  </div>

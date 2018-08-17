@@ -1,4 +1,4 @@
-<nav id="menu-navbar" class="navbar navbar-expand-sm navbar-light bg-light">
+<!-- <nav id="menu-navbar" class="navbar navbar-expand-sm navbar-light bg-light">
 
   <a class="navbar-brand" routerLink="/">
     <img class="icon" src="favicon.png">
@@ -27,6 +27,40 @@
       <li class="nav-item">
         <a class="nav-link" routerLinkActive="active-link" routerLink="boom" (click)="clickHamburgerLink()">VP/QC (Boom)</a>
       </li>
+      
     </ul>
   </div>
-</nav>
+</nav> -->
+
+<mat-toolbar *ngIf="show">
+  <span style="margin-right: 10px;">
+    <a>
+      <button mat-raised-button [color]="getColor('dashboard')" routerLink="dashboard">Dashboard</button>
+    </a>
+  </span>
+
+  <span style="margin-right: 10px;">
+    <a>
+      <button mat-raised-button [color]="getColor('calendar')" routerLink="calendar">Calendar</button>
+    </a>
+  </span>
+
+  <span style="margin-right: 10px;">
+    <a>
+      <button mat-raised-button [color]="getColor('curriculum/editor')" routerLink="curriculum/editor">Curriculum Editor</button>
+    </a>
+  </span>
+
+  <span style="margin-right: 10px;">
+    <a>
+      <button mat-raised-button [color]="getColor('boom')" routerLink="boom">VP/QC (Boom)</button>
+    </a>
+  </span>
+
+  <span style="flex: 1 auto;"></span>
+  <span>
+    <a>
+      <button mat-raised-button (click)="logout()">Logout</button>
+    </a>
+  </span>
+</mat-toolbar>

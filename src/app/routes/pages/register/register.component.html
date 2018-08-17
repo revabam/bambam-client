@@ -1,0 +1,32 @@
+
+<mat-grid-list cols="1" rowHeight="500px">
+    <mat-grid-tile colspan="1" rowspan="1">
+      <mat-card>
+        <mat-card-content>
+          <mat-card-title>Register</mat-card-title>
+          <mat-form-field>
+            <input matInput name="email" placeholder="Email" type="text" [(ngModel)]="email">
+          </mat-form-field>
+          <br/>
+          <mat-form-field>
+            <input matInput name="password" placeholder="Password" type="password" [(ngModel)]="password">
+          </mat-form-field>
+          <br/>
+          <mat-form-field>
+            <input matInput name="confirm-password" placeholder="Confirm Password" type="password" [(ngModel)]="confirmPassword">
+          </mat-form-field>
+          <br/>
+          <mat-form-field>
+            <input matInput name="first-name" placeholder="First Name" type="text" [(ngModel)]="firstName">
+          </mat-form-field>
+          <br/>
+          <mat-form-field>
+            <input matInput name="last-name" placeholder="Last Name" type="text" [(ngModel)]="lastName">
+          </mat-form-field>
+        </mat-card-content>
+        <mat-card-actions>
+          <button mat-button name="register" color="primary" (click)="register()">Register</button>
+        </mat-card-actions>
+      </mat-card>
+    </mat-grid-tile>
+  </mat-grid-list>
