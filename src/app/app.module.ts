@@ -15,7 +15,6 @@ import { RouterModule } from '@angular/router';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { TimepickerModule } from 'ngx-bootstrap/timepicker';
 import { FlatpickrModule } from 'angularx-flatpickr';
-
 import { appRoutes } from '../app/routes/routes';
 import { AppComponent } from './app.component';
 import { BoomComponent } from './routes/pages/boom/boom.component';
