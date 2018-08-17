@@ -1,18 +1,188 @@
+<ng-template #modalContent let-close="close">
+  <div class="modal-header">
+    <h5 class="modal-title">Event action occurred</h5>
+    <button type="button" class="close" (click)="close()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div>
+      Action:
+      <pre>{{ modalData?.action }}</pre>
+    </div>
+    <div>
+      Event:
+      <pre>{{ modalData?.event | json }}</pre>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-secondary" (click)="close()">OK</button>
+  </div>
+</ng-template>
+
+<br>
+<div class="row justify-content-center mx-4 p-4">
+  <div class="col-md-2" *ngIf="showSideNav">
+    <mat-card>
+      <mat-card-title>Curriculums</mat-card-title>
+      <mat-divider></mat-divider>
+      <mat-list>
+        <mat-list-item *ngFor="let curriculum of curriculums" mwlDraggable [dropData]="{event: event}" style="position:relative; z-index: 10">
+          {{curriculum.name}}</mat-list-item>
+      </mat-list>
+    </mat-card>
+  </div>
+  <div class="col-md-10">
+    <mat-card>
+      <button mat-mini-fab color="primary" (click)="toggleSideNav()">+</button>
+      <div class="row text-center">
+
+        <div class="col-md-4">
+          <div class="btn-group">
+            <div mwlCalendarPreviousView [view]="view" [(viewDate)]="viewDate" (viewDateChange)="activeDayIsOpen = false">
+              <button mat-raised-button color="primary">Previous</button>
+            </div>
+            <div mwlCalendarToday [(viewDate)]="viewDate">
+              <button mat-stroked-button color="accent">Today</button>
+            </div>
+            <div mwlCalendarNextView [view]="view" [(viewDate)]="viewDate" (viewDateChange)="activeDayIsOpen = false">
+              <button mat-raised-button color="primary">Next</button>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <h3>{{ viewDate | calendarDate:(view + 'ViewTitle'):'en' }}</h3>
+        </div>
+        <div class="col-md-4">
+          <div class="btn-group">
+            <div (click)="view = 'month'" [class.active]="view === 'month'">
+              <button mat-raised-button color="primary">Month</button>
+            </div>
+            <div (click)="view = 'week'" [class.active]="view === 'week'">
+              <button mat-raised-button color="primary">Week</button>
+            </div>
+            <div (click)="view = 'day'" [class.active]="view === 'day'">
+              <button mat-raised-button color="primary">Day</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div [ngSwitch]="view">
+        <mwl-calendar-month-view *ngSwitchCase="'month'" [viewDate]="viewDate" [events]="events" [refresh]="refresh" [activeDayIsOpen]="activeDayIsOpen"
+          (dayClicked)="dayClicked($event.day)" (eventClicked)="handleEvent('Clicked', $event.event)" (eventTimesChanged)="eventTimesChanged($event)">
+        </mwl-calendar-month-view>
+        <mwl-calendar-week-view *ngSwitchCase="'week'" [viewDate]="viewDate" [events]="events" [refresh]="refresh" (eventClicked)="handleEvent('Clicked', $event.event)"
+          (eventTimesChanged)="eventTimesChanged($event)">
+        </mwl-calendar-week-view>
+        <mwl-calendar-day-view *ngSwitchCase="'day'" [viewDate]="viewDate" [events]="events" [refresh]="refresh" (eventClicked)="handleEvent('Clicked', $event.event)"
+          (eventTimesChanged)="eventTimesChanged($event)">
+        </mwl-calendar-day-view>
+      </div>
+    </mat-card>
+    </div>
+</div>
+
+<!-- <br><br><br>
+
+<h3>
+  Edit events
+  <button
+    class="btn btn-primary pull-right"
+    (click)="addEvent()">
+    Add new
+  </button>
+  <div class="clearfix"></div>
+</h3>
+
+<table class="table table-bordered">
+
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Primary color</th>
+      <th>Secondary color</th>
+      <th>Starts at</th>
+      <th>Ends at</th>
+      <th>Remove</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <tr *ngFor="let event of events; let index = index">
+      <td>
+        <input
+          type="text"
+          class="form-control"
+          [(ngModel)]="event.title"
+          (keyup)="refresh.next()">
+      </td>
+      <td>
+        <input
+          type="color"
+          [(ngModel)]="event.color.primary"
+          (change)="refresh.next()">
+      </td>
+      <td>
+        <input
+          type="color"
+          [(ngModel)]="event.color.secondary"
+          (change)="refresh.next()">
+      </td>
+      <td>
+        <input
+          class="form-control"
+          type="text"
+          mwlFlatpickr
+          [(ngModel)]="event.start"
+          (ngModelChange)="refresh.next()"
+          [altInput]="true"
+          [convertModelValue]="true"
+          [enableTime]="true"
+          dateFormat="Y-m-dTH:i"
+          altFormat="F j, Y H:i"
+          placeholder="Not set">
+      </td>
+      <td>
+        <input
+          class="form-control"
+          type="text"
+          mwlFlatpickr
+          [(ngModel)]="event.end"
+          (ngModelChange)="refresh.next()"
+          [altInput]="true"
+          [convertModelValue]="true"
+          [enableTime]="true"
+          dateFormat="Y-m-dTH:i"
+          altFormat="F j, Y H:i"
+          placeholder="Not set">
+      </td>
+      <td>
+        <button
+          class="btn btn-danger"
+          (click)="events.splice(index, 1); refresh.next()">
+          Delete
+        </button>
+      </td>
+    </tr>
+  </tbody>
+
+</table> -->
+
 <!-- Fixed event option button to show or hide event-panel -->
-<div class="event-options-wrapper">
+<!-- <div class="event-options-wrapper">
   <div class="event-options text-center bg-orange">
     <button class="btn" type="button" (click)="clickEventOptions()">
       <i class="far fa-calendar-alt"></i>
     </button>
   </div>
-</div>
+</div> -->
 
 <!-- Main container -->
-<div class="container-fluid padding-top">
-  <div class="row">
+<!-- <div class="container-fluid padding-top">
+  <div class="row"> -->
 
-    <!-- Left Column - Date Picker and Event Panel-->
-    <div id="event-panel" class="col-md-4 event-panel">
+<!-- Left Column - Date Picker and Event Panel-->
+<!-- <div id="event-panel" class="col-md-4 event-panel">
       <div class="event-panel-left">
         <div>Jump to a particular date</div>
         <div class="input-wrapper">
@@ -62,31 +232,31 @@
       </div>
 
       <hr *ngIf="smallScreen()">
-    </div>
+    </div> -->
 
-    <!-- Right Column - Main Calendar -->
-    <div id="calendar-panel" class="col-md-8 col-md-12">
-      <div class="vl"></div>
-      
-      <!-- Main Calendar -->
-      <div class="container-fluid">
+<!-- Right Column - Main Calendar -->
+<!-- <div id="calendar-panel" class="col-md-8 col-md-12">
+      <div class="vl"></div> -->
+
+<!-- Main Calendar -->
+<!-- <div class="container-fluid">
         <div class="row">
           <div class="col-lg">
             <h3>{{ title }}</h3>
           </div>
         </div>
 
-        <div class="row">
-          <!-- Left Buttons -->
-          <div class="col-lg">
+        <div class="row"> -->
+<!-- Left Buttons -->
+<!-- <div class="col-lg">
             <a (click)="changeView('day')" class="btn buttons buttons-left" [ngClass]="{'active' : view === 'day'}">Day</a>
             <a (click)="changeView('week')" class="btn buttons buttons-middle" [ngClass]="{'active' : view === 'week'}">Week</a>
             <a (click)="changeView('month')" class="btn buttons buttons-right" [ngClass]="{'active' : view === 'month'}">Month</a>
             <a (click)="changeView('list')" class="btn buttons buttons-list" [ngClass]="{'active' : view === 'list'}">List</a>
-          </div>
-    
-          <!-- Right Buttons -->
-          <div class="col-lg text-right">
+          </div> -->
+
+<!-- Right Buttons -->
+<!-- <div class="col-lg text-right">
             <a class="btn buttons buttons-today" [ngClass]="{'disabled': isToday}" (click)="changeView('today')">
               Today
             </a>
@@ -98,10 +268,10 @@
             <a class="btn buttons buttons-right" (click)="changeView('next')">
               <i class="fas fa-chevron-right"></i>
             </a>
-          </div>
+          </div> -->
 
-          <!-- Main Calendar -->
-          <div class="container-fluid">
+<!-- Main Calendar -->
+<!-- <div class="container-fluid">
             <div class="row">
               <div class="col-lg">
                 <div id="main-calendar" class="padding-top"></div>
@@ -111,8 +281,7 @@
           
         </div>
       </div>
-  </div>
+    </div> 
+  </div> -->
 
-</div> <!-- End main container-fluid-->
-
-<br>
+<!-- End main container-fluid-->

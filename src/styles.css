@@ -1,2 +1,7 @@
 /* You can add global styles to this file, and also import other style files */
 @import "~ngx-bootstrap/datepicker/bs-datepicker.css";
+
+body {
+    background-color: #ffffff;
+background-image: url("https://www.transparenttextures.com/patterns/asfalt-dark.png");
+}
