@@ -21,30 +21,30 @@ export class CurriculumEditorComponent implements OnInit {
     private topicService: TopicService
   ) { }
 
-  ngOnInit() {
+  ngOnInit () {
     this.getAllCurriculums();
     this.getAllTopics();
   }
 
-  getAllCurriculums(): void {
+  getAllCurriculums (): void {
     this.curriculumService.getAll().subscribe(curriculums => {
       this.curriculums = curriculums;
       this.curriculumNames = this.getUniqueNames();
     });
   }
 
-  getAllTopics(): void {
+  getAllTopics (): void {
     this.topicService.getAll().subscribe(topics => {
       this.topics = topics;
     });
   }
 
-  getUniqueNames(): string[] {
+  getUniqueNames (): string[] {
     const names = this.curriculums.map(curr => curr.name);
     return names.filter((x, i, a) => x && a.indexOf(x) === i);
   }
 
-  getCurriculumsByName(name: string): Curriculum[] {
+  getCurriculumsByName (name: string): Curriculum[] {
     const curriculumsWithName: Curriculum[] = [];
     for (let i = 0; i < this.curriculums.length; i++) {
       if (this.curriculums[i].name === name) {
@@ -55,7 +55,7 @@ export class CurriculumEditorComponent implements OnInit {
     return curriculumsWithName;
   }
 
-  getTopicsByCurriculums(name: string): Topic[] {
+  getTopicsByCurriculums (name: string): Topic[] {
     let topics: Topic[] = [];
     const currs: Curriculum[] = this.getCurriculumsByName(name);
     for (let i = 0; i < currs.length; i++) {
@@ -69,9 +69,9 @@ export class CurriculumEditorComponent implements OnInit {
     return returnedTopics;
   }
 
-  convertTopics(topicsList: Topic[]): void {
+  convertTopics (topicsList: Topic[]): void {
     for (let i = 0; i < topicsList.length; i++) {
-      if (typeof(topicsList[i]) === 'number') {
+      if (typeof (topicsList[i]) === 'number') {
         const idConv: any = topicsList[i];
         const id: number = idConv;
         for (let j = 0; j < this.topics.length; j++) {
@@ -82,5 +82,4 @@ export class CurriculumEditorComponent implements OnInit {
       }
     }
   }
-
 }
