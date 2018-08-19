@@ -19,6 +19,7 @@ import { appRoutes } from '../app/routes/routes';
 import { AppComponent } from './app.component';
 import { BoomComponent } from './routes/pages/boom/boom.component';
 import { CalendarComponent } from './routes/pages/calendar/calendar.component';
+import { CreateVersionComponent } from './routes/pages/create-version/create-version.component';
 import { CurriculumEditorComponent } from './routes/pages/curriculum-editor/curriculum-editor.component';
 import { NgbModalModule } from '../../node_modules/@ng-bootstrap/ng-bootstrap/modal/modal.module';
 import { CalendarModule } from '../../node_modules/angular-calendar';
@@ -42,6 +43,7 @@ import { RoutesModule } from './routes/routes.module';
     DashboardComponent,
     CalendarComponent,
     CurriculumEditorComponent,
+    CreateVersionComponent,
     CurriculumViewComponent,
     BoomComponent,
     LoginComponent,

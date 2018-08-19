@@ -3,6 +3,8 @@ import { CurriculumService } from '../../../services/curriculum.service';
 import { Curriculum } from '../../../models/curriculum';
 import { Topic } from '../../../models/topic';
 import { TopicService } from '../../../services/topic.service';
+import { MatDialog } from '../../../../../node_modules/@angular/material';
+import { CreateVersionComponent } from '../create-version/create-version.component';
 
 @Component({
   selector: 'app-curriculum-editor',
@@ -18,7 +20,8 @@ export class CurriculumEditorComponent implements OnInit {
 
   constructor(
     private curriculumService: CurriculumService,
-    private topicService: TopicService
+    private topicService: TopicService,
+    public dialog: MatDialog
   ) { }
 
   ngOnInit () {
@@ -81,5 +84,18 @@ export class CurriculumEditorComponent implements OnInit {
         }
       }
     }
+  }
+
+  openDialog(): void {
+    const dialogRef = this.dialog.open(CreateVersionComponent,
+      {
+        width: '600px',
+        data: {
+          curriculums: this.curriculums,
+          curriculumNames: this.curriculumNames,
+          topics: this.topics
+        }
+      }
+    );
   }
 }
