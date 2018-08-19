@@ -1,16 +1,15 @@
 <div *ngIf="this.user" class="container">
   <div class="row">
-    <div class="col-sm my-4">
-      <mat-card color="primary">
-        <mat-card-header>
-            <mat-card-title style="font-size: 65px">
-              Welcome, {{this.user.firstName}}
-            </mat-card-title>
+    <div class="col-sm mb-3 mt-2">
+      <mat-card #bg class="">
+        <mat-card-header >
+            <!-- <mat-card-title> -->
+              <h1>Welcome, {{this.user.firstName}}</h1>
+            <!-- </mat-card-title> -->
         </mat-card-header>
-        <mat-card-content style="font-size: 18px">
-          <mat-divider [inset]="true"></mat-divider>
+        <mat-card-content style="font-size: 18px" >
+          <!-- <mat-divider [inset]="true"></mat-divider> -->
           <br/>
-          <div class="container">
             <div class="row">
               <div class="col-sm-6">
                 <span *ngIf="this.batch">Current Batch: {{this.batch.name}}</span>
@@ -19,7 +18,6 @@
                 <button mat-raised-button style="float: right" color="primary" routerLink="../calendar">View Calendar<mat-icon>event</mat-icon></button>
               </div>
             </div>
-          </div>
         </mat-card-content>
       </mat-card>
     </div>
@@ -27,7 +25,7 @@
 
   <div class="row">
     <div class="col-sm">
-      <mat-card>
+      <mat-card class="rounded">
         <mat-card-header>
           <mat-card-title><h4>Pesonal Information</h4></mat-card-title>
         </mat-card-header>
@@ -48,7 +46,7 @@
     </div>
 
     <div class="col-sm">
-      <mat-card>
+      <mat-card class="rounded">
         <mat-card-header>
           <mat-card-title><h4>Batch Information</h4></mat-card-title>
         </mat-card-header>
@@ -73,8 +71,8 @@
   </div>
 
   <div class="row">
-    <div class="col-sm my-4">
-      <mat-card>
+    <div class="col-sm mt-3">
+      <mat-card class="rounded">
         <mat-card-header>
           <mat-card-title>
             <h4>Batch Progress</h4>
@@ -86,7 +84,7 @@
               <h5>Progress By Day</h5>
             </mat-list-item>
             <mat-list-item>
-              <h6>{{this.percentCompletion | percent}} Days Completed</h6>
+              <h6>{{this.percentCompletion | percent}} Completed</h6>
             </mat-list-item>
           </mat-list>
           <mat-progress-bar mode="determinate" [value]="this.percentCompletion * 100" color="accent"></mat-progress-bar>

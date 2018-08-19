@@ -31,11 +31,10 @@ export class DashboardComponent implements OnInit {
         In our sprint, only trainers can use the program so there is no
         need to check if the user is a trainer or not.
       */
-
       this.batchService.getBatchesByTrainerId(this.user.id).subscribe(
         result => {
-          // If the result is not null
-          if (result) {
+          // If the result is not null and not empty
+          if (result && result.length !== 0) {
             this.batch = result.sort(this.compareBatches)[result.length - 1];
 
             // Figure out what week the batch is in
