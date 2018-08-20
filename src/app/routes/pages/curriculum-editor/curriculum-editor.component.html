@@ -34,8 +34,14 @@
             </mat-expansion-panel-header>
             <div *ngFor="let curriculum of curriculums">
               <div *ngIf="curriculum.name == cname">
-                {{curriculum.version}}
-                <button mat-mini-fab color="primary" class="pull-right">X</button>
+                <mat-toolbar>
+                  <span>{{curriculum.version}}</span>
+                  <span class="fill-remaining-space">
+                  </span>
+                  <span>
+                    <button mat-mini-fab color="primary" (click)=deleteCurriculum(curriculum)>X</button>
+                  </span>
+                </mat-toolbar>
               </div>
             </div>
           </mat-expansion-panel>
@@ -77,10 +83,10 @@
         </mat-toolbar>
       <mat-accordion>
         <mat-card-content>
-          <mat-expansion-panel *ngFor="let cname of curriculumNames">
+          <mat-expansion-panel *ngFor="let topic of topics">
             <mat-expansion-panel-header>
               <mat-panel-title>
-                {{cname}}
+                {{topic.name}}
               </mat-panel-title>
             </mat-expansion-panel-header>
             <br />

@@ -99,4 +99,19 @@ export class CurriculumEditorComponent implements OnInit {
       }
     );
   }
+  deleteCurriculum(curriculum: Curriculum): void {
+    this.curriculumService.delete(curriculum).subscribe(
+      data => {
+        console.log('Successfully deleted ', curriculum);
+      },
+      err => {
+        console.log('Failed to delete a curriculum');
+      }
+    );
+    for (let i = 0; i < this.curriculums.length; i++) {
+      if (this.curriculums[i] === curriculum) {
+        this.curriculums.splice(i, 1);
+      }
+    }
+  }
 }

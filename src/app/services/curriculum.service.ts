@@ -29,4 +29,10 @@ export class CurriculumService {
     return this.http.post<Curriculum>(environment.apiUrl + 'curriculums',
       curriculum, HTTP_OPTIONS);
   }
+
+  delete(curriculum: Curriculum): Observable<Object> {
+    console.log('[LOG] - In CurriculumService.delete()');
+    return this.http.delete(environment.apiUrl + `curriculums/${curriculum.id}`,
+      HTTP_OPTIONS);
+  }
 }
