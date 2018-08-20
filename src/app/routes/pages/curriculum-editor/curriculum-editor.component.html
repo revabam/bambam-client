@@ -19,7 +19,8 @@
           </span>
           <span style="flex: 1 1 auto"></span>
           <span>  
-              <button mat-raised-button color="primary">Create New Version</button>
+              <button mat-raised-button color="primary"
+                (click)="openDialog()">Create New Version</button>
           </span>
           <span style="flex: 1 1 auto"></span>
         </mat-toolbar>
@@ -31,8 +32,15 @@
                 {{cname}}
               </mat-panel-title>
             </mat-expansion-panel-header>
-            <div *ngFor="let curriculum of curriculums">
-              <div *ngIf="curriculum.name == cname">{{curriculum.version}}</div>
+            <div *ngFor="let curriculum of getCurriculumsByName(cname)">
+              <mat-toolbar>
+                <span>{{curriculum.version}}</span>
+                <span class="fill-remaining-space">
+                </span>
+                <span *ngIf="getCurriculumsByName(cname).length > 1">
+                  <button mat-mini-fab color="primary" (click)=deleteCurriculum(curriculum)>X</button>
+                </span>
+              </mat-toolbar>
             </div>
           </mat-expansion-panel>
         </mat-card-content>
@@ -63,7 +71,7 @@
           <span style="flex: 1 1 auto"></span>
           <span>  
               <mat-form-field class="my-0">
-                  <input matInput type="text" placeholder="Search Topic" [(ngModel)]="topicSearch">
+                  <input matInput type="text" placeholder="Search Subtopic" [(ngModel)]="topicSearch">
                   <button mat-button *ngIf="value" matSuffix mat-icon-button aria-label="Clear" (click)="value=''">
                     <mat-icon>close</mat-icon>
                   </button>
@@ -73,16 +81,18 @@
         </mat-toolbar>
       <mat-accordion>
         <mat-card-content>
-          <mat-expansion-panel *ngFor="let cname of curriculumNames">
+          <mat-expansion-panel *ngFor="let topic of topics">
             <mat-expansion-panel-header>
               <mat-panel-title>
-                {{cname}}
+                {{topic.name}}
               </mat-panel-title>
             </mat-expansion-panel-header>
             <br />
             <br />
-            <div *ngFor="let topic of getTopicsByCurriculums(cname)">
-              <div *ngIf="!topicSearch || ((topic.name | lowercase).indexOf(topicSearch | lowercase) >= 0)">{{ topic.name }}</div>
+            <div *ngFor="let subtopic of getSubtopicsByTopic(topic)">
+              <div *ngIf="!topicSearch || ((subtopic.name | lowercase).indexOf(topicSearch | lowercase) >= 0)">
+                {{ subtopic.name }}
+              </div>
             </div>
           </mat-expansion-panel>
         </mat-card-content>

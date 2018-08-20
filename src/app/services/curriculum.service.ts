@@ -23,4 +23,16 @@ export class CurriculumService {
     console.log('[LOG] - In CurriculumService.getAll()');
     return this.http.get<Curriculum[]>(environment.apiUrl + 'curriculums', HTTP_OPTIONS);
   }
+
+  post(curriculum: Curriculum): Observable<Curriculum> {
+    console.log('[LOG] - In CurriculumService.post()');
+    return this.http.post<Curriculum>(environment.apiUrl + 'curriculums',
+      curriculum, HTTP_OPTIONS);
+  }
+
+  delete(curriculum: Curriculum): Observable<Object> {
+    console.log('[LOG] - In CurriculumService.delete()');
+    return this.http.delete(environment.apiUrl + `curriculums/${curriculum.id}`,
+      HTTP_OPTIONS);
+  }
 }
