@@ -12,6 +12,7 @@ export class LoginComponent implements OnInit {
 
   email: string;
   password: string;
+  message: string;
 
   constructor(
     private userService: UserService,
@@ -22,19 +23,21 @@ export class LoginComponent implements OnInit {
   }
 
   login() {
+    this.message = '';
     this.userService.login(this.email, this.password).subscribe(
       result => {
         if (result !== null) {
-          sessionStorage.setItem('user', JSON.stringify(result[0]));
-          this.userService.user.next(result[0]);
+          console.log(result);
+          if (result.length) {
+            sessionStorage.setItem('user', JSON.stringify(result[0]));
+            this.userService.user.next(result[0]);
 
-          this.router.navigate(['dashboard']);
+            this.router.navigate(['dashboard']);
+          } else {
+            this.message = 'Invalid Credentials';
+          }
         }
-      },
-      error => {
-        console.log(error);
       }
     );
   }
-
 }

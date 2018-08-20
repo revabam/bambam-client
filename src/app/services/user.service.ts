@@ -28,9 +28,9 @@ export class UserService {
   /*
     Add comments here
   */
-  login(email: string, password: string): Observable<BamUser> {
+  login(email: string, password: string): Observable<BamUser[]> {
     console.log('[LOG] - In UserService.login()');
-    return this.http.get<BamUser>(environment.apiUrl + 'users?email=' + email, HTTP_OPTIONS);
+    return this.http.get<BamUser[]>(environment.apiUrl + 'users?email=' + email, HTTP_OPTIONS);
   }
 
   register(user: BamUser): Observable<BamUser> {

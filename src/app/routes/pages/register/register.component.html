@@ -4,28 +4,39 @@
       <mat-card>
         <mat-card-content>
           <mat-card-title>Register</mat-card-title>
-          <mat-form-field>
-            <input matInput name="email" placeholder="Email" type="text" [(ngModel)]="email">
-          </mat-form-field>
-          <br/>
-          <mat-form-field>
-            <input matInput name="password" placeholder="Password" type="password" [(ngModel)]="password">
-          </mat-form-field>
-          <br/>
-          <mat-form-field>
-            <input matInput name="confirm-password" placeholder="Confirm Password" type="password" [(ngModel)]="confirmPassword">
-          </mat-form-field>
-          <br/>
-          <mat-form-field>
-            <input matInput name="first-name" placeholder="First Name" type="text" [(ngModel)]="firstName">
-          </mat-form-field>
-          <br/>
-          <mat-form-field>
-            <input matInput name="last-name" placeholder="Last Name" type="text" [(ngModel)]="lastName">
-          </mat-form-field>
+          <form [formGroup]="registrationForm" (ngSubmit)="register(registrationForm.value)">
+            <mat-form-field>
+              <input matInput placeholder="Email" formControlName="email" required>
+              <mat-error *ngFor="let validation of registrationValidationMessages.email">
+                <mat-error *ngIf="registrationForm.get('email').hasError(validation.type) && (registrationForm.get('email').dirty || registrationForm.get('email').touched)">{{validation.message}}</mat-error>
+              </mat-error>
+            </mat-form-field>
+            <br/>
+            <mat-form-field>
+              <input matInput placeholder="Password" type="password" formControlName="password" required>
+              <mat-error *ngFor="let validation of registrationValidationMessages.password">
+                <mat-error *ngIf="registrationForm.get('password').hasError(validation.type) && (registrationForm.get('password').dirty || registrationForm.get('password').touched)">{{validation.message}}</mat-error>
+              </mat-error>
+            </mat-form-field>
+            <br/>
+            <mat-form-field>
+              <input matInput #conf placeholder="Confirm Password" type="password" formControlName="confirmPassword" (keyup)="checkMatch(conf.value)" required>
+              <mat-error *ngIf="!conf.value">Confirm password is required</mat-error>
+              <mat-error *ngIf="this.message">{{this.message}}</mat-error>
+            </mat-form-field>
+            <br/>
+            <mat-form-field>
+              <input matInput name="first-name" placeholder="First Name" type="text" required>
+            </mat-form-field>
+            <br/>
+            <mat-form-field>
+              <input matInput name="last-name" placeholder="Last Name" type="text" required>
+            </mat-form-field>
+          </form>
         </mat-card-content>
         <mat-card-actions>
-          <button mat-button name="register" color="primary" (click)="register()">Register</button>
+          <button mat-raised-button name="register" color="primary" (click)="register()">Register</button>
+          <button mat-raised-button name="login" routerLink="/login">Login</button>
         </mat-card-actions>
       </mat-card>
     </mat-grid-tile>
