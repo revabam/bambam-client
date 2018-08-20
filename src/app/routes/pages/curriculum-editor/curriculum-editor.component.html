@@ -32,17 +32,15 @@
                 {{cname}}
               </mat-panel-title>
             </mat-expansion-panel-header>
-            <div *ngFor="let curriculum of curriculums">
-              <div *ngIf="curriculum.name == cname">
-                <mat-toolbar>
-                  <span>{{curriculum.version}}</span>
-                  <span class="fill-remaining-space">
-                  </span>
-                  <span>
-                    <button mat-mini-fab color="primary" (click)=deleteCurriculum(curriculum)>X</button>
-                  </span>
-                </mat-toolbar>
-              </div>
+            <div *ngFor="let curriculum of getCurriculumsByName(cname)">
+              <mat-toolbar>
+                <span>{{curriculum.version}}</span>
+                <span class="fill-remaining-space">
+                </span>
+                <span *ngIf="getCurriculumsByName(cname).length > 1">
+                  <button mat-mini-fab color="primary" (click)=deleteCurriculum(curriculum)>X</button>
+                </span>
+              </mat-toolbar>
             </div>
           </mat-expansion-panel>
         </mat-card-content>
@@ -73,7 +71,7 @@
           <span style="flex: 1 1 auto"></span>
           <span>  
               <mat-form-field class="my-0">
-                  <input matInput type="text" placeholder="Search Topic" [(ngModel)]="topicSearch">
+                  <input matInput type="text" placeholder="Search Subtopic" [(ngModel)]="topicSearch">
                   <button mat-button *ngIf="value" matSuffix mat-icon-button aria-label="Clear" (click)="value=''">
                     <mat-icon>close</mat-icon>
                   </button>
@@ -91,8 +89,10 @@
             </mat-expansion-panel-header>
             <br />
             <br />
-            <div *ngFor="let topic of getTopicsByCurriculums(cname)">
-              <div *ngIf="!topicSearch || ((topic.name | lowercase).indexOf(topicSearch | lowercase) >= 0)">{{ topic.name }}</div>
+            <div *ngFor="let subtopic of getSubtopicsByTopic(topic)">
+              <div *ngIf="!topicSearch || ((subtopic.name | lowercase).indexOf(topicSearch | lowercase) >= 0)">
+                {{ subtopic.name }}
+              </div>
             </div>
           </mat-expansion-panel>
         </mat-card-content>

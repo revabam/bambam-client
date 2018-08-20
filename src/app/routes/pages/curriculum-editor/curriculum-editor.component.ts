@@ -2,9 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { CurriculumService } from '../../../services/curriculum.service';
 import { Curriculum } from '../../../models/curriculum';
 import { Topic } from '../../../models/topic';
+import { Subtopic } from '../../../models/subtopic';
 import { TopicService } from '../../../services/topic.service';
 import { MatDialog } from '../../../../../node_modules/@angular/material';
 import { CreateVersionComponent } from '../create-version/create-version.component';
+import { SubtopicService } from '../../../services/subtopic.service';
 
 @Component({
   selector: 'app-curriculum-editor',
@@ -16,10 +18,12 @@ export class CurriculumEditorComponent implements OnInit {
   curriculumNames: string[];
   selectedTopics: Topic[] = [];
   topics: Topic[] = [];
+  subtopics: Subtopic[] = [];
   selectedName: string;
 
   constructor(
     private curriculumService: CurriculumService,
+    private subtopicService: SubtopicService,
     private topicService: TopicService,
     public dialog: MatDialog
   ) { }
@@ -27,6 +31,7 @@ export class CurriculumEditorComponent implements OnInit {
   ngOnInit () {
     this.getAllCurriculums();
     this.getAllTopics();
+    this.getAllSubtopics();
   }
 
   getAllCurriculums (): void {
@@ -42,20 +47,26 @@ export class CurriculumEditorComponent implements OnInit {
     });
   }
 
+  getAllSubtopics (): void {
+    this.subtopicService.getAll().subscribe(subtopics => {
+      this.subtopics = subtopics;
+    });
+  }
+
   getUniqueNames (): string[] {
-    const names = this.curriculums.map(curr => curr.name);
-    return names.filter((x, i, a) => x && a.indexOf(x) === i);
+    const names: string[] = this.curriculums.map(curr => curr.name);
+    return names.filter((name, i, arr) => name && arr.indexOf(name) === i);
   }
 
   getCurriculumsByName (name: string): Curriculum[] {
-    const curriculumsWithName: Curriculum[] = [];
-    for (let i = 0; i < this.curriculums.length; i++) {
-      if (this.curriculums[i].name === name) {
-        curriculumsWithName.push(this.curriculums[i]);
-      }
-    }
     this.selectedName = name;
-    return curriculumsWithName;
+    return this.curriculums.filter(
+      (curriculum) => curriculum && curriculum.name === name);
+  }
+
+  getSubtopicsByTopic (topic: Topic): Subtopic[] {
+    return this.subtopics.filter(
+      (subtopic) => subtopic && subtopic.parentTopic_id === topic.id);
   }
 
   getTopicsByCurriculums (name: string): Topic[] {

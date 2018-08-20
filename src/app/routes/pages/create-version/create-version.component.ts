@@ -32,12 +32,6 @@ export class CreateVersionComponent {
       numberOfWeeks: this.numberOfWeeks,
       topics: this.selectedTopics
     };
-    console.log(`Name: ${newCurriculum.name}`);
-    console.log(`Version: ${newCurriculum.version}`);
-    console.log(`Creator Id: ${newCurriculum.creator_id}`);
-    console.log(`Date Created: ${newCurriculum.dateCreated}`);
-    console.log(`Number of Weeks: ${newCurriculum.numberOfWeeks}`);
-    console.log(newCurriculum.topics);
     this.data['curriculumService'].post(newCurriculum).subscribe(curr => {
       console.log(curr);
       if (curr !== undefined && curr !== null) {
