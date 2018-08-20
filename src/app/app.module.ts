@@ -1,6 +1,6 @@
 import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatAutocompleteModule, MatBadgeModule, MatBottomSheetModule, MatButtonModule,
   MatButtonToggleModule, MatCardModule, MatCheckboxModule, MatChipsModule, MatDatepickerModule,
   MatDialogModule, MatDividerModule, MatExpansionModule, MatGridListModule, MatIconModule, MatInputModule,
@@ -31,6 +31,7 @@ import { UserService } from './services/user.service';
 import { BatchService } from './services/batch/batch.service';
 import { LocationStrategy, PathLocationStrategy } from '../../node_modules/@angular/common';
 import { RoutesModule } from './routes/routes.module';
+import { CognitoService } from './services/cognito.service';
 
 
 
@@ -91,12 +92,14 @@ import { RoutesModule } from './routes/routes.module';
     BsDatepickerModule.forRoot(),
     TimepickerModule.forRoot(),
     BrowserAnimationsModule,
+    ReactiveFormsModule,
     NgbModalModule.forRoot(),
     FlatpickrModule.forRoot(),
     CalendarModule.forRoot()
   ],
   providers: [
     UserService,
+    CognitoService,
     BatchService,
     {provide: LocationStrategy, useClass: PathLocationStrategy}
   ],
