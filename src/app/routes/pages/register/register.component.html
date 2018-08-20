@@ -4,7 +4,7 @@
       <mat-card>
         <mat-card-content>
           <mat-card-title>Register</mat-card-title>
-          <form [formGroup]="registrationForm" (ngSubmit)="register(registrationForm.value)">
+          <form [formGroup]="registrationForm">
             <mat-form-field>
               <input matInput placeholder="Email" formControlName="email" required>
               <mat-error *ngFor="let validation of registrationValidationMessages.email">
@@ -20,19 +20,28 @@
             </mat-form-field>
             <br/>
             <mat-form-field>
-              <input matInput #conf placeholder="Confirm Password" type="password" formControlName="confirmPassword" (keyup)="checkMatch(conf.value)" required>
+              <input matInput #conf placeholder="Confirm Password" type="password" formControlName="confirmPassword" (keyup)="checkMatch()" required>
               <mat-error *ngIf="!conf.value">Confirm password is required</mat-error>
               <mat-error *ngIf="this.message">{{this.message}}</mat-error>
             </mat-form-field>
             <br/>
             <mat-form-field>
-              <input matInput name="first-name" placeholder="First Name" type="text" required>
+              <input matInput placeholder="First Name" type="text" formControlName="firstName" required>
+              <mat-error *ngFor="let validation of registrationValidationMessages.firstName">
+                <mat-error *ngIf="registrationForm.get('firstName').hasError(validation.type) && (registrationForm.get('firstName').dirty || registrationForm.get('firstName').touched)">{{validation.message}}</mat-error>
+              </mat-error>
             </mat-form-field>
             <br/>
             <mat-form-field>
-              <input matInput name="last-name" placeholder="Last Name" type="text" required>
+              <input matInput placeholder="Last Name" type="text" formControlName="lastName" required>
+              <mat-error *ngFor="let validation of registrationValidationMessages.lastName">
+                <mat-error *ngIf="registrationForm.get('lastName').hasError(validation.type) && (registrationForm.get('lastName').dirty || registrationForm.get('lastName').touched)">{{validation.message}}</mat-error>
+              </mat-error>
             </mat-form-field>
           </form>
+          <div *ngIf="errorMessage" class="alert alert-danger" role="alert">
+            {{errorMessage}}
+          </div>
         </mat-card-content>
         <mat-card-actions>
           <button mat-raised-button name="register" color="primary" (click)="register()">Register</button>
