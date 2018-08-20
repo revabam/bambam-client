@@ -476,14 +476,6 @@
       "email": "andrewli@reva.com",
       "role_id": 2,
       "status_id": 1
-    },
-    {
-      "firstName": "Bradley",
-      "lastName": "Walker",
-      "email": "bradleynwalker1@gmail.com",
-      "role_id": 1,
-      "status_id": 1,
-      "id": 15
     }
   ]
 }
