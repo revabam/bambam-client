@@ -1,4 +1,4 @@
 export class Topic {
-    id: number;
+    id?: number;
     name: string;
 }

@@ -2,6 +2,7 @@ import { Routes } from '@angular/router';
 import { AppComponent } from '../../app/app.component';
 import { DashboardComponent } from '../../app/routes/pages/dashboard/dashboard.component';
 import { CalendarComponent } from '../../app/routes/pages/calendar/calendar.component';
+import { CreateVersionComponent } from '../../app/routes/pages/create-version/create-version.component';
 import { CurriculumEditorComponent } from '../../app/routes/pages/curriculum-editor/curriculum-editor.component';
 import { BoomComponent } from '../../app/routes/pages/boom/boom.component';
 import { LoginComponent } from './pages/login/login.component';
@@ -36,6 +37,11 @@ export const appRoutes: Routes = [
     {
         path: 'curriculum/editor',
         component: CurriculumEditorComponent
+    },
+
+    {
+        path: 'curriculum/create-version',
+        component: CreateVersionComponent
     },
 
     {

@@ -12,24 +12,42 @@
         </mat-card-title>
       </mat-card-header>
       <mat-card-content>
-        <mat-form-field>
-          <input matInput name="email" placeholder="Email" type="email" [(ngModel)]="email" (keyup.enter)="login()">
-        </mat-form-field>
-        <br/>
-        <mat-form-field>
-          <input matInput name="password" placeholder="Password" type="password" [(ngModel)]="password" (keyup.enter)="login()">
-        </mat-form-field>
+        <form [formGroup]="loginForm">
+          <mat-form-field>
+            <input matInput name="email" placeholder="Email" type="email" formControlName="email" (keyup.enter)="login()">
+            <mat-error *ngFor="let validation of loginValidationMessages.email">
+              <mat-error *ngIf="loginForm.get('email').hasError(validation.type) && (loginForm.get('email').dirty || loginForm.get('email').touched)">{{validation.message}}</mat-error>
+            </mat-error>
+          </mat-form-field>
+          <br/>
+          <mat-form-field>
+            <input matInput name="password" placeholder="Password" type="password" formControlName="password" (keyup.enter)="login()">
+            <mat-error *ngFor="let validation of loginValidationMessages.password">
+              <mat-error *ngIf="loginForm.get('password').hasError(validation.type) && (loginForm.get('password').dirty || loginForm.get('password').touched)">{{validation.message}}</mat-error>
+            </mat-error>
+          </mat-form-field>
+        </form>
         <div class="row justify-content-right">
-          <!-- <div class="col-12"> -->
-            <!-- <div class="col-10">  -->
-                <span style="flex: 1 auto;"></span>
-            <!-- </div> -->
-            <div class="col-2">
-              <button mat-raised-button name="login" color="primary" (click)="login()">Submit</button>
-            </div>
-            <span style="flex: .1 auto;"></span>
+        <!-- <div class="col-12"> -->
+          <!-- <div class="col-10">  -->
+              <span style="flex: 1 auto;"></span>
+          <!-- </div> -->
+          <div class="col-2">
+            <button mat-raised-button name="login" color="primary" (click)="login()">Submit</button>
           </div>
+          <span style="flex: .1 auto;"></span>
+        </div>
         <!-- </div> -->
+
+        <br *ngIf="errorMessage"/>
+        <div *ngIf="errorMessage" class="alert alert-danger" role="alert">
+          {{errorMessage}}
+        </div>
+
+        <br *ngIf="infoMessage"/>
+        <div *ngIf="infoMessage" class="alert alert-primary" role="alert">
+          {{infoMessage}}
+        </div>
       </mat-card-content>
     </mat-card>
   </div>

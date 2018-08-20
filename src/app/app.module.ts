@@ -1,6 +1,6 @@
 import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatAutocompleteModule, MatBadgeModule, MatBottomSheetModule, MatButtonModule,
   MatButtonToggleModule, MatCardModule, MatCheckboxModule, MatChipsModule, MatDatepickerModule,
   MatDialogModule, MatDividerModule, MatExpansionModule, MatGridListModule, MatIconModule, MatInputModule,
@@ -8,7 +8,6 @@ import { MatAutocompleteModule, MatBadgeModule, MatBottomSheetModule, MatButtonM
   MatRadioModule, MatRippleModule, MatSelectModule, MatSidenavModule, MatSliderModule, MatSlideToggleModule, MatSnackBarModule,
   MatSortModule, MatStepperModule, MatTableModule, MatTabsModule, MatToolbarModule,
   MatTooltipModule, MatTreeModule } from '@angular/material';
-import { CurriculumViewComponent } from './routes/pages/curriculum-view/curriculum-view.component';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule } from '@angular/router';
@@ -19,6 +18,7 @@ import { appRoutes } from '../app/routes/routes';
 import { AppComponent } from './app.component';
 import { BoomComponent } from './routes/pages/boom/boom.component';
 import { CalendarComponent } from './routes/pages/calendar/calendar.component';
+import { CreateVersionComponent } from './routes/pages/create-version/create-version.component';
 import { CurriculumEditorComponent } from './routes/pages/curriculum-editor/curriculum-editor.component';
 import { NgbModalModule } from '../../node_modules/@ng-bootstrap/ng-bootstrap/modal/modal.module';
 import { CalendarModule } from '../../node_modules/angular-calendar';
@@ -30,8 +30,13 @@ import { NavbarComponent } from './routes/template/navbar/navbar.component';
 import { UserService } from './services/user.service';
 import { BatchService } from './services/batch/batch.service';
 import { LocationStrategy, PathLocationStrategy } from '../../node_modules/@angular/common';
+<<<<<<< HEAD
 import { UserIdleModule } from 'angular-user-idle';
 import { AlertsModule } from 'angular-alert-module';
+=======
+import { RoutesModule } from './routes/routes.module';
+import { CognitoService } from './services/cognito.service';
+>>>>>>> 2b73dc9fceecef16332b84f82a8d0d838771adab
 
 
 
@@ -43,7 +48,7 @@ import { AlertsModule } from 'angular-alert-module';
     DashboardComponent,
     CalendarComponent,
     CurriculumEditorComponent,
-    CurriculumViewComponent,
+    CreateVersionComponent,
     BoomComponent,
     LoginComponent,
     RegisterComponent
@@ -92,6 +97,7 @@ import { AlertsModule } from 'angular-alert-module';
     BsDatepickerModule.forRoot(),
     TimepickerModule.forRoot(),
     BrowserAnimationsModule,
+    ReactiveFormsModule,
     NgbModalModule.forRoot(),
     FlatpickrModule.forRoot(),
     CalendarModule.forRoot(),
@@ -100,6 +106,7 @@ import { AlertsModule } from 'angular-alert-module';
   ],
   providers: [
     UserService,
+    CognitoService,
     BatchService,
     {provide: LocationStrategy, useClass: PathLocationStrategy}
   ],
