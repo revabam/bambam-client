@@ -7,7 +7,6 @@ import { RegisterComponent } from './pages/register/register.component';
 import { CalendarComponent } from './pages/calendar/calendar.component';
 import { CurriculumEditorComponent } from './pages/curriculum-editor/curriculum-editor.component';
 import { BoomComponent } from './pages/boom/boom.component';
-import { LoginRegisterComponent } from './pages/login-register/login-register.component';
 
 const ROUTES: Routes = [
   {
@@ -51,7 +50,7 @@ const ROUTES: Routes = [
     CommonModule,
     RouterModule.forRoot(ROUTES, {onSameUrlNavigation: 'reload'})
   ],
-  declarations: [LoginRegisterComponent],
+  declarations: [],
   exports: [
     RouterModule
   ]

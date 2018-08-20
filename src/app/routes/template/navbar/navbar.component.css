@@ -86,3 +86,7 @@
     color: salmon !important;
     border-bottom: 2px solid salmon !important;
 }
+
+mat-toolbar {
+    background-color: rgb(156, 156, 156, 0) !important;
+}

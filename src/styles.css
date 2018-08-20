@@ -1,2 +1,35 @@
 /* You can add global styles to this file, and also import other style files */
 @import "~ngx-bootstrap/datepicker/bs-datepicker.css";
+
+body {
+    background-color: #000000;
+    background-image: url("https://www.transparenttextures.com/patterns/shattered.png");
+    /* This is mostly intended for prototyping; please download the pattern and re-host for production environments. Thank you! */
+}
+
+.mat-card {
+    padding: 0px!important;
+    background-color: #fafafa;
+    border-radius:  .25rem!important;
+}
+.mat-card-header {
+    padding: 15px;
+    margin: 0px;
+    background-color: #e53935;
+    border-top-left-radius: .25rem!important;
+    border-top-right-radius: .25rem!important;
+    background-color: #e53935;
+    /* background-image: url("https://www.transparenttextures.com/patterns/maze-white.png"); */
+    background-image: url("https://www.transparenttextures.com/patterns/gplay.png");
+    /* This is mostly intended for prototyping; please download the pattern and re-host for production environments. Thank you! */
+}
+.mat-card-content {
+    padding:15px;
+}
+.mat-card-title {
+    margin: 0px!important;
+}
+h1,h2,h3,h4 {
+    margin: 0px;
+    color: white;
+}

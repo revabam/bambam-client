@@ -75,11 +75,6 @@ export class RegisterComponent implements OnInit {
     }
   }
 
-  getEmailErrorMessage() {
-    return this.email.hasError('required') ? 'You must enter a value' :
-        this.email.hasError('email') ? 'Not a valid email' : '';
-  }
-
   register() {
     // console.log(`Registering with the following values:
 
@@ -106,9 +101,6 @@ export class RegisterComponent implements OnInit {
     // );
   }
 
-  emailInvalid(): boolean {
-
-  }
 
   emailValid(): boolean {
     let isValid = false;
@@ -132,13 +124,6 @@ export class RegisterComponent implements OnInit {
     let isValid = false;
     // TODO
     return isValid;
-  }
-
-  passwordConfirmed(): boolean {
-    if (this.password !== this.confirmPassword) {
-      return false;
-    }
-    return true;
   }
 
 }

@@ -1,8 +1,17 @@
-<mat-grid-list cols="1" rowHeight="500px">
-  <mat-grid-tile colspan="1" rowspan="1">
+<div class="row justify-content-center mx-2">
+
+  <img src="../../../../assets/bam.png" height="200px" width="300px" alt="" srcset="" class="py-3">
+</div>
+<div class="row justify-content-center mx-2">
+  <div class="col-4">
+
     <mat-card>
+      <mat-card-header>
+        <mat-card-title>
+          <h2>Login</h2>
+        </mat-card-title>
+      </mat-card-header>
       <mat-card-content>
-        <mat-card-title>Login</mat-card-title>
         <mat-form-field>
           <input matInput name="email" placeholder="Email" type="email" [(ngModel)]="email" (keyup.enter)="login()">
         </mat-form-field>
@@ -10,11 +19,25 @@
         <mat-form-field>
           <input matInput name="password" placeholder="Password" type="password" [(ngModel)]="password" (keyup.enter)="login()">
         </mat-form-field>
+        <div class="row justify-content-right">
+          <!-- <div class="col-12"> -->
+            <!-- <div class="col-10">  -->
+                <span style="flex: 1 auto;"></span>
+            <!-- </div> -->
+            <div class="col-2">
+              <button mat-raised-button name="login" color="primary" (click)="login()">Submit</button>
+            </div>
+            <span style="flex: .1 auto;"></span>
+          </div>
+        <!-- </div> -->
       </mat-card-content>
+<<<<<<< HEAD
       <mat-card-actions>
         <button mat-raised-button name="login" color="primary" (click)="login()">Login</button>
         <button mat-raised-button name="register" routerLink="/register">Create Account</button>
       </mat-card-actions>
+=======
+>>>>>>> 9e5b7d568c0d1280fd2d317195f53ffa8cf86f31
     </mat-card>
-  </mat-grid-tile>
-</mat-grid-list>
+  </div>
+</div>
