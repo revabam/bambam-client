@@ -1,9 +1,20 @@
 import { Injectable } from '@angular/core';
+/*
+ * HttpClient - What we use to make the http request.
+ * HttpHeaders - What we need to pass in to the http request
+ * in order to define the Content-Type.
+ * Observable - The type of object returned by the http request,
+ * in order to enable us to get the response asynchronously.
+ * Curriculum - The model that this current service pertains to.
+ * Environment - Contains the server endpoint that we're making
+ * the HTTP Request to.
+ */
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Curriculum } from '../models/curriculum';
-import { Observable, BehaviorSubject } from 'rxjs';
+import { Observable } from 'rxjs';
 import { environment } from '../../environments/environment';
 
+// The content type for our HTTP requests is JSON.
 const HTTP_OPTIONS = {
   headers: new HttpHeaders({
     'Content-Type': 'application/json'
@@ -15,21 +26,29 @@ const HTTP_OPTIONS = {
 })
 export class CurriculumService {
 
-  curriculum: BehaviorSubject<Curriculum> = new BehaviorSubject<Curriculum>(null);
-
+  // The dependency to be injected, in order to use an HttpClient.
   constructor(private http: HttpClient) { }
 
+  /**
+   * The function used to fetch all the curriculums from the server.
+   */
   getAll(): Observable<Curriculum[]> {
     console.log('[LOG] - In CurriculumService.getAll()');
     return this.http.get<Curriculum[]>(environment.apiUrl + 'curriculums', HTTP_OPTIONS);
   }
 
+  /**
+   * The function used to post a curriculum to a server
+   */
   post(curriculum: Curriculum): Observable<Curriculum> {
     console.log('[LOG] - In CurriculumService.post()');
     return this.http.post<Curriculum>(environment.apiUrl + 'curriculums',
       curriculum, HTTP_OPTIONS);
   }
 
+  /**
+   * The function used to delete a curriculum from a server
+   */
   delete(curriculum: Curriculum): Observable<Object> {
     console.log('[LOG] - In CurriculumService.delete()');
     return this.http.delete(environment.apiUrl + `curriculums/${curriculum.id}`,
