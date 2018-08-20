@@ -225,12 +225,13 @@ export class CalendarComponent implements OnInit, DoCheck {
       console.log(response.topics);
       let topicWeek = 0;
       const topicLength = response.topics.length / response.numberOfWeeks;
+      let topicDay = 0;
       response.topics.forEach((topic) => {
         console.log(topic.id);
         this.events.push(
           {
-            start: addWeeks(startOfDay(new Date()), topicWeek),
-            end: addWeeks(new Date(), (topicWeek + 1) / topicLength),
+            start: addDays(event.start, topicDay),
+            end: addDays(topicDay, topicLength),
             title: topic.name,
             id: topic.id,
             color: colors.red,
@@ -243,6 +244,7 @@ export class CalendarComponent implements OnInit, DoCheck {
           }
         );
         topicWeek++;
+        topicDay += topicLength;
         this.refresh.next();
       });
     });
