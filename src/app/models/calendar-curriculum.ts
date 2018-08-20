@@ -1,5 +1,5 @@
 export class CalendarCurriculum {
-    id: number;
+    id?: number;
     curriculum_id: number;
     batch_id: number;
 }

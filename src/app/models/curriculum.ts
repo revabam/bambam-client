@@ -1,7 +1,7 @@
 import { Topic } from './topic';
 
 export class Curriculum {
-    id: number;
+    id?: number;
     name: string;
     version: string;
     creator_id: number;

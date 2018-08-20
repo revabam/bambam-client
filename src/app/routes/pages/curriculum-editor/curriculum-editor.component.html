@@ -33,7 +33,10 @@
               </mat-panel-title>
             </mat-expansion-panel-header>
             <div *ngFor="let curriculum of curriculums">
-              <div *ngIf="curriculum.name == cname">{{curriculum.version}}</div>
+              <div *ngIf="curriculum.name == cname">
+                {{curriculum.version}}
+                <button mat-mini-fab color="primary" class="pull-right">X</button>
+              </div>
             </div>
           </mat-expansion-panel>
         </mat-card-content>

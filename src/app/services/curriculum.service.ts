@@ -23,4 +23,10 @@ export class CurriculumService {
     console.log('[LOG] - In CurriculumService.getAll()');
     return this.http.get<Curriculum[]>(environment.apiUrl + 'curriculums', HTTP_OPTIONS);
   }
+
+  post(curriculum: Curriculum): Observable<Curriculum> {
+    console.log('[LOG] - In CurriculumService.post()');
+    return this.http.post<Curriculum>(environment.apiUrl + 'curriculums',
+      curriculum, HTTP_OPTIONS);
+  }
 }

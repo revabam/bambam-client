@@ -93,7 +93,8 @@ export class CurriculumEditorComponent implements OnInit {
         data: {
           curriculums: this.curriculums,
           curriculumNames: this.curriculumNames,
-          topics: this.topics
+          topics: this.topics,
+          curriculumService: this.curriculumService
         }
       }
     );

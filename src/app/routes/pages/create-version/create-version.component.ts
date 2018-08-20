@@ -24,10 +24,26 @@ export class CreateVersionComponent {
   }
 
   add(): void {
-    console.log(this.selectedCurriculumName);
-    console.log(this.version);
-    console.log(this.numberOfWeeks);
-    console.log(this.selectedTopics);
+    const newCurriculum: Curriculum = {
+      name: this.selectedCurriculumName,
+      version: this.version,
+      creator_id: JSON.parse(sessionStorage['user'])['id'],
+      dateCreated: new Date(),
+      numberOfWeeks: this.numberOfWeeks,
+      topics: this.selectedTopics
+    };
+    console.log(`Name: ${newCurriculum.name}`);
+    console.log(`Version: ${newCurriculum.version}`);
+    console.log(`Creator Id: ${newCurriculum.creator_id}`);
+    console.log(`Date Created: ${newCurriculum.dateCreated}`);
+    console.log(`Number of Weeks: ${newCurriculum.numberOfWeeks}`);
+    console.log(newCurriculum.topics);
+    this.data['curriculumService'].post(newCurriculum).subscribe(curr => {
+      console.log(curr);
+      if (curr !== undefined && curr !== null) {
+        this.data['curriculums'].push(curr);
+      }
+    });
     this.close();
   }
 
