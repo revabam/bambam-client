@@ -23,4 +23,9 @@ export class TopicService {
     console.log('[LOG] - In TopicService.getAll()');
     return this.http.get<Topic[]>(environment.apiUrl + 'topics', HTTP_OPTIONS);
   }
+
+  getTopicById(id: number): Observable<Topic> {
+    console.log('[LOG] - In TopicService.getTopicById()');
+    return this.http.get<Topic>(environment.apiUrl + `topics/${id}`, HTTP_OPTIONS);
+  }
 }

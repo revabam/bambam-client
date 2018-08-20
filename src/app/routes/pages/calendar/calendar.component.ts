@@ -10,7 +10,7 @@ import {
   DoCheck
 } from '@angular/core';
 import {
-  startOfDay, endOfDay, subDays, addDays, endOfMonth, isSameDay, isSameMonth, addHours
+  startOfDay, endOfDay, subDays, addDays, endOfMonth, isSameDay, isSameMonth, addHours, addWeeks
 } from 'date-fns';
 import { Subject, Observable } from 'rxjs';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap/modal/modal.module';
@@ -21,6 +21,12 @@ import {
 } from 'angular-calendar';
 import { CalendarService } from '../../../services/calendar.service';
 import { Curriculum } from '../../../models/curriculum';
+import { CalendarCurriculum } from '../../../models/calendar-curriculum';
+import { CalendarSubtopic } from '../../../models/calendar-subtopic';
+import { Subtopic } from '../../../models/subtopic';
+import { SubtopicService } from '../../../services/subtopic.service';
+import { TopicService } from '../../../services/topic.service';
+import { Topic } from '../../../models/topic';
 
 const colors: any = {
   red: {
@@ -45,11 +51,19 @@ const colors: any = {
 })
 export class CalendarComponent implements OnInit, DoCheck {
 
-  curriculums: Curriculum[];
-
   curriculumDataFetched = false;
   renderCalendar = false;
   showSideNav = false;
+
+  activeDayIsOpen = true;
+
+  calendarCurriculums: CalendarCurriculum[];
+  calendarSubtopics: CalendarSubtopic[];
+  topics: Topic[];
+  subtopics: Subtopic[];
+  curriculums: Curriculum[];
+
+  curriculumEvents: CalendarEvent[] = [];
 
   @ViewChild('modalContent') modalContent: TemplateRef<any>;
 
@@ -114,14 +128,22 @@ export class CalendarComponent implements OnInit, DoCheck {
     }
   ];
 
-  activeDayIsOpen = true;
-
-  constructor(private modal: NgbModal, private calendarService: CalendarService) {}
+  constructor(private modal: NgbModal, private calendarService: CalendarService, private subtopicService: SubtopicService,
+    private topicService: TopicService) { }
 
   ngOnInit() {
     this.calendarService.getCurriculum().subscribe(response => {
       this.curriculums = response;
-      this.curriculumDataFetched = true;
+      this.topicService.getAll().subscribe(response2 => {
+        this.topics = response2;
+        this.subtopicService.getAll().subscribe(response3 => {
+          this.subtopics = response3;
+          this.curriculumDataFetched = true;
+          this.convertCirriculum();
+          // console.log(this.topics);
+          // console.log(this.subtopics);
+        });
+      });
     });
   }
 
@@ -131,6 +153,41 @@ export class CalendarComponent implements OnInit, DoCheck {
 
   toggleSideNav() {
     this.showSideNav = !this.showSideNav;
+  }
+
+  convertCirriculum() {
+    // this.curriculums.forEach((curriculum) => {
+    //   const currTopics = curriculum.topics;
+    //   currTopics.forEach((topic) => {
+    //     this.subtopicService.getSubtopicByParentId(topic.id).subscribe(response => {
+    //       response.forEach((res) => {
+    //         this.subtopics.push(res);
+    //       });
+    //       // console.log(this.subtopics);
+    //     });
+    //   });
+    // });
+    this.curriculums.forEach((curriculum) => {
+      // console.log(curriculum);
+      // console.log(curriculum.name);
+      this.curriculumEvents.push(
+        {
+          start: addHours(startOfDay(new Date()), 2),
+          end: addWeeks(new Date(), curriculum.numberOfWeeks),
+          title: curriculum.name,
+          id: curriculum.id,
+          color: colors.yellow,
+          actions: this.actions,
+          resizable: {
+            beforeStart: true,
+            afterEnd: true
+          },
+          draggable: true
+        });
+    });
+    this.curriculumEvents.forEach((curr) => {
+      // console.log(curr);
+    });
   }
 
   dayClicked({ date, events }: { date: Date; events: CalendarEvent[] }): void {
@@ -159,8 +216,37 @@ export class CalendarComponent implements OnInit, DoCheck {
   }
 
   handleEvent(action: string, event: CalendarEvent): void {
-    this.modalData = { event, action };
-    this.modal.open(this.modalContent, { size: 'lg' });
+    console.log(event);
+    // this.modalData = { event, action };
+    // this.modal.open(this.modalContent, { size: 'lg' });
+    const id: number = +event.id;
+    // console.log(id);
+    this.calendarService.getCurriculumById(id).subscribe(response => {
+      console.log(response.topics);
+      let topicWeek = 0;
+      const topicLength = response.topics.length / response.numberOfWeeks;
+      response.topics.forEach((topic) => {
+        console.log(topic.id);
+        this.events.push(
+          {
+            start: addWeeks(startOfDay(new Date()), topicWeek),
+            end: addWeeks(new Date(), (topicWeek + 1) / topicLength),
+            title: topic.name,
+            id: topic.id,
+            color: colors.red,
+            actions: this.actions,
+            resizable: {
+              beforeStart: true,
+              afterEnd: true
+            },
+            draggable: true
+          }
+        );
+        topicWeek++;
+        this.refresh.next();
+      });
+    });
+    // this.events.push(event);
   }
 
   addEvent(): void {
