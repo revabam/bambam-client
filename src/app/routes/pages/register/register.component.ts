@@ -15,9 +15,10 @@ export class RegisterComponent implements OnInit {
   // the confirm password field
   message: string;
 
-  // This string is used to display regostration errors to the user
+  // This string is used to display registration errors to the user
   errorMessage: string;
 
+  // Building the form
   registrationForm = new FormBuilder().group({
     email: new FormControl('', Validators.compose([
       Validators.required,
@@ -42,6 +43,7 @@ export class RegisterComponent implements OnInit {
     ]))
   });
 
+  // Error messages to display to the user
   registrationValidationMessages = {
     'email': [
       {type: 'required', message: 'Email is required'},
@@ -85,6 +87,33 @@ export class RegisterComponent implements OnInit {
       this.registrationForm.get('confirmPassword').updateValueAndValidity();
       this.message = '';
     }
+  }
+
+  /*
+  * This method gets the error message for a field. I made this specifically
+  * for the password field. When the user input is both too short and doesn't
+  * conform to the password regex pattern, angular tries to display multiple
+  * error messages under the field. The messages overflow onto the field below.
+  * This way, only a single error message is actually shown.
+  *
+  * @param  field The name of the field
+  *
+  * @return       The error message, if any
+  */
+  getErrorMessage(field: string): string {
+    let e = '';
+
+    const validations = this.registrationValidationMessages[field];
+    for (let i = 0; i < Object.keys(validations).length; i++) {
+      const validation = validations[i];
+
+      if (this.registrationForm.get('password').hasError(validation['type']) &&
+      (this.registrationForm.get('password').dirty || this.registrationForm.get('password').touched)) {
+        e = validation['message'];
+      }
+    }
+
+    return e;
   }
 
   /*

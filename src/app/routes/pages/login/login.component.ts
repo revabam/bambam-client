@@ -85,7 +85,6 @@ export class LoginComponent implements OnInit {
           if (result) {
             // If there was an error
             if (result['message']) {
-              // this.errorMessage = result['message'];
               this.errorMessage = 'Invalid credentials';
               return;
             }
