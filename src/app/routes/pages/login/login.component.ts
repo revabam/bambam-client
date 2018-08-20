@@ -123,31 +123,28 @@ export class LoginComponent implements OnInit {
       );
     }
   }
-<<<<<<< HEAD
 
-  openModal() {
-    if (this.count) {
-      this.count++;
-      this.modal.open(this.modalContent, {size: 'lg'});
-    }
-  }
-  stop() {
-    this.userIdle.stopTimer();
-  }
+  // openModal() {
+  //   if (this.count) {
+  //     this.count++;
+  //     this.modal.open(this.modalContent, {size: 'lg'});
+  //   }
+  // }
+  // stop() {
+  //   this.userIdle.stopTimer();
+  // }
 
-  stopWatching() {
-    this.userIdle.stopWatching();
-  }
+  // stopWatching() {
+  //   this.userIdle.stopWatching();
+  // }
 
-  startWatching() {
-    this.userIdle.startWatching();
-  }
+  // startWatching() {
+  //   this.userIdle.startWatching();
+  // }
 
-  restart() {
-    this.count = 0;
-    this.userIdle.resetTimer();
-  }
+  // restart() {
+  //   this.count = 0;
+  //   this.userIdle.resetTimer();
+  // }
 
-=======
->>>>>>> 2b73dc9fceecef16332b84f82a8d0d838771adab
 }

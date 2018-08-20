@@ -30,13 +30,10 @@ import { NavbarComponent } from './routes/template/navbar/navbar.component';
 import { UserService } from './services/user.service';
 import { BatchService } from './services/batch/batch.service';
 import { LocationStrategy, PathLocationStrategy } from '../../node_modules/@angular/common';
-<<<<<<< HEAD
 import { UserIdleModule } from 'angular-user-idle';
 import { AlertsModule } from 'angular-alert-module';
-=======
 import { RoutesModule } from './routes/routes.module';
 import { CognitoService } from './services/cognito.service';
->>>>>>> 2b73dc9fceecef16332b84f82a8d0d838771adab
 
 
 
