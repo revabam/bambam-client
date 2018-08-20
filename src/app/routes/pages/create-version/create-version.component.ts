@@ -10,6 +10,10 @@ import { CurriculumEditorComponent } from '../curriculum-editor/curriculum-edito
   styleUrls: ['./create-version.component.css']
 })
 export class CreateVersionComponent {
+  selectedCurriculumName: string;
+  version: string;
+  numberOfWeeks: number;
+  selectedTopics: Topic[];
 
   constructor(
     public dialogRef: MatDialogRef<CreateVersionComponent>,
@@ -20,7 +24,10 @@ export class CreateVersionComponent {
   }
 
   add(): void {
-    // TODO: Save data
+    console.log(this.selectedCurriculumName);
+    console.log(this.version);
+    console.log(this.numberOfWeeks);
+    console.log(this.selectedTopics);
     this.close();
   }
 
