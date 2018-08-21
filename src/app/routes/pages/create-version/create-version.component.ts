@@ -66,7 +66,7 @@ export class CreateVersionComponent {
         this.data['curriculums'].push(curr);
       }
     }, err => {
-      console.log('Failed to create a bersion');
+      console.log('Failed to create a version');
     });
     // After the curriculum is added, we're done with the modal.
     this.close();
