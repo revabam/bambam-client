@@ -175,10 +175,6 @@ export class CurriculumEditorComponent implements OnInit {
         curriculum.name = this.curriculumService.deactivateName(
           curriculum.name
         );
-        /* Old code
-        this.curriculums = this.curriculums.filter((remaining) =>
-          remaining !== curriculum);
-        */
       },
       err => {
         console.log('Failed to deactivate a curriculum');
@@ -207,13 +203,65 @@ export class CurriculumEditorComponent implements OnInit {
         curriculum.name = this.curriculumService.reactivateName(
           curriculum.name
         );
-        /* Old code
-        this.curriculums = this.curriculums.filter((remaining) =>
-          remaining !== curriculum);
-        */
       },
       err => {
-        console.log('Failed to deactivate a curriculum');
+        console.log('Failed to reactivate a curriculum');
+      }
+    );
+  }
+  /**
+   * Calls the deactivate function from the topic
+   * service.
+   * @param topic - The topic to be deactivated.
+   */
+  deactivateTopic(topic: Topic): void {
+    this.topicService.deactivate(topic).subscribe(
+      data => {
+        if (data['name'] === undefined || data['name'] === null) {
+          console.log('Failed to deactivate topic');
+          return;
+        }
+        console.log('Successfully deactivated ', data);
+        /*
+         * After we deactivate from the server, we also want to
+         * deactivate from the client-side array binded to our
+         * template (so the user immediately sees that it's
+         * deactivated)
+         */
+        topic.name = this.topicService.deactivateName(
+          topic.name
+        );
+      },
+      err => {
+        console.log('Failed to deactivate a topic');
+      }
+    );
+  }
+  /**
+   * Calls the deactivate function from the topic
+   * service.
+   * @param topic - The topic to be deactivated.
+   */
+  reactivateTopic(topic: Topic): void {
+    this.topicService.reactivate(topic).subscribe(
+      data => {
+        if (data['name'] === undefined || data['name'] === null) {
+          console.log('Failed to reactivate topic');
+          return;
+        }
+        console.log('Successfully reactivated ', data);
+        /*
+         * After we deactivate from the server, we also want to
+         * deactivate from the client-side array binded to our
+         * template (so the user immediately sees that it's
+         * deactivated)
+         */
+        topic.name = this.topicService.reactivateName(
+          topic.name
+        );
+      },
+      err => {
+        console.log('Failed to reactivate a topic');
       }
     );
   }
