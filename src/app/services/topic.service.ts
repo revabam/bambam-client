@@ -49,6 +49,11 @@ export class TopicService {
     return this.http.post<Topic>(environment.apiUrl + 'topics', JSON.stringify(newTopic), HTTP_OPTIONS);
   }
 
+  getTopicById(id: number): Observable<Topic> {
+    console.log('[LOG] - In TopicService.getTopicById()');
+    return this.http.get<Topic>(environment.apiUrl + `topics/${id}`, HTTP_OPTIONS);
+  }
+
   /**
    * The function used to deactivate a topic in the server
    */
