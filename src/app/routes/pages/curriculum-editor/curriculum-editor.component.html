@@ -1,3 +1,133 @@
-<p>
-  curriculum-editor works!
-</p>
+<br />
+
+<div class="container">
+  <div class="row justify-content-center">
+    <h1 class="text-center">Curriculum Editor</h1>
+  </div>
+  <div class="row">
+
+    <div class="col-sm-6">
+      <mat-toolbar>
+          <span style="flex: 1 1 auto"></span>
+          <span>
+
+            <h4 class="">Course Structure</h4>
+          </span>
+          <span style="flex: 1 1 auto"></span>
+          <span>  
+              <button mat-raised-button color="primary"
+                (click)="openDialog()">Create New Version</button>
+          </span>
+          <span style="flex: 1 1 auto"></span>
+        </mat-toolbar>
+      <mat-accordion>
+        <mat-card-content>
+          <mat-expansion-panel *ngFor="let cname of curriculumNames">
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                {{cname}}
+              </mat-panel-title>
+            </mat-expansion-panel-header>
+            <div *ngFor="let curriculum of getCurriculumsByName(cname)">
+              <mat-toolbar>
+                <span *ngIf="curriculum.name === cname">
+                  {{curriculum.version}}
+                </span>
+                <span *ngIf="curriculum.name !== cname">
+                  <del>{{curriculum.version}}</del>
+                </span>
+                <span class="fill-remaining-space">
+                </span>
+                <span *ngIf="curriculum.name === cname">
+                  <button mat-mini-fab color="primary" (click)="deactivateCurriculum(curriculum)">X</button>
+                </span>
+                <span *ngIf="curriculum.name !== cname">
+                  <button mat-mini-fab color="'green'" (click)="reactivateCurriculum(curriculum)">+</button>
+                </span>
+              </mat-toolbar>
+            </div>
+          </mat-expansion-panel>
+        </mat-card-content>
+      </mat-accordion>
+    </div>
+    <div class="col-sm-6">
+      <mat-toolbar>
+          <span style="flex: 1 1 auto"></span>
+          <span>
+
+            <h4 class="">Topic Pool</h4>
+          </span>
+          <span style="flex: 1 1 auto"></span>
+          <span>  
+              <mat-form-field class="my-0">
+                  <input matInput type="text" placeholder="Search Subtopic" [(ngModel)]="topicSearch">
+                  <button mat-button *ngIf="value" matSuffix mat-icon-button aria-label="Clear" (click)="value=''">
+                    <mat-icon>close</mat-icon>
+                  </button>
+                </mat-form-field>
+          </span>
+          <span>
+                  <button mat-fab color="primary" (click)="openNewDialog()"><i class="material-icons">add</i></button>
+          </span>
+          <span style="flex: 1 1 auto"></span>
+        </mat-toolbar>
+      <mat-accordion>
+        <mat-card-content>
+          <div *ngFor="let topic of topics">
+          <mat-expansion-panel [disabled]="topic.name !== topicService.reactivateName(topic.name)"
+            [expanded]="topic.name === topicService.reactivateName(topic.name) &amp;&amp; isExpanded(topic.id)"
+            (opened)="expandTopic(topic.id)" (closed)="collapseTopic(topic.id)">
+            <mat-expansion-panel-header>
+              <mat-panel-title *ngIf="topic.name === topicService.reactivateName(topic.name)">
+                
+                  <span>
+                    {{topic.name}}
+                  </span>
+                  <span class="fill-remaining-space">
+                  </span>
+                  <span>
+                    <button mat-mini-fab color="primary" (click)="deactivateTopic(topic)">X</button>
+                  </span>
+                
+              </mat-panel-title>
+              <mat-panel-title *ngIf="topic.name !== topicService.reactivateName(topic.name)">
+                  <span>
+                    <del>{{topicService.reactivateName(topic.name)}}</del>
+                  </span>
+                  <span class="fill-remaining-space">
+                  </span>
+                  <span>
+                    <button mat-mini-fab color="'green'" (click)="reactivateTopic(topic)">+</button>
+                  </span>
+              </mat-panel-title>
+            </mat-expansion-panel-header>
+            <div *ngFor="let subtopic of getSubtopicsByTopic(topic)">
+              <div *ngIf="(!topicSearch || ((subtopic.name | lowercase).indexOf(topicSearch | lowercase) >= 0)) &amp;&amp; (subtopicService.reactivateName(subtopic.name) === subtopic.name)">
+                <mat-toolbar>
+                  <span> {{ subtopic.name }}</span>
+                  <span class="fill-remaining-space"></span>
+                  <span>
+                    <button mat-mini-fab color="primary" (click)=deactivateSubtopic(subtopic)>X</button>
+                  </span>
+                </mat-toolbar>
+              </div>
+              <div *ngIf="(!topicSearch || ((subtopic.name | lowercase).indexOf(topicSearch | lowercase) >= 0)) &amp;&amp; (subtopicService.reactivateName(subtopic.name) !== subtopic.name)">
+                <mat-toolbar>
+                  <span> <del>{{ subtopicService.reactivateName(subtopic.name) }}</del></span>
+                  <span class="fill-remaining-space"> </span>
+                  <span>
+                    <button mat-mini-fab color="green" (click)=reactivateSubtopic(subtopic)>+</button>
+                  </span>
+                </mat-toolbar>
+              </div>
+            </div>
+            <div *ngIf="getSubtopicsByTopic(topic).length == 0">
+              No Subtopics for {{ topic.name }}
+            </div>
+          </mat-expansion-panel>
+          </div>
+        </mat-card-content>
+      </mat-accordion>
+    </div>
+  </div>
+</div>

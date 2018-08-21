@@ -1,0 +1,34 @@
+{
+    "calendar-curriculums": [
+        {
+            "id": 1,
+            "curriculum_id": 1,
+            "batch_id": 1
+        },
+        {
+            "id": 2,
+            "curriculum_id": 1,
+            "batch_id": 1
+        },
+        {
+            "id": 3,
+            "curriculum_id": 1,
+            "batch_id": 1
+        },
+        {
+            "id": 4,
+            "curriculum_id": 1,
+            "batch_id": 1
+        },
+        {
+            "id": 5,
+            "curriculum_id": 1,
+            "batch_id": 1
+        },
+        {
+            "id": 6,
+            "curriculum_id": 1,
+            "batch_id": 5
+        }
+    ]
+}

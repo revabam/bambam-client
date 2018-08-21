@@ -1,0 +1,44 @@
+{
+    "batches": [
+        {
+            "id": 1,
+            "name": "1806-Jun18-USF-Java",
+            "startDate": 123456787,
+            "endDate": 123456789,
+            "trainer_id": 4,
+            "calendarCurriculum_id": 2
+        },
+        {
+            "id": 2,
+            "name": "1807-Jul18-USF-JavaScript",
+            "startDate": 123456787,
+            "endDate": 123456789,
+            "trainer_id": 12,
+            "calendarCurriculum_id": 4
+        },
+        {
+            "id": 3,
+            "name": "1808-Aug18-USF-C++",
+            "startDate": 123456787,
+            "endDate": 123456789,
+            "trainer_id": 7,
+            "calendarCurriculum_id": 1
+        },
+        {
+            "id": 4,
+            "name": "1809-Sep18-USF-Java",
+            "startDate": 123456787,
+            "endDate": 123456789,
+            "trainer_id": 11,
+            "calendarCurriculum_id": 2
+        },
+        {
+            "id": 5,
+            "name": "1806-Nov18-USF-Java",
+            "startDate": 123456787,
+            "endDate": 123456789,
+            "trainer_id": 10,
+            "calendarCurriculum_id": 2
+        }
+    ]
+ }
