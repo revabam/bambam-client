@@ -86,17 +86,30 @@ export class CurriculumEditorComponent implements OnInit {
    * curriculums
    */
   getUniqueNames (): string[] {
-    const names: string[] = this.curriculums.map(curr => curr.name);
+    let names: string[] = this.curriculums.map(curr => curr.name);
+    // If it is deactivated, then we don't create a
+    // separate unique name for that.
+    names = names.map((name) => this.curriculumService.reactivateName(name));
     return names.filter((name, i, arr) => name && arr.indexOf(name) === i);
   }
 
   /**
-   * Gets us all of the curriculums that have a certain name
+   * Gets us all of the curriculums that have a certain name.
+   * Also, orders it from highest version to lowest version.
+   * It also looks for deactivated versions with that name.
    * @param name - the name of the curricula that we seek.
    */
   getCurriculumsByName (name: string): Curriculum[] {
-    return this.curriculums.filter(
-      (curriculum) => curriculum && curriculum.name === name);
+    const curriculumsWithName: Curriculum[] = this.curriculums.filter(
+      (curriculum) => curriculum && (curriculum.name === name
+        || this.curriculumService.reactivateName(curriculum.name)
+        === name));
+    // Ordering from highest version to lowest version
+    curriculumsWithName.sort(function(makeBigger: Curriculum,
+      makeSmaller: Curriculum): number {
+      return makeSmaller.version - makeBigger.version;
+    });
+    return curriculumsWithName;
   }
 
   /**
@@ -124,6 +137,9 @@ export class CurriculumEditorComponent implements OnInit {
      * An object is passed in as the second parameter, which
      * defines properties of the dialog modal, as well as the
      * data that we'll pass in for the modal component to access.
+     * We need to allow the child component to access the
+     * getCurriculumsByName so that the child component can get
+     * the highest version number and increment by one.
      */
       {
         width: '600px',
@@ -131,29 +147,121 @@ export class CurriculumEditorComponent implements OnInit {
           curriculums: this.curriculums,
           curriculumNames: this.curriculumNames,
           topics: this.topics,
-          curriculumService: this.curriculumService
+          curriculumService: this.curriculumService,
+          getCurriculumsByName: this.getCurriculumsByName
         }
       }
     );
   }
   /**
-   * Calls the delete function from the curriculum service.
-   * @param curriculum - The curriculum to be deleted.
+   * Calls the deactivate function from the curriculum
+   * service.
+   * @param curriculum - The curriculum to be deactivated.
    */
-  deleteCurriculum(curriculum: Curriculum): void {
-    this.curriculumService.delete(curriculum).subscribe(
+  deactivateCurriculum(curriculum: Curriculum): void {
+    this.curriculumService.deactivate(curriculum).subscribe(
       data => {
-        console.log('Successfully deleted ', curriculum);
+        if (data['name'] === undefined || data['name'] === null) {
+          console.log('Failed to deactivate curriculum');
+          return;
+        }
+        console.log('Successfully deactivated ', data);
         /*
-         * After we delete from the server, we also want to delete
-         * from the client-side array binded to our template (so
-         * the user immediately sees that it's deleted)
+         * After we deactivate from the server, we also want to
+         * deactivate from the client-side array binded to our
+         * template (so the user immediately sees that it's
+         * deactivated)
          */
-        this.curriculums = this.curriculums.filter((remaining) =>
-          remaining !== curriculum);
+        curriculum.name = this.curriculumService.deactivateName(
+          curriculum.name
+        );
       },
       err => {
-        console.log('Failed to delete a curriculum');
+        console.log('Failed to deactivate a curriculum');
+      }
+    );
+  }
+  /**
+   * Calls the deactivate function from the curriculum
+   * service.
+   * @param curriculum - The curriculum to be deactivated.
+   */
+  reactivateCurriculum(curriculum: Curriculum): void {
+    this.curriculumService.reactivate(curriculum).subscribe(
+      data => {
+        if (data['name'] === undefined || data['name'] === null) {
+          console.log('Failed to reactivate curriculum');
+          return;
+        }
+        console.log('Successfully reactivated ', data);
+        /*
+         * After we deactivate from the server, we also want to
+         * deactivate from the client-side array binded to our
+         * template (so the user immediately sees that it's
+         * deactivated)
+         */
+        curriculum.name = this.curriculumService.reactivateName(
+          curriculum.name
+        );
+      },
+      err => {
+        console.log('Failed to reactivate a curriculum');
+      }
+    );
+  }
+  /**
+   * Calls the deactivate function from the topic
+   * service.
+   * @param topic - The topic to be deactivated.
+   */
+  deactivateTopic(topic: Topic): void {
+    this.topicService.deactivate(topic).subscribe(
+      data => {
+        if (data['name'] === undefined || data['name'] === null) {
+          console.log('Failed to deactivate topic');
+          return;
+        }
+        console.log('Successfully deactivated ', data);
+        /*
+         * After we deactivate from the server, we also want to
+         * deactivate from the client-side array binded to our
+         * template (so the user immediately sees that it's
+         * deactivated)
+         */
+        topic.name = this.topicService.deactivateName(
+          topic.name
+        );
+      },
+      err => {
+        console.log('Failed to deactivate a topic');
+      }
+    );
+  }
+  /**
+   * Calls the deactivate function from the topic
+   * service.
+   * @param topic - The topic to be deactivated.
+   */
+  reactivateTopic(topic: Topic): void {
+    this.topicService.reactivate(topic).subscribe(
+      data => {
+        if (data['name'] === undefined || data['name'] === null) {
+          console.log('Failed to reactivate topic');
+          return;
+        }
+        console.log('Successfully reactivated ', data);
+        /*
+         * After we deactivate from the server, we also want to
+         * deactivate from the client-side array binded to our
+         * template (so the user immediately sees that it's
+         * deactivated)
+         */
+        topic.name = this.topicService.reactivateName(
+          topic.name
+        );
+      },
+      err => {
+        console.log('Failed to reactivate a topic');
       }
     );
   }
