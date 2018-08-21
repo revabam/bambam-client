@@ -8,6 +8,7 @@ import { CalendarComponent } from './pages/calendar/calendar.component';
 import { CurriculumEditorComponent } from './pages/curriculum-editor/curriculum-editor.component';
 import { BoomComponent } from './pages/boom/boom.component';
 import { CreateVersionComponent } from './pages/create-version/create-version.component';
+import { DialogViewComponent } from './pages/dialog-view/dialog-view.component';
 
 const ROUTES: Routes = [
   {
@@ -40,6 +41,10 @@ const ROUTES: Routes = [
       component: BoomComponent
   },
   {
+      path: 'curriculum/editor',
+      component: DialogViewComponent
+  },
+  {
       path: '',
       pathMatch: 'full',
       redirectTo: 'dashboard'
@@ -51,7 +56,7 @@ const ROUTES: Routes = [
     CommonModule,
     RouterModule.forRoot(ROUTES, {onSameUrlNavigation: 'reload'})
   ],
-  declarations: [CreateVersionComponent],
+  declarations: [CreateVersionComponent, DialogViewComponent],
   exports: [
     RouterModule
   ]
