@@ -30,10 +30,10 @@ describe('CalendarComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
-  
+
   it('should have <h3> of the title', () => {
     component = fixture.componentInstance;
-    const h3: HTMLElement = fixture.nativeElement.querySelector('h3');
-    expect(h3.textContent).toContain(component.title);
+    const h5: HTMLElement = fixture.nativeElement.querySelector('h5');
+    expect(h5.textContent).toContain('Event action occurred');
   });
 });
