@@ -87,6 +87,9 @@
         </div>
       </mat-card-header>
       <mat-card-content>
+        <div #numWeek class="float-left">
+
+        </div>
         <div [ngSwitch]="view">
           <mwl-calendar-month-view *ngSwitchCase="'month'" [viewDate]="viewDate" [events]="events" [refresh]="refresh" [activeDayIsOpen]="activeDayIsOpen"
             (dayClicked)="dayClicked($event.day)" (eventClicked)="handleEvent('Clicked', $event.event)" (eventTimesChanged)="eventTimesChanged($event)">

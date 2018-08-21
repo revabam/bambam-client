@@ -23,6 +23,10 @@ export class CalendarService {
     return this.http.get<Curriculum[]>(environment.apiUrl + 'curriculums', HTTP_OPTIONS);
   }
 
+  // saveCalanderCurriculum() {
+
+  // }
+
   getCurriculumById(id: number): Observable<Curriculum> {
     return this.http.get<Curriculum>(environment.apiUrl + `curriculums/${id}`, HTTP_OPTIONS);
   }
