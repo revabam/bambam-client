@@ -11,7 +11,6 @@ import { Topic } from '../../../models/topic';
 export class CreateVersionComponent {
   // Variables binded to our template, used to retrieve UI inputs
   selectedCurriculumName: string;
-  version: string;
   numberOfWeeks: number;
   selectedTopics: Topic[];
 
@@ -42,7 +41,8 @@ export class CreateVersionComponent {
   add(): void {
     const newCurriculum: Curriculum = {
       name: this.selectedCurriculumName,
-      version: this.version,
+      version: this.data['getCurriculumsByName'](
+        this.selectedCurriculumName)[0].version + 1,
       creator_id: JSON.parse(sessionStorage['user'])['id'],
       dateCreated: new Date(),
       numberOfWeeks: this.numberOfWeeks,
@@ -59,6 +59,8 @@ export class CreateVersionComponent {
       if (curr !== undefined && curr !== null) {
         this.data['curriculums'].push(curr);
       }
+    }, err => {
+      console.log('Failed to create a bersion');
     });
     // After the curriculum is added, we're done with the modal.
     this.close();

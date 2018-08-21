@@ -30,11 +30,19 @@
             </mat-expansion-panel-header>
             <div *ngFor="let curriculum of getCurriculumsByName(cname)">
               <mat-toolbar>
-                <span>{{curriculum.version}}</span>
+                <span *ngIf="curriculum.name === cname">
+                  {{curriculum.version}}
+                </span>
+                <span *ngIf="curriculum.name !== cname">
+                  <del>{{curriculum.version}}</del>
+                </span>
                 <span class="fill-remaining-space">
                 </span>
-                <span *ngIf="getCurriculumsByName(cname).length > 1">
-                  <button mat-mini-fab color="primary" (click)=deleteCurriculum(curriculum)>X</button>
+                <span *ngIf="curriculum.name === cname">
+                  <button mat-mini-fab color="primary" (click)=deactivateCurriculum(curriculum)>X</button>
+                </span>
+                <span *ngIf="curriculum.name !== cname">
+                  <button mat-mini-fab color="'green'" (click)=reactivateCurriculum(curriculum)>+</button>
                 </span>
               </mat-toolbar>
             </div>
