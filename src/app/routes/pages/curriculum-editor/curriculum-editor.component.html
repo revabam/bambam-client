@@ -39,10 +39,10 @@
                 <span class="fill-remaining-space">
                 </span>
                 <span *ngIf="curriculum.name === cname">
-                  <button mat-mini-fab color="primary" (click)=deactivateCurriculum(curriculum)>X</button>
+                  <button mat-mini-fab color="primary" (click)="deactivateCurriculum(curriculum)">X</button>
                 </span>
                 <span *ngIf="curriculum.name !== cname">
-                  <button mat-mini-fab color="'green'" (click)=reactivateCurriculum(curriculum)>+</button>
+                  <button mat-mini-fab color="'green'" (click)="reactivateCurriculum(curriculum)">+</button>
                 </span>
               </mat-toolbar>
             </div>
@@ -71,7 +71,9 @@
       <mat-accordion>
         <mat-card-content>
           <div *ngFor="let topic of topics">
-          <mat-expansion-panel [disabled]="topic.name !== topicService.reactivateName(topic.name)">
+          <mat-expansion-panel [disabled]="topic.name !== topicService.reactivateName(topic.name)"
+            [expanded]="topic.name === topicService.reactivateName(topic.name) &amp;&amp; isExpanded(topic.id)"
+            (opened)="expandTopic(topic.id)" (closed)="collapseTopic(topic.id)">
             <mat-expansion-panel-header>
               <mat-panel-title *ngIf="topic.name === topicService.reactivateName(topic.name)">
                 
@@ -81,7 +83,7 @@
                   <span class="fill-remaining-space">
                   </span>
                   <span>
-                    <button mat-mini-fab color="primary" (click)=deactivateTopic(topic)>X</button>
+                    <button mat-mini-fab color="primary" (click)="deactivateTopic(topic)">X</button>
                   </span>
                 
               </mat-panel-title>
@@ -92,13 +94,28 @@
                   <span class="fill-remaining-space">
                   </span>
                   <span>
-                    <button mat-mini-fab color="'green'" (click)=reactivateTopic(topic)>+</button>
+                    <button mat-mini-fab color="'green'" (click)="reactivateTopic(topic)">+</button>
                   </span>
               </mat-panel-title>
             </mat-expansion-panel-header>
             <div *ngFor="let subtopic of getSubtopicsByTopic(topic)">
-              <div *ngIf="!topicSearch || ((subtopic.name | lowercase).indexOf(topicSearch | lowercase) >= 0)">
-                {{ subtopic.name }}
+              <div *ngIf="(!topicSearch || ((subtopic.name | lowercase).indexOf(topicSearch | lowercase) >= 0)) &amp;&amp; (subtopicService.reactivateName(subtopic.name) === subtopic.name)">
+                <mat-toolbar>
+                  <span> {{ subtopic.name }}</span>
+                  <span class="fill-remaining-space"></span>
+                  <span>
+                    <button mat-mini-fab color="primary" (click)=deactivateSubtopic(subtopic)>X</button>
+                  </span>
+                </mat-toolbar>
+              </div>
+              <div *ngIf="(!topicSearch || ((subtopic.name | lowercase).indexOf(topicSearch | lowercase) >= 0)) &amp;&amp; (subtopicService.reactivateName(subtopic.name) !== subtopic.name)">
+                <mat-toolbar>
+                  <span> <del>{{ subtopicService.reactivateName(subtopic.name) }}</del></span>
+                  <span class="fill-remaining-space"> </span>
+                  <span>
+                    <button mat-mini-fab color="green" (click)=reactivateSubtopic(subtopic)>+</button>
+                  </span>
+                </mat-toolbar>
               </div>
             </div>
             <div *ngIf="getSubtopicsByTopic(topic).length == 0">

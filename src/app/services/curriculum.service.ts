@@ -57,7 +57,7 @@ export class CurriculumService {
   }
 
   /**
-   * The function used to reactive a curriculum in theserver
+   * The function used to reactivate a curriculum in theserver
    */
   reactivate(curriculum: Curriculum): Observable<Object> {
     console.log('[LOG] - In CurriculumService.reactivate()');

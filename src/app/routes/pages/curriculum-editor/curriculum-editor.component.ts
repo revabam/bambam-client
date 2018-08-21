@@ -19,6 +19,16 @@ export class CurriculumEditorComponent implements OnInit {
   curriculumNames: string[] = [];
   topics: Topic[] = [];
   subtopics: Subtopic[] = [];
+  /*
+   * This object will store a set of boolean variables for
+   * all of the topics shown, so we can keep track of
+   * whether or not a topic is expanded, as well as
+   * programaticallyexpand a topic panel (the [expanded]
+   * attribute will be binded to the booleans in this object).
+   * Since it's empty, all the topics are not expanded (as
+   * undefined === true is false)
+   */
+  topicExpansions: Object = {};
 
   /**
    * @param curriculumService - The service (defined by us)
@@ -212,6 +222,9 @@ export class CurriculumEditorComponent implements OnInit {
   /**
    * Calls the deactivate function from the topic
    * service.
+   * this.collapseTopic is called because we want
+   * the panel to be collapsed if the deactivate
+   * button is clicked.
    * @param topic - The topic to be deactivated.
    */
   deactivateTopic(topic: Topic): void {
@@ -236,15 +249,20 @@ export class CurriculumEditorComponent implements OnInit {
         console.log('Failed to deactivate a topic');
       }
     );
+    this.collapseTopic(topic.id);
   }
   /**
    * Calls the deactivate function from the topic
    * service.
+   * collapseTopic is called because we don't want
+   * the reactivation to automatically expand a panel,
+   * or if the button is clicked.
    * @param topic - The topic to be deactivated.
    */
   reactivateTopic(topic: Topic): void {
     this.topicService.reactivate(topic).subscribe(
       data => {
+        this.collapseTopic(topic.id);
         if (data['name'] === undefined || data['name'] === null) {
           console.log('Failed to reactivate topic');
           return;
@@ -262,6 +280,77 @@ export class CurriculumEditorComponent implements OnInit {
       },
       err => {
         console.log('Failed to reactivate a topic');
+      }
+    );
+    this.collapseTopic(topic.id);
+  }
+  /*
+   * topic_{id} will be unique for each topic.
+   * It's initialized as undefined, but expansion
+   * will define it as true.
+   */
+  expandTopic(topicId: number): void {
+    this.topicExpansions[`topic_${topicId}`] = true;
+  }
+  collapseTopic(topicId: number): void {
+    this.topicExpansions[`topic_${topicId}`] = false;
+  }
+  isExpanded(topicId: number): boolean {
+    return this.topicExpansions[`topic_${topicId}`] === true;
+  }
+  /**
+   * Calls the deactivate function from the subtopic
+   * service.
+   * @param subtopic - The subtopic to be deactivated.
+   */
+  deactivateSubtopic(subtopic: Subtopic): void {
+    this.subtopicService.deactivate(subtopic).subscribe(
+      data => {
+        if (data['name'] === undefined || data['name'] === null) {
+          console.log('Failed to deactivate subtopic');
+          return;
+        }
+        console.log('Successfully deactivated ', data);
+        /*
+         * After we deactivate from the server, we also want to
+         * deactivate from the client-side array binded to our
+         * template (so the user immediately sees that it's
+         * deactivated)
+         */
+        subtopic.name = this.subtopicService.deactivateName(
+          subtopic.name
+        );
+      },
+      err => {
+        console.log('Failed to deactivate a subtopic');
+      }
+    );
+  }
+  /**
+   * Calls the deactivate function from the subtopic
+   * service.
+   * @param subtopic - The subtopic to be deactivated.
+   */
+  reactivateSubtopic(subtopic: Subtopic): void {
+    this.subtopicService.reactivate(subtopic).subscribe(
+      data => {
+        if (data['name'] === undefined || data['name'] === null) {
+          console.log('Failed to reactivate subtopic');
+          return;
+        }
+        console.log('Successfully reactivated ', data);
+        /*
+         * After we deactivate from the server, we also want to
+         * deactivate from the client-side array binded to our
+         * template (so the user immediately sees that it's
+         * deactivated)
+         */
+        subtopic.name = this.subtopicService.reactivateName(
+          subtopic.name
+        );
+      },
+      err => {
+        console.log('Failed to reactivate a subtopic');
       }
     );
   }

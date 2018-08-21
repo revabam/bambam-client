@@ -48,7 +48,7 @@ export class TopicService {
   }
 
   /**
-   * The function used to reactive a topic in theserver
+   * The function used to reactivate a topic in theserver
    */
   reactivate(topic: Topic): Observable<Object> {
     console.log('[LOG] - In TopicService.reactivate()');

@@ -36,4 +36,51 @@ export class SubtopicService {
     console.log('[LOG] - In SubtopicService.getAll()');
     return this.http.get<Subtopic[]>(environment.apiUrl + 'subtopics', HTTP_OPTIONS);
   }
+
+  /**
+   * The function used to deactivate a subtopic in the server
+   */
+  deactivate(subtopic: Subtopic): Observable<Object> {
+    console.log('[LOG] - In SubtopicService.deactivate()');
+    subtopic.name = this.deactivateName(subtopic.name);
+    return this.http.put(environment.apiUrl + `subtopics/${subtopic.id}`,
+      subtopic, HTTP_OPTIONS);
+  }
+
+  /**
+   * The function used to reactivate a subtopic in theserver
+   */
+  reactivate(subtopic: Subtopic): Observable<Object> {
+    console.log('[LOG] - In SubtopicService.reactivate()');
+    subtopic.name = this.reactivateName(subtopic.name);
+    return this.http.put(environment.apiUrl + `subtopics/${subtopic.id}`,
+      subtopic, HTTP_OPTIONS);
+  }
+
+  /**
+   * Helper function to append '(DEACTIVATED) ' to the
+   * beginning of the subtopic name, to show that
+   * the subtopic is deactivated.
+   * @param subtopicName - The string that we want to
+   * append '(DEACTIVATED) ' to.
+   */
+  deactivateName(subtopicName: string): string {
+    return '(DEACTIVATED) ' + subtopicName;
+  }
+
+  /**
+   * Helper function to remove '(DEACTIVATED) ' from the
+   * beginning of the subtopic name
+   * @param subtopicName - The string that we want to
+   * append '(DEACTIVATED) ' to.
+   */
+  reactivateName(subtopicName: string): string {
+    if (subtopicName.indexOf('(DEACTIVATED) ') >= 0) {
+      subtopicName = subtopicName.substring(
+        subtopicName.lastIndexOf('(DEACTIVATED) ')
+        + ('(DEACTIVATED) ').length
+      );
+    }
+    return subtopicName;
+  }
 }
