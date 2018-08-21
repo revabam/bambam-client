@@ -48,12 +48,8 @@ import { DialogViewComponent } from './routes/pages/dialog-view/dialog-view.comp
     CreateVersionComponent,
     BoomComponent,
     LoginComponent,
-<<<<<<< HEAD
-    RegisterComponent
-=======
     RegisterComponent,
     DialogViewComponent
->>>>>>> db51e6df053965f2be54999b5514c9d84ddc3d2d
   ],
   imports: [
     NgbModule.forRoot(),
