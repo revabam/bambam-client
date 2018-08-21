@@ -48,4 +48,51 @@ export class TopicService {
     newTopic.name = name;
     return this.http.post<Topic>(environment.apiUrl + 'topics', JSON.stringify(newTopic), HTTP_OPTIONS);
   }
+
+  /**
+   * The function used to deactivate a topic in the server
+   */
+  deactivate(topic: Topic): Observable<Object> {
+    console.log('[LOG] - In TopicService.deactivate()');
+    topic.name = this.deactivateName(topic.name);
+    return this.http.put(environment.apiUrl + `topics/${topic.id}`,
+      topic, HTTP_OPTIONS);
+  }
+
+  /**
+   * The function used to reactive a topic in theserver
+   */
+  reactivate(topic: Topic): Observable<Object> {
+    console.log('[LOG] - In TopicService.reactivate()');
+    topic.name = this.reactivateName(topic.name);
+    return this.http.put(environment.apiUrl + `topics/${topic.id}`,
+      topic, HTTP_OPTIONS);
+  }
+
+  /**
+   * Helper function to append '(DEACTIVATED) ' to the
+   * beginning of the topic name, to show that
+   * the topic is deactivated.
+   * @param topicName - The string that we want to
+   * append '(DEACTIVATED) ' to.
+   */
+  deactivateName(topicName: string): string {
+    return '(DEACTIVATED) ' + topicName;
+  }
+
+  /**
+   * Helper function to remove '(DEACTIVATED) ' from the
+   * beginning of the topic name
+   * @param topicName - The string that we want to
+   * append '(DEACTIVATED) ' to.
+   */
+  reactivateName(topicName: string): string {
+    if (topicName.indexOf('(DEACTIVATED) ') >= 0) {
+      topicName = topicName.substring(
+        topicName.lastIndexOf('(DEACTIVATED) ')
+        + ('(DEACTIVATED) ').length
+      );
+    }
+    return topicName;
+  }
 }
