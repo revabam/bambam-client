@@ -33,6 +33,7 @@ import { LocationStrategy, PathLocationStrategy } from '../../node_modules/@angu
 import { UserIdleModule } from 'angular-user-idle';
 import { RoutesModule } from './routes/routes.module';
 import { CognitoService } from './services/cognito.service';
+import { DialogViewComponent } from './routes/pages/dialog-view/dialog-view.component';
 
 
 
@@ -47,7 +48,8 @@ import { CognitoService } from './services/cognito.service';
     CreateVersionComponent,
     BoomComponent,
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
+    DialogViewComponent
   ],
   imports: [
     NgbModule.forRoot(),

@@ -7,6 +7,7 @@ import { CurriculumEditorComponent } from '../../app/routes/pages/curriculum-edi
 import { BoomComponent } from '../../app/routes/pages/boom/boom.component';
 import { LoginComponent } from './pages/login/login.component';
 import { RegisterComponent } from './pages/register/register.component';
+import { DialogViewComponent } from './pages/dialog-view/dialog-view.component';
 
 export const appRoutes: Routes = [
     {
@@ -47,5 +48,10 @@ export const appRoutes: Routes = [
     {
         path: 'boom',
         component: BoomComponent
+    },
+
+    {
+        path: 'curriculum/dialog-view',
+        component: DialogViewComponent
     }
 ];
