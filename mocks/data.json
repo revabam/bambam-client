@@ -33,6 +33,33 @@
       "calendarCurriculum_id": 2
     }
   ],
+  "calendar-curriculums": [
+    {
+      "id": 1,
+      "curriculum_id": 1,
+      "batch_id": 1
+    },
+    {
+      "id": 2,
+      "curriculum_id": 2,
+      "batch_id": 1
+    },
+    {
+      "id": 3,
+      "curriculum_id": 3,
+      "batch_id": 1
+    },
+    {
+      "id": 4,
+      "curriculum_id": 4,
+      "batch_id": 1
+    },
+    {
+      "id": 5,
+      "curriculum_id": 5,
+      "batch_id": 1
+    }
+  ],
   "calendar-subtopics": [
     {
       "id": 1,
@@ -153,6 +180,56 @@
         7,
         2
       ]
+    }
+  ],
+  "topics": [
+    {
+      "id": 1,
+      "name": "Java"
+    },
+    {
+      "id": 2,
+      "name": "SQL"
+    },
+    {
+      "id": 3,
+      "name": "JDBC"
+    },
+    {
+      "id": 4,
+      "name": "HTML"
+    },
+    {
+      "id": 5,
+      "name": "CSS"
+    },
+    {
+      "id": 6,
+      "name": "JavaScript"
+    },
+    {
+      "id": 7,
+      "name": "Angular"
+    },
+    {
+      "id": 8,
+      "name": "DevOps"
+    },
+    {
+      "id": 9,
+      "name": "Hibernate"
+    },
+    {
+      "id": 10,
+      "name": "Spring"
+    },
+    {
+      "id": 11,
+      "name": "Web Services"
+    },
+    {
+      "id": 12,
+      "name": "Microservices"
     }
   ],
   "subtopics": [
@@ -287,88 +364,12 @@
       "parentTopic_id": 12
     },
     {
-      "name": "Beef",
-      "parentTopic_id": 15,
+      "name": "Chicken",
       "id": 27
     },
     {
-      "name": "Chicken",
+      "name": "Rawr",
       "id": 28
-    },
-    {
-      "name": "Apple",
-      "id": 29
-    },
-    {
-      "name": "Apple",
-      "id": 30
-    },
-    {
-      "name": "Operators",
-      "id": 31
-    }
-  ],
-  "topics": [
-    {
-      "id": 1,
-      "name": "Java"
-    },
-    {
-      "id": 2,
-      "name": "SQL"
-    },
-    {
-      "id": 3,
-      "name": "JDBC"
-    },
-    {
-      "id": 4,
-      "name": "HTML"
-    },
-    {
-      "id": 5,
-      "name": "CSS"
-    },
-    {
-      "id": 6,
-      "name": "JavaScript"
-    },
-    {
-      "id": 7,
-      "name": "Angular"
-    },
-    {
-      "id": 8,
-      "name": "DevOps"
-    },
-    {
-      "id": 9,
-      "name": "Hibernate"
-    },
-    {
-      "id": 10,
-      "name": "Spring"
-    },
-    {
-      "id": 11,
-      "name": "Web Services"
-    },
-    {
-      "id": 12,
-      "name": "Microservices"
-    },
-    {
-      "name": "Food",
-      "id": 13
-    },
-    {
-      "name": "Chicken",
-      "parentTopic_id": 13,
-      "id": 14
-    },
-    {
-      "name": "Food2",
-      "id": 15
     }
   ],
   "users": [
@@ -483,33 +484,6 @@
       "email": "andrewli@reva.com",
       "role_id": 2,
       "status_id": 1
-    }
-  ],
-  "calendar-curriculums": [
-    {
-      "id": 1,
-      "curriculum_id": 1,
-      "batch_id": 1
-    },
-    {
-      "id": 2,
-      "curriculum_id": 2,
-      "batch_id": 1
-    },
-    {
-      "id": 3,
-      "curriculum_id": 3,
-      "batch_id": 1
-    },
-    {
-      "id": 4,
-      "curriculum_id": 4,
-      "batch_id": 1
-    },
-    {
-      "id": 5,
-      "curriculum_id": 5,
-      "batch_id": 1
     }
   ]
 }

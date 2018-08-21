@@ -11,6 +11,8 @@ import { SubtopicService } from '../../../services/subtopic.service';
 export class DialogViewComponent {
   topicName: string;
   subtopicName: string;
+  fieldVisible = false;
+  subtopicList: string[];
 
   constructor(
     public dialogRef: MatDialogRef<DialogViewComponent>,
@@ -38,6 +40,14 @@ export class DialogViewComponent {
       }
       this.dialogRef.close();
     });
+  }
+
+  makefieldVisible() {
+    this.fieldVisible = true;
+  }
+
+  addToSubTopicList(): void {
+    this.subtopicList.push(this.subtopicName);
   }
 
 }
