@@ -69,4 +69,9 @@ export class UserService {
     console.log('[LOG] - In UserService.deleteById()');
     this.http.delete(environment.apiUrl + `users/${id}`);
   }
+
+  updateInfo(user: BamUser): Observable<BamUser> {
+    console.log('[LOG] - In UserService.updateInfo()');
+    return this.http.put<BamUser>(environment.apiUrl + `users/${user.id}`, JSON.stringify(user),  HTTP_OPTIONS);
+  }
 }
