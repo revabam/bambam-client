@@ -12,7 +12,7 @@ export class DialogViewComponent {
   topicName: string;
   subtopicName: string;
   fieldVisible = false;
-  subtopicList: string[];
+  subtopics: string[] = [];
 
   constructor(
     public dialogRef: MatDialogRef<DialogViewComponent>,
@@ -25,18 +25,21 @@ export class DialogViewComponent {
     }
 
   addTopic(): void {
+    console.log('[DEBUG] - in addTopic');
     console.log(`${this.topicName} - ${this.subtopicName}`);
 
-    this.topicService.getByName(this.topicName).subscribe(topic => {
-      if (topic === null) {
-        this.topicService.add(this.topicName).subscribe(result =>
-          this.subtopicService.add(this.subtopicName, result.id).subscribe(_ =>
-            this.dialogRef.close()
-          ));
+    this.topicService.getByName(this.topicName).subscribe(topics => {
+      console.log('[DEBUG] - topic already exist, topic is: ');
+      console.log(topics);
+      if (topics.length === 0) {
+        this.topicService.add(this.topicName).subscribe(result => {
+          console.log('[DEBUG] - result: ');
+          console.log(result);
+          this.subtopics.forEach(subtopic => this.subtopicService.add(subtopic, result.id).subscribe());
+        });
       } else {
-        console.log(`${topic.id}`);
-        this.subtopicService.add(this.subtopicName, topic.id).subscribe(_ =>
-        this.dialogRef.close());
+        console.log(`${topics[0].id}`);
+        this.subtopics.forEach(subtopic => this.subtopicService.add(subtopic, topics[0].id).subscribe());
       }
       this.dialogRef.close();
     });
@@ -46,8 +49,9 @@ export class DialogViewComponent {
     this.fieldVisible = true;
   }
 
-  addToSubTopicList(): void {
-    this.subtopicList.push(this.subtopicName);
+  addToSubTopics(): void {
+    this.subtopics.push(this.subtopicName);
+    this.subtopics.forEach(item => console.log(item));
   }
 
 }

@@ -6,12 +6,16 @@
   <br />
   <h6 mat-dialog-title>Sub-Topic <button mat-mini-fab color="primary" (click)="makefieldVisible()"><i class="material-icons">add</i></button></h6>
   <div *ngIf="fieldVisible">
+    <div>
+      <ul>
+        <li *ngFor="let subtopic of subtopics">{{ subtopic }}</li>
+      </ul>
+    </div>
     <mat-form-field>
       <input matInput [(ngModel)]="subtopicName" placeholder="Name of Sub-Topic">
     </mat-form-field>
-    <button mat-mini-fab color="primary"><i class="material-icons">check</i></button>
+    <button mat-mini-fab color="primary" (click)="addToSubTopics()"><i class="material-icons">check</i></button>
   </div>
-
   <br />
 </div>
 <div mat-dialog-actions>

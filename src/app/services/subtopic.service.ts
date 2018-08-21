@@ -38,7 +38,7 @@ export class SubtopicService {
   }
 
   add(name: string, parentId: number): Observable<Subtopic> {
-    console.log('[LOG] - In TopicService.getAll()');
+    console.log('[LOG] - In Sub-TopicService.add()');
     const newSubtopic = new Subtopic();
     newSubtopic.name = name;
     newSubtopic.parentTopic_id = parentId;
