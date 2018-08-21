@@ -36,4 +36,12 @@ export class SubtopicService {
     console.log('[LOG] - In SubtopicService.getAll()');
     return this.http.get<Subtopic[]>(environment.apiUrl + 'subtopics', HTTP_OPTIONS);
   }
+
+  add(name: string, parentId: number): Observable<Subtopic> {
+    console.log('[LOG] - In TopicService.getAll()');
+    const newSubtopic = new Subtopic();
+    newSubtopic.name = name;
+    newSubtopic.parentTopic_id = parentId;
+    return this.http.post<Subtopic>(environment.apiUrl + 'subtopics', JSON.stringify(newSubtopic), HTTP_OPTIONS);
+  }
 }

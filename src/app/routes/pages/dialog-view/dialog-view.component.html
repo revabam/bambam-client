@@ -1,0 +1,17 @@
+<h5 mat-dialog-title>Topic</h5>
+<div mat-dialog-content>
+  <mat-form-field>
+    <input matInput [(ngModel)]="topicName" placeholder="Name of Topic">
+  </mat-form-field>
+  <br />
+
+  <h6 mat-dialog-title>Sub-Topic</h6>
+  <mat-form-field>
+    <input matInput [(ngModel)]="subtopicName" placeholder="Name of subTopic">
+  </mat-form-field>
+  <br />
+</div>
+<div mat-dialog-actions>
+  <button mat-raised-button (click)="close()">Cancel</button>
+  <button mat-raised-button (click)="addTopic()">Ok</button>
+</div>

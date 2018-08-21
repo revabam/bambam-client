@@ -36,4 +36,16 @@ export class TopicService {
     console.log('[LOG] - In TopicService.getAll()');
     return this.http.get<Topic[]>(environment.apiUrl + 'topics', HTTP_OPTIONS);
   }
+
+  getByName(name: string): Observable<Topic> {
+    console.log('[LOG] - In TopicService.getByName()');
+    return this.http.get<Topic>(environment.apiUrl + 'topics?name=' + name, HTTP_OPTIONS);
+  }
+
+  add(name: string): Observable<Topic> {
+    console.log('[LOG] - In TopicService.getAll()');
+    const newTopic = new Topic();
+    newTopic.name = name;
+    return this.http.post<Topic>(environment.apiUrl + 'topics', JSON.stringify(newTopic), HTTP_OPTIONS);
+  }
 }

@@ -32,6 +32,7 @@ import { BatchService } from './services/batch/batch.service';
 import { LocationStrategy, PathLocationStrategy } from '../../node_modules/@angular/common';
 import { RoutesModule } from './routes/routes.module';
 import { CognitoService } from './services/cognito.service';
+import { DialogViewComponent } from './routes/pages/dialog-view/dialog-view.component';
 
 
 
@@ -47,6 +48,7 @@ import { CognitoService } from './services/cognito.service';
     BoomComponent,
     LoginComponent,
     RegisterComponent,
+    DialogViewComponent
   ],
   imports: [
     NgbModule.forRoot(),

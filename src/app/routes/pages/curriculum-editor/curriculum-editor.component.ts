@@ -7,6 +7,8 @@ import { TopicService } from '../../../services/topic.service';
 import { MatDialog } from '../../../../../node_modules/@angular/material';
 import { CreateVersionComponent } from '../create-version/create-version.component';
 import { SubtopicService } from '../../../services/subtopic.service';
+import { DialogViewComponent } from '../dialog-view/dialog-view.component';
+
 
 @Component({
   selector: 'app-curriculum-editor',
@@ -154,6 +156,16 @@ export class CurriculumEditorComponent implements OnInit {
       },
       err => {
         console.log('Failed to delete a curriculum');
+      }
+    );
+  }
+
+  openNewDialog(): void {
+    console.log('In openNewDialog()');
+    const dialogRef = this.dialog.open(DialogViewComponent,
+
+      {
+        width: '600px'
       }
     );
   }
