@@ -362,7 +362,13 @@ export class CurriculumEditorComponent implements OnInit {
     const dialogRef = this.dialog.open(DialogViewComponent,
 
       {
-        width: '600px'
+        width: '600px',
+        data: {
+          topics: this.topics,
+          subtopics: this.subtopics,
+          topicService: this.topicService,
+          subtopicService: this.subtopicService
+        }
       }
     );
   }
