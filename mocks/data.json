@@ -362,6 +362,14 @@
             "email":"andrewli@reva.com",
             "role_id":2,
             "status_id":1
+        },
+        {
+          "id":15,
+          "firstName":"Aaron",
+          "lastName":"Matthews",
+          "email":"aaron.mathews95@gmail.com",
+          "role_id":2,
+          "status_id":1
         }
     ]
 ,
@@ -530,6 +538,14 @@
             "endDate": 123456789,
             "trainer_id": 11,
             "calendarCurriculum_id": 2
-        }
+        },
+        {
+          "id": 5,
+          "name": "1810-Sep18-USF-Java",
+          "startDate": 123456787,
+          "endDate": 123456789,
+          "trainer_id": 15,
+          "calendarCurriculum_id": 2
+      }
     ]
  }
