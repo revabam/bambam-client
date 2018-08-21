@@ -64,7 +64,10 @@
                   <button mat-button *ngIf="value" matSuffix mat-icon-button aria-label="Clear" (click)="value=''">
                     <mat-icon>close</mat-icon>
                   </button>
-              </mat-form-field>
+                </mat-form-field>
+          </span>
+          <span>
+                  <button mat-fab color="primary" (click)="openNewDialog()"><i class="material-icons">add</i></button>
           </span>
           <span style="flex: 1 1 auto"></span>
         </mat-toolbar>
