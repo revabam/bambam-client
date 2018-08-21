@@ -1,6 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, TemplateRef } from '@angular/core';
 import { UserService } from '../../../services/user.service';
-import { BamUser } from '../../../models/bam-user';
 import { Router } from '@angular/router';
 import { FormBuilder, FormControl, Validators } from '@angular/forms';
 import { CognitoService } from '../../../services/cognito.service';
@@ -41,7 +40,10 @@ export class LoginComponent implements OnInit {
   constructor(
     private userService: UserService,
     private cognitoService: CognitoService,
-    private router: Router
+    private router: Router,
+    // private userIdle: UserIdleService,
+    // private appComponent: AppComponent,
+    // private modal: NgbModal
   ) { }
 
   ngOnInit() {
@@ -121,4 +123,28 @@ export class LoginComponent implements OnInit {
       );
     }
   }
+
+  // openModal() {
+  //   if (this.count) {
+  //     this.count++;
+  //     this.modal.open(this.modalContent, {size: 'lg'});
+  //   }
+  // }
+  // stop() {
+  //   this.userIdle.stopTimer();
+  // }
+
+  // stopWatching() {
+  //   this.userIdle.stopWatching();
+  // }
+
+  // startWatching() {
+  //   this.userIdle.startWatching();
+  // }
+
+  // restart() {
+  //   this.count = 0;
+  //   this.userIdle.resetTimer();
+  // }
+
 }

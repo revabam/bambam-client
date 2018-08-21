@@ -83,4 +83,8 @@ export class SubtopicService {
     }
     return subtopicName;
   }
+  getSubtopicByParentId(id: number): Observable<Subtopic[]> {
+    console.log('[LOG} - In SubtopicService.getSubtopicByParentId()');
+    return this.http.get<Subtopic[]>(environment.apiUrl + `subtopics?parentTopic_id=${id}`, HTTP_OPTIONS);
+  }
 }

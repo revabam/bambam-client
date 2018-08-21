@@ -30,6 +30,7 @@ import { NavbarComponent } from './routes/template/navbar/navbar.component';
 import { UserService } from './services/user.service';
 import { BatchService } from './services/batch/batch.service';
 import { LocationStrategy, PathLocationStrategy } from '../../node_modules/@angular/common';
+import { UserIdleModule } from 'angular-user-idle';
 import { RoutesModule } from './routes/routes.module';
 import { CognitoService } from './services/cognito.service';
 
@@ -46,7 +47,7 @@ import { CognitoService } from './services/cognito.service';
     CreateVersionComponent,
     BoomComponent,
     LoginComponent,
-    RegisterComponent,
+    RegisterComponent
   ],
   imports: [
     NgbModule.forRoot(),
@@ -95,7 +96,8 @@ import { CognitoService } from './services/cognito.service';
     ReactiveFormsModule,
     NgbModalModule.forRoot(),
     FlatpickrModule.forRoot(),
-    CalendarModule.forRoot()
+    CalendarModule.forRoot(),
+    UserIdleModule.forRoot({idle: 600, timeout: 300, ping: 60})
   ],
   providers: [
     UserService,
