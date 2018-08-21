@@ -41,8 +41,4 @@ export class SubtopicService {
     console.log('[LOG} - In SubtopicService.getSubtopicByParentId()');
     return this.http.get<Subtopic[]>(environment.apiUrl + `subtopics?parentTopic_id=${id}`, HTTP_OPTIONS);
   }
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> a1c69ee75a876f0a103cc2d11cf34dcb63f3724e
