@@ -4,7 +4,6 @@ import { Router } from '@angular/router';
 import { Batch } from '../../../models/batch';
 import { BatchService } from '../../../services/batch/batch.service';
 import { UserIdleService } from '../../../../../node_modules/angular-user-idle';
-import { AlertsService } from '../../../../../node_modules/angular-alert-module';
 import { timeout } from '../../../../../node_modules/@types/q';
 import { NgbModal } from '../../../../../node_modules/@ng-bootstrap/ng-bootstrap';
 

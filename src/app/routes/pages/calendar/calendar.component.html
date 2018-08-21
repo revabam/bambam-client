@@ -36,7 +36,7 @@
           {{curriculum.title}}</mat-list-item>
       </mat-list>
     </mat-card>
-    <mat-card class="mt-4">
+    <!-- <mat-card class="mt-4">
       <mat-card-header>
         <mat-card-title>
           <h4>Subtopics</h4>
@@ -48,7 +48,7 @@
         <mat-list-item *ngFor="let subtopic of subtopics" mwlDraggable [dropData]="{event: event}" style="position:relative; z-index: 10">
           {{subtopic.name}}</mat-list-item>
       </mat-list>
-    </mat-card>
+    </mat-card> -->
   </div>
   <div class="col-md-10">
     <mat-card>
@@ -95,7 +95,7 @@
             (eventTimesChanged)="eventTimesChanged($event)">
           </mwl-calendar-week-view>
           <mwl-calendar-day-view *ngSwitchCase="'day'" [viewDate]="viewDate" [events]="events" [refresh]="refresh" (eventClicked)="handleEvent('Clicked', $event.event)"
-            (eventTimesChanged)="eventTimesChanged($event)">
+            (eventTimesChanged)="eventTimesChanged($event)" dayStartHour="8" dayEndHour="18">
           </mwl-calendar-day-view>
         </div>
       </mat-card-content>

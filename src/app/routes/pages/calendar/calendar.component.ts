@@ -10,7 +10,7 @@ import {
   DoCheck
 } from '@angular/core';
 import {
-  startOfDay, endOfDay, subDays, addDays, endOfMonth, isSameDay, isSameMonth, addHours, addWeeks
+  startOfDay, endOfDay, subDays, addDays, endOfMonth, isSameDay, isSameMonth, addHours, addWeeks, isWeekend
 } from 'date-fns';
 import { Subject, Observable } from 'rxjs';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap/modal/modal.module';
@@ -29,17 +29,9 @@ import { TopicService } from '../../../services/topic.service';
 import { Topic } from '../../../models/topic';
 
 const colors: any = {
-  red: {
+  random: {
     primary: '#ad2121',
     secondary: '#FAE3E3'
-  },
-  blue: {
-    primary: '#1e90ff',
-    secondary: '#D1E8FF'
-  },
-  yellow: {
-    primary: '#e3bc08',
-    secondary: '#FDF1BA'
   }
 };
 
@@ -54,6 +46,12 @@ export class CalendarComponent implements OnInit, DoCheck {
   curriculumDataFetched = false;
   renderCalendar = false;
   showSideNav = false;
+
+  hour = 0;
+
+  colorNum = 0;
+
+  newColor: string;
 
   activeDayIsOpen = true;
 
@@ -95,37 +93,37 @@ export class CalendarComponent implements OnInit, DoCheck {
   refresh: Subject<any> = new Subject();
 
   events: CalendarEvent[] = [
-    {
-      start: subDays(startOfDay(new Date()), 1),
-      end: addDays(new Date(), 1),
-      title: 'A 3 day event',
-      color: colors.red,
-      actions: this.actions
-    },
-    {
-      start: startOfDay(new Date()),
-      title: 'An event with no end date',
-      color: colors.yellow,
-      actions: this.actions
-    },
-    {
-      start: subDays(endOfMonth(new Date()), 3),
-      end: addDays(endOfMonth(new Date()), 3),
-      title: 'A long event that spans 2 months',
-      color: colors.blue
-    },
-    {
-      start: addHours(startOfDay(new Date()), 2),
-      end: new Date(),
-      title: 'A draggable and resizable event',
-      color: colors.yellow,
-      actions: this.actions,
-      resizable: {
-        beforeStart: true,
-        afterEnd: true
-      },
-      draggable: true
-    }
+    // {
+    //   start: subDays(startOfDay(new Date()), 1),
+    //   end: addDays(new Date(), 1),
+    //   title: 'A 3 day event',
+    //   color: colors.red,
+    //   actions: this.actions
+    // },
+    // {
+    //   start: startOfDay(new Date()),
+    //   title: 'An event with no end date',
+    //   color: colors.yellow,
+    //   actions: this.actions
+    // },
+    // {
+    //   start: subDays(endOfMonth(new Date()), 3),
+    //   end: addDays(endOfMonth(new Date()), 3),
+    //   title: 'A long event that spans 2 months',
+    //   color: colors.blue
+    // },
+    // {
+    //   start: addHours(startOfDay(new Date()), 2),
+    //   end: new Date(),
+    //   title: 'A draggable and resizable event',
+    //   color: colors.yellow,
+    //   actions: this.actions,
+    //   resizable: {
+    //     beforeStart: true,
+    //     afterEnd: true
+    //   },
+    //   draggable: true
+    // }
   ];
 
   constructor(private modal: NgbModal, private calendarService: CalendarService, private subtopicService: SubtopicService,
@@ -215,40 +213,117 @@ export class CalendarComponent implements OnInit, DoCheck {
     this.refresh.next();
   }
 
+  randomColor() {
+    return '#' + Math.floor(Math.random() * 16777215).toString(16);
+  }
+
   handleEvent(action: string, event: CalendarEvent): void {
-    console.log(event);
+    // console.log(event);
     // this.modalData = { event, action };
     // this.modal.open(this.modalContent, { size: 'lg' });
     const id: number = +event.id;
     // console.log(id);
-    this.calendarService.getCurriculumById(id).subscribe(response => {
-      console.log(response.topics);
+    this.calendarService.getCurriculumById(id).subscribe(curr => {
+      // console.log(response);
       let topicWeek = 0;
-      const topicLength = response.topics.length / response.numberOfWeeks;
+      const topicLength = curr.numberOfWeeks / curr.topics.length;
       let topicDay = 0;
-      response.topics.forEach((topic) => {
-        console.log(topic.id);
-        this.events.push(
-          {
-            start: addDays(event.start, topicDay),
-            end: addDays(topicDay, topicLength),
-            title: topic.name,
-            id: topic.id,
-            color: colors.red,
-            actions: this.actions,
-            resizable: {
-              beforeStart: true,
-              afterEnd: true
-            },
-            draggable: true
+      curr.topics.forEach((topic) => {
+        this.subtopicService.getSubtopicByParentId(topic.id).subscribe(subResponse => {
+          const subtopicTime = (topicLength * 5 * 7) / subResponse.length;
+          let currTopicTime = subtopicTime;
+          console.log('subtopicTime: ', subtopicTime);
+          console.log('topiclength: ', topicLength);
+          colors.random.primary = this.randomColor();
+          this.newColor = 'color' + this.colorNum;
+          colors[this.newColor] = this.randomColor();
+          for (let i = 0; i < subResponse.length; i++) {
+            if (isWeekend(addDays(addHours(startOfDay(event.start), 9 + this.hour), topicDay))) {
+              topicDay++;
+              if (isWeekend(addDays(addHours(startOfDay(event.start), 9 + this.hour), topicDay))) {
+                topicDay++;
+              }
+            }
+            if (this.hour + currTopicTime > 7) {
+              this.multidaySubtopic(subResponse[i], topicDay, (7 - this.hour), event, currTopicTime);
+              topicDay++;
+              this.hour = 0;
+              currTopicTime = currTopicTime - (7 - this.hour);
+              i--;
+            } else {
+              console.log('IN CREATE SOLO DAY EVENT', subResponse[i].name);
+              this.events.push(
+                {
+                  start: addDays(addHours(startOfDay(event.start), 9 + this.hour), topicDay),
+                  end: addDays(addHours(startOfDay(event.start), 9 + this.hour + currTopicTime), topicDay),
+                  title: subResponse[i].name,
+                  id: subResponse[i].id,
+                  color: colors.newColor,
+                  actions: this.actions,
+                  resizable: {
+                    beforeStart: true,
+                    afterEnd: true
+                  },
+                  draggable: true
+                }
+              );
+              this.colorNum++;
+              this.hour += currTopicTime;
+            }
+            this.refresh.next();
           }
-        );
-        topicWeek++;
-        topicDay += topicLength;
-        this.refresh.next();
+          // subResponse.forEach((sub) => {
+          //   // console.log(sub);
+          //   if (this.hour + subtopicTime > 7) {
+          //     this.multidaySubtopic(sub, topicDay, (7 - this.hour), event, subtopicTime);
+          //     topicDay++;
+          //     this.hour = 0;
+          //   } else {
+          //     console.log('hour: ' + this.hour);
+          //     this.events.push(
+          //       {
+          //         start: addHours(startOfDay(event.start), 9 + this.hour),
+          //         end: addHours(startOfDay(event.start), 9 + this.hour + subtopicTime),
+          //         title: sub.name,
+          //         id: sub.id,
+          //         color: colors.red,
+          //         actions: this.actions,
+          //         resizable: {
+          //           beforeStart: true,
+          //           afterEnd: true
+          //         },
+          //         draggable: true
+          //       }
+          //     );
+          //     this.hour += subtopicTime;
+          //   }
+          //   this.refresh.next();
+          // });
+        });
       });
     });
     // this.events.push(event);
+  }
+
+  multidaySubtopic(subtopic: Subtopic, topicDay: number, timeLeft: number, event: CalendarEvent, subtopicTime: number) {
+    console.log('IN CREATE MULTIDAY EVENT', subtopic.name);
+    this.events.push(
+      {
+        start: addDays(addHours(startOfDay(event.start), 9 + this.hour), topicDay),
+        end: addDays(addHours(startOfDay(event.start), 17), topicDay),
+        title: subtopic.name,
+        id: subtopic.id,
+        color: colors.newColor,
+        actions: this.actions,
+        resizable: {
+          beforeStart: true,
+          afterEnd: true
+        },
+        draggable: true
+      }
+    );
+
+    this.hour += subtopicTime;
   }
 
   addEvent(): void {

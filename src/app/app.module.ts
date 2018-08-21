@@ -31,7 +31,6 @@ import { UserService } from './services/user.service';
 import { BatchService } from './services/batch/batch.service';
 import { LocationStrategy, PathLocationStrategy } from '../../node_modules/@angular/common';
 import { UserIdleModule } from 'angular-user-idle';
-import { AlertsModule } from 'angular-alert-module';
 import { RoutesModule } from './routes/routes.module';
 import { CognitoService } from './services/cognito.service';
 
@@ -98,8 +97,7 @@ import { CognitoService } from './services/cognito.service';
     NgbModalModule.forRoot(),
     FlatpickrModule.forRoot(),
     CalendarModule.forRoot(),
-    UserIdleModule.forRoot({idle: 600, timeout: 300, ping: 60}),
-    AlertsModule.forRoot()
+    UserIdleModule.forRoot({idle: 600, timeout: 300, ping: 60})
   ],
   providers: [
     UserService,

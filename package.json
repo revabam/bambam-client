@@ -29,11 +29,7 @@
     "@fortawesome/fontawesome-free": "^5.1.0",
     "@ng-bootstrap/ng-bootstrap": "^2.2.2",
     "@types/jquery": "^3.2.7",
-<<<<<<< HEAD
-    "angular-alert-module": "^2.0.3",
-=======
     "amazon-cognito-identity-js": "^2.0.21",
->>>>>>> 2b73dc9fceecef16332b84f82a8d0d838771adab
     "angular-calendar": "^0.25.2",
     "angular-user-idle": "^2.0.0",
     "angularx-flatpickr": "^6.0.0",
