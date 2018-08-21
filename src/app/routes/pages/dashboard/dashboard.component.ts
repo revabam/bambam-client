@@ -49,8 +49,6 @@ export class DashboardComponent implements OnInit {
             if (this.percentCompletion > 1) {
               this.percentCompletion = 1;
             }
-            console.log(elapsedTime + ' is our elapsed time');
-            console.log(totalTime + ' is our total time');
           }
         }
       );
