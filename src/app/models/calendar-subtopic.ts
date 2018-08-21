@@ -1,4 +1,4 @@
 export class CalendarSubtopic {
-    id: number;
+    id?: number;
     subtopic_id: number;
 }

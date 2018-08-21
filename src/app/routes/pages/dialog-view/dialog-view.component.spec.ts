@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { CurriculumViewComponent } from './curriculum-view.component';
+import { DialogViewComponent } from './dialog-view.component';
 
-describe('CurriculumViewComponent', () => {
-  let component: CurriculumViewComponent;
-  let fixture: ComponentFixture<CurriculumViewComponent>;
+describe('DialogViewComponent', () => {
+  let component: DialogViewComponent;
+  let fixture: ComponentFixture<DialogViewComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ CurriculumViewComponent ]
+      declarations: [ DialogViewComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(CurriculumViewComponent);
+    fixture = TestBed.createComponent(DialogViewComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

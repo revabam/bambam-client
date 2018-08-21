@@ -28,11 +28,38 @@ export class UserService {
   /*
     Add comments here
   */
-  login(email: string, password: string): Observable<BamUser> {
+  login(email: string, password: string): Observable<BamUser[]> {
     console.log('[LOG] - In UserService.login()');
+    return this.http.get<BamUser[]>(environment.apiUrl + 'users?email=' + email, HTTP_OPTIONS);
+  }
+
+  /*
+  * This method will get user info from the database based on
+  * the email address. This method is called from the login
+  * component to get the user's info.
+  *
+  * IMPORTANT:
+  * This may need to be changed in future sprints when the
+  * microservices backend is connected. Depending on how
+  * the services are setup, the http request may not actually
+  * function.
+  *
+  * @param  email The user's email address
+  *
+  * @return       An Observable which will broadcast the BamUser when it is retrieved
+  */
+  getUserByEmail(email: string): Observable<BamUser> {
+    console.log('[LOG] - In UserService.getUserByEmail()');
     return this.http.get<BamUser>(environment.apiUrl + 'users?email=' + email, HTTP_OPTIONS);
   }
 
+  /*
+  * This method will add a new user to the database.
+  *
+  * @param  user  A BamUser object that contains the user data
+  *
+  * @return       An Observable that will broadcast the BamUser when it has been inserted into the database
+  */
   register(user: BamUser): Observable<BamUser> {
     console.log('[LOG] - In UserService.register()');
     return this.http.post<BamUser>(environment.apiUrl + 'users', JSON.stringify(user), HTTP_OPTIONS);

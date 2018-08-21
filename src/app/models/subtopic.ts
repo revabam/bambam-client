@@ -1,5 +1,5 @@
 export class Subtopic {
-    id: number;
+    id?: number;
     name: string;
     parentTopic_id: number;
 }
