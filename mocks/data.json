@@ -3,7 +3,7 @@
     {
       "id": 1,
       "name": "c++",
-      "version": 1,
+      "version": "1",
       "creator_id": 4,
       "dateCreated": 99257573426,
       "numberOfWeeks": 10,
@@ -17,7 +17,7 @@
     {
       "id": 2,
       "name": "java",
-      "version": 10,
+      "version": "10",
       "creator_id": 3,
       "dateCreated": 734870348,
       "numberOfWeeks": 14,
@@ -31,7 +31,7 @@
     {
       "id": 3,
       "name": "python",
-      "version": 4,
+      "version": "4",
       "creator_id": 4,
       "dateCreated": 8989752698,
       "numberOfWeeks": 10,
@@ -45,7 +45,7 @@
     {
       "id": 4,
       "name": "angular",
-      "version": 6,
+      "version": "6",
       "creator_id": 1,
       "dateCreated": 463224573,
       "numberOfWeeks": 10,
