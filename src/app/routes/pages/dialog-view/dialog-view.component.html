@@ -1,0 +1,24 @@
+<h5 mat-dialog-title>Topic</h5>
+<div mat-dialog-content>
+  <mat-form-field>
+    <input matInput [(ngModel)]="topicName" placeholder="Name of Topic">
+  </mat-form-field>
+  <br />
+  <h6 mat-dialog-title>Sub-Topic <button mat-mini-fab color="primary" (click)="makefieldVisible()"><i class="material-icons">add</i></button></h6>
+  <div *ngIf="fieldVisible">
+    <div>
+      <ul>
+        <li *ngFor="let subtopic of subtopics">{{ subtopic }}</li>
+      </ul>
+    </div>
+    <mat-form-field>
+      <input matInput [(ngModel)]="subtopicName" placeholder="Name of Sub-Topic">
+    </mat-form-field>
+    <button mat-mini-fab color="primary" (click)="addToSubTopics()"><i class="material-icons">check</i></button>
+  </div>
+  <br />
+</div>
+<div mat-dialog-actions>
+  <button mat-raised-button (click)="close()">Cancel</button>
+  <button mat-raised-button (click)="addTopic()">Ok</button>
+</div>
