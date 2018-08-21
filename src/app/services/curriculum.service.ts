@@ -47,11 +47,49 @@ export class CurriculumService {
   }
 
   /**
-   * The function used to delete a curriculum from a server
+   * The function used to deactivate a curriculum in the server
    */
-  delete(curriculum: Curriculum): Observable<Object> {
-    console.log('[LOG] - In CurriculumService.delete()');
-    return this.http.delete(environment.apiUrl + `curriculums/${curriculum.id}`,
-      HTTP_OPTIONS);
+  deactivate(curriculum: Curriculum): Observable<Object> {
+    console.log('[LOG] - In CurriculumService.deactivate()');
+    curriculum.name = this.deactivateName(curriculum.name);
+    return this.http.put(environment.apiUrl + `curriculums/${curriculum.id}`,
+      curriculum, HTTP_OPTIONS);
+  }
+
+  /**
+   * The function used to reactive a curriculum in theserver
+   */
+  reactivate(curriculum: Curriculum): Observable<Object> {
+    console.log('[LOG] - In CurriculumService.reactivate()');
+    curriculum.name = this.reactivateName(curriculum.name);
+    return this.http.put(environment.apiUrl + `curriculums/${curriculum.id}`,
+      curriculum, HTTP_OPTIONS);
+  }
+
+  /**
+   * Helper function to append '(DEACTIVATED) ' to the
+   * beginning of the curriculum name, to show that
+   * the curriculum is deactivated.
+   * @param curriculumName - The string that we want to
+   * append '(DEACTIVATED) ' to.
+   */
+  deactivateName(curriculumName: string): string {
+    return '(DEACTIVATED) ' + curriculumName;
+  }
+
+  /**
+   * Helper function to remove '(DEACTIVATED) ' from the
+   * beginning of the curriculum name
+   * @param curriculumName - The string that we want to
+   * append '(DEACTIVATED) ' to.
+   */
+  reactivateName(curriculumName: string): string {
+    if (curriculumName.indexOf('(DEACTIVATED) ') >= 0) {
+      curriculumName = curriculumName.substring(
+        curriculumName.lastIndexOf('(DEACTIVATED) ')
+        + ('(DEACTIVATED) ').length
+      );
+    }
+    return curriculumName;
   }
 }
