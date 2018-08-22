@@ -50,6 +50,7 @@ export class CalendarService {
   }
 
   addCalendarEvent(event: CalendarEvent): Observable<CalendarEvent> {
+    console.log('[LOG] - In CalendarService.addCalendarEvent()');
     const json = JSON.stringify(event);
     return this.http.post<CalendarEvent>(environment.apiUrl + 'calendar-events', json, HTTP_OPTIONS);
   }

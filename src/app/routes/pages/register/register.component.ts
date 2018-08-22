@@ -73,7 +73,7 @@ export class RegisterComponent implements OnInit {
   ngOnInit() {
   }
 
-  /*
+  /**
   * This method checks if the password field and confirm password field
   * match. If not, it sets the messages which is displayed as a mat-error
   * on the form.
@@ -89,7 +89,7 @@ export class RegisterComponent implements OnInit {
     }
   }
 
-  /*
+  /**
   * This method gets the error message for a field. I made this specifically
   * for the password field. When the user input is both too short and doesn't
   * conform to the password regex pattern, angular tries to display multiple
@@ -116,7 +116,7 @@ export class RegisterComponent implements OnInit {
     return e;
   }
 
-  /*
+  /**
   * This method implements the registration functionality. It checks that
   * the input is valid and then makes the call to the cognito service to
   * register the user in the cognito user pool.

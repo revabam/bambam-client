@@ -13,7 +13,7 @@ import {
 import {
   startOfDay, endOfDay, subDays, addDays, endOfMonth, isSameDay, isSameMonth, addHours, addWeeks, isWeekend
 } from 'date-fns';
-import { Subject, Observable } from 'rxjs';
+import { Subject, Observable, BehaviorSubject } from 'rxjs';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap/modal/modal.module';
 import {
   CalendarEvent,
@@ -270,6 +270,7 @@ export class CalendarComponent implements OnInit, DoCheck {
   }
 
   handleEvent(action: string, event: MyEvent): void {
+    console.log('[LOG] - In handleEvent()');
     if (action === 'Clicked') {
       this.openDialog(event);
     } else if (action === 'Edited') {

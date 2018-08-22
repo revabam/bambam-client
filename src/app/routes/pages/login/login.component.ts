@@ -46,6 +46,10 @@ export class LoginComponent implements OnInit {
     // private modal: NgbModal
   ) { }
 
+  /**
+  * This method runs when the component is initialized. It checks if the user
+  * is logged in and, if they are, sends them to the dashboard page.
+  */
   ngOnInit() {
     if (sessionStorage.getItem('user')) {
       this.userService.user.next(JSON.parse(sessionStorage.getItem('user')));
@@ -62,6 +66,11 @@ export class LoginComponent implements OnInit {
     }
   }
 
+  /**
+  * This method is called whenever the user clicks the login button. It will attempt
+  * to authenticate the user in the cognito user pool and if the credentials are valid
+  * it will send them to the dashboard.
+  */
   login() {
     // Clear the error message
     this.errorMessage = '';
@@ -123,28 +132,4 @@ export class LoginComponent implements OnInit {
       );
     }
   }
-
-  // openModal() {
-  //   if (this.count) {
-  //     this.count++;
-  //     this.modal.open(this.modalContent, {size: 'lg'});
-  //   }
-  // }
-  // stop() {
-  //   this.userIdle.stopTimer();
-  // }
-
-  // stopWatching() {
-  //   this.userIdle.stopWatching();
-  // }
-
-  // startWatching() {
-  //   this.userIdle.startWatching();
-  // }
-
-  // restart() {
-  //   this.count = 0;
-  //   this.userIdle.resetTimer();
-  // }
-
 }
