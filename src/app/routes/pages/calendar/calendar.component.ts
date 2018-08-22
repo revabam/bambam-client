@@ -178,7 +178,8 @@ export class CalendarComponent implements OnInit, DoCheck {
             afterEnd: true
           },
           draggable: true,
-          dropped: false
+          dropped: false,
+          version: curriculum.version
         });
     });
   }
@@ -262,7 +263,8 @@ export class CalendarComponent implements OnInit, DoCheck {
           // this.persistCurriculum(curr);
           curr.topics.forEach((topic) => {
             this.subtopicService.getSubtopicByParentId(topic.id).subscribe(subResponse => {
-              console.log(subResponse.length);
+              console.log(subResponse);
+              // console.log('topicDay: ', topicDay);
               const subtopicTime = (topicLength * 5 * 7) / subResponse.length;
               this.currTopicTime = subtopicTime;
               // console.log('subtopicTime: ', subtopicTime);
@@ -280,7 +282,7 @@ export class CalendarComponent implements OnInit, DoCheck {
                     topicDay++;
                   }
                 }
-                console.log(this. hour + 'This.hour 1st run through');
+                // console.log(this. hour + 'This.hour 1st run through');
                 if (this.hour + this.currTopicTime > 7) {
                   // console.log('subtopic time: ', subtopicTime);
                   // console.log('curr topic time = ', currTopicTime + 'hour = ', this.hour);
@@ -299,10 +301,11 @@ export class CalendarComponent implements OnInit, DoCheck {
                 } else {
                   // console.log('IN CREATE SOLO DAY EVENT', subResponse[i].name);
                   // console.log(subResponse[i]);
+                  console.log(topicDay);
                   this.events.push(
                     {
                       start: addDays(addHours(startOfDay(event.start), 9 + this.hour), topicDay),
-                      end: addDays(addHours(startOfDay(event.start), 9 + this.hour + this.currTopicTime), topicDay),
+                      end: addDays(addHours(startOfDay(event.start), 9 + this.hour + subtopicTime), topicDay),
                       title: subResponse[i].name,
                       id: subResponse[i].id,
                       color: colors.newColor,
@@ -323,7 +326,8 @@ export class CalendarComponent implements OnInit, DoCheck {
                   console.log('start: ' + this.events[this.events.length - 1].start);
                   // this.persistEvent(this.events[this.events.length - 1]);
                   this.colorNum++;
-                  this.hour += this.currTopicTime;
+                  console.log('log here ' , (this.hour + subtopicTime));
+                  this.hour += subtopicTime;
                 }
                 this.refresh.next();
               }
