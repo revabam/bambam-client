@@ -1,1 +1,8 @@
 @import "~ngx-bootstrap/datepicker/bs-datepicker.css";
+::ng-deep .mat-progress-bar-fill::after {
+    background-color: #E43D37;
+}
+
+::ng-deep .mat-progress-bar-buffer {
+    background: #E4E8EB;
+}

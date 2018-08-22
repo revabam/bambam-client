@@ -67,10 +67,13 @@
               </mat-list-item>
               <!-- Leave these extra list items here for formatting reasons -->
               <mat-list-item>
-                <div class="col-12">
-                  <h6>Email: {{ this.user.email }}</h6>
-                </div>
-              </mat-list-item>
+                  <div class="col-3">
+                    <h6>Email:</h6>
+                      </div>
+                      <div class="col-9 text-left">
+                     <h6>{{ this.user.email }}</h6>
+                  </div>
+                </mat-list-item>
               <mat-list-item></mat-list-item>
             </mat-list>
           </div>
@@ -99,10 +102,13 @@
                 </div>
               </mat-list-item>
               <mat-list-item>
-                <div class="col-12">
-                  <h6>Email: {{ this.user.email }}</h6>
-                </div>
-              </mat-list-item>
+                  <div class="col-3">
+                    <h6>Email:</h6>
+                      </div>
+                      <div class="col-9 text-left">
+                     <h6>{{ this.user.email }}</h6>
+                  </div>
+                </mat-list-item>
             </mat-list>
             <div mat-actions>
               <button mat-raised-button (click)="cancelEdit()" class="mr-2">Cancel</button>
@@ -158,7 +164,7 @@
               <h6>{{this.percentCompletion | percent}} Completed</h6>
             </mat-list-item>
           </mat-list>
-          <mat-progress-bar mode="determinate" [value]="this.percentCompletion * 100" color="accent"></mat-progress-bar>
+          <mat-progress-bar mode="determinate" [value]="this.percentCompletion * 100" ></mat-progress-bar>
         </mat-card-content>
       </mat-card>
     </div>
