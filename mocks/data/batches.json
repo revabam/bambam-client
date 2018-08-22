@@ -31,6 +31,14 @@
             "endDate": 123456789,
             "trainer_id": 11,
             "calendarCurriculum_id": 2
+        },
+        {
+            "id": 5,
+            "name": "1806-Nov18-USF-Java",
+            "startDate": 123456787,
+            "endDate": 123456789,
+            "trainer_id": 10,
+            "calendarCurriculum_id": 2
         }
     ]
  }

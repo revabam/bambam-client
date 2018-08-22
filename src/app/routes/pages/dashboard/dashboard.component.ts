@@ -6,6 +6,7 @@ import { BatchService } from '../../../services/batch/batch.service';
 import { UserIdleService } from '../../../../../node_modules/angular-user-idle';
 import { timeout } from '../../../../../node_modules/@types/q';
 import { NgbModal } from '../../../../../node_modules/@ng-bootstrap/ng-bootstrap';
+import { UserService } from '../../../services/user.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -18,10 +19,14 @@ export class DashboardComponent implements OnInit {
   batch: Batch;
   batchWeek: number;
   percentCompletion: number;
+  editing = false;
+  firstName: string;
+  lastName: string;
 
   constructor(
     private router: Router,
-    private batchService: BatchService
+    private batchService: BatchService,
+    private userService: UserService
   ) { }
 
   ngOnInit() {
@@ -78,5 +83,25 @@ export class DashboardComponent implements OnInit {
     const difference_ms = Math.abs(date1_ms - date2_ms);
     // Convert back to weeks and return hole weeks
     return Math.floor(difference_ms / ONE_WEEK);
+  }
+
+  toggleEdit() {
+    this.firstName = this.user.firstName;
+    this.lastName = this.user.lastName;
+    this.editing = true;
+  }
+
+  cancelEdit() {
+    this.user.firstName = this.firstName;
+    this.user.lastName = this.lastName;
+    this.editing = false;
+  }
+  saveChanges() {
+    this.userService.updateInfo(this.user).subscribe(
+      result => {
+        sessionStorage.setItem('user', JSON.stringify(this.user));
+      }
+    );
+    this.editing = false;
   }
 }
