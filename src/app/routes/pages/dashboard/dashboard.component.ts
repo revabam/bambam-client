@@ -29,6 +29,11 @@ export class DashboardComponent implements OnInit {
     private userService: UserService
   ) { }
 
+  /**
+  * This method runs when the component is initialized. It will get the user
+  * data from the session storage and display both the user's personal info,
+  * and info about the batch they are associated with.
+  */
   ngOnInit() {
     this.user = JSON.parse(sessionStorage.getItem('user'));
 
@@ -69,6 +74,12 @@ export class DashboardComponent implements OnInit {
     }
   }
 
+  /**
+   * This method is used t sort throught a list of batches. Batches
+   * are sorted by their start dates.
+   * @param a A batch
+   * @param b Another batch
+   */
   compareBatches(a: Batch, b: Batch) {
     if (a.startDate < b.startDate) {
       return -1;
@@ -79,6 +90,12 @@ export class DashboardComponent implements OnInit {
     return 0;
   }
 
+  /**
+   * This method is used to calculate the number of weeks between
+   * two dates.
+   * @param date1 Start date
+   * @param date2 End date
+   */
   calculateWeeksBetween(date1: Date, date2: Date) {
     // The number of milliseconds in one week
     const ONE_WEEK = 604800000;
@@ -91,17 +108,29 @@ export class DashboardComponent implements OnInit {
     return Math.floor(difference_ms / ONE_WEEK);
   }
 
+  /**
+   * This method toggles editing mode on the personal information
+   * card.
+   */
   toggleEdit() {
     this.firstName = this.user.firstName;
     this.lastName = this.user.lastName;
     this.editing = true;
   }
 
+  /**
+   * This method is called if the user cancels out of editing mode
+   */
   cancelEdit() {
     this.user.firstName = this.firstName;
     this.user.lastName = this.lastName;
     this.editing = false;
   }
+
+  /**
+   * This method is called if the user saves the changes made in editing mode.
+   * It updates the user's info in the database and in session storage.
+   */
   saveChanges() {
     this.userService.updateInfo(this.user).subscribe(
       result => {

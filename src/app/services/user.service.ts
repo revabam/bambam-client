@@ -19,21 +19,7 @@ export class UserService {
 
   constructor(private http: HttpClient) { }
 
-  // registerUser(user: BamUser): Observable<BamUser> {
-  //   console.log('[LOG] - In UserService.registerUser()');
-  //   const json = JSON.stringify(user);
-  //   return this.http.post<BamUser>(environment.apiUrl + 'users', json, HTTP_OPTIONS);
-  // }
-
-  /*
-    Add comments here
-  */
-  login(email: string, password: string): Observable<BamUser[]> {
-    console.log('[LOG] - In UserService.login()');
-    return this.http.get<BamUser[]>(environment.apiUrl + 'users?email=' + email, HTTP_OPTIONS);
-  }
-
-  /*
+  /**
   * This method will get user info from the database based on
   * the email address. This method is called from the login
   * component to get the user's info.
@@ -53,7 +39,7 @@ export class UserService {
     return this.http.get<BamUser>(environment.apiUrl + 'users?email=' + email, HTTP_OPTIONS);
   }
 
-  /*
+  /**
   * This method will add a new user to the database.
   *
   * @param  user  A BamUser object that contains the user data
@@ -65,11 +51,12 @@ export class UserService {
     return this.http.post<BamUser>(environment.apiUrl + 'users', JSON.stringify(user), HTTP_OPTIONS);
   }
 
-  deleteById(id: number) {
-    console.log('[LOG] - In UserService.deleteById()');
-    this.http.delete(environment.apiUrl + `users/${id}`);
-  }
-
+  /**
+   * This method is used to update the user's info in the database.
+   * It's called from the dashboard component when the user edits their
+   * personal information.
+   * @param user The updated user
+   */
   updateInfo(user: BamUser): Observable<BamUser> {
     console.log('[LOG] - In UserService.updateInfo()');
     return this.http.put<BamUser>(environment.apiUrl + `users/${user.id}`, JSON.stringify(user),  HTTP_OPTIONS);

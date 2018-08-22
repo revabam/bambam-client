@@ -13,7 +13,7 @@ import {
 import {
   startOfDay, endOfDay, subDays, addDays, endOfMonth, isSameDay, isSameMonth, addHours, addWeeks, isWeekend
 } from 'date-fns';
-import { Subject, Observable } from 'rxjs';
+import { Subject, Observable, BehaviorSubject } from 'rxjs';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap/modal/modal.module';
 import {
   CalendarEvent,
@@ -219,6 +219,7 @@ export class CalendarComponent implements OnInit, DoCheck {
   }
 
   handleEvent(action: string, event: MyEvent): void {
+    console.log('[LOG] - In handleEvent()');
     if (action === 'Clicked') {
       this.openDialog(event);
     } else if (action === 'Edited') {
@@ -233,11 +234,13 @@ export class CalendarComponent implements OnInit, DoCheck {
         // console.log(action);
         const id: number = +event.id;
         this.calendarService.getCurriculumById(id).subscribe(curr => {
+          console.log(curr);
           const topicLength = curr.numberOfWeeks / curr.topics.length;
           let topicDay = 0;
           this.persistCurriculum(curr);
           curr.topics.forEach((topic) => {
             this.subtopicService.getSubtopicByParentId(topic.id).subscribe(subResponse => {
+              console.log(topicDay);
               const subtopicTime = (topicLength * 5 * 7) / subResponse.length;
               let currTopicTime = subtopicTime;
               // console.log('subtopicTime: ', subtopicTime);
