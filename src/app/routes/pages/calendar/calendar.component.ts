@@ -190,7 +190,8 @@ export class CalendarComponent implements OnInit, DoCheck {
             afterEnd: true
           },
           draggable: true,
-          dropped: false
+          dropped: false,
+          version: curriculum.version
         });
     });
   }

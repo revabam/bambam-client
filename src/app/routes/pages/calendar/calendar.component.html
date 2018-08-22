@@ -33,7 +33,7 @@
       <mat-divider></mat-divider>
       <mat-list>
         <mat-list-item *ngFor="let curriculum of curriculumEvents" mwlDraggable [dropData]="{event: curriculum}" style="position:relative; z-index: 10">
-          {{curriculum.title}}</mat-list-item>
+          {{curriculum.title}} : Version {{curriculum.version}}</mat-list-item>
       </mat-list>
     </mat-card>
     <mat-card class="mt-4">
