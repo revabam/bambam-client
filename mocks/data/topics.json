@@ -2,7 +2,7 @@
     "topics": [
         {
             "id": 1,
-            "name": "Java"
+            "name": "Core Java"
         },
         {
             "id": 2,
@@ -10,42 +10,34 @@
         },
         {
             "id": 3,
-            "name": "JDBC"
+            "name": "Client-Side Technologies"
         },
         {
             "id": 4,
-            "name": "HTML"
+            "name": "Servlets"
         },
         {
             "id": 5,
-            "name": "CSS"
-        },
-        {
-            "id": 6,
-            "name": "JavaScript"
-        },
-        {
-            "id": 7,
             "name": "Angular"
         },
         {
-            "id": 8,
+            "id": 6,
             "name": "DevOps"
         },
         {
-            "id": 9,
+            "id": 7,
             "name": "Hibernate"
         },
         {
-            "id": 10,
+            "id": 8,
             "name": "Spring"
         },
         {
-            "id": 11,
+            "id": 9,
             "name": "Web Services"
         },
         {
-            "id": 12,
+            "id": 10,
             "name": "Microservices"
         }
     ]
