@@ -17,7 +17,7 @@ import { FlatpickrModule } from 'angularx-flatpickr';
 import { appRoutes } from '../app/routes/routes';
 import { AppComponent } from './app.component';
 import { BoomComponent } from './routes/pages/boom/boom.component';
-import { CalendarComponent } from './routes/pages/calendar/calendar.component';
+import { CalendarComponent, CalendarModalComponent } from './routes/pages/calendar/calendar.component';
 import { CreateVersionComponent } from './routes/pages/create-version/create-version.component';
 import { CurriculumEditorComponent } from './routes/pages/curriculum-editor/curriculum-editor.component';
 import { NgbModalModule } from '../../node_modules/@ng-bootstrap/ng-bootstrap/modal/modal.module';
@@ -37,7 +37,6 @@ import { DialogViewComponent } from './routes/pages/dialog-view/dialog-view.comp
 
 
 
-
 @NgModule({
   declarations: [
     AppComponent,
@@ -49,6 +48,7 @@ import { DialogViewComponent } from './routes/pages/dialog-view/dialog-view.comp
     BoomComponent,
     LoginComponent,
     RegisterComponent,
+    CalendarModalComponent,
     DialogViewComponent
   ],
   imports: [
@@ -101,6 +101,7 @@ import { DialogViewComponent } from './routes/pages/dialog-view/dialog-view.comp
     CalendarModule.forRoot(),
     UserIdleModule.forRoot({idle: 600, timeout: 300, ping: 60})
   ],
+  entryComponents: [CalendarModalComponent],
   providers: [
     UserService,
     CognitoService,
