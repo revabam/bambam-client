@@ -116,7 +116,7 @@
             <div *ngFor="let subtopic of getSubtopicsByTopic(topic)">
               <div *ngIf="(!topicSearch || ((subtopic.name | lowercase).indexOf(topicSearch | lowercase) >= 0)) &amp;&amp; (subtopicService.reactivateName(subtopic.name) === subtopic.name)">
                 <mat-toolbar>
-                  <span> {{(subtopic.name | slice:0:55)}}</span>
+                  <span> {{(subtopic.name | slice:0:50) + ((subtopic.name.length > 50) ? "..." : "")}}</span>
                   <span class="fill-remaining-space"></span>
                   <span>
                       <button mat-icon-button color="" (click)="deactivateSubtopic(subtopic)">

@@ -29,21 +29,19 @@
     <div class="col-sm">
       <mat-card class="rounded">
         <mat-card-header>
-          <mat-card-title>
-            <div class="row">
-              <div class="col-12">
-                <h4>
-                  Personal Information
-                  <button mat-button (click)="toggleEdit()">
-                      <i class="material-icons">
-                        border_color
-                      </i>
-                    </button>
-                  </h4>
-                </div>
-            </div>
-
-          </mat-card-title>
+          <mat-toolbar style="background-color: rgba(0, 0, 0, 0); height: 50%;">
+            <span>
+              <h4 style="font-size: 140%;">Personal Information</h4>
+            </span>
+            <span style="flex: 1 1 auto;"></span>
+            <span>
+              <button mat-button (click)="toggleEdit()">
+                <i class="material-icons" style="color: white;">
+                  border_color
+                </i>
+              </button>
+            </span>
+          </mat-toolbar>
         </mat-card-header>
         <mat-card-content>
 
@@ -65,17 +63,19 @@
                   <h6>{{this.user.lastName}}</h6>
                 </div>
               </mat-list-item>
-              <!-- Leave these extra list items here for formatting reasons -->
               <mat-list-item>
-                  <div class="col-3">
-                    <h6>Email:</h6>
-                      </div>
-                      <div class="col-9 text-left">
-                     <h6>{{ this.user.email }}</h6>
-                  </div>
-                </mat-list-item>
-              <mat-list-item></mat-list-item>
+                <div class="col-3">
+                  <h6>Email:</h6>
+                </div>
+                <div class="col-9 text-left">
+                  <h6>{{ this.user.email }}</h6>
+                </div>
+              </mat-list-item>
             </mat-list>
+            <div mat-actions style="opacity: 0;">
+              <button mat-raised-button (click)="cancelEdit()" class="mr-2">Cancel</button>
+              <button mat-raised-button color="primary" (click)="saveChanges()">Ok</button>
+            </div>
           </div>
 
           <div *ngIf="editing">
@@ -102,13 +102,13 @@
                 </div>
               </mat-list-item>
               <mat-list-item>
-                  <div class="col-3">
-                    <h6>Email:</h6>
-                      </div>
-                      <div class="col-9 text-left">
-                     <h6>{{ this.user.email }}</h6>
-                  </div>
-                </mat-list-item>
+                <div class="col-3">
+                  <h6>Email:</h6>
+                </div>
+                <div class="col-9 text-left">
+                  <h6>{{ this.user.email }}</h6>
+                </div>
+              </mat-list-item>
             </mat-list>
             <div mat-actions>
               <button mat-raised-button (click)="cancelEdit()" class="mr-2">Cancel</button>
@@ -123,9 +123,11 @@
     <div class="col-sm">
       <mat-card class="rounded">
         <mat-card-header>
-          <mat-card-title>
-            <h4>Batch Information</h4>
-          </mat-card-title>
+          <mat-toolbar style="background-color: rgba(0, 0, 0, 0); height: 50%;">
+            <span>
+              <h4 style="font-size: 140%;">Batch Information</h4>
+            </span>
+          </mat-toolbar>
         </mat-card-header>
         <mat-card-content>
           <mat-list dense>
