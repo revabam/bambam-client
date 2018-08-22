@@ -1,6 +1,14 @@
-<h6 mat-dialog-title>Create a new version</h6>
+<h6 mat-dialog-title>Curriculum: {{data.curriculum.name.toUpperCase()}}</h6><mat-divider></mat-divider>
 <div mat-dialog-content>
-  <mat-form-field>
+    <p>Number of Weeks in Curriculum: {{data.numWeeks}}</p><br>
+    <p>Curriculum Version: {{data.version}}</p><br>
+    <span>Topics:</span>
+    <ul>
+        <li *ngFor="let topic of data.topics">{{topic.name}}</li>
+    </ul>
+    <p>Subtopic: {{data.title}}</p><br>
+
+  <!-- <mat-form-field>
     <mat-select placeholder="Curriculum Name"
         [(ngModel)]="selectedCurriculumName">
       <mat-option *ngFor="let curriculumName of data.curriculumNames"
@@ -8,6 +16,10 @@
         {{curriculumName}}
       </mat-option>
     </mat-select>
+  </mat-form-field>
+  <br />
+  <mat-form-field>
+    <input matInput [(ngModel)]="version" placeholder="Type in a version number">
   </mat-form-field>
   <br />
   <mat-form-field>
@@ -21,9 +33,8 @@
         {{topic.name}}
       </mat-option>
     </mat-select>
-  </mat-form-field>
+  </mat-form-field> -->
 </div>
 <div mat-dialog-actions>
-  <button mat-raised-button (click)="close()">Cancel</button>
-  <button mat-raised-button color="primary" (click)="add()">Ok</button>
+  <button mat-button (click)="close()">OK</button>
 </div>
