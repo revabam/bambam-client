@@ -39,7 +39,7 @@ export class TopicService {
 
   getByName(name: string): Observable<Topic[]> {
     console.log('[LOG] - In TopicService.getByName()');
-    return this.http.get<Topic[]>(environment.apiUrl + 'topics?name=' + name, HTTP_OPTIONS);
+    return this.http.get<Topic[]>(environment.apiUrl + `topics?name=${name}&name=${this.deactivateName(name)}`, HTTP_OPTIONS);
   }
 
   add(name: string): Observable<Topic> {
@@ -53,7 +53,6 @@ export class TopicService {
     console.log('[LOG] - In TopicService.getTopicById()');
     return this.http.get<Topic>(environment.apiUrl + `topics/${id}`, HTTP_OPTIONS);
   }
-
   /**
    * The function used to deactivate a topic in the server
    */

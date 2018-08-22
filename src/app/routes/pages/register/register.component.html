@@ -25,6 +25,7 @@
                 {{getErrorMessage('password')}}
               </mat-error>
             </mat-form-field>
+            <div *ngIf="getErrorMessage('password') && (registrationForm.get('password').dirty || registrationForm.get('password').touched)"></div>
             <br/>
             <mat-form-field>
               <input matInput #conf placeholder="Confirm Password" type="password" formControlName="confirmPassword" (keyup)="checkMatch()" (blur)="checkMatch()" required>
