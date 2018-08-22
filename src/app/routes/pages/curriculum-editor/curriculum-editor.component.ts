@@ -31,6 +31,8 @@ export class CurriculumEditorComponent implements OnInit {
    * undefined === true is false)
    */
   topicExpansions: Object = {};
+  // Binding the subtopic search
+  topicSearch = '';
 
   /**
    * @param curriculumService - The service (defined by us)
@@ -393,5 +395,21 @@ export class CurriculumEditorComponent implements OnInit {
       return this.wordBeginsWith(searchString, word);
     });
     return wordsString.length > 0 || this.hasSequence(searchString, targetString);
+  }
+
+  searchSubtopics(search: string): Subtopic[] {
+    return this.subtopics.filter((subtopic) => this.inSearch(search, subtopic.name));
+  }
+
+  hasTopic(search: string, topic: Topic): boolean {
+    let subtopics: Subtopic[] = this.searchSubtopics(search);
+    subtopics = subtopics.filter((subtopic) => subtopic.parentTopic_id
+      === topic.id);
+    return subtopics.length > 0;
+  }
+
+  searchTopics(search: string): Topic[] {
+    return this.topics.filter((topic) => this.hasTopic(search, topic)
+      || this.inSearch(search, topic.name));
   }
 }
