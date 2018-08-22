@@ -373,15 +373,25 @@ export class CurriculumEditorComponent implements OnInit {
     );
   }
 
-  wordBeginsWith(searchString: string, comparedString: string): boolean {
-    return comparedString.toLowerCase().substring(0,
+  wordBeginsWith(searchString: string, targetString: string): boolean {
+    return targetString.toLowerCase().substring(0,
       searchString.length) === searchString.toLowerCase();
   }
 
-  inSearch(searchString: string, comparedString: string) {
-    let wordsString: string[] = comparedString.split(' ');
+  hasSequence(searchString: string, targetString: string): boolean {
+    searchString = searchString.trim();
+    searchString = ` ${searchString} `;
+    searchString = searchString.toLowerCase();
+    targetString = ` ${targetString} `;
+    targetString = targetString.toLowerCase();
+    return targetString.indexOf(searchString) >= 0;
+  }
+
+  inSearch(searchString: string, targetString: string) {
+    let wordsString: string[] = targetString.split(' ');
     wordsString = wordsString.filter((word) => {
       return this.wordBeginsWith(searchString, word);
     });
+    return wordsString.length > 0 || this.hasSequence(searchString, targetString);
   }
 }
