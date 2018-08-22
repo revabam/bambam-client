@@ -8,17 +8,19 @@
     <div class="col-sm-6 mt-2">
       <mat-card>
         <mat-card-header>
-          <span style="flex: 1 1 auto"></span>
+          <mat-toolbar style="font-size: 120%;">
+          <span style="flex: 0.3 1 auto"></span>
           <span>
 
-            <h4 class="">Course Structure</h4>
+            <h4 class="m-0 p-0" style="font-size: 140%;">Course Structure</h4>
           </span>
           <span style="flex: 1 1 auto"></span>
           <span>  
               <button mat-raised-button color="primary"
                 (click)="openDialog()">Create New Version</button>
           </span>
-          <span style="flex: 1 1 auto"></span>
+          <span style="flex: 0.3 1 auto"></span>
+        </mat-toolbar>
         </mat-card-header>
         <mat-card-content>
       <mat-accordion>
@@ -54,8 +56,9 @@
     <div class="col-sm-6 mt-2">
       <mat-card >
       <mat-card-header>
-          <span style="flex: 1 1 auto"></span>
-            <h3 class="m-0 p-0">Topic Pool</h3>
+        <mat-toolbar style="font-size: 120%;">
+          <span style="flex: 0.3 1 auto"></span>
+            <h4 class="m-0 p-0" style="font-size: 140%;">Topic Pool</h4>
           <span style="flex: 1 1 auto"></span>
               <mat-form-field class="my-0 pb-0">
                   <input matInput color="accent" type="text" placeholder="Search Subtopic" [(ngModel)]="topicSearch">
@@ -68,7 +71,8 @@
                   <mat-icon>add</mat-icon>
                 </button>
           </span>
-          <span style="flex: 1 1 auto"></span>
+          <span style="flex: 0.3 1 auto"></span>
+        </mat-toolbar>
         </mat-card-header>
         <mat-card-content style="overflow: auto; height: 470px;">
       <mat-accordion *ngIf="topicSearch.length < 2">
