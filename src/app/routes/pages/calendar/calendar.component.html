@@ -33,57 +33,66 @@
       <mat-divider></mat-divider>
       <mat-list>
         <mat-list-item *ngFor="let curriculum of curriculumEvents" mwlDraggable [dropData]="{event: curriculum}" style="position:relative; z-index: 10">
-          {{curriculum.title}}</mat-list-item>
+          {{curriculum.title}} : Version {{curriculum.version}}</mat-list-item>
       </mat-list>
     </mat-card>
     <mat-card class="mt-4">
       <mat-card-header>
         <mat-card-title>
-          <h4>Add Event to Calendar</h4>
+          <h4>Create Event</h4>
         </mat-card-title>
       </mat-card-header>
-
       <mat-divider></mat-divider>
-      <mat-list>
-        <mat-list-item></mat-list-item>
-      </mat-list>
+      <mat-card-content>
+        <mat-form-field>
+          <input matInput #addSubtopic [(ngModel)]="newSubtopicName" placeholder="Event Name">
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput [matDatepicker]="picker" [(ngModel)]="newSubtopicDate" placeholder="Choose a starting date">
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker startView="year" [startAt]="startDate"></mat-datepicker>
+        </mat-form-field>
+        <button mat-raised-button color="primary" (click)="addEvent()">Create Event</button>
+      </mat-card-content>
     </mat-card>
   </div>
   <div class="col-md-10">
     <mat-card>
       <mat-card-header class="text-center text-center align-content-center align-center justify-content-center">
-          <button mat-mini-fab color="primary" (click)="toggleSideNav()">+</button>
-        <div class="row">
-          <div class="col-md-4">
-            <div class="btn-group">
-              <div mwlCalendarPreviousView [view]="view" [(viewDate)]="viewDate" (viewDateChange)="activeDayIsOpen = false">
+        <mat-toolbar style="background-color: rgba(0,0,0,0)">
+          <button mat-button color="accent" mat-icon-button aria-label="add" (click)="toggleSideNav()">
+              <mat-icon>add</mat-icon>
+            </button>
+          <span style="flex: 1 1 auto;"></span>
+            <span class="btn-group">
+              <span mwlCalendarPreviousView [view]="view" [(viewDate)]="viewDate" (viewDateChange)="activeDayIsOpen = false">
                 <button mat-raised-button color="primary">Previous</button>
-              </div>
-              <div mwlCalendarToday [(viewDate)]="viewDate">
+              </span>
+              <span mwlCalendarToday [(viewDate)]="viewDate">
                 <button mat-stroked-button color="accent">Today</button>
-              </div>
-              <div mwlCalendarNextView [view]="view" [(viewDate)]="viewDate" (viewDateChange)="activeDayIsOpen = false">
+              </span>
+              <span mwlCalendarNextView [view]="view" [(viewDate)]="viewDate" (viewDateChange)="activeDayIsOpen = false">
                 <button mat-raised-button color="primary">Next</button>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-4">
+              </span>
+            </span>
+            <span style="flex: .1 1 auto;"></span>
+          <span class="col-md-4">
             <h3>{{ viewDate | calendarDate:(view + 'ViewTitle'):'en' }}</h3>
-          </div>
-          <div class="col-md-4">
-            <div class="btn-group">
-              <div (click)="view = 'month'" [class.active]="view === 'month'">
+          </span>
+          <span style="flex: .7 1 auto;"></span>
+            <span class="btn-group">
+              <span (click)="view = 'month'" [class.active]="view === 'month'">
                 <button mat-raised-button color="primary">Month</button>
-              </div>
-              <div (click)="view = 'week'" [class.active]="view === 'week'">
+              </span>
+              <span (click)="view = 'week'" [class.active]="view === 'week'">
                 <button mat-raised-button color="primary">Week</button>
-              </div>
-              <div (click)="view = 'day'" [class.active]="view === 'day'">
+              </span>
+              <span (click)="view = 'day'" [class.active]="view === 'day'">
                 <button mat-raised-button color="primary">Day</button>
-              </div>
-            </div>
-          </div>
-        </div>
+              </span>
+            </span>
+            <span style="flex: 1 1 auto;"></span>
+      </mat-toolbar>
       </mat-card-header>
       <mat-card-content>
         <div #numWeek class="float-left">
@@ -104,207 +113,3 @@
     </mat-card>
   </div>
 </div>
-
-<!-- <br><br><br>
-
-<h3>
-  Edit events
-  <button
-    class="btn btn-primary pull-right"
-    (click)="addEvent()">
-    Add new
-  </button>
-  <div class="clearfix"></div>
-</h3>
-
-<table class="table table-bordered">
-
-  <thead>
-    <tr>
-      <th>Title</th>
-      <th>Primary color</th>
-      <th>Secondary color</th>
-      <th>Starts at</th>
-      <th>Ends at</th>
-      <th>Remove</th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <tr *ngFor="let event of events; let index = index">
-      <td>
-        <input
-          type="text"
-          class="form-control"
-          [(ngModel)]="event.title"
-          (keyup)="refresh.next()">
-      </td>
-      <td>
-        <input
-          type="color"
-          [(ngModel)]="event.color.primary"
-          (change)="refresh.next()">
-      </td>
-      <td>
-        <input
-          type="color"
-          [(ngModel)]="event.color.secondary"
-          (change)="refresh.next()">
-      </td>
-      <td>
-        <input
-          class="form-control"
-          type="text"
-          mwlFlatpickr
-          [(ngModel)]="event.start"
-          (ngModelChange)="refresh.next()"
-          [altInput]="true"
-          [convertModelValue]="true"
-          [enableTime]="true"
-          dateFormat="Y-m-dTH:i"
-          altFormat="F j, Y H:i"
-          placeholder="Not set">
-      </td>
-      <td>
-        <input
-          class="form-control"
-          type="text"
-          mwlFlatpickr
-          [(ngModel)]="event.end"
-          (ngModelChange)="refresh.next()"
-          [altInput]="true"
-          [convertModelValue]="true"
-          [enableTime]="true"
-          dateFormat="Y-m-dTH:i"
-          altFormat="F j, Y H:i"
-          placeholder="Not set">
-      </td>
-      <td>
-        <button
-          class="btn btn-danger"
-          (click)="events.splice(index, 1); refresh.next()">
-          Delete
-        </button>
-      </td>
-    </tr>
-  </tbody>
-
-</table> -->
-
-<!-- Fixed event option button to show or hide event-panel -->
-<!-- <div class="event-options-wrapper">
-  <div class="event-options text-center bg-orange">
-    <button class="btn" type="button" (click)="clickEventOptions()">
-      <i class="far fa-calendar-alt"></i>
-    </button>
-  </div>
-</div> -->
-
-<!-- Main container -->
-<!-- <div class="container-fluid padding-top">
-  <div class="row"> -->
-
-<!-- Left Column - Date Picker and Event Panel-->
-<!-- <div id="event-panel" class="col-md-4 event-panel">
-      <div class="event-panel-left">
-        <div>Jump to a particular date</div>
-        <div class="input-wrapper">
-          <div *ngIf="smallScreen()">
-            <input id="datepicker" placement="bottom" type="text" name="datepickerInput" [bsValue]="date" #dp="bsDatepicker" (onHidden)="dateChange(dp._bsValue)" (change)="dateChange(dp._bsValue)" bsDatepicker [bsConfig]="{containerClass: 'theme-orange'}">
-            <span class="calendar" (click)="dp.toggle()"><i class="far fa-calendar-alt"></i></span>
-          </div>
-
-          <div *ngIf="!smallScreen()">
-            <input id="datepicker" placement="bottom left" type="text" name="datepickerInput" [bsValue]="date" #dp="bsDatepicker" (onHidden)="dateChange(dp._bsValue)" (change)="dateChange(dp._bsValue)" bsDatepicker [bsConfig]="{containerClass: 'theme-orange'}">
-            <span class="calendar" (click)="dp.toggle()"><i class="far fa-calendar-alt"></i></span>
-          </div>
-        </div>
-
-        <br>
-        
-        <div>Add subtopic to calendar</div>
-
-        <div>Topic:</div>
-        <input id="topic" name="topic" class="panel-inputs" list="topics" (keyup)="getSubtopics()" (change)="getSubtopics()">
-        <datalist id="topics">
-          <option *ngFor="let topic of topics" [value]="topic">
-        </datalist>
-
-        <br><br>
-        
-        <div>Subtopic:</div>
-        <input id="subtopic" name="subtopic" class="panel-inputs" list="subtopics" (keyup)="checkSubtopic()" (change)="checkSubtopic()" disabled>
-        <datalist id="subtopics">
-          <option *ngFor="let subtopic of subtopics" [value]="subtopic">
-        </datalist>
-
-        <br><br>
-
-        <div>Start:</div>
-        <div>
-          <timepicker id="timepicker" [(ngModel)]="time" [mousewheel]="true" [arrowkeys]="true" (change)="timeChange()"></timepicker>
-        </div>
-
-        <br><br>
-
-        <a class="btn buttons" [ngClass]="{'disabled' : !validSubtopic}" (click)="addToCalendar()">Add to Calendar</a>
-
-        <div class="delete">
-          <i class="fas fa-trash"></i>
-        </div>
-      </div>
-
-      <hr *ngIf="smallScreen()">
-    </div> -->
-
-<!-- Right Column - Main Calendar -->
-<!-- <div id="calendar-panel" class="col-md-8 col-md-12">
-      <div class="vl"></div> -->
-
-<!-- Main Calendar -->
-<!-- <div class="container-fluid">
-        <div class="row">
-          <div class="col-lg">
-            <h3>{{ title }}</h3>
-          </div>
-        </div>
-
-        <div class="row"> -->
-<!-- Left Buttons -->
-<!-- <div class="col-lg">
-            <a (click)="changeView('day')" class="btn buttons buttons-left" [ngClass]="{'active' : view === 'day'}">Day</a>
-            <a (click)="changeView('week')" class="btn buttons buttons-middle" [ngClass]="{'active' : view === 'week'}">Week</a>
-            <a (click)="changeView('month')" class="btn buttons buttons-right" [ngClass]="{'active' : view === 'month'}">Month</a>
-            <a (click)="changeView('list')" class="btn buttons buttons-list" [ngClass]="{'active' : view === 'list'}">List</a>
-          </div> -->
-
-<!-- Right Buttons -->
-<!-- <div class="col-lg text-right">
-            <a class="btn buttons buttons-today" [ngClass]="{'disabled': isToday}" (click)="changeView('today')">
-              Today
-            </a>
-
-            <a class="btn buttons buttons-left" (click)="changeView('prev')">
-              <i class="fas fa-chevron-left"></i>
-            </a>
-            
-            <a class="btn buttons buttons-right" (click)="changeView('next')">
-              <i class="fas fa-chevron-right"></i>
-            </a>
-          </div> -->
-
-<!-- Main Calendar -->
-<!-- <div class="container-fluid">
-            <div class="row">
-              <div class="col-lg">
-                <div id="main-calendar" class="padding-top"></div>
-              </div>
-            </div>
-          </div>
-          
-        </div>
-      </div>
-    </div> 
-  </div> -->
-
-<!-- End main container-fluid-->

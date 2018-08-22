@@ -55,8 +55,8 @@ export class CalendarService {
     return this.http.post<CalendarEvent>(environment.apiUrl + 'calendar-events', json, HTTP_OPTIONS);
   }
 
-  getCalendarEvents(): Observable<MyEvent[]> {
-    return this.http.get<MyEvent[]>(environment.apiUrl + 'calendar-events', HTTP_OPTIONS);
+  getCalendarEvents(): Observable<CalendarEvent[]> {
+    return this.http.get<CalendarEvent[]>(environment.apiUrl + 'calendar-events', HTTP_OPTIONS);
   }
 
   getCalendarSubtopics(): Observable<Subtopic[]> {

@@ -1,24 +1,26 @@
 <br />
 
 <div class="container">
-  <div class="row justify-content-center">
-    <h1 class="text-center">Curriculum Editor</h1>
+  <div style="height: 30px;">
   </div>
   <div class="row">
     <div class="col-sm-6 mt-2">
       <mat-card>
         <mat-card-header>
+          <mat-toolbar style="font-size: 120%;">
           <span style="flex: 1 1 auto"></span>
           <span>
 
-            <h4 class="">Course Structure</h4>
+            <h4 class="m-0 p-0" style="font-size: 140%;">Course Structure</h4>
           </span>
-          <span style="flex: 1 1 auto"></span>
+          <span style="flex: .6 .3 auto"></span>
           <span>  
-              <button mat-raised-button color="primary"
-                (click)="openDialog()">Create New Version</button>
+                <button mat-button color="accent" mat-icon-button aria-label="add" (click)="openDialog()">
+                    <mat-icon>add</mat-icon>
+                  </button>
           </span>
-          <span style="flex: 1 1 auto"></span>
+          <span style="flex: 0.3 1 auto"></span>
+        </mat-toolbar>
         </mat-card-header>
         <mat-card-content>
       <mat-accordion>
@@ -39,10 +41,14 @@
                 <span class="fill-remaining-space">
                 </span>
                 <span *ngIf="curriculum.name === cname">
-                  <button mat-mini-fab color="primary" (click)="deactivateCurriculum(curriculum)">X</button>
+                  <button mat-icon-button color="" (click)="deactivateSubtopic(subtopic)">
+                    <mat-icon color="primary">clear</mat-icon>
+                </button>
                 </span>
                 <span *ngIf="curriculum.name !== cname">
-                  <button mat-mini-fab color="'green'" (click)="reactivateCurriculum(curriculum)">+</button>
+                  <button mat-icon-button color="" (click)="reactivateSubtopic(subtopic)">
+                    <mat-icon color="">add</mat-icon>
+                </button>
                 </span>
               </mat-toolbar>
             </div>
@@ -54,11 +60,12 @@
     <div class="col-sm-6 mt-2">
       <mat-card >
       <mat-card-header>
+        <mat-toolbar style="font-size: 120%;">
+          <span style="flex: 0.3 1 auto"></span>
+            <h4 class="m-0 p-0" style="font-size: 140%;">Topic Pool</h4>
           <span style="flex: 1 1 auto"></span>
-            <h3 class="m-0 p-0">Topic Pool</h3>
-          <span style="flex: 1 1 auto"></span>
-              <mat-form-field class="my-0 pb-0">
-                  <input matInput color="accent" type="text" placeholder="Search Subtopic" [(ngModel)]="topicSearch">
+              <mat-form-field class="my-0 pb-0" style="color: white;">
+                  <input style="color: white;" matInput color="accent" type="text" placeholder="Search Subtopic" [(ngModel)]="topicSearch">
                   <button mat-button *ngIf="value" matSuffix mat-icon-button aria-label="Clear" (click)="value=''">
                     <mat-icon>close</mat-icon>
                   </button>
@@ -68,7 +75,8 @@
                   <mat-icon>add</mat-icon>
                 </button>
           </span>
-          <span style="flex: 1 1 auto"></span>
+          <span style="flex: 0.3 1 auto"></span>
+        </mat-toolbar>
         </mat-card-header>
         <mat-card-content style="overflow: auto; height: 470px;">
       <mat-accordion *ngIf="topicSearch.length < 2">
@@ -108,7 +116,7 @@
             <div *ngFor="let subtopic of getSubtopicsByTopic(topic)">
               <div *ngIf="(!topicSearch || ((subtopic.name | lowercase).indexOf(topicSearch | lowercase) >= 0)) &amp;&amp; (subtopicService.reactivateName(subtopic.name) === subtopic.name)">
                 <mat-toolbar>
-                  <span> {{(subtopic.name | slice:0:35)}}</span>
+                  <span> {{(subtopic.name | slice:0:55)}}</span>
                   <span class="fill-remaining-space"></span>
                   <span>
                       <button mat-icon-button color="" (click)="deactivateSubtopic(subtopic)">
