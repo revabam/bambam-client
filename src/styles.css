@@ -12,6 +12,9 @@ body {
     background-color: #fafafa;
     border-radius:  .25rem!important;
 }
+.mat-accordion {
+  background-color: #fafafa;
+}
 .mat-card-header {
     padding: 15px;
     margin: 0px;

@@ -37,7 +37,6 @@ import { DialogViewComponent } from './routes/pages/dialog-view/dialog-view.comp
 
 
 
-
 @NgModule({
   declarations: [
     AppComponent,

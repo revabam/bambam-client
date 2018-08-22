@@ -3,8 +3,13 @@
     {
       "id": 1,
       "name": "1806-Jun18-USF-Java",
+<<<<<<< HEAD
       "startDate": 123456787,
       "endDate": 123456789,
+=======
+      "startDate": 1529337600,
+      "endDate": 1535126400,
+>>>>>>> 3238e8ab9df53e03cacdf4eb3f750fdd92cdb163
       "trainer_id": 3,
       "calendarCurriculum_id": 2
     },
@@ -92,6 +97,7 @@
         }
       ]
     }
+<<<<<<< HEAD
       ]
     }
   ],
@@ -151,6 +157,49 @@
       "id": 6,
       "curriculum_id": 1,
       "batch_id": 5
+=======
+  ],
+  "topics": [
+    {
+      "id": 1,
+      "name": "Core Java"
+    },
+    {
+      "id": 2,
+      "name": "SQL"
+    },
+    {
+      "id": 3,
+      "name": "Client-Side Technologies"
+    },
+    {
+      "id": 4,
+      "name": "Servlets"
+    },
+    {
+      "id": 5,
+      "name": "Angular"
+    },
+    {
+      "id": 6,
+      "name": "DevOps"
+    },
+    {
+      "id": 7,
+      "name": "Hibernate"
+    },
+    {
+      "id": 8,
+      "name": "Spring"
+    },
+    {
+      "id": 9,
+      "name": "Web Services"
+    },
+    {
+      "id": 10,
+      "name": "Microservices"
+>>>>>>> 3238e8ab9df53e03cacdf4eb3f750fdd92cdb163
     }
   ],
   "subtopics": [
@@ -165,6 +214,14 @@
       "parentTopic_id": 1
     },
     {
+<<<<<<< HEAD
+=======
+      "id": 3,
+      "name": "First Java Program: HelloWorld, new, naming conventions",
+      "parentTopic_id": 1
+    },
+    {
+>>>>>>> 3238e8ab9df53e03cacdf4eb3f750fdd92cdb163
       "id": 4,
       "name": "Constructors",
       "parentTopic_id": 1
@@ -180,11 +237,32 @@
       "parentTopic_id": 1
     },
     {
+<<<<<<< HEAD
+=======
+      "id": 7,
+      "name": "Control Statements",
+      "parentTopic_id": 1
+    },
+    {
+>>>>>>> 3238e8ab9df53e03cacdf4eb3f750fdd92cdb163
       "id": 8,
       "name": "Array",
       "parentTopic_id": 1
     },
     {
+<<<<<<< HEAD
+=======
+      "id": 9,
+      "name": "Varags, For Each Loop",
+      "parentTopic_id": 1
+    },
+    {
+      "id": 10,
+      "name": "Packages and Imports",
+      "parentTopic_id": 1
+    },
+    {
+>>>>>>> 3238e8ab9df53e03cacdf4eb3f750fdd92cdb163
       "id": 11,
       "name": "Access Modifiers",
       "parentTopic_id": 1
@@ -205,6 +283,24 @@
       "parentTopic_id": 1
     },
     {
+<<<<<<< HEAD
+=======
+      "id": 15,
+      "name": "Checked vs Unchecked Exceptions",
+      "parentTopic_id": 1
+    },
+    {
+      "id": 16,
+      "name": "Garbage Collection: finalize()",
+      "parentTopic_id": 1
+    },
+    {
+      "id": 17,
+      "name": "Wrapper Classes",
+      "parentTopic_id": 1
+    },
+    {
+>>>>>>> 3238e8ab9df53e03cacdf4eb3f750fdd92cdb163
       "id": 18,
       "name": "Reflection",
       "parentTopic_id": 1
@@ -215,11 +311,37 @@
       "parentTopic_id": 1
     },
     {
+<<<<<<< HEAD
+=======
+      "id": 20,
+      "name": "Method Overloading and Overriding",
+      "parentTopic_id": 1
+    },
+    {
+      "id": 21,
+      "name": "Interfaces",
+      "parentTopic_id": 1
+    },
+    {
+      "id": 22,
+      "name": "Abstract Classes",
+      "parentTopic_id": 1
+    },
+    {
+>>>>>>> 3238e8ab9df53e03cacdf4eb3f750fdd92cdb163
       "id": 23,
       "name": "File I/O: FileInputStream/FileReader/FileWriter",
       "parentTopic_id": 1
     },
     {
+<<<<<<< HEAD
+=======
+      "id": 24,
+      "name": "Read from Console(Scanner)",
+      "parentTopic_id": 1
+    },
+    {
+>>>>>>> 3238e8ab9df53e03cacdf4eb3f750fdd92cdb163
       "id": 25,
       "name": "Serialization",
       "parentTopic_id": 1
@@ -230,6 +352,29 @@
       "parentTopic_id": 1
     },
     {
+<<<<<<< HEAD
+=======
+      "id": 27,
+      "name": "List, Set, Map Interfaces",
+      "parentTopic_id": 1
+    },
+    {
+      "id": 28,
+      "name": "Using the Iterator",
+      "parentTopic_id": 1
+    },
+    {
+      "id": 29,
+      "name": "Comparing Objects",
+      "parentTopic_id": 1
+    },
+    {
+      "id": 30,
+      "name": "Generics",
+      "parentTopic_id": 1
+    },
+    {
+>>>>>>> 3238e8ab9df53e03cacdf4eb3f750fdd92cdb163
       "id": 31,
       "name": "Object Class",
       "parentTopic_id": 1
@@ -245,6 +390,39 @@
       "parentTopic_id": 1
     },
     {
+<<<<<<< HEAD
+=======
+      "id": 34,
+      "name": "Runnable Interface and Thread Class",
+      "parentTopic_id": 1
+    },
+    {
+      "id": 35,
+      "name": "Multithreaded",
+      "parentTopic_id": 1
+    },
+    {
+      "id": 36,
+      "name": "Using isAlive() and join()",
+      "parentTopic_id": 1
+    },
+    {
+      "id": 37,
+      "name": "Sychronization",
+      "parentTopic_id": 1
+    },
+    {
+      "id": 38,
+      "name": "Deadlock",
+      "parentTopic_id": 1
+    },
+    {
+      "id": 39,
+      "name": "Producer/Consumer Problem",
+      "parentTopic_id": 1
+    },
+    {
+>>>>>>> 3238e8ab9df53e03cacdf4eb3f750fdd92cdb163
       "id": 40,
       "name": "Creational Design Patterns: Singleton and Factory",
       "parentTopic_id": 1
@@ -255,6 +433,24 @@
       "parentTopic_id": 1
     },
     {
+<<<<<<< HEAD
+=======
+      "id": 42,
+      "name": "JUnit Introduction",
+      "parentTopic_id": 1
+    },
+    {
+      "id": 43,
+      "name": "Assert Methods",
+      "parentTopic_id": 1
+    },
+    {
+      "id": 44,
+      "name": "Annotations with JUnit",
+      "parentTopic_id": 1
+    },
+    {
+>>>>>>> 3238e8ab9df53e03cacdf4eb3f750fdd92cdb163
       "id": 45,
       "name": "Introduction to Maven",
       "parentTopic_id": 1
@@ -265,11 +461,37 @@
       "parentTopic_id": 1
     },
     {
+<<<<<<< HEAD
+=======
+      "id": 47,
+      "name": "Maven Lifecycle",
+      "parentTopic_id": 1
+    },
+    {
+      "id": 48,
+      "name": "Maven Repositories",
+      "parentTopic_id": 1
+    },
+    {
+      "id": 49,
+      "name": "Executing a Sample Maven Build",
+      "parentTopic_id": 1
+    },
+    {
+>>>>>>> 3238e8ab9df53e03cacdf4eb3f750fdd92cdb163
       "id": 50,
       "name": "Relational Database Service (RDS)",
       "parentTopic_id": 2
     },
     {
+<<<<<<< HEAD
+=======
+      "id": 51,
+      "name": "Java 8 Concepts - Lambda & Functional Interfaces",
+      "parentTopic_id": 2
+    },
+    {
+>>>>>>> 3238e8ab9df53e03cacdf4eb3f750fdd92cdb163
       "id": 52,
       "name": "Introduction to DBMS",
       "parentTopic_id": 2
@@ -285,6 +507,64 @@
       "parentTopic_id": 2
     },
     {
+<<<<<<< HEAD
+=======
+      "id": 55,
+      "name": "Aggregate Functions",
+      "parentTopic_id": 2
+    },
+    {
+      "id": 56,
+      "name": "Multiplicity",
+      "parentTopic_id": 2
+    },
+    {
+      "id": 57,
+      "name": "Scalar Functions",
+      "parentTopic_id": 2
+    },
+    {
+      "id": 58,
+      "name": "Database Joins",
+      "parentTopic_id": 2
+    },
+    {
+      "id": 59,
+      "name": "Sub-queries",
+      "parentTopic_id": 2
+    },
+    {
+      "id": 60,
+      "name": "Normalization - 1NF/2NF/3NF",
+      "parentTopic_id": 2
+    },
+    {
+      "id": 61,
+      "name": "PL/SQL",
+      "parentTopic_id": 2
+    },
+    {
+      "id": 62,
+      "name": "Stored Procedures",
+      "parentTopic_id": 2
+    },
+    {
+      "id": 63,
+      "name": "Functions",
+      "parentTopic_id": 2
+    },
+    {
+      "id": 64,
+      "name": "Cursors",
+      "parentTopic_id": 2
+    },
+    {
+      "id": 65,
+      "name": "Triggers",
+      "parentTopic_id": 2
+    },
+    {
+>>>>>>> 3238e8ab9df53e03cacdf4eb3f750fdd92cdb163
       "id": 66,
       "name": "Introduction to JDBC",
       "parentTopic_id": 2
@@ -300,31 +580,199 @@
       "parentTopic_id": 2
     },
     {
+<<<<<<< HEAD
+=======
+      "id": 69,
+      "name": "Callable Statements",
+      "parentTopic_id": 2
+    },
+    {
+      "id": 70,
+      "name": "Accessing Stored Procedures",
+      "parentTopic_id": 2
+    },
+    {
+      "id": 71,
+      "name": "Properties File",
+      "parentTopic_id": 2
+    },
+    {
+      "id": 73,
+      "name": "Design Patterns: Data Access Object (DAO)",
+      "parentTopic_id": 2
+    },
+    {
+>>>>>>> 3238e8ab9df53e03cacdf4eb3f750fdd92cdb163
       "id": 74,
       "name": "HTML 5",
       "parentTopic_id": 3
     },
     {
+<<<<<<< HEAD
+=======
+      "id": 75,
+      "name": "HTML Forms",
+      "parentTopic_id": 3
+    },
+    {
+      "id": 76,
+      "name": "CSS3",
+      "parentTopic_id": 3
+    },
+    {
+      "id": 77,
+      "name": "Bootstrap",
+      "parentTopic_id": 3
+    },
+    {
+>>>>>>> 3238e8ab9df53e03cacdf4eb3f750fdd92cdb163
       "id": 78,
       "name": "JavaScript Overview",
       "parentTopic_id": 3
     },
     {
+<<<<<<< HEAD
+=======
+      "id": 79,
+      "name": "JSON Overview",
+      "parentTopic_id": 3
+    },
+    {
+      "id": 80,
+      "name": "Events & Listeners",
+      "parentTopic_id": 3
+    },
+    {
+      "id": 81,
+      "name": "Introduction to ES6",
+      "parentTopic_id": 3
+    },
+    {
+      "id": 82,
+      "name": "Template Literals & Arrow Notation",
+      "parentTopic_id": 3
+    },
+    {
+      "id": 83,
+      "name": "Variable Scopes",
+      "parentTopic_id": 3
+    },
+    {
+>>>>>>> 3238e8ab9df53e03cacdf4eb3f750fdd92cdb163
       "id": 84,
       "name": "DOM Selection",
       "parentTopic_id": 3
     },
     {
+<<<<<<< HEAD
+=======
+      "id": 85,
+      "name": "DOM Manipulation",
+      "parentTopic_id": 3
+    },
+    {
+      "id": 86,
+      "name": "Callback functions",
+      "parentTopic_id": 3
+    },
+    {
+      "id": 87,
+      "name": "Introduction to NPM",
+      "parentTopic_id": 3
+    },
+    {
+      "id": 88,
+      "name": "package.json",
+      "parentTopic_id": 3
+    },
+    {
+      "id": 89,
+      "name": "Introduction to Webpack/CLI",
+      "parentTopic_id": 3
+    },
+    {
+      "id": 90,
+      "name": "Bubbling, Capturing",
+      "parentTopic_id": 3
+    },
+    {
+      "id": 91,
+      "name": "Event Object",
+      "parentTopic_id": 3
+    },
+    {
+      "id": 92,
+      "name": "Cancelling Events",
+      "parentTopic_id": 3
+    },
+    {
+>>>>>>> 3238e8ab9df53e03cacdf4eb3f750fdd92cdb163
       "id": 93,
       "name": "AJAX Introduction",
       "parentTopic_id": 3
     },
     {
+<<<<<<< HEAD
+=======
+      "id": 94,
+      "name": "AJAX Workflow",
+      "parentTopic_id": 3
+    },
+    {
+      "id": 95,
+      "name": "AJAX with XMLHttpRequest Object",
+      "parentTopic_id": 3
+    },
+    {
+      "id": 96,
+      "name": "Working with JSON in AJAX",
+      "parentTopic_id": 3
+    },
+    {
+      "id": 97,
+      "name": "J2EE Architecture",
+      "parentTopic_id": 3
+    },
+    {
+      "id": 98,
+      "name": "Introduction to SDLC",
+      "parentTopic_id": 3
+    },
+    {
+      "id": 99,
+      "name": "Agile/Scrum Concepts",
+      "parentTopic_id": 3
+    },
+    {
+>>>>>>> 3238e8ab9df53e03cacdf4eb3f750fdd92cdb163
       "id": 100,
       "name": "Introduction to XML",
       "parentTopic_id": 3
     },
     {
+<<<<<<< HEAD
+=======
+      "id": 101,
+      "name": "XML Schema/DTD Overview",
+      "parentTopic_id": 3
+    },
+    {
+      "id": 102,
+      "name": "Well formed vs. valid XML",
+      "parentTopic_id": 3
+    },
+    {
+      "id": 103,
+      "name": "XML Namespace",
+      "parentTopic_id": 3
+    },
+    {
+      "id": 104,
+      "name": "JAX-P (DOM and SaX)",
+      "parentTopic_id": 3
+    },
+    {
+>>>>>>> 3238e8ab9df53e03cacdf4eb3f750fdd92cdb163
       "id": 105,
       "name": "Design Patterns: MVC, Front Controllers, Business Delegate",
       "parentTopic_id": 3
@@ -335,16 +783,135 @@
       "parentTopic_id": 4
     },
     {
+<<<<<<< HEAD
+=======
+      "id": 107,
+      "name": "Container and Lifecycle",
+      "parentTopic_id": 4
+    },
+    {
+      "id": 108,
+      "name": "Browser/Server Communication",
+      "parentTopic_id": 4
+    },
+    {
+      "id": 109,
+      "name": "Servlet Inheritance Tree",
+      "parentTopic_id": 4
+    },
+    {
+      "id": 110,
+      "name": "Web Application (web.xml)",
+      "parentTopic_id": 4
+    },
+    {
+      "id": 111,
+      "name": "ServletConfig and Context",
+      "parentTopic_id": 4
+    },
+    {
+      "id": 112,
+      "name": "PrinterWriter",
+      "parentTopic_id": 4
+    },
+    {
+      "id": 113,
+      "name": "Design Patterns: Front Controller",
+      "parentTopic_id": 4
+    },
+    {
+      "id": 114,
+      "name": "Form Processing",
+      "parentTopic_id": 4
+    },
+    {
+      "id": 115,
+      "name": "doGet and doPost",
+      "parentTopic_id": 4
+    },
+    {
+      "id": 116,
+      "name": "request.getParameter",
+      "parentTopic_id": 4
+    },
+    {
+      "id": 117,
+      "name": "RequestDispatcher",
+      "parentTopic_id": 4
+    },
+    {
+      "id": 118,
+      "name": "sendRedirect",
+      "parentTopic_id": 4
+    },
+    {
+      "id": 119,
+      "name": "Bundling",
+      "parentTopic_id": 5
+    },
+    {
+>>>>>>> 3238e8ab9df53e03cacdf4eb3f750fdd92cdb163
       "id": 120,
       "name": "Introduction to TypeScript",
       "parentTopic_id": 5
     },
     {
+<<<<<<< HEAD
+=======
+      "id": 121,
+      "name": "Access Modifiers/Variable Types",
+      "parentTopic_id": 5
+    },
+    {
+      "id": 122,
+      "name": "Classes & Decorators",
+      "parentTopic_id": 5
+    },
+    {
+      "id": 124,
+      "name": "Introduction to Angular 4",
+      "parentTopic_id": 5
+    },
+    {
+      "id": 125,
+      "name": "Directives",
+      "parentTopic_id": 5
+    },
+    {
+>>>>>>> 3238e8ab9df53e03cacdf4eb3f750fdd92cdb163
       "id": 126,
       "name": "Components",
       "parentTopic_id": 5
     },
     {
+<<<<<<< HEAD
+=======
+      "id": 127,
+      "name": "Modules and Templates",
+      "parentTopic_id": 5
+    },
+    {
+      "id": 128,
+      "name": "2-Way Data Binding",
+      "parentTopic_id": 5
+    },
+    {
+      "id": 129,
+      "name": "Pipes & Filtering",
+      "parentTopic_id": 5
+    },
+    {
+      "id": 130,
+      "name": "Angular Services & Routing",
+      "parentTopic_id": 5
+    },
+    {
+      "id": 131,
+      "name": "Angular HTTP",
+      "parentTopic_id": 5
+    },
+    {
+>>>>>>> 3238e8ab9df53e03cacdf4eb3f750fdd92cdb163
       "id": 132,
       "name": "RxJS Promises vs Observable",
       "parentTopic_id": 5
@@ -355,21 +922,128 @@
       "parentTopic_id": 5
     },
     {
+<<<<<<< HEAD
+=======
+      "id": 134,
+      "name": "Design Patterns: Publisher/Subscriber, Modules",
+      "parentTopic_id": 5
+    },
+    {
+      "id": 135,
+      "name": "Unix basics (basic shell scripting)",
+      "parentTopic_id": 6
+    },
+    {
+      "id": 136,
+      "name": "grep (lite), man, yum",
+      "parentTopic_id": 6
+    },
+    {
+>>>>>>> 3238e8ab9df53e03cacdf4eb3f750fdd92cdb163
       "id": 137,
       "name": "Amazon Web Services Introduction",
       "parentTopic_id": 6
     },
     {
+<<<<<<< HEAD
+=======
+      "id": 138,
+      "name": "Elastic Cloud Compute (EC2)",
+      "parentTopic_id": 6
+    },
+    {
+      "id": 139,
+      "name": "Amazon Machine Image (AMI)",
+      "parentTopic_id": 6
+    },
+    {
+      "id": 140,
+      "name": "Elastic Block Store (EBS)",
+      "parentTopic_id": 6
+    },
+    {
+      "id": 141,
+      "name": "Security Groups",
+      "parentTopic_id": 6
+    },
+    {
+      "id": 142,
+      "name": "AWS",
+      "parentTopic_id": 6
+    },
+    {
+      "id": 143,
+      "name": "Simple Storage Service (S3)",
+      "parentTopic_id": 6
+    },
+    {
+      "id": 144,
+      "name": "EC2 Autoscaling",
+      "parentTopic_id": 6
+    },
+    {
+>>>>>>> 3238e8ab9df53e03cacdf4eb3f750fdd92cdb163
       "id": 145,
       "name": "Continuous Integration (CI)",
       "parentTopic_id": 6
     },
     {
+<<<<<<< HEAD
+=======
+      "id": 146,
+      "name": "Jenkins Setup",
+      "parentTopic_id": 6
+    },
+    {
+      "id": 147,
+      "name": "Jenkins Job",
+      "parentTopic_id": 6
+    },
+    {
+      "id": 148,
+      "name": "Jenkins Build",
+      "parentTopic_id": 6
+    },
+    {
+      "id": 149,
+      "name": "SonarQube (Code Checker)",
+      "parentTopic_id": 6
+    },
+    {
+>>>>>>> 3238e8ab9df53e03cacdf4eb3f750fdd92cdb163
       "id": 150,
       "name": "Hibernate Object States",
       "parentTopic_id": 7
     },
     {
+<<<<<<< HEAD
+=======
+      "id": 151,
+      "name": "Hibernate API and HQL",
+      "parentTopic_id": 7
+    },
+    {
+      "id": 152,
+      "name": "Configuring Data Source on Server",
+      "parentTopic_id": 7
+    },
+    {
+      "id": 153,
+      "name": "ACID Properties",
+      "parentTopic_id": 7
+    },
+    {
+      "id": 154,
+      "name": "Native SQL",
+      "parentTopic_id": 7
+    },
+    {
+      "id": 155,
+      "name": "Sample Hibernate Application",
+      "parentTopic_id": 7
+    },
+    {
+>>>>>>> 3238e8ab9df53e03cacdf4eb3f750fdd92cdb163
       "id": 156,
       "name": "DAO Implementation",
       "parentTopic_id": 7
@@ -380,6 +1054,29 @@
       "parentTopic_id": 7
     },
     {
+<<<<<<< HEAD
+=======
+      "id": 158,
+      "name": "Multiplicity using Hibernate",
+      "parentTopic_id": 7
+    },
+    {
+      "id": 159,
+      "name": "Named Query using hbm Files",
+      "parentTopic_id": 7
+    },
+    {
+      "id": 160,
+      "name": "Hibernate L1 vs L2 caching",
+      "parentTopic_id": 7
+    },
+    {
+      "id": 161,
+      "name": "Design Patterns: Service Locator",
+      "parentTopic_id": 7
+    },
+    {
+>>>>>>> 3238e8ab9df53e03cacdf4eb3f750fdd92cdb163
       "id": 162,
       "name": "Introduction to Spring",
       "parentTopic_id": 8
@@ -390,6 +1087,29 @@
       "parentTopic_id": 8
     },
     {
+<<<<<<< HEAD
+=======
+      "id": 164,
+      "name": "Injecting primitives (XML)",
+      "parentTopic_id": 8
+    },
+    {
+      "id": 165,
+      "name": "Bean Factory vs. App Context",
+      "parentTopic_id": 8
+    },
+    {
+      "id": 166,
+      "name": "Injecting Objects (XML)",
+      "parentTopic_id": 8
+    },
+    {
+      "id": 167,
+      "name": "Tomcat",
+      "parentTopic_id": 8
+    },
+    {
+>>>>>>> 3238e8ab9df53e03cacdf4eb3f750fdd92cdb163
       "id": 168,
       "name": "Annotations",
       "parentTopic_id": 8
@@ -405,11 +1125,102 @@
       "parentTopic_id": 8
     },
     {
+<<<<<<< HEAD
+=======
+      "id": 171,
+      "name": "Cross-Cutting Concerns",
+      "parentTopic_id": 8
+    },
+    {
+      "id": 172,
+      "name": "Advice",
+      "parentTopic_id": 8
+    },
+    {
+      "id": 173,
+      "name": "Advice",
+      "parentTopic_id": 8
+    },
+    {
+      "id": 174,
+      "name": "Pointcut",
+      "parentTopic_id": 8
+    },
+    {
+      "id": 175,
+      "name": "Join Points",
+      "parentTopic_id": 8
+    },
+    {
+      "id": 176,
+      "name": "Aspect-J",
+      "parentTopic_id": 8
+    },
+    {
+      "id": 177,
+      "name": "Spring Boot",
+      "parentTopic_id": 8
+    },
+    {
+      "id": 178,
+      "name": "Spring MVC",
+      "parentTopic_id": 8
+    },
+    {
+      "id": 178,
+      "name": "Control Flow",
+      "parentTopic_id": 8
+    },
+    {
+      "id": 179,
+      "name": "@Controller",
+      "parentTopic_id": 8
+    },
+    {
+      "id": 180,
+      "name": "@RequestMapping",
+      "parentTopic_id": 8
+    },
+    {
+      "id": 181,
+      "name": "InternalViewResourceResolver",
+      "parentTopic_id": 8
+    },
+    {
+>>>>>>> 3238e8ab9df53e03cacdf4eb3f750fdd92cdb163
       "id": 182,
       "name": "Spring Data",
       "parentTopic_id": 8
     },
     {
+<<<<<<< HEAD
+=======
+      "id": 183,
+      "name": "Form Input",
+      "parentTopic_id": 8
+    },
+    {
+      "id": 184,
+      "name": "Validation (JSR 303)",
+      "parentTopic_id": 8
+    },
+    {
+      "id": 185,
+      "name": "Hibernate Integration using Contextual Sessions",
+      "parentTopic_id": 8
+    },
+    {
+      "id": 186,
+      "name": "@Transactional",
+      "parentTopic_id": 8
+    },
+    {
+      "id": 187,
+      "name": "JndiObjectFactoryBean",
+      "parentTopic_id": 8
+    },
+    {
+>>>>>>> 3238e8ab9df53e03cacdf4eb3f750fdd92cdb163
       "id": 188,
       "name": "Overview of Web Services",
       "parentTopic_id": 9
@@ -430,6 +1241,39 @@
       "parentTopic_id": 9
     },
     {
+<<<<<<< HEAD
+=======
+      "id": 192,
+      "name": "REST with XML (JAXB)",
+      "parentTopic_id": 9
+    },
+    {
+      "id": 193,
+      "name": "REST with JSON (Jackson)",
+      "parentTopic_id": 9
+    },
+    {
+      "id": 194,
+      "name": "Exception/Error Handling",
+      "parentTopic_id": 9
+    },
+    {
+      "id": 195,
+      "name": "Using Angular to make RESTful Calls to Spring Controllers",
+      "parentTopic_id": 9
+    },
+    {
+      "id": 196,
+      "name": "SOAP-based WS Architecture",
+      "parentTopic_id": 9
+    },
+    {
+      "id": 197,
+      "name": "WS Online Example",
+      "parentTopic_id": 9
+    },
+    {
+>>>>>>> 3238e8ab9df53e03cacdf4eb3f750fdd92cdb163
       "id": 198,
       "name": "WSDL",
       "parentTopic_id": 9
@@ -440,6 +1284,34 @@
       "parentTopic_id": 9
     },
     {
+<<<<<<< HEAD
+=======
+      "id": 200,
+      "name": "XML namespace",
+      "parentTopic_id": 9
+    },
+    {
+      "id": 201,
+      "name": "JAX-WS, JAXB",
+      "parentTopic_id": 9
+    },
+    {
+      "id": 202,
+      "name": "SOAP binding styles",
+      "parentTopic_id": 9
+    },
+    {
+      "id": 203,
+      "name": "Building SOAP Services with Apache CXF and Maven",
+      "parentTopic_id": 9
+    },
+    {
+      "id": 204,
+      "name": "Viewing SOAP Messages",
+      "parentTopic_id": 9
+    },
+    {
+>>>>>>> 3238e8ab9df53e03cacdf4eb3f750fdd92cdb163
       "id": 205,
       "name": "Microservices-(Discovery)",
       "parentTopic_id": 10
@@ -468,6 +1340,7 @@
       "id": 210,
       "name": "Containerization-Docker",
       "parentTopic_id": 10
+<<<<<<< HEAD
     }
   ],
   "topics": [
@@ -515,6 +1388,35 @@
   "calendar-events": [
     {}
   ],
+=======
+    },
+    {
+      "id": 211,
+      "name": "Orchestration-Docker Swarm/Kubernetes",
+      "parentTopic_id": 10
+    },
+    {
+      "id": 212,
+      "name": "Config/Messaging & Monitoring",
+      "parentTopic_id": 10
+    },
+    {
+      "id": 213,
+      "name": "Messaging MQs-Kafka/Rabbit MQ",
+      "parentTopic_id": 10
+    },
+    {
+      "id": 214,
+      "name": "Centralized Configuration - Spring Cloud Config/Consul/Zookeeper",
+      "parentTopic_id": 10
+    },
+    {
+      "id": 215,
+      "name": "Monitoring-Hystrix",
+      "parentTopic_id": 10
+    }
+  ],
+>>>>>>> 3238e8ab9df53e03cacdf4eb3f750fdd92cdb163
   "users": [
     {
       "id": 1,
