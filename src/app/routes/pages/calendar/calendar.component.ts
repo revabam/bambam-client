@@ -118,6 +118,29 @@ export class CalendarComponent implements OnInit, DoCheck {
   ngOnInit() {
     this.user = JSON.parse(sessionStorage.getItem('user'));
 
+    this.calendarService.getCalendarEvents().subscribe(response => {
+      console.log(response);
+      response.forEach((calEvent) => {
+        this.events.push(
+          {
+            start: calEvent.start,
+            end: calEvent.end,
+            title: calEvent.title,
+            id: calEvent.id,
+            color: calEvent.color,
+            actions: calEvent.actions,
+            resizable: calEvent.resizable,
+            draggable: calEvent.draggable,
+            curriculum: calEvent.curriculum,
+            numWeeks: calEvent.numWeeks,
+            topics: calEvent.topics,
+            version: calEvent.version,
+            dropped: calEvent.dropped,
+            parentTopic_id: calEvent.parentTopic_id
+        });
+      });
+    });
+
     this.calendarService.getCurriculum().subscribe(response => {
       this.curriculums = response;
       this.topicService.getAll().subscribe(response2 => {
@@ -235,13 +258,16 @@ export class CalendarComponent implements OnInit, DoCheck {
         this.calendarService.getCurriculumById(id).subscribe(curr => {
           const topicLength = curr.numberOfWeeks / curr.topics.length;
           let topicDay = 0;
-          this.persistCurriculum(curr);
+          // this.persistCurriculum(curr);
           curr.topics.forEach((topic) => {
             this.subtopicService.getSubtopicByParentId(topic.id).subscribe(subResponse => {
               const subtopicTime = (topicLength * 5 * 7) / subResponse.length;
               let currTopicTime = subtopicTime;
               // console.log('subtopicTime: ', subtopicTime);
+              // console.log('subResponseLength: ', subResponse.length);
               // console.log('topiclength: ', topicLength);
+              // console.log(curr.numberOfWeeks);
+              // console.log(curr.topics.length);
               colors.random.primary = this.randomColor();
               this.newColor = 'color' + this.colorNum;
               colors[this.newColor] = this.randomColor();
@@ -260,6 +286,7 @@ export class CalendarComponent implements OnInit, DoCheck {
                   i--;
                 } else {
                   // console.log('IN CREATE SOLO DAY EVENT', subResponse[i].name);
+                  // console.log(subResponse[i]);
                   this.events.push(
                     {
                       start: addDays(addHours(startOfDay(event.start), 9 + this.hour), topicDay),
@@ -281,7 +308,8 @@ export class CalendarComponent implements OnInit, DoCheck {
                       parentTopic_id: subResponse[i].parentTopic_id
                     }
                   );
-                  this.persistEvent(this.events[this.events.length - 1]);
+                  console.log('start: ' + this.events[this.events.length - 1].start);
+                  // this.persistEvent(this.events[this.events.length - 1]);
                   this.colorNum++;
                   this.hour += currTopicTime;
                 }
@@ -299,6 +327,7 @@ export class CalendarComponent implements OnInit, DoCheck {
   multidaySubtopic(subtopic: Subtopic, topicDay: number, timeLeft: number, event: MyEvent, subtopicTime: number, curr: Curriculum) {
     // console.log('IN CREATE MULTIDAY EVENT', subtopic.name);
     event.dropped = true;
+    // console.log(event);
     this.events.push(
       {
         start: addDays(addHours(startOfDay(event.start), 9 + this.hour), topicDay),
@@ -319,7 +348,7 @@ export class CalendarComponent implements OnInit, DoCheck {
         dropped: true
       }
     );
-
+    console.log('start: ' + this.events[this.events.length - 1].start);
     this.hour += subtopicTime;
   }
 
