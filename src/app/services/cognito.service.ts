@@ -10,7 +10,7 @@ export class CognitoService {
 
   private userPool: AWSCognito.CognitoUserPool;
 
-  /*
+  /**
   * When the cognito service is intialized, it creates the user pool.
   * In a future sprint, I would recommend that these credentials not
   * be hard coded. I didn't have the time to fix this when I was working
@@ -25,7 +25,7 @@ export class CognitoService {
     this.userPool = new AWSCognito.CognitoUserPool(poolData);
   }
 
-  /*
+  /**
   * This method will create a new user in the cognito user pool. When
   * a user is created, cognito will send that user an email to verify
   * their email account.
@@ -83,10 +83,12 @@ export class CognitoService {
     return resultStream;
   }
 
-  /*
-  * This method attempts to sign in the user. If the user is in the pool,
-  * it returns a CognitoIdToken. Otherwise it returns an error object.
-  */
+  /**
+   * This method attempts to sign in the user. If the user is in the pool,
+   * it returns a CognitoIdToken. Otherwise it returns an error object.
+   * @param email The email address that the user entered
+   * @param password The password that the user entered
+   */
   signIn(email: string, password: string): BehaviorSubject<object> {
     const userData = {
       Username: email,
