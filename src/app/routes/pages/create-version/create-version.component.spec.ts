@@ -1,6 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { CreateVersionComponent } from './create-version.component';
+import { CurriculumService } from '../../../services/curriculum.service';
 
 describe('CreateVersionComponent', () => {
   let component: CreateVersionComponent;
@@ -8,7 +9,7 @@ describe('CreateVersionComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ CreateVersionComponent ]
+      declarations: [ CreateVersionComponent, CurriculumService ]
     })
     .compileComponents();
   }));
@@ -23,3 +24,19 @@ describe('CreateVersionComponent', () => {
     expect(component).toBeTruthy();
   });
 });
+describe('Add a new version', () => {
+  beforeEach(async(() => {
+    TestBed.configureTestingModule({
+      declarations: [ CreateVersionComponent, CurriculumService ]
+    })
+    .compileComponents();
+  }));
+  let component: CreateVersionComponent;
+  let fixture: ComponentFixture<CreateVersionComponent>;
+
+  testVersion = {selectedCurriculumName: 'java', numberOfWeeks: 7, selectedTopics: []}
+  it('should make a new version of the Java curriculum',() => {
+    const newVesion = new CreateVersionComponent();
+    expect(newVesion.add())
+  });
+})
