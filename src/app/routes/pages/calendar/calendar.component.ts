@@ -63,7 +63,14 @@ export class CalendarComponent implements OnInit, DoCheck {
   showSideNav = false;
 
   hour = 0;
-
+  subtopicsReceivedCount = 0;
+  topicLength = 0;
+  topicArr: Topic[];
+  subtopicArrArr: Array<Subtopic[]> = [];
+  subTopicsReceived = false;
+  multiDayEventCreated = false;
+  dropEvent: MyEvent;
+  selectedCurriculum: Curriculum;
   colorNum = 0;
 
   newColor: string;
@@ -138,7 +145,7 @@ export class CalendarComponent implements OnInit, DoCheck {
             version: calEvent.version,
             dropped: calEvent.dropped,
             parentTopic_id: calEvent.parentTopic_id
-        });
+          });
       });
     });
 
@@ -157,6 +164,11 @@ export class CalendarComponent implements OnInit, DoCheck {
 
   ngDoCheck() {
     this.renderCalendar = this.curriculumDataFetched;
+    if (this.subTopicsReceived && this.subtopicsReceivedCount === 0) {
+      console.log();
+      console.log('Begining event generation...');
+      this.generateEvents();
+    }
   }
 
   toggleSideNav() {
@@ -247,100 +259,108 @@ export class CalendarComponent implements OnInit, DoCheck {
     if (action === 'Clicked') {
       this.openDialog(event);
     } else if (action === 'Edited') {
-      /* Functionality removed because pencil icon not rendering correctly*/
-      // console.log(action);
     } else if (action === 'Deleted') {
-
     } else {
       if (!event.dropped) {
-        // console.log(event.dropped);
         event.dropped = true;
-        // console.log(action);
         const id: number = +event.id;
         this.calendarService.getCurriculumById(id).subscribe(curr => {
-          const topicLength = curr.numberOfWeeks / curr.topics.length;
-          let topicDay = 0;
-          // this.persistCurriculum(curr);
-          curr.topics.forEach((topic) => {
-            this.subtopicService.getSubtopicByParentId(topic.id).subscribe(subResponse => {
-              console.log(subResponse);
-              // console.log('topicDay: ', topicDay);
-              const subtopicTime = (topicLength * 5 * 7) / subResponse.length;
-              this.currTopicTime = subtopicTime;
-              // console.log('subtopicTime: ', subtopicTime);
-              // console.log('subResponseLength: ', subResponse.length);
-              // console.log('topiclength: ', topicLength);
-              // console.log(curr.numberOfWeeks);
-              // console.log(curr.topics.length);
-              colors.random.primary = this.randomColor();
-              this.newColor = 'color' + this.colorNum;
-              colors[this.newColor] = this.randomColor();
-              for (let i = 0; i < subResponse.length; i++) {
-                if (isWeekend(addDays(addHours(startOfDay(event.start), 9 + this.hour), topicDay))) {
-                  topicDay++;
-                  if (isWeekend(addDays(addHours(startOfDay(event.start), 9 + this.hour), topicDay))) {
-                    topicDay++;
-                  }
-                }
-                // console.log(this. hour + 'This.hour 1st run through');
-                if (this.hour + this.currTopicTime > 7) {
-                  // console.log('subtopic time: ', subtopicTime);
-                  // console.log('curr topic time = ', currTopicTime + 'hour = ', this.hour);
-                  this.multidaySubtopic(subResponse[i], topicDay, (7 - this.hour), event, this.currTopicTime, curr);
-                  topicDay++;
-                  if (this.currTopicTime < 7) {
-                    console.log(this.currTopicTime + ' this.hour = ' + (7 - this.hour));
-                    console.log(this.currTopicTime + ' this.hour = ' + (this.hour));
-                    this.currTopicTime = this.currTopicTime - (7 - this.hour);
-                  } else {
-                    // console.log(this.currTopicTime + ' this.hour = ' + this.hour);
-                    this.currTopicTime = this.currTopicTime - 7;
-                  }
-                  this.hour = 0;
-                  i--;
-                } else {
-                  // console.log('IN CREATE SOLO DAY EVENT', subResponse[i].name);
-                  // console.log(subResponse[i]);
-                  console.log(topicDay);
-                  this.events.push(
-                    {
-                      start: addDays(addHours(startOfDay(event.start), 9 + this.hour), topicDay),
-                      end: addDays(addHours(startOfDay(event.start), 9 + this.hour + subtopicTime), topicDay),
-                      title: subResponse[i].name,
-                      id: subResponse[i].id,
-                      color: colors.newColor,
-                      actions: this.actions,
-                      resizable: {
-                        beforeStart: true,
-                        afterEnd: true
-                      },
-                      draggable: true,
-                      curriculum: curr,
-                      numWeeks: curr.numberOfWeeks,
-                      topics: curr.topics,
-                      version: curr.version,
-                      dropped: true,
-                      parentTopic_id: subResponse[i].parentTopic_id
-                    }
-                  );
-                  console.log('start: ' + this.events[this.events.length - 1].start);
-                  // this.persistEvent(this.events[this.events.length - 1]);
-                  this.colorNum++;
-                  console.log('log here ' , (this.hour + subtopicTime));
-                  this.hour += subtopicTime;
-                }
-                this.refresh.next();
-              }
+          this.selectedCurriculum = curr;
+          console.log('number of weeks: ' + curr.numberOfWeeks);
+          console.log('number of topics: ' + curr.topics.length);
+          this.topicLength = curr.numberOfWeeks / curr.topics.length;
+          console.log('topicLength: ' + this.topicLength);
+          this.topicArr = curr.topics;
+          for (let i = 0, j = 0; i < curr.topics.length; i++) {
+            this.subtopicService.getSubtopicByParentId(curr.topics[i].id).subscribe(subResponse => {
+              this.subtopicArrArr.push(subResponse);
+            console.log();
+            console.log('subtopicArrArr: ' + subResponse.length);
+            console.log();
+            if (i === curr.topics.length - 1) {
+              this.subTopicsReceived = true;
+              console.log();
+              console.log('subtopics Received set to true');
+              console.log();
+            }
             });
-          });
+          }
+          this.dropEvent = event;
         });
       } else {
-        // this.openDialog(event);
       }
     }
   }
+/*
+  Assumes that each topic contains at least 1 sub topic per day
+*/
+  generateEvents() {
+    this.subTopicsReceived = false;
+    console.log('subtopics Received set to false');
+    this.subtopicsReceivedCount++;
+    console.log('count incremented');
+    console.log();
+    let topicDay = 0;
+    for (let j = 0; j < this.topicArr.length; j++) {
+      const subtopicTime = (this.topicLength * 5 * 7) / this.subtopicArrArr[j].length;
+      this.currTopicTime = subtopicTime;
 
-  multidaySubtopic(subtopic: Subtopic, topicDay: number, timeLeft: number, event: MyEvent, subtopicTime: number, curr: Curriculum) {
+    for (let i = 0; i < this.subtopicArrArr[j].length; i++) {
+      if (isWeekend(addDays(addHours(startOfDay(this.dropEvent.start), 9 + this.hour), topicDay))) {
+        topicDay++;
+        if (isWeekend(addDays(addHours(startOfDay(this.dropEvent.start), 9 + this.hour), topicDay))) {
+          topicDay++;
+        }
+      }
+      console.log();
+      console.log(this.hour + 'This.hour');
+      console.log();
+      if (this.hour + this.currTopicTime > 7 && !this.multiDayEventCreated) {
+        this.multidaySubtopic(this.subtopicArrArr[j][i], topicDay, (7 - this.hour), this.dropEvent, this.selectedCurriculum);
+        topicDay++;
+        // if (this.multiDayEventCreated) {
+        //   // console.log(this.currTopicTime + ' this.hour = ' + (7 - this.hour));
+        //   // console.log(this.currTopicTime + ' this.hour = ' + (this.hour));
+        //   this.currTopicTime = this.currTopicTime - 7 - this.hour;
+        // } else {
+        //   this.currTopicTime = this.currTopicTime - 7;
+        // }
+        // this.hour = 0;
+        i--;
+      } else {
+        this.events.push(
+          {
+            start: addDays(addHours(startOfDay(this.dropEvent.start), 9 + this.hour), topicDay),
+            end: addDays(addHours(startOfDay(this.dropEvent.start), 9 + this.hour + this.currTopicTime), topicDay),
+            title: this.subtopicArrArr[j][i].name,
+            id: this.subtopicArrArr[j][i].id,
+            color: colors.newColor,
+            actions: this.actions,
+            resizable: {
+              beforeStart: true,
+              afterEnd: true
+            },
+            draggable: true,
+            curriculum: this.selectedCurriculum,
+            numWeeks: this.selectedCurriculum.numberOfWeeks,
+            topics: this.selectedCurriculum.topics,
+            version: this.selectedCurriculum.version,
+            dropped: true,
+            parentTopic_id: this.subtopicArrArr[j][i].parentTopic_id
+          }
+        );
+        console.log('start: ' + this.events[this.events.length - 1].start);
+        this.colorNum++;
+        this.hour += this.currTopicTime;
+        this.currTopicTime = subtopicTime;
+        this.multiDayEventCreated = false;
+      }
+      this.refresh.next();
+    }
+  }
+  }
+
+  multidaySubtopic(subtopic: Subtopic, topicDay: number, timeLeft: number, event: MyEvent, curr: Curriculum) {
     // console.log('IN CREATE MULTIDAY EVENT', subtopic.name);
     event.dropped = true;
     // console.log(event);
@@ -364,9 +384,11 @@ export class CalendarComponent implements OnInit, DoCheck {
         dropped: true
       }
     );
-    console.log('start: ' + this.events[this.events.length - 1].start);
+    // console.log('start: ' + this.events[this.events.length - 1].start);
     this.currTopicTime = this.currTopicTime - timeLeft;
-    this.hour = 7;
+    // this.hour = 7;
+    this.hour = 0;
+    this.multiDayEventCreated = true;
   }
 
   persistEvent(event: MyEvent) {
