@@ -1,4 +1,105 @@
 {
+    "batches": [
+        {
+            "id": 1,
+            "name": "1806-Jun18-USF-Java",
+            "startDate": 123456787,
+            "endDate": 123456789,
+            "trainer_id": 4,
+            "calendarCurriculum_id": 2
+        },
+        {
+            "id": 2,
+            "name": "1807-Jul18-USF-JavaScript",
+            "startDate": 123456787,
+            "endDate": 123456789,
+            "trainer_id": 12,
+            "calendarCurriculum_id": 4
+        },
+        {
+            "id": 3,
+            "name": "1808-Aug18-USF-C++",
+            "startDate": 123456787,
+            "endDate": 123456789,
+            "trainer_id": 7,
+            "calendarCurriculum_id": 1
+        },
+        {
+            "id": 4,
+            "name": "1809-Sep18-USF-Java",
+            "startDate": 123456787,
+            "endDate": 123456789,
+            "trainer_id": 11,
+            "calendarCurriculum_id": 2
+        }
+    ]
+ ,
+    "calendar-events":
+    [{
+        "id":1,
+        "title":"eventOne",
+        "description":"the first event",
+        "status_id":2,
+        "startDateTime":6713691398138,
+        "endDateTime":634342887095487,
+        "calendarSubtopic_id":2
+        },
+        {
+        "id":2,
+        "title":"eventTwo",
+        "description":"the second event",
+        "status_id":1,
+        "startDateTime":8129132869,
+        "endDateTime":6742830928462,
+        "calendarSubtopic_id":2
+        },
+        {
+        "id":3,
+        "title":"eventThree",
+        "description":"the third event",
+        "status_id":1,
+        "startDateTime":238080293,
+        "endDateTime":7342723489,
+        "calendarSubtopic_id":2
+        },
+        {
+        "id":4,
+        "title":"eventFour",
+        "description":"the fourth event",
+        "status_id":"2",
+        "startDateTime":376542356,
+        "endDateTime":478764567765,
+        "calendarSubtopic_id":1
+    }]
+,
+    "calendar-curriculums": [
+        {
+            "id": 1,
+            "curriculum_id": 1,
+            "batch_id": 1
+        },
+        {
+            "id": 2,
+            "curriculum_id": 2,
+            "batch_id": 1
+        },
+        {
+            "id": 3,
+            "curriculum_id": 3,
+            "batch_id": 1
+        },
+        {
+            "id": 4,
+            "curriculum_id": 4,
+            "batch_id": 1
+        },
+        {
+            "id": 5,
+            "curriculum_id": 5,
+            "batch_id": 1
+        }
+    ]
+,
     "curriculums": [
         {
             "id": 1,
@@ -133,69 +234,136 @@
         }
     ]
 ,
-    "calendar-events":
-    [{
-        "id":1,
-        "title":"eventOne",
-        "description":"the first event",
-        "status_id":2,
-        "startDateTime":6713691398138,
-        "endDateTime":634342887095487,
-        "calendarSubtopic_id":2
-        },
-        {
-        "id":2,
-        "title":"eventTwo",
-        "description":"the second event",
-        "status_id":1,
-        "startDateTime":8129132869,
-        "endDateTime":6742830928462,
-        "calendarSubtopic_id":2
-        },
-        {
-        "id":3,
-        "title":"eventThree",
-        "description":"the third event",
-        "status_id":1,
-        "startDateTime":238080293,
-        "endDateTime":7342723489,
-        "calendarSubtopic_id":2
-        },
-        {
-        "id":4,
-        "title":"eventFour",
-        "description":"the fourth event",
-        "status_id":"2",
-        "startDateTime":376542356,
-        "endDateTime":478764567765,
-        "calendarSubtopic_id":1
-    }]
-,
-    "calendar-curriculums": [
+    "subtopics": [
         {
             "id": 1,
-            "curriculum_id": 1,
-            "batch_id": 1
+            "name": "Core Java",
+            "parentTopic_id": 1
         },
         {
             "id": 2,
-            "curriculum_id": 2,
-            "batch_id": 1
+            "name": "Data Types",
+            "parentTopic_id": 1
         },
         {
             "id": 3,
-            "curriculum_id": 3,
-            "batch_id": 1
+            "name": "Inheritance",
+            "parentTopic_id": 1
         },
         {
             "id": 4,
-            "curriculum_id": 4,
-            "batch_id": 1
+            "name": "Joins",
+            "parentTopic_id": 2
         },
         {
             "id": 5,
-            "curriculum_id": 5,
-            "batch_id": 1
+            "name": "Semantic Elements",
+            "parentTopic_id": 4
+        },
+        {
+            "id": 6,
+            "name": "Basic CSS",
+            "parentTopic_id": 5
+        },
+        {
+            "id": 7,
+            "name": "Core JavaScript",
+            "parentTopic_id": 6
+        },
+        {
+            "id": 8,
+            "name": "TypeScript",
+            "parentTopic_id": 7
+        },
+        {
+            "id": 9,
+            "name": "Directives",
+            "parentTopic_id": 7
+        },
+        {
+            "id": 10,
+            "name": "Binding",
+            "parentTopic_id": 7
+        },
+        {
+            "id": 11,
+            "name": "Observables",
+            "parentTopic_id": 7
+        },
+        {
+            "id": 12,
+            "name": "CI/CD",
+            "parentTopic_id": 8
+        },
+        {
+            "id": 13,
+            "name": "AWS",
+            "parentTopic_id": 8
+        },
+        {
+            "id": 14,
+            "name": "Hibernate Framework",
+            "parentTopic_id": 9
+        },
+        {
+            "id": 15,
+            "name": "HQL",
+            "parentTopic_id": 9
+        },
+        {
+            "id": 16,
+            "name": "Spring Framework",
+            "parentTopic_id": 10
+        },
+        {
+            "id": 17,
+            "name": "Spring Web MVC",
+            "parentTopic_id": 10
+        },
+        {
+            "id": 18,
+            "name": "Spring Boot",
+            "parentTopic_id": 10
+        },
+        {
+            "id": 19,
+            "name": "Spring Data",
+            "parentTopic_id": 10
+        },
+        {
+            "id": 20,
+            "name": "REST",
+            "parentTopic_id": 11
+        },
+        {
+            "id": 21,
+            "name": "SOAP",
+            "parentTopic_id": 11
+        },
+        {
+            "id": 22,
+            "name": "API Gateway / Zuul",
+            "parentTopic_id": 12
+        },
+        {
+            "id": 23,
+            "name": "Discovery Service / Eureka",
+            "parentTopic_id": 12
+        },
+        {
+            "id": 24,
+            "name": "Config Server",
+            "parentTopic_id": 12
+        },
+        {
+            "id": 25,
+            "name": "Rest Template / Feign",
+            "parentTopic_id": 12
+        },
+        {
+            "id": 26,
+            "name": "Circuit Breaker / Hystrix",
+            "parentTopic_id": 12
         }
     ]
 ,
@@ -362,174 +530,14 @@
             "email":"andrewli@reva.com",
             "role_id":2,
             "status_id":1
+        },
+        {
+            "id":15,
+            "firstName":"Bradley",
+            "lastName":"Walker",
+            "email":"bradleynwalker1@gmail.com",
+            "role_id":2,
+            "status_id":1
         }
     ]
-,
-    "subtopics": [
-        {
-            "id": 1,
-            "name": "Core Java",
-            "parentTopic_id": 1
-        },
-        {
-            "id": 2,
-            "name": "Data Types",
-            "parentTopic_id": 1
-        },
-        {
-            "id": 3,
-            "name": "Inheritance",
-            "parentTopic_id": 1
-        },
-        {
-            "id": 4,
-            "name": "Joins",
-            "parentTopic_id": 2
-        },
-        {
-            "id": 5,
-            "name": "Semantic Elements",
-            "parentTopic_id": 4
-        },
-        {
-            "id": 6,
-            "name": "Basic CSS",
-            "parentTopic_id": 5
-        },
-        {
-            "id": 7,
-            "name": "Core JavaScript",
-            "parentTopic_id": 6
-        },
-        {
-            "id": 8,
-            "name": "TypeScript",
-            "parentTopic_id": 7
-        },
-        {
-            "id": 9,
-            "name": "Directives",
-            "parentTopic_id": 7
-        },
-        {
-            "id": 10,
-            "name": "Binding",
-            "parentTopic_id": 7
-        },
-        {
-            "id": 11,
-            "name": "Observables",
-            "parentTopic_id": 7
-        },
-        {
-            "id": 12,
-            "name": "CI/CD",
-            "parentTopic_id": 8
-        },
-        {
-            "id": 13,
-            "name": "AWS",
-            "parentTopic_id": 8
-        },
-        {
-            "id": 14,
-            "name": "Hibernate Framework",
-            "parentTopic_id": 9
-        },
-        {
-            "id": 15,
-            "name": "HQL",
-            "parentTopic_id": 9
-        },
-        {
-            "id": 16,
-            "name": "Spring Framework",
-            "parentTopic_id": 10
-        },
-        {
-            "id": 17,
-            "name": "Spring Web MVC",
-            "parentTopic_id": 10
-        },
-        {
-            "id": 18,
-            "name": "Spring Boot",
-            "parentTopic_id": 10
-        },
-        {
-            "id": 19,
-            "name": "Spring Data",
-            "parentTopic_id": 10
-        },
-        {
-            "id": 20,
-            "name": "REST",
-            "parentTopic_id": 11
-        },
-        {
-            "id": 21,
-            "name": "SOAP",
-            "parentTopic_id": 11
-        },
-        {
-            "id": 22,
-            "name": "API Gateway / Zuul",
-            "parentTopic_id": 12
-        },
-        {
-            "id": 23,
-            "name": "Discovery Service / Eureka",
-            "parentTopic_id": 12
-        },
-        {
-            "id": 24,
-            "name": "Config Server",
-            "parentTopic_id": 12
-        },
-        {
-            "id": 25,
-            "name": "Rest Template / Feign",
-            "parentTopic_id": 12
-        },
-        {
-            "id": 26,
-            "name": "Circuit Breaker / Hystrix",
-            "parentTopic_id": 12
-        }
-    ]
-,
-    "batches": [
-        {
-            "id": 1,
-            "name": "1806-Jun18-USF-Java",
-            "startDate": 123456787,
-            "endDate": 123456789,
-            "trainer_id": 4,
-            "calendarCurriculum_id": 2
-        },
-        {
-            "id": 2,
-            "name": "1807-Jul18-USF-JavaScript",
-            "startDate": 123456787,
-            "endDate": 123456789,
-            "trainer_id": 12,
-            "calendarCurriculum_id": 4
-        },
-        {
-            "id": 3,
-            "name": "1808-Aug18-USF-C++",
-            "startDate": 123456787,
-            "endDate": 123456789,
-            "trainer_id": 7,
-            "calendarCurriculum_id": 1
-        },
-        {
-            "id": 4,
-            "name": "1809-Sep18-USF-Java",
-            "startDate": 123456787,
-            "endDate": 123456789,
-            "trainer_id": 11,
-            "calendarCurriculum_id": 2
-        }
-    ]
- }
+}

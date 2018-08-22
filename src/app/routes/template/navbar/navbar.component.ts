@@ -27,6 +27,10 @@ export class NavbarComponent implements OnInit {
 
         if (!this.show && JSON.parse(sessionStorage.getItem('user'))) {
           this.userService.user.next(JSON.parse(sessionStorage.getItem('user')));
+        } else if (!this.show && !JSON.parse(sessionStorage.getItem('user'))) {
+          if (window.location.pathname !== '/login' && window.location.pathname !== '/register') {
+            this.router.navigate(['login']);
+          }
         }
       }
     );
