@@ -75,6 +75,7 @@ export class CalendarComponent implements OnInit, DoCheck {
   topics: Topic[];
   subtopics: Subtopic[];
   curriculums: Curriculum[];
+  currTopicTime: number;
 
   curriculumEvents: MyEvent[] = [];
 
@@ -261,8 +262,9 @@ export class CalendarComponent implements OnInit, DoCheck {
           // this.persistCurriculum(curr);
           curr.topics.forEach((topic) => {
             this.subtopicService.getSubtopicByParentId(topic.id).subscribe(subResponse => {
+              console.log(subResponse.length);
               const subtopicTime = (topicLength * 5 * 7) / subResponse.length;
-              let currTopicTime = subtopicTime;
+              this.currTopicTime = subtopicTime;
               // console.log('subtopicTime: ', subtopicTime);
               // console.log('subResponseLength: ', subResponse.length);
               // console.log('topiclength: ', topicLength);
@@ -278,11 +280,21 @@ export class CalendarComponent implements OnInit, DoCheck {
                     topicDay++;
                   }
                 }
-                if (this.hour + currTopicTime > 7) {
-                  this.multidaySubtopic(subResponse[i], topicDay, (7 - this.hour), event, currTopicTime, curr);
+                console.log(this. hour + 'This.hour 1st run through');
+                if (this.hour + this.currTopicTime > 7) {
+                  // console.log('subtopic time: ', subtopicTime);
+                  // console.log('curr topic time = ', currTopicTime + 'hour = ', this.hour);
+                  this.multidaySubtopic(subResponse[i], topicDay, (7 - this.hour), event, this.currTopicTime, curr);
                   topicDay++;
+                  if (this.currTopicTime < 7) {
+                    console.log(this.currTopicTime + ' this.hour = ' + (7 - this.hour));
+                    console.log(this.currTopicTime + ' this.hour = ' + (this.hour));
+                    this.currTopicTime = this.currTopicTime - (7 - this.hour);
+                  } else {
+                    // console.log(this.currTopicTime + ' this.hour = ' + this.hour);
+                    this.currTopicTime = this.currTopicTime - 7;
+                  }
                   this.hour = 0;
-                  currTopicTime = currTopicTime - (7 - this.hour);
                   i--;
                 } else {
                   // console.log('IN CREATE SOLO DAY EVENT', subResponse[i].name);
@@ -290,7 +302,7 @@ export class CalendarComponent implements OnInit, DoCheck {
                   this.events.push(
                     {
                       start: addDays(addHours(startOfDay(event.start), 9 + this.hour), topicDay),
-                      end: addDays(addHours(startOfDay(event.start), 9 + this.hour + currTopicTime), topicDay),
+                      end: addDays(addHours(startOfDay(event.start), 9 + this.hour + this.currTopicTime), topicDay),
                       title: subResponse[i].name,
                       id: subResponse[i].id,
                       color: colors.newColor,
@@ -311,7 +323,7 @@ export class CalendarComponent implements OnInit, DoCheck {
                   console.log('start: ' + this.events[this.events.length - 1].start);
                   // this.persistEvent(this.events[this.events.length - 1]);
                   this.colorNum++;
-                  this.hour += currTopicTime;
+                  this.hour += this.currTopicTime;
                 }
                 this.refresh.next();
               }
@@ -331,7 +343,7 @@ export class CalendarComponent implements OnInit, DoCheck {
     this.events.push(
       {
         start: addDays(addHours(startOfDay(event.start), 9 + this.hour), topicDay),
-        end: addDays(addHours(startOfDay(event.start), 17), topicDay),
+        end: addDays(addHours(startOfDay(event.start), 16), topicDay),
         title: subtopic.name,
         id: subtopic.id,
         color: colors.newColor,
@@ -349,7 +361,8 @@ export class CalendarComponent implements OnInit, DoCheck {
       }
     );
     console.log('start: ' + this.events[this.events.length - 1].start);
-    this.hour += subtopicTime;
+    this.currTopicTime = this.currTopicTime - timeLeft;
+    this.hour = 7;
   }
 
   persistEvent(event: MyEvent) {

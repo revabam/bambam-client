@@ -212,6 +212,61 @@
             "parentTopic_id": 1
         },
         {
+            "id": 19,
+            "name": "Inheritance",
+            "parentTopic_id": 1
+        },
+        {
+            "id": 23,
+            "name": "File I/O: FileInputStream/FileReader/FileWriter",
+            "parentTopic_id": 1
+        },
+        {
+            "id": 25,
+            "name": "Serialization",
+            "parentTopic_id": 1
+        },
+        {
+            "id": 26,
+            "name": "Collection Framework",
+            "parentTopic_id": 1
+        },
+        {
+            "id": 31,
+            "name": "Object Class",
+            "parentTopic_id": 1
+        },
+        {
+            "id": 32,
+            "name": "Equals and Hashcode",
+            "parentTopic_id": 1
+        },
+        {
+            "id": 33,
+            "name": "Thread model",
+            "parentTopic_id": 1
+        },
+        {
+            "id": 40,
+            "name": "Creational Design Patterns: Singleton and Factory",
+            "parentTopic_id": 1
+        },
+        {
+            "id": 41,
+            "name": "Introduction to Unit Testing",
+            "parentTopic_id": 1
+        },
+        {
+            "id": 45,
+            "name": "Introduction to Maven",
+            "parentTopic_id": 1
+        },
+        {
+            "id": 46,
+            "name": "Maven Project Object Model (POM)",
+            "parentTopic_id": 1
+        },
+        {
             "id": 50,
             "name": "Relational Database Service (RDS)",
             "parentTopic_id": 2
