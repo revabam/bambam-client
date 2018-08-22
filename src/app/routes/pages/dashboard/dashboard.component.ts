@@ -54,6 +54,7 @@ export class DashboardComponent implements OnInit {
             // Calculate the % progress
             const totalTime = new Date(this.batch.endDate).getTime() - new Date(this.batch.startDate).getTime();
             const elapsedTime = new Date().getTime() - new Date(this.batch.startDate).getTime();
+
             this.percentCompletion = elapsedTime / totalTime;
 
             // Percent completion must be between 0 and 1
