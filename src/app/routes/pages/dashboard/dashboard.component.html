@@ -2,22 +2,24 @@
   <div class="row">
     <div class="col-sm mb-3 mt-2">
       <mat-card #bg class="">
-        <mat-card-header >
-            <!-- <mat-card-title> -->
-              <h1>Welcome, {{this.user.firstName}}</h1>
-            <!-- </mat-card-title> -->
+        <mat-card-header>
+          <!-- <mat-card-title> -->
+          <h1>Welcome, {{this.user.firstName}}</h1>
+          <!-- </mat-card-title> -->
         </mat-card-header>
-        <mat-card-content style="font-size: 18px" >
+        <mat-card-content style="font-size: 18px">
           <!-- <mat-divider [inset]="true"></mat-divider> -->
           <br/>
-            <div class="row">
-              <div class="col-sm-6">
-                <span *ngIf="this.batch">Current Batch: {{this.batch.name}}</span>
-              </div>
-              <div class="col-sm-6">
-                <button mat-raised-button style="float: right" color="primary" routerLink="../calendar">View Calendar<mat-icon>event</mat-icon></button>
-              </div>
+          <div class="row">
+            <div class="col-sm-6">
+              <span *ngIf="this.batch">Current Batch: {{this.batch.name}}</span>
             </div>
+            <div class="col-sm-6">
+              <button mat-raised-button style="float: right" color="primary" routerLink="../calendar">View Calendar
+                <mat-icon>event</mat-icon>
+              </button>
+            </div>
+          </div>
         </mat-card-content>
       </mat-card>
     </div>
@@ -28,51 +30,88 @@
       <mat-card class="rounded">
         <mat-card-header>
           <mat-card-title>
-            <h4>
-              Pesonal Information
-              <button mat-button style="float: right;" (click)="toggleEdit()"><i class="material-icons">
-                border_color
-              </i>
-            </button>
-            </h4>
+            <div class="row">
+              <div class="col-11">
+                <h4>
+                  Pesonal Information
+                </h4>
+              </div>
+              <div class="col-1">
+                <button mat-button (click)="toggleEdit()">
+                  <i class="material-icons">
+                    border_color
+                  </i>
+                </button>
+              </div>
+            </div>
+
           </mat-card-title>
         </mat-card-header>
         <mat-card-content>
-          
-            <div *ngIf="!editing">
-                <mat-list dense>
+
+          <div *ngIf="!editing">
+            <mat-list dense>
               <mat-list-item>
-                <h6>First Name: {{this.user.firstName}}</h6>
+                <div class="col-3">
+                  <h6>First Name: </h6>
+                </div>
+                <div class="col-9 text-left">
+                  <h6>{{this.user.firstName}}</h6>
+                </div>
               </mat-list-item>
               <mat-list-item>
-                <h6>Last Name: {{this.user.lastName}}</h6>
+                <div class="col-3">
+                  <h6>Last Name: </h6>
+                </div>
+                <div class="col-9 text-left">
+                  <h6>{{this.user.lastName}}</h6>
+                </div>
               </mat-list-item>
               <!-- Leave these extra list items here for formatting reasons -->
               <mat-list-item>
-                <h6>Email: {{ this.user.email }}</h6>
+                <div class="col-12">
+                  <h6>Email: {{ this.user.email }}</h6>
+                </div>
               </mat-list-item>
               <mat-list-item></mat-list-item>
-              </mat-list>
-            </div>
-            
-            <div *ngIf="editing">
-              <mat-list dense>
+            </mat-list>
+          </div>
+
+          <div *ngIf="editing">
+            <mat-list dense>
               <mat-list-item>
-                <h6>First Name: <input matInput [(ngModel)]="this.user.firstName"></h6>
+                <div class="col-3">
+                  <h6>First Name: </h6>
+                </div>
+                <div class="col-9 text-left">
+                  <mat-form-field class="example-full-width">
+                    <input matInput [(ngModel)]="this.user.firstName" [(placeholder)]="this.user.firstName">
+                  </mat-form-field>
+                </div>
+
               </mat-list-item>
               <mat-list-item>
-                  <h6>Last Name: <input matInput [(ngModel)]="this.user.lastName"></h6>
+                <div class="col-3">
+                  <h6>Last Name: </h6>
+                </div>
+                <div class="col-9 text-left">
+                  <mat-form-field class="example-full-width">
+                    <input matInput [(ngModel)]="this.user.lastName" [(placeholder)]="this.user.lastName">
+                  </mat-form-field>
+                </div>
               </mat-list-item>
               <mat-list-item>
-                <h6>Email: {{ this.user.email }}</h6>
+                <div class="col-12">
+                  <h6>Email: {{ this.user.email }}</h6>
+                </div>
               </mat-list-item>
             </mat-list>
             <div mat-actions>
-                <button mat-button (click)="cancelEdit()">Cancel</button>
-                <button mat-button (click)="saveChanges()">Ok</button>
+              <button mat-raised-button (click)="cancelEdit()" class="mr-2">Cancel</button>
+              <button mat-raised-button color="primary" (click)="saveChanges()">Ok</button>
             </div>
-            </div>
-            
+          </div>
+
         </mat-card-content>
       </mat-card>
     </div>
@@ -80,7 +119,9 @@
     <div class="col-sm">
       <mat-card class="rounded">
         <mat-card-header>
-          <mat-card-title><h4>Batch Information</h4></mat-card-title>
+          <mat-card-title>
+            <h4>Batch Information</h4>
+          </mat-card-title>
         </mat-card-header>
         <mat-card-content>
           <mat-list dense>
