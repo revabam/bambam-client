@@ -37,21 +37,32 @@ export class DashboardComponent implements OnInit {
     } else {
       /*
         In our sprint, only trainers can use the program so there is no
-        need to check if the user is a trainer or not.
+        need to check if the user is a trainer or not, But this is where
+        you might want to do that.
       */
       this.batchService.getBatchesByTrainerId(this.user.id).subscribe(
         result => {
           // If the result is not null and not empty
           if (result && result.length !== 0) {
+            // Get the most recent batch
             this.batch = result.sort(this.compareBatches)[result.length - 1];
 
             // Figure out what week the batch is in
             this.batchWeek = this.calculateWeeksBetween(new Date(this.batch.startDate), new Date()) + 1;
+            const totalWeeks = this.calculateWeeksBetween(new Date(this.batch.startDate), new Date(this.batch.endDate));
 
             // Calculate the % progress
             const totalTime = new Date(this.batch.endDate).getTime() - new Date(this.batch.startDate).getTime();
             const elapsedTime = new Date().getTime() - new Date(this.batch.startDate).getTime();
             this.percentCompletion = elapsedTime / totalTime;
+
+            // Percent completion must be between 0 and 1
+            this.percentCompletion = (this.percentCompletion < 0) ? 0 : this.percentCompletion;
+            this.percentCompletion = (this.percentCompletion > 1) ? 1 : this.percentCompletion;
+
+            // Batch week must be > 0 and < the total number of weeks
+            this.batchWeek = (this.batchWeek < 0) ? 1 : this.batchWeek;
+            this.batchWeek = (this.batchWeek > totalWeeks) ? totalWeeks : this.batchWeek;
           }
         }
       );
@@ -70,7 +81,7 @@ export class DashboardComponent implements OnInit {
 
   calculateWeeksBetween(date1: Date, date2: Date) {
     // The number of milliseconds in one week
-    const ONE_WEEK = 1000 * 60 * 60 * 24 * 7;
+    const ONE_WEEK = 604800000;
     // Convert both dates to milliseconds
     const date1_ms = date1.getTime();
     const date2_ms = date2.getTime();
