@@ -329,31 +329,31 @@ export class CalendarComponent implements OnInit, DoCheck {
     };
     // console.log(subtopic.name);
     // console.log(subtopic.parentTopic_id);
-    this.calendarService.addCalendarSubtopic(subtopic).subscribe(subtopicRes => {
-      console.log(subtopicRes);
-      const calEvent: cal_event.CalendarEvent = {
-        title: event.title,
-        description: event.title,
-        status_id: 0,
-        startDateTime: event.start,
-        endDateTime: event.end,
-        calendarSubtopic_id: subtopicRes.id,
-        user_id: this.user.id,
-        resizable: event.resizable,
-        color: event.color,
-        actions: event.actions,
-        draggable: event.draggable,
-        curriculum: event.curriculum,
-        numWeeks: event.numWeeks,
-        topics: event.topics,
-        version: event.version,
-        dropped: event.dropped
-      };
-      console.log(calEvent);
-      this.calendarService.addCalendarEvent(calEvent).subscribe(eventRes => {
-        // console.log(eventRes);
-      });
+    const calEvent: cal_event.CalendarEvent = {
+      title: event.title,
+      description: event.title,
+      status_id: 0,
+      startDateTime: event.start,
+      endDateTime: event.end,
+      calendarSubtopic_id: +event.id,
+      user_id: this.user.id,
+      resizable: event.resizable,
+      color: event.color,
+      actions: event.actions,
+      draggable: event.draggable,
+      curriculum: event.curriculum,
+      numWeeks: event.numWeeks,
+      topics: event.topics,
+      version: event.version,
+      dropped: event.dropped
+    };
+    // console.log(calEvent);
+    this.calendarService.addCalendarEvent(calEvent).subscribe(eventRes => {
+      // console.log(eventRes);
     });
+    // this.calendarService.addCalendarSubtopic(subtopic).subscribe(subtopicRes => {
+    //   console.log(subtopicRes);
+    // });
   }
 
   persistCurriculum(curriculum: Curriculum) {
