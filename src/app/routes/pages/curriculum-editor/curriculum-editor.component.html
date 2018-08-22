@@ -41,10 +41,14 @@
                 <span class="fill-remaining-space">
                 </span>
                 <span *ngIf="curriculum.name === cname">
-                  <button mat-mini-fab color="primary" (click)="deactivateCurriculum(curriculum)">X</button>
+                  <button mat-icon-button color="" (click)="deactivateSubtopic(subtopic)">
+                    <mat-icon color="primary">clear</mat-icon>
+                </button>
                 </span>
                 <span *ngIf="curriculum.name !== cname">
-                  <button mat-mini-fab color="'green'" (click)="reactivateCurriculum(curriculum)">+</button>
+                  <button mat-icon-button color="" (click)="reactivateSubtopic(subtopic)">
+                    <mat-icon color="">add</mat-icon>
+                </button>
                 </span>
               </mat-toolbar>
             </div>

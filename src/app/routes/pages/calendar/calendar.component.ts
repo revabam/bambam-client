@@ -32,6 +32,7 @@ import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '../../../../../node_mo
 import * as cal_event from '../../../models/calendar-event';
 import { BamUser } from '../../../models/bam-user';
 import { BatchService } from '../../../services/batch/batch.service';
+import { EventColor, EventAction } from '../../../../../node_modules/calendar-utils';
 
 const colors: any = {
   random: {
@@ -72,6 +73,11 @@ export class CalendarComponent implements OnInit, DoCheck {
   dropEvent: MyEvent;
   selectedCurriculum: Curriculum;
   colorNum = 0;
+
+  newSubtopicName: string;
+  newSubtopicDate: Date;
+
+  initialRender = false;
 
   newColor: string;
 
@@ -127,26 +133,28 @@ export class CalendarComponent implements OnInit, DoCheck {
     this.user = JSON.parse(sessionStorage.getItem('user'));
 
     this.calendarService.getCalendarEvents().subscribe(response => {
-      console.log(response);
-      response.forEach((calEvent) => {
+      console.log(response.length);
+      for (let i = 0; i < response.length; i++) {
         this.events.push(
           {
-            start: calEvent.start,
-            end: calEvent.end,
-            title: calEvent.title,
-            id: calEvent.id,
-            color: calEvent.color,
-            actions: calEvent.actions,
-            resizable: calEvent.resizable,
-            draggable: calEvent.draggable,
-            curriculum: calEvent.curriculum,
-            numWeeks: calEvent.numWeeks,
-            topics: calEvent.topics,
-            version: calEvent.version,
-            dropped: calEvent.dropped,
-            parentTopic_id: calEvent.parentTopic_id
+            start: new Date(response[i].startDateTime),
+            end: new Date(response[i].endDateTime),
+            title: response[i].title,
+            id: response[i].id,
+            color: response[i].color as EventColor,
+            actions: [response[i].actions as EventAction],
+            resizable: response[i].resizable,
+            draggable: response[i].draggable,
+            curriculum: response[i].curriculum,
+            numWeeks: response[i].numWeeks,
+            topics: response[i].topics,
+            version: response[i].version,
+            dropped: response[i].dropped
           });
-      });
+          if (i === response.length - 1) {
+            this.initialRender = true;
+          }
+      }
     });
 
     this.calendarService.getCurriculum().subscribe(response => {
@@ -163,6 +171,12 @@ export class CalendarComponent implements OnInit, DoCheck {
   }
 
   ngDoCheck() {
+    if (this.initialRender) {
+      console.log('refreshing');
+      console.log(this.events);
+      this.refresh.next();
+      this.initialRender = false;
+    }
     this.renderCalendar = this.curriculumDataFetched;
     if (this.subTopicsReceived && this.subtopicsReceivedCount === 0) {
       console.log();
@@ -267,23 +281,17 @@ export class CalendarComponent implements OnInit, DoCheck {
         const id: number = +event.id;
         this.calendarService.getCurriculumById(id).subscribe(curr => {
           this.selectedCurriculum = curr;
-          console.log('number of weeks: ' + curr.numberOfWeeks);
-          console.log('number of topics: ' + curr.topics.length);
+          // console.log('number of weeks: ' + curr.numberOfWeeks);
+          // console.log('number of topics: ' + curr.topics.length);
           this.topicLength = curr.numberOfWeeks / curr.topics.length;
-          console.log('topicLength: ' + this.topicLength);
+          // console.log('topicLength: ' + this.topicLength);
           this.topicArr = curr.topics;
           for (let i = 0, j = 0; i < curr.topics.length; i++) {
             this.subtopicService.getSubtopicByParentId(curr.topics[i].id).subscribe(subResponse => {
               this.subtopicArrArr.push(subResponse);
-            console.log();
-            console.log('subtopicArrArr: ' + subResponse.length);
-            console.log();
-            if (i === curr.topics.length - 1) {
-              this.subTopicsReceived = true;
-              console.log();
-              console.log('subtopics Received set to true');
-              console.log();
-            }
+              if (i === curr.topics.length - 1) {
+                this.subTopicsReceived = true;
+              }
             });
           }
           this.dropEvent = event;
@@ -292,73 +300,76 @@ export class CalendarComponent implements OnInit, DoCheck {
       }
     }
   }
-/*
-  Assumes that each topic contains at least 1 sub topic per day
-*/
+  /*
+    Assumes that each topic contains at least 1 sub topic per day
+  */
   generateEvents() {
     this.subTopicsReceived = false;
-    console.log('subtopics Received set to false');
+    // console.log('subtopics Received set to false');
     this.subtopicsReceivedCount++;
-    console.log('count incremented');
-    console.log();
+    // console.log('count incremented');
+    // console.log();
     let topicDay = 0;
     for (let j = 0; j < this.topicArr.length; j++) {
       const subtopicTime = (this.topicLength * 5 * 7) / this.subtopicArrArr[j].length;
       this.currTopicTime = subtopicTime;
 
-    for (let i = 0; i < this.subtopicArrArr[j].length; i++) {
-      if (isWeekend(addDays(addHours(startOfDay(this.dropEvent.start), 9 + this.hour), topicDay))) {
-        topicDay++;
+      for (let i = 0; i < this.subtopicArrArr[j].length; i++) {
         if (isWeekend(addDays(addHours(startOfDay(this.dropEvent.start), 9 + this.hour), topicDay))) {
           topicDay++;
-        }
-      }
-      console.log();
-      console.log(this.hour + 'This.hour');
-      console.log();
-      if (this.hour + this.currTopicTime > 7 && !this.multiDayEventCreated) {
-        this.multidaySubtopic(this.subtopicArrArr[j][i], topicDay, (7 - this.hour), this.dropEvent, this.selectedCurriculum);
-        topicDay++;
-        // if (this.multiDayEventCreated) {
-        //   // console.log(this.currTopicTime + ' this.hour = ' + (7 - this.hour));
-        //   // console.log(this.currTopicTime + ' this.hour = ' + (this.hour));
-        //   this.currTopicTime = this.currTopicTime - 7 - this.hour;
-        // } else {
-        //   this.currTopicTime = this.currTopicTime - 7;
-        // }
-        // this.hour = 0;
-        i--;
-      } else {
-        this.events.push(
-          {
-            start: addDays(addHours(startOfDay(this.dropEvent.start), 9 + this.hour), topicDay),
-            end: addDays(addHours(startOfDay(this.dropEvent.start), 9 + this.hour + this.currTopicTime), topicDay),
-            title: this.subtopicArrArr[j][i].name,
-            id: this.subtopicArrArr[j][i].id,
-            color: colors.newColor,
-            actions: this.actions,
-            resizable: {
-              beforeStart: true,
-              afterEnd: true
-            },
-            draggable: true,
-            curriculum: this.selectedCurriculum,
-            numWeeks: this.selectedCurriculum.numberOfWeeks,
-            topics: this.selectedCurriculum.topics,
-            version: this.selectedCurriculum.version,
-            dropped: true,
-            parentTopic_id: this.subtopicArrArr[j][i].parentTopic_id
+          if (isWeekend(addDays(addHours(startOfDay(this.dropEvent.start), 9 + this.hour), topicDay))) {
+            topicDay++;
           }
-        );
-        console.log('start: ' + this.events[this.events.length - 1].start);
-        this.colorNum++;
-        this.hour += this.currTopicTime;
-        this.currTopicTime = subtopicTime;
-        this.multiDayEventCreated = false;
+        }
+        // console.log();
+        // console.log(this.hour + 'This.hour');
+        // console.log();
+        if (this.hour + this.currTopicTime > 7 && !this.multiDayEventCreated) {
+          this.multidaySubtopic(this.subtopicArrArr[j][i], topicDay, (7 - this.hour), this.dropEvent, this.selectedCurriculum);
+          topicDay++;
+          // if (this.multiDayEventCreated) {
+          //   // console.log(this.currTopicTime + ' this.hour = ' + (7 - this.hour));
+          //   // console.log(this.currTopicTime + ' this.hour = ' + (this.hour));
+          //   this.currTopicTime = this.currTopicTime - 7 - this.hour;
+          // } else {
+          //   this.currTopicTime = this.currTopicTime - 7;
+          // }
+          // this.hour = 0;
+          i--;
+        } else {
+          this.events.push(
+            {
+              start: addDays(addHours(startOfDay(this.dropEvent.start), 9 + this.hour), topicDay),
+              end: addDays(addHours(startOfDay(this.dropEvent.start), 9 + this.hour + this.currTopicTime), topicDay),
+              title: this.subtopicArrArr[j][i].name,
+              id: this.subtopicArrArr[j][i].id,
+              color: colors.newColor,
+              actions: this.actions,
+              resizable: {
+                beforeStart: true,
+                afterEnd: true
+              },
+              draggable: true,
+              curriculum: this.selectedCurriculum,
+              numWeeks: this.selectedCurriculum.numberOfWeeks,
+              topics: this.selectedCurriculum.topics,
+              version: this.selectedCurriculum.version,
+              dropped: true,
+              parentTopic_id: this.subtopicArrArr[j][i].parentTopic_id
+            }
+          );
+          this.persistEvent(this.events[this.events.length - 1]);
+          console.log('start: ' + this.events[this.events.length - 1].start);
+          this.colorNum++;
+          this.hour += this.currTopicTime;
+          this.currTopicTime = subtopicTime;
+          this.multiDayEventCreated = false;
+        }
+        this.refresh.next();
       }
-      this.refresh.next();
     }
-  }
+    this.persistCurriculum(this.selectedCurriculum);
+
   }
 
   multidaySubtopic(subtopic: Subtopic, topicDay: number, timeLeft: number, event: MyEvent, curr: Curriculum) {
@@ -442,23 +453,20 @@ export class CalendarComponent implements OnInit, DoCheck {
     });
   }
 
-  // addEvent(): void {
-  //   this.events.push({
-  //     title: 'New event',
-  //     start: startOfDay(new Date()),
-  //     end: endOfDay(new Date()),
-  //     color: colors.red,
-  //     draggable: true,
-  //     resizable: {
-  //       beforeStart: true,
-  //       afterEnd: true
-  //     },
-  //     curriculum: curr,
-  //     numWeeks: curr.numberOfWeeks,
-  //     topics: curr.topics
-  //   });
-  //   this.refresh.next();
-  // }
+  addEvent(): void {
+    this.events.push({
+      title: this.newSubtopicName,
+      start: addHours(this.newSubtopicDate, 9),
+      end: addHours(this.newSubtopicDate, 10),
+      color: colors.red,
+      draggable: true,
+      resizable: {
+        beforeStart: true,
+        afterEnd: true
+      }
+    });
+    this.refresh.next();
+  }
 }
 
 @Component({
