@@ -1,1425 +1,1420 @@
 {
   "batches": [
-      {
-          "id": 1,
-          "name": "1806-Jun18-USF-Java",
-          "startDate": 123456787,
-          "endDate": 123456789,
-          "trainer_id": 3,
-          "calendarCurriculum_id": 2
-      },
-      {
-          "id": 2,
-          "name": "1807-Jul18-USF-JavaScript",
-          "startDate": 123456787,
-          "endDate": 123456789,
-          "trainer_id": 12,
-          "calendarCurriculum_id": 4
-      },
-      {
-          "id": 3,
-          "name": "1808-Aug18-USF-C++",
-          "startDate": 123456787,
-          "endDate": 123456789,
-          "trainer_id": 7,
-          "calendarCurriculum_id": 1
-      },
-      {
-          "id": 4,
-          "name": "1809-Sep18-USF-Java",
-          "startDate": 123456787,
-          "endDate": 123456789,
-          "trainer_id": 11,
-          "calendarCurriculum_id": 2
-      },
-      {
-          "id": 5,
-          "name": "1806-Nov18-USF-Java",
-          "startDate": 123456787,
-          "endDate": 123456789,
-          "trainer_id": 10,
-          "calendarCurriculum_id": 2
-      }
-  ]
-,
+    {
+      "id": 1,
+      "name": "1806-Jun18-USF-Java",
+      "startDate": 1529337600,
+      "endDate": 1535126400,
+      "trainer_id": 3,
+      "calendarCurriculum_id": 2
+    },
+    {
+      "id": 2,
+      "name": "1807-Jul18-USF-JavaScript",
+      "startDate": 123456787,
+      "endDate": 123456789,
+      "trainer_id": 12,
+      "calendarCurriculum_id": 4
+    },
+    {
+      "id": 3,
+      "name": "1808-Aug18-USF-C++",
+      "startDate": 123456787,
+      "endDate": 123456789,
+      "trainer_id": 7,
+      "calendarCurriculum_id": 1
+    },
+    {
+      "id": 4,
+      "name": "1809-Sep18-USF-Java",
+      "startDate": 123456787,
+      "endDate": 123456789,
+      "trainer_id": 11,
+      "calendarCurriculum_id": 2
+    },
+    {
+      "id": 5,
+      "name": "1806-Nov18-USF-Java",
+      "startDate": 123456787,
+      "endDate": 123456789,
+      "trainer_id": 10,
+      "calendarCurriculum_id": 2
+    }
+  ],
   "calendar-curriculums": [
-      {
-          "id": 1,
-          "curriculum_id": 1,
-          "batch_id": 1
-      },
-      {
-          "id": 2,
-          "curriculum_id": 1,
-          "batch_id": 1
-      },
-      {
-          "id": 3,
-          "curriculum_id": 1,
-          "batch_id": 1
-      },
-      {
-          "id": 4,
-          "curriculum_id": 1,
-          "batch_id": 1
-      },
-      {
-          "id": 5,
-          "curriculum_id": 1,
-          "batch_id": 1
-      },
-      {
-          "id": 6,
-          "curriculum_id": 1,
-          "batch_id": 5
-      }
-  ]
-,
-  "calendar-events":
-  [{
-      "id":1,
-      "title":"eventOne",
-      "description":"the first event",
-      "status_id":2,
-      "startDateTime":6713691398138,
-      "endDateTime":634342887095487,
-      "calendarSubtopic_id":2
-      },
-      {
-      "id":2,
-      "title":"eventTwo",
-      "description":"the second event",
-      "status_id":1,
-      "startDateTime":8129132869,
-      "endDateTime":6742830928462,
-      "calendarSubtopic_id":2
-      },
-      {
-      "id":3,
-      "title":"eventThree",
-      "description":"the third event",
-      "status_id":1,
-      "startDateTime":238080293,
-      "endDateTime":7342723489,
-      "calendarSubtopic_id":2
-      },
-      {
-      "id":4,
-      "title":"eventFour",
-      "description":"the fourth event",
-      "status_id":"2",
-      "startDateTime":376542356,
-      "endDateTime":478764567765,
-      "calendarSubtopic_id":1
-  }]
-,
+    {
+      "id": 1,
+      "curriculum_id": 1,
+      "batch_id": 1
+    },
+    {
+      "id": 2,
+      "curriculum_id": 1,
+      "batch_id": 1
+    },
+    {
+      "id": 3,
+      "curriculum_id": 1,
+      "batch_id": 1
+    },
+    {
+      "id": 4,
+      "curriculum_id": 1,
+      "batch_id": 1
+    },
+    {
+      "id": 5,
+      "curriculum_id": 1,
+      "batch_id": 1
+    },
+    {
+      "id": 6,
+      "curriculum_id": 1,
+      "batch_id": 5
+    }
+  ],
+  "calendar-events": [
+    {
+      "id": 1,
+      "title": "eventOne",
+      "description": "the first event",
+      "status_id": 2,
+      "startDateTime": 6713691398138,
+      "endDateTime": 634342887095487,
+      "calendarSubtopic_id": 2
+    },
+    {
+      "id": 2,
+      "title": "eventTwo",
+      "description": "the second event",
+      "status_id": 1,
+      "startDateTime": 8129132869,
+      "endDateTime": 6742830928462,
+      "calendarSubtopic_id": 2
+    },
+    {
+      "id": 3,
+      "title": "eventThree",
+      "description": "the third event",
+      "status_id": 1,
+      "startDateTime": 238080293,
+      "endDateTime": 7342723489,
+      "calendarSubtopic_id": 2
+    },
+    {
+      "id": 4,
+      "title": "eventFour",
+      "description": "the fourth event",
+      "status_id": "2",
+      "startDateTime": 376542356,
+      "endDateTime": 478764567765,
+      "calendarSubtopic_id": 1
+    }
+  ],
   "calendar-subtopics": [
-      {
-          "id": 1,
-          "subtopic_id": 1
-      },
-      {
-          "id": 2,
-          "subtopic_id": 2
-      },
-      {
-          "id": 3,
-          "subtopic_id": 3
-      },
-      {
-          "id": 4,
-          "subtopic_id": 4
-      },
-      {
-          "id": 5,
-          "subtopic_id": 5
-      },
-      {
-          "id": 6,
-          "subtopic_id": 6
-      }
-  ]
-,
+    {
+      "id": 1,
+      "subtopic_id": 1
+    },
+    {
+      "id": 2,
+      "subtopic_id": 2
+    },
+    {
+      "id": 3,
+      "subtopic_id": 3
+    },
+    {
+      "id": 4,
+      "subtopic_id": 4
+    },
+    {
+      "id": 5,
+      "subtopic_id": 5
+    },
+    {
+      "id": 6,
+      "subtopic_id": 6
+    }
+  ],
   "curriculums": [
-      {
-          "id": 1,
-          "name": "Java/JEE",
-          "version": "1",
-          "creator_id": 4,
-          "dateCreated": 99257573426,
-          "numberOfWeeks": 10,
-          "topics": [
-              {
-                  "id": 1,
-                  "name": "Core Java"
-              },
-              {
-                  "id": 2,
-                  "name": "SQL"
-              },
-              {
-                  "id": 3,
-                  "name": "Client-Side Technologies"
-              },
-              {
-                  "id": 4,
-                  "name": "Servlets"
-              },
-              {
-                  "id": 5,
-                  "name": "Angular"
-              },
-              {
-                  "id": 6,
-                  "name": "DevOps"
-              },
-              {
-                  "id": 7,
-                  "name": "Hibernate"
-              },
-              {
-                  "id": 8,
-                  "name": "Spring"
-              },
-              {
-                  "id": 9,
-                  "name": "Web Services"
-              },
-              {
-                  "id": 10,
-                  "name": "Microservices"
-              }
-          ]
-      }
-  ]
-,
-  "topics": [
-      {
+    {
+      "id": 1,
+      "name": "Java/JEE",
+      "version": "1",
+      "creator_id": 4,
+      "dateCreated": 99257573426,
+      "numberOfWeeks": 10,
+      "topics": [
+        {
           "id": 1,
           "name": "Core Java"
-      },
-      {
+        },
+        {
           "id": 2,
           "name": "SQL"
-      },
-      {
+        },
+        {
           "id": 3,
           "name": "Client-Side Technologies"
-      },
-      {
+        },
+        {
           "id": 4,
           "name": "Servlets"
-      },
-      {
+        },
+        {
           "id": 5,
           "name": "Angular"
-      },
-      {
+        },
+        {
           "id": 6,
           "name": "DevOps"
-      },
-      {
+        },
+        {
           "id": 7,
           "name": "Hibernate"
-      },
-      {
+        },
+        {
           "id": 8,
           "name": "Spring"
-      },
-      {
+        },
+        {
           "id": 9,
           "name": "Web Services"
-      },
-      {
+        },
+        {
           "id": 10,
           "name": "Microservices"
-      }
-  ]
-,
+        }
+      ]
+    }
+  ],
+  "topics": [
+    {
+      "id": 1,
+      "name": "Core Java"
+    },
+    {
+      "id": 2,
+      "name": "SQL"
+    },
+    {
+      "id": 3,
+      "name": "Client-Side Technologies"
+    },
+    {
+      "id": 4,
+      "name": "Servlets"
+    },
+    {
+      "id": 5,
+      "name": "Angular"
+    },
+    {
+      "id": 6,
+      "name": "DevOps"
+    },
+    {
+      "id": 7,
+      "name": "Hibernate"
+    },
+    {
+      "id": 8,
+      "name": "Spring"
+    },
+    {
+      "id": 9,
+      "name": "Web Services"
+    },
+    {
+      "id": 10,
+      "name": "Microservices"
+    }
+  ],
   "subtopics": [
-      {
-          "id": 1,
-          "name": "Introduction to Java: Why Java?",
-          "parentTopic_id": 1
-      },
-      {
-          "id": 2,
-          "name": "OOP Concepts in Depth: Polymorphism, Encapsulation, Inheritance, and Abstraction",
-          "parentTopic_id": 1
-      },
-      {
-          "id": 3,
-          "name": "First Java Program: HelloWorld, new, naming conventions",
-          "parentTopic_id": 1
-      },
-      {
-          "id": 4,
-          "name": "Constructors",
-          "parentTopic_id": 1
-      },
-      {
-          "id": 5,
-          "name": "Methods and Parameters",
-          "parentTopic_id": 1
-      },
-      {
-          "id": 6,
-          "name": "Scopes of a Variable in Java",
-          "parentTopic_id": 1
-      },
-      {
-          "id": 7,
-          "name": "Control Statements",
-          "parentTopic_id": 1
-      },
-      {
-          "id": 8,
-          "name": "Array",
-          "parentTopic_id": 1
-      },
-      {
-          "id": 9,
-          "name": "Varags, For Each Loop",
-          "parentTopic_id": 1
-      },
-      {
-          "id": 10,
-          "name": "Packages and Imports",
-          "parentTopic_id": 1
-      },
-      {
-          "id": 11,
-          "name": "Access Modifiers",
-          "parentTopic_id": 1
-      },
-      {
-          "id": 12,
-          "name": "String API",
-          "parentTopic_id": 1
-      },
-      {
-          "id": 13,
-          "name": "StringBuilder and StringBuffer",
-          "parentTopic_id": 1
-      },
-      {
-          "id": 14,
-          "name": "Exception Handling - try, catch, finally",
-          "parentTopic_id": 1
-      },
-      {
-          "id": 15,
-          "name": "Checked vs Unchecked Exceptions",
-          "parentTopic_id": 1
-      },
-      {
-          "id": 16,
-          "name": "Garbage Collection: finalize()",
-          "parentTopic_id": 1
-      },
-      {
-          "id": 17,
-          "name": "Wrapper Classes",
-          "parentTopic_id": 1
-      },
-      {
-          "id": 18,
-          "name": "Reflection",
-          "parentTopic_id": 1
-      },
-      {
-          "id": 19,
-          "name": "Inheritance",
-          "parentTopic_id": 1
-      },
-      {
-          "id": 20,
-          "name": "Method Overloading and Overriding",
-          "parentTopic_id": 1
-      },
-      {
-          "id": 21,
-          "name": "Interfaces",
-          "parentTopic_id": 1
-      },
-      {
-          "id": 22,
-          "name": "Abstract Classes",
-          "parentTopic_id": 1
-      },
-      {
-          "id": 23,
-          "name": "File I/O: FileInputStream/FileReader/FileWriter",
-          "parentTopic_id": 1
-      },
-      {
-          "id": 24,
-          "name": "Read from Console(Scanner)",
-          "parentTopic_id": 1
-      },
-      {
-          "id": 25,
-          "name": "Serialization",
-          "parentTopic_id": 1
-      },
-      {
-          "id": 26,
-          "name": "Collection Framework",
-          "parentTopic_id": 1
-      },
-      {
-          "id": 27,
-          "name": "List, Set, Map Interfaces",
-          "parentTopic_id": 1
-      },
-      {
-          "id": 28,
-          "name": "Using the Iterator",
-          "parentTopic_id": 1
-      },
-      {
-          "id": 29,
-          "name": "Comparing Objects",
-          "parentTopic_id": 1
-      },
-      {
-          "id": 30,
-          "name": "Generics",
-          "parentTopic_id": 1
-      },
-      {
-          "id": 31,
-          "name": "Object Class",
-          "parentTopic_id": 1
-      },
-      {
-          "id": 32,
-          "name": "Equals and Hashcode",
-          "parentTopic_id": 1
-      },
-      {
-          "id": 33,
-          "name": "Thread model",
-          "parentTopic_id": 1
-      },
-      {
-          "id": 34,
-          "name": "Runnable Interface and Thread Class",
-          "parentTopic_id": 1
-      },
-      {
-          "id": 35,
-          "name": "Multithreaded",
-          "parentTopic_id": 1
-      },
-      {
-          "id": 36,
-          "name": "Using isAlive() and join()",
-          "parentTopic_id": 1
-      },
-      {
-          "id": 37,
-          "name": "Sychronization",
-          "parentTopic_id": 1
-      },
-      {
-          "id": 38,
-          "name": "Deadlock",
-          "parentTopic_id": 1
-      },
-      {
-          "id": 39,
-          "name": "Producer/Consumer Problem",
-          "parentTopic_id": 1
-      },
-      {
-          "id": 40,
-          "name": "Creational Design Patterns: Singleton and Factory",
-          "parentTopic_id": 1
-      },
-      {
-          "id": 41,
-          "name": "Introduction to Unit Testing",
-          "parentTopic_id": 1
-      },
-      {
-          "id": 42,
-          "name": "JUnit Introduction",
-          "parentTopic_id": 1
-      },
-      {
-          "id": 43,
-          "name": "Assert Methods",
-          "parentTopic_id": 1
-      },
-      {
-          "id": 44,
-          "name": "Annotations with JUnit",
-          "parentTopic_id": 1
-      },
-      {
-          "id": 45,
-          "name": "Introduction to Maven",
-          "parentTopic_id": 1
-      },
-      {
-          "id": 46,
-          "name": "Maven Project Object Model (POM)",
-          "parentTopic_id": 1
-      },
-      {
-          "id": 47,
-          "name": "Maven Lifecycle",
-          "parentTopic_id": 1
-      },
-      {
-          "id": 48,
-          "name": "Maven Repositories",
-          "parentTopic_id": 1
-      },
-      {
-          "id": 49,
-          "name": "Executing a Sample Maven Build",
-          "parentTopic_id": 1
-      },
-      {
-          "id": 50,
-          "name": "Relational Database Service (RDS)",
-          "parentTopic_id": 2
-      },
-      {
-          "id": 51,
-          "name": "Java 8 Concepts - Lambda & Functional Interfaces",
-          "parentTopic_id": 2
-      },
-      {
-          "id": 52,
-          "name": "Introduction to DBMS",
-          "parentTopic_id": 2
-      },
-      {
-          "id": 53,
-          "name": "DML, DDL, DQL",
-          "parentTopic_id": 2
-      },
-      {
-          "id": 54,
-          "name": "Basic SQL Queries",
-          "parentTopic_id": 2
-      },
-      {
-          "id": 55,
-          "name": "Aggregate Functions",
-          "parentTopic_id": 2
-      },
-      {
-          "id": 56,
-          "name": "Multiplicity",
-          "parentTopic_id": 2
-      },
-      {
-          "id": 57,
-          "name": "Scalar Functions",
-          "parentTopic_id": 2
-      },
-      {
-          "id": 58,
-          "name": "Database Joins",
-          "parentTopic_id": 2
-      },
-      {
-          "id": 59,
-          "name": "Sub-queries",
-          "parentTopic_id": 2
-      },
-      {
-          "id": 60,
-          "name": "Normalization - 1NF/2NF/3NF",
-          "parentTopic_id": 2
-      },
-      {
-          "id": 61,
-          "name": "PL/SQL",
-          "parentTopic_id": 2
-      },
-      {
-          "id": 62,
-          "name": "Stored Procedures",
-          "parentTopic_id": 2
-      },
-      {
-          "id": 63,
-          "name": "Functions",
-          "parentTopic_id": 2
-      },
-      {
-          "id": 64,
-          "name": "Cursors",
-          "parentTopic_id": 2
-      },
-      {
-          "id": 65,
-          "name": "Triggers",
-          "parentTopic_id": 2
-      },
-      {
-          "id": 66,
-          "name": "Introduction to JDBC",
-          "parentTopic_id": 2
-      },
-      {
-          "id": 67,
-          "name": "Connection Interface",
-          "parentTopic_id": 2
-      },
-      {
-          "id": 68,
-          "name": "Simple and Prepared Statements",
-          "parentTopic_id": 2
-      },
-      {
-          "id": 69,
-          "name": "Callable Statements",
-          "parentTopic_id": 2
-      },
-      {
-          "id": 70,
-          "name": "Accessing Stored Procedures",
-          "parentTopic_id": 2
-      },
-      {
-          "id": 71,
-          "name": "Properties File",
-          "parentTopic_id": 2
-      },
-      {
-          "id": 73,
-          "name": "Design Patterns: Data Access Object (DAO)",
-          "parentTopic_id": 2
-      },
-      {
-          "id": 74,
-          "name": "HTML 5",
-          "parentTopic_id": 3
-      },
-      {
-          "id": 75,
-          "name": "HTML Forms",
-          "parentTopic_id": 3
-      },
-      {
-          "id": 76,
-          "name": "CSS3",
-          "parentTopic_id": 3
-      },
-      {
-          "id": 77,
-          "name": "Bootstrap",
-          "parentTopic_id": 3
-      },
-      {
-          "id": 78,
-          "name": "JavaScript Overview",
-          "parentTopic_id": 3
-      },
-      {
-          "id": 79,
-          "name": "JSON Overview",
-          "parentTopic_id": 3
-      },
-      {
-          "id": 80,
-          "name": "Events & Listeners",
-          "parentTopic_id": 3
-      },
-      {
-          "id": 81,
-          "name": "Introduction to ES6",
-          "parentTopic_id": 3
-      },
-      {
-          "id": 82,
-          "name": "Template Literals & Arrow Notation",
-          "parentTopic_id": 3
-      },
-      {
-          "id": 83,
-          "name": "Variable Scopes",
-          "parentTopic_id": 3
-      },
-      {
-          "id": 84,
-          "name": "DOM Selection",
-          "parentTopic_id": 3
-      },
-      {
-          "id": 85,
-          "name": "DOM Manipulation",
-          "parentTopic_id": 3
-      },
-      {
-          "id": 86,
-          "name": "Callback functions",
-          "parentTopic_id": 3
-      },
-      {
-          "id": 87,
-          "name": "Introduction to NPM",
-          "parentTopic_id": 3
-      },
-      {
-          "id": 88,
-          "name": "package.json",
-          "parentTopic_id": 3
-      },
-      {
-          "id": 89,
-          "name": "Introduction to Webpack/CLI",
-          "parentTopic_id": 3
-      },
-      {
-          "id": 90,
-          "name": "Bubbling, Capturing",
-          "parentTopic_id": 3
-      },
-      {
-          "id": 91,
-          "name": "Event Object",
-          "parentTopic_id": 3
-      },
-      {
-          "id": 92,
-          "name": "Cancelling Events",
-          "parentTopic_id": 3
-      },
-      {
-          "id": 93,
-          "name": "AJAX Introduction",
-          "parentTopic_id": 3
-      },
-      {
-          "id": 94,
-          "name": "AJAX Workflow",
-          "parentTopic_id": 3
-      },
-      {
-          "id": 95,
-          "name": "AJAX with XMLHttpRequest Object",
-          "parentTopic_id": 3
-      },
-      {
-          "id": 96,
-          "name": "Working with JSON in AJAX",
-          "parentTopic_id": 3
-      },
-      {
-          "id": 97,
-          "name": "J2EE Architecture",
-          "parentTopic_id": 3
-      },
-      {
-          "id": 98,
-          "name": "Introduction to SDLC",
-          "parentTopic_id": 3
-      },
-      {
-          "id": 99,
-          "name": "Agile/Scrum Concepts",
-          "parentTopic_id": 3
-      },
-      {
-          "id": 100,
-          "name": "Introduction to XML",
-          "parentTopic_id": 3
-      },
-      {
-          "id": 101,
-          "name": "XML Schema/DTD Overview",
-          "parentTopic_id": 3
-      },
-      {
-          "id": 102,
-          "name": "Well formed vs. valid XML",
-          "parentTopic_id": 3
-      },
-      {
-          "id": 103,
-          "name": "XML Namespace",
-          "parentTopic_id": 3
-      },
-      {
-          "id": 104,
-          "name": "JAX-P (DOM and SaX)",
-          "parentTopic_id": 3
-      },
-      {
-          "id": 105,
-          "name": "Design Patterns: MVC, Front Controllers, Business Delegate",
-          "parentTopic_id": 3
-      },
-      {
-          "id": 106,
-          "name": "Servlet Introduction",
-          "parentTopic_id": 4
-      },
-      {
-          "id": 107,
-          "name": "Container and Lifecycle",
-          "parentTopic_id": 4
-      },
-      {
-          "id": 108,
-          "name": "Browser/Server Communication",
-          "parentTopic_id": 4
-      },
-      {
-          "id": 109,
-          "name": "Servlet Inheritance Tree",
-          "parentTopic_id": 4
-      },
-      {
-          "id": 110,
-          "name": "Web Application (web.xml)",
-          "parentTopic_id": 4
-      },
-      {
-          "id": 111,
-          "name": "ServletConfig and Context",
-          "parentTopic_id": 4
-      },
-      {
-          "id": 112,
-          "name": "PrinterWriter",
-          "parentTopic_id": 4
-      },
-      {
-          "id": 113,
-          "name": "Design Patterns: Front Controller",
-          "parentTopic_id": 4
-      },
-      {
-          "id": 114,
-          "name": "Form Processing",
-          "parentTopic_id": 4
-      },
-      {
-          "id": 115,
-          "name": "doGet and doPost",
-          "parentTopic_id": 4
-      },
-      {
-          "id": 116,
-          "name": "request.getParameter",
-          "parentTopic_id": 4
-      },
-      {
-          "id": 117,
-          "name": "RequestDispatcher",
-          "parentTopic_id": 4
-      },
-      {
-          "id": 118,
-          "name": "sendRedirect",
-          "parentTopic_id": 4
-      },
-      {
-          "id": 119,
-          "name": "Bundling",
-          "parentTopic_id": 5
-      },
-      {
-          "id": 120,
-          "name": "Introduction to TypeScript",
-          "parentTopic_id": 5
-      },
-      {
-          "id": 121,
-          "name": "Access Modifiers/Variable Types",
-          "parentTopic_id": 5
-      },
-      {
-          "id": 122,
-          "name": "Classes & Decorators",
-          "parentTopic_id": 5
-      },
-      {
-          "id": 124,
-          "name": "Introduction to Angular 4",
-          "parentTopic_id": 5
-      },
-      {
-          "id": 125,
-          "name": "Directives",
-          "parentTopic_id": 5
-      },
-      {
-          "id": 126,
-          "name": "Components",
-          "parentTopic_id": 5
-      },
-      {
-          "id": 127,
-          "name": "Modules and Templates",
-          "parentTopic_id": 5
-      },
-      {
-          "id": 128,
-          "name": "2-Way Data Binding",
-          "parentTopic_id": 5
-      },
-      {
-          "id": 129,
-          "name": "Pipes & Filtering",
-          "parentTopic_id": 5
-      },
-      {
-          "id": 130,
-          "name": "Angular Services & Routing",
-          "parentTopic_id": 5
-      },
-      {
-          "id": 131,
-          "name": "Angular HTTP",
-          "parentTopic_id": 5
-      },
-      {
-          "id": 132,
-          "name": "RxJS Promises vs Observable",
-          "parentTopic_id": 5
-      },
-      {
-          "id": 133,
-          "name": "AngularJS vs Angular 4",
-          "parentTopic_id": 5
-      },
-      {
-          "id": 134,
-          "name": "Design Patterns: Publisher/Subscriber, Modules",
-          "parentTopic_id": 5
-      },
-      {
-          "id": 135,
-          "name": "Unix basics (basic shell scripting)",
-          "parentTopic_id": 6
-      },
-      {
-          "id": 136,
-          "name": "grep (lite), man, yum",
-          "parentTopic_id": 6
-      },
-      {
-          "id": 137,
-          "name": "Amazon Web Services Introduction",
-          "parentTopic_id": 6
-      },
-      {
-          "id": 138,
-          "name": "Elastic Cloud Compute (EC2)",
-          "parentTopic_id": 6
-      },
-      {
-          "id": 139,
-          "name": "Amazon Machine Image (AMI)",
-          "parentTopic_id": 6
-      },
-      {
-          "id": 140,
-          "name": "Elastic Block Store (EBS)",
-          "parentTopic_id": 6
-      },
-      {
-          "id": 141,
-          "name": "Security Groups",
-          "parentTopic_id": 6
-      },
-      {
-          "id": 142,
-          "name": "AWS",
-          "parentTopic_id": 6
-      },
-      {
-          "id": 143,
-          "name": "Simple Storage Service (S3)",
-          "parentTopic_id": 6
-      },
-      {
-          "id": 144,
-          "name": "EC2 Autoscaling",
-          "parentTopic_id": 6
-      },
-      {
-          "id": 145,
-          "name": "Continuous Integration (CI)",
-          "parentTopic_id": 6
-      },
-      {
-          "id": 146,
-          "name": "Jenkins Setup",
-          "parentTopic_id": 6
-      },
-      {
-          "id": 147,
-          "name": "Jenkins Job",
-          "parentTopic_id": 6
-      },
-      {
-          "id": 148,
-          "name": "Jenkins Build",
-          "parentTopic_id": 6
-      },
-      {
-          "id": 149,
-          "name": "SonarQube (Code Checker)",
-          "parentTopic_id": 6
-      },
-      {
-          "id": 150,
-          "name": "Hibernate Object States",
-          "parentTopic_id": 7
-      },
-      {
-          "id": 151,
-          "name": "Hibernate API and HQL",
-          "parentTopic_id": 7
-      },
-      {
-          "id": 152,
-          "name": "Configuring Data Source on Server",
-          "parentTopic_id": 7
-      },
-      {
-          "id": 153,
-          "name": "ACID Properties",
-          "parentTopic_id": 7
-      },
-      {
-          "id": 154,
-          "name": "Native SQL",
-          "parentTopic_id": 7
-      },
-      {
-          "id": 155,
-          "name": "Sample Hibernate Application",
-          "parentTopic_id": 7
-      },
-      {
-          "id": 156,
-          "name": "DAO Implementation",
-          "parentTopic_id": 7
-      },
-      {
-          "id": 157,
-          "name": "Hibernate Criteria API",
-          "parentTopic_id": 7
-      },
-      {
-          "id": 158,
-          "name": "Multiplicity using Hibernate",
-          "parentTopic_id": 7
-      },
-      {
-          "id": 159,
-          "name": "Named Query using hbm Files",
-          "parentTopic_id": 7
-      },
-      {
-          "id": 160,
-          "name": "Hibernate L1 vs L2 caching",
-          "parentTopic_id": 7
-      },
-      {
-          "id": 161,
-          "name": "Design Patterns: Service Locator",
-          "parentTopic_id": 7
-      },
-      {
-          "id": 162,
-          "name": "Introduction to Spring",
-          "parentTopic_id": 8
-      },
-      {
-          "id": 163,
-          "name": "Bean Lifecycle",
-          "parentTopic_id": 8
-      },
-      {
-          "id": 164,
-          "name": "Injecting primitives (XML)",
-          "parentTopic_id": 8
-      },
-      {
-          "id": 165,
-          "name": "Bean Factory vs. App Context",
-          "parentTopic_id": 8
-      },
-      {
-          "id": 166,
-          "name": "Injecting Objects (XML)",
-          "parentTopic_id": 8
-      },
-      {
-          "id": 167,
-          "name": "Tomcat",
-          "parentTopic_id": 8
-      },
-      {
-          "id": 168,
-          "name": "Annotations",
-          "parentTopic_id": 8
-      },
-      {
-          "id": 169,
-          "name": "@Component, @Repository, @Service, @Inject, @Autowired",
-          "parentTopic_id": 8
-      },
-      {
-          "id": 170,
-          "name": "Aspect-Oriented Programming (AOP)",
-          "parentTopic_id": 8
-      },
-      {
-          "id": 171,
-          "name": "Cross-Cutting Concerns",
-          "parentTopic_id": 8
-      },
-      {
-          "id": 172,
-          "name": "Advice",
-          "parentTopic_id": 8
-      },
-      {
-          "id": 173,
-          "name": "Advice",
-          "parentTopic_id": 8
-      },
-      {
-          "id": 174,
-          "name": "Pointcut",
-          "parentTopic_id": 8
-      },
-      {
-          "id": 175,
-          "name": "Join Points",
-          "parentTopic_id": 8
-      },
-      {
-          "id": 176,
-          "name": "Aspect-J",
-          "parentTopic_id": 8
-      },
-      {
-          "id": 177,
-          "name": "Spring Boot",
-          "parentTopic_id": 8
-      },
-      {
-          "id": 178,
-          "name": "Spring MVC",
-          "parentTopic_id": 8
-      },
-      {
-          "id": 178,
-          "name": "Control Flow",
-          "parentTopic_id": 8
-      },
-      {
-          "id": 179,
-          "name": "@Controller",
-          "parentTopic_id": 8
-      },
-      {
-          "id": 180,
-          "name": "@RequestMapping",
-          "parentTopic_id": 8
-      },
-      {
-          "id": 181,
-          "name": "InternalViewResourceResolver",
-          "parentTopic_id": 8
-      },
-      {
-          "id": 182,
-          "name": "Spring Data",
-          "parentTopic_id": 8
-      },
-      {
-          "id": 183,
-          "name": "Form Input",
-          "parentTopic_id": 8
-      },
-      {
-          "id": 184,
-          "name": "Validation (JSR 303)",
-          "parentTopic_id": 8
-      },
-      {
-          "id": 185,
-          "name": "Hibernate Integration using Contextual Sessions",
-          "parentTopic_id": 8
-      },
-      {
-          "id": 186,
-          "name": "@Transactional",
-          "parentTopic_id": 8
-      },
-      {
-          "id": 187,
-          "name": "JndiObjectFactoryBean",
-          "parentTopic_id": 8
-      },
-      {
-          "id": 188,
-          "name": "Overview of Web Services",
-          "parentTopic_id": 9
-      },
-      {
-          "id": 189,
-          "name": "Why We use Web Services",
-          "parentTopic_id": 9
-      },
-      {
-          "id": 190,
-          "name": "REST (Spring)",
-          "parentTopic_id": 9
-      },
-      {
-          "id": 191,
-          "name": "Exposing/Consuming REST",
-          "parentTopic_id": 9
-      },
-      {
-          "id": 192,
-          "name": "REST with XML (JAXB)",
-          "parentTopic_id": 9
-      },
-      {
-          "id": 193,
-          "name": "REST with JSON (Jackson)",
-          "parentTopic_id": 9
-      },
-      {
-          "id": 194,
-          "name": "Exception/Error Handling",
-          "parentTopic_id": 9
-      },
-      {
-          "id": 195,
-          "name": "Using Angular to make RESTful Calls to Spring Controllers",
-          "parentTopic_id": 9
-      },{
-          "id": 196,
-          "name": "SOAP-based WS Architecture",
-          "parentTopic_id": 9
-      },
-      {
-          "id": 197,
-          "name": "WS Online Example",
-          "parentTopic_id": 9
-      },
-      {
-          "id": 198,
-          "name": "WSDL",
-          "parentTopic_id": 9
-      },
-      {
-          "id": 199,
-          "name": "Contract First/Contract Last",
-          "parentTopic_id": 9
-      },
-      {
-          "id": 200,
-          "name": "XML namespace",
-          "parentTopic_id": 9
-      },
-      {
-          "id": 201,
-          "name": "JAX-WS, JAXB",
-          "parentTopic_id": 9
-      },
-      {
-          "id": 202,
-          "name": "SOAP binding styles",
-          "parentTopic_id": 9
-      },
-      {
-          "id": 203,
-          "name": "Building SOAP Services with Apache CXF and Maven",
-          "parentTopic_id": 9
-      },
-      {
-          "id": 204,
-          "name": "Viewing SOAP Messages",
-          "parentTopic_id": 9
-      },
-      {
-          "id": 205,
-          "name": "Microservices-(Discovery)",
-          "parentTopic_id": 10
-      },
-      {
-          "id": 206,
-          "name": "Microservices Architecture",
-          "parentTopic_id": 10
-      },
-      {
-          "id": 207,
-          "name": "API Gateway-Zuul/MS Web API",
-          "parentTopic_id": 10
-      },
-      {
-          "id": 208,
-          "name": "Service Discovery & Registry-Eureka(Ribbon)/Consul",
-          "parentTopic_id": 10
-      },
-      {
-          "id": 209,
-          "name": "Deployment Environment",
-          "parentTopic_id": 10
-      },
-      {
-          "id": 210,
-          "name": "Containerization-Docker",
-          "parentTopic_id": 10
-      },
-      {
-          "id": 211,
-          "name": "Orchestration-Docker Swarm/Kubernetes",
-          "parentTopic_id": 10
-      },
-      {
-          "id": 212,
-          "name": "Config/Messaging & Monitoring",
-          "parentTopic_id": 10
-      },
-      {
-          "id": 213,
-          "name": "Messaging MQs-Kafka/Rabbit MQ",
-          "parentTopic_id": 10
-      },
-      {
-          "id": 214,
-          "name": "Centralized Configuration - Spring Cloud Config/Consul/Zookeeper",
-          "parentTopic_id": 10
-      },
-      {
-          "id": 215,
-          "name": "Monitoring-Hystrix",
-          "parentTopic_id": 10
-      }
-  ]
-,
+    {
+      "id": 1,
+      "name": "Introduction to Java: Why Java?",
+      "parentTopic_id": 1
+    },
+    {
+      "id": 2,
+      "name": "OOP Concepts in Depth: Polymorphism, Encapsulation, Inheritance, and Abstraction",
+      "parentTopic_id": 1
+    },
+    {
+      "id": 3,
+      "name": "First Java Program: HelloWorld, new, naming conventions",
+      "parentTopic_id": 1
+    },
+    {
+      "id": 4,
+      "name": "Constructors",
+      "parentTopic_id": 1
+    },
+    {
+      "id": 5,
+      "name": "Methods and Parameters",
+      "parentTopic_id": 1
+    },
+    {
+      "id": 6,
+      "name": "Scopes of a Variable in Java",
+      "parentTopic_id": 1
+    },
+    {
+      "id": 7,
+      "name": "Control Statements",
+      "parentTopic_id": 1
+    },
+    {
+      "id": 8,
+      "name": "Array",
+      "parentTopic_id": 1
+    },
+    {
+      "id": 9,
+      "name": "Varags, For Each Loop",
+      "parentTopic_id": 1
+    },
+    {
+      "id": 10,
+      "name": "Packages and Imports",
+      "parentTopic_id": 1
+    },
+    {
+      "id": 11,
+      "name": "Access Modifiers",
+      "parentTopic_id": 1
+    },
+    {
+      "id": 12,
+      "name": "String API",
+      "parentTopic_id": 1
+    },
+    {
+      "id": 13,
+      "name": "StringBuilder and StringBuffer",
+      "parentTopic_id": 1
+    },
+    {
+      "id": 14,
+      "name": "Exception Handling - try, catch, finally",
+      "parentTopic_id": 1
+    },
+    {
+      "id": 15,
+      "name": "Checked vs Unchecked Exceptions",
+      "parentTopic_id": 1
+    },
+    {
+      "id": 16,
+      "name": "Garbage Collection: finalize()",
+      "parentTopic_id": 1
+    },
+    {
+      "id": 17,
+      "name": "Wrapper Classes",
+      "parentTopic_id": 1
+    },
+    {
+      "id": 18,
+      "name": "Reflection",
+      "parentTopic_id": 1
+    },
+    {
+      "id": 19,
+      "name": "Inheritance",
+      "parentTopic_id": 1
+    },
+    {
+      "id": 20,
+      "name": "Method Overloading and Overriding",
+      "parentTopic_id": 1
+    },
+    {
+      "id": 21,
+      "name": "Interfaces",
+      "parentTopic_id": 1
+    },
+    {
+      "id": 22,
+      "name": "Abstract Classes",
+      "parentTopic_id": 1
+    },
+    {
+      "id": 23,
+      "name": "File I/O: FileInputStream/FileReader/FileWriter",
+      "parentTopic_id": 1
+    },
+    {
+      "id": 24,
+      "name": "Read from Console(Scanner)",
+      "parentTopic_id": 1
+    },
+    {
+      "id": 25,
+      "name": "Serialization",
+      "parentTopic_id": 1
+    },
+    {
+      "id": 26,
+      "name": "Collection Framework",
+      "parentTopic_id": 1
+    },
+    {
+      "id": 27,
+      "name": "List, Set, Map Interfaces",
+      "parentTopic_id": 1
+    },
+    {
+      "id": 28,
+      "name": "Using the Iterator",
+      "parentTopic_id": 1
+    },
+    {
+      "id": 29,
+      "name": "Comparing Objects",
+      "parentTopic_id": 1
+    },
+    {
+      "id": 30,
+      "name": "Generics",
+      "parentTopic_id": 1
+    },
+    {
+      "id": 31,
+      "name": "Object Class",
+      "parentTopic_id": 1
+    },
+    {
+      "id": 32,
+      "name": "Equals and Hashcode",
+      "parentTopic_id": 1
+    },
+    {
+      "id": 33,
+      "name": "Thread model",
+      "parentTopic_id": 1
+    },
+    {
+      "id": 34,
+      "name": "Runnable Interface and Thread Class",
+      "parentTopic_id": 1
+    },
+    {
+      "id": 35,
+      "name": "Multithreaded",
+      "parentTopic_id": 1
+    },
+    {
+      "id": 36,
+      "name": "Using isAlive() and join()",
+      "parentTopic_id": 1
+    },
+    {
+      "id": 37,
+      "name": "Sychronization",
+      "parentTopic_id": 1
+    },
+    {
+      "id": 38,
+      "name": "Deadlock",
+      "parentTopic_id": 1
+    },
+    {
+      "id": 39,
+      "name": "Producer/Consumer Problem",
+      "parentTopic_id": 1
+    },
+    {
+      "id": 40,
+      "name": "Creational Design Patterns: Singleton and Factory",
+      "parentTopic_id": 1
+    },
+    {
+      "id": 41,
+      "name": "Introduction to Unit Testing",
+      "parentTopic_id": 1
+    },
+    {
+      "id": 42,
+      "name": "JUnit Introduction",
+      "parentTopic_id": 1
+    },
+    {
+      "id": 43,
+      "name": "Assert Methods",
+      "parentTopic_id": 1
+    },
+    {
+      "id": 44,
+      "name": "Annotations with JUnit",
+      "parentTopic_id": 1
+    },
+    {
+      "id": 45,
+      "name": "Introduction to Maven",
+      "parentTopic_id": 1
+    },
+    {
+      "id": 46,
+      "name": "Maven Project Object Model (POM)",
+      "parentTopic_id": 1
+    },
+    {
+      "id": 47,
+      "name": "Maven Lifecycle",
+      "parentTopic_id": 1
+    },
+    {
+      "id": 48,
+      "name": "Maven Repositories",
+      "parentTopic_id": 1
+    },
+    {
+      "id": 49,
+      "name": "Executing a Sample Maven Build",
+      "parentTopic_id": 1
+    },
+    {
+      "id": 50,
+      "name": "Relational Database Service (RDS)",
+      "parentTopic_id": 2
+    },
+    {
+      "id": 51,
+      "name": "Java 8 Concepts - Lambda & Functional Interfaces",
+      "parentTopic_id": 2
+    },
+    {
+      "id": 52,
+      "name": "Introduction to DBMS",
+      "parentTopic_id": 2
+    },
+    {
+      "id": 53,
+      "name": "DML, DDL, DQL",
+      "parentTopic_id": 2
+    },
+    {
+      "id": 54,
+      "name": "Basic SQL Queries",
+      "parentTopic_id": 2
+    },
+    {
+      "id": 55,
+      "name": "Aggregate Functions",
+      "parentTopic_id": 2
+    },
+    {
+      "id": 56,
+      "name": "Multiplicity",
+      "parentTopic_id": 2
+    },
+    {
+      "id": 57,
+      "name": "Scalar Functions",
+      "parentTopic_id": 2
+    },
+    {
+      "id": 58,
+      "name": "Database Joins",
+      "parentTopic_id": 2
+    },
+    {
+      "id": 59,
+      "name": "Sub-queries",
+      "parentTopic_id": 2
+    },
+    {
+      "id": 60,
+      "name": "Normalization - 1NF/2NF/3NF",
+      "parentTopic_id": 2
+    },
+    {
+      "id": 61,
+      "name": "PL/SQL",
+      "parentTopic_id": 2
+    },
+    {
+      "id": 62,
+      "name": "Stored Procedures",
+      "parentTopic_id": 2
+    },
+    {
+      "id": 63,
+      "name": "Functions",
+      "parentTopic_id": 2
+    },
+    {
+      "id": 64,
+      "name": "Cursors",
+      "parentTopic_id": 2
+    },
+    {
+      "id": 65,
+      "name": "Triggers",
+      "parentTopic_id": 2
+    },
+    {
+      "id": 66,
+      "name": "Introduction to JDBC",
+      "parentTopic_id": 2
+    },
+    {
+      "id": 67,
+      "name": "Connection Interface",
+      "parentTopic_id": 2
+    },
+    {
+      "id": 68,
+      "name": "Simple and Prepared Statements",
+      "parentTopic_id": 2
+    },
+    {
+      "id": 69,
+      "name": "Callable Statements",
+      "parentTopic_id": 2
+    },
+    {
+      "id": 70,
+      "name": "Accessing Stored Procedures",
+      "parentTopic_id": 2
+    },
+    {
+      "id": 71,
+      "name": "Properties File",
+      "parentTopic_id": 2
+    },
+    {
+      "id": 73,
+      "name": "Design Patterns: Data Access Object (DAO)",
+      "parentTopic_id": 2
+    },
+    {
+      "id": 74,
+      "name": "HTML 5",
+      "parentTopic_id": 3
+    },
+    {
+      "id": 75,
+      "name": "HTML Forms",
+      "parentTopic_id": 3
+    },
+    {
+      "id": 76,
+      "name": "CSS3",
+      "parentTopic_id": 3
+    },
+    {
+      "id": 77,
+      "name": "Bootstrap",
+      "parentTopic_id": 3
+    },
+    {
+      "id": 78,
+      "name": "JavaScript Overview",
+      "parentTopic_id": 3
+    },
+    {
+      "id": 79,
+      "name": "JSON Overview",
+      "parentTopic_id": 3
+    },
+    {
+      "id": 80,
+      "name": "Events & Listeners",
+      "parentTopic_id": 3
+    },
+    {
+      "id": 81,
+      "name": "Introduction to ES6",
+      "parentTopic_id": 3
+    },
+    {
+      "id": 82,
+      "name": "Template Literals & Arrow Notation",
+      "parentTopic_id": 3
+    },
+    {
+      "id": 83,
+      "name": "Variable Scopes",
+      "parentTopic_id": 3
+    },
+    {
+      "id": 84,
+      "name": "DOM Selection",
+      "parentTopic_id": 3
+    },
+    {
+      "id": 85,
+      "name": "DOM Manipulation",
+      "parentTopic_id": 3
+    },
+    {
+      "id": 86,
+      "name": "Callback functions",
+      "parentTopic_id": 3
+    },
+    {
+      "id": 87,
+      "name": "Introduction to NPM",
+      "parentTopic_id": 3
+    },
+    {
+      "id": 88,
+      "name": "package.json",
+      "parentTopic_id": 3
+    },
+    {
+      "id": 89,
+      "name": "Introduction to Webpack/CLI",
+      "parentTopic_id": 3
+    },
+    {
+      "id": 90,
+      "name": "Bubbling, Capturing",
+      "parentTopic_id": 3
+    },
+    {
+      "id": 91,
+      "name": "Event Object",
+      "parentTopic_id": 3
+    },
+    {
+      "id": 92,
+      "name": "Cancelling Events",
+      "parentTopic_id": 3
+    },
+    {
+      "id": 93,
+      "name": "AJAX Introduction",
+      "parentTopic_id": 3
+    },
+    {
+      "id": 94,
+      "name": "AJAX Workflow",
+      "parentTopic_id": 3
+    },
+    {
+      "id": 95,
+      "name": "AJAX with XMLHttpRequest Object",
+      "parentTopic_id": 3
+    },
+    {
+      "id": 96,
+      "name": "Working with JSON in AJAX",
+      "parentTopic_id": 3
+    },
+    {
+      "id": 97,
+      "name": "J2EE Architecture",
+      "parentTopic_id": 3
+    },
+    {
+      "id": 98,
+      "name": "Introduction to SDLC",
+      "parentTopic_id": 3
+    },
+    {
+      "id": 99,
+      "name": "Agile/Scrum Concepts",
+      "parentTopic_id": 3
+    },
+    {
+      "id": 100,
+      "name": "Introduction to XML",
+      "parentTopic_id": 3
+    },
+    {
+      "id": 101,
+      "name": "XML Schema/DTD Overview",
+      "parentTopic_id": 3
+    },
+    {
+      "id": 102,
+      "name": "Well formed vs. valid XML",
+      "parentTopic_id": 3
+    },
+    {
+      "id": 103,
+      "name": "XML Namespace",
+      "parentTopic_id": 3
+    },
+    {
+      "id": 104,
+      "name": "JAX-P (DOM and SaX)",
+      "parentTopic_id": 3
+    },
+    {
+      "id": 105,
+      "name": "Design Patterns: MVC, Front Controllers, Business Delegate",
+      "parentTopic_id": 3
+    },
+    {
+      "id": 106,
+      "name": "Servlet Introduction",
+      "parentTopic_id": 4
+    },
+    {
+      "id": 107,
+      "name": "Container and Lifecycle",
+      "parentTopic_id": 4
+    },
+    {
+      "id": 108,
+      "name": "Browser/Server Communication",
+      "parentTopic_id": 4
+    },
+    {
+      "id": 109,
+      "name": "Servlet Inheritance Tree",
+      "parentTopic_id": 4
+    },
+    {
+      "id": 110,
+      "name": "Web Application (web.xml)",
+      "parentTopic_id": 4
+    },
+    {
+      "id": 111,
+      "name": "ServletConfig and Context",
+      "parentTopic_id": 4
+    },
+    {
+      "id": 112,
+      "name": "PrinterWriter",
+      "parentTopic_id": 4
+    },
+    {
+      "id": 113,
+      "name": "Design Patterns: Front Controller",
+      "parentTopic_id": 4
+    },
+    {
+      "id": 114,
+      "name": "Form Processing",
+      "parentTopic_id": 4
+    },
+    {
+      "id": 115,
+      "name": "doGet and doPost",
+      "parentTopic_id": 4
+    },
+    {
+      "id": 116,
+      "name": "request.getParameter",
+      "parentTopic_id": 4
+    },
+    {
+      "id": 117,
+      "name": "RequestDispatcher",
+      "parentTopic_id": 4
+    },
+    {
+      "id": 118,
+      "name": "sendRedirect",
+      "parentTopic_id": 4
+    },
+    {
+      "id": 119,
+      "name": "Bundling",
+      "parentTopic_id": 5
+    },
+    {
+      "id": 120,
+      "name": "Introduction to TypeScript",
+      "parentTopic_id": 5
+    },
+    {
+      "id": 121,
+      "name": "Access Modifiers/Variable Types",
+      "parentTopic_id": 5
+    },
+    {
+      "id": 122,
+      "name": "Classes & Decorators",
+      "parentTopic_id": 5
+    },
+    {
+      "id": 124,
+      "name": "Introduction to Angular 4",
+      "parentTopic_id": 5
+    },
+    {
+      "id": 125,
+      "name": "Directives",
+      "parentTopic_id": 5
+    },
+    {
+      "id": 126,
+      "name": "Components",
+      "parentTopic_id": 5
+    },
+    {
+      "id": 127,
+      "name": "Modules and Templates",
+      "parentTopic_id": 5
+    },
+    {
+      "id": 128,
+      "name": "2-Way Data Binding",
+      "parentTopic_id": 5
+    },
+    {
+      "id": 129,
+      "name": "Pipes & Filtering",
+      "parentTopic_id": 5
+    },
+    {
+      "id": 130,
+      "name": "Angular Services & Routing",
+      "parentTopic_id": 5
+    },
+    {
+      "id": 131,
+      "name": "Angular HTTP",
+      "parentTopic_id": 5
+    },
+    {
+      "id": 132,
+      "name": "RxJS Promises vs Observable",
+      "parentTopic_id": 5
+    },
+    {
+      "id": 133,
+      "name": "AngularJS vs Angular 4",
+      "parentTopic_id": 5
+    },
+    {
+      "id": 134,
+      "name": "Design Patterns: Publisher/Subscriber, Modules",
+      "parentTopic_id": 5
+    },
+    {
+      "id": 135,
+      "name": "Unix basics (basic shell scripting)",
+      "parentTopic_id": 6
+    },
+    {
+      "id": 136,
+      "name": "grep (lite), man, yum",
+      "parentTopic_id": 6
+    },
+    {
+      "id": 137,
+      "name": "Amazon Web Services Introduction",
+      "parentTopic_id": 6
+    },
+    {
+      "id": 138,
+      "name": "Elastic Cloud Compute (EC2)",
+      "parentTopic_id": 6
+    },
+    {
+      "id": 139,
+      "name": "Amazon Machine Image (AMI)",
+      "parentTopic_id": 6
+    },
+    {
+      "id": 140,
+      "name": "Elastic Block Store (EBS)",
+      "parentTopic_id": 6
+    },
+    {
+      "id": 141,
+      "name": "Security Groups",
+      "parentTopic_id": 6
+    },
+    {
+      "id": 142,
+      "name": "AWS",
+      "parentTopic_id": 6
+    },
+    {
+      "id": 143,
+      "name": "Simple Storage Service (S3)",
+      "parentTopic_id": 6
+    },
+    {
+      "id": 144,
+      "name": "EC2 Autoscaling",
+      "parentTopic_id": 6
+    },
+    {
+      "id": 145,
+      "name": "Continuous Integration (CI)",
+      "parentTopic_id": 6
+    },
+    {
+      "id": 146,
+      "name": "Jenkins Setup",
+      "parentTopic_id": 6
+    },
+    {
+      "id": 147,
+      "name": "Jenkins Job",
+      "parentTopic_id": 6
+    },
+    {
+      "id": 148,
+      "name": "Jenkins Build",
+      "parentTopic_id": 6
+    },
+    {
+      "id": 149,
+      "name": "SonarQube (Code Checker)",
+      "parentTopic_id": 6
+    },
+    {
+      "id": 150,
+      "name": "Hibernate Object States",
+      "parentTopic_id": 7
+    },
+    {
+      "id": 151,
+      "name": "Hibernate API and HQL",
+      "parentTopic_id": 7
+    },
+    {
+      "id": 152,
+      "name": "Configuring Data Source on Server",
+      "parentTopic_id": 7
+    },
+    {
+      "id": 153,
+      "name": "ACID Properties",
+      "parentTopic_id": 7
+    },
+    {
+      "id": 154,
+      "name": "Native SQL",
+      "parentTopic_id": 7
+    },
+    {
+      "id": 155,
+      "name": "Sample Hibernate Application",
+      "parentTopic_id": 7
+    },
+    {
+      "id": 156,
+      "name": "DAO Implementation",
+      "parentTopic_id": 7
+    },
+    {
+      "id": 157,
+      "name": "Hibernate Criteria API",
+      "parentTopic_id": 7
+    },
+    {
+      "id": 158,
+      "name": "Multiplicity using Hibernate",
+      "parentTopic_id": 7
+    },
+    {
+      "id": 159,
+      "name": "Named Query using hbm Files",
+      "parentTopic_id": 7
+    },
+    {
+      "id": 160,
+      "name": "Hibernate L1 vs L2 caching",
+      "parentTopic_id": 7
+    },
+    {
+      "id": 161,
+      "name": "Design Patterns: Service Locator",
+      "parentTopic_id": 7
+    },
+    {
+      "id": 162,
+      "name": "Introduction to Spring",
+      "parentTopic_id": 8
+    },
+    {
+      "id": 163,
+      "name": "Bean Lifecycle",
+      "parentTopic_id": 8
+    },
+    {
+      "id": 164,
+      "name": "Injecting primitives (XML)",
+      "parentTopic_id": 8
+    },
+    {
+      "id": 165,
+      "name": "Bean Factory vs. App Context",
+      "parentTopic_id": 8
+    },
+    {
+      "id": 166,
+      "name": "Injecting Objects (XML)",
+      "parentTopic_id": 8
+    },
+    {
+      "id": 167,
+      "name": "Tomcat",
+      "parentTopic_id": 8
+    },
+    {
+      "id": 168,
+      "name": "Annotations",
+      "parentTopic_id": 8
+    },
+    {
+      "id": 169,
+      "name": "@Component, @Repository, @Service, @Inject, @Autowired",
+      "parentTopic_id": 8
+    },
+    {
+      "id": 170,
+      "name": "Aspect-Oriented Programming (AOP)",
+      "parentTopic_id": 8
+    },
+    {
+      "id": 171,
+      "name": "Cross-Cutting Concerns",
+      "parentTopic_id": 8
+    },
+    {
+      "id": 172,
+      "name": "Advice",
+      "parentTopic_id": 8
+    },
+    {
+      "id": 173,
+      "name": "Advice",
+      "parentTopic_id": 8
+    },
+    {
+      "id": 174,
+      "name": "Pointcut",
+      "parentTopic_id": 8
+    },
+    {
+      "id": 175,
+      "name": "Join Points",
+      "parentTopic_id": 8
+    },
+    {
+      "id": 176,
+      "name": "Aspect-J",
+      "parentTopic_id": 8
+    },
+    {
+      "id": 177,
+      "name": "Spring Boot",
+      "parentTopic_id": 8
+    },
+    {
+      "id": 178,
+      "name": "Spring MVC",
+      "parentTopic_id": 8
+    },
+    {
+      "id": 178,
+      "name": "Control Flow",
+      "parentTopic_id": 8
+    },
+    {
+      "id": 179,
+      "name": "@Controller",
+      "parentTopic_id": 8
+    },
+    {
+      "id": 180,
+      "name": "@RequestMapping",
+      "parentTopic_id": 8
+    },
+    {
+      "id": 181,
+      "name": "InternalViewResourceResolver",
+      "parentTopic_id": 8
+    },
+    {
+      "id": 182,
+      "name": "Spring Data",
+      "parentTopic_id": 8
+    },
+    {
+      "id": 183,
+      "name": "Form Input",
+      "parentTopic_id": 8
+    },
+    {
+      "id": 184,
+      "name": "Validation (JSR 303)",
+      "parentTopic_id": 8
+    },
+    {
+      "id": 185,
+      "name": "Hibernate Integration using Contextual Sessions",
+      "parentTopic_id": 8
+    },
+    {
+      "id": 186,
+      "name": "@Transactional",
+      "parentTopic_id": 8
+    },
+    {
+      "id": 187,
+      "name": "JndiObjectFactoryBean",
+      "parentTopic_id": 8
+    },
+    {
+      "id": 188,
+      "name": "Overview of Web Services",
+      "parentTopic_id": 9
+    },
+    {
+      "id": 189,
+      "name": "Why We use Web Services",
+      "parentTopic_id": 9
+    },
+    {
+      "id": 190,
+      "name": "REST (Spring)",
+      "parentTopic_id": 9
+    },
+    {
+      "id": 191,
+      "name": "Exposing/Consuming REST",
+      "parentTopic_id": 9
+    },
+    {
+      "id": 192,
+      "name": "REST with XML (JAXB)",
+      "parentTopic_id": 9
+    },
+    {
+      "id": 193,
+      "name": "REST with JSON (Jackson)",
+      "parentTopic_id": 9
+    },
+    {
+      "id": 194,
+      "name": "Exception/Error Handling",
+      "parentTopic_id": 9
+    },
+    {
+      "id": 195,
+      "name": "Using Angular to make RESTful Calls to Spring Controllers",
+      "parentTopic_id": 9
+    },
+    {
+      "id": 196,
+      "name": "SOAP-based WS Architecture",
+      "parentTopic_id": 9
+    },
+    {
+      "id": 197,
+      "name": "WS Online Example",
+      "parentTopic_id": 9
+    },
+    {
+      "id": 198,
+      "name": "WSDL",
+      "parentTopic_id": 9
+    },
+    {
+      "id": 199,
+      "name": "Contract First/Contract Last",
+      "parentTopic_id": 9
+    },
+    {
+      "id": 200,
+      "name": "XML namespace",
+      "parentTopic_id": 9
+    },
+    {
+      "id": 201,
+      "name": "JAX-WS, JAXB",
+      "parentTopic_id": 9
+    },
+    {
+      "id": 202,
+      "name": "SOAP binding styles",
+      "parentTopic_id": 9
+    },
+    {
+      "id": 203,
+      "name": "Building SOAP Services with Apache CXF and Maven",
+      "parentTopic_id": 9
+    },
+    {
+      "id": 204,
+      "name": "Viewing SOAP Messages",
+      "parentTopic_id": 9
+    },
+    {
+      "id": 205,
+      "name": "Microservices-(Discovery)",
+      "parentTopic_id": 10
+    },
+    {
+      "id": 206,
+      "name": "Microservices Architecture",
+      "parentTopic_id": 10
+    },
+    {
+      "id": 207,
+      "name": "API Gateway-Zuul/MS Web API",
+      "parentTopic_id": 10
+    },
+    {
+      "id": 208,
+      "name": "Service Discovery & Registry-Eureka(Ribbon)/Consul",
+      "parentTopic_id": 10
+    },
+    {
+      "id": 209,
+      "name": "Deployment Environment",
+      "parentTopic_id": 10
+    },
+    {
+      "id": 210,
+      "name": "Containerization-Docker",
+      "parentTopic_id": 10
+    },
+    {
+      "id": 211,
+      "name": "Orchestration-Docker Swarm/Kubernetes",
+      "parentTopic_id": 10
+    },
+    {
+      "id": 212,
+      "name": "Config/Messaging & Monitoring",
+      "parentTopic_id": 10
+    },
+    {
+      "id": 213,
+      "name": "Messaging MQs-Kafka/Rabbit MQ",
+      "parentTopic_id": 10
+    },
+    {
+      "id": 214,
+      "name": "Centralized Configuration - Spring Cloud Config/Consul/Zookeeper",
+      "parentTopic_id": 10
+    },
+    {
+      "id": 215,
+      "name": "Monitoring-Hystrix",
+      "parentTopic_id": 10
+    }
+  ],
   "users": [
-      {
-          "id":1,
-          "firstName":"Wezley",
-          "lastName":"Singleton",
-          "email":"wezleysingleton@reva.com",
-          "role_id":1,
-          "status_id":1
-      },
-      {
-          "id":2,
-          "firstName":"Dylan",
-          "lastName":"McBee",
-          "email":"dylanmcbee@reva.com",
-          "role_id":1,
-          "status_id":1
-      },
-      {
-          "id":3,
-          "firstName":"Aaron",
-          "lastName":"Mathews",
-          "email":"aaron.mathews95@gmail.com",
-          "role_id":2,
-          "status_id":1
-      },
-      {
-          "id":4,
-          "firstName":"Algustus",
-          "lastName":"Lee",
-          "email":"algustuslee@reva.com",
-          "role_id":2,
-          "status_id":1
-      },
-      {
-          "id":5,
-          "firstName":"Brandon",
-          "lastName":"Scoggins",
-          "email":"brandonscoggins@reva.com",
-          "role_id":2,
-          "status_id":1
-      },
-      {
-          "id":6,
-          "firstName":"Christian",
-          "lastName":"DeFaria",
-          "email":"christiandefaria@reva.com",
-          "role_id":2,
-          "status_id":1
-      },
-      {
-          "id":7,
-          "firstName":"Derek",
-          "lastName":"Loisel",
-          "email":"derekloisel@reva.com",
-          "role_id":2,
-          "status_id":1
-      },
-      {
-          "id":8,
-          "firstName":"Bradley",
-          "lastName":"Walker",
-          "email":"bradleywalker@reva.com",
-          "role_id":2,
-          "status_id":1
-      },
-      {
-          "id":9,
-          "firstName":"John",
-          "lastName":"Beineke",
-          "email":"johnbeineke@reva.com",
-          "role_id":2,
-          "status_id":1
-      },
-      {
-          "id":10,
-          "firstName":"Karen",
-          "lastName":"Matney",
-          "email":"matneyka@gmail.com",
-          "role_id":2,
-          "status_id":1
-      },
-      {
-          "id":11,
-          "firstName":"Khaleel",
-          "lastName":"Williams",
-          "email":"khaleelwilliams@reva.com",
-          "role_id":2,
-          "status_id":1
-      },
-      {
-          "id":12,
-          "firstName":"Kyle",
-          "lastName":"Smith",
-          "email":"kylesmith@reva.com",
-          "role_id":2,
-          "status_id":1
-      },
-      {
-          "id":13,
-          "firstName":"Thomas",
-          "lastName":"Steyaert",
-          "email":"thomassteyaert@reva.com",
-          "role_id":2,
-          "status_id":1
-      },
-      {
-          "id":14,
-          "firstName":"Andrew",
-          "lastName":"Li",
-          "email":"andrewli@reva.com",
-          "role_id":2,
-          "status_id":1
-      }
+    {
+      "id": 1,
+      "firstName": "Wezley",
+      "lastName": "Singleton",
+      "email": "wezleysingleton@reva.com",
+      "role_id": 1,
+      "status_id": 1
+    },
+    {
+      "id": 2,
+      "firstName": "Dylan",
+      "lastName": "McBee",
+      "email": "dylanmcbee@reva.com",
+      "role_id": 1,
+      "status_id": 1
+    },
+    {
+      "id": 3,
+      "firstName": "Aaron",
+      "lastName": "Mathews",
+      "email": "aaron.mathews95@gmail.com",
+      "role_id": 2,
+      "status_id": 1
+    },
+    {
+      "id": 4,
+      "firstName": "Algustus",
+      "lastName": "Lee",
+      "email": "algustuslee@reva.com",
+      "role_id": 2,
+      "status_id": 1
+    },
+    {
+      "id": 5,
+      "firstName": "Brandon",
+      "lastName": "Scoggins",
+      "email": "brandonscoggins@reva.com",
+      "role_id": 2,
+      "status_id": 1
+    },
+    {
+      "id": 6,
+      "firstName": "Christian",
+      "lastName": "DeFaria",
+      "email": "christiandefaria@reva.com",
+      "role_id": 2,
+      "status_id": 1
+    },
+    {
+      "id": 7,
+      "firstName": "Derek",
+      "lastName": "Loisel",
+      "email": "derekloisel@reva.com",
+      "role_id": 2,
+      "status_id": 1
+    },
+    {
+      "id": 8,
+      "firstName": "Bradley",
+      "lastName": "Walker",
+      "email": "bradleywalker@reva.com",
+      "role_id": 2,
+      "status_id": 1
+    },
+    {
+      "id": 9,
+      "firstName": "John",
+      "lastName": "Beineke",
+      "email": "johnbeineke@reva.com",
+      "role_id": 2,
+      "status_id": 1
+    },
+    {
+      "id": 10,
+      "firstName": "Karen",
+      "lastName": "Matney",
+      "email": "matneyka@gmail.com",
+      "role_id": 2,
+      "status_id": 1
+    },
+    {
+      "id": 11,
+      "firstName": "Khaleel",
+      "lastName": "Williams",
+      "email": "khaleelwilliams@reva.com",
+      "role_id": 2,
+      "status_id": 1
+    },
+    {
+      "id": 12,
+      "firstName": "Kyle",
+      "lastName": "Smith",
+      "email": "kylesmith@reva.com",
+      "role_id": 2,
+      "status_id": 1
+    },
+    {
+      "id": 13,
+      "firstName": "Thomas",
+      "lastName": "Steyaert",
+      "email": "thomassteyaert@reva.com",
+      "role_id": 2,
+      "status_id": 1
+    },
+    {
+      "id": 14,
+      "firstName": "Andrew",
+      "lastName": "Li",
+      "email": "andrewli@reva.com",
+      "role_id": 2,
+      "status_id": 1
+    }
   ]
 }
