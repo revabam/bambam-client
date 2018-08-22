@@ -19,9 +19,9 @@
         {
             "id": 3,
             "name": "1808-Aug18-USF-C++",
-            "startDate": 123456787,
-            "endDate": 123456789,
-            "trainer_id": 7,
+            "startDate": 1534737600000,
+            "endDate": 1540526400000,
+            "trainer_id": 3,
             "calendarCurriculum_id": 1
         },
         {
