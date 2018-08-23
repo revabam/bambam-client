@@ -12,21 +12,23 @@
         </mat-card-title>
       </mat-card-header>
       <mat-card-content style="background-color: rgb(245,245,245)">
-        <form [formGroup]="loginForm">
-          <mat-form-field>
+        <form [formGroup]="loginForm"> 
+          <mat-form-field class="col-9">
             <input matInput name="email" placeholder="Email" type="email" formControlName="email" (keyup.enter)="login()">
             <mat-error *ngFor="let validation of loginValidationMessages.email">
               <mat-error *ngIf="loginForm.get('email').hasError(validation.type) && (loginForm.get('email').dirty || loginForm.get('email').touched)">{{validation.message}}</mat-error>
             </mat-error>
           </mat-form-field>
           <br/>
-          <mat-form-field>
+          
+          <mat-form-field class="col-9">
             <input matInput name="password" placeholder="Password" type="password" formControlName="password" (keyup.enter)="login()">
             <mat-error *ngFor="let validation of loginValidationMessages.password">
               <mat-error *ngIf="loginForm.get('password').hasError(validation.type) && (loginForm.get('password').dirty || loginForm.get('password').touched)">{{validation.message}}</mat-error>
             </mat-error>
           </mat-form-field>
-        </form>
+          
+        </form> 
         <mat-toolbar #buttonBar>
           <button mat-raised-button name="login" color="primary" (click)="login()">Submit</button>
           <span style="flex: 1 auto;"></span>
