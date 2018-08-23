@@ -11,7 +11,7 @@
           <span style="flex: 1 1 auto"></span>
           <span>
 
-            <h4 class="m-0 p-0" style="font-size: 140%;">Course Structure</h4>
+            <h4 class="m-0 p-0" style="font-size: 140%;">Curriculum</h4>
           </span>
           <span style="flex: .6 .3 auto"></span>
           <span>  
@@ -33,20 +33,20 @@
             <div *ngFor="let curriculum of getCurriculumsByName(cname)">
               <mat-toolbar>
                 <span *ngIf="curriculum.name === cname">
-                  {{curriculum.version}}
+                  Version: {{curriculum.version}}
                 </span>
                 <span *ngIf="curriculum.name !== cname">
-                  <del>{{curriculum.version}}</del>
+                  <del>Version: {{curriculum.version}}</del>
                 </span>
                 <span class="fill-remaining-space">
                 </span>
                 <span *ngIf="curriculum.name === cname">
-                  <button mat-icon-button color="" (click)="deactivateSubtopic(subtopic)">
+                  <button mat-icon-button color="" (click)="deactivateCurriculum(curriculum)">
                     <mat-icon color="primary">clear</mat-icon>
                 </button>
                 </span>
                 <span *ngIf="curriculum.name !== cname">
-                  <button mat-icon-button color="" (click)="reactivateSubtopic(subtopic)">
+                  <button mat-icon-button color="" (click)="reactivateCurriculum(curriculum)">
                     <mat-icon color="">add</mat-icon>
                 </button>
                 </span>

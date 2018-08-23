@@ -74,6 +74,8 @@ export class CalendarComponent implements OnInit, DoCheck {
   selectedCurriculum: Curriculum;
   colorNum = 0;
 
+  storedEvents: cal_event.CalendarEvent[] = null;
+
   newSubtopicName: string;
   newSubtopicDate: Date;
 
@@ -134,27 +136,8 @@ export class CalendarComponent implements OnInit, DoCheck {
 
     this.calendarService.getCalendarEvents().subscribe(response => {
       console.log(response.length);
-      for (let i = 0; i < response.length; i++) {
-        this.events.push(
-          {
-            start: new Date(response[i].startDateTime),
-            end: new Date(response[i].endDateTime),
-            title: response[i].title,
-            id: response[i].id,
-            color: response[i].color as EventColor,
-            actions: [response[i].actions as EventAction],
-            resizable: response[i].resizable,
-            draggable: response[i].draggable,
-            curriculum: response[i].curriculum,
-            numWeeks: response[i].numWeeks,
-            topics: response[i].topics,
-            version: response[i].version,
-            dropped: response[i].dropped
-          });
-          if (i === response.length - 1) {
-            this.initialRender = true;
-          }
-      }
+      this.storedEvents = response;
+      this.initialRender = true;
     });
 
     this.calendarService.getCurriculum().subscribe(response => {
@@ -171,11 +154,12 @@ export class CalendarComponent implements OnInit, DoCheck {
   }
 
   ngDoCheck() {
-    if (this.initialRender) {
+    if (this.storedEvents != null && this.initialRender) {
       console.log('refreshing');
-      console.log(this.events);
-      this.refresh.next();
+      // console.log(this.events);
+      // this.refresh.next();
       this.initialRender = false;
+      this.generateStoredEvents();
     }
     this.renderCalendar = this.curriculumDataFetched;
     if (this.subTopicsReceived && this.subtopicsReceivedCount === 0) {
@@ -300,6 +284,29 @@ export class CalendarComponent implements OnInit, DoCheck {
       }
     }
   }
+
+  generateStoredEvents() {
+    for (let i = 0; i < this.storedEvents.length; i++) {
+      this.events.push(
+        {
+          start: new Date(this.storedEvents[i].startDateTime),
+          end: new Date(this.storedEvents[i].endDateTime),
+          title: this.storedEvents[i].title,
+          id: this.storedEvents[i].id,
+          color: this.storedEvents[i].color as EventColor,
+          actions: [this.storedEvents[i].actions as EventAction],
+          resizable: this.storedEvents[i].resizable,
+          draggable: this.storedEvents[i].draggable,
+          curriculum: this.storedEvents[i].curriculum,
+          numWeeks: this.storedEvents[i].numWeeks,
+          topics: this.storedEvents[i].topics,
+          version: this.storedEvents[i].version,
+          dropped: this.storedEvents[i].dropped
+        });
+    }
+    this.refresh.next();
+  }
+
   /*
     Assumes that each topic contains at least 1 sub topic per day
   */
@@ -427,10 +434,13 @@ export class CalendarComponent implements OnInit, DoCheck {
       version: event.version,
       dropped: event.dropped
     };
-    // console.log(calEvent);
+    console.log('Persisting calEvent: ', calEvent);
     this.calendarService.addCalendarEvent(calEvent).subscribe(eventRes => {
       // console.log(eventRes);
-    });
+    },
+      err => {
+        console.log(err.message);
+      });
     // this.calendarService.addCalendarSubtopic(subtopic).subscribe(subtopicRes => {
     //   console.log(subtopicRes);
     // });
