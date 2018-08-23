@@ -134,7 +134,12 @@ export class CalendarComponent implements OnInit, DoCheck {
   ngOnInit() {
     this.user = JSON.parse(sessionStorage.getItem('user'));
 
-    this.calendarService.getCalendarEvents().subscribe(response => {
+    // this.calendarService.getCalendarEvents().subscribe(response => {
+    //   console.log(response.length);
+    //   this.storedEvents = response;
+    //   this.initialRender = true;
+    // });
+    this.calendarService.getCalendarEventsList().subscribe(response => {
       console.log(response.length);
       this.storedEvents = response;
       this.initialRender = true;
@@ -365,18 +370,19 @@ export class CalendarComponent implements OnInit, DoCheck {
               parentTopic_id: this.subtopicArrArr[j][i].parentTopic_id
             }
           );
-          this.persistEvent(this.events[this.events.length - 1]);
+          // this.persistEvent(this.events[this.events.length - 1]);
           console.log('start: ' + this.events[this.events.length - 1].start);
           this.colorNum++;
           this.hour += this.currTopicTime;
           this.currTopicTime = subtopicTime;
           this.multiDayEventCreated = false;
         }
+        // this.persistEvent(this.events[this.events.length - 1]);
         this.refresh.next();
       }
     }
     this.persistCurriculum(this.selectedCurriculum);
-
+    this.persistEvents();
   }
 
   multidaySubtopic(subtopic: Subtopic, topicDay: number, timeLeft: number, event: MyEvent, curr: Curriculum) {
@@ -408,6 +414,33 @@ export class CalendarComponent implements OnInit, DoCheck {
     // this.hour = 7;
     this.hour = 0;
     this.multiDayEventCreated = true;
+  }
+
+  persistEvents() {
+    const eventsToPersist: cal_event.CalendarEvent[] = [];
+    for (let i = 0; i < this.events.length; i++) {
+      eventsToPersist.push({
+        title: this.events[i].title,
+        description: this.events[i].title,
+        status_id: 0,
+        startDateTime: this.events[i].start,
+        endDateTime: this.events[i].end,
+        calendarSubtopic_id: +this.events[i].id,
+        user_id: this.user.id,
+        resizable: this.events[i].resizable,
+        color: this.events[i].color,
+        actions: this.events[i].actions,
+        draggable: this.events[i].draggable,
+        curriculum: this.events[i].curriculum,
+        numWeeks: this.events[i].numWeeks,
+        topics: this.events[i].topics,
+        version: this.events[i].version,
+        dropped: this.events[i].dropped
+      });
+
+    }
+    this.calendarService.addCalendarEventList(eventsToPersist).subscribe(eventRes => {
+    });
   }
 
   persistEvent(event: MyEvent) {
@@ -476,7 +509,12 @@ export class CalendarComponent implements OnInit, DoCheck {
       }
     });
     this.refresh.next();
+    this.persistEvents();
   }
+
+  // deleteEventList() {
+  //   this.calendarService.deleteCalendarEventList().subscribe(e => {});
+  // }
 }
 
 @Component({
