@@ -2,25 +2,33 @@ import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { TopicService } from '../../../services/topic.service';
 import { SubtopicService } from '../../../services/subtopic.service';
+import { Topic } from '../../../models/topic';
 
 @Component({
   selector: 'app-dialog-view',
   templateUrl: './dialog-view.component.html',
   styleUrls: ['./dialog-view.component.css']
 })
-export class DialogViewComponent {
+export class DialogViewComponent implements OnInit {
   topicName: string;
   subtopicName: string;
   fieldVisible = false;
   subtopics: string[] = [];
+  dropDownTopics: Topic[] = [];
 
   constructor(
     public dialogRef: MatDialogRef<DialogViewComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: object) {}
+    @Inject(MAT_DIALOG_DATA) public data: object, private topicService: TopicService) { }
 
-    close(): void {
-      this.dialogRef.close();
-    }
+  ngOnInit() {
+    this.topicService.getAll().subscribe(response => {
+      this.dropDownTopics = response;
+    });
+  }
+
+  close(): void {
+    this.dialogRef.close();
+  }
 
   addTopic(): void {
     console.log('[DEBUG] - in addTopic');
@@ -33,7 +41,7 @@ export class DialogViewComponent {
 
     this.data['topicService'].getAll().subscribe(topics => {
       topics = topics.filter((topic) => this.topicName.toUpperCase()
-          === this.data['topicService'].reactivateName(
+        === this.data['topicService'].reactivateName(
           topic.name).toUpperCase());
       console.log('[DEBUG] - topic already exist, topic is: ');
       console.log(topics);
