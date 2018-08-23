@@ -47,7 +47,7 @@ export class CreateVersionComponent {
        * version to oldest version, so we take the version of
        * first element and add by 1
        */
-      version: this.data['getCurriculumsByName'](
+      version: +this.data['getCurriculumsByName'](
         this.selectedCurriculumName)[0].version + 1,
       creator_id: JSON.parse(sessionStorage['user'])['id'],
       dateCreated: new Date(),
