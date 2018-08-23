@@ -1,10 +1,4 @@
 <div mat-dialog-content>
-  <!-- <mat-toolbar style="height: 60%; background-color: rgba(0, 0, 0, 0);">
-    <h6 mat-dialog-title>Topic</h6>
-    </mat-toolbar> -->
-  <!-- <mat-form-field>
-    <input matInput [(ngModel)]="topicName" placeholder="Name of Topic">
-  </mat-form-field> -->
   <mat-form-field class="col-9">
     <mat-select style="font-size: 100%;" placeholder="Topic" name="topicName" [(ngModel)]="topicName">
       <mat-option *ngFor="let topic of dropDownTopics" [value]="topic.name">
@@ -38,6 +32,8 @@
   <br />
 </div>
 <div mat-dialog-actions>
-  <button mat-raised-button (click)="close()">Cancel</button>
-  <button mat-raised-button color="primary" (click)="addTopic()">Ok</button>
+  <div class="col">
+    <button mat-raised-button (click)="close()">Cancel</button>
+    <button mat-raised-button color="primary" (click)="addTopic()">Ok</button>
+  </div>
 </div>
