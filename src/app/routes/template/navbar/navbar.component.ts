@@ -3,6 +3,11 @@ import { Router } from '@angular/router';
 import { UserService } from '../../../services/user.service';
 import { BamUser } from '../../../models/bam-user';
 
+/**
+ * Shows current page view and navigates to different page views of application.
+ * Does not display if current session is not associated with a user.
+ * @author Bradley Walker | Khaleel Williams | 1806-Jun-18-USF-Java | Wezley Singleton
+ */
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
