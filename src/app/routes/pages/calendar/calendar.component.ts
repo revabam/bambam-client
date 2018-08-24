@@ -1,386 +1,585 @@
-import { Component, OnInit} from '@angular/core';
 import * as $ from 'jquery';
 import * as moment from 'moment';
 import 'fullcalendar';
+import {Component, ChangeDetectionStrategy, ViewChild, TemplateRef, OnInit, DoCheck, Inject} from '@angular/core';
+import {startOfDay, endOfDay, subDays, addDays, endOfMonth, isSameDay, isSameMonth, addHours, addWeeks, isWeekend} from 'date-fns';
+import { Subject, Observable, BehaviorSubject } from 'rxjs';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap/modal/modal.module';
+import {CalendarEvent, CalendarEventAction, CalendarEventTimesChangedEvent} from 'angular-calendar';
+import { CalendarService } from '../../../services/calendar.service';
+import { Curriculum } from '../../../models/curriculum';
+import { CalendarCurriculum } from '../../../models/calendar-curriculum';
+import { CalendarSubtopic } from '../../../models/calendar-subtopic';
+import { Subtopic } from '../../../models/subtopic';
+import { SubtopicService } from '../../../services/subtopic.service';
+import { TopicService } from '../../../services/topic.service';
+import { Topic } from '../../../models/topic';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '../../../../../node_modules/@angular/material';
+import * as cal_event from '../../../models/calendar-event';
+import { BamUser } from '../../../models/bam-user';
+import { BatchService } from '../../../services/batch/batch.service';
+import { EventColor, EventAction } from '../../../../../node_modules/calendar-utils';
+
+const colors: any = {
+  random: {
+    primary: '#ad2121',
+    secondary: '#FAE3E3'
+  }
+};
+
+export interface MyEvent extends CalendarEvent {
+  curriculum?: Curriculum;
+  numWeeks?: number;
+  topics?: Topic[];
+  version?: number;
+  dropped?: boolean;
+  parentTopic_id?: number;
+}
 
 @Component({
   selector: 'app-calendar',
+  changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './calendar.component.html',
   styleUrls: ['./calendar.component.css']
 })
-export class CalendarComponent implements OnInit {
+export class CalendarComponent implements OnInit, DoCheck {
 
-  private topics = ['Java', 'SQL', 'Angular', 'JavaScript', 'Spring', 'DevOps',
-  'SOAP', 'REST', 'Microservices', 'Docker', 'Amazon Web Services'];
+  user: BamUser = JSON.parse(sessionStorage.getItem('user'));
+  curriculumDataFetched = false;
+  renderCalendar = false;
+  showSideNav = false;
 
-  private subtopics = [];
+  hour = 0;
+  subtopicsReceivedCount = 0;
+  topicLength = 0;
+  topicArr: Topic[];
+  subtopicArrArr: Array<Subtopic[]> = [];
+  subTopicsReceived = false;
+  multiDayEventCreated = false;
+  dropEvent: MyEvent;
+  selectedCurriculum: Curriculum;
+  colorNum = 0;
 
-  private validSubtopic = false;
-  private isToday = true;
+  storedEvents: cal_event.CalendarEvent[] = null;
 
-  // Used for updating the view of the main calendar
-  private view: string; // $('#main-calendar').fullCalendar('getView').type;
-  private viewDate: Date; // $('#main-calendar').fullCalendar('getDate').toDate();
-  private title: string; // $('#main-calendar').fullCalendar('getView').title;
+  newSubtopicName: string;
+  newSubtopicDate: Date;
 
-  // Used for datepicker and timepicker
-  private date: Date;  // input value for datepicker and timepicker
-  private time: Date;
+  initialRender = false;
 
-  private events = [
+  newColor: string;
+
+  activeDayIsOpen = false;
+
+  calendarCurriculums: CalendarCurriculum[];
+  calendarSubtopics: CalendarSubtopic[];
+  topics: Topic[];
+  subtopics: Subtopic[];
+  curriculums: Curriculum[];
+  currTopicTime: number;
+
+  curriculumEvents: MyEvent[] = [];
+
+  @ViewChild('modalContent') modalContent: TemplateRef<any>;
+
+  view = 'month';
+
+  viewDate: Date = new Date();
+
+  modalData: {
+    action: string;
+    event: MyEvent;
+  };
+
+  actions: CalendarEventAction[] = [
+    /* Pencil label (icon) is not rendering correctly.
+    Removed for now until solution is found. */
+
+    // {
+    //   label: '<i class="fa fa-fw fa-pencil"></i>',
+    //   onClick: ({ event }: { event: MyEvent }): void => {
+    //     this.handleEvent('Edited', event);
+    //   }
+    // },
     {
-      title: 'Test1',
-      start: new Date(),
-      description: 'This is a cool event',
-      textColor: 'white',
-      color: eventColor.blue
-    },
-    {
-      title: 'Test2',
-      start: new Date(),
-      description: 'This is a cool event',
-      textColor: 'white',
-      color: eventColor.green
-    },
-    {
-      title: 'Test3',
-      start: new Date(),
-      description: 'This is a cool event',
-      textColor: 'white',
-      color: eventColor.red
-    },
-    {
-      title: 'Test4',
-      start: new Date(),
-      description: 'This is a cool event',
-      textColor: 'white',
-      color: eventColor.orange
-    },
-    {
-      title: 'Test5',
-      start: new Date(),
-      description: 'This is a cool event',
-      textColor: 'white',
-      color: eventColor.blue
-    },
-    {
-      title: 'Test6',
-      start: new Date(),
-      description: 'This is a cool event',
-      textColor: 'white',
-      color: eventColor.blue
+      label: '<i class="fa fa-fw fa-times"></i>',
+      onClick: ({ event }: { event: MyEvent }): void => {
+        this.events = this.events.filter(iEvent => iEvent !== event);
+        this.handleEvent('Deleted', event);
+      }
     }
   ];
 
-  constructor() { }
+  refresh: Subject<any> = new Subject();
 
+  events: MyEvent[] = [];
+
+  constructor(private modal: NgbModal, private calendarService: CalendarService, private subtopicService: SubtopicService,
+    private topicService: TopicService, private dialog: MatDialog, private batchService: BatchService) { }
+
+  /**
+   * Life hook for loading all calendar services
+   */
   ngOnInit() {
-    this.configureCalendars();
-  }
-
-  /**
-   * Returns true if window screen is smaller than 768px.
-   */
-  private smallScreen(): boolean {
-    if (window.innerWidth < 768) {
-      return true;
-    }
-    return false;
-  }
-
-  /**
-   * Configures the main calendar.
-   */
-  private configureCalendars() {
-    const today = new Date();
-
-    $('#main-calendar').fullCalendar({
-      header: false,
-      timezone: 'local',
-      events: this.events,
-      eventLimit: true,
-      dayRender: function( date, cell ) {
-        // Change background color of today's day
-        if (date.format('MM-DD-Y') === moment(today).format('MM-DD-Y')) {
-          cell.css('background-color', 'rgb(255, 134, 73)');
-        }
-      }
+    this.user = JSON.parse(sessionStorage.getItem('user'));
+    this.calendarService.getCalendarEventsList().subscribe(response => {
+      console.log(response.length);
+      this.storedEvents = response;
+      this.initialRender = true;
     });
 
-    // For the main calendar view
-    this.title = $('#main-calendar').fullCalendar('getView').title;
-    this.viewDate = $('#main-calendar').fullCalendar('getDate').toDate();
-    this.view = $('#main-calendar').fullCalendar('getView').type;
-
-    // For datepicker and timepicker
-    this.date = this.viewDate;
-    this.time = new Date();
-    this.resetTime(this.time);
-    this.time.setHours(8);
+    this.calendarService.getCurriculum().subscribe(response => {
+      this.curriculums = response;
+      this.topicService.getAll().subscribe(response2 => {
+        this.topics = response2;
+        this.subtopicService.getAll().subscribe(response3 => {
+          this.subtopics = response3;
+          this.curriculumDataFetched = true;
+          this.convertCirriculum();
+        });
+      });
+    });
   }
 
   /**
-   * Changes the calendar view. Available views: day, week, month, list.
-   * Also changes view based on: today, prev, next
-   * @param value Type of view
+   * Lifehook for generating events after the service has retruned them from onInit.
    */
-  private changeView(view: string) {
-    switch (view) {
-      case 'day':
-        $('#main-calendar').fullCalendar('changeView', 'agendaDay');
-        this.view = 'day';
-        break;
-
-      case 'week':
-        $('#main-calendar').fullCalendar('changeView', 'agendaWeek');
-        this.view = 'week';
-        break;
-
-      case 'month':
-        $('#main-calendar').fullCalendar('changeView', 'month');
-        this.view = 'month';
-        break;
-
-      case 'list':
-        $('#main-calendar').fullCalendar('changeView', 'list');
-        this.view = 'list';
-        break;
-
-      case 'today':
-        $('#main-calendar').fullCalendar('today');
-        break;
-
-      case 'prev':
-        $('#main-calendar').fullCalendar('prev');
-        break;
-
-      case 'next':
-        $('#main-calendar').fullCalendar('next');
-        break;
+  ngDoCheck() {
+    if (this.storedEvents != null && this.initialRender) {
+      console.log('refreshing');
+      // console.log(this.events);
+      // this.refresh.next();
+      this.initialRender = false;
+      this.generateStoredEvents();
     }
-
-    // Set current title and viewDate to reflect changes
-    this.title = $('#main-calendar').fullCalendar('getView').title;
-    this.viewDate = $('#main-calendar').fullCalendar('getDate').toDate();
-    this.date = this.viewDate;
-
-    // Disable or enable the 'Today' button
-    if (this.checkToday(this.viewDate)) {
-      this.isToday = true;
-    } else {
-      this.isToday = false;
+    this.renderCalendar = this.curriculumDataFetched;
+    if (this.subTopicsReceived && this.subtopicsReceivedCount === 0) {
+      console.log();
+      console.log('Begining event generation...');
+      this.generateEvents();
     }
   }
 
   /**
-   * Sets datepicker input value to current viewDate if dateValue is invalid.
-   * Else it jumps to date specified.
-   * @param dateValue Object with date
+   * toggles the side nav for creating events and draging curriculum on to the calendar.
    */
-  private dateChange(dateValue) {
-    if (!this.isDateValid(dateValue)) {
-      this.date = new Date();
-      this.date.setTime(this.viewDate.getTime());
-    } else {
-      this.jumpTo(dateValue);
+  toggleSideNav() {
+    this.showSideNav = !this.showSideNav;
+  }
+  /**
+   * Convert cirriculums into Material CalendarEvents so they can be dropped onto the calendar
+   * and stored.
+   */
+  convertCirriculum() {
+    this.curriculums.forEach((curriculum) => {
+      this.curriculumEvents.push(
+        {
+          start: (startOfDay(new Date())),
+          end: addWeeks(new Date(), curriculum.numberOfWeeks),
+          title: curriculum.name,
+          id: curriculum.id,
+          color: colors.yellow,
+          actions: this.actions,
+          resizable: {
+            beforeStart: true,
+            afterEnd: true
+          },
+          draggable: true,
+          dropped: false,
+          version: curriculum.version
+        });
+    });
+  }
+
+  /**
+   * Built in method from angular material2 calendar.
+   * Handles clicks on days.
+   * @param param0 An object that holds the date clicked and the events on that day.
+   */
+  dayClicked({ date, events }: { date: Date; events: MyEvent[] }): void {
+    if (isSameMonth(date, this.viewDate)) {
+      this.viewDate = date;
+      if (
+        (isSameDay(this.viewDate, date) && this.activeDayIsOpen === true) ||
+        events.length === 0
+      ) {
+        this.activeDayIsOpen = false;
+      } else {
+        this.activeDayIsOpen = true;
+      }
     }
   }
 
   /**
-   * Resets time of date to 8:00 AM.
-   * @param date date Object
+   * Built in method from angular material2 calendar.
+   * Handles time changes for events.
+   * @param param0 A wrapper object that stores the event, its new starting time, and ending time.
    */
-  private resetTime(date: Date) {
-    date.setHours(8);
-    date.setMinutes(0);
-    date.setSeconds(0);
-    date.setMilliseconds(0);
+  eventTimesChanged({
+    event,
+    newStart,
+    newEnd
+  }: CalendarEventTimesChangedEvent): void {
+    event.start = newStart;
+    event.end = newEnd;
+    this.handleEvent('Dropped or resized', event);
+    this.refresh.next();
   }
-
-  /**
-   * Updates the time (hour, minutes, seconds. milliseconds)
-   * of date1 with the time of date2. Used to update time of
-   * datepicker with time of timepicker.
-   * @param date1 Date with old time
-   * @param date2 Date with new time
-   */
-  private updateTime(date1: Date, date2: Date): Date {
-    date1.setHours(date2.getHours());
-    date1.setMinutes(date2.getMinutes());
-    date1.setSeconds(date2.getSeconds());
-    date1.setMilliseconds(date2.getMilliseconds());
-    return date1;
+/**
+ * Should be used for creating a random color for the curriculum when it is dropped on the calendar
+ * but it is not implemented.
+ */
+  randomColor() {
+    return '#' + Math.floor(Math.random() * 16777215).toString(16);
   }
-
-  /**
-   * Resets timepicker input value if invalid.
-   * @param valid event that returns true if valid or not.
-   */
-  private timeChange() {
-      if (!this.date) {
-        this.date = new Date();
-        this.date.setTime(this.viewDate.getTime());
-
-        // iterate DOM and remove 'is-invalid' class style
-        // this removes the red border in invalid input
-        const inputs = document.getElementsByClassName('is-invalid');
-        for (let i = 0; i < inputs.length; i++) {
-          inputs[i].classList.remove('is-invalid');
+/**
+ * When the title of an event on the calendar is clicked, a modal is opened with relevant
+ * information about the event (curriculum, topics, etc.).
+ * @param event The event that was clicked
+ */
+  openDialog(event: MyEvent): void {
+    console.log(event);
+    /*
+     * this.dialog is an injected dependency for the modal
+     * The open method passes in a component that we'll use
+     * in the modal.
+     */
+    let eventTopic: Topic;
+    this.topicService.getTopicById(+event.id).subscribe(response => {
+      eventTopic = response;
+    });
+    const dialogRef = this.dialog.open(CalendarModalComponent,
+      /*
+      * An object is passed in as the second parameter, which
+      * defines properties of the dialog modal, as well as the
+      * data that we'll pass in for the modal component to access.
+      */
+      {
+        width: '600px',
+        data: {
+          title: event.title,
+          topics: event.topics,
+          curriculum: event.curriculum,
+          version: event.version,
+          numWeeks: event.numWeeks
         }
       }
+    );
   }
 
   /**
-   * Jump to specific date if the date value changes.
-   * 'dateValue' is of type object that contains a date -
-   * e.g. - Wed Jun 20 2018 18:09:17 GMT-0400 (Eastern Daylight Time)
-   * @param dateValue - Object with date
+   * Whenever an event happens on the calendar (click, drag, drop, edit, delete), this method is called
+   * with the actions of the event and the event itself.
+   * Becaused the pencil icon does not render correctly, we removed it and do not have any functionality
+   * for the action.
+   * @param action The action that took place (drag, drop, edit, delete, click)
+   * @param event The event that the action happened on
    */
-  private jumpTo(dateValue) {
-    // this.date contains previous date, dateValue contains new date
-
-    // compare previous date with new date
-    if (dateValue) {
-      if (this.date.toLocaleDateString() !== (new Date(dateValue).toLocaleDateString())) {
-        const date = moment(dateValue);
-        $('#main-calendar').fullCalendar('gotoDate', date);
-        this.changeView('day');
-      }
-    }
-  }
-
-  /**
-   * Returns true if date is valid or not.
-   * @param date Date to be checked
-   */
-  private isDateValid(date): boolean {
-    const validDate = new Date(date);
-
-    // Check if date time is a valid number
-    if (!isNaN(validDate.getTime())) {
-      return true;
-    }
-    return false;
-  }
-
-  /**
-   * Returns true if date passed is today's date.
-   * @param date Date of type Moment
-   */
-  private checkToday(date: Date): boolean {
-    const today = new Date();
-    if (date.toLocaleDateString() === today.toLocaleDateString()) {
-      return true;
-    }
-    return false;
-  }
-
-  /**
-   * Show or hide the events panel.
-   * Modifies some CSS and bootstrap elements of the events panel.
-   */
-  private clickEventOptions() {
-    const events = document.getElementById('event-panel');
-    const calendar = document.getElementById('calendar-panel');
-    if (events.style.display !== 'inline-block') {
-      events.style.display = 'inline-block';
-      calendar.classList.remove('col-md-12');
+  handleEvent(action: string, event: MyEvent): void {
+    console.log('[LOG] - In handleEvent()');
+    if (action === 'Clicked') {
+      this.openDialog(event);
+    } else if (action === 'Edited') {
+    } else if (action === 'Deleted') {
     } else {
-      events.style.display = 'none';
-      calendar.classList.add('col-md-12');
-    }
-
-    // scroll to menu navbar with animation
-    $('html, body').animate({
-      scrollTop: $('#menu-navbar').offset().top
-    }, 500);
-  }
-
-  /**
-   * Add list of subtopics if a topic is valid.
-   */
-  private getSubtopics() {
-    const topic = (<HTMLInputElement>document.getElementById('topic')).value;
-    this.subtopics = [];
-
-    if (topic.toLowerCase() === 'java'.toLowerCase()) {
-      this.subtopics.push('Threads');
-      this.subtopics.push('Inheritance');
-      this.subtopics.push('Collections');
-      this.subtopics.push('Maps');
-      // this.validSubtopic = true;
-      (<HTMLInputElement>document.getElementById('subtopic')).disabled = false;
-    } else if (topic.toLowerCase() === 'angular'.toLowerCase()) {
-      this.subtopics.push('Directives');
-      this.subtopics.push('Observables');
-      this.subtopics.push('Data Binding');
-      this.subtopics.push('Pipes');
-      // this.validSubtopic = true;
-      (<HTMLInputElement>document.getElementById('subtopic')).disabled = false;
-    } else {
-      this.validSubtopic = false;
-      (<HTMLInputElement>document.getElementById('subtopic')).value = '';
-      (<HTMLInputElement>document.getElementById('subtopic')).disabled = true;
-    }
-  }
-
-  /**
-   * Returns true or false if subtopic exists within a topic.
-   */
-  private checkSubtopic() {
-    const subtopic = (<HTMLInputElement>document.getElementById('subtopic')).value;
-    for (let i = 0; i < this.subtopics.length; i++) {
-      if (subtopic.toLowerCase() === this.subtopics[i].toLowerCase()) {
-        this.validSubtopic = true;
-        break;
+      if (!event.dropped) {
+        event.dropped = true;
+        const id: number = +event.id;
+        this.calendarService.getCurriculumById(id).subscribe(curr => {
+          this.selectedCurriculum = curr;
+          // console.log('number of weeks: ' + curr.numberOfWeeks);
+          // console.log('number of topics: ' + curr.topics.length);
+          this.topicLength = curr.numberOfWeeks / curr.topics.length;
+          // console.log('topicLength: ' + this.topicLength);
+          this.topicArr = curr.topics;
+          for (let i = 0, j = 0; i < curr.topics.length; i++) {
+            this.subtopicService.getSubtopicByParentId(curr.topics[i].id).subscribe(subResponse => {
+              this.subtopicArrArr.push(subResponse);
+              if (i === curr.topics.length - 1) {
+                this.subTopicsReceived = true;
+              }
+            });
+          }
+          this.dropEvent = event;
+        });
       } else {
-        this.validSubtopic = false;
       }
     }
   }
 
+/**
+ * Used to populate the add persisted events from the ngOnInit database call to the events list
+ * that is used to hold calendar events, then refreshes the calendar. This is called by the ngDoCheck
+ * lifecycle hook so that it is only called once the response from the ngOnInit call is complete.
+ */
+  generateStoredEvents() {
+    for (let i = 0; i < this.storedEvents.length; i++) {
+      this.events.push(
+        {
+          start: new Date(this.storedEvents[i].startDateTime),
+          end: new Date(this.storedEvents[i].endDateTime),
+          title: this.storedEvents[i].title,
+          id: this.storedEvents[i].id,
+          color: this.storedEvents[i].color as EventColor,
+          actions: [this.storedEvents[i].actions as EventAction],
+          resizable: this.storedEvents[i].resizable,
+          draggable: this.storedEvents[i].draggable,
+          curriculum: this.storedEvents[i].curriculum,
+          numWeeks: this.storedEvents[i].numWeeks,
+          topics: this.storedEvents[i].topics,
+          version: this.storedEvents[i].version,
+          dropped: this.storedEvents[i].dropped
+        });
+    }
+    this.refresh.next();
+  }
   /**
-   * Returns true if all inputs are valid.
+   * Assumes that each topic contains at least 1 sub topic per day
    */
-  private validateInputs(): boolean {
-    if (this.isDateValid(this.date.getTime())) {
-      if (this.validSubtopic) {
-        return true;
+  generateEvents() {
+    this.subTopicsReceived = false;
+    // console.log('subtopics Received set to false');
+    this.subtopicsReceivedCount++;
+    // console.log('count incremented');
+    // console.log();
+    let topicDay = 0;
+    for (let j = 0; j < this.topicArr.length; j++) {
+      const subtopicTime = (this.topicLength * 5 * 7) / this.subtopicArrArr[j].length;
+      this.currTopicTime = subtopicTime;
+
+      for (let i = 0; i < this.subtopicArrArr[j].length; i++) {
+        if (isWeekend(addDays(addHours(startOfDay(this.dropEvent.start), 9 + this.hour), topicDay))) {
+          topicDay++;
+          if (isWeekend(addDays(addHours(startOfDay(this.dropEvent.start), 9 + this.hour), topicDay))) {
+            topicDay++;
+          }
+        }
+        // console.log();
+        // console.log(this.hour + 'This.hour');
+        // console.log();
+        if (this.hour + this.currTopicTime > 7 && !this.multiDayEventCreated) {
+          this.multidaySubtopic(this.subtopicArrArr[j][i], topicDay, (7 - this.hour), this.dropEvent, this.selectedCurriculum);
+          topicDay++;
+          // if (this.multiDayEventCreated) {
+          //   // console.log(this.currTopicTime + ' this.hour = ' + (7 - this.hour));
+          //   // console.log(this.currTopicTime + ' this.hour = ' + (this.hour));
+          //   this.currTopicTime = this.currTopicTime - 7 - this.hour;
+          // } else {
+          //   this.currTopicTime = this.currTopicTime - 7;
+          // }
+          // this.hour = 0;
+          i--;
+        } else {
+          this.events.push(
+            {
+              start: addDays(addHours(startOfDay(this.dropEvent.start), 9 + this.hour), topicDay),
+              end: addDays(addHours(startOfDay(this.dropEvent.start), 9 + this.hour + this.currTopicTime), topicDay),
+              title: this.subtopicArrArr[j][i].name,
+              id: this.subtopicArrArr[j][i].id,
+              color: colors.newColor,
+              actions: this.actions,
+              resizable: {
+                beforeStart: true,
+                afterEnd: true
+              },
+              draggable: true,
+              curriculum: this.selectedCurriculum,
+              numWeeks: this.selectedCurriculum.numberOfWeeks,
+              topics: this.selectedCurriculum.topics,
+              version: this.selectedCurriculum.version,
+              dropped: true,
+              parentTopic_id: this.subtopicArrArr[j][i].parentTopic_id
+            }
+          );
+          // this.persistEvent(this.events[this.events.length - 1]);
+          console.log('start: ' + this.events[this.events.length - 1].start);
+          this.colorNum++;
+          this.hour += this.currTopicTime;
+          this.currTopicTime = subtopicTime;
+          this.multiDayEventCreated = false;
+        }
+        // this.persistEvent(this.events[this.events.length - 1]);
+        this.refresh.next();
       }
     }
-    return false;
+    this.persistCurriculum(this.selectedCurriculum);
+    this.persistEvents();
   }
 
-  /**
-   * Adds subtopic to calendar
-   */
-  private addToCalendar() {
-    const event = {
-      title: 'Test1',
-      start: new Date(),
-      description: 'This is a cool event',
-      textColor: 'white',
-      color: eventColor.blue
+/**
+ * Used for subtopics that span multiple days.
+ * If there is not enought time in the current day to complete a subtopic, this method is used
+ * to split the subtopic and make multiple events from it.
+ * @param subtopic subTopic to be added to calendar
+ * @param topicDay the current day that the subtopic is on
+ * @param timeLeft time left in a day (hours until 4pm)
+ * @param event the event to be pushed to calendar
+ * @param curr curr is the curriculum to be pushed
+ */
+  multidaySubtopic(subtopic: Subtopic, topicDay: number, timeLeft: number, event: MyEvent, curr: Curriculum) {
+    // console.log('IN CREATE MULTIDAY EVENT', subtopic.name);
+    event.dropped = true;
+    // console.log(event);
+    this.events.push(
+      {
+        start: addDays(addHours(startOfDay(event.start), 9 + this.hour), topicDay),
+        end: addDays(addHours(startOfDay(event.start), 16), topicDay),
+        title: subtopic.name,
+        id: subtopic.id,
+        color: colors.newColor,
+        actions: this.actions,
+        resizable: {
+          beforeStart: true,
+          afterEnd: true
+        },
+        draggable: true,
+        curriculum: curr,
+        numWeeks: curr.numberOfWeeks,
+        topics: curr.topics,
+        version: curr.version,
+        dropped: true
+      }
+    );
+    // console.log('start: ' + this.events[this.events.length - 1].start);
+    this.currTopicTime = this.currTopicTime - timeLeft;
+    // this.hour = 7;
+    this.hour = 0;
+    this.multiDayEventCreated = true;
+  }
+/**
+ * persists all events in the event array.
+ */
+  persistEvents() {
+    const eventsToPersist: cal_event.CalendarEvent[] = [];
+    for (let i = 0; i < this.events.length; i++) {
+      eventsToPersist.push({
+        title: this.events[i].title,
+        description: this.events[i].title,
+        status_id: 0,
+        startDateTime: this.events[i].start,
+        endDateTime: this.events[i].end,
+        calendarSubtopic_id: +this.events[i].id,
+        user_id: this.user.id,
+        resizable: this.events[i].resizable,
+        color: this.events[i].color,
+        actions: this.events[i].actions,
+        draggable: this.events[i].draggable,
+        curriculum: this.events[i].curriculum,
+        numWeeks: this.events[i].numWeeks,
+        topics: this.events[i].topics,
+        version: this.events[i].version,
+        dropped: this.events[i].dropped
+      });
+
+    }
+    this.calendarService.addCalendarEventList(eventsToPersist).subscribe(eventRes => {
+    });
+  }
+/**
+ * Custom event to be persisted.
+ * @param event an event to be persisted
+ */
+  persistEvent(event: MyEvent) {
+    const subtopic: CalendarSubtopic = {
+      subtopic_id: +event.id
     };
-
-    if (this.validateInputs()) {
-      const title = <HTMLInputElement>document.getElementById('subtopic');
-      this.date = this.updateTime(this.date, this.time);
-
-      event.title = title.value;
-      event.start = this.date;
-      event.description = `Subtopic for: ${event.title}`;
-      this.events.push(event);
-
-      $('#main-calendar').fullCalendar( 'renderEvent', event, true );
-    }
+    // console.log(subtopic.name);
+    // console.log(subtopic.parentTopic_id);
+    const calEvent: cal_event.CalendarEvent = {
+      title: event.title,
+      description: event.title,
+      status_id: 0,
+      startDateTime: event.start,
+      endDateTime: event.end,
+      calendarSubtopic_id: +event.id,
+      user_id: this.user.id,
+      resizable: event.resizable,
+      color: event.color,
+      actions: event.actions,
+      draggable: event.draggable,
+      curriculum: event.curriculum,
+      numWeeks: event.numWeeks,
+      topics: event.topics,
+      version: event.version,
+      dropped: event.dropped
+    };
+    console.log('Persisting calEvent: ', calEvent);
+    this.calendarService.addCalendarEvent(calEvent).subscribe(eventRes => {
+      // console.log(eventRes);
+    },
+      err => {
+        console.log(err.message);
+      });
+    // this.calendarService.addCalendarSubtopic(subtopic).subscribe(subtopicRes => {
+    //   console.log(subtopicRes);
+    // });
+  }
+/**
+ * Persists a curriculum.
+ * @param curriculum a curriculum object to be persisted.
+ */
+  persistCurriculum(curriculum: Curriculum) {
+    let batchId = 0;
+    this.batchService.getBatchesByTrainerId(this.user.id).subscribe(batches => {
+      // console.log(batches);
+      if (batches === []) {
+        batchId = batches[0].id;
+      }
+    });
+    const calCurriculum: CalendarCurriculum = {
+      curriculum_id: curriculum.id,
+      batch_id: batchId
+    };
+    this.calendarService.addCalendarCirriculum(calCurriculum).subscribe(curr => {
+      console.log(curr);
+    });
   }
 
+/**
+ * creates an event for the calander persisting the event and reloading the calendar.
+ */
+  addEvent(): void {
+    this.events.push({
+      title: this.newSubtopicName,
+      start: addHours(this.newSubtopicDate, 9),
+      end: addHours(this.newSubtopicDate, 10),
+      color: colors.red,
+      draggable: true,
+      resizable: {
+        beforeStart: true,
+        afterEnd: true
+      }
+    });
+    this.refresh.next();
+    this.persistEvents();
+  }
+
+  // deleteEventList() {
+  //   this.calendarService.deleteCalendarEventList().subscribe(e => {});
+  // }
 }
 
-const eventColor = {
-  red: '#ff0000',
-  green: '#00bb5d',
-  blue: '#2399e5',
-  orange: '#fd7850'
-};
+@Component({
+  selector: 'app-calendar-modal',
+  templateUrl: './calendar-modal-component.html'
+})
+export class CalendarModalComponent {
+
+  /**
+  * @author Kyle Smith, Aaron Mathews
+  * @param dialogRef - The reference to the dialog using our
+  * component, which allows us to close the dialog when we're
+  * done.
+  * @param data - Received from the parent component
+  * of this modal component, enabling the current component
+  * to retrieve and update what's in the parent component
+  */
+  constructor(private dialogRef: MatDialogRef<CalendarModalComponent>, @Inject(MAT_DIALOG_DATA) public data: object) { }
+
+  close() {
+    this.dialogRef.close();
+  }
+}
+/**
+ * @author Kyle Smith | Aaron Mathews | Brandon Scoggins | 1806-Jun18-USF-Java | Wezley Singleton
+ */

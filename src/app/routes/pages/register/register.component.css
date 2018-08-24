@@ -1,0 +1,12 @@
+.register-container {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .example-container > * {
+    width: 100%;
+  }
+
+  /* .row {
+    margin-top: 200px !important;
+  } */
