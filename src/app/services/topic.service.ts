@@ -37,11 +37,20 @@ export class TopicService {
     return this.http.get<Topic[]>(environment.apiUrl + 'topics', HTTP_OPTIONS);
   }
 
+  /**
+   * Function used to retrieve topics by name
+   * @param name The name of the topic to be retrieved
+   */
   getByName(name: string): Observable<Topic[]> {
     console.log('[LOG] - In TopicService.getByName()');
     return this.http.get<Topic[]>(environment.apiUrl + `topics?name=${name}&name=${this.deactivateName(name)}`, HTTP_OPTIONS);
   }
 
+  /**
+   * Function used to create topic.
+   * Only pass the name as the id should be incremented and placed onto the topic on the backend
+   * @param name Name of the topic
+   */
   add(name: string): Observable<Topic> {
     console.log('[LOG] - In TopicService.getAll()');
     const newTopic = new Topic();
@@ -49,6 +58,10 @@ export class TopicService {
     return this.http.post<Topic>(environment.apiUrl + 'topics', JSON.stringify(newTopic), HTTP_OPTIONS);
   }
 
+  /**
+   * Get a topic by its unique id
+   * @param id Id of the topic
+   */
   getTopicById(id: number): Observable<Topic> {
     console.log('[LOG] - In TopicService.getTopicById()');
     return this.http.get<Topic>(environment.apiUrl + `topics/${id}`, HTTP_OPTIONS);
