@@ -21,6 +21,7 @@ export class CreateVersionComponent {
    * @param data - Received from the parent component
    * of this modal component, enabling the current component
    * to retrieve and update what's in the parent component
+   * @author - Andrew Li | 1806-Jun-18-USF-Java | Wezley Singleton
    */
   constructor(
     public dialogRef: MatDialogRef<CreateVersionComponent>,
@@ -28,6 +29,7 @@ export class CreateVersionComponent {
 
   /**
    * When the user decides to close the dialog.
+   * @author - Andrew Li | 1806-Jun-18-USF-Java | Wezley Singleton
    */
   close(): void {
     this.dialogRef.close();
@@ -37,6 +39,7 @@ export class CreateVersionComponent {
    * Creates a Curriculum object from the variables binded to the UI,
    * to the UI, the timestamp of the current time, and the user_id
    * of the user's current session.
+   * @author - Andrew Li | 1806-Jun-18-USF-Java | Wezley Singleton
    */
   add(): void {
     const newCurriculum: Curriculum = {
