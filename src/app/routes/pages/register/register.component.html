@@ -24,11 +24,6 @@
           <br/>
           <mat-form-field class="col-9">
             <input matInput placeholder="Password" type="password" formControlName="password" (keyup)="checkMatch()" required>
-            <!-- <mat-error *ngFor="let validation of registrationValidationMessages.password">
-                <mat-error *ngIf="registrationForm.get('password').hasError(validation.type) && (registrationForm.get('password').dirty || registrationForm.get('password').touched)">
-                  {{validation.message}}
-                </mat-error>
-              </mat-error> -->
             <mat-error *ngIf="getErrorMessage('password')">
               {{getErrorMessage('password')}}
             </mat-error>

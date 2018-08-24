@@ -554,6 +554,9 @@ export class CalendarComponent implements OnInit, DoCheck {
     this.persistEvents();
   }
 
+  /**
+   * To be used for clearing an entire curriculum from the calendar
+   */
   // deleteEventList() {
   //   this.calendarService.deleteCalendarEventList().subscribe(e => {});
   // }

@@ -37,6 +37,9 @@ export class LoginComponent implements OnInit {
     ]
   };
 
+  /**
+   * Commented out parameters were to be used for session timeout but was not implemented
+   */
   constructor(
     private userService: UserService,
     private cognitoService: CognitoService,
