@@ -8,6 +8,14 @@ import { timeout } from '../../../../../node_modules/@types/q';
 import { NgbModal } from '../../../../../node_modules/@ng-bootstrap/ng-bootstrap';
 import { UserService } from '../../../services/user.service';
 
+/**
+ * This component is the dashboard page. It is the page that the
+ * user is directed to after they login. It displays personal
+ * information and batch information to the user.
+ *
+ * @author Bradley Walker | Khaleel Williams | 1806-Jun18-USF-Java | Wezley Singleton
+ */
+
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
