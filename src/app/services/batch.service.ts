@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Batch } from '../../models/batch';
+import { Batch } from '../models/batch';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { environment } from '../../../environments/environment';
+import { environment } from '../../environments/environment';
 
 const HTTP_OPTIONS = {
   headers: new HttpHeaders({
@@ -24,7 +24,6 @@ export class BatchService {
     @return       an Observable to return the newly created batch
   */
   createBatch(batch: Batch): Observable<Batch> {
-    console.log('[LOG] - In BatchService.createBatch()');
     const json = JSON.stringify(batch);
     return this.http.post<Batch>(environment.apiUrl + 'batches', json, HTTP_OPTIONS);
   }
@@ -38,7 +37,6 @@ export class BatchService {
     @return     an Observable to return the list of batches
   */
   getBatchesByTrainerId(id: number): Observable<Batch[]> {
-    console.log('[LOG] - In BatchService.getBatchByTrainerId()');
     return this.http.get<Batch[]>(environment.apiUrl + `batches?trainer_id=${id}`, HTTP_OPTIONS);
   }
 }

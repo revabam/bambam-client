@@ -14,11 +14,11 @@ import { Subtopic } from '../../../models/subtopic';
 import { SubtopicService } from '../../../services/subtopic.service';
 import { TopicService } from '../../../services/topic.service';
 import { Topic } from '../../../models/topic';
-import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '../../../../../node_modules/@angular/material';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import * as cal_event from '../../../models/calendar-event';
 import { BamUser } from '../../../models/bam-user';
-import { BatchService } from '../../../services/batch/batch.service';
-import { EventColor, EventAction } from '../../../../../node_modules/calendar-utils';
+import { BatchService } from '../../../services/batch.service';
+import { EventColor, EventAction } from 'calendar-utils';
 
 const colors: any = {
   random: {
@@ -123,7 +123,6 @@ export class CalendarComponent implements OnInit, DoCheck {
   ngOnInit() {
     this.user = JSON.parse(sessionStorage.getItem('user'));
     this.calendarService.getCalendarEventsList().subscribe(response => {
-      console.log(response.length);
       this.storedEvents = response;
       this.initialRender = true;
     });
@@ -146,16 +145,11 @@ export class CalendarComponent implements OnInit, DoCheck {
    */
   ngDoCheck() {
     if (this.storedEvents != null && this.initialRender) {
-      console.log('refreshing');
-      // console.log(this.events);
-      // this.refresh.next();
       this.initialRender = false;
       this.generateStoredEvents();
     }
     this.renderCalendar = this.curriculumDataFetched;
     if (this.subTopicsReceived && this.subtopicsReceivedCount === 0) {
-      console.log();
-      console.log('Begining event generation...');
       this.generateEvents();
     }
   }
@@ -238,7 +232,6 @@ export class CalendarComponent implements OnInit, DoCheck {
  * @param event The event that was clicked
  */
   openDialog(event: MyEvent): void {
-    console.log(event);
     /*
      * this.dialog is an injected dependency for the modal
      * The open method passes in a component that we'll use
@@ -276,7 +269,6 @@ export class CalendarComponent implements OnInit, DoCheck {
    * @param event The event that the action happened on
    */
   handleEvent(action: string, event: MyEvent): void {
-    console.log('[LOG] - In handleEvent()');
     if (action === 'Clicked') {
       this.openDialog(event);
     } else if (action === 'Edited') {
@@ -287,10 +279,7 @@ export class CalendarComponent implements OnInit, DoCheck {
         const id: number = +event.id;
         this.calendarService.getCurriculumById(id).subscribe(curr => {
           this.selectedCurriculum = curr;
-          // console.log('number of weeks: ' + curr.numberOfWeeks);
-          // console.log('number of topics: ' + curr.topics.length);
           this.topicLength = curr.numberOfWeeks / curr.topics.length;
-          // console.log('topicLength: ' + this.topicLength);
           this.topicArr = curr.topics;
           for (let i = 0, j = 0; i < curr.topics.length; i++) {
             this.subtopicService.getSubtopicByParentId(curr.topics[i].id).subscribe(subResponse => {
@@ -338,10 +327,7 @@ export class CalendarComponent implements OnInit, DoCheck {
    */
   generateEvents() {
     this.subTopicsReceived = false;
-    // console.log('subtopics Received set to false');
     this.subtopicsReceivedCount++;
-    // console.log('count incremented');
-    // console.log();
     let topicDay = 0;
     for (let j = 0; j < this.topicArr.length; j++) {
       const subtopicTime = (this.topicLength * 5 * 7) / this.subtopicArrArr[j].length;
@@ -354,20 +340,9 @@ export class CalendarComponent implements OnInit, DoCheck {
             topicDay++;
           }
         }
-        // console.log();
-        // console.log(this.hour + 'This.hour');
-        // console.log();
         if (this.hour + this.currTopicTime > 7 && !this.multiDayEventCreated) {
           this.multidaySubtopic(this.subtopicArrArr[j][i], topicDay, (7 - this.hour), this.dropEvent, this.selectedCurriculum);
           topicDay++;
-          // if (this.multiDayEventCreated) {
-          //   // console.log(this.currTopicTime + ' this.hour = ' + (7 - this.hour));
-          //   // console.log(this.currTopicTime + ' this.hour = ' + (this.hour));
-          //   this.currTopicTime = this.currTopicTime - 7 - this.hour;
-          // } else {
-          //   this.currTopicTime = this.currTopicTime - 7;
-          // }
-          // this.hour = 0;
           i--;
         } else {
           this.events.push(
@@ -391,14 +366,11 @@ export class CalendarComponent implements OnInit, DoCheck {
               parentTopic_id: this.subtopicArrArr[j][i].parentTopic_id
             }
           );
-          // this.persistEvent(this.events[this.events.length - 1]);
-          console.log('start: ' + this.events[this.events.length - 1].start);
           this.colorNum++;
           this.hour += this.currTopicTime;
           this.currTopicTime = subtopicTime;
           this.multiDayEventCreated = false;
         }
-        // this.persistEvent(this.events[this.events.length - 1]);
         this.refresh.next();
       }
     }
@@ -417,9 +389,7 @@ export class CalendarComponent implements OnInit, DoCheck {
  * @param curr curr is the curriculum to be pushed
  */
   multidaySubtopic(subtopic: Subtopic, topicDay: number, timeLeft: number, event: MyEvent, curr: Curriculum) {
-    // console.log('IN CREATE MULTIDAY EVENT', subtopic.name);
     event.dropped = true;
-    // console.log(event);
     this.events.push(
       {
         start: addDays(addHours(startOfDay(event.start), 9 + this.hour), topicDay),
@@ -440,9 +410,7 @@ export class CalendarComponent implements OnInit, DoCheck {
         dropped: true
       }
     );
-    // console.log('start: ' + this.events[this.events.length - 1].start);
     this.currTopicTime = this.currTopicTime - timeLeft;
-    // this.hour = 7;
     this.hour = 0;
     this.multiDayEventCreated = true;
   }
@@ -483,8 +451,6 @@ export class CalendarComponent implements OnInit, DoCheck {
     const subtopic: CalendarSubtopic = {
       subtopic_id: +event.id
     };
-    // console.log(subtopic.name);
-    // console.log(subtopic.parentTopic_id);
     const calEvent: cal_event.CalendarEvent = {
       title: event.title,
       description: event.title,
@@ -503,16 +469,10 @@ export class CalendarComponent implements OnInit, DoCheck {
       version: event.version,
       dropped: event.dropped
     };
-    console.log('Persisting calEvent: ', calEvent);
     this.calendarService.addCalendarEvent(calEvent).subscribe(eventRes => {
-      // console.log(eventRes);
     },
       err => {
-        console.log(err.message);
       });
-    // this.calendarService.addCalendarSubtopic(subtopic).subscribe(subtopicRes => {
-    //   console.log(subtopicRes);
-    // });
   }
 /**
  * Persists a curriculum.
@@ -521,7 +481,6 @@ export class CalendarComponent implements OnInit, DoCheck {
   persistCurriculum(curriculum: Curriculum) {
     let batchId = 0;
     this.batchService.getBatchesByTrainerId(this.user.id).subscribe(batches => {
-      // console.log(batches);
       if (batches === []) {
         batchId = batches[0].id;
       }
@@ -531,7 +490,6 @@ export class CalendarComponent implements OnInit, DoCheck {
       batch_id: batchId
     };
     this.calendarService.addCalendarCirriculum(calCurriculum).subscribe(curr => {
-      console.log(curr);
     });
   }
 
@@ -554,9 +512,6 @@ export class CalendarComponent implements OnInit, DoCheck {
     this.persistEvents();
   }
 
-  // deleteEventList() {
-  //   this.calendarService.deleteCalendarEventList().subscribe(e => {});
-  // }
 }
 
 @Component({

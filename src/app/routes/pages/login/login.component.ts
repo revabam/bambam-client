@@ -40,10 +40,7 @@ export class LoginComponent implements OnInit {
   constructor(
     private userService: UserService,
     private cognitoService: CognitoService,
-    private router: Router,
-    // private userIdle: UserIdleService,
-    // private appComponent: AppComponent,
-    // private modal: NgbModal
+    private router: Router
   ) { }
 
   /**

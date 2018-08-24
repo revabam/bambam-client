@@ -64,12 +64,10 @@ export class CreateVersionComponent {
      * so that the user can see the changes.
      */
     this.data['curriculumService'].post(newCurriculum).subscribe(curr => {
-      console.log(curr);
       if (curr !== undefined && curr !== null) {
         this.data['curriculums'].push(curr);
       }
     }, err => {
-      console.log('Failed to create a version');
     });
     // After the curriculum is added, we're done with the modal.
     this.close();

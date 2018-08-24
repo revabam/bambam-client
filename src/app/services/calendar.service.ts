@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable } from '../../../node_modules/rxjs';
+import { Observable } from 'rxjs';
 import { Curriculum } from '../models/curriculum';
 import { environment } from '../../environments/environment';
 import { CalendarEvent } from '../models/calendar-event';
@@ -74,9 +74,7 @@ export class CalendarService {
    * @param events An array of calendar events
    */
   addCalendarEventList(events: CalendarEvent[]): Observable<CalendarEvent[]> {
-    console.log('[LOG] - In CalendarService.addCalendarEventlist()');
     const json = JSON.stringify(events);
-    console.log('this is the json string: ' + json);
     return this.http.post<CalendarEvent[]>(environment.apiUrl + 'calendar-events-list', json, HTTP_OPTIONS);
   }
 
@@ -85,7 +83,6 @@ export class CalendarService {
    * @param event
    */
   addCalendarEvent(event: CalendarEvent): Observable<CalendarEvent> {
-    console.log('[LOG] - In CalendarService.addCalendarEvent()');
     const json = JSON.stringify(event);
     return this.http.post<CalendarEvent>(environment.apiUrl + 'calendar-events', json, HTTP_OPTIONS);
   }
