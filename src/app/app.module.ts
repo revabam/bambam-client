@@ -31,7 +31,6 @@ import { UserService } from './services/user.service';
 import { BatchService } from './services/batch/batch.service';
 import { LocationStrategy, PathLocationStrategy } from '../../node_modules/@angular/common';
 import { UserIdleModule } from 'angular-user-idle';
-import { RoutesModule } from './routes/routes.module';
 import { CognitoService } from './services/cognito.service';
 import { DialogViewComponent } from './routes/pages/dialog-view/dialog-view.component';
 

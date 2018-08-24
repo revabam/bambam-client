@@ -13,22 +13,5 @@ export class AppComponent implements OnInit {
 
   constructor(private bottomSheet: MatBottomSheet) {}
 
-  // openBottomSheet(): void {
-  //   this.bottomSheet.open(SessionTimeoutComponent);
-  // }
-
   ngOnInit() {}
 }
-// @Component({
-//   // tslint:disable-next-line:component-selector
-//   selector: 'session-timeout',
-//   templateUrl: 'session-timeout.html',
-// })
-// export class SessionTimeoutComponent {
-//   constructor(private bottomSheetRef: MatBottomSheetRef<SessionTimeoutComponent>) {}
-
-//   openLink(event: MouseEvent): void {
-//     this.bottomSheetRef.dismiss();
-//     event.preventDefault();
-//   }
-// }

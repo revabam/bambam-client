@@ -1,25 +1,11 @@
 import * as $ from 'jquery';
 import * as moment from 'moment';
 import 'fullcalendar';
-import {
-  Component,
-  ChangeDetectionStrategy,
-  ViewChild,
-  TemplateRef,
-  OnInit,
-  DoCheck,
-  Inject
-} from '@angular/core';
-import {
-  startOfDay, endOfDay, subDays, addDays, endOfMonth, isSameDay, isSameMonth, addHours, addWeeks, isWeekend
-} from 'date-fns';
+import {Component, ChangeDetectionStrategy, ViewChild, TemplateRef, OnInit, DoCheck, Inject} from '@angular/core';
+import {startOfDay, endOfDay, subDays, addDays, endOfMonth, isSameDay, isSameMonth, addHours, addWeeks, isWeekend} from 'date-fns';
 import { Subject, Observable, BehaviorSubject } from 'rxjs';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap/modal/modal.module';
-import {
-  CalendarEvent,
-  CalendarEventAction,
-  CalendarEventTimesChangedEvent
-} from 'angular-calendar';
+import {CalendarEvent, CalendarEventAction, CalendarEventTimesChangedEvent} from 'angular-calendar';
 import { CalendarService } from '../../../services/calendar.service';
 import { Curriculum } from '../../../models/curriculum';
 import { CalendarCurriculum } from '../../../models/calendar-curriculum';
@@ -131,14 +117,11 @@ export class CalendarComponent implements OnInit, DoCheck {
   constructor(private modal: NgbModal, private calendarService: CalendarService, private subtopicService: SubtopicService,
     private topicService: TopicService, private dialog: MatDialog, private batchService: BatchService) { }
 
+  /**
+   * Life hook for loading all calendar services
+   */
   ngOnInit() {
     this.user = JSON.parse(sessionStorage.getItem('user'));
-
-    // this.calendarService.getCalendarEvents().subscribe(response => {
-    //   console.log(response.length);
-    //   this.storedEvents = response;
-    //   this.initialRender = true;
-    // });
     this.calendarService.getCalendarEventsList().subscribe(response => {
       console.log(response.length);
       this.storedEvents = response;
@@ -158,6 +141,9 @@ export class CalendarComponent implements OnInit, DoCheck {
     });
   }
 
+  /**
+   * Lifehook for generating events after the service has retruned them from onInit.
+   */
   ngDoCheck() {
     if (this.storedEvents != null && this.initialRender) {
       console.log('refreshing');
@@ -174,10 +160,16 @@ export class CalendarComponent implements OnInit, DoCheck {
     }
   }
 
+  /**
+   * toggles the side nav for creating events and draging curriculum on to the calendar.
+   */
   toggleSideNav() {
     this.showSideNav = !this.showSideNav;
   }
-
+  /**
+   * Convert cirriculums into Material CalendarEvents so they can be dropped onto the calendar
+   * and stored.
+   */
   convertCirriculum() {
     this.curriculums.forEach((curriculum) => {
       this.curriculumEvents.push(
@@ -199,6 +191,11 @@ export class CalendarComponent implements OnInit, DoCheck {
     });
   }
 
+  /**
+   * Built in method from angular material2 calendar.
+   * Handles clicks on days.
+   * @param param0 An object that holds the date clicked and the events on that day.
+   */
   dayClicked({ date, events }: { date: Date; events: MyEvent[] }): void {
     if (isSameMonth(date, this.viewDate)) {
       this.viewDate = date;
@@ -213,6 +210,11 @@ export class CalendarComponent implements OnInit, DoCheck {
     }
   }
 
+  /**
+   * Built in method from angular material2 calendar.
+   * Handles time changes for events.
+   * @param param0 A wrapper object that stores the event, its new starting time, and ending time.
+   */
   eventTimesChanged({
     event,
     newStart,
@@ -223,11 +225,18 @@ export class CalendarComponent implements OnInit, DoCheck {
     this.handleEvent('Dropped or resized', event);
     this.refresh.next();
   }
-
+/**
+ * Should be used for creating a random color for the curriculum when it is dropped on the calendar
+ * but it is not implemented.
+ */
   randomColor() {
     return '#' + Math.floor(Math.random() * 16777215).toString(16);
   }
-
+/**
+ * When the title of an event on the calendar is clicked, a modal is opened with relevant
+ * information about the event (curriculum, topics, etc.).
+ * @param event The event that was clicked
+ */
   openDialog(event: MyEvent): void {
     console.log(event);
     /*
@@ -258,6 +267,14 @@ export class CalendarComponent implements OnInit, DoCheck {
     );
   }
 
+  /**
+   * Whenever an event happens on the calendar (click, drag, drop, edit, delete), this method is called
+   * with the actions of the event and the event itself.
+   * Becaused the pencil icon does not render correctly, we removed it and do not have any functionality
+   * for the action.
+   * @param action The action that took place (drag, drop, edit, delete, click)
+   * @param event The event that the action happened on
+   */
   handleEvent(action: string, event: MyEvent): void {
     console.log('[LOG] - In handleEvent()');
     if (action === 'Clicked') {
@@ -290,6 +307,11 @@ export class CalendarComponent implements OnInit, DoCheck {
     }
   }
 
+/**
+ * Used to populate the add persisted events from the ngOnInit database call to the events list
+ * that is used to hold calendar events, then refreshes the calendar. This is called by the ngDoCheck
+ * lifecycle hook so that it is only called once the response from the ngOnInit call is complete.
+ */
   generateStoredEvents() {
     for (let i = 0; i < this.storedEvents.length; i++) {
       this.events.push(
@@ -311,10 +333,9 @@ export class CalendarComponent implements OnInit, DoCheck {
     }
     this.refresh.next();
   }
-
-  /*
-    Assumes that each topic contains at least 1 sub topic per day
-  */
+  /**
+   * Assumes that each topic contains at least 1 sub topic per day
+   */
   generateEvents() {
     this.subTopicsReceived = false;
     // console.log('subtopics Received set to false');
@@ -385,6 +406,16 @@ export class CalendarComponent implements OnInit, DoCheck {
     this.persistEvents();
   }
 
+/**
+ * Used for subtopics that span multiple days.
+ * If there is not enought time in the current day to complete a subtopic, this method is used
+ * to split the subtopic and make multiple events from it.
+ * @param subtopic subTopic to be added to calendar
+ * @param topicDay the current day that the subtopic is on
+ * @param timeLeft time left in a day (hours until 4pm)
+ * @param event the event to be pushed to calendar
+ * @param curr curr is the curriculum to be pushed
+ */
   multidaySubtopic(subtopic: Subtopic, topicDay: number, timeLeft: number, event: MyEvent, curr: Curriculum) {
     // console.log('IN CREATE MULTIDAY EVENT', subtopic.name);
     event.dropped = true;
@@ -415,7 +446,9 @@ export class CalendarComponent implements OnInit, DoCheck {
     this.hour = 0;
     this.multiDayEventCreated = true;
   }
-
+/**
+ * persists all events in the event array.
+ */
   persistEvents() {
     const eventsToPersist: cal_event.CalendarEvent[] = [];
     for (let i = 0; i < this.events.length; i++) {
@@ -442,7 +475,10 @@ export class CalendarComponent implements OnInit, DoCheck {
     this.calendarService.addCalendarEventList(eventsToPersist).subscribe(eventRes => {
     });
   }
-
+/**
+ * Custom event to be persisted.
+ * @param event an event to be persisted
+ */
   persistEvent(event: MyEvent) {
     const subtopic: CalendarSubtopic = {
       subtopic_id: +event.id
@@ -478,7 +514,10 @@ export class CalendarComponent implements OnInit, DoCheck {
     //   console.log(subtopicRes);
     // });
   }
-
+/**
+ * Persists a curriculum.
+ * @param curriculum a curriculum object to be persisted.
+ */
   persistCurriculum(curriculum: Curriculum) {
     let batchId = 0;
     this.batchService.getBatchesByTrainerId(this.user.id).subscribe(batches => {
@@ -496,6 +535,9 @@ export class CalendarComponent implements OnInit, DoCheck {
     });
   }
 
+/**
+ * creates an event for the calander persisting the event and reloading the calendar.
+ */
   addEvent(): void {
     this.events.push({
       title: this.newSubtopicName,
@@ -524,6 +566,7 @@ export class CalendarComponent implements OnInit, DoCheck {
 export class CalendarModalComponent {
 
   /**
+  * @author Kyle Smith, Aaron Mathews
   * @param dialogRef - The reference to the dialog using our
   * component, which allows us to close the dialog when we're
   * done.
@@ -537,5 +580,6 @@ export class CalendarModalComponent {
     this.dialogRef.close();
   }
 }
-
-
+/**
+ * @author Kyle Smith | Aaron Mathews | Brandon Scoggins | 1806-Jun18-USF-Java | Wezley Singleton
+ */
