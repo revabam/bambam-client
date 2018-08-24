@@ -4,7 +4,7 @@ import { Curriculum } from '../../../models/curriculum';
 import { Topic } from '../../../models/topic';
 import { Subtopic } from '../../../models/subtopic';
 import { TopicService } from '../../../services/topic.service';
-import { MatDialog } from '../../../../../node_modules/@angular/material';
+import { MatDialog } from '@angular/material';
 import { CreateVersionComponent } from '../create-version/create-version.component';
 import { SubtopicService } from '../../../services/subtopic.service';
 import { DialogViewComponent } from '../dialog-view/dialog-view.component';
@@ -185,10 +185,8 @@ export class CurriculumEditorComponent implements OnInit {
     this.curriculumService.deactivate(curriculum).subscribe(
       data => {
         if (data['name'] === undefined || data['name'] === null) {
-          console.log('Failed to deactivate curriculum');
           return;
         }
-        console.log('Successfully deactivated ', data);
         /*
          * After we deactivate from the server, we also want to
          * deactivate from the client-side array binded to our
@@ -200,7 +198,6 @@ export class CurriculumEditorComponent implements OnInit {
         );
       },
       err => {
-        console.log('Failed to deactivate a curriculum');
       }
     );
   }
@@ -214,10 +211,8 @@ export class CurriculumEditorComponent implements OnInit {
     this.curriculumService.reactivate(curriculum).subscribe(
       data => {
         if (data['name'] === undefined || data['name'] === null) {
-          console.log('Failed to reactivate curriculum');
           return;
         }
-        console.log('Successfully reactivated ', data);
         /*
          * After we deactivate from the server, we also want to
          * deactivate from the client-side array binded to our
@@ -229,7 +224,6 @@ export class CurriculumEditorComponent implements OnInit {
         );
       },
       err => {
-        console.log('Failed to reactivate a curriculum');
       }
     );
   }
@@ -246,10 +240,8 @@ export class CurriculumEditorComponent implements OnInit {
     this.topicService.deactivate(topic).subscribe(
       data => {
         if (data['name'] === undefined || data['name'] === null) {
-          console.log('Failed to deactivate topic');
           return;
         }
-        console.log('Successfully deactivated ', data);
         /*
          * After we deactivate from the server, we also want to
          * deactivate from the client-side array binded to our
@@ -261,7 +253,6 @@ export class CurriculumEditorComponent implements OnInit {
         );
       },
       err => {
-        console.log('Failed to deactivate a topic');
       }
     );
     this.collapseTopic(topic.id);
@@ -280,10 +271,8 @@ export class CurriculumEditorComponent implements OnInit {
       data => {
         this.collapseTopic(topic.id);
         if (data['name'] === undefined || data['name'] === null) {
-          console.log('Failed to reactivate topic');
           return;
         }
-        console.log('Successfully reactivated ', data);
         /*
          * After we deactivate from the server, we also want to
          * deactivate from the client-side array binded to our
@@ -295,7 +284,6 @@ export class CurriculumEditorComponent implements OnInit {
         );
       },
       err => {
-        console.log('Failed to reactivate a topic');
       }
     );
     this.collapseTopic(topic.id);
@@ -347,10 +335,8 @@ export class CurriculumEditorComponent implements OnInit {
     this.subtopicService.deactivate(subtopic).subscribe(
       data => {
         if (data['name'] === undefined || data['name'] === null) {
-          console.log('Failed to deactivate subtopic');
           return;
         }
-        console.log('Successfully deactivated ', data);
         /*
          * After we deactivate from the server, we also want to
          * deactivate from the client-side array binded to our
@@ -362,7 +348,6 @@ export class CurriculumEditorComponent implements OnInit {
         );
       },
       err => {
-        console.log('Failed to deactivate a subtopic');
       }
     );
   }
@@ -376,10 +361,8 @@ export class CurriculumEditorComponent implements OnInit {
     this.subtopicService.reactivate(subtopic).subscribe(
       data => {
         if (data['name'] === undefined || data['name'] === null) {
-          console.log('Failed to reactivate subtopic');
           return;
         }
-        console.log('Successfully reactivated ', data);
         /*
          * After we reactivate on the server, we also want to
          * reactivate from the client-side array binded to our
@@ -391,7 +374,6 @@ export class CurriculumEditorComponent implements OnInit {
         );
       },
       err => {
-        console.log('Failed to reactivate a subtopic');
       }
     );
   }
@@ -405,7 +387,6 @@ export class CurriculumEditorComponent implements OnInit {
    * @author - Karen Matney | 1806-Jun-18-USF-Java | Wezley Singleton
    */
   openNewDialog(): void {
-    console.log('In openNewDialog()');
     /*
      * this.dialog is an injected dependency for the modal
      * The open method passes in a component that we'll use

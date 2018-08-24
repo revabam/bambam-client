@@ -7,33 +7,6 @@
         <li *ngFor="let topic of data.topics">{{topic.name}}</li>
     </ul>
     <p>Subtopic: {{data.title}}</p><br>
-
-  <!-- <mat-form-field>
-    <mat-select placeholder="Curriculum Name"
-        [(ngModel)]="selectedCurriculumName">
-      <mat-option *ngFor="let curriculumName of data.curriculumNames"
-        [value]="curriculumName">
-        {{curriculumName}}
-      </mat-option>
-    </mat-select>
-  </mat-form-field>
-  <br />
-  <mat-form-field>
-    <input matInput [(ngModel)]="version" placeholder="Type in a version number">
-  </mat-form-field>
-  <br />
-  <mat-form-field>
-    <input matInput [(ngModel)]="numberOfWeeks" placeholder="Number of weeks">
-  </mat-form-field>
-  <br />
-  <mat-form-field>
-    <mat-select multiple placeholder="Select Topics"
-        [(ngModel)]="selectedTopics">
-      <mat-option *ngFor="let topic of data.topics" [value]="topic">
-        {{topic.name}}
-      </mat-option>
-    </mat-select>
-  </mat-form-field> -->
 </div>
 <div mat-dialog-actions>
   <button mat-button (click)="close()">OK</button>

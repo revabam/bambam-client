@@ -48,9 +48,6 @@ export class DialogViewComponent implements OnInit {
    * @author Karen Matney | Khaleel Williams
    */
   addTopic(): void {
-    console.log('[DEBUG] - in addTopic');
-    console.log(`${this.topicName} - ${this.subtopicName}`);
-
     if (this.topicName !== this.data['topicService'].reactivateName(this.topicName)) {
       alert('Invalid Topic Name');
       return;
@@ -60,19 +57,14 @@ export class DialogViewComponent implements OnInit {
       topics = topics.filter((topic) => this.topicName.toUpperCase()
         === this.data['topicService'].reactivateName(
           topic.name).toUpperCase());
-      console.log('[DEBUG] - topic already exist, topic is: ');
-      console.log(topics);
       if (topics.length === 0) {
         this.data['topicService'].add(this.topicName).subscribe(result => {
-          console.log('[DEBUG] - result: ');
-          console.log(result);
           this.data['topics'].push(result);
           this.subtopics.forEach(subtopic => this.data['subtopicService'].add(subtopic, result.id).subscribe(addedSubtopic => {
             this.data['subtopics'].push(addedSubtopic);
           }));
         });
       } else {
-        console.log(`${topics[0].id}`);
         this.subtopics.forEach(subtopic => this.data['subtopicService'].add(subtopic, topics[0].id).subscribe(
           (addedSubtopic) => this.data['subtopics'].push(addedSubtopic)
         ));
@@ -99,7 +91,6 @@ export class DialogViewComponent implements OnInit {
       return;
     }
     this.subtopics.push(this.subtopicName);
-    this.subtopics.forEach(item => console.log(item));
   }
 
 }

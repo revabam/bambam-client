@@ -1,6 +1,6 @@
-import { environment } from './../environments/environment';
+import { environment } from '../environments/environment';
 import { Component, OnInit } from '@angular/core';
-import { MatBottomSheetRef, MatBottomSheet } from '../../node_modules/@angular/material';
+import { MatBottomSheetRef, MatBottomSheet } from '@angular/material';
 
 @Component({
   selector: 'app-root',

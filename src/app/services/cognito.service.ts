@@ -36,7 +36,6 @@ export class CognitoService {
   * @param  lastName  The new user's last name
   */
   registerUser(email: string, password: string, firstName: string, lastName: string): BehaviorSubject<object> {
-    console.log('[LOG] - In CognitoService.registerUser()');
 
     const attributeList = [];
 
@@ -108,11 +107,9 @@ export class CognitoService {
 
     cognitoUser.authenticateUser(authenticationDetails, {
       onSuccess: function(session: AWSCognito.CognitoUserSession) {
-        console.log('[LOG] - Cognito login succeeded');
         resultStream.next(session.getIdToken());
       },
       onFailure: function(err: any) {
-        console.log('[ERROR] - Failed to authenticate user');
         resultStream.next(err);
       }
     });
