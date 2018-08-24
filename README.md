@@ -25,3 +25,12 @@ Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protrac
 ## Further help
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+
+# Sprint 1 Final Thoughts - 8/24/18
+- Brandon Scoggins | 1806-Jun-USF-Java | Wezley Singleton
+
+The look and feel of most components is where we feel it needs to be. Some minor adjustments, such as font sizing and margin white space, could still be addressed. 
+
+The core functionality of the login/register, curriculum editor, and calendar components is presentable. The calendar and curriculum editor components have room for additional functionality (color coding events, marking events with a status, etc) but they also have features that need to be fully fleshed out (adding new events to a set of already persisted events, editing events in a modal/dialouge view, etc). 
+
+A future sprint could also implement the BOOM (Bootcamp Overall Object Manager) functionality to allow for statistical analysis of BAM.
