@@ -21,6 +21,7 @@ export class CreateVersionComponent {
    * @param data - Received from the parent component
    * of this modal component, enabling the current component
    * to retrieve and update what's in the parent component
+   * @author - Andrew Li | 1806-Jun-18-USF-Java | Wezley Singleton
    */
   constructor(
     public dialogRef: MatDialogRef<CreateVersionComponent>,
@@ -28,6 +29,7 @@ export class CreateVersionComponent {
 
   /**
    * When the user decides to close the dialog.
+   * @author - Andrew Li | 1806-Jun-18-USF-Java | Wezley Singleton
    */
   close(): void {
     this.dialogRef.close();
@@ -37,6 +39,7 @@ export class CreateVersionComponent {
    * Creates a Curriculum object from the variables binded to the UI,
    * to the UI, the timestamp of the current time, and the user_id
    * of the user's current session.
+   * @author - Andrew Li | 1806-Jun-18-USF-Java | Wezley Singleton
    */
   add(): void {
     const newCurriculum: Curriculum = {
@@ -47,7 +50,7 @@ export class CreateVersionComponent {
        * version to oldest version, so we take the version of
        * first element and add by 1
        */
-      version: this.data['getCurriculumsByName'](
+      version: +this.data['getCurriculumsByName'](
         this.selectedCurriculumName)[0].version + 1,
       creator_id: JSON.parse(sessionStorage['user'])['id'],
       dateCreated: new Date(),
@@ -61,12 +64,10 @@ export class CreateVersionComponent {
      * so that the user can see the changes.
      */
     this.data['curriculumService'].post(newCurriculum).subscribe(curr => {
-      console.log(curr);
       if (curr !== undefined && curr !== null) {
         this.data['curriculums'].push(curr);
       }
     }, err => {
-      console.log('Failed to create a version');
     });
     // After the curriculum is added, we're done with the modal.
     this.close();

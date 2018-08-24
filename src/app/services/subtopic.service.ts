@@ -33,20 +33,26 @@ export class SubtopicService {
    * The function used to fetch all the subtopics from the server.
    */
   getAll(): Observable<Subtopic[]> {
-    console.log('[LOG] - In SubtopicService.getAll()');
     return this.http.get<Subtopic[]>(environment.apiUrl + 'subtopics', HTTP_OPTIONS);
   }
 
+  /**
+   * Add a new subtopic
+   * @param name      name of the subtopic
+   * @param parentId  reference id to the topic it belongs to
+   */
   add(name: string, parentId: number): Observable<Subtopic> {
-    console.log('[LOG] - In Sub-TopicService.add()');
     const newSubtopic = new Subtopic();
     newSubtopic.name = name;
     newSubtopic.parentTopic_id = parentId;
     return this.http.post<Subtopic>(environment.apiUrl + 'subtopics', JSON.stringify(newSubtopic), HTTP_OPTIONS);
   }
 
+  /**
+   * Get subtopics related to a particular topic
+   * @param id The id of the topic
+   */
   getSubtopicByParentId(id: number): Observable<Subtopic[]> {
-    console.log('[LOG} - In SubtopicService.getSubtopicByParentId()');
     return this.http.get<Subtopic[]>(environment.apiUrl + `subtopics?parentTopic_id=${id}`, HTTP_OPTIONS);
   }
 
@@ -54,7 +60,6 @@ export class SubtopicService {
    * The function used to deactivate a subtopic in the server
    */
   deactivate(subtopic: Subtopic): Observable<Object> {
-    console.log('[LOG] - In SubtopicService.deactivate()');
     subtopic.name = this.deactivateName(subtopic.name);
     return this.http.put(environment.apiUrl + `subtopics/${subtopic.id}`,
       subtopic, HTTP_OPTIONS);
@@ -64,7 +69,6 @@ export class SubtopicService {
    * The function used to reactivate a subtopic in theserver
    */
   reactivate(subtopic: Subtopic): Observable<Object> {
-    console.log('[LOG] - In SubtopicService.reactivate()');
     subtopic.name = this.reactivateName(subtopic.name);
     return this.http.put(environment.apiUrl + `subtopics/${subtopic.id}`,
       subtopic, HTTP_OPTIONS);

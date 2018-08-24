@@ -91,111 +91,9 @@
       "curriculum_id": 1,
       "batch_id": 0,
       "id": 10
-    },
-    {
-      "curriculum_id": 1,
-      "batch_id": 0,
-      "id": 11
-    },
-    {
-      "curriculum_id": 1,
-      "batch_id": 0,
-      "id": 12
-    },
-    {
-      "curriculum_id": 1,
-      "batch_id": 0,
-      "id": 13
-    },
-    {
-      "curriculum_id": 1,
-      "batch_id": 0,
-      "id": 14
-    },
-    {
-      "curriculum_id": 1,
-      "batch_id": 0,
-      "id": 15
-    },
-    {
-      "curriculum_id": 1,
-      "batch_id": 0,
-      "id": 16
-    },
-    {
-      "curriculum_id": 1,
-      "batch_id": 0,
-      "id": 17
-    },
-    {
-      "curriculum_id": 1,
-      "batch_id": 0,
-      "id": 18
     }
   ],
   "calendar-subtopics": [
-    {
-      "id": 1,
-      "subtopic_id": 1
-    },
-    {
-      "id": 2,
-      "subtopic_id": 2
-    },
-    {
-      "id": 3,
-      "subtopic_id": 3
-    },
-    {
-      "id": 4,
-      "subtopic_id": 4
-    },
-    {
-      "id": 5,
-      "subtopic_id": 5
-    },
-    {
-      "id": 6,
-      "subtopic_id": 6
-    }
-  ],
-  "calendar-events": [
-    {
-      "id": 1,
-      "title": "eventOne",
-      "description": "the first event",
-      "status_id": 2,
-      "startDateTime": 6713691398138,
-      "endDateTime": 634342887095487,
-      "calendarSubtopic_id": 2
-    },
-    {
-      "id": 2,
-      "title": "eventTwo",
-      "description": "the second event",
-      "status_id": 1,
-      "startDateTime": 8129132869,
-      "endDateTime": 6742830928462,
-      "calendarSubtopic_id": 2
-    },
-    {
-      "id": 3,
-      "title": "eventThree",
-      "description": "the third event",
-      "status_id": 1,
-      "startDateTime": 238080293,
-      "endDateTime": 7342723489,
-      "calendarSubtopic_id": 2
-    },
-    {
-      "id": 4,
-      "title": "eventFour",
-      "description": "the fourth event",
-      "status_id": "2",
-      "startDateTime": 376542356,
-      "endDateTime": 478764567765,
-      "calendarSubtopic_id": 1
-    },
     {
       "title": "Relational Database Service (RDS)",
       "description": "Relational Database Service (RDS)",
@@ -66322,6 +66220,7 @@
       "id": 579
     }
   ],
+  "calendar-events-list": {},
   "curriculums": [
     {
       "id": 1,

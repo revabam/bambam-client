@@ -2,10 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { BamUser } from '../../../models/bam-user';
 import { Router } from '@angular/router';
 import { Batch } from '../../../models/batch';
-import { BatchService } from '../../../services/batch/batch.service';
-import { UserIdleService } from '../../../../../node_modules/angular-user-idle';
-import { timeout } from '../../../../../node_modules/@types/q';
-import { NgbModal } from '../../../../../node_modules/@ng-bootstrap/ng-bootstrap';
+import { BatchService } from '../../../services/batch.service';
+import { UserIdleService } from 'angular-user-idle';
+import { timeout } from 'q';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { UserService } from '../../../services/user.service';
 
 /**

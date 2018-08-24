@@ -2,41 +2,41 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { CreateVersionComponent } from './create-version.component';
 import { CurriculumService } from '../../../services/curriculum.service';
+import { FormsModule } from '@angular/forms';
+import {
+  MatFormFieldModule, MatIconModule, MatOptionModule,
+  MatSelectModule, MatDialogRef, MatDialogModule, MAT_DIALOG_DATA, MatToolbar,
+  MatToolbarModule, MatExpansionPanel
+} from '@angular/material';
+import { CurriculumEditorComponent } from '../curriculum-editor/curriculum-editor.component';
 
+/**
+ * The Unit test to build this component.
+ */
 describe('CreateVersionComponent', () => {
   let component: CreateVersionComponent;
   let fixture: ComponentFixture<CreateVersionComponent>;
-
+  let CurriculumServiceSub: Partial<CurriculumService>;
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ CreateVersionComponent, CurriculumService ]
+      declarations: [CreateVersionComponent],
+      imports: [FormsModule, MatToolbarModule, MatFormFieldModule, MatIconModule, MatOptionModule, MatSelectModule, MatDialogModule],
+      providers: [
+        { provide: CurriculumService, useValue: CurriculumServiceSub },
+        { provide: MatDialogRef },
+        { provide: MAT_DIALOG_DATA }
+      ]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {
     fixture = TestBed.createComponent(CreateVersionComponent);
     component = fixture.componentInstance;
-    fixture.detectChanges();
+    // fixture.detectChanges();
   });
 
   it('should create', () => {
     expect(component).toBeTruthy();
   });
 });
-describe('Add a new version', () => {
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      declarations: [ CreateVersionComponent, CurriculumService ]
-    })
-    .compileComponents();
-  }));
-  let component: CreateVersionComponent;
-  let fixture: ComponentFixture<CreateVersionComponent>;
-
-  testVersion = {selectedCurriculumName: 'java', numberOfWeeks: 7, selectedTopics: []}
-  it('should make a new version of the Java curriculum',() => {
-    const newVesion = new CreateVersionComponent();
-    expect(newVesion.add())
-  });
-})

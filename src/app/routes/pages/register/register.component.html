@@ -1,59 +1,69 @@
+<div class="row justify-content-center mx-2">
+  <img src="../../../../assets/bam.png" height="200px" width="300px" alt="" srcset="" class="py-3">
+</div>
 
-<mat-grid-list cols="1" rowHeight="500px">
-    <mat-grid-tile colspan="1" rowspan="1">
-      <mat-card>
-        <mat-card-content>
-          <mat-card-title>Register</mat-card-title>
-          <form [formGroup]="registrationForm">
-            <mat-form-field>
-              <input matInput placeholder="Email" formControlName="email" required>
-              <mat-error *ngFor="let validation of registrationValidationMessages.email">
-                <mat-error *ngIf="registrationForm.get('email').hasError(validation.type) && (registrationForm.get('email').dirty || registrationForm.get('email').touched)">
-                  {{validation.message}}
-                </mat-error>
+<div class="row justify-content-center mx-2">
+  <div class="col-4">
+    <mat-card>
+      <mat-card-header>
+        <mat-card-title>
+          <h2>Register</h2>
+        </mat-card-title>
+      </mat-card-header>
+      <mat-card-content style="background-color: rgb(245,245,245)">
+        <form [formGroup]="registrationForm">
+          <mat-form-field class="col-9">
+            <input matInput placeholder="Email" formControlName="email" required>
+            <mat-error *ngFor="let validation of registrationValidationMessages.email">
+              <mat-error *ngIf="registrationForm.get('email').hasError(validation.type) && (registrationForm.get('email').dirty || registrationForm.get('email').touched)">
+                {{validation.message}}
               </mat-error>
-            </mat-form-field>
-            <br/>
-            <mat-form-field>
-              <input matInput placeholder="Password" type="password" formControlName="password" (keyup)="checkMatch()" required>
-              <mat-error *ngIf="getErrorMessage('password')">
-                {{getErrorMessage('password')}}
+            </mat-error>
+          </mat-form-field>
+          <br/>
+          <mat-form-field class="col-9">
+            <input matInput placeholder="Password" type="password" formControlName="password" (keyup)="checkMatch()" required>
+            <mat-error *ngIf="getErrorMessage('password')">
+              {{getErrorMessage('password')}}
+            </mat-error>
+          </mat-form-field>
+          <div *ngIf="getErrorMessage('password') && (registrationForm.get('password').dirty || registrationForm.get('password').touched)"></div>
+          <br/>
+          <mat-form-field class="col-9">
+            <input matInput #conf placeholder="Confirm Password" type="password" formControlName="confirmPassword" (keyup)="checkMatch()"
+              (blur)="checkMatch()" required>
+            <mat-error *ngIf="!conf.value">Confirm password is required</mat-error>
+            <mat-error *ngIf="this.message">{{this.message}}</mat-error>
+          </mat-form-field>
+          <br/>
+          <mat-form-field class="col-9">
+            <input matInput placeholder="First Name" type="text" formControlName="firstName" required>
+            <mat-error *ngFor="let validation of registrationValidationMessages.firstName">
+              <mat-error *ngIf="registrationForm.get('firstName').hasError(validation.type) && (registrationForm.get('firstName').dirty || registrationForm.get('firstName').touched)">
+                {{validation.message}}
               </mat-error>
-            </mat-form-field>
-            <div *ngIf="getErrorMessage('password') && (registrationForm.get('password').dirty || registrationForm.get('password').touched)"></div>
-            <br/>
-            <mat-form-field>
-              <input matInput #conf placeholder="Confirm Password" type="password" formControlName="confirmPassword" (keyup)="checkMatch()" (blur)="checkMatch()" required>
-              <mat-error *ngIf="!conf.value">Confirm password is required</mat-error>
-              <mat-error *ngIf="this.message">{{this.message}}</mat-error>
-            </mat-form-field>
-            <br/>
-            <mat-form-field>
-              <input matInput placeholder="First Name" type="text" formControlName="firstName" required>
-              <mat-error *ngFor="let validation of registrationValidationMessages.firstName">
-                <mat-error *ngIf="registrationForm.get('firstName').hasError(validation.type) && (registrationForm.get('firstName').dirty || registrationForm.get('firstName').touched)">
-                  {{validation.message}}
-                </mat-error>
+            </mat-error>
+          </mat-form-field>
+          <br/>
+          <mat-form-field class="col-9">
+            <input matInput placeholder="Last Name" type="text" formControlName="lastName" required>
+            <mat-error *ngFor="let validation of registrationValidationMessages.lastName">
+              <mat-error *ngIf="registrationForm.get('lastName').hasError(validation.type) && (registrationForm.get('lastName').dirty || registrationForm.get('lastName').touched)">
+                {{validation.message}}
               </mat-error>
-            </mat-form-field>
-            <br/>
-            <mat-form-field>
-              <input matInput placeholder="Last Name" type="text" formControlName="lastName" required>
-              <mat-error *ngFor="let validation of registrationValidationMessages.lastName">
-                <mat-error *ngIf="registrationForm.get('lastName').hasError(validation.type) && (registrationForm.get('lastName').dirty || registrationForm.get('lastName').touched)">
-                  {{validation.message}}
-                </mat-error>
-              </mat-error>
-            </mat-form-field>
-          </form>
-          <div *ngIf="errorMessage" class="alert alert-danger" role="alert">
-            {{errorMessage}}
-          </div>
-        </mat-card-content>
-        <mat-card-actions>
+            </mat-error>
+          </mat-form-field>
+        </form>
+        <div *ngIf="errorMessage" class="alert alert-danger" role="alert">
+          {{errorMessage}}
+        </div>
+        <mat-toolbar #buttonBar>
           <button mat-raised-button name="register" color="primary" (click)="register()">Register</button>
+          <span style="flex: 1 auto;"></span>
           <button mat-raised-button name="login" routerLink="/login">Login</button>
-        </mat-card-actions>
-      </mat-card>
-    </mat-grid-tile>
-  </mat-grid-list>
+        </mat-toolbar>
+
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>

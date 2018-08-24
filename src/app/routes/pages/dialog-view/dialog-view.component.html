@@ -1,29 +1,39 @@
-<h5 mat-dialog-title>Topic</h5>
 <div mat-dialog-content>
-  <mat-form-field>
-    <input matInput [(ngModel)]="topicName" placeholder="Name of Topic">
+  <mat-form-field class="col-9">
+    <mat-select style="font-size: 100%;" placeholder="Topic" name="topicName" [(ngModel)]="topicName">
+      <mat-option *ngFor="let topic of dropDownTopics" [value]="topic.name">
+        {{topic.name}}
+      </mat-option>
+    </mat-select>
   </mat-form-field>
   <br />
-  <h6 mat-dialog-title>Sub-Topic <button mat-button color="primary"mat-icon-button aria-label="add" (click)="makefieldVisible()">
+  <mat-toolbar style="height: 60%; background-color: rgba(0, 0, 0, 0);">
+    <span>
+      <span mat-dialog-title style="color: black; font-size: 83%;">Sub-Topic</span>
+    </span>
+    <button mat-button color="primary" mat-icon-button aria-label="add" (click)="makefieldVisible()">
       <mat-icon>add</mat-icon>
-    </button></h6>
-  
+    </button>
+    <span style="flex: 1 1 auto;"></span>
+  </mat-toolbar>
   <div *ngIf="fieldVisible">
     <div>
       <ul>
         <li *ngFor="let subtopic of subtopics">{{ subtopic }}</li>
       </ul>
     </div>
-    <mat-form-field>
+    <mat-form-field class="col-6">
       <input matInput [(ngModel)]="subtopicName" placeholder="Name of Sub-Topic">
     </mat-form-field>
-    <button mat-button color="primary"mat-icon-button aria-label="add" (click)="addToSubTopics()">
-        <mat-icon>check</mat-icon>
-      </button>
+    <button mat-button color="primary" mat-icon-button aria-label="add" (click)="addToSubTopics()">
+      <mat-icon>check</mat-icon>
+    </button>
   </div>
   <br />
 </div>
 <div mat-dialog-actions>
-  <button mat-raised-button (click)="close()">Cancel</button>
-  <button mat-raised-button color="primary" (click)="addTopic()">Ok</button>
+  <div class="col">
+    <button mat-raised-button (click)="close()">Cancel</button>
+    <button mat-raised-button color="primary" (click)="addTopic()">Ok</button>
+  </div>
 </div>
