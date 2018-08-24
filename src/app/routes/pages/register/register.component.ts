@@ -1,10 +1,17 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from '../../../services/user.service';
 import { Router } from '@angular/router';
-import { FormControl, Validators, FormBuilder, FormGroup } from '@angular/forms';
+import { FormControl, Validators, FormBuilder } from '@angular/forms';
 import { CognitoService } from '../../../services/cognito.service';
 import { BamUser } from '../../../models/bam-user';
 
+/**
+ * This is the register component. It allows users to create their
+ * own accounts. This component uses the cognito service to create
+ * user records in the user pool.
+ *
+ * @author Bradley Walker | Karen Matney | 1806-Jun18-USF-Java | Wezley Singleton
+ */
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
@@ -26,8 +33,7 @@ export class RegisterComponent implements OnInit {
     password: new FormControl('', Validators.compose([
       Validators.required,
       Validators.minLength(8),
-      // ^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])
-      // ^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d$@$!%*#?&]{8,}
+      // This is the best regex string I could find for password matching
       Validators.pattern('^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9]).+$')])),
 
     // This one isn't actually used for verifying validity at the moment,
@@ -78,7 +84,7 @@ export class RegisterComponent implements OnInit {
   * match. If not, it sets the messages which is displayed as a mat-error
   * on the form.
   */
-  checkMatch(conf: string) {
+  checkMatch() {
     if (this.registrationForm.get('password').value !== this.registrationForm.get('confirmPassword').value) {
       this.registrationForm.get('confirmPassword').setErrors([{'mismatch': true}]);
       this.message = 'Password mismatch';
@@ -97,7 +103,6 @@ export class RegisterComponent implements OnInit {
   * This way, only a single error message is actually shown.
   *
   * @param  field The name of the field
-  *
   * @return       The error message, if any
   */
   getErrorMessage(field: string): string {
@@ -126,7 +131,7 @@ export class RegisterComponent implements OnInit {
     this.errorMessage = '';
 
     // Run the password match check
-    this.checkMatch(this.registrationForm.get('confirmPassword').value);
+    this.checkMatch();
     // Check if there are any errors in the form
     if (
       this.registrationForm.get('email').errors ||

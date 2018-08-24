@@ -3,7 +3,14 @@ import { UserService } from '../../../services/user.service';
 import { Router } from '@angular/router';
 import { FormBuilder, FormControl, Validators } from '@angular/forms';
 import { CognitoService } from '../../../services/cognito.service';
-import { CognitoIdToken } from 'amazon-cognito-identity-js';
+
+/**
+ * This if the login component. It implements the login functionality
+ * for the application. It uses the cognito service to interact with
+ * the user pool.
+ *
+ * @author Bradley Walker | 1806-Jun18-USF-Java | Wezley Singleton
+ */
 
 @Component({
   selector: 'app-login',

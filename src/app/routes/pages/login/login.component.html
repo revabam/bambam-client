@@ -27,14 +27,13 @@
               <mat-error *ngIf="loginForm.get('password').hasError(validation.type) && (loginForm.get('password').dirty || loginForm.get('password').touched)">{{validation.message}}</mat-error>
             </mat-error>
           </mat-form-field>
-          
         </form> 
         <mat-toolbar #buttonBar>
           <button mat-raised-button name="login" color="primary" (click)="login()">Submit</button>
           <span style="flex: 1 auto;"></span>
           <button mat-raised-button name="register" routerLink="/register">Register</button>
         </mat-toolbar>
-        <div class="row justify-content-right">          
+        <div class="row justify-content-right">      
           <div class="col-2">
           </div>
           <div class="col-2">
