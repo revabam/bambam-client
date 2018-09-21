@@ -23,11 +23,18 @@
       <button mat-raised-button [color]="getColor('boom')" routerLink="boom">VP/QC (Boom)</button>
     </a>
   </span>
-
   <span style="flex: 1 auto;"></span>
+  <span style="margin-right: 10px;">
+      <a>
+        <button mat-raised-button (click)="editUserModal()">
+          <mat-icon>person</mat-icon>{{user.lastName}}
+        </button>
+      </a>
+    </span>
   <span>
     <a>
       <button mat-raised-button (click)="logout()">Logout</button>
     </a>
   </span>
+
 </mat-toolbar>
