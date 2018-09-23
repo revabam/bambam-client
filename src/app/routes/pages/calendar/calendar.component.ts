@@ -27,15 +27,6 @@ const colors: any = {
   }
 };
 
-export interface MyEvent extends CalendarEvent {
-  curriculum?: Curriculum;
-  numWeeks?: number;
-  topics?: Topic[];
-  version?: number;
-  dropped?: boolean;
-  parentTopic_id?: number;
-}
-
 @Component({
   selector: 'app-calendar',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -56,7 +47,6 @@ export class CalendarComponent implements OnInit, DoCheck {
   subtopicArrArr: Array<Subtopic[]> = [];
   subTopicsReceived = false;
   multiDayEventCreated = false;
-  dropEvent: MyEvent;
   selectedCurriculum: Curriculum;
   colorNum = 0;
 
@@ -70,7 +60,7 @@ export class CalendarComponent implements OnInit, DoCheck {
   newColor: string;
 
   activeDayIsOpen = false;
-
+  dropEvent: CalendarEvent;
   calendarCurriculums: CalendarCurriculum[];
   calendarSubtopics: CalendarSubtopic[];
   topics: Topic[];
@@ -78,7 +68,7 @@ export class CalendarComponent implements OnInit, DoCheck {
   curriculums: Curriculum[];
   currTopicTime: number;
 
-  curriculumEvents: MyEvent[] = [];
+  curriculumEvents: CalendarEvent[] = [];
 
   @ViewChild('modalContent') modalContent: TemplateRef<any>;
 
@@ -88,7 +78,7 @@ export class CalendarComponent implements OnInit, DoCheck {
 
   modalData: {
     action: string;
-    event: MyEvent;
+    event: CalendarEvent;
   };
 
   actions: CalendarEventAction[] = [
@@ -103,7 +93,7 @@ export class CalendarComponent implements OnInit, DoCheck {
     // },
     {
       label: '<i class="fa fa-fw fa-times"></i>',
-      onClick: ({ event }: { event: MyEvent }): void => {
+      onClick: ({ event }: { event: CalendarEvent }): void => {
         this.events = this.events.filter(iEvent => iEvent !== event);
         this.handleEvent('Deleted', event);
       }
@@ -112,7 +102,7 @@ export class CalendarComponent implements OnInit, DoCheck {
 
   refresh: Subject<any> = new Subject();
 
-  events: MyEvent[] = [];
+  events: CalendarEvent[] = [];
 
   constructor(private modal: NgbModal, private calendarService: CalendarService, private subtopicService: SubtopicService,
     private topicService: TopicService, private dialog: MatDialog, private batchService: BatchService) { }
@@ -179,8 +169,6 @@ export class CalendarComponent implements OnInit, DoCheck {
             afterEnd: true
           },
           draggable: true,
-          dropped: false,
-          version: curriculum.version
         });
     });
   }
@@ -190,7 +178,7 @@ export class CalendarComponent implements OnInit, DoCheck {
    * Handles clicks on days.
    * @param param0 An object that holds the date clicked and the events on that day.
    */
-  dayClicked({ date, events }: { date: Date; events: MyEvent[] }): void {
+  dayClicked({ date, events }: { date: Date; events: CalendarEvent[] }): void {
     if (isSameMonth(date, this.viewDate)) {
       this.viewDate = date;
       if (
@@ -231,7 +219,7 @@ export class CalendarComponent implements OnInit, DoCheck {
  * information about the event (curriculum, topics, etc.).
  * @param event The event that was clicked
  */
-  openDialog(event: MyEvent): void {
+  openDialog(event: CalendarEvent): void {
     /*
      * this.dialog is an injected dependency for the modal
      * The open method passes in a component that we'll use
@@ -251,10 +239,6 @@ export class CalendarComponent implements OnInit, DoCheck {
         width: '600px',
         data: {
           title: event.title,
-          topics: event.topics,
-          curriculum: event.curriculum,
-          version: event.version,
-          numWeeks: event.numWeeks
         }
       }
     );
@@ -268,14 +252,12 @@ export class CalendarComponent implements OnInit, DoCheck {
    * @param action The action that took place (drag, drop, edit, delete, click)
    * @param event The event that the action happened on
    */
-  handleEvent(action: string, event: MyEvent): void {
+  handleEvent(action: string, event: CalendarEvent): void {
     if (action === 'Clicked') {
       this.openDialog(event);
     } else if (action === 'Edited') {
     } else if (action === 'Deleted') {
     } else {
-      if (!event.dropped) {
-        event.dropped = true;
         const id: number = +event.id;
         this.calendarService.getCurriculumById(id).subscribe(curr => {
           this.selectedCurriculum = curr;
@@ -291,10 +273,8 @@ export class CalendarComponent implements OnInit, DoCheck {
           }
           this.dropEvent = event;
         });
-      } else {
       }
     }
-  }
 
 /**
  * Used to populate the add persisted events from the ngOnInit database call to the events list
@@ -309,15 +289,6 @@ export class CalendarComponent implements OnInit, DoCheck {
           end: new Date(this.storedEvents[i].endDateTime),
           title: this.storedEvents[i].title,
           id: this.storedEvents[i].id,
-          color: this.storedEvents[i].color as EventColor,
-          actions: [this.storedEvents[i].actions as EventAction],
-          resizable: this.storedEvents[i].resizable,
-          draggable: this.storedEvents[i].draggable,
-          curriculum: this.storedEvents[i].curriculum,
-          numWeeks: this.storedEvents[i].numWeeks,
-          topics: this.storedEvents[i].topics,
-          version: this.storedEvents[i].version,
-          dropped: this.storedEvents[i].dropped
         });
     }
     this.refresh.next();
@@ -358,12 +329,6 @@ export class CalendarComponent implements OnInit, DoCheck {
                 afterEnd: true
               },
               draggable: true,
-              curriculum: this.selectedCurriculum,
-              numWeeks: this.selectedCurriculum.numberOfWeeks,
-              topics: this.selectedCurriculum.topics,
-              version: this.selectedCurriculum.version,
-              dropped: true,
-              parentTopic_id: this.subtopicArrArr[j][i].parentTopic_id
             }
           );
           this.colorNum++;
@@ -388,8 +353,7 @@ export class CalendarComponent implements OnInit, DoCheck {
  * @param event the event to be pushed to calendar
  * @param curr curr is the curriculum to be pushed
  */
-  multidaySubtopic(subtopic: Subtopic, topicDay: number, timeLeft: number, event: MyEvent, curr: Curriculum) {
-    event.dropped = true;
+  multidaySubtopic(subtopic: Subtopic, topicDay: number, timeLeft: number, event: CalendarEvent, curr: Curriculum) {
     this.events.push(
       {
         start: addDays(addHours(startOfDay(event.start), 9 + this.hour), topicDay),
@@ -403,11 +367,6 @@ export class CalendarComponent implements OnInit, DoCheck {
           afterEnd: true
         },
         draggable: true,
-        curriculum: curr,
-        numWeeks: curr.numberOfWeeks,
-        topics: curr.topics,
-        version: curr.version,
-        dropped: true
       }
     );
     this.currTopicTime = this.currTopicTime - timeLeft;
@@ -423,20 +382,10 @@ export class CalendarComponent implements OnInit, DoCheck {
       eventsToPersist.push({
         title: this.events[i].title,
         description: this.events[i].title,
-        status_id: 0,
+        statusId: 0,
         startDateTime: this.events[i].start,
         endDateTime: this.events[i].end,
-        calendarSubtopic_id: +this.events[i].id,
-        user_id: this.user.id,
-        resizable: this.events[i].resizable,
-        color: this.events[i].color,
-        actions: this.events[i].actions,
-        draggable: this.events[i].draggable,
-        curriculum: this.events[i].curriculum,
-        numWeeks: this.events[i].numWeeks,
-        topics: this.events[i].topics,
-        version: this.events[i].version,
-        dropped: this.events[i].dropped
+        calendarSubtopicId: +this.events[i].id,
       });
 
     }
@@ -447,27 +396,17 @@ export class CalendarComponent implements OnInit, DoCheck {
  * Custom event to be persisted.
  * @param event an event to be persisted
  */
-  persistEvent(event: MyEvent) {
+  persistEvent(event: CalendarEvent) {
     const subtopic: CalendarSubtopic = {
       subtopic_id: +event.id
     };
     const calEvent: cal_event.CalendarEvent = {
       title: event.title,
       description: event.title,
-      status_id: 0,
+      statusId: 0,
       startDateTime: event.start,
       endDateTime: event.end,
-      calendarSubtopic_id: +event.id,
-      user_id: this.user.id,
-      resizable: event.resizable,
-      color: event.color,
-      actions: event.actions,
-      draggable: event.draggable,
-      curriculum: event.curriculum,
-      numWeeks: event.numWeeks,
-      topics: event.topics,
-      version: event.version,
-      dropped: event.dropped
+      calendarSubtopicId: +event.id,
     };
     this.calendarService.addCalendarEvent(calEvent).subscribe(eventRes => {
     },
