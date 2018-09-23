@@ -397,9 +397,6 @@ export class CalendarComponent implements OnInit, DoCheck {
  * @param event an event to be persisted
  */
   persistEvent(event: CalendarEvent) {
-    const subtopic: CalendarSubtopic = {
-      subtopic_id: +event.id
-    };
     const calEvent: cal_event.CalendarEvent = {
       title: event.title,
       description: event.title,
@@ -425,8 +422,8 @@ export class CalendarComponent implements OnInit, DoCheck {
       }
     });
     const calCurriculum: CalendarCurriculum = {
-      curriculum_id: curriculum.id,
-      batch_id: batchId
+      curriculumId: curriculum.id,
+      batchId: batchId
     };
     this.calendarService.addCalendarCirriculum(calCurriculum).subscribe(curr => {
     });
