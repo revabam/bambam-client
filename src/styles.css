@@ -23,7 +23,7 @@ body {
     border-top-right-radius: .25rem!important;
     background-color: #e53935;
     /* background-image: url("https://www.transparenttextures.com/patterns/maze-white.png"); */
-    background-image: url("assets/gplay.png");
+    /* background-image: url("assets/gplay.png"); */
     /* This is mostly intended for prototyping; please download the pattern and re-host for production environments. Thank you! */
 }
 .mat-card-content {

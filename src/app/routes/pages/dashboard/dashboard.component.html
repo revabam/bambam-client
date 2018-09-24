@@ -19,7 +19,6 @@
           <br/>
           <div class="row">
             <div class="col-sm-6">
-              <span *ngIf="this.batch">Current Batch: {{this.batch.name}}</span>
             </div>
             <div class="col-sm-6">
               <button mat-raised-button style="float: right" color="primary" routerLink="../calendar">View Calendar
@@ -31,56 +30,59 @@
       </mat-card>
     </div>
   </div>
-  <!-- Personal and Batch Info -->
-  <div class="row">
-    <!-- Batch Info -->
-    <div class="col-sm">
-      <mat-card class="rounded">
-        <mat-card-header>
-          <mat-toolbar style="background-color: rgba(0, 0, 0, 0); height: 50%;">
-            <span>
-              <h4 style="font-size: 140%;">Batch Information</h4>
-            </span>
-          </mat-toolbar>
-        </mat-card-header>
-        <mat-card-content>
-          <mat-list dense>
-            <mat-list-item>
-              <h6 *ngIf="this.batch">Current Batch: {{this.batch.name}}</h6>
-            </mat-list-item>
-            <mat-list-item>
-              <h6 *ngIf="this.batch">Batch Week: #{{this.batchWeek}}</h6>
-            </mat-list-item>
-            <mat-list-item>
-              <h6 *ngIf="this.batch">Start Date: {{this.batch.startDate | date}}</h6>
-            </mat-list-item>
-            <mat-list-item>
-              <h6 *ngIf="this.batch">End Date: {{this.batch.endDate | date}}</h6>
-            </mat-list-item>
-          </mat-list>
-        </mat-card-content>
-      </mat-card>
-    </div>
-    <!-- Batch Progress -->
-    <div class="col-sm mt-3">
-      <mat-card class="rounded">
-        <mat-card-header>
-          <mat-card-title>
-            <h4>Batch Progress</h4>
-          </mat-card-title>
-        </mat-card-header>
-        <mat-card-content>
-          <mat-list dense>
-            <mat-list-item>
-              <h5>Progress By Day</h5>
-            </mat-list-item>
-            <mat-list-item>
-              <h6>{{this.percentCompletion | percent}} Completed</h6>
-            </mat-list-item>
-          </mat-list>
+  <!-- Batch Info and Progress -->
+
+  <!--*ngIf="this.batch">Current Batch: {{this.batch.name}}
+      *ngIf="this.batch">Batch Week: #{{this.batchWeek}}
+      *ngIf="this.batch">Start Date: {{this.batch.startDate | date}}
+      *ngIf="this.batch">End Date: {{this.batch.endDate | date}}
+    -->
+  <!-- <mat-card class="rounded">
+    <mat-card-header>
+      <mat-grid-list>
+        <mat-grid-tile>Batch Information</mat-grid-tile>
+        <mat-grid-tile>Batch Progress</mat-grid-tile>
+      </mat-grid-list>
+    </mat-card-header>
+    <mat-card-content>
+      <mat-grid-list>
+        <mat-grid-tile>
+          <ng-container [matRowDef]="headers[0]"></ng-container>
+            <td>stuff</td>
+        </mat-grid-tile>
+        <mat-grid-tile>
+          Progress By Day
+          {{this.percentCompletion | percent}} Completed
           <mat-progress-bar mode="determinate" [value]="this.percentCompletion * 100" ></mat-progress-bar>
-        </mat-card-content>
-      </mat-card>
-    </div>
-  </div>
+        </mat-grid-tile>
+      </mat-grid-list>
+    </mat-card-content>
+  </mat-card> -->
+  <mat-card>
+    <mat-grid-list cols="2" rowHeight="2:1">
+      <mat-grid-tile>
+        <table>
+          <tr>
+            <td>Current Batch: </td>
+            <td>{{this.batch.name}}</td>
+          </tr>
+          <tr>
+            <td>Batch Week: </td>
+            <td>{{this.batchWeek}}</td>
+          </tr>
+          <tr>
+            <td>Start Date: </td>
+            <td>{{this.batch.startDate | date}}</td>
+          </tr>
+          <tr>
+            <td>End Date: </td>
+            <td>{{this.batch.endDate | date}}</td>
+          </tr>
+        </table>
+      </mat-grid-tile>
+      <mat-grid-tile>
+        <mat-progress-bar mode="determinate" [value]="this.percentCompletion * 100" ></mat-progress-bar>
+      </mat-grid-tile>
+    </mat-grid-list>
+  </mat-card>
 </div>

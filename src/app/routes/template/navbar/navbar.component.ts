@@ -1,8 +1,8 @@
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { UserService } from '../../../services/user.service';
 import { BamUser } from '../../../models/bam-user';
-import { MatDialog, MatDialogRef } from '@angular/material';
+import { MatDialog } from '@angular/material';
 import { UserInfoComponent } from '../user-info/user-info.component';
 
 /**
@@ -19,8 +19,6 @@ export class NavbarComponent implements OnInit {
 
   user: BamUser;
 
-  @ViewChild('hamburger') hamburger: ElementRef;
-  private links = document.getElementsByClassName('nav-link');
   show = true;
 
   constructor(
@@ -45,22 +43,6 @@ export class NavbarComponent implements OnInit {
       }
     );
     this.user = JSON.parse(sessionStorage.getItem('user'));
-  }
-
-  /**
-   * Click event to close hamburger menu.
-   */
-  private clickHamburgerLink() {
-    if (window.innerWidth < 991) {
-      this.hamburger.nativeElement.click();
-    }
-  }
-
-  /**
-   * Click event to toggle hamburger animation.
-   */
-  private toggleHamburgerMenu() {
-    this.hamburger.nativeElement.classList.toggle('change');
   }
 
   /*

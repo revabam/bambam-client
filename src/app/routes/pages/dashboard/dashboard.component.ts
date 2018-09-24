@@ -3,9 +3,6 @@ import { BamUser } from '../../../models/bam-user';
 import { Router } from '@angular/router';
 import { Batch } from '../../../models/batch';
 import { BatchService } from '../../../services/batch.service';
-import { UserIdleService } from 'angular-user-idle';
-import { timeout } from 'q';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { UserService } from '../../../services/user.service';
 
 /**
@@ -31,6 +28,8 @@ export class DashboardComponent implements OnInit {
   firstName: string;
   lastName: string;
 
+  headers: ['Current Batch', 'Week', 'Start Date', 'End Date'];
+
   constructor(
     private router: Router,
     private batchService: BatchService,
@@ -53,7 +52,7 @@ export class DashboardComponent implements OnInit {
         need to check if the user is a trainer or not, But this is where
         you might want to do that.
       */
-      this.batchService.getBatchesByTrainerId(this.user.id).subscribe(
+      this.batchService.getBatchesByTrainerId(12).subscribe(
         result => {
           // If the result is not null and not empty
           if (result && result.length !== 0) {
