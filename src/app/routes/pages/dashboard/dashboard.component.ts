@@ -30,6 +30,7 @@ export class DashboardComponent implements OnInit {
   editing = false;
   firstName: string;
   lastName: string;
+  isOpen = 0;
 
   constructor(
     private router: Router,
@@ -53,7 +54,7 @@ export class DashboardComponent implements OnInit {
         need to check if the user is a trainer or not, But this is where
         you might want to do that.
       */
-      this.batchService.getBatchesByTrainerId(this.user.id).subscribe(
+      this.batchService.getBatchesByTrainerId(12).subscribe(
         result => {
           // If the result is not null and not empty
           if (result && result.length !== 0) {
@@ -81,6 +82,9 @@ export class DashboardComponent implements OnInit {
       );
     }
   }
+
+
+
 
   /**
    * This method is used t sort throught a list of batches. Batches
