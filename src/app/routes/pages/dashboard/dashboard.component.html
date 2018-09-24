@@ -16,96 +16,113 @@
       </mat-card>
     </div>
   </div>
-  <!-- Personal and Batch Info -->
+  <!-- Dash -->
 
-  <!-- Batch Info -->
-  <div class='d-flex flex-row'>
-    <mat-card class="rounded justify-content-center">
-      <p><button mat-button (click)="sidenav.toggle()" class='flex-fill'>Batch Details</button></p>
-    </mat-card>
+  <!-- Dash Info -->
+  <div class='d-flex flex-row border border-dark justify-content-center'>
+
+    <p><button mat-button (click)="sidenav.toggle()" class='flex-fill btn btn-dark'>Batch Details</button></p>
+
+    <p><button mat-button (click)="sidenav.toggle()" class='flex-fill btn btn-dark'>View Today</button></p>
+
+    <p><button mat-button (click)="sidenav.toggle()" class='flex-fill btn btn-dark'>View Topics</button></p>
+
   </div>
-
+  <!-- SIDENAV -->
   <mat-sidenav-container class="example-container">
-    <mat-sidenav #sidenav mode="side" [(opened)]="opened" 
-      class='border border-dark rounded'>
-      <mat-list dense>
-        <mat-list-item>
-          Current Batch:
-          <span *ngIf="this.batch">&nbsp;{{this.batch.name}}</span>
-        </mat-list-item>
-        <mat-divider></mat-divider>
-        <mat-list-item>
-          Batch Week: #
-          <span *ngIf="this.batch">&nbsp;{{this.batchWeek}}</span>
-        </mat-list-item>
-        <mat-divider></mat-divider>
-        <mat-list-item>
-          Start Date:
-          <span *ngIf="this.batch">&nbsp;{{this.batch.startDate | date}}</span>
-        </mat-list-item>
-        <mat-divider></mat-divider>
-        <mat-list-item>
-          End Date:
-          <span *ngIf="this.batch">&nbsp;{{this.batch.endDate | date}}</span>
-        </mat-list-item>
-      </mat-list>
+    <mat-sidenav #sidenav mode="side" [(opened)]="opened" class=''>
+      <mat-card class='border border-dark rounded justify-content-center'>
+        <mat-card-header class='border border-dark justify-content-center'>
+          Batch Information
+        </mat-card-header>
+        <mat-list dense>
+          <mat-list-item>
+            Current Batch:
+            <span *ngIf="this.batch">&nbsp;{{this.batch.name}}</span>
+          </mat-list-item>
+          <mat-divider></mat-divider>
+          <mat-list-item>
+            Batch Week: #
+            <span *ngIf="this.batch">&nbsp;{{this.batchWeek}}</span>
+          </mat-list-item>
+          <mat-divider></mat-divider>
+          <mat-list-item>
+            Start Date:
+            <span *ngIf="this.batch">&nbsp;{{this.batch.startDate | date}}</span>
+          </mat-list-item>
+          <mat-divider></mat-divider>
+          <mat-list-item>
+            End Date:
+            <span *ngIf="this.batch">&nbsp;{{this.batch.endDate | date}}</span>
+          </mat-list-item>
+        </mat-list>
+      </mat-card>
     </mat-sidenav>
 
     <mat-sidenav-content>
+
+
       <mat-card class='border border-dark rounded justify-content-center'>
-        <mat-card-header>
-          Batch Progress
+        <mat-card-header class='justify-content-center border border-dark rounded'>
+          {{DashTitle}}
         </mat-card-header>
         <mat-card-content>
-          <mat-list dense>
-            <mat-list-item>
-              <h5>Progress By Day</h5>
-            </mat-list-item>
-            <mat-accordion>
-              <mat-expansion-panel>
-                <mat-expansion-panel-header>
-                  <mat-panel-title>
-                    Overall Progress
-                  </mat-panel-title>
-                  <mat-panel-description>
-                  <p>
-                    <span class="badge badge-success">{{this.percentCompletion | percent}} Completed</span>
-                  </p>
-                  <mat-progress-bar mode="determinate" [value]="this.percentCompletion * 100"></mat-progress-bar>
-                  </mat-panel-description>
-                </mat-expansion-panel-header>
-                <mat-form-field>
-                  <input matInput placeholder="First name">
-                </mat-form-field>
-                <mat-form-field>
-                  <input matInput placeholder="Age">
-                </mat-form-field>
-              </mat-expansion-panel>
-              <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
-                <mat-expansion-panel-header>
-                  <mat-panel-title>
-                    Self aware panel
-                  </mat-panel-title>
-                  <mat-panel-description>
-                    Currently I am {{panelOpenState ? 'open' : 'closed'}}
-                  </mat-panel-description>
-                </mat-expansion-panel-header>
-                <p>I'm visible because I am open</p>
-              </mat-expansion-panel>
-            </mat-accordion>
-            <br>
-            <mat-list-item class='border border-dark'>
+            <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
 
-             empty box boop bop
+                <!--- Note that these columns can be defined in any order.
+                      The actual rendered columns are set as a property on the row definition" -->
+              
+                <!-- Position Column -->
+                <ng-container matColumnDef="status">
+                  <th mat-header-cell *matHeaderCellDef> No. </th>
+                  <td mat-cell *matCellDef="let sub"> {{sub.id}} </td>
+                </ng-container>
+              
+                <!-- Name Column -->
+                <ng-container matColumnDef="sub">
+                  <th mat-header-cell *matHeaderCellDef> Name </th>
+                  <td mat-cell *matCellDef="let sub"> x </td>
+                </ng-container>
+              
+                <!-- Weight Column -->
+                <ng-container matColumnDef="control">
+                  <th mat-header-cell *matHeaderCellDef> Weight </th>
+                  <td mat-cell *matCellDef="let sub"> x </td>
+                </ng-container>
+
+                <tr mat-header-row *matHeaderRowDef="headers"></tr>
+                <tr mat-row *matRowDef="let row; columns: headers;"></tr>
+              </table>
+<!-- 
+
+
+          <mat-list>
+            <mat-list-item>
+              <span>
+                Subtopic
+              </span>
+              <mat-icon>check_circle_outline</mat-icon>
+
+              <span *ngIf="this.batch">&nbsp;{{this.batchWeek}}</span>
             </mat-list-item>
-          </mat-list>
+            <mat-divider></mat-divider>
+            <mat-list-item>
+              
+              Subtopic <mat-icon>check_circle_outline</mat-icon>
+              <p>
+                  <span class="badge badge-success">{{this.percentCompletion | percent}} Completed</span>
+                </p>
+
+            </mat-list-item>
+            <mat-divider></mat-divider>
+        
+          </mat-list> -->
         </mat-card-content>
       </mat-card>
 
+
+
     </mat-sidenav-content>
   </mat-sidenav-container>
-
-
-
 
 </div>

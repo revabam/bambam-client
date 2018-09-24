@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { Batch } from '../../../models/batch';
 import { BatchService } from '../../../services/batch.service';
 import { UserService } from '../../../services/user.service';
+import { Curriculum } from '../../../models/curriculum';
 
 /**
  * This component is the dashboard page. It is the page that the
@@ -28,8 +29,10 @@ export class DashboardComponent implements OnInit {
   firstName: string;
   lastName: string;
   isOpen = 0;
+  DashTitle = 'Today';
 
-  headers: ['Current Batch', 'Week', 'Start Date', 'End Date'];
+  headers: ['status', 'sub', 'control'];
+  dataSource: Curriculum[];
 
   constructor(
     private router: Router,
@@ -43,6 +46,32 @@ export class DashboardComponent implements OnInit {
   * and info about the batch they are associated with.
   */
   ngOnInit() {
+    this.dataSource = {
+      id: 1,
+      name: 'wow',
+      version: 1,
+      creator_id: 1,
+      dateCreated: null,
+      numberOfWeeks: 10,
+      topics: [
+        {
+        id: 1,
+        name: 'science'
+      },
+      {
+        id: 2,
+        name: 'math'
+      },
+      {
+        id: 3,
+        name: 'mom'
+      },
+      {
+        id: 4,
+        name: 'SAT prep'
+      }
+    ]
+    };
     this.user = JSON.parse(sessionStorage.getItem('user'));
 
     if (!this.user) {
