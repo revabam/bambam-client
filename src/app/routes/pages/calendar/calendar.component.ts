@@ -177,6 +177,7 @@ export class CalendarComponent implements OnInit, DoCheck {
    * Built in method from angular material2 calendar.
    * Handles clicks on days.
    * @param param0 An object that holds the date clicked and the events on that day.
+   * @author Marcin Salamon | Spark1806-USF-Java | Steven Kelsey
    */
   dayClicked({ date, events }: { date: Date; events: CalendarEvent[] }): void {
       if (
