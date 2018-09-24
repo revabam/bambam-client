@@ -27,6 +27,7 @@ export class DashboardComponent implements OnInit {
   editing = false;
   firstName: string;
   lastName: string;
+  isOpen = 0;
 
   headers: ['Current Batch', 'Week', 'Start Date', 'End Date'];
 
@@ -80,6 +81,9 @@ export class DashboardComponent implements OnInit {
       );
     }
   }
+
+
+
 
   /**
    * This method is used t sort throught a list of batches. Batches
