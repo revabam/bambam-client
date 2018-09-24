@@ -131,7 +131,7 @@ export class CalendarComponent implements OnInit, DoCheck {
   }
 
   /**
-   * Lifehook for generating events after the service has retruned them from onInit.
+   * Lifehook for generating events after the service has returned them from onInit.
    */
   ngDoCheck() {
     if (this.storedEvents != null && this.initialRender) {
@@ -179,8 +179,6 @@ export class CalendarComponent implements OnInit, DoCheck {
    * @param param0 An object that holds the date clicked and the events on that day.
    */
   dayClicked({ date, events }: { date: Date; events: CalendarEvent[] }): void {
-    if (isSameMonth(date, this.viewDate)) {
-      this.viewDate = date;
       if (
         (isSameDay(this.viewDate, date) && this.activeDayIsOpen === true) ||
         events.length === 0
@@ -188,8 +186,8 @@ export class CalendarComponent implements OnInit, DoCheck {
         this.activeDayIsOpen = false;
       } else {
         this.activeDayIsOpen = true;
+        this.viewDate = date;
       }
-    }
   }
 
   /**
