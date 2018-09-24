@@ -2,30 +2,16 @@
   <!-- WAGBar -->
   <div class="row">
     <div class="col-sm mb-3 mt-2">
-      <mat-card #bg class="">
-        <mat-card-header class="d-flex bd-highlight">
+      <mat-card>
+        <mat-card-header>
           <div class="p-2 w-100 bd-highlight">
             <h1>
               Welcome, {{this.user.firstName}}
             </h1>
           </div>
-          <div class="p-2 flex-shrink-1 bd-highlight">
-            <button mat-icon-button>
-              <mat-icon>person</mat-icon>
-            </button>
-          </div>
         </mat-card-header>
         <mat-card-content style="font-size: 18px">
-          <br />
-          <div class="row">
-            <div class="col-sm-6">
-            </div>
-            <div class="col-sm-6">
-              <button mat-raised-button style="float: right" color="primary" routerLink="../calendar">View Calendar
-                <mat-icon>event</mat-icon>
-              </button>
-            </div>
-          </div>
+          <span>Week At a Glance Bar</span>
         </mat-card-content>
       </mat-card>
     </div>
@@ -34,11 +20,6 @@
 
   <!-- Batch Info -->
   <div class='d-flex flex-row'>
-
-
-
-    <!-- Batch Progress -->
-
     <mat-card class="rounded justify-content-center">
       <p><button mat-button (click)="sidenav.toggle()" class='flex-fill'>Batch Details</button></p>
     </mat-card>
@@ -54,43 +35,31 @@
         </mat-list-item>
         <mat-divider></mat-divider>
         <mat-list-item>
-
           Batch Week: #
-
           <span *ngIf="this.batch">&nbsp;{{this.batchWeek}}</span>
         </mat-list-item>
         <mat-divider></mat-divider>
         <mat-list-item>
-
           Start Date:
-
           <span *ngIf="this.batch">&nbsp;{{this.batch.startDate | date}}</span>
         </mat-list-item>
         <mat-divider></mat-divider>
         <mat-list-item>
-
           End Date:
-
           <span *ngIf="this.batch">&nbsp;{{this.batch.endDate | date}}</span>
         </mat-list-item>
       </mat-list>
     </mat-sidenav>
+
     <mat-sidenav-content>
-
-
       <mat-card class='border border-dark rounded justify-content-center'>
         <mat-card-header>
-
           Batch Progress
-
         </mat-card-header>
         <mat-card-content>
           <mat-list dense>
             <mat-list-item>
               <h5>Progress By Day</h5>
-            </mat-list-item>
-            <mat-list-item>
-
             </mat-list-item>
             <mat-accordion>
               <mat-expansion-panel>
@@ -98,21 +67,16 @@
                   <mat-panel-title>
                     Overall Progress
                   </mat-panel-title>
-                  <mat-panel-description >
-          
-                          <!-- This will be the users input daily quota they are trying to meet
-                              for now its hard coded --> <p>
-                <span class="badge badge-success">{{this.percentCompletion | percent}} Completed</span>
-              </p>
-              <mat-progress-bar mode="determinate" [value]="this.percentCompletion * 100"></mat-progress-bar>
-                        
+                  <mat-panel-description>
+                  <p>
+                    <span class="badge badge-success">{{this.percentCompletion | percent}} Completed</span>
+                  </p>
+                  <mat-progress-bar mode="determinate" [value]="this.percentCompletion * 100"></mat-progress-bar>
                   </mat-panel-description>
                 </mat-expansion-panel-header>
-
                 <mat-form-field>
                   <input matInput placeholder="First name">
                 </mat-form-field>
-
                 <mat-form-field>
                   <input matInput placeholder="Age">
                 </mat-form-field>
