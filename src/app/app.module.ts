@@ -33,6 +33,7 @@ import { LocationStrategy, PathLocationStrategy } from '@angular/common';
 import { UserIdleModule } from 'angular-user-idle';
 import { CognitoService } from './services/cognito.service';
 import { DialogViewComponent } from './routes/pages/dialog-view/dialog-view.component';
+import { EventDuplicateModalComponent } from './routes/pages/calendar/event-duplicate-modal/event-duplicate-modal.component';
 
 
 
@@ -48,6 +49,7 @@ import { DialogViewComponent } from './routes/pages/dialog-view/dialog-view.comp
     LoginComponent,
     RegisterComponent,
     CalendarModalComponent,
+    EventDuplicateModalComponent,
     DialogViewComponent
   ],
   imports: [
@@ -100,7 +102,7 @@ import { DialogViewComponent } from './routes/pages/dialog-view/dialog-view.comp
     CalendarModule.forRoot(),
     UserIdleModule.forRoot({idle: 600, timeout: 300, ping: 60})
   ],
-  entryComponents: [CalendarModalComponent],
+  entryComponents: [CalendarModalComponent, EventDuplicateModalComponent],
   providers: [
     UserService,
     CognitoService,

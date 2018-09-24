@@ -155,6 +155,31 @@
           "name": "Microservices"
         }
       ]
+    },
+    {
+      "name": "Java/JEE",
+      "version": 2,
+      "dateCreated": "2018-09-24T18:59:12.469Z",
+      "numberOfWeeks": "10",
+      "topics": [
+        {
+          "id": 7,
+          "name": "Hibernate"
+        },
+        {
+          "id": 8,
+          "name": "Spring"
+        },
+        {
+          "id": 9,
+          "name": "Web Services"
+        },
+        {
+          "id": 10,
+          "name": "Microservices"
+        }
+      ],
+      "id": 2
     }
   ],
   "calendar-curriculums": [
@@ -232,6 +257,71 @@
       "curriculumId": 1,
       "batchId": 0,
       "id": 15
+    },
+    {
+      "curriculumId": 1,
+      "batchId": 0,
+      "id": 16
+    },
+    {
+      "curriculumId": 1,
+      "batchId": 0,
+      "id": 17
+    },
+    {
+      "curriculumId": 1,
+      "batchId": 0,
+      "id": 18
+    },
+    {
+      "curriculumId": 1,
+      "batchId": 0,
+      "id": 19
+    },
+    {
+      "curriculumId": 1,
+      "batchId": 0,
+      "id": 20
+    },
+    {
+      "curriculumId": 1,
+      "batchId": 0,
+      "id": 21
+    },
+    {
+      "curriculumId": 1,
+      "batchId": 0,
+      "id": 22
+    },
+    {
+      "curriculumId": 1,
+      "batchId": 0,
+      "id": 23
+    },
+    {
+      "curriculumId": 1,
+      "batchId": 0,
+      "id": 24
+    },
+    {
+      "curriculumId": 1,
+      "batchId": 0,
+      "id": 25
+    },
+    {
+      "curriculumId": 1,
+      "batchId": 0,
+      "id": 26
+    },
+    {
+      "curriculumId": 1,
+      "batchId": 0,
+      "id": 27
+    },
+    {
+      "curriculumId": 2,
+      "batchId": 0,
+      "id": 28
     }
   ],
   "subtopics": [

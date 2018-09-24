@@ -9,6 +9,7 @@ import { CurriculumEditorComponent } from './pages/curriculum-editor/curriculum-
 import { BoomComponent } from './pages/boom/boom.component';
 import { CreateVersionComponent } from './pages/create-version/create-version.component';
 import { DialogViewComponent } from './pages/dialog-view/dialog-view.component';
+import { EventDuplicateModalComponent } from './pages/calendar/event-duplicate-modal/event-duplicate-modal.component';
 
 const ROUTES: Routes = [
   {
@@ -56,7 +57,7 @@ const ROUTES: Routes = [
     CommonModule,
     RouterModule.forRoot(ROUTES, {onSameUrlNavigation: 'reload'})
   ],
-  declarations: [CreateVersionComponent, DialogViewComponent],
+  declarations: [CreateVersionComponent, DialogViewComponent, EventDuplicateModalComponent],
   exports: [
     RouterModule
   ]

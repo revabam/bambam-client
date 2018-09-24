@@ -1,11 +1,11 @@
 import * as $ from 'jquery';
 import * as moment from 'moment';
 import 'fullcalendar';
-import {Component, ChangeDetectionStrategy, ViewChild, TemplateRef, OnInit, DoCheck, Inject} from '@angular/core';
-import {startOfDay, endOfDay, subDays, addDays, endOfMonth, isSameDay, isSameMonth, addHours, addWeeks, isWeekend} from 'date-fns';
+import { Component, ChangeDetectionStrategy, ViewChild, TemplateRef, OnInit, DoCheck, Inject } from '@angular/core';
+import { startOfDay, endOfDay, subDays, addDays, endOfMonth, isSameDay, isSameMonth, addHours, addWeeks, isWeekend } from 'date-fns';
 import { Subject, Observable, BehaviorSubject } from 'rxjs';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap/modal/modal.module';
-import {CalendarEvent, CalendarEventAction, CalendarEventTimesChangedEvent} from 'angular-calendar';
+import { CalendarEvent, CalendarEventAction, CalendarEventTimesChangedEvent } from 'angular-calendar';
 import { CalendarService } from '../../../services/calendar.service';
 import { Curriculum } from '../../../models/curriculum';
 import { CalendarCurriculum } from '../../../models/calendar-curriculum';
@@ -19,6 +19,7 @@ import * as cal_event from '../../../models/calendar-event';
 import { BamUser } from '../../../models/bam-user';
 import { BatchService } from '../../../services/batch.service';
 import { EventColor, EventAction } from 'calendar-utils';
+import { EventDuplicateModalComponent } from './event-duplicate-modal/event-duplicate-modal.component';
 
 const colors: any = {
   random: {
@@ -180,15 +181,15 @@ export class CalendarComponent implements OnInit, DoCheck {
    * @author Marcin Salamon | Spark1806-USF-Java | Steven Kelsey
    */
   dayClicked({ date, events }: { date: Date; events: CalendarEvent[] }): void {
-      if (
-        (isSameDay(this.viewDate, date) && this.activeDayIsOpen === true) ||
-        events.length === 0
-      ) {
-        this.activeDayIsOpen = false;
-      } else {
-        this.activeDayIsOpen = true;
-        this.viewDate = date;
-      }
+    if (
+      (isSameDay(this.viewDate, date) && this.activeDayIsOpen === true) ||
+      events.length === 0
+    ) {
+      this.activeDayIsOpen = false;
+    } else {
+      this.activeDayIsOpen = true;
+      this.viewDate = date;
+    }
   }
 
   /**
@@ -206,18 +207,18 @@ export class CalendarComponent implements OnInit, DoCheck {
     this.handleEvent('Dropped or resized', event);
     this.refresh.next();
   }
-/**
- * Should be used for creating a random color for the curriculum when it is dropped on the calendar
- * but it is not implemented.
- */
+  /**
+   * Should be used for creating a random color for the curriculum when it is dropped on the calendar
+   * but it is not implemented.
+   */
   randomColor() {
     return '#' + Math.floor(Math.random() * 16777215).toString(16);
   }
-/**
- * When the title of an event on the calendar is clicked, a modal is opened with relevant
- * information about the event (curriculum, topics, etc.).
- * @param event The event that was clicked
- */
+  /**
+   * When the title of an event on the calendar is clicked, a modal is opened with relevant
+   * information about the event (curriculum, topics, etc.).
+   * @param event The event that was clicked
+   */
   openDialog(event: CalendarEvent): void {
     /*
      * this.dialog is an injected dependency for the modal
@@ -227,20 +228,48 @@ export class CalendarComponent implements OnInit, DoCheck {
     let eventTopic: Topic;
     this.topicService.getTopicById(+event.id).subscribe(response => {
       eventTopic = response;
+      let curriculum: Curriculum;
+      this.curriculums.forEach(curr => {
+        curr.topics.forEach(topic => {
+          if (topic = eventTopic) {
+            curriculum = curr;
+          }
+        });
+      });
+      this.dialog.open(CalendarModalComponent,
+        /*
+        * An object is passed in as the second parameter, which
+        * defines properties of the dialog modal, as well as the
+        * data that we'll pass in for the modal component to access.
+        */
+        {
+          width: '600px',
+          data: {
+            title: curriculum.name,
+            topics: curriculum.topics,
+            curriculum: curriculum,
+            version: curriculum.version,
+            numWeeks: curriculum.numberOfWeeks
+          }
+        }
+      );
     });
-    const dialogRef = this.dialog.open(CalendarModalComponent,
-      /*
-      * An object is passed in as the second parameter, which
-      * defines properties of the dialog modal, as well as the
-      * data that we'll pass in for the modal component to access.
-      */
+  }
+
+  /**
+   * displays the modal for showing the duplicate event
+   * @param name of the duplicate event
+   * @param date of the duplicate event
+   */
+  openEventDuplicateDialog(name: string, date: Date) {
+    const modal = this.dialog.open(EventDuplicateModalComponent,
       {
         width: '600px',
         data: {
-          title: event.title,
+          eventName: name,
+          eventDate: date
         }
-      }
-    );
+      });
   }
 
   /**
@@ -257,29 +286,38 @@ export class CalendarComponent implements OnInit, DoCheck {
     } else if (action === 'Edited') {
     } else if (action === 'Deleted') {
     } else {
-        const id: number = +event.id;
-        this.calendarService.getCurriculumById(id).subscribe(curr => {
-          this.selectedCurriculum = curr;
-          this.topicLength = curr.numberOfWeeks / curr.topics.length;
-          this.topicArr = curr.topics;
-          for (let i = 0, j = 0; i < curr.topics.length; i++) {
-            this.subtopicService.getSubtopicByParentId(curr.topics[i].id).subscribe(subResponse => {
-              this.subtopicArrArr.push(subResponse);
-              if (i === curr.topics.length - 1) {
-                this.subTopicsReceived = true;
-              }
-            });
+      const id: number = +event.id;
+      this.populateCalendar(id, event);
+    }
+  }
+
+  /**
+   * Algorithm that handles where subtopics go on the calendar when first dropped,
+   *
+   * @param id id for the object that will be dropped into the calendar
+   * @param event that is dragged and dropped
+   */
+  populateCalendar(id: number, event: CalendarEvent): void {
+    this.calendarService.getCurriculumById(id).subscribe(curr => {
+      this.selectedCurriculum = curr;
+      this.topicLength = curr.numberOfWeeks / curr.topics.length;
+      this.topicArr = curr.topics;
+      for (let i = 0, j = 0; i < curr.topics.length; i++) {
+        this.subtopicService.getSubtopicByParentId(curr.topics[i].id).subscribe(subResponse => {
+          this.subtopicArrArr.push(subResponse);
+          if (i === curr.topics.length - 1) {
+            this.subTopicsReceived = true;
           }
-          this.dropEvent = event;
         });
       }
-    }
-
-/**
- * Used to populate the add persisted events from the ngOnInit database call to the events list
- * that is used to hold calendar events, then refreshes the calendar. This is called by the ngDoCheck
- * lifecycle hook so that it is only called once the response from the ngOnInit call is complete.
- */
+      this.dropEvent = event;
+    });
+  }
+  /**
+   * Used to populate the add persisted events from the ngOnInit database call to the events list
+   * that is used to hold calendar events, then refreshes the calendar. This is called by the ngDoCheck
+   * lifecycle hook so that it is only called once the response from the ngOnInit call is complete.
+   */
   generateStoredEvents() {
     for (let i = 0; i < this.storedEvents.length; i++) {
       this.events.push(
@@ -293,7 +331,7 @@ export class CalendarComponent implements OnInit, DoCheck {
     this.refresh.next();
   }
   /**
-   * Assumes that each topic contains at least 1 sub topic per day
+   * method that takes the topics and subtopics and generated calendar events from them when dropped onto the calendar
    */
   generateEvents() {
     this.subTopicsReceived = false;
@@ -342,16 +380,16 @@ export class CalendarComponent implements OnInit, DoCheck {
     this.persistEvents();
   }
 
-/**
- * Used for subtopics that span multiple days.
- * If there is not enought time in the current day to complete a subtopic, this method is used
- * to split the subtopic and make multiple events from it.
- * @param subtopic subTopic to be added to calendar
- * @param topicDay the current day that the subtopic is on
- * @param timeLeft time left in a day (hours until 4pm)
- * @param event the event to be pushed to calendar
- * @param curr curr is the curriculum to be pushed
- */
+  /**
+   * Used for subtopics that span multiple days.
+   * If there is not enought time in the current day to complete a subtopic, this method is used
+   * to split the subtopic and make multiple events from it.
+   * @param subtopic subTopic to be added to calendar
+   * @param topicDay the current day that the subtopic is on
+   * @param timeLeft time left in a day (hours until 4pm)
+   * @param event the event to be pushed to calendar
+   * @param curr curr is the curriculum to be pushed
+   */
   multidaySubtopic(subtopic: Subtopic, topicDay: number, timeLeft: number, event: CalendarEvent, curr: Curriculum) {
     this.events.push(
       {
@@ -372,9 +410,9 @@ export class CalendarComponent implements OnInit, DoCheck {
     this.hour = 0;
     this.multiDayEventCreated = true;
   }
-/**
- * persists all events in the event array.
- */
+  /**
+   * persists all events in the event array.
+   */
   persistEvents() {
     const eventsToPersist: cal_event.CalendarEvent[] = [];
     for (let i = 0; i < this.events.length; i++) {
@@ -391,10 +429,10 @@ export class CalendarComponent implements OnInit, DoCheck {
     this.calendarService.addCalendarEventList(eventsToPersist).subscribe(eventRes => {
     });
   }
-/**
- * Custom event to be persisted.
- * @param event an event to be persisted
- */
+  /**
+   * Custom event to be persisted.
+   * @param event an event to be persisted
+   */
   persistEvent(event: CalendarEvent) {
     const calEvent: cal_event.CalendarEvent = {
       title: event.title,
@@ -409,10 +447,10 @@ export class CalendarComponent implements OnInit, DoCheck {
       err => {
       });
   }
-/**
- * Persists a curriculum.
- * @param curriculum a curriculum object to be persisted.
- */
+  /**
+   * Persists a curriculum.
+   * @param curriculum a curriculum object to be persisted.
+   */
   persistCurriculum(curriculum: Curriculum) {
     let batchId = 0;
     this.batchService.getBatchesByTrainerId(this.user.id).subscribe(batches => {
@@ -428,25 +466,43 @@ export class CalendarComponent implements OnInit, DoCheck {
     });
   }
 
-/**
- * creates an event for the calander persisting the event and reloading the calendar.
- */
+  /**
+   * creates an event for the calander persisting the event and reloading the calendar.
+   */
   addEvent(): void {
-    this.events.push({
-      title: this.newSubtopicName,
-      start: addHours(this.newSubtopicDate, 9),
-      end: addHours(this.newSubtopicDate, 10),
-      color: colors.red,
-      draggable: true,
-      resizable: {
-        beforeStart: true,
-        afterEnd: true
-      }
-    });
-    this.refresh.next();
-    this.persistEvents();
-  }
+    if (!this.eventExists(this.newSubtopicName)) {
+      this.events.push({
+        title: this.newSubtopicName,
+        start: addHours(this.newSubtopicDate, 9),
+        end: addHours(this.newSubtopicDate, 10),
+        color: colors.red,
+        draggable: true,
+        resizable: {
+          beforeStart: true,
+          afterEnd: true
+        }
+      });
+      this.refresh.next();
+      this.persistEvents();
+    } else {
+      this.openEventDuplicateDialog(this.newSubtopicName, this.newSubtopicDate);
+    }
 
+  }
+  /**
+   * check if event exists in the events array
+   *
+   * @param title of the new event
+   * @author Marcin Salamon | Spark1806-USF-Java | Steven Kelsey
+   */
+  eventExists(title): boolean {
+    for (const calEvent of this.events) {
+      if (title === calEvent.title) {
+        return true;
+      }
+    }
+    return false;
+  }
 }
 
 @Component({
@@ -470,6 +526,7 @@ export class CalendarModalComponent {
     this.dialogRef.close();
   }
 }
+
 /**
  * @author Kyle Smith | Aaron Mathews | Brandon Scoggins | 1806-Jun18-USF-Java | Wezley Singleton
  */
