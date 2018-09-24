@@ -6,18 +6,18 @@ import {startOfDay, endOfDay, subDays, addDays, endOfMonth, isSameDay, isSameMon
 import { Subject, Observable, BehaviorSubject } from 'rxjs';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap/modal/modal.module';
 import {CalendarEvent, CalendarEventAction, CalendarEventTimesChangedEvent} from 'angular-calendar';
-import { CalendarService } from '../../../services/calendar.service';
-import { Curriculum } from '../../../models/curriculum';
-import { CalendarCurriculum } from '../../../models/calendar-curriculum';
-import { CalendarSubtopic } from '../../../models/calendar-subtopic';
-import { Subtopic } from '../../../models/subtopic';
-import { SubtopicService } from '../../../services/subtopic.service';
-import { TopicService } from '../../../services/topic.service';
-import { Topic } from '../../../models/topic';
+import { CalendarService } from '../../services/calendar.service';
+import { Curriculum } from '../../models/curriculum';
+import { CalendarCurriculum } from '../../models/calendar-curriculum';
+import { CalendarSubtopic } from '../../models/calendar-subtopic';
+import { Subtopic } from '../../models/subtopic';
+import { SubtopicService } from '../../services/subtopic.service';
+import { TopicService } from '../../services/topic.service';
+import { Topic } from '../../models/topic';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
-import * as cal_event from '../../../models/calendar-event';
-import { BamUser } from '../../../models/bam-user';
-import { BatchService } from '../../../services/batch.service';
+import * as cal_event from '../../models/calendar-event';
+import { BamUser } from '../../models/bam-user';
+import { BatchService } from '../../services/batch.service';
 import { EventColor, EventAction } from 'calendar-utils';
 
 const colors: any = {

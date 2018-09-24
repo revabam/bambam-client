@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { UserService } from '../../../services/user.service';
+import { UserService } from '../../services/user.service';
 import { Router } from '@angular/router';
 import { FormControl, Validators, FormBuilder } from '@angular/forms';
-import { CognitoService } from '../../../services/cognito.service';
-import { BamUser } from '../../../models/bam-user';
+import { CognitoService } from '../../services/cognito.service';
+import { BamUser } from '../../models/bam-user';
 
 /**
  * This is the register component. It allows users to create their

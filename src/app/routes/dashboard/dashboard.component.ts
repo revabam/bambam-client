@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { BamUser } from '../../../models/bam-user';
+import { BamUser } from '../../models/bam-user';
 import { Router } from '@angular/router';
-import { Batch } from '../../../models/batch';
-import { BatchService } from '../../../services/batch.service';
+import { Batch } from '../../models/batch';
+import { BatchService } from '../../services/batch.service';
 import { UserIdleService } from 'angular-user-idle';
 import { timeout } from 'q';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { UserService } from '../../../services/user.service';
+import { UserService } from '../../services/user.service';
 
 /**
  * This component is the dashboard page. It is the page that the
