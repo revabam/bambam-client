@@ -35,6 +35,7 @@ import { CognitoService } from './services/cognito.service';
 import { DialogViewComponent } from './routes/dialog-view/dialog-view.component';
 import { UserInfoComponent } from './shared-components/user-info/user-info.component';
 import { TopicsComponent } from './routes/topics/topics.component';
+import { ChartsModule } from 'ng2-charts';
 
 @NgModule({
   declarations: [
@@ -100,7 +101,8 @@ import { TopicsComponent } from './routes/topics/topics.component';
     NgbModalModule.forRoot(),
     FlatpickrModule.forRoot(),
     CalendarModule.forRoot(),
-    UserIdleModule.forRoot({idle: 600, timeout: 300, ping: 60})
+    UserIdleModule.forRoot({idle: 600, timeout: 300, ping: 60}),
+    ChartsModule
   ],
   entryComponents: [CalendarModalComponent,
   UserInfoComponent],
