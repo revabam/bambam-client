@@ -1,3 +1,4 @@
+import { ForgottenPasswordComponent } from './forgotten-password/forgotten-password.component';
 import { DashboardComponent } from '../routes/dashboard/dashboard.component';
 import { Routes } from '@angular/router';
 import { AppComponent } from '../app.component';
@@ -53,5 +54,9 @@ export const appRoutes: Routes = [
     {
         path: 'curriculum/dialog-view',
         component: DialogViewComponent
+    },
+    {
+        path: 'forgotten/password',
+        component: ForgottenPasswordComponent
     }
 ];

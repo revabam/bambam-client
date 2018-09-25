@@ -1,3 +1,4 @@
+import { ForgottenPasswordComponent } from './routes/forgotten-password/forgotten-password.component';
 import { HttpClientModule } from '@angular/common/http';
 import { NgModule, Component } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -54,7 +55,8 @@ import { TopicsComponent } from './routes/topics/topics.component';
     EventDuplicateModalComponent,
     DialogViewComponent,
     UserInfoComponent,
-    TopicsComponent
+    TopicsComponent,
+    ForgottenPasswordComponent
   ],
   imports: [
     NgbModule.forRoot(),

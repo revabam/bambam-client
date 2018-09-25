@@ -13,6 +13,7 @@ import { EventDuplicateModalComponent } from './calendar/event-duplicate-modal/e
 import { CalendarModalComponent } from './calendar/calendar-modal/calendar-modal.component';
 import { UserInfoComponent } from '../shared-components/user-info/user-info.component';
 import { TopicsComponent } from './topics/topics.component';
+import { ForgottenPasswordComponent } from './forgotten-password/forgotten-password.component';
 
 const ROUTES: Routes = [
   {
@@ -60,7 +61,7 @@ const ROUTES: Routes = [
     CommonModule,
     RouterModule.forRoot(ROUTES, {onSameUrlNavigation: 'reload'})
   ],
-  declarations: [CreateVersionComponent, DialogViewComponent, EventDuplicateModalComponent, CalendarModalComponent, UserInfoComponent, TopicsComponent],
+  declarations: [CreateVersionComponent, DialogViewComponent, EventDuplicateModalComponent, CalendarModalComponent, UserInfoComponent, TopicsComponent, ForgottenPasswordComponent],
   exports: [
     RouterModule
   ]

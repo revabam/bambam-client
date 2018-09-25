@@ -116,6 +116,38 @@ export class CognitoService {
 
     return resultStream;
   }
+
+/*
+  * The user will need to provide their email which Cognito for check the user
+  * pool for and then create a new password.
+  */
+ resetPassword(email : string) {
+   const userData = {
+     Username: email,
+     Pool: this.userPool
+   };
+   
+   const cognitoUser = new AWSCognito.CognitoUser(userData);
+
+   cognitoUser.forgotPassword({
+     onSuccess: function (result) {
+         console.log('call result: ' + result);
+         console.log( JSON.stringify(result));
+     },
+     onFailure: function(err) {
+         alert("That email address does not match our records. Please try again.");
+     },
+     inputVerificationCode() {
+         var verificationCode = prompt('Please input verification code ' ,'');
+         var newPassword = prompt('Enter new password ' ,'');
+         cognitoUser.confirmPassword(verificationCode, newPassword, this);
+         
+     }
+ });
+
+ }
+
+
 }
 /**
  * @author Bradley Walker | 1806-Jun18-USF-Java | Wezley Singleton
