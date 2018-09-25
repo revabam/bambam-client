@@ -17,7 +17,6 @@ import { FlatpickrModule } from 'angularx-flatpickr';
 import { appRoutes } from './routes/routes';
 import { AppComponent } from './app.component';
 import { BoomComponent } from './routes/boom/boom.component';
-import { CalendarComponent, CalendarModalComponent } from './routes/calendar/calendar.component';
 import { CreateVersionComponent } from './routes/curriculum-editor/create-version/create-version.component';
 import { CurriculumEditorComponent } from './routes/curriculum-editor/curriculum-editor.component';
 import { NgbModalModule } from '@ng-bootstrap/ng-bootstrap/modal/modal.module';
@@ -32,9 +31,13 @@ import { BatchService } from './services/batch.service';
 import { LocationStrategy, PathLocationStrategy } from '@angular/common';
 import { UserIdleModule } from 'angular-user-idle';
 import { CognitoService } from './services/cognito.service';
+import { EventDuplicateModalComponent } from './routes/calendar/event-duplicate-modal/event-duplicate-modal.component';
 import { DialogViewComponent } from './routes/dialog-view/dialog-view.component';
+import { CalendarComponent } from './routes/calendar/calendar.component';
+import { CalendarModalComponent } from './routes/calendar/calendar-modal/calendar-modal.component';
 import { UserInfoComponent } from './shared-components/user-info/user-info.component';
 import { TopicsComponent } from './routes/topics/topics.component';
+
 
 @NgModule({
   declarations: [
@@ -48,6 +51,7 @@ import { TopicsComponent } from './routes/topics/topics.component';
     LoginComponent,
     RegisterComponent,
     CalendarModalComponent,
+    EventDuplicateModalComponent,
     DialogViewComponent,
     UserInfoComponent,
     TopicsComponent
@@ -102,8 +106,7 @@ import { TopicsComponent } from './routes/topics/topics.component';
     CalendarModule.forRoot(),
     UserIdleModule.forRoot({idle: 600, timeout: 300, ping: 60})
   ],
-  entryComponents: [CalendarModalComponent,
-  UserInfoComponent],
+  entryComponents: [CalendarModalComponent, EventDuplicateModalComponent, UserInfoComponent],
   providers: [
     UserService,
     CognitoService,

@@ -1,14 +1,16 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Routes, RouterModule } from '@angular/router';
-import { DashboardComponent } from '../routes/dashboard/dashboard.component';
-import { CalendarComponent } from '../routes/calendar/calendar.component';
-import { CreateVersionComponent } from '../routes/curriculum-editor/create-version/create-version.component';
-import { CurriculumEditorComponent } from '../routes/curriculum-editor/curriculum-editor.component';
-import { BoomComponent } from '../routes/boom/boom.component';
-import { LoginComponent } from '../routes/login/login.component';
-import { RegisterComponent } from '../routes/register/register.component';
-import { DialogViewComponent } from '../routes/dialog-view/dialog-view.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
+import { LoginComponent } from './login/login.component';
+import { RegisterComponent } from './register/register.component';
+import { CalendarComponent } from './calendar/calendar.component';
+import { CurriculumEditorComponent } from './curriculum-editor/curriculum-editor.component';
+import { BoomComponent } from './boom/boom.component';
+import { DialogViewComponent } from './dialog-view/dialog-view.component';
+import { CreateVersionComponent } from './curriculum-editor/create-version/create-version.component';
+import { EventDuplicateModalComponent } from './calendar/event-duplicate-modal/event-duplicate-modal.component';
+import { CalendarModalComponent } from './calendar/calendar-modal/calendar-modal.component';
 import { UserInfoComponent } from '../shared-components/user-info/user-info.component';
 import { TopicsComponent } from './topics/topics.component';
 
@@ -58,7 +60,7 @@ const ROUTES: Routes = [
     CommonModule,
     RouterModule.forRoot(ROUTES, {onSameUrlNavigation: 'reload'})
   ],
-  declarations: [CreateVersionComponent, DialogViewComponent, UserInfoComponent, TopicsComponent],
+  declarations: [CreateVersionComponent, DialogViewComponent, EventDuplicateModalComponent, CalendarModalComponent, UserInfoComponent, TopicsComponent],
   exports: [
     RouterModule
   ]
