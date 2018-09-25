@@ -58,7 +58,7 @@ export class DashboardComponent implements OnInit {
   editing = false;
   firstName: string;
   lastName: string;
-  isOpen = 0;
+  isOpen: boolean;
   visibilityIcon = [{num: 0, icon: 'visibility_off' },
                     {num: 1, icon: 'visibility'}];
   DashTitle = 'Today';
