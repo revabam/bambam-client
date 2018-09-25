@@ -1,6 +1,3 @@
-import { Curriculum } from './curriculum';
-import { Topic } from './topic';
-
 export class CalendarEvent {
     id?: number;
     title: string;
@@ -10,4 +7,3 @@ export class CalendarEvent {
     endDateTime: Date;
     calendarSubtopicId: number;
 }
-

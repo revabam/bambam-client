@@ -20,6 +20,7 @@ import { BamUser } from '../../../models/bam-user';
 import { BatchService } from '../../../services/batch.service';
 import { EventColor, EventAction } from 'calendar-utils';
 import { EventDuplicateModalComponent } from './event-duplicate-modal/event-duplicate-modal.component';
+import { CalendarModalComponent } from './calendar-modal/calendar-modal.component';
 
 const colors: any = {
   random: {
@@ -39,7 +40,7 @@ export class CalendarComponent implements OnInit, DoCheck {
   user: BamUser = JSON.parse(sessionStorage.getItem('user'));
   curriculumDataFetched = false;
   renderCalendar = false;
-  showSideNav = false;
+  showSideNav = true;
 
   hour = 0;
   subtopicsReceivedCount = 0;
@@ -69,7 +70,7 @@ export class CalendarComponent implements OnInit, DoCheck {
   curriculums: Curriculum[];
   currTopicTime: number;
 
-  curriculumEvents: CalendarEvent[] = [];
+  curriculumEvents: CalendarEvent[] = null;
 
   @ViewChild('modalContent') modalContent: TemplateRef<any>;
 
@@ -83,15 +84,6 @@ export class CalendarComponent implements OnInit, DoCheck {
   };
 
   actions: CalendarEventAction[] = [
-    /* Pencil label (icon) is not rendering correctly.
-    Removed for now until solution is found. */
-
-    // {
-    //   label: '<i class="fa fa-fw fa-pencil"></i>',
-    //   onClick: ({ event }: { event: MyEvent }): void => {
-    //     this.handleEvent('Edited', event);
-    //   }
-    // },
     {
       label: '<i class="fa fa-fw fa-times"></i>',
       onClick: ({ event }: { event: CalendarEvent }): void => {
@@ -156,6 +148,7 @@ export class CalendarComponent implements OnInit, DoCheck {
    * and stored.
    */
   convertCirriculum() {
+    this.curriculumEvents = [];
     this.curriculums.forEach((curriculum) => {
       this.curriculumEvents.push(
         {
@@ -169,9 +162,11 @@ export class CalendarComponent implements OnInit, DoCheck {
             beforeStart: true,
             afterEnd: true
           },
-          draggable: true,
+          draggable: true
         });
     });
+    // next line reloads the AngularMaterials
+    this.refresh.next();
   }
 
   /**
@@ -257,17 +252,31 @@ export class CalendarComponent implements OnInit, DoCheck {
   }
 
   /**
-   * displays the modal for showing the duplicate event
+   * displays the modal for creating a duplicate event
    * @param name of the duplicate event
    * @param date of the duplicate event
+   * @author Marcin Salamon | Spark1806-USF-Java | Steven Kelsey
    */
   openEventDuplicateDialog(name: string, date: Date) {
-    const modal = this.dialog.open(EventDuplicateModalComponent,
+    const dialogRef = this.dialog.open(EventDuplicateModalComponent,
       {
         width: '600px',
         data: {
           eventName: name,
-          eventDate: date
+          eventDate: date,
+          decision: false
+        }
+      });
+
+    dialogRef.afterClosed().subscribe(decision => {
+      if (decision) {
+        this.events.forEach(ev => {
+          if (ev.title === name) {
+            ev.start = date;
+            ev.end = date;
+          }
+        });
+        this.refresh.next();
         }
       });
   }
@@ -296,6 +305,7 @@ export class CalendarComponent implements OnInit, DoCheck {
    *
    * @param id id for the object that will be dropped into the calendar
    * @param event that is dragged and dropped
+   * @author Marcin Salamon | Spark1806-USF-Java | Steven Kelsey
    */
   populateCalendar(id: number, event: CalendarEvent): void {
     this.calendarService.getCurriculumById(id).subscribe(curr => {
@@ -332,6 +342,9 @@ export class CalendarComponent implements OnInit, DoCheck {
   }
   /**
    * method that takes the topics and subtopics and generated calendar events from them when dropped onto the calendar
+   *
+   * currently populating the calendar takes a visible fraction of a second, needs a performance fix
+   * if someone can improve the code made by 1806-Java
    */
   generateEvents() {
     this.subTopicsReceived = false;
@@ -502,28 +515,6 @@ export class CalendarComponent implements OnInit, DoCheck {
       }
     }
     return false;
-  }
-}
-
-@Component({
-  selector: 'app-calendar-modal',
-  templateUrl: './calendar-modal-component.html'
-})
-export class CalendarModalComponent {
-
-  /**
-  * @author Kyle Smith, Aaron Mathews
-  * @param dialogRef - The reference to the dialog using our
-  * component, which allows us to close the dialog when we're
-  * done.
-  * @param data - Received from the parent component
-  * of this modal component, enabling the current component
-  * to retrieve and update what's in the parent component
-  */
-  constructor(private dialogRef: MatDialogRef<CalendarModalComponent>, @Inject(MAT_DIALOG_DATA) public data: object) { }
-
-  close() {
-    this.dialogRef.close();
   }
 }
 

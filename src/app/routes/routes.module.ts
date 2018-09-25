@@ -10,6 +10,7 @@ import { BoomComponent } from './pages/boom/boom.component';
 import { CreateVersionComponent } from './pages/create-version/create-version.component';
 import { DialogViewComponent } from './pages/dialog-view/dialog-view.component';
 import { EventDuplicateModalComponent } from './pages/calendar/event-duplicate-modal/event-duplicate-modal.component';
+import { CalendarModalComponent } from './pages/calendar/calendar-modal/calendar-modal.component';
 
 const ROUTES: Routes = [
   {
@@ -57,7 +58,7 @@ const ROUTES: Routes = [
     CommonModule,
     RouterModule.forRoot(ROUTES, {onSameUrlNavigation: 'reload'})
   ],
-  declarations: [CreateVersionComponent, DialogViewComponent, EventDuplicateModalComponent],
+  declarations: [CreateVersionComponent, DialogViewComponent, EventDuplicateModalComponent, CalendarModalComponent],
   exports: [
     RouterModule
   ]

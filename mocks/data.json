@@ -1,44 +1,229 @@
 {
-  "batches": [
+  "calendar-subtopics": [
     {
       "id": 1,
-      "name": "1806-Jun18-USF-Java",
-      "startDate": 123456787,
-      "endDate": 123456789,
-      "trainer_id": 3,
-      "calendarCurriculum_id": 2
+      "subtopic_id": 1
     },
     {
       "id": 2,
-      "name": "1807-Jul18-USF-JavaScript",
-      "startDate": 123456787,
-      "endDate": 123456789,
-      "trainer_id": 12,
-      "calendarCurriculum_id": 4
+      "subtopic_id": 2
     },
     {
       "id": 3,
-      "name": "1808-Aug18-USF-C++",
-      "startDate": 1534737600000,
-      "endDate": 1540526400000,
-      "trainer_id": 3,
-      "calendarCurriculum_id": 1
+      "subtopic_id": 3
     },
     {
       "id": 4,
-      "name": "1809-Sep18-USF-Java",
-      "startDate": 123456787,
-      "endDate": 123456789,
-      "trainer_id": 11,
-      "calendarCurriculum_id": 2
+      "subtopic_id": 4
     },
     {
       "id": 5,
-      "name": "1806-Nov18-USF-Java",
-      "startDate": 123456787,
-      "endDate": 123456789,
-      "trainer_id": 10,
-      "calendarCurriculum_id": 2
+      "subtopic_id": 5
+    },
+    {
+      "id": 6,
+      "subtopic_id": 6
+    }
+  ],
+  "calendar-curriculums": [
+    {
+      "id": 1,
+      "curriculum_id": 1,
+      "batch_id": 1
+    },
+    {
+      "id": 2,
+      "curriculum_id": 1,
+      "batch_id": 1
+    },
+    {
+      "id": 3,
+      "curriculum_id": 1,
+      "batch_id": 1
+    },
+    {
+      "id": 4,
+      "curriculum_id": 1,
+      "batch_id": 1
+    },
+    {
+      "id": 5,
+      "curriculum_id": 1,
+      "batch_id": 1
+    },
+    {
+      "id": 6,
+      "curriculum_id": 1,
+      "batch_id": 5
+    },
+    {
+      "curriculumId": 1,
+      "batchId": 0,
+      "id": 7
+    },
+    {
+      "curriculumId": 1,
+      "batchId": 0,
+      "id": 8
+    },
+    {
+      "curriculumId": 1,
+      "batchId": 0,
+      "id": 9
+    },
+    {
+      "curriculumId": 1,
+      "batchId": 0,
+      "id": 10
+    },
+    {
+      "curriculumId": 1,
+      "batchId": 0,
+      "id": 11
+    },
+    {
+      "curriculumId": 1,
+      "batchId": 0,
+      "id": 12
+    },
+    {
+      "curriculumId": 1,
+      "batchId": 0,
+      "id": 13
+    },
+    {
+      "curriculumId": 1,
+      "batchId": 0,
+      "id": 14
+    },
+    {
+      "curriculumId": 1,
+      "batchId": 0,
+      "id": 15
+    },
+    {
+      "curriculumId": 1,
+      "batchId": 0,
+      "id": 16
+    },
+    {
+      "curriculumId": 1,
+      "batchId": 0,
+      "id": 17
+    }
+  ],
+  "users": [
+    {
+      "id": 1,
+      "firstName": "Wezley",
+      "lastName": "Singleton",
+      "email": "wezleysingleton@reva.com",
+      "role_id": 1,
+      "status_id": 1
+    },
+    {
+      "id": 2,
+      "firstName": "Dylan",
+      "lastName": "McBee",
+      "email": "dylanmcbee@reva.com",
+      "role_id": 1,
+      "status_id": 1
+    },
+    {
+      "id": 3,
+      "firstName": "Aaron",
+      "lastName": "Mathews",
+      "email": "aaron.mathews95@gmail.com",
+      "role_id": 2,
+      "status_id": 1
+    },
+    {
+      "id": 4,
+      "firstName": "Algustus",
+      "lastName": "Lee",
+      "email": "algustuslee@reva.com",
+      "role_id": 2,
+      "status_id": 1
+    },
+    {
+      "id": 5,
+      "firstName": "Brandon",
+      "lastName": "Scoggins",
+      "email": "brandonscoggins@reva.com",
+      "role_id": 2,
+      "status_id": 1
+    },
+    {
+      "id": 6,
+      "firstName": "Christian",
+      "lastName": "DeFaria",
+      "email": "christiandefaria@reva.com",
+      "role_id": 2,
+      "status_id": 1
+    },
+    {
+      "id": 7,
+      "firstName": "Derek",
+      "lastName": "Loisel",
+      "email": "derekloisel@reva.com",
+      "role_id": 2,
+      "status_id": 1
+    },
+    {
+      "id": 8,
+      "firstName": "Bradley",
+      "lastName": "Walker",
+      "email": "bradleywalker@reva.com",
+      "role_id": 2,
+      "status_id": 1
+    },
+    {
+      "id": 9,
+      "firstName": "John",
+      "lastName": "Beineke",
+      "email": "johnbeineke@reva.com",
+      "role_id": 2,
+      "status_id": 1
+    },
+    {
+      "id": 10,
+      "firstName": "Karen",
+      "lastName": "Matney",
+      "email": "matneyka@gmail.com",
+      "role_id": 2,
+      "status_id": 1
+    },
+    {
+      "id": 11,
+      "firstName": "Khaleel",
+      "lastName": "Williams",
+      "email": "khaleelwilliams@reva.com",
+      "role_id": 2,
+      "status_id": 1
+    },
+    {
+      "id": 12,
+      "firstName": "Kyle",
+      "lastName": "Smith",
+      "email": "kylesmith@reva.com",
+      "role_id": 2,
+      "status_id": 1
+    },
+    {
+      "id": 13,
+      "firstName": "Thomas",
+      "lastName": "Steyaert",
+      "email": "thomassteyaert@reva.com",
+      "role_id": 2,
+      "status_id": 1
+    },
+    {
+      "id": 14,
+      "firstName": "Andrew",
+      "lastName": "Li",
+      "email": "andrewli@reva.com",
+      "role_id": 2,
+      "status_id": 1
     }
   ],
   "calendar-events": [
@@ -79,30 +264,46 @@
       "calendarSubtopic_id": 1
     }
   ],
-  "calendar-subtopics": [
+  "batches": [
     {
       "id": 1,
-      "subtopic_id": 1
+      "name": "1806-Jun18-USF-Java",
+      "startDate": 123456787,
+      "endDate": 123456789,
+      "trainer_id": 3,
+      "calendarCurriculum_id": 2
     },
     {
       "id": 2,
-      "subtopic_id": 2
+      "name": "1807-Jul18-USF-JavaScript",
+      "startDate": 123456787,
+      "endDate": 123456789,
+      "trainer_id": 12,
+      "calendarCurriculum_id": 4
     },
     {
       "id": 3,
-      "subtopic_id": 3
+      "name": "1808-Aug18-USF-C++",
+      "startDate": 1534737600000,
+      "endDate": 1540526400000,
+      "trainer_id": 3,
+      "calendarCurriculum_id": 1
     },
     {
       "id": 4,
-      "subtopic_id": 4
+      "name": "1809-Sep18-USF-Java",
+      "startDate": 123456787,
+      "endDate": 123456789,
+      "trainer_id": 11,
+      "calendarCurriculum_id": 2
     },
     {
       "id": 5,
-      "subtopic_id": 5
-    },
-    {
-      "id": 6,
-      "subtopic_id": 6
+      "name": "1806-Nov18-USF-Java",
+      "startDate": 123456787,
+      "endDate": 123456789,
+      "trainer_id": 10,
+      "calendarCurriculum_id": 2
     }
   ],
   "curriculums": [
@@ -155,173 +356,48 @@
           "name": "Microservices"
         }
       ]
-    },
-    {
-      "name": "Java/JEE",
-      "version": 2,
-      "dateCreated": "2018-09-24T18:59:12.469Z",
-      "numberOfWeeks": "10",
-      "topics": [
-        {
-          "id": 7,
-          "name": "Hibernate"
-        },
-        {
-          "id": 8,
-          "name": "Spring"
-        },
-        {
-          "id": 9,
-          "name": "Web Services"
-        },
-        {
-          "id": 10,
-          "name": "Microservices"
-        }
-      ],
-      "id": 2
     }
   ],
-  "calendar-curriculums": [
+  "topics": [
     {
       "id": 1,
-      "curriculum_id": 1,
-      "batch_id": 1
+      "name": "Core Java"
     },
     {
       "id": 2,
-      "curriculum_id": 1,
-      "batch_id": 1
+      "name": "SQL"
     },
     {
       "id": 3,
-      "curriculum_id": 1,
-      "batch_id": 1
+      "name": "Client-Side Technologies"
     },
     {
       "id": 4,
-      "curriculum_id": 1,
-      "batch_id": 1
+      "name": "Servlets"
     },
     {
       "id": 5,
-      "curriculum_id": 1,
-      "batch_id": 1
+      "name": "Angular"
     },
     {
       "id": 6,
-      "curriculum_id": 1,
-      "batch_id": 5
+      "name": "DevOps"
     },
     {
-      "curriculum_id": 1,
-      "batch_id": 0,
-      "id": 7
+      "id": 7,
+      "name": "Hibernate"
     },
     {
-      "curriculumId": 1,
-      "batchId": 0,
-      "id": 8
+      "id": 8,
+      "name": "Spring"
     },
     {
-      "curriculumId": 1,
-      "batchId": 0,
-      "id": 9
+      "id": 9,
+      "name": "Web Services"
     },
     {
-      "curriculumId": 1,
-      "batchId": 0,
-      "id": 10
-    },
-    {
-      "curriculumId": 1,
-      "batchId": 0,
-      "id": 11
-    },
-    {
-      "curriculumId": 1,
-      "batchId": 0,
-      "id": 12
-    },
-    {
-      "curriculumId": 1,
-      "batchId": 0,
-      "id": 13
-    },
-    {
-      "curriculumId": 1,
-      "batchId": 0,
-      "id": 14
-    },
-    {
-      "curriculumId": 1,
-      "batchId": 0,
-      "id": 15
-    },
-    {
-      "curriculumId": 1,
-      "batchId": 0,
-      "id": 16
-    },
-    {
-      "curriculumId": 1,
-      "batchId": 0,
-      "id": 17
-    },
-    {
-      "curriculumId": 1,
-      "batchId": 0,
-      "id": 18
-    },
-    {
-      "curriculumId": 1,
-      "batchId": 0,
-      "id": 19
-    },
-    {
-      "curriculumId": 1,
-      "batchId": 0,
-      "id": 20
-    },
-    {
-      "curriculumId": 1,
-      "batchId": 0,
-      "id": 21
-    },
-    {
-      "curriculumId": 1,
-      "batchId": 0,
-      "id": 22
-    },
-    {
-      "curriculumId": 1,
-      "batchId": 0,
-      "id": 23
-    },
-    {
-      "curriculumId": 1,
-      "batchId": 0,
-      "id": 24
-    },
-    {
-      "curriculumId": 1,
-      "batchId": 0,
-      "id": 25
-    },
-    {
-      "curriculumId": 1,
-      "batchId": 0,
-      "id": 26
-    },
-    {
-      "curriculumId": 1,
-      "batchId": 0,
-      "id": 27
-    },
-    {
-      "curriculumId": 2,
-      "batchId": 0,
-      "id": 28
+      "id": 10,
+      "name": "Microservices"
     }
   ],
   "subtopics": [
@@ -639,162 +715,6 @@
       "id": 210,
       "name": "Containerization-Docker",
       "parentTopic_id": 10
-    }
-  ],
-  "users": [
-    {
-      "id": 1,
-      "firstName": "Wezley",
-      "lastName": "Singleton",
-      "email": "wezleysingleton@reva.com",
-      "role_id": 1,
-      "status_id": 1
-    },
-    {
-      "id": 2,
-      "firstName": "Dylan",
-      "lastName": "McBee",
-      "email": "dylanmcbee@reva.com",
-      "role_id": 1,
-      "status_id": 1
-    },
-    {
-      "id": 3,
-      "firstName": "Aaron",
-      "lastName": "Mathews",
-      "email": "aaron.mathews95@gmail.com",
-      "role_id": 2,
-      "status_id": 1
-    },
-    {
-      "id": 4,
-      "firstName": "Algustus",
-      "lastName": "Lee",
-      "email": "algustuslee@reva.com",
-      "role_id": 2,
-      "status_id": 1
-    },
-    {
-      "id": 5,
-      "firstName": "Brandon",
-      "lastName": "Scoggins",
-      "email": "brandonscoggins@reva.com",
-      "role_id": 2,
-      "status_id": 1
-    },
-    {
-      "id": 6,
-      "firstName": "Christian",
-      "lastName": "DeFaria",
-      "email": "christiandefaria@reva.com",
-      "role_id": 2,
-      "status_id": 1
-    },
-    {
-      "id": 7,
-      "firstName": "Derek",
-      "lastName": "Loisel",
-      "email": "derekloisel@reva.com",
-      "role_id": 2,
-      "status_id": 1
-    },
-    {
-      "id": 8,
-      "firstName": "Bradley",
-      "lastName": "Walker",
-      "email": "bradleywalker@reva.com",
-      "role_id": 2,
-      "status_id": 1
-    },
-    {
-      "id": 9,
-      "firstName": "John",
-      "lastName": "Beineke",
-      "email": "johnbeineke@reva.com",
-      "role_id": 2,
-      "status_id": 1
-    },
-    {
-      "id": 10,
-      "firstName": "Karen",
-      "lastName": "Matney",
-      "email": "matneyka@gmail.com",
-      "role_id": 2,
-      "status_id": 1
-    },
-    {
-      "id": 11,
-      "firstName": "Khaleel",
-      "lastName": "Williams",
-      "email": "khaleelwilliams@reva.com",
-      "role_id": 2,
-      "status_id": 1
-    },
-    {
-      "id": 12,
-      "firstName": "Kyle",
-      "lastName": "Smith",
-      "email": "kylesmith@reva.com",
-      "role_id": 2,
-      "status_id": 1
-    },
-    {
-      "id": 13,
-      "firstName": "Thomas",
-      "lastName": "Steyaert",
-      "email": "thomassteyaert@reva.com",
-      "role_id": 2,
-      "status_id": 1
-    },
-    {
-      "id": 14,
-      "firstName": "Andrew",
-      "lastName": "Li",
-      "email": "andrewli@reva.com",
-      "role_id": 2,
-      "status_id": 1
-    }
-  ],
-  "topics": [
-    {
-      "id": 1,
-      "name": "Core Java"
-    },
-    {
-      "id": 2,
-      "name": "SQL"
-    },
-    {
-      "id": 3,
-      "name": "Client-Side Technologies"
-    },
-    {
-      "id": 4,
-      "name": "Servlets"
-    },
-    {
-      "id": 5,
-      "name": "Angular"
-    },
-    {
-      "id": 6,
-      "name": "DevOps"
-    },
-    {
-      "id": 7,
-      "name": "Hibernate"
-    },
-    {
-      "id": 8,
-      "name": "Spring"
-    },
-    {
-      "id": 9,
-      "name": "Web Services"
-    },
-    {
-      "id": 10,
-      "name": "Microservices"
     }
   ]
 }

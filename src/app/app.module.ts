@@ -17,7 +17,6 @@ import { FlatpickrModule } from 'angularx-flatpickr';
 import { appRoutes } from './routes/routes';
 import { AppComponent } from './app.component';
 import { BoomComponent } from './routes/pages/boom/boom.component';
-import { CalendarComponent, CalendarModalComponent } from './routes/pages/calendar/calendar.component';
 import { CreateVersionComponent } from './routes/pages/create-version/create-version.component';
 import { CurriculumEditorComponent } from './routes/pages/curriculum-editor/curriculum-editor.component';
 import { NgbModalModule } from '@ng-bootstrap/ng-bootstrap/modal/modal.module';
@@ -34,6 +33,8 @@ import { UserIdleModule } from 'angular-user-idle';
 import { CognitoService } from './services/cognito.service';
 import { DialogViewComponent } from './routes/pages/dialog-view/dialog-view.component';
 import { EventDuplicateModalComponent } from './routes/pages/calendar/event-duplicate-modal/event-duplicate-modal.component';
+import { CalendarComponent } from './routes/pages/calendar/calendar.component';
+import { CalendarModalComponent } from './routes/pages/calendar/calendar-modal/calendar-modal.component';
 
 
 
