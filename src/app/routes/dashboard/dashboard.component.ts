@@ -13,6 +13,34 @@ import { UserService } from '../../services/user.service';
  *
  * @author Bradley Walker | Khaleel Williams | 1806-Jun18-USF-Java | Wezley Singleton
  */
+export interface Topicz {
+  id: number;
+  name: string;
+  time: string;
+}
+
+const topics: Topicz[] = [
+  {
+    id: 1,
+    name: 'science',
+    time: 'noon'
+  },
+  {
+    id: 2,
+    name: 'math',
+    time: 'noon'
+  },
+  {
+    id: 3,
+    name: 'mom',
+    time: 'noon'
+  },
+  {
+    id: 4,
+    name: 'SAT prep',
+    time: 'noon'
+  }
+];
 
 @Component({
   selector: 'app-dashboard',
@@ -20,6 +48,8 @@ import { UserService } from '../../services/user.service';
   styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent implements OnInit {
+  dataSource = topics;
+  headerColumns: string[] = ['idno', 'sub', 'time', 'control'];
 
   user: BamUser;
   batch: Batch;
@@ -29,10 +59,11 @@ export class DashboardComponent implements OnInit {
   firstName: string;
   lastName: string;
   isOpen = 0;
+  visibilityIcon = [{num: 0, icon: 'visibility_off' },
+                    {num: 1, icon: 'visibility'}];
   DashTitle = 'Today';
 
-  headers: ['status', 'sub', 'control'];
-  dataSource: Curriculum;
+
 
   constructor(
     private router: Router,
@@ -46,32 +77,7 @@ export class DashboardComponent implements OnInit {
   * and info about the batch they are associated with.
   */
   ngOnInit() {
-    this.dataSource = {
-      id: 1,
-      name: 'wow',
-      version: 1,
-      creator_id: 1,
-      dateCreated: null,
-      numberOfWeeks: 10,
-      topics: [
-        {
-        id: 1,
-        name: 'science'
-      },
-      {
-        id: 2,
-        name: 'math'
-      },
-      {
-        id: 3,
-        name: 'mom'
-      },
-      {
-        id: 4,
-        name: 'SAT prep'
-      }
-    ]
-    };
+
     this.user = JSON.parse(sessionStorage.getItem('user'));
 
     if (!this.user) {
@@ -112,6 +118,10 @@ export class DashboardComponent implements OnInit {
   }
 
 
+  growl(x) {
+    console.log(x);
+       }
+
 
 
   /**
@@ -120,6 +130,9 @@ export class DashboardComponent implements OnInit {
    * @param a A batch
    * @param b Another batch
    */
+
+
+
   compareBatches(a: Batch, b: Batch) {
     if (a.startDate < b.startDate) {
       return -1;
