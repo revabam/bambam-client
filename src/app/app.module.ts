@@ -37,6 +37,7 @@ import { CalendarComponent } from './routes/calendar/calendar.component';
 import { CalendarModalComponent } from './routes/calendar/calendar-modal/calendar-modal.component';
 import { UserInfoComponent } from './shared-components/user-info/user-info.component';
 import { TopicsComponent } from './routes/topics/topics.component';
+import { ChartsModule } from 'ng2-charts';
 
 
 @NgModule({
@@ -104,7 +105,8 @@ import { TopicsComponent } from './routes/topics/topics.component';
     NgbModalModule.forRoot(),
     FlatpickrModule.forRoot(),
     CalendarModule.forRoot(),
-    UserIdleModule.forRoot({idle: 600, timeout: 300, ping: 60})
+    UserIdleModule.forRoot({idle: 600, timeout: 300, ping: 60}),
+    ChartsModule
   ],
   entryComponents: [CalendarModalComponent, EventDuplicateModalComponent, UserInfoComponent],
   providers: [
