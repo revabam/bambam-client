@@ -15,54 +15,61 @@ import { UserInfoComponent } from '../shared-components/user-info/user-info.comp
 import { TopicsComponent } from './topics/topics.component';
 
 const ROUTES: Routes = [
-  {
-      path: 'dashboard',
-      component: DashboardComponent
-  },
+    {
+        path: 'dashboard',
+        component: DashboardComponent
+    },
 
-  {
-      path: 'login',
-      component: LoginComponent
-  },
+    {
+        path: 'login',
+        component: LoginComponent
+    },
 
-  {
-      path: 'register',
-      component: RegisterComponent
-  },
+    {
+        path: 'register',
+        component: RegisterComponent
+    },
 
-  {
-      path: 'calendar',
-      component: CalendarComponent
-  },
+    {
+        path: 'calendar',
+        component: CalendarComponent
+    },
 
-  {
-      path: 'curriculum/editor',
-      component: CurriculumEditorComponent
-  },
+    {
+        path: 'curriculum/editor',
+        component: CurriculumEditorComponent
+    },
 
-  {
-      path: 'boom',
-      component: BoomComponent
-  },
-  {
-      path: 'curriculum/editor',
-      component: DialogViewComponent
-  },
-  {
-      path: '',
-      pathMatch: 'full',
-      redirectTo: 'dashboard'
-  }
+    {
+        path: 'boom',
+        component: BoomComponent
+    },
+    {
+        path: 'curriculum/editor',
+        component: DialogViewComponent
+    },
+    {
+        path: '',
+        pathMatch: 'full',
+        redirectTo: 'dashboard'
+    }
 ];
 
 @NgModule({
-  imports: [
-    CommonModule,
-    RouterModule.forRoot(ROUTES, {onSameUrlNavigation: 'reload'})
-  ],
-  declarations: [CreateVersionComponent, DialogViewComponent, EventDuplicateModalComponent, CalendarModalComponent, UserInfoComponent, TopicsComponent],
-  exports: [
-    RouterModule
-  ]
+    imports: [
+        CommonModule,
+        RouterModule.forRoot(ROUTES, { onSameUrlNavigation: 'reload' })
+    ],
+    declarations: [
+        CreateVersionComponent,
+        DialogViewComponent,
+        EventDuplicateModalComponent,
+        CalendarModalComponent,
+        UserInfoComponent,
+        TopicsComponent
+    ],
+    exports: [
+        RouterModule
+    ]
 })
 export class RoutesModule { }
