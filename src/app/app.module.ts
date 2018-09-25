@@ -34,6 +34,7 @@ import { UserIdleModule } from 'angular-user-idle';
 import { CognitoService } from './services/cognito.service';
 import { DialogViewComponent } from './routes/dialog-view/dialog-view.component';
 import { UserInfoComponent } from './shared-components/user-info/user-info.component';
+import { TopicsComponent } from './routes/topics/topics.component';
 
 @NgModule({
   declarations: [
@@ -48,7 +49,8 @@ import { UserInfoComponent } from './shared-components/user-info/user-info.compo
     RegisterComponent,
     CalendarModalComponent,
     DialogViewComponent,
-    UserInfoComponent
+    UserInfoComponent,
+    TopicsComponent
   ],
   imports: [
     NgbModule.forRoot(),

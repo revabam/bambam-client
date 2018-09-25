@@ -10,6 +10,7 @@ import { LoginComponent } from '../routes/login/login.component';
 import { RegisterComponent } from '../routes/register/register.component';
 import { DialogViewComponent } from '../routes/dialog-view/dialog-view.component';
 import { UserInfoComponent } from '../shared-components/user-info/user-info.component';
+import { TopicsComponent } from './topics/topics.component';
 
 const ROUTES: Routes = [
   {
@@ -57,7 +58,7 @@ const ROUTES: Routes = [
     CommonModule,
     RouterModule.forRoot(ROUTES, {onSameUrlNavigation: 'reload'})
   ],
-  declarations: [CreateVersionComponent, DialogViewComponent, UserInfoComponent],
+  declarations: [CreateVersionComponent, DialogViewComponent, UserInfoComponent, TopicsComponent],
   exports: [
     RouterModule
   ]
