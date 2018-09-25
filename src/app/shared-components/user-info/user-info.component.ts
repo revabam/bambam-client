@@ -10,7 +10,7 @@ import { UserService } from '../../services/user.service';
  * user is directed to after they login. It displays personal
  * information and batch information to the user.
  *
- * @author Bradley Walker | Khaleel Williams | 1806-Jun18-USF-Java | Wezley Singleton
+ * @author Joseph Shannon | Drake Mapel | 1806-Spark | Steven Kelsey
  */
 
 @Component({
