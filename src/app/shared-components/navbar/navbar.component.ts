@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { UserService } from '../../../services/user.service';
-import { BamUser } from '../../../models/bam-user';
+import { UserService } from '../../services/user.service';
+import { BamUser } from '../../models/bam-user';
 import { MatDialog } from '@angular/material';
 import { UserInfoComponent } from '../user-info/user-info.component';
 

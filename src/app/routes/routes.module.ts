@@ -1,15 +1,15 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Routes, RouterModule } from '@angular/router';
-import { DashboardComponent } from './pages/dashboard/dashboard.component';
-import { LoginComponent } from './pages/login/login.component';
-import { RegisterComponent } from './pages/register/register.component';
-import { CalendarComponent } from './pages/calendar/calendar.component';
-import { CurriculumEditorComponent } from './pages/curriculum-editor/curriculum-editor.component';
-import { BoomComponent } from './pages/boom/boom.component';
-import { CreateVersionComponent } from './pages/create-version/create-version.component';
-import { DialogViewComponent } from './pages/dialog-view/dialog-view.component';
-import { UserInfoComponent } from './template/user-info/user-info.component';
+import { DashboardComponent } from '../routes/dashboard/dashboard.component';
+import { CalendarComponent } from '../routes/calendar/calendar.component';
+import { CreateVersionComponent } from '../routes/curriculum-editor/create-version/create-version.component';
+import { CurriculumEditorComponent } from '../routes/curriculum-editor/curriculum-editor.component';
+import { BoomComponent } from '../routes/boom/boom.component';
+import { LoginComponent } from '../routes/login/login.component';
+import { RegisterComponent } from '../routes/register/register.component';
+import { DialogViewComponent } from '../routes/dialog-view/dialog-view.component';
+import { UserInfoComponent } from '../shared-components/user-info/user-info.component';
 
 const ROUTES: Routes = [
   {

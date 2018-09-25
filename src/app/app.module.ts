@@ -1,5 +1,5 @@
 import { HttpClientModule } from '@angular/common/http';
-import { NgModule } from '@angular/core';
+import { NgModule, Component } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatAutocompleteModule, MatBadgeModule, MatBottomSheetModule, MatButtonModule,
   MatButtonToggleModule, MatCardModule, MatCheckboxModule, MatChipsModule, MatDatepickerModule,
@@ -16,26 +16,24 @@ import { TimepickerModule } from 'ngx-bootstrap/timepicker';
 import { FlatpickrModule } from 'angularx-flatpickr';
 import { appRoutes } from './routes/routes';
 import { AppComponent } from './app.component';
-import { BoomComponent } from './routes/pages/boom/boom.component';
-import { CalendarComponent, CalendarModalComponent } from './routes/pages/calendar/calendar.component';
-import { CreateVersionComponent } from './routes/pages/create-version/create-version.component';
-import { CurriculumEditorComponent } from './routes/pages/curriculum-editor/curriculum-editor.component';
+import { BoomComponent } from './routes/boom/boom.component';
+import { CalendarComponent, CalendarModalComponent } from './routes/calendar/calendar.component';
+import { CreateVersionComponent } from './routes/curriculum-editor/create-version/create-version.component';
+import { CurriculumEditorComponent } from './routes/curriculum-editor/curriculum-editor.component';
 import { NgbModalModule } from '@ng-bootstrap/ng-bootstrap/modal/modal.module';
 import { CalendarModule } from 'angular-calendar';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
-import { DashboardComponent } from './routes/pages/dashboard/dashboard.component';
-import { LoginComponent } from './routes/pages/login/login.component';
-import { RegisterComponent } from './routes/pages/register/register.component';
-import { NavbarComponent } from './routes/template/navbar/navbar.component';
+import { DashboardComponent } from './routes/dashboard/dashboard.component';
+import { LoginComponent } from './routes/login/login.component';
+import { RegisterComponent } from './routes/register/register.component';
+import { NavbarComponent } from './shared-components/navbar/navbar.component';
 import { UserService } from './services/user.service';
 import { BatchService } from './services/batch.service';
 import { LocationStrategy, PathLocationStrategy } from '@angular/common';
 import { UserIdleModule } from 'angular-user-idle';
 import { CognitoService } from './services/cognito.service';
-import { DialogViewComponent } from './routes/pages/dialog-view/dialog-view.component';
+import { DialogViewComponent } from './routes/dialog-view/dialog-view.component';
 import { UserInfoComponent } from './routes/template/user-info/user-info.component';
-
-
 
 @NgModule({
   declarations: [

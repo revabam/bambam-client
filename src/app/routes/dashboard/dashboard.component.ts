@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { BamUser } from '../../../models/bam-user';
+import { BamUser } from '../../models/bam-user';
 import { Router } from '@angular/router';
-import { Batch } from '../../../models/batch';
-import { BatchService } from '../../../services/batch.service';
-import { UserService } from '../../../services/user.service';
-import { Curriculum } from '../../../models/curriculum';
+import { Batch } from '../../models/batch';
+import { BatchService } from '../../services/batch.service';
+import { Curriculum } from '../../models/curriculum';
+import { UserService } from '../../services/user.service';
 
 /**
  * This component is the dashboard page. It is the page that the
