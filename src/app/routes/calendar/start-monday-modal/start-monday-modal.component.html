@@ -1,0 +1,10 @@
+<h6 mat-dialog-title>Curriculum Start </h6><mat-divider></mat-divider>
+<div mat-dialog-content>
+  <p> Would you like to start {data.curriculumName} on Monday {{data.startDate}}</p>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="startOnMonday()">Yes</button>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="close()">No</button>
+</div>

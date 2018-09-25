@@ -22,6 +22,7 @@ import { CalendarSubtopic } from '../../models/calendar-subtopic';
 import { TopicService } from '../../services/topic.service';
 import { CalendarService } from '../../services/calendar.service';
 import { SubtopicService } from '../../services/subtopic.service';
+import { StartMondayModalComponent } from './start-monday-modal/start-monday-modal.component';
 
 const colors: any = {
   random: {
@@ -278,8 +279,22 @@ export class CalendarComponent implements OnInit, DoCheck {
           }
         });
         this.refresh.next();
-        }
-      });
+      }
+    });
+  }
+
+  openEventInsertCurriculum(name: string, date: Date) {
+    const dialogRef = this.dialog.open(StartMondayModalComponent, {
+      width: '600px',
+      data: {
+        curriculumName: name,
+        startDate: date
+      }
+    });
+
+    dialogRef.afterClosed().subscribe(decision => {
+      console.log(decision);
+    });
   }
 
   /**
@@ -306,10 +321,11 @@ export class CalendarComponent implements OnInit, DoCheck {
    *
    * @param id id for the object that will be dropped into the calendar
    * @param event that is dragged and dropped
-   * @author Marcin Salamon | Spark1806-USF-Java | Steven Kelsey
+   * @author Marcin Salamon | Alex Moraga | Spark1806-USF-Java | Steven Kelsey
    */
   populateCalendar(id: number, event: CalendarEvent): void {
     this.calendarService.getCurriculumById(id).subscribe(curr => {
+      this.openEventInsertCurriculum(curr.name, event.start);
       this.selectedCurriculum = curr;
       this.topicLength = curr.numberOfWeeks / curr.topics.length;
       this.topicArr = curr.topics;
