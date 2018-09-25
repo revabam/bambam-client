@@ -33,8 +33,8 @@ import { LocationStrategy, PathLocationStrategy } from '@angular/common';
 import { UserIdleModule } from 'angular-user-idle';
 import { CognitoService } from './services/cognito.service';
 import { DialogViewComponent } from './routes/dialog-view/dialog-view.component';
-
-
+import { UserInfoComponent } from './shared-components/user-info/user-info.component';
+import { TopicsComponent } from './routes/topics/topics.component';
 
 @NgModule({
   declarations: [
@@ -48,7 +48,9 @@ import { DialogViewComponent } from './routes/dialog-view/dialog-view.component'
     LoginComponent,
     RegisterComponent,
     CalendarModalComponent,
-    DialogViewComponent
+    DialogViewComponent,
+    UserInfoComponent,
+    TopicsComponent
   ],
   imports: [
     NgbModule.forRoot(),
@@ -100,7 +102,8 @@ import { DialogViewComponent } from './routes/dialog-view/dialog-view.component'
     CalendarModule.forRoot(),
     UserIdleModule.forRoot({idle: 600, timeout: 300, ping: 60})
   ],
-  entryComponents: [CalendarModalComponent],
+  entryComponents: [CalendarModalComponent,
+  UserInfoComponent],
   providers: [
     UserService,
     CognitoService,
