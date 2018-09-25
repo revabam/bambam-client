@@ -33,7 +33,7 @@ import { LocationStrategy, PathLocationStrategy } from '@angular/common';
 import { UserIdleModule } from 'angular-user-idle';
 import { CognitoService } from './services/cognito.service';
 import { DialogViewComponent } from './routes/dialog-view/dialog-view.component';
-import { UserInfoComponent } from './routes/template/user-info/user-info.component';
+import { UserInfoComponent } from './shared-components/user-info/user-info.component';
 
 @NgModule({
   declarations: [
