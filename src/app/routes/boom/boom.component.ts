@@ -59,6 +59,9 @@ export class BoomComponent implements OnInit {
     return prog;
   }
 
+  /**
+   * Prepare data to be populated into the charts
+   */
   ngOnInit() {
     let completed = 0;
     let missed = 0;
