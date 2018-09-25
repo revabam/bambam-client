@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { Router } from '@angular/router';
-import { UserService } from '../../../services/user.service';
-import { BamUser } from '../../../models/bam-user';
+import { UserService } from '../../services/user.service';
+import { BamUser } from '../../models/bam-user';
 
 /**
  * Shows current page view and navigates to different page views of application.

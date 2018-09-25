@@ -1,6 +1,6 @@
 /**
  * Use this environment locally to connect the hosted UAT
- *      UAT is not available as of June 5th, 2018
+ *      UAT is not available as of September 24th, 2018
  */
 export const environment = {
   production: false,

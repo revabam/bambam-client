@@ -1,8 +1,8 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
-import { TopicService } from '../../../services/topic.service';
-import { SubtopicService } from '../../../services/subtopic.service';
-import { Topic } from '../../../models/topic';
+import { TopicService } from '../../services/topic.service';
+import { SubtopicService } from '../../services/subtopic.service';
+import { Topic } from '../../models/topic';
 
 /**
  * Component created to inject a dialog view whenever adding Topics or Sub-Topics in the
