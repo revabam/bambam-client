@@ -35,7 +35,8 @@ import { EventDuplicateModalComponent } from './routes/calendar/event-duplicate-
 import { DialogViewComponent } from './routes/dialog-view/dialog-view.component';
 import { CalendarComponent } from './routes/calendar/calendar.component';
 import { CalendarModalComponent } from './routes/calendar/calendar-modal/calendar-modal.component';
-
+import { UserInfoComponent } from './shared-components/user-info/user-info.component';
+import { TopicsComponent } from './routes/topics/topics.component';
 
 
 @NgModule({
@@ -51,7 +52,9 @@ import { CalendarModalComponent } from './routes/calendar/calendar-modal/calenda
     RegisterComponent,
     CalendarModalComponent,
     EventDuplicateModalComponent,
-    DialogViewComponent
+    DialogViewComponent,
+    UserInfoComponent,
+    TopicsComponent
   ],
   imports: [
     NgbModule.forRoot(),
@@ -103,7 +106,7 @@ import { CalendarModalComponent } from './routes/calendar/calendar-modal/calenda
     CalendarModule.forRoot(),
     UserIdleModule.forRoot({idle: 600, timeout: 300, ping: 60})
   ],
-  entryComponents: [CalendarModalComponent, EventDuplicateModalComponent],
+  entryComponents: [CalendarModalComponent, EventDuplicateModalComponent, UserInfoComponent],
   providers: [
     UserService,
     CognitoService,
