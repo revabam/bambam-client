@@ -32,7 +32,7 @@ export class DashboardComponent implements OnInit {
   DashTitle = 'Today';
 
   headers: ['status', 'sub', 'control'];
-  dataSource: Curriculum[];
+  dataSource: Curriculum;
 
   constructor(
     private router: Router,
