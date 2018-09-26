@@ -10,7 +10,7 @@ import { Injectable } from '@angular/core';
  * the HTTP Request to.
  */
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { SubTopic } from '../models/SubTopic';
+import { SubTopic } from '../models/subtopic';
 import { Observable, BehaviorSubject } from 'rxjs';
 import { environment } from '../../environments/environment';
 
