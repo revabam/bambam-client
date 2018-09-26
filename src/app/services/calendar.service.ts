@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { Curriculum } from '../models/curriculum';
 import { environment } from '../../environments/environment';
 import { CalendarEvent } from '../models/calendar-event';
-import { Subtopic } from '../models/subtopic';
+import { SubTopic } from '../models/subtopic';
 import { CalendarCurriculum } from '../models/calendar-curriculum';
 import { CalendarSubtopic } from '../models/calendar-subtopic';
 
@@ -105,8 +105,8 @@ export class CalendarService {
   /**
    * Retrieve all stored calendar subtopics
    */
-  getCalendarSubtopics(): Observable<Subtopic[]> {
-    return this.http.get<Subtopic[]>(environment.apiUrl + 'calendar-subtopics', HTTP_OPTIONS);
+  getCalendarSubtopics(): Observable<SubTopic[]> {
+    return this.http.get<SubTopic[]>(environment.apiUrl + 'calendar-subtopics', HTTP_OPTIONS);
   }
 
   /**
