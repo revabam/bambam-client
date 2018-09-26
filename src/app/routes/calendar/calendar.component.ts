@@ -15,13 +15,13 @@ import { EventColor, EventAction } from 'calendar-utils';
 import { EventDuplicateModalComponent } from './event-duplicate-modal/event-duplicate-modal.component';
 import { CalendarModalComponent } from './calendar-modal/calendar-modal.component';
 import { Topic } from '../../models/topic';
-import { Subtopic } from '../../models/subtopic';
+import { SubTopic } from '../../models/subtopic';
 import { Curriculum } from '../../models/curriculum';
 import { CalendarCurriculum } from '../../models/calendar-curriculum';
 import { CalendarSubtopic } from '../../models/calendar-subtopic';
 import { TopicService } from '../../services/topic.service';
 import { CalendarService } from '../../services/calendar.service';
-import { SubtopicService } from '../../services/subtopic.service';
+import { SubTopicService } from '../../services/subtopic.service';
 
 const colors: any = {
   random: {
@@ -47,7 +47,7 @@ export class CalendarComponent implements OnInit, DoCheck {
   subtopicsReceivedCount = 0;
   topicLength = 0;
   topicArr: Topic[];
-  subtopicArrArr: Array<Subtopic[]> = [];
+  subtopicArrArr: Array<SubTopic[]> = [];
   subTopicsReceived = false;
   multiDayEventCreated = false;
   selectedCurriculum: Curriculum;
@@ -67,7 +67,7 @@ export class CalendarComponent implements OnInit, DoCheck {
   calendarCurriculums: CalendarCurriculum[];
   calendarSubtopics: CalendarSubtopic[];
   topics: Topic[];
-  subtopics: Subtopic[];
+  subtopics: SubTopic[];
   curriculums: Curriculum[];
   currTopicTime: number;
 
@@ -98,7 +98,7 @@ export class CalendarComponent implements OnInit, DoCheck {
 
   events: CalendarEvent[] = [];
 
-  constructor(private modal: NgbModal, private calendarService: CalendarService, private subtopicService: SubtopicService,
+  constructor(private modal: NgbModal, private calendarService: CalendarService, private subtopicService: SubTopicService,
     private topicService: TopicService, private dialog: MatDialog, private batchService: BatchService) { }
 
   /**
@@ -314,7 +314,7 @@ export class CalendarComponent implements OnInit, DoCheck {
       this.topicLength = curr.numberOfWeeks / curr.topics.length;
       this.topicArr = curr.topics;
       for (let i = 0, j = 0; i < curr.topics.length; i++) {
-        this.subtopicService.getSubtopicByParentId(curr.topics[i].id).subscribe(subResponse => {
+        this.subtopicService.getSubTopicByParentId(curr.topics[i].id).subscribe(subResponse => {
           this.subtopicArrArr.push(subResponse);
           if (i === curr.topics.length - 1) {
             this.subTopicsReceived = true;
@@ -404,7 +404,7 @@ export class CalendarComponent implements OnInit, DoCheck {
    * @param event the event to be pushed to calendar
    * @param curr curr is the curriculum to be pushed
    */
-  multidaySubtopic(subtopic: Subtopic, topicDay: number, timeLeft: number, event: CalendarEvent, curr: Curriculum) {
+  multidaySubtopic(subtopic: SubTopic, topicDay: number, timeLeft: number, event: CalendarEvent, curr: Curriculum) {
     this.events.push(
       {
         start: addDays(addHours(startOfDay(event.start), 9 + this.hour), topicDay),

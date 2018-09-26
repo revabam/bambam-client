@@ -3,11 +3,12 @@ import { Component, OnInit } from '@angular/core';
 import { CurriculumService } from '../../services/curriculum.service';
 import { Curriculum } from '../../models/curriculum';
 import { Topic } from '../../models/topic';
-import { Subtopic } from '../../models/subtopic';
+import { SubTopic } from '../../models/subtopic';
 import { TopicService } from '../../services/topic.service';
 import { MatDialog } from '@angular/material';
-import { SubtopicService } from '../../services/subtopic.service';
+import { SubTopicService } from '../../services/subtopic.service';
 import { DialogViewComponent } from '../dialog-view/dialog-view.component';
+import { CreateCurriculumComponent } from './create-curriculum/create-curriculum.component';
 
 
 @Component({
@@ -20,7 +21,7 @@ export class CurriculumEditorComponent implements OnInit {
   curriculums: Curriculum[] = [];
   curriculumNames: string[] = [];
   topics: Topic[] = [];
-  subtopics: Subtopic[] = [];
+  subtopics: SubTopic[] = [];
   /*
    * This object will serve a dictionary, and store a
    * set of boolean variables for
@@ -47,7 +48,7 @@ export class CurriculumEditorComponent implements OnInit {
    */
   constructor(
     private curriculumService: CurriculumService,
-    private subtopicService: SubtopicService,
+    private subtopicService: SubTopicService,
     private topicService: TopicService,
     public dialog: MatDialog
   ) { }
@@ -138,11 +139,42 @@ export class CurriculumEditorComponent implements OnInit {
    * @param topic - the parent topic of the subtopics that we seek
    * @author - Andrew Li | 1806-Jun-18-USF-Java | Wezley Singleton
    */
-  getSubtopicsByTopic (topic: Topic): Subtopic[] {
+  getSubtopicsByTopic (topic: Topic): SubTopic[] {
     return this.subtopics.filter(
-      (subtopic) => subtopic && subtopic.parentTopic_id === topic.id);
+      (subtopic) => subtopic && subtopic.parentTopicId === topic.id);
   }
-
+  /**
+   * When we invoke this function, it opens up the modal that we use
+   * to create new curriculum.
+   * @author - Chinedu Ozodi | 1806-Jun-18-USF-Java | Steven Kelsey
+   */
+  createNewCurriculumDialog(): void {
+    /*
+     * this.dialog is an injected dependency for the modal
+     * The open method passes in a component that we'll use
+     * in the modal.
+     */
+    const dialogRef = this.dialog.open(CreateCurriculumComponent,
+     /*
+     * An object is passed in as the second parameter, which
+     * defines properties of the dialog modal, as well as the
+     * data that we'll pass in for the modal component to access.
+     * We need to allow the child component to access the
+     * getCurriculumsByName so that the child component can get
+     * the highest version number and increment by one.
+     */
+      {
+        width: '600px',
+        data: {
+          curriculums: this.curriculums,
+          curriculumNames: this.curriculumNames,
+          topics: this.topics,
+          curriculumService: this.curriculumService,
+          getCurriculumsByName: this.getCurriculumsByName
+        }
+      }
+    );
+  }
   /**
    * When we invoke this function, it opens up the modal that we use
    * to create new versions of a curriculum.
@@ -331,7 +363,7 @@ export class CurriculumEditorComponent implements OnInit {
    * @param subtopic - The subtopic to be deactivated.
    * @author - Andrew Li | 1806-Jun-18-USF-Java | Wezley Singleton
    */
-  deactivateSubtopic(subtopic: Subtopic): void {
+  deactivateSubtopic(subtopic: SubTopic): void {
     this.subtopicService.deactivate(subtopic).subscribe(
       data => {
         if (data['name'] === undefined || data['name'] === null) {
@@ -357,7 +389,7 @@ export class CurriculumEditorComponent implements OnInit {
    * @param subtopic - The subtopic to be reactivated.
    * @author - Andrew Li | 1806-Jun-18-USF-Java | Wezley Singleton
    */
-  reactivateSubtopic(subtopic: Subtopic): void {
+  reactivateSubtopic(subtopic: SubTopic): void {
     this.subtopicService.reactivate(subtopic).subscribe(
       data => {
         if (data['name'] === undefined || data['name'] === null) {
@@ -484,7 +516,7 @@ export class CurriculumEditorComponent implements OnInit {
    * @param search - the user input that will determine the criteria
    * @author - Andrew Li | 1806-Jun-18-USF-Java | Wezley Singleton
    */
-  searchSubtopics(search: string): Subtopic[] {
+  searchSubtopics(search: string): SubTopic[] {
     return this.subtopics.filter((subtopic) => this.inSearch(search, subtopic.name));
   }
 
@@ -496,8 +528,8 @@ export class CurriculumEditorComponent implements OnInit {
    * @author - Andrew Li | 1806-Jun-18-USF-Java | Wezley Singleton
    */
   hasTopic(search: string, topic: Topic): boolean {
-    let subtopics: Subtopic[] = this.searchSubtopics(search);
-    subtopics = subtopics.filter((subtopic) => subtopic.parentTopic_id
+    let subtopics: SubTopic[] = this.searchSubtopics(search);
+    subtopics = subtopics.filter((subtopic) => subtopic.parentTopicId
       === topic.id);
     return subtopics.length > 0;
   }

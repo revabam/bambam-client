@@ -52,7 +52,7 @@ export class CreateVersionComponent {
        */
       version: +this.data['getCurriculumsByName'](
         this.selectedCurriculumName)[0].version + 1,
-      creator_id: JSON.parse(sessionStorage['user'])['id'],
+      creatorId: JSON.parse(sessionStorage['user'])['id'],
       dateCreated: new Date(),
       numberOfWeeks: this.numberOfWeeks,
       topics: this.selectedTopics

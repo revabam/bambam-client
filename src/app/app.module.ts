@@ -1,3 +1,4 @@
+import { CreateCurriculumComponent } from './routes/curriculum-editor/create-curriculum/create-curriculum.component';
 import { HttpClientModule } from '@angular/common/http';
 import { NgModule, Component } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -47,6 +48,7 @@ import { TopicsComponent } from './routes/topics/topics.component';
     CalendarComponent,
     CurriculumEditorComponent,
     CreateVersionComponent,
+    CreateCurriculumComponent,
     BoomComponent,
     LoginComponent,
     RegisterComponent,
@@ -106,7 +108,7 @@ import { TopicsComponent } from './routes/topics/topics.component';
     CalendarModule.forRoot(),
     UserIdleModule.forRoot({idle: 600, timeout: 300, ping: 60})
   ],
-  entryComponents: [CalendarModalComponent, EventDuplicateModalComponent, UserInfoComponent],
+  entryComponents: [CalendarModalComponent, EventDuplicateModalComponent, UserInfoComponent, CreateCurriculumComponent],
   providers: [
     UserService,
     CognitoService,
