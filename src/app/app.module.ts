@@ -1,3 +1,4 @@
+import { CurriculumViewComponent } from './routes/curriculum-editor/curriculum-view/curriculum-view.component';
 import { CreateCurriculumComponent } from './routes/curriculum-editor/create-curriculum/create-curriculum.component';
 import { HttpClientModule } from '@angular/common/http';
 import { NgModule, Component } from '@angular/core';
@@ -38,6 +39,7 @@ import { CalendarComponent } from './routes/calendar/calendar.component';
 import { CalendarModalComponent } from './routes/calendar/calendar-modal/calendar-modal.component';
 import { UserInfoComponent } from './shared-components/user-info/user-info.component';
 import { TopicsComponent } from './routes/topics/topics.component';
+import { CurriculumDayComponent } from './routes/curriculum-editor/curriculum-day/curriculum-day.component';
 
 
 @NgModule({
@@ -56,7 +58,9 @@ import { TopicsComponent } from './routes/topics/topics.component';
     EventDuplicateModalComponent,
     DialogViewComponent,
     UserInfoComponent,
-    TopicsComponent
+    TopicsComponent,
+    CurriculumViewComponent,
+    CurriculumDayComponent
   ],
   imports: [
     NgbModule.forRoot(),
@@ -97,7 +101,7 @@ import { TopicsComponent } from './routes/topics/topics.component';
     MatTooltipModule,
     MatTreeModule,
     BrowserModule,
-    RouterModule.forRoot(appRoutes),
+    RouterModule.forRoot(appRoutes, {onSameUrlNavigation: 'reload'}),
     FormsModule,
     BsDatepickerModule.forRoot(),
     TimepickerModule.forRoot(),

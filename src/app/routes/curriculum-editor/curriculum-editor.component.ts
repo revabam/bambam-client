@@ -22,6 +22,7 @@ export class CurriculumEditorComponent implements OnInit {
   curriculumNames: string[] = [];
   topics: Topic[] = [];
   subtopics: SubTopic[] = [];
+  selectedCurriculum: Curriculum;
   /*
    * This object will serve a dictionary, and store a
    * set of boolean variables for
@@ -132,6 +133,14 @@ export class CurriculumEditorComponent implements OnInit {
     });
     return curriculumsWithName;
   }
+  /**
+   * Selects the passed in curriculum to be injected into the curriculum view component.
+   * @param curriculum the curriculum you want to display in the curriculum view component.
+   * @author - Chinedu Ozodi | 1806-Sep-18-USF-Java | Steven Kelsey
+   */
+  selectCurriculum(curriculum: Curriculum) {
+    this.selectedCurriculum = curriculum;
+  }
 
   /**
    * Gets all of the subtopics that have the parent id that matches
@@ -146,7 +155,7 @@ export class CurriculumEditorComponent implements OnInit {
   /**
    * When we invoke this function, it opens up the modal that we use
    * to create new curriculum.
-   * @author - Chinedu Ozodi | 1806-Jun-18-USF-Java | Steven Kelsey
+   * @author - Chinedu Ozodi | 1806-Sep-18-USF-Java | Steven Kelsey
    */
   createNewCurriculumDialog(): void {
     /*

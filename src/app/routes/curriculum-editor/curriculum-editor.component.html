@@ -1,7 +1,7 @@
 <br>
-<div class="container">
+<div class="p-5 m-auto">
   <div class="row">
-    <div class="col-sm-6 mt-2">
+    <div class="col-sm-3 mt-2">
       <mat-tab-group>
         <mat-tab label="Curriculum">
           <mat-card>
@@ -15,7 +15,7 @@
                 <span style="flex: .6 .3 auto"></span>
                 <span>
                   <button mat-button color="accent" mat-icon-button aria-label="add" (click)="createNewCurriculumDialog()">
-                    <mat-icon>add</mat-icon>
+                    <mat-icon color="secondary">add</mat-icon>
                   </button>
                 </span>
                 <span style="flex: 0.3 1 auto"></span>
@@ -40,8 +40,8 @@
                       <span class="fill-remaining-space">
                       </span>
                       <span *ngIf="curriculum.name === cname">
-                        <button mat-icon-button color="" (click)="deactivateCurriculum(curriculum)">
-                          <mat-icon color="primary">clear</mat-icon>
+                        <button mat-icon-button color="" (click)="selectCurriculum(curriculum)">
+                          <mat-icon color="secondary">visibility</mat-icon>
                         </button>
                       </span>
                       <span *ngIf="curriculum.name !== cname">
@@ -61,7 +61,7 @@
             <mat-card-header>
               <mat-toolbar class="panel-bar">
                 <span style="flex: 0.3 1 auto"></span>
-                <h4 class="m-0 p-0" style="font-size: 140%;">Topic Pool</h4>
+                <!-- <h4 class="m-0 p-0" style="font-size: 140%;">Topic Pool</h4> -->
                 <span style="flex: 1 1 auto"></span>
                 <mat-form-field class="my-0 pb-0" style="color: grey;">
                   <input style="color: white;" matInput color="accent" type="text" placeholder="Search Subtopic"
@@ -181,21 +181,8 @@
       </mat-tab-group>
 
     </div>
-    <div class="col-sm-auto mt-2">
-      <mat-card>
-        <mat-card-header>
-          <mat-toolbar class="panel-bar">
-            <h4 class="m-0 p-0" style="font-size: 140%;">Curriculum View</h4>
-            <span>
-              <button mat-button color="accent" mat-icon-button aria-label="add" (click)="openNewDialog()">
-                <mat-icon>add</mat-icon>
-              </button>
-            </span>
-          </mat-toolbar>
-        </mat-card-header>
-        <mat-card-content style="overflow: auto; height: 470px;">
-        </mat-card-content>
-      </mat-card>
+    <div class="col-sm-auto mt-2" *ngIf="selectedCurriculum">
+      <app-curriculum-view [curriculum]='selectedCurriculum'></app-curriculum-view>
     </div>
   </div>
 </div>
