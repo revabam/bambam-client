@@ -23,6 +23,7 @@ import { TopicService } from '../../services/topic.service';
 import { CalendarService } from '../../services/calendar.service';
 import { SubTopicService } from '../../services/subtopic.service';
 import { StartMondayModalComponent } from './start-monday-modal/start-monday-modal.component';
+import { CurriculumWeek } from '../../models/curriculum-week';
 
 const colors: any = {
   random: {
@@ -48,6 +49,7 @@ export class CalendarComponent implements OnInit, DoCheck {
   selectedCurriculum: Curriculum;
   colorNum = 0;
 
+  docheck = true;
   storedEvents: cal_event.CalendarEvent[] = null;
 
   newSubtopicName: string;
@@ -116,8 +118,9 @@ export class CalendarComponent implements OnInit, DoCheck {
       this.initialRender = false;
       this.generateStoredEvents();
     }
-    if (this.subTopicsReceived && this.subtopicsReceivedCount === 0) {
-      console.log('generate Events');
+    if (this.selectedCurriculum != null && this.docheck) {
+      this.docheck = false;
+      console.log('generate');
       this.generateEvents();
     }
     this.refresh.next();
@@ -243,6 +246,7 @@ export class CalendarComponent implements OnInit, DoCheck {
    * @author Marcin Salamon | Spark1806-USF-Java | Steven Kelsey
    */
   openEventDuplicateDialog(name: string, date: Date) {
+    console.log(date.getDay());
     const dialogRef = this.dialog.open(EventDuplicateModalComponent,
       {
         width: '600px',
@@ -329,14 +333,6 @@ export class CalendarComponent implements OnInit, DoCheck {
         if (decision !== null) {
           event.start = decision;
           this.selectedCurriculum = curr;
-          for (let i = 0; i < curr.topics.length; i++) {
-            this.subtopicService.getSubTopicByParentId(curr.topics[i].id).subscribe(subResponse => {
-              this.subtopicArrArr.push(subResponse);
-              if (i === curr.topics.length - 1) {
-                this.subTopicsReceived = true;
-              }
-            });
-          }
           this.dropEvent = event;
         }
       });
@@ -362,53 +358,65 @@ export class CalendarComponent implements OnInit, DoCheck {
   }
   /**
    * method that takes the topics and subtopics and generated calendar events from them when dropped onto the calendar
+   * called when curriculum is dropped onto the calendar
    *
-   * currently populating the calendar takes a visible fraction of a second, needs a performance fix
-   * if someone can improve the code made by 1806-Java
+   * @author Marcin Salamon | Spark1806-USF-Java | Steven Kelsey
    */
   generateEvents() {
-    this.subTopicsReceived = false;
-    this.subtopicsReceivedCount++;
-    let topicDay = 0;
-    for (let j = 0; j < this.topicArr.length; j++) {
-      const subtopicTime = (this.topicLength * 5 * 7) / this.subtopicArrArr[j].length;
-      this.currTopicTime = subtopicTime;
+    // this.subTopicsReceived = false;
+    // for (let j = 0; j < this.topicArr.length; j++) {
+    //   const subtopicTime = (this.topicLength * 5 * 7) / this.subtopicArrArr[j].length;
+    //   this.currTopicTime = subtopicTime;
 
-      for (let i = 0; i < this.subtopicArrArr[j].length; i++) {
-        if (isWeekend(addDays(addHours(startOfDay(this.dropEvent.start), 9 + this.hour), topicDay))) {
-          topicDay++;
-          if (isWeekend(addDays(addHours(startOfDay(this.dropEvent.start), 9 + this.hour), topicDay))) {
-            topicDay++;
-          }
-        }
-        if (this.hour + this.currTopicTime > 7 && !this.multiDayEventCreated) {
-          this.multidaySubtopic(this.subtopicArrArr[j][i], topicDay, (7 - this.hour), this.dropEvent, this.selectedCurriculum);
-          topicDay++;
-          i--;
-        } else {
-          this.events.push(
-            {
-              start: addDays(addHours(startOfDay(this.dropEvent.start), 9 + this.hour), topicDay),
-              end: addDays(addHours(startOfDay(this.dropEvent.start), 9 + this.hour + this.currTopicTime), topicDay),
-              title: this.subtopicArrArr[j][i].name,
-              id: this.subtopicArrArr[j][i].id,
-              color: colors.newColor,
-              actions: this.actions,
-              resizable: {
-                beforeStart: true,
-                afterEnd: true
-              },
-              draggable: true,
-            }
-          );
-          this.colorNum++;
-          this.hour += this.currTopicTime;
-          this.currTopicTime = subtopicTime;
-          this.multiDayEventCreated = false;
+    //   for (let i = 0; i < this.subtopicArrArr[j].length; i++) {
+    //     if (isWeekend(addDays(addHours(startOfDay(this.dropEvent.start), 9 + this.hour), topicDay))) {
+    //       topicDay++;
+    //       if (isWeekend(addDays(addHours(startOfDay(this.dropEvent.start), 9 + this.hour), topicDay))) {
+    //         topicDay++;
+    //       }
+    //     }
+    //     if (this.hour + this.currTopicTime > 7 && !this.multiDayEventCreated) {
+    //       this.multidaySubtopic(this.subtopicArrArr[j][i], topicDay, (7 - this.hour), this.dropEvent, this.selectedCurriculum);
+    //       topicDay++;
+    //       i--;
+    //     } else {
+    //       this.events.push(
+    //         {
+    //           start: addDays(addHours(startOfDay(this.dropEvent.start), 9 + this.hour), topicDay),
+    //           end: addDays(addHours(startOfDay(this.dropEvent.start), 9 + this.hour + this.currTopicTime), topicDay),
+    //           title: this.subtopicArrArr[j][i].name,
+    //           id: this.subtopicArrArr[j][i].id,
+    //           color: colors.newColor,
+    //           actions: this.actions,
+    //           resizable: {
+    //             beforeStart: true,
+    //             afterEnd: true
+    //           },
+    //           draggable: true,
+    //         }
+    //       );
+    //       this.colorNum++;
+    //       this.hour += this.currTopicTime;
+    //       this.currTopicTime = subtopicTime;
+    //       this.multiDayEventCreated = false;
+    //     }
+    //   }
+    // }
+    console.log('generate Events');
+    console.log(this.selectedCurriculum);
+    const numWeeks: number = this.selectedCurriculum.numberOfWeeks;
+    const weeks: CurriculumWeek[] = this.selectedCurriculum.curriculumWeeks;
+    this.selectedCurriculum = null;
+    for ( const week of weeks) {
+      console.log('week: ' + week.curriculumWeekId);
+      for ( const day of week.curriculumDays ) {
+        console.log('day: ' + day.dayNum);
+        for ( const subtopic of day.supTopics ) {
+          console.log(subtopic);
         }
       }
     }
-    this.persistCurriculum(this.selectedCurriculum);
+    // this.persistCurriculum(this.selectedCurriculum);
     this.persistEvents();
   }
 

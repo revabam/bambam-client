@@ -48,6 +48,42 @@
                     "id": 10,
                     "name": "Microservices"
                 }
+            ],
+            "curriculumWeeks": [
+                {
+                    "curriculumWeekId": 0,
+                    "curriculumId": 1,
+                    "weekNum": 0,
+                    "curriculumDays": [
+                        {
+                            "curriculumDayId": 0,
+                            "curriculumWeekId": 0,
+                            "dayNum": 1,
+                            "supTopics": [
+                                {
+                                    "id": 1,
+                                    "name": "Introduction to Java: Why Java?",
+                                    "parentTopicId": 1
+                                },
+                                {
+                                    "id": 2,
+                                    "name": "OOP Concepts in Depth: Polymorphism, Encapsulation, Inheritance, and Abstraction",
+                                    "parentTopicId": 1
+                                },
+                                {
+                                    "id": 4,
+                                    "name": "Constructors",
+                                    "parentTopicId": 1
+                                },
+                                {
+                                    "id": 5,
+                                    "name": "Methods and Parameters",
+                                    "parentTopicId": 1
+                                }
+                            ]
+                        }
+                    ]
+                }
             ]
         }
     ]
