@@ -80,12 +80,12 @@ export class BoomComponent implements OnInit {
    */
   getProgres() {
     const prog: number[] = [0, 0];
-    for (let k = 0; k < this.data.length; k++) {
-      for (let i = 0; i < this.data[k].curriculum.length; i++) {
-        for (let j = 0; j < this.data[k].curriculum[i].tasks.length; j++) {
-          if (this.data[k].curriculum[i].tasks[j].status === 1) {
+    for (let k = 0; k < this.data.length; k++) { // for each curriculum
+      for (let i = 0; i < this.data[k].curriculum.length; i++) { // for each week
+        for (let j = 0; j < this.data[k].curriculum[i].tasks.length; j++) { // for each task
+          if (this.data[k].curriculum[i].tasks[j].status === 1) { // if the task was completed
             ++prog[0];
-          } else if (this.data[k].curriculum[i].tasks[j].status === 2) {
+          } else if (this.data[k].curriculum[i].tasks[j].status === 2) { // if the task was missed
             ++prog[1];
           }
         }
@@ -101,8 +101,6 @@ export class BoomComponent implements OnInit {
     this.completed = [];
     this.missed = [];
     this.weeks = [];
-    let completed = 0;
-    let missed = 0;
 
     // get week titles for the axis lables
     for (let k = 0; k < this.data[curriculumId].curriculum.length; k++) {
@@ -112,6 +110,8 @@ export class BoomComponent implements OnInit {
 
     // get the completed and missed tasks and count how many there are each week
     for (let i = 0; i < this.data[curriculumId].curriculum.length; i++) {
+      let completed = 0;
+      let missed = 0;
       for (let j = 0; j < this.data[curriculumId].curriculum[i].tasks.length; j++) {
         if (this.data[curriculumId].curriculum[i].tasks[j].status === 1) {
           ++completed;
@@ -121,8 +121,6 @@ export class BoomComponent implements OnInit {
       }
       this.completed.push(completed);
       this.missed.push(missed);
-      completed = 0;
-      missed = 0;
     }
     const clone = JSON.parse(JSON.stringify(this.barChartData));
     clone[0].data = this.completed;
