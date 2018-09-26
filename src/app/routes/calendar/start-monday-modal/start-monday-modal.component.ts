@@ -9,7 +9,7 @@ import { Component, OnInit, Inject } from '@angular/core';
 /**
  * modal box that pops up when you try to insert a new curriculum into the calendar
  */
-export class StartMondayModalComponent {
+export class StartMondayModalComponent implements OnInit {
 
   /**
   * @author Marcin Salamon | Alex Moraga | Spark1806-USF-Java | Steven Kelsey
@@ -20,12 +20,25 @@ export class StartMondayModalComponent {
   * of this modal component, enabling the current component
   * to retrieve and update what's in the parent component
   */
-  constructor(private dialogRef: MatDialogRef<StartMondayModalComponent>, @Inject(MAT_DIALOG_DATA) public data: object) { }
+  constructor(private dialogRef: MatDialogRef<StartMondayModalComponent>, @Inject(MAT_DIALOG_DATA) public data: {
+    curriculumName: string,
+    startDate: Date
+  }) { }
 
-  decision = false;
+  decision: Date = null;
+  prevMonday: Date;
 
+  ngOnInit() {
+    const start = this.data.startDate;
+    if (this.data.startDate.getDay() !== 1) {
+      const weekday: number = start.getDay();
+      this.prevMonday = new Date(start);
+      this.prevMonday.setDate(start.getDate() - weekday + 1);
+    }
+  }
   /**
-   * closes the modal and returns an Observable with the boolean decision
+   * returns decision if user doesn't want to start the curriculum on that day or previous Monday
+   * default decision is NO
    *
    *  @author Marcin Salamon | Alex Moraga | Spark1806-USF-Java | Steven Kelsey
    */
@@ -34,12 +47,22 @@ export class StartMondayModalComponent {
   }
 
   /**
-   * marks the decision as true and closes the modal
+   * marks the decision as MON and closes the modal
    *
    * @author Marcin Salamon | Alex Moraga | Spark1806-USF-Java | Steven Kelsey
    */
   startOnMonday() {
-    this.decision = true;
+    this.decision = this.prevMonday;
+    this.close();
+  }
+
+  /**
+   * returns the decision as CUR for day specified and closes the modal
+   *
+   * @author Marcin Salamon | Spark1806-USF-Java | Steven Kelsey
+   */
+  startOnCurrentDay() {
+    this.decision = this.data.startDate;
     this.close();
   }
 }

@@ -37,6 +37,7 @@ import { CalendarComponent } from './routes/calendar/calendar.component';
 import { CalendarModalComponent } from './routes/calendar/calendar-modal/calendar-modal.component';
 import { UserInfoComponent } from './shared-components/user-info/user-info.component';
 import { TopicsComponent } from './routes/topics/topics.component';
+import { StartMondayModalComponent } from './routes/calendar/start-monday-modal/start-monday-modal.component';
 
 
 @NgModule({
@@ -52,6 +53,7 @@ import { TopicsComponent } from './routes/topics/topics.component';
     RegisterComponent,
     CalendarModalComponent,
     EventDuplicateModalComponent,
+    StartMondayModalComponent,
     DialogViewComponent,
     UserInfoComponent,
     TopicsComponent
@@ -106,7 +108,7 @@ import { TopicsComponent } from './routes/topics/topics.component';
     CalendarModule.forRoot(),
     UserIdleModule.forRoot({idle: 600, timeout: 300, ping: 60})
   ],
-  entryComponents: [CalendarModalComponent, EventDuplicateModalComponent, UserInfoComponent],
+  entryComponents: [CalendarModalComponent, EventDuplicateModalComponent, UserInfoComponent, StartMondayModalComponent],
   providers: [
     UserService,
     CognitoService,
