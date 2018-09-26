@@ -40,15 +40,9 @@ const colors: any = {
 export class CalendarComponent implements OnInit, DoCheck {
 
   user: BamUser = JSON.parse(sessionStorage.getItem('user'));
-  curriculumDataFetched = false;
-  renderCalendar = false;
   showSideNav = true;
 
   hour = 0;
-  subtopicsReceivedCount = 0;
-  topicLength = 0;
-  topicArr: Topic[];
-  subtopicArrArr: Array<SubTopic[]> = [];
   subTopicsReceived = false;
   multiDayEventCreated = false;
   selectedCurriculum: Curriculum;
@@ -65,10 +59,6 @@ export class CalendarComponent implements OnInit, DoCheck {
 
   activeDayIsOpen = false;
   dropEvent: CalendarEvent;
-  calendarCurriculums: CalendarCurriculum[];
-  calendarSubtopics: CalendarSubtopic[];
-  topics: Topic[];
-  subtopics: SubTopic[];
   curriculums: Curriculum[];
   currTopicTime: number;
 
@@ -88,7 +78,7 @@ export class CalendarComponent implements OnInit, DoCheck {
   actions: CalendarEventAction[] = [
     {
       label: '<span><mat-icon>edit</mat-icon></span>',
-      onClick: ({ event }: { event: MyEvent }): void => {
+      onClick: ({ event }: { event: CalendarEvent }): void => {
         this.events = this.events.filter(iEvent => iEvent !== event);
         this.handleEvent('Deleted', event);
       }
@@ -114,14 +104,7 @@ export class CalendarComponent implements OnInit, DoCheck {
 
     this.calendarService.getCurriculum().subscribe(response => {
       this.curriculums = response;
-      this.topicService.getAll().subscribe(response2 => {
-        this.topics = response2;
-        this.subtopicService.getAll().subscribe(response3 => {
-          this.subtopics = response3;
-          this.curriculumDataFetched = true;
-          this.convertCirriculum();
-        });
-      });
+      this.convertCirriculum();
     });
   }
 
@@ -133,8 +116,8 @@ export class CalendarComponent implements OnInit, DoCheck {
       this.initialRender = false;
       this.generateStoredEvents();
     }
-    this.renderCalendar = this.curriculumDataFetched;
     if (this.subTopicsReceived && this.subtopicsReceivedCount === 0) {
+      console.log('generate Events');
       this.generateEvents();
     }
     this.refresh.next();
@@ -346,8 +329,6 @@ export class CalendarComponent implements OnInit, DoCheck {
         if (decision !== null) {
           event.start = decision;
           this.selectedCurriculum = curr;
-          this.topicLength = curr.numberOfWeeks / curr.topics.length;
-          this.topicArr = curr.topics;
           for (let i = 0; i < curr.topics.length; i++) {
             this.subtopicService.getSubTopicByParentId(curr.topics[i].id).subscribe(subResponse => {
               this.subtopicArrArr.push(subResponse);
