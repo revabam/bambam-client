@@ -55,7 +55,8 @@ export class CreateVersionComponent {
       creatorId: JSON.parse(sessionStorage['user'])['id'],
       dateCreated: new Date(),
       numberOfWeeks: this.numberOfWeeks,
-      topics: this.selectedTopics
+      topics: this.selectedTopics,
+      curriculumWeeks: []
     };
     /*
      * After the Curriculum object is created, we make

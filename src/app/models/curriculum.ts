@@ -1,3 +1,4 @@
+import { CurriculumWeek } from './curriculum-week';
 import { Topic } from './topic';
 
 export class Curriculum {
@@ -9,4 +10,5 @@ export class Curriculum {
     dateCreated: Date;
     numberOfWeeks: number;
     topics: Topic[];
+    curriculumWeeks: CurriculumWeek[];
 }
