@@ -43,6 +43,7 @@ import { CurriculumDayComponent } from './routes/curriculum-editor/curriculum-da
 import { StartMondayModalComponent } from './routes/calendar/start-monday-modal/start-monday-modal.component';
 import { ChartsModule } from 'ng2-charts';
 import { CurriculumWeekComponent } from './routes/curriculum-editor/curriculum-week/curriculum-week.component';
+import { TopicPoolComponent } from './routes/curriculum-editor/topic-pool/topic-pool.component';
 
 
 @NgModule({
@@ -65,7 +66,8 @@ import { CurriculumWeekComponent } from './routes/curriculum-editor/curriculum-w
     TopicsComponent,
     CurriculumViewComponent,
     CurriculumDayComponent,
-    CurriculumWeekComponent
+    CurriculumWeekComponent,
+    TopicPoolComponent
   ],
   imports: [
     NgbModule.forRoot(),

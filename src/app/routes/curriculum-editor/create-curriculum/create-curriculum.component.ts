@@ -75,6 +75,7 @@ export class CreateCurriculumComponent implements OnInit {
       creatorId: JSON.parse(sessionStorage['user'])['id'],
       dateCreated: new Date(),
       numberOfWeeks: this.numberOfWeeks,
+      status: 1,
       topics: [],
       curriculumWeeks: weeks
     };
