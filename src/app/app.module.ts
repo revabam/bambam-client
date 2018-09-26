@@ -1,3 +1,4 @@
+import { ForgottenPasswordComponent } from './routes/forgotten-password/forgotten-password.component';
 import { HttpClientModule } from '@angular/common/http';
 import { NgModule, Component } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -57,7 +58,8 @@ import { ChartsModule } from 'ng2-charts';
     StartMondayModalComponent,
     DialogViewComponent,
     UserInfoComponent,
-    TopicsComponent
+    TopicsComponent,
+    ForgottenPasswordComponent
   ],
   imports: [
     NgbModule.forRoot(),

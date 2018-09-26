@@ -27,6 +27,8 @@
               <mat-error *ngIf="loginForm.get('password').hasError(validation.type) && (loginForm.get('password').dirty || loginForm.get('password').touched)">{{validation.message}}</mat-error>
             </mat-error>
           </mat-form-field>
+          <br>
+          <a routerLink = "/forgotten/password">Forgot Password</a>
         </form> 
         <mat-toolbar #buttonBar>
           <button mat-raised-button name="login" color="primary" (click)="login()">Submit</button>
