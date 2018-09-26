@@ -102,7 +102,7 @@ export class CalendarComponent implements OnInit, DoCheck {
     //   }
     // },
     {
-      label: '<i class="fa fa-fw fa-times"></i>',
+      label: '<span><mat-icon>edit</mat-icon></span>',
       onClick: ({ event }: { event: MyEvent }): void => {
         this.events = this.events.filter(iEvent => iEvent !== event);
         this.handleEvent('Deleted', event);

@@ -6,6 +6,7 @@ import { BatchService } from '../../services/batch.service';
 import { Curriculum } from '../../models/curriculum';
 import { UserService } from '../../services/user.service';
 
+
 /**
  * This component is the dashboard page. It is the page that the
  * user is directed to after they login. It displays personal
@@ -14,31 +15,41 @@ import { UserService } from '../../services/user.service';
  * @author Bradley Walker | Khaleel Williams | 1806-Jun18-USF-Java | Wezley Singleton
  */
 export interface Topicz {
+  time: number;
+  flagged: number;
   id: number;
   name: string;
-  time: string;
+  status: number;
 }
 
 const topics: Topicz[] = [
   {
+    flagged: 0,
     id: 1,
-    name: 'science',
-    time: 'noon'
+    name: 'Java Data Types',
+    time: 1537899180000,
+    status: 0
   },
   {
+    flagged: 0,
     id: 2,
-    name: 'math',
-    time: 'noon'
+    name: 'Panels & Softskills',
+    time: 1537899180000,
+    status: 1
   },
   {
+    flagged: 0,
     id: 3,
-    name: 'mom',
-    time: 'noon'
+    name: 'Overwatch Gameplay Trailers',
+    time: 1537899180000,
+    status: 0
   },
   {
+    flagged: 0,
     id: 4,
-    name: 'SAT prep',
-    time: 'noon'
+    name: 'Lifecycle of a Green Bean',
+    time: 1537899180000,
+    status: 1
   }
 ];
 
@@ -49,7 +60,7 @@ const topics: Topicz[] = [
 })
 export class DashboardComponent implements OnInit {
   dataSource = topics;
-  headerColumns: string[] = ['idno', 'sub', 'time', 'control'];
+  headerColumns: string[] = ['time', 'flag', 'sub',  'control'];
 
   user: BamUser;
   batch: Batch;
@@ -121,9 +132,18 @@ export class DashboardComponent implements OnInit {
   }
 
 
-  growl(x) {
-    console.log(x);
+  statusToggle(index, yesNo) {
+    console.log(index, yesNo);
+    this.dataSource[index].status = yesNo;
        }
+  flagRow(index, flag) {
+    console.log('item' + index + 'flagis' + this.dataSource[index].flagged);
+    if ( !flag ) {
+      this.dataSource[index].flagged = 1;
+    } else {
+      this.dataSource[index].flagged = 0;
+    }
+  }
 
 
 
