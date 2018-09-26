@@ -3,14 +3,14 @@ import { Injectable } from '@angular/core';
  * HttpClient - What we use to make the http request.
  * HttpHeaders - What we need to pass in to the http request
  * in order to define the Content-Type.
- * Subtopic - The model that the current service pertains to.
+ * SubTopic - The model that the current service pertains to.
  * Observable - The type of object returned by the http request,
  * in order to enable us to get the response asynchronously.
  * Environment - Contains the server endpoint that we're making
  * the HTTP Request to.
  */
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Subtopic } from '../models/subtopic';
+import { SubTopic } from '../models/subtopic';
 import { Observable, BehaviorSubject } from 'rxjs';
 import { environment } from '../../environments/environment';
 
@@ -24,80 +24,80 @@ const HTTP_OPTIONS = {
 @Injectable({
   providedIn: 'root'
 })
-export class SubtopicService {
+export class SubTopicService {
 
   // The dependency to be injected, in order to use an HttpClient.
   constructor(private http: HttpClient) { }
 
   /**
-   * The function used to fetch all the subtopics from the server.
+   * The function used to fetch all the SubTopics from the server.
    */
-  getAll(): Observable<Subtopic[]> {
-    return this.http.get<Subtopic[]>(environment.apiUrl + 'subtopics', HTTP_OPTIONS);
+  getAll(): Observable<SubTopic[]> {
+    return this.http.get<SubTopic[]>(environment.apiUrl + 'SubTopics', HTTP_OPTIONS);
   }
 
   /**
-   * Add a new subtopic
-   * @param name      name of the subtopic
+   * Add a new SubTopic
+   * @param name      name of the SubTopic
    * @param parentId  reference id to the topic it belongs to
    */
-  add(name: string, parentId: number): Observable<Subtopic> {
-    const newSubtopic = new Subtopic();
-    newSubtopic.name = name;
-    newSubtopic.parentTopic_id = parentId;
-    return this.http.post<Subtopic>(environment.apiUrl + 'subtopics', JSON.stringify(newSubtopic), HTTP_OPTIONS);
+  add(name: string, parentId: number): Observable<SubTopic> {
+    const newSubTopic = new SubTopic();
+    newSubTopic.name = name;
+    newSubTopic.parentTopicId = parentId;
+    return this.http.post<SubTopic>(environment.apiUrl + 'SubTopics', JSON.stringify(newSubTopic), HTTP_OPTIONS);
   }
 
   /**
-   * Get subtopics related to a particular topic
+   * Get SubTopics related to a particular topic
    * @param id The id of the topic
    */
-  getSubtopicsByParentId(id: number): Observable<Subtopic[]> {
-    return this.http.get<Subtopic[]>(environment.apiUrl + `subtopics?parentTopic_id=${id}`, HTTP_OPTIONS);
+  getSubTopicByParentId(id: number): Observable<SubTopic[]> {
+    return this.http.get<SubTopic[]>(environment.apiUrl + `SubTopics?parentTopic_id=${id}`, HTTP_OPTIONS);
   }
 
   /**
-   * The function used to deactivate a subtopic in the server
+   * The function used to deactivate a SubTopic in the server
    */
-  deactivate(subtopic: Subtopic): Observable<Object> {
-    subtopic.name = this.deactivateName(subtopic.name);
-    return this.http.put(environment.apiUrl + `subtopics/${subtopic.id}`,
-      subtopic, HTTP_OPTIONS);
+  deactivate(subTopic: SubTopic): Observable<Object> {
+    subTopic.name = this.deactivateName(subTopic.name);
+    return this.http.put(environment.apiUrl + `SubTopics/${subTopic.id}`,
+      subTopic, HTTP_OPTIONS);
   }
 
   /**
-   * The function used to reactivate a subtopic in theserver
+   * The function used to reactivate a SubTopic in the server
    */
-  reactivate(subtopic: Subtopic): Observable<Object> {
-    subtopic.name = this.reactivateName(subtopic.name);
-    return this.http.put(environment.apiUrl + `subtopics/${subtopic.id}`,
-      subtopic, HTTP_OPTIONS);
+  reactivate(subTopic: SubTopic): Observable<Object> {
+    subTopic.name = this.reactivateName(subTopic.name);
+    return this.http.put(environment.apiUrl + `SubTopics/${subTopic.id}`,
+      subTopic, HTTP_OPTIONS);
   }
 
   /**
    * Helper function to append '(DEACTIVATED) ' to the
-   * beginning of the subtopic name, to show that
-   * the subtopic is deactivated.
-   * @param subtopicName - The string that we want to
+   * beginning of the SubTopic name, to show that
+   * the SubTopic is deactivated.
+   * @param SubTopicName - The string that we want to
    * append '(DEACTIVATED) ' to.
    */
-  deactivateName(subtopicName: string): string {
-    return '(DEACTIVATED) ' + subtopicName;
+  deactivateName(SubTopicName: string): string {
+    return '(DEACTIVATED) ' + SubTopicName;
   }
 
   /**
    * Helper function to remove '(DEACTIVATED) ' from the
-   * beginning of the subtopic name
-   * @param subtopicName - The string that we want to
+   * beginning of the SubTopic name
+   * @param SubTopicName - The string that we want to
    * append '(DEACTIVATED) ' to.
    */
-  reactivateName(subtopicName: string): string {
-    if (subtopicName.indexOf('(DEACTIVATED) ') >= 0) {
-      subtopicName = subtopicName.substring(
-        subtopicName.lastIndexOf('(DEACTIVATED) ')
+  reactivateName(SubTopicName: string): string {
+    if (SubTopicName.indexOf('(DEACTIVATED) ') >= 0) {
+      SubTopicName = SubTopicName.substring(
+        SubTopicName.lastIndexOf('(DEACTIVATED) ')
         + ('(DEACTIVATED) ').length
       );
     }
-    return subtopicName;
+    return SubTopicName;
   }
 }

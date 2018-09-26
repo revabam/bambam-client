@@ -17,3 +17,9 @@
     font: 500 12px/24px Roboto, "Helvetica Neue", sans-serif;
     margin: 0;
 }
+
+.panel-bar {
+    background-color: lightgrey;
+    font-size: 120%;
+}
+

@@ -1,3 +1,5 @@
+import { CurriculumViewComponent } from './routes/curriculum-editor/curriculum-view/curriculum-view.component';
+import { CreateCurriculumComponent } from './routes/curriculum-editor/create-curriculum/create-curriculum.component';
 import { HttpClientModule } from '@angular/common/http';
 import { NgModule, Component } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -37,6 +39,7 @@ import { CalendarComponent } from './routes/calendar/calendar.component';
 import { CalendarModalComponent } from './routes/calendar/calendar-modal/calendar-modal.component';
 import { UserInfoComponent } from './shared-components/user-info/user-info.component';
 import { TopicsComponent } from './routes/topics/topics.component';
+import { CurriculumDayComponent } from './routes/curriculum-editor/curriculum-day/curriculum-day.component';
 import { StartMondayModalComponent } from './routes/calendar/start-monday-modal/start-monday-modal.component';
 import { ChartsModule } from 'ng2-charts';
 
@@ -49,6 +52,7 @@ import { ChartsModule } from 'ng2-charts';
     CalendarComponent,
     CurriculumEditorComponent,
     CreateVersionComponent,
+    CreateCurriculumComponent,
     BoomComponent,
     LoginComponent,
     RegisterComponent,
@@ -57,7 +61,9 @@ import { ChartsModule } from 'ng2-charts';
     StartMondayModalComponent,
     DialogViewComponent,
     UserInfoComponent,
-    TopicsComponent
+    TopicsComponent,
+    CurriculumViewComponent,
+    CurriculumDayComponent
   ],
   imports: [
     NgbModule.forRoot(),
@@ -98,7 +104,7 @@ import { ChartsModule } from 'ng2-charts';
     MatTooltipModule,
     MatTreeModule,
     BrowserModule,
-    RouterModule.forRoot(appRoutes),
+    RouterModule.forRoot(appRoutes, {onSameUrlNavigation: 'reload'}),
     FormsModule,
     BsDatepickerModule.forRoot(),
     TimepickerModule.forRoot(),
@@ -110,7 +116,12 @@ import { ChartsModule } from 'ng2-charts';
     UserIdleModule.forRoot({idle: 600, timeout: 300, ping: 60}),
     ChartsModule
   ],
-  entryComponents: [CalendarModalComponent, EventDuplicateModalComponent, UserInfoComponent, StartMondayModalComponent],
+  entryComponents: [
+    CalendarModalComponent,
+    EventDuplicateModalComponent,
+    UserInfoComponent,
+    CreateCurriculumComponent,
+    StartMondayModalComponent],
   providers: [
     UserService,
     CognitoService,
