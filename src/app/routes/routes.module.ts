@@ -69,5 +69,6 @@ const ROUTES: Routes = [
     exports: [
         RouterModule
     ]
+
 })
 export class RoutesModule { }
