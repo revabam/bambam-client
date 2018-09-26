@@ -1,3 +1,4 @@
+import { HttpClient, HttpHandler } from '@angular/common/http';
 import { TestBed, inject } from '@angular/core/testing';
 
 import { TopicService } from './topic.service';
@@ -5,7 +6,7 @@ import { TopicService } from './topic.service';
 describe('TopicService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [TopicService]
+      providers: [TopicService, HttpClient, HttpHandler]
     });
   });
 

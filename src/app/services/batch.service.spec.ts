@@ -1,3 +1,4 @@
+import { HttpClient, HttpHandler} from '@angular/common/http';
 import { TestBed, inject } from '@angular/core/testing';
 
 import { BatchService } from './batch.service';
@@ -5,7 +6,7 @@ import { BatchService } from './batch.service';
 describe('BatchService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [BatchService]
+      providers: [BatchService, HttpClient, HttpHandler]
     });
   });
 
