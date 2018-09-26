@@ -6,13 +6,13 @@ import { BatchService } from '../../services/batch.service';
 import { Curriculum } from '../../models/curriculum';
 import { UserService } from '../../services/user.service';
 
-
 /**
  * This component is the dashboard page. It is the page that the
  * user is directed to after they login. It displays personal
  * information and batch information to the user.
  *
  * @author Bradley Walker | Khaleel Williams | 1806-Jun18-USF-Java | Wezley Singleton
+ * @author Joey Shannon | Drake Mapel | 1806-Spark | Steven Kelsey
  */
 export interface Topicz {
   time: number;
@@ -61,7 +61,6 @@ const topics: Topicz[] = [
 export class DashboardComponent implements OnInit {
   dataSource = topics;
   headerColumns: string[] = ['time', 'flag', 'sub',  'control'];
-
   user: BamUser;
   batch: Batch;
   batchWeek: number;
@@ -89,7 +88,6 @@ export class DashboardComponent implements OnInit {
   * and info about the batch they are associated with.
   */
   ngOnInit() {
-
     this.user = JSON.parse(sessionStorage.getItem('user'));
 
     if (!this.user) {
@@ -126,26 +124,23 @@ export class DashboardComponent implements OnInit {
           }
         }
       );
-
       this.todayIsOpen = true;
     }
   }
 
-
   statusToggle(index, yesNo) {
     console.log(index, yesNo);
     this.dataSource[index].status = yesNo;
-       }
+  }
+
   flagRow(index, flag) {
     console.log('item' + index + 'flagis' + this.dataSource[index].flagged);
-    if ( !flag ) {
+    if (!flag) {
       this.dataSource[index].flagged = 1;
     } else {
       this.dataSource[index].flagged = 0;
     }
   }
-
-
 
   /**
    * This method is used t sort throught a list of batches. Batches
@@ -153,9 +148,6 @@ export class DashboardComponent implements OnInit {
    * @param a A batch
    * @param b Another batch
    */
-
-
-
   compareBatches(a: Batch, b: Batch) {
     if (a.startDate < b.startDate) {
       return -1;
