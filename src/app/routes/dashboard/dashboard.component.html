@@ -1,16 +1,17 @@
-<div *ngIf="this.user" class="container">
+
+<div id="dashAll" *ngIf="this.user" class="container">
   <!-- WAGBar -->
   <div class="row">
     <div class="col-sm mb-3 mt-2">
-      <mat-card>
+      <mat-card style="border-radius: 20px 20px 20px 20px" id="header">
         <mat-card-header>
           <div class="p-2 w-100 bd-highlight">
-            <h1>
+            <h1 id="title">
               Welcome, {{this.user.firstName}}
             </h1>
           </div>
         </mat-card-header>
-        <mat-card-content style="font-size: 18px">
+        <mat-card-content id="week">
           <span>Week At a Glance Bar</span>
         </mat-card-content>
       </mat-card>
@@ -19,43 +20,43 @@
   <!-- Dash -->
 
   <!-- Dash Info -->
-  <div class='d-flex flex-row border border-dark justify-content-center'>
+  <div class='d-flex flex-row  justify-content-center'>
 
-    <p><button mat-button (click)="sidenav.toggle()" class='flex-fill btn btn-dark'>
+    <p><button style="margin-left: -10%;" mat-button (click)="sidenav.toggle()" class='flex-fill btn '>
         <mat-icon>
           visibility
         </mat-icon>
       </button></p>
 
-    <p><button mat-button (click)="sidenav.toggle()" class='flex-fill btn btn-dark'>View Today</button></p>
+    <p><button mat-button (click)="sidenav.toggle()" class='flex-fill btn '>View Today</button></p>
 
-    <p><button mat-button (click)="tsidenav.toggle()" class='flex-fill btn btn-dark'>View Topics</button></p>
+    <p><button style="margin-left: 10%;" mat-button (click)="tsidenav.toggle()" class='flex-fill btn '>View Topics</button></p>
 
   </div>
   <!-- SIDENAV -->
-  <mat-sidenav-container class="example-container">
+  <mat-sidenav-container style="border-radius: 20px 20px 20px 20px" class="example-container">
     <mat-sidenav #sidenav mode="side" class=''>
-      <mat-card class='border border-dark rounded justify-content-center'>
+      <mat-card style="border-radius: 20px 20px 20px 20px" id="bInfoAll">
         <mat-card-header class='border border-dark justify-content-center'>
           Batch Information
-        </mat-card-header>
+        </mat-card-header><br>
         <mat-list dense>
-          <mat-list-item>
+          <mat-list-item id="bInfo">
             Current Batch:
             <span *ngIf="this.batch">&nbsp;{{this.batch.name}}</span>
           </mat-list-item>
-          <mat-divider></mat-divider>
-          <mat-list-item>
+          <mat-divider></mat-divider><br>
+          <mat-list-item id="bInfo">
             Batch Week: #
             <span *ngIf="this.batch">&nbsp;{{this.batchWeek}}</span>
           </mat-list-item>
-          <mat-divider></mat-divider>
-          <mat-list-item>
+          <mat-divider></mat-divider><br>
+          <mat-list-item id="bInfo">
             Start Date:
             <span *ngIf="this.batch">&nbsp;{{this.batch.startDate | date}}</span>
           </mat-list-item>
-          <mat-divider></mat-divider>
-          <mat-list-item>
+          <mat-divider></mat-divider><br>
+          <mat-list-item id="bInfo">
             End Date:
             <span *ngIf="this.batch">&nbsp;{{this.batch.endDate | date}}</span>
           </mat-list-item>
@@ -63,7 +64,7 @@
       </mat-card>
     </mat-sidenav>
     <!-- <mat-sidenav-content> -->
-      <mat-card class='border border-dark rounded justify-content-center'>
+      <mat-card style="border-radius: 20px 20px 20px 20px" >
         <mat-card-header class='justify-content-center border border-dark rounded'>
           <div class='d-flex'>
             <div class=''>

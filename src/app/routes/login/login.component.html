@@ -5,10 +5,10 @@
 <div class="row justify-content-center mx-2">
   <div class="col-4">
 
-    <mat-card>
+    <mat-card style="border-radius: 20px 20px 20px 20px">
       <mat-card-header>
         <mat-card-title>
-          <h2>Login</h2>
+          <h2 id="login">Login</h2>
         </mat-card-title>
       </mat-card-header>
       <mat-card-content style="background-color: rgb(245,245,245)">
@@ -29,7 +29,7 @@
           </mat-form-field>
         </form> 
         <mat-toolbar #buttonBar>
-          <button mat-raised-button name="login" color="primary" (click)="login()">Submit</button>
+          <button mat-raised-button name="login" (click)="login()">Submit</button>
           <span style="flex: 1 auto;"></span>
           <button mat-raised-button name="register" routerLink="/register">Register</button>
         </mat-toolbar>
@@ -56,6 +56,7 @@
 </div>
 
 <ng-template #modalContent let-close="close">
+  <mat-card>
   <div class="modal-header">
     <h5 class="modal-title">Session Inactivity Warning</h5>
     <button type="button" class="close" (click)="close()">
@@ -68,4 +69,5 @@
   <div class="modal-footer">
     <button type="button" class="btn btn-outline-secondary" (click)="restart()" (click)="close()">Continue</button>
   </div>
+</mat-card>
 </ng-template>

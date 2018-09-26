@@ -1,26 +1,30 @@
+/* Specific styling for buttons related to the calendar */
 button{
-  background-color: rgb(255, 94, 0);
+  background-color: rgb(252, 105, 21);
   border-radius: 13px 13px 13px 13px;
   color: white;
   font-weight: bold;
-  border-style: double;
-  border-width: 6px;
-  border-color: rgb(255, 94, 0) 0px 0px 2px 2px;
-}
+  border-style: outset;
+  border-width: 3px;
+  border-color: #ff5e00 0px 0px 2px 2px;
+  font-size: .85vw;
 
+}
 button:hover{
   box-shadow:  rgb(255, 94, 0) 0px 0px 2px 2px;
 }
 
-#date{
-  width: 250%;
-  margin-left: -75%;
-}
-
+/* Calendar date styling e.g. September 2018 */
 #currentDate{
-  font-size: 2vw;
+  font-size: 1.5vw;
+  font-weight: bold;
 }
 
+/* Details inside the modal boxes bolded */
 #details{
   font-weight: bold;
+}
+
+mat-card{
+  background-image: url('https://images.pexels.com/photos/1316484/pexels-photo-1316484.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260');
 }

@@ -1,43 +1,39 @@
 /* You can add global styles to this file, and also import other style files */
 @import "~ngx-bootstrap/datepicker/bs-datepicker.css";
 
+/* If two seperate elements are together than they are related.
+        e.g. mat-card-header and mat-card-content
+
+/* This is the styling for all mat-cards tags.
+      Created this way to have ease of manipulation, if needed*/
 mat-card {
-    background-color: #fdfdfd;
-    border-radius: 60px 60px 60px 60px;
-    border-style: double;
-    border-width: 10px;
+    background-image: url('https://images.pexels.com/photos/1316484/pexels-photo-1316484.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260');
+    border-style: outset;
+    border-width: 4px;
     border-color: rgb(255, 94, 0);
-    opacity: .8;
-    
+    box-shadow: 0px 0px 5px 5px black;
 }
 
-mat-accordion {
-  background-color: #000000e3;
-}
-
+/* styling for all mat-card-headers */
 mat-card-header {
     padding: 15px;
     margin: 0px;
     font-weight: bold;
-   /* This is mostly intended for prototyping; please download the pattern and re-host for production environments. Thank you! */
-}
-mat-card-content {
-    padding:15px;
 }
 
+/* all headers to maintain consistency */
 h1,h2,h3,h4,h6 {
     font-size: 1.5vw;
     font-weight: bold;
     margin: 0px;
-    color: rgba(214, 79, 0, 0.603);
-    -webkit-text-stroke-width: 2px;
-    -webkit-text-stroke-color: rgb(218, 88, 2);
+    color: rgba(255, 94, 0, 0.788);
+    font-family: verdana;
 }
 
+/* all p tags */
 p{
     font-weight: bold;
     font-size: 150%;
-    
 }
 
 /* Background Wallpaper */
@@ -51,7 +47,11 @@ p{
 
 /* All button tags */
 button{
-    background-color: rgb(255, 94, 0);
+    /* background-color: rgb(255, 94, 0); */
+    background-image: url('assets/pexels-photo-451837.jpeg');
+    background-position-y: 250px;
+    background-size: 10px;
+    background-repeat: no-repeat;
     border-radius: 13px 13px 13px 13px;
-    size: 2vw;
+    width: 7vw;
   }

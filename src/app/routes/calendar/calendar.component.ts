@@ -97,6 +97,9 @@ export class CalendarComponent implements OnInit, DoCheck {
   constructor(private modal: NgbModal, private calendarService: CalendarService, private subtopicService: SubtopicService,
     private topicService: TopicService, private dialog: MatDialog, private batchService: BatchService) { }
 
+    /**
+     * Allow for color change when the object is clicked e.g. from orange to grey
+     */
     getColor(path: string) {
       return (`/${path}` === window.location.pathname) ? 'accent' : '';
     }
