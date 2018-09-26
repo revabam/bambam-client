@@ -56,13 +56,24 @@ export class BoomComponent implements OnInit {
     { data: [], label: 'Completed' },
     { data: [], label: 'Missed' }
   ];
-  public barColors = [{backgroundColor: ['rgb(0, 189, 0)', 'rgb(230, 230, 90)']}];
+
+  public barColors: Array<any> = [
+    { // correct color
+      backgroundColor: 'rgb(51, 230, 51)',
+      borderColor: 'rgba(255,255,255,1)',
+      pointBorderColor: 'rgba(255,255,255,1)',
+    },
+    { // missed color
+      backgroundColor: 'rgb(255, 255, 56)',
+      borderColor: 'rgba(255,255,255,1)',
+      pointBorderColor: 'rgba(255,255,255,1)',
+    }];
 
   // donut chart
   public doughnutChartLabels: string[] = ['Completed', 'Missed'];
   public doughnutChartData: number[] = this.getProgres();
   public doughnutChartType = 'doughnut';
-  public donutColors = [{backgroundColor: ['rgb(0, 189, 0)', 'rgb(230, 230, 90)']}];
+  public donutColors = [{backgroundColor: ['rgb(51, 230, 51)', 'rgb(255, 255, 56)']}];
 
   /**
    * determines how many tasks have been completed and how many have been missed
