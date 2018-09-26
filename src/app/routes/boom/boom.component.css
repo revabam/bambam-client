@@ -1,0 +1,13 @@
+.chart{
+    margin-top: 100px;
+    margin: 15px;
+    background-color: rgb(238, 238, 238);
+    height: 450px;
+    width: 730px;
+}
+.banner{
+    text-align:center;
+    background-color: orange;
+    margin-bottom: 15px;
+    padding: 8px;
+}
