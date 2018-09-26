@@ -48,7 +48,7 @@ import { DialogViewComponent } from './routes/dialog-view/dialog-view.component'
     LoginComponent,
     RegisterComponent,
     CalendarModalComponent,
-    DialogViewComponent
+    DialogViewComponent, NavbarComponent,
   ],
   imports: [
     NgbModule.forRoot(),
@@ -98,7 +98,11 @@ import { DialogViewComponent } from './routes/dialog-view/dialog-view.component'
     NgbModalModule.forRoot(),
     FlatpickrModule.forRoot(),
     CalendarModule.forRoot(),
-    UserIdleModule.forRoot({idle: 600, timeout: 300, ping: 60})
+    UserIdleModule.forRoot({idle: 600, timeout: 300, ping: 60}),
+    NavbarComponent
+  ],
+  exports: [
+    NavbarComponent,
   ],
   entryComponents: [CalendarModalComponent],
   providers: [

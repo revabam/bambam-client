@@ -1,15 +1,20 @@
-import { TestBed, inject } from '@angular/core/testing';
-
+import { HttpClient, HttpHandler } from '@angular/common/http';
+import { TestBed, inject, async } from '@angular/core/testing';
 import { UserService } from './user.service';
 
 describe('UserService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [UserService]
+      providers: [UserService, HttpClient, HttpHandler]
     });
   });
 
   it('should be created', inject([UserService], (service: UserService) => {
     expect(service).toBeTruthy();
   }));
+
+  it('should have getUserByEmail',
+async(inject([UserService], (service: UserService) => {
+  expect(service.getUserByEmail).toBeTruthy();
+})));
 });
