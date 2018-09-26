@@ -66,7 +66,7 @@ export class SubTopicService {
   }
 
   /**
-   * The function used to reactivate a SubTopic in theserver
+   * The function used to reactivate a SubTopic in the server
    */
   reactivate(subTopic: SubTopic): Observable<Object> {
     subTopic.name = this.reactivateName(subTopic.name);
