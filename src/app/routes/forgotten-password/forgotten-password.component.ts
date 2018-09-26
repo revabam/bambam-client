@@ -14,12 +14,11 @@ export class ForgottenPasswordComponent implements OnInit {
   ngOnInit() {
   }
   /**
-   * This methods allows a user to reset their password.
+   * This methods calls the Cognito Service to call the resetPassword method.
+   * @author Jasmine C. Onwuzulike
    */
   reset() {
    const rest =  this.cognito.resetPassword(this.email);
      this.router.navigate(['login']);
   }
-
-
 }

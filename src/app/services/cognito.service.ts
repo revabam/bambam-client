@@ -118,10 +118,15 @@ export class CognitoService {
     return resultStream;
   }
 
-/*
-  * The user will need to provide their email which Cognito for check the user
-  * pool for and then create a new password.
-  */
+/**
+ * This method allows user to request a new password if forgotten. 
+ * @param email The email address that the user entered.
+ *  The method will take the email entered and send it to Cognito which verifies
+ * that is is in the user pool and if it is, it will prompt the user to enter
+ * a new password and persist that. 
+ * @author Jasmine C. Onwuzulike
+ */
+  
  resetPassword(email : string) {
    const userData = {
      Username: email,
