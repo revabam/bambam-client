@@ -1,45 +1,25 @@
-/* Hamburger Menu */
-.bars-container {
-    display: none;
-    cursor: pointer;
-}
-
-.bar1, .bar2, .bar3 {
-    width: 20px;
-    height: 2px;
-    background-color: rgb(156, 156, 156);
-    margin: 5px 0;
-    transition: 0.4s;
-}
-
-.change .bar1 {
-    -webkit-transform: rotate(-45deg) translate(-6px, 6px);
-    transform: rotate(-45deg) translate(-6px, 6px);
-}
-
-.change .bar2 {opacity: 0;}
-
-.change .bar3 {
-    -webkit-transform: rotate(45deg) translate(-4px, -4px);
-    transform: rotate(45deg) translate(-4px, -4px);
-}
-/* End Hamburger Menu */
-
-@media(max-width: 575px) {
-    .bars-container {
-        display: inline-block;
-    }
-} */
-
 .navbar-item {
     flex: 1 1 auto;
 }
 
 .active-link {
-    color: salmon !important;
-    border-bottom: 2px solid salmon !important;
+    color: rgb(230, 113, 36) !important;
+    border-bottom: 2px solid rgb(255, 255, 255) !important;
 }
 
 mat-toolbar {
     background-color: rgb(156, 156, 156, 0) !important;
+}
+
+button{
+    font-weight: bold;
+    color: rgba(255, 102, 0, 0.959);
+    border-style: double;
+    border-width: 6px;
+    font-size: .9vw;
+    opacity: .8;
+}
+button:hover{
+    box-shadow: rgb(255, 115, 0) 0px 0px 3px 3px;
+    opacity: 1;
 }

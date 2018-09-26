@@ -21,10 +21,6 @@ import { BatchService } from '../../../services/batch.service';
 import { EventColor, EventAction } from 'calendar-utils';
 
 const colors: any = {
-  random: {
-    primary: '#ad2121',
-    secondary: '#FAE3E3'
-  }
 };
 
 export interface MyEvent extends CalendarEvent {
@@ -116,6 +112,11 @@ export class CalendarComponent implements OnInit, DoCheck {
 
   constructor(private modal: NgbModal, private calendarService: CalendarService, private subtopicService: SubtopicService,
     private topicService: TopicService, private dialog: MatDialog, private batchService: BatchService) { }
+
+    getColor(path: string) {
+      return (`/${path}` === window.location.pathname) ? 'accent' : '';
+    }
+
 
   /**
    * Life hook for loading all calendar services

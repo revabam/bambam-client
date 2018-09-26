@@ -1,4 +1,4 @@
-<ng-template #modalContent let-close="close">
+<ng-template class="container-fluid" #modalContent let-close="close">
   <div class="modal-header">
     <h5 class="modal-title">Event action occurred</h5>
     <button type="button" class="close" (click)="close()">
@@ -52,43 +52,43 @@
           <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
           <mat-datepicker #picker startView="year" [startAt]="startDate"></mat-datepicker>
         </mat-form-field>
-        <button mat-raised-button color="primary" (click)="addEvent()">Create Event</button>
+        <button mat-raised-button (click)="addEvent()">Create Event</button>
       </mat-card-content>
     </mat-card>
   </div>
   <div class="col-md-10">
     <mat-card>
       <mat-card-header class="text-center text-center align-content-center align-center justify-content-center">
-        <mat-toolbar style="background-color: rgba(0,0,0,0)">
+        <mat-toolbar style="background-color: rgba(0, 0, 0, 0)">
           <button mat-button color="accent" mat-icon-button aria-label="add" (click)="toggleSideNav()">
               <mat-icon>add</mat-icon>
             </button>
           <span style="flex: 1 1 auto;"></span>
             <span class="btn-group">
               <span mwlCalendarPreviousView [view]="view" [(viewDate)]="viewDate" (viewDateChange)="activeDayIsOpen = false">
-                <button mat-raised-button color="primary">Previous</button>
+                <button mat-raised-button >< Previous</button>
               </span>
               <span mwlCalendarToday [(viewDate)]="viewDate">
                 <button mat-stroked-button color="accent">Today</button>
               </span>
               <span mwlCalendarNextView [view]="view" [(viewDate)]="viewDate" (viewDateChange)="activeDayIsOpen = false">
-                <button mat-raised-button color="primary">Next</button>
+                <button mat-raised-button >Next ></button>
               </span>
             </span>
             <span style="flex: .1 1 auto;"></span>
           <span class="col-md-4">
-            <h3>{{ viewDate | calendarDate:(view + 'ViewTitle'):'en' }}</h3>
+            <h1 id="currentDate">{{ viewDate | calendarDate:(view + 'ViewTitle'):'en' }}</h1>
           </span>
           <span style="flex: .7 1 auto;"></span>
             <span class="btn-group">
               <span (click)="view = 'month'" [class.active]="view === 'month'">
-                <button mat-raised-button color="primary">Month</button>
+                <button mat-raised-button >Month</button>
               </span>
               <span (click)="view = 'week'" [class.active]="view === 'week'">
-                <button mat-raised-button color="primary">Week</button>
+                <button mat-raised-button >Week</button>
               </span>
               <span (click)="view = 'day'" [class.active]="view === 'day'">
-                <button mat-raised-button color="primary">Day</button>
+                <button mat-raised-button >Day</button>
               </span>
             </span>
             <span style="flex: 1 1 auto;"></span>

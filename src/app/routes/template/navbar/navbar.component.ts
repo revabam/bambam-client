@@ -41,22 +41,6 @@ export class NavbarComponent implements OnInit {
     );
   }
 
-  /**
-   * Click event to close hamburger menu.
-   */
-  private clickHamburgerLink() {
-    if (window.innerWidth < 991) {
-      this.hamburger.nativeElement.click();
-    }
-  }
-
-  /**
-   * Click event to toggle hamburger animation.
-   */
-  private toggleHamburgerMenu() {
-    this.hamburger.nativeElement.classList.toggle('change');
-  }
-
   /*
     Returns the color for the navbar buttons
 
@@ -64,7 +48,7 @@ export class NavbarComponent implements OnInit {
     @return       'primary' or '' depending on which page the user is on
   */
   getColor(path: string) {
-    return (`/${path}` === window.location.pathname) ? 'primary' : '';
+    return (`/${path}` === window.location.pathname) ? 'accent' : '';
   }
 
   /*
