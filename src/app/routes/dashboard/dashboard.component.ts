@@ -58,12 +58,13 @@ export class DashboardComponent implements OnInit {
   editing = false;
   firstName: string;
   lastName: string;
-  isOpen: boolean;
-  visibilityIcon = [{num: 0, icon: 'visibility_off' },
-                    {num: 1, icon: 'visibility'}];
+  visibilityIcon = [
+    {num: 0, icon: 'visibility_off' },
+    {num: 1, icon: 'visibility'}
+  ];
   DashTitle = 'Today';
-
-
+  todayIsOpen: boolean;
+  topicsIsOpen: boolean;
 
   constructor(
     private router: Router,
@@ -114,6 +115,8 @@ export class DashboardComponent implements OnInit {
           }
         }
       );
+
+      this.todayIsOpen = true;
     }
   }
 

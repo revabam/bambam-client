@@ -27,9 +27,9 @@
         </mat-icon>
       </button></p>
 
-    <p><button mat-button (click)="sidenav.toggle()" class='flex-fill btn btn-dark'>View Today</button></p>
+    <p><button mat-button (click)="todayIsOpen=true ; topicsIsOpen=false" class='flex-fill btn btn-dark'>View Today</button></p>
 
-    <p><button mat-button (click)="tsidenav.toggle()" class='flex-fill btn btn-dark'>View Topics</button></p>
+    <p><button mat-button (click)="topicsIsOpen=true ; todayIsOpen=false" class='flex-fill btn btn-dark'>View Topics</button></p>
 
   </div>
   <!-- SIDENAV -->
@@ -63,7 +63,7 @@
       </mat-card>
     </mat-sidenav>
     <!-- <mat-sidenav-content> -->
-      <mat-card class='border border-dark rounded justify-content-center'>
+      <mat-card *ngIf='todayIsOpen' class='border border-dark rounded justify-content-center'>
         <mat-card-header class='justify-content-center border border-dark rounded'>
           <div class='d-flex'>
             <div class=''>
@@ -121,9 +121,9 @@
         </table>
       </mat-card>
     <!-- </mat-sidenav-content> -->
-    <mat-sidenav #tsidenav mode="side" position="end">
-      <app-topics></app-topics>
-    </mat-sidenav>
+    <!-- <mat-sidenav #tsidenav mode="side" position="end"> -->
+    <app-topics *ngIf='topicsIsOpen'></app-topics>
+    <!-- </mat-sidenav> -->
 
   </mat-sidenav-container>
 
