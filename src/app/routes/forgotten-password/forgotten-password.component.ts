@@ -18,9 +18,7 @@ export class ForgottenPasswordComponent implements OnInit {
    */
   reset() {
    const rest =  this.cognito.resetPassword(this.email);
-   if (rest) {
      this.router.navigate(['login']);
-   }
   }
 
 

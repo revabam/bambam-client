@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { Injectable } from '@angular/core';
 import * as AWSCognito from 'amazon-cognito-identity-js';
 import { CognitoIdToken } from 'amazon-cognito-identity-js';
@@ -9,6 +10,7 @@ import { BehaviorSubject } from 'rxjs';
 export class CognitoService {
 
   private userPool: AWSCognito.CognitoUserPool;
+ 
 
   /**
   * When the cognito service is intialized, it creates the user pool.
@@ -141,7 +143,6 @@ export class CognitoService {
          var verificationCode = prompt('Please input verification code ' ,'');
          var newPassword = prompt('Enter new password ' ,'');
          cognitoUser.confirmPassword(verificationCode, newPassword, this);
-         
      }
  });
 
