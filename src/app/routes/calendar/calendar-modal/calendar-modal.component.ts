@@ -19,7 +19,12 @@ export class CalendarModalComponent {
   */
   constructor(private dialogRef: MatDialogRef<CalendarModalComponent>, @Inject(MAT_DIALOG_DATA) public data: object) { }
 
+  changeTime = false;
   close() {
     this.dialogRef.close();
+  }
+
+  pushEvents() {
+    this.changeTime = true;
   }
 }
