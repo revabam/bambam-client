@@ -115,7 +115,6 @@ export class CognitoService {
         resultStream.next(err);
       }
     });
-
     return resultStream;
   }
 
@@ -145,10 +144,7 @@ export class CognitoService {
          cognitoUser.confirmPassword(verificationCode, newPassword, this);
      }
  });
-
  }
-
-
 }
 
 /**

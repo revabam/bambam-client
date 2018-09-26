@@ -16,54 +16,58 @@ import { TopicsComponent } from './topics/topics.component';
 import { ForgottenPasswordComponent } from './forgotten-password/forgotten-password.component';
 
 const ROUTES: Routes = [
-  {
-      path: 'dashboard',
-      component: DashboardComponent
-  },
+    {
+        path: 'dashboard',
+        component: DashboardComponent
+    },
 
-  {
-      path: 'login',
-      component: LoginComponent
-  },
+    {
+        path: 'login',
+        component: LoginComponent
+    },
 
-  {
-      path: 'register',
-      component: RegisterComponent
-  },
+    {
+        path: 'register',
+        component: RegisterComponent
+    },
 
-  {
-      path: 'calendar',
-      component: CalendarComponent
-  },
+    {
+        path: 'calendar',
+        component: CalendarComponent
+    },
 
-  {
-      path: 'curriculum/editor',
-      component: CurriculumEditorComponent
-  },
+    {
+        path: 'curriculum/editor',
+        component: CurriculumEditorComponent
+    },
 
-  {
-      path: 'boom',
-      component: BoomComponent
-  },
-  {
-      path: 'curriculum/editor',
-      component: DialogViewComponent
-  },
-  {
-      path: '',
-      pathMatch: 'full',
-      redirectTo: 'dashboard'
-  }
+    {
+        path: 'boom',
+        component: BoomComponent
+    },
+    {
+        path: 'curriculum/editor',
+        component: DialogViewComponent
+    },
+    {
+        path: '',
+        pathMatch: 'full',
+        redirectTo: 'dashboard'
+    },
+    {
+        path: 'forgotten/password',
+        component: ForgottenPasswordComponent
+    }
 ];
 
 @NgModule({
-  imports: [
-    CommonModule,
-    RouterModule.forRoot(ROUTES, {onSameUrlNavigation: 'reload'})
-  ],
-  declarations: [CreateVersionComponent, DialogViewComponent, EventDuplicateModalComponent, CalendarModalComponent, UserInfoComponent, TopicsComponent, ForgottenPasswordComponent],
-  exports: [
-    RouterModule
-  ]
+    imports: [
+        CommonModule,
+        RouterModule.forRoot(ROUTES, { onSameUrlNavigation: 'reload' })
+    ],
+    declarations: [CreateVersionComponent, DialogViewComponent, EventDuplicateModalComponent, CalendarModalComponent, UserInfoComponent, TopicsComponent, ForgottenPasswordComponent],
+    exports: [
+        RouterModule
+    ]
 })
 export class RoutesModule { }
