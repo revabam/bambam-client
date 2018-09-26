@@ -1,0 +1,25 @@
+<table>
+    <tr>
+        <td>
+            <div class="chart">
+                <div class="banner">
+                    <h2>Overall Progress</h2>
+                </div>
+                <div style="display: block">
+                    <canvas baseChart [data]="doughnutChartData" [labels]="doughnutChartLabels" [chartType]="doughnutChartType"></canvas>
+                </div>
+            </div>
+        </td>
+        <td>
+            <div class="chart">
+                <div class="banner">
+                    <h2>Weekly Progress</h2>
+                </div>
+                <div style="display: block">
+                    <canvas baseChart [datasets]="barChartData" [labels]="barChartLabels" [options]="barChartOptions" [legend]="barChartLegend"
+                        [chartType]="barChartType"></canvas>
+                </div>
+            </div>
+        </td>
+    </tr>
+</table>
