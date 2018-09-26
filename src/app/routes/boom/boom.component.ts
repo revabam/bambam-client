@@ -36,7 +36,7 @@ export class BoomComponent implements OnInit {
   ];
 
 
-  // ponut chart
+  // Donut chart
   public doughnutChartLabels: string[] = ['Completed', 'Missed'];
   public doughnutChartData: number[] = this.getProgres();
   public doughnutChartType = 'doughnut';
@@ -69,7 +69,7 @@ export class BoomComponent implements OnInit {
       // get week titles for the axis lables
       this.weeks.push(this.data.curriculum[i].week);
 
-      // get the completed and missed takss and count how many there are each week
+      // get the completed and missed tasks and count how many there are each week
       for (let j = 0; j < this.data.curriculum[i].tasks.length; j++) {
         if (this.data.curriculum[i].tasks[j].status === 1) {
           ++completed;
