@@ -22,6 +22,7 @@ import { CalendarSubtopic } from '../../models/calendar-subtopic';
 import { TopicService } from '../../services/topic.service';
 import { CalendarService } from '../../services/calendar.service';
 import { SubtopicService } from '../../services/subtopic.service';
+import { StartMondayModalComponent } from './start-monday-modal/start-monday-modal.component';
 
 const colors: any = {
   random: {
@@ -136,6 +137,7 @@ export class CalendarComponent implements OnInit, DoCheck {
     if (this.subTopicsReceived && this.subtopicsReceivedCount === 0) {
       this.generateEvents();
     }
+    this.refresh.next();
   }
 
   /**
@@ -201,7 +203,6 @@ export class CalendarComponent implements OnInit, DoCheck {
     event.start = newStart;
     event.end = newEnd;
     this.handleEvent('Dropped or resized', event);
-    this.refresh.next();
   }
   /**
    * Should be used for creating a random color for the curriculum when it is dropped on the calendar
@@ -278,8 +279,28 @@ export class CalendarComponent implements OnInit, DoCheck {
           }
         });
         this.refresh.next();
-        }
-      });
+        this.persistEvents();
+      }
+    });
+  }
+
+  /**
+   * opens the modal when user tries to insert the curriculum
+   * @param name of the curriculum
+   * @param date the date curriculum got dropped on
+   *
+   * @author Marcin Salamon | Alex Moraga | Spark1806-USF-Java | Steven Kelsey
+   */
+  openEventInsertCurriculum(name: string, date: Date): Observable<any> {
+    const dialogRef = this.dialog.open(StartMondayModalComponent, {
+      width: '600px',
+      data: {
+        curriculumName: name,
+        startDate: date
+      }
+    });
+
+    return dialogRef.afterClosed();
   }
 
   /**
@@ -289,6 +310,8 @@ export class CalendarComponent implements OnInit, DoCheck {
    * for the action.
    * @param action The action that took place (drag, drop, edit, delete, click)
    * @param event The event that the action happened on
+   *
+   * @author Marcin Salamon | Spark1806-USF-Java | Steven Kelsey
    */
   handleEvent(action: string, event: CalendarEvent): void {
     if (action === 'Clicked') {
@@ -297,7 +320,15 @@ export class CalendarComponent implements OnInit, DoCheck {
     } else if (action === 'Deleted') {
     } else {
       const id: number = +event.id;
-      this.populateCalendar(id, event);
+      /**
+       * checks if the date is the same, current way of preventing the modal from popping when moving a day event
+       * in the future a CustomCalendarEvent class could be a solution to this problem,
+       * providing a way to check if something is a curriculum being dragged or not
+       */
+      if (event.start.getDate() !== event.end.getDate() || event.start.getMonth() !== event.end.getMonth()) {
+        this.populateCalendar(id, event);
+      }
+      this.refresh.next();
     }
   }
 
@@ -306,24 +337,31 @@ export class CalendarComponent implements OnInit, DoCheck {
    *
    * @param id id for the object that will be dropped into the calendar
    * @param event that is dragged and dropped
-   * @author Marcin Salamon | Spark1806-USF-Java | Steven Kelsey
+   * @author Marcin Salamon | Alex Moraga | Spark1806-USF-Java | Steven Kelsey
    */
   populateCalendar(id: number, event: CalendarEvent): void {
+    console.log(event);
     this.calendarService.getCurriculumById(id).subscribe(curr => {
-      this.selectedCurriculum = curr;
-      this.topicLength = curr.numberOfWeeks / curr.topics.length;
-      this.topicArr = curr.topics;
-      for (let i = 0, j = 0; i < curr.topics.length; i++) {
-        this.subtopicService.getSubtopicByParentId(curr.topics[i].id).subscribe(subResponse => {
-          this.subtopicArrArr.push(subResponse);
-          if (i === curr.topics.length - 1) {
-            this.subTopicsReceived = true;
+      this.openEventInsertCurriculum(curr.name, event.start).subscribe(decision => {
+        if (decision !== null) {
+          event.start = decision;
+          this.selectedCurriculum = curr;
+          this.topicLength = curr.numberOfWeeks / curr.topics.length;
+          this.topicArr = curr.topics;
+          for (let i = 0; i < curr.topics.length; i++) {
+            this.subtopicService.getSubtopicsByParentId(curr.topics[i].id).subscribe(subResponse => {
+              this.subtopicArrArr.push(subResponse);
+              if (i === curr.topics.length - 1) {
+                this.subTopicsReceived = true;
+              }
+            });
           }
-        });
-      }
-      this.dropEvent = event;
+          this.dropEvent = event;
+        }
+      });
     });
   }
+
   /**
    * Used to populate the add persisted events from the ngOnInit database call to the events list
    * that is used to hold calendar events, then refreshes the calendar. This is called by the ngDoCheck
@@ -387,7 +425,6 @@ export class CalendarComponent implements OnInit, DoCheck {
           this.currTopicTime = subtopicTime;
           this.multiDayEventCreated = false;
         }
-        this.refresh.next();
       }
     }
     this.persistCurriculum(this.selectedCurriculum);

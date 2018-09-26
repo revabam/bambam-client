@@ -37,6 +37,7 @@ import { CalendarComponent } from './routes/calendar/calendar.component';
 import { CalendarModalComponent } from './routes/calendar/calendar-modal/calendar-modal.component';
 import { UserInfoComponent } from './shared-components/user-info/user-info.component';
 import { TopicsComponent } from './routes/topics/topics.component';
+import { StartMondayModalComponent } from './routes/calendar/start-monday-modal/start-monday-modal.component';
 import { ChartsModule } from 'ng2-charts';
 
 
@@ -53,6 +54,7 @@ import { ChartsModule } from 'ng2-charts';
     RegisterComponent,
     CalendarModalComponent,
     EventDuplicateModalComponent,
+    StartMondayModalComponent,
     DialogViewComponent,
     UserInfoComponent,
     TopicsComponent
@@ -108,7 +110,7 @@ import { ChartsModule } from 'ng2-charts';
     UserIdleModule.forRoot({idle: 600, timeout: 300, ping: 60}),
     ChartsModule
   ],
-  entryComponents: [CalendarModalComponent, EventDuplicateModalComponent, UserInfoComponent],
+  entryComponents: [CalendarModalComponent, EventDuplicateModalComponent, UserInfoComponent, StartMondayModalComponent],
   providers: [
     UserService,
     CognitoService,

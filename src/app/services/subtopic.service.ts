@@ -52,7 +52,7 @@ export class SubtopicService {
    * Get subtopics related to a particular topic
    * @param id The id of the topic
    */
-  getSubtopicByParentId(id: number): Observable<Subtopic[]> {
+  getSubtopicsByParentId(id: number): Observable<Subtopic[]> {
     return this.http.get<Subtopic[]>(environment.apiUrl + `subtopics?parentTopic_id=${id}`, HTTP_OPTIONS);
   }
 
