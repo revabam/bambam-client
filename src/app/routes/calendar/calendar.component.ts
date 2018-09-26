@@ -120,7 +120,6 @@ export class CalendarComponent implements OnInit, DoCheck {
     }
     if (this.selectedCurriculum != null && this.docheck) {
       this.docheck = false;
-      console.log('generate');
       this.generateEvents();
     }
     this.refresh.next();
@@ -404,19 +403,23 @@ export class CalendarComponent implements OnInit, DoCheck {
     // }
     console.log('generate Events');
     console.log(this.selectedCurriculum);
+    const startDate: Date = this.dropEvent.start;
+    const populationDay = startDate;
     const numWeeks: number = this.selectedCurriculum.numberOfWeeks;
     const weeks: CurriculumWeek[] = this.selectedCurriculum.curriculumWeeks;
-    this.selectedCurriculum = null;
     for ( const week of weeks) {
-      console.log('week: ' + week.curriculumWeekId);
       for ( const day of week.curriculumDays ) {
-        console.log('day: ' + day.dayNum);
-        for ( const subtopic of day.supTopics ) {
-          console.log(subtopic);
+        let hour = 9;
+        const subTopicsToday = day.subTopics.length;
+        for ( const subtopic of day.subTopics ) {
+          populationDay.setHours(hour++);
+          hour += (7 / subTopicsToday);
         }
       }
     }
-    // this.persistCurriculum(this.selectedCurriculum);
+    this.persistCurriculum(this.selectedCurriculum);
+    this.selectedCurriculum = null;
+    this.docheck = true;
     this.persistEvents();
   }
 
