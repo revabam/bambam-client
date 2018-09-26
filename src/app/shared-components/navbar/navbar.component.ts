@@ -1,7 +1,9 @@
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { UserService } from '../../../services/user.service';
-import { BamUser } from '../../../models/bam-user';
+import { UserService } from '../../services/user.service';
+import { BamUser } from '../../models/bam-user';
+import { MatDialog } from '@angular/material';
+import { UserInfoComponent } from '../user-info/user-info.component';
 
 /**
  * Shows current page view and navigates to different page views of application.
@@ -15,13 +17,14 @@ import { BamUser } from '../../../models/bam-user';
 })
 export class NavbarComponent implements OnInit {
 
-  @ViewChild('hamburger') hamburger: ElementRef;
-  private links = document.getElementsByClassName('nav-link');
+  user: BamUser;
+
   show = true;
 
   constructor(
     private userService: UserService,
-    private router: Router
+    private router: Router,
+    public modal: MatDialog
   ) { }
 
   ngOnInit() {
@@ -39,6 +42,7 @@ export class NavbarComponent implements OnInit {
         }
       }
     );
+    this.user = JSON.parse(sessionStorage.getItem('user'));
   }
 
   /*
@@ -63,6 +67,12 @@ export class NavbarComponent implements OnInit {
     this.userService.user.next(null);
 
     this.router.navigate(['login']);
+  }
+
+  editUserModal() {
+    const modalRef = this.modal.open(UserInfoComponent, {
+      width: '50%'
+    });
   }
 
 }

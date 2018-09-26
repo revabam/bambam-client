@@ -1,12 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { BamUser } from '../../../models/bam-user';
+import { BamUser } from '../../models/bam-user';
 import { Router } from '@angular/router';
-import { Batch } from '../../../models/batch';
-import { BatchService } from '../../../services/batch.service';
-import { UserIdleService } from 'angular-user-idle';
-import { timeout } from 'q';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { UserService } from '../../../services/user.service';
+import { Batch } from '../../models/batch';
+import { BatchService } from '../../services/batch.service';
+import { Curriculum } from '../../models/curriculum';
+import { UserService } from '../../services/user.service';
 
 /**
  * This component is the dashboard page. It is the page that the
@@ -15,6 +13,34 @@ import { UserService } from '../../../services/user.service';
  *
  * @author Bradley Walker | Khaleel Williams | 1806-Jun18-USF-Java | Wezley Singleton
  */
+export interface Topicz {
+  id: number;
+  name: string;
+  time: string;
+}
+
+const topics: Topicz[] = [
+  {
+    id: 1,
+    name: 'science',
+    time: 'noon'
+  },
+  {
+    id: 2,
+    name: 'math',
+    time: 'noon'
+  },
+  {
+    id: 3,
+    name: 'mom',
+    time: 'noon'
+  },
+  {
+    id: 4,
+    name: 'SAT prep',
+    time: 'noon'
+  }
+];
 
 @Component({
   selector: 'app-dashboard',
@@ -22,6 +48,8 @@ import { UserService } from '../../../services/user.service';
   styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent implements OnInit {
+  dataSource = topics;
+  headerColumns: string[] = ['idno', 'sub', 'time', 'control'];
 
   user: BamUser;
   batch: Batch;
@@ -30,6 +58,12 @@ export class DashboardComponent implements OnInit {
   editing = false;
   firstName: string;
   lastName: string;
+  isOpen: boolean;
+  visibilityIcon = [{num: 0, icon: 'visibility_off' },
+                    {num: 1, icon: 'visibility'}];
+  DashTitle = 'Today';
+
+
 
   constructor(
     private router: Router,
@@ -43,6 +77,7 @@ export class DashboardComponent implements OnInit {
   * and info about the batch they are associated with.
   */
   ngOnInit() {
+
     this.user = JSON.parse(sessionStorage.getItem('user'));
 
     if (!this.user) {
@@ -53,7 +88,7 @@ export class DashboardComponent implements OnInit {
         need to check if the user is a trainer or not, But this is where
         you might want to do that.
       */
-      this.batchService.getBatchesByTrainerId(this.user.id).subscribe(
+      this.batchService.getBatchesByTrainerId(12).subscribe(
         result => {
           // If the result is not null and not empty
           if (result && result.length !== 0) {
@@ -82,12 +117,22 @@ export class DashboardComponent implements OnInit {
     }
   }
 
+
+  growl(x) {
+    console.log(x);
+       }
+
+
+
   /**
    * This method is used t sort throught a list of batches. Batches
    * are sorted by their start dates.
    * @param a A batch
    * @param b Another batch
    */
+
+
+
   compareBatches(a: Batch, b: Batch) {
     if (a.startDate < b.startDate) {
       return -1;

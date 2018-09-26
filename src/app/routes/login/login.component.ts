@@ -1,8 +1,8 @@
 import { Component, OnInit, ViewChild, TemplateRef } from '@angular/core';
-import { UserService } from '../../../services/user.service';
+import { UserService } from '../../services/user.service';
 import { Router } from '@angular/router';
 import { FormBuilder, FormControl, Validators } from '@angular/forms';
-import { CognitoService } from '../../../services/cognito.service';
+import { CognitoService } from '../../services/cognito.service';
 
 /**
  * This if the login component. It implements the login functionality

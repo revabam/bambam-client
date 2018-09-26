@@ -1,0 +1,26 @@
+button{
+    background-color: rgb(255, 94, 0);
+    border-radius: 13px 13px 13px 13px;
+    color: white;
+    font-weight: bold;
+    border-style: double;
+    border-width: 6px;
+    border-color: rgb(255, 94, 0) 0px 0px 2px 2px;
+  }
+  
+  button:hover{
+    box-shadow:  rgb(255, 94, 0) 0px 0px 2px 2px;
+  }
+  
+  #date{
+    width: 250%;
+    margin-left: -75%;
+  }
+  
+  #currentDate{
+    font-size: 2vw;
+  }
+  
+  #details{
+    font-weight: bold;
+  }

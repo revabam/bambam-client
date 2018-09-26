@@ -1,12 +1,12 @@
+import { CreateVersionComponent } from '../../routes/curriculum-editor/create-version/create-version.component';
 import { Component, OnInit } from '@angular/core';
-import { CurriculumService } from '../../../services/curriculum.service';
-import { Curriculum } from '../../../models/curriculum';
-import { Topic } from '../../../models/topic';
-import { Subtopic } from '../../../models/subtopic';
-import { TopicService } from '../../../services/topic.service';
+import { CurriculumService } from '../../services/curriculum.service';
+import { Curriculum } from '../../models/curriculum';
+import { Topic } from '../../models/topic';
+import { Subtopic } from '../../models/subtopic';
+import { TopicService } from '../../services/topic.service';
 import { MatDialog } from '@angular/material';
-import { CreateVersionComponent } from '../create-version/create-version.component';
-import { SubtopicService } from '../../../services/subtopic.service';
+import { SubtopicService } from '../../services/subtopic.service';
 import { DialogViewComponent } from '../dialog-view/dialog-view.component';
 
 
