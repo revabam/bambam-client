@@ -1,3 +1,32 @@
 <mat-card class='border border-dark rounded justify-content-center'>
-  yes
+    <mat-card-header class="justify-content-center border border-dark rounded">
+      <div class="d-flex">
+        <div>
+          Topic View
+        </div>
+      </div>
+    </mat-card-header>
+  <mat-grid-list cols="2" rowHeight="200" gutterSize="0">
+    <mat-grid-tile>
+      <div>
+        <mat-list>
+          <mat-list-item>
+            <mat-checkbox color="warn">Core Java</mat-checkbox>
+          </mat-list-item>
+          <mat-list-item>
+            <mat-checkbox color="warn">SQL</mat-checkbox>
+          </mat-list-item>
+          <mat-list-item>
+            <mat-checkbox color="warn">Hibernate</mat-checkbox>
+          </mat-list-item>
+          <mat-list-item>
+            <mat-checkbox color="warn">Servlets</mat-checkbox>
+          </mat-list-item>
+        </mat-list>
+      </div>
+    </mat-grid-tile>
+    <mat-grid-tile>
+      Subtopics
+    </mat-grid-tile>
+  </mat-grid-list>
 </mat-card>
