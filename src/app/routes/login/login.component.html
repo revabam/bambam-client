@@ -1,0 +1,71 @@
+<div class="row justify-content-center mx-2">
+
+  <img src="../../../../assets/bam.png" height="200px" width="300px" alt="" srcset="" class="py-3">
+</div>
+<div class="row justify-content-center mx-2">
+  <div class="col-4">
+
+    <mat-card>
+      <mat-card-header>
+        <mat-card-title>
+          <h2>Login</h2>
+        </mat-card-title>
+      </mat-card-header>
+      <mat-card-content style="background-color: rgb(245,245,245)">
+        <form [formGroup]="loginForm"> 
+          <mat-form-field class="col-9">
+            <input matInput name="email" placeholder="Email" type="email" formControlName="email" (keyup.enter)="login()">
+            <mat-error *ngFor="let validation of loginValidationMessages.email">
+              <mat-error *ngIf="loginForm.get('email').hasError(validation.type) && (loginForm.get('email').dirty || loginForm.get('email').touched)">{{validation.message}}</mat-error>
+            </mat-error>
+          </mat-form-field>
+          <br/>
+          
+          <mat-form-field class="col-9">
+            <input matInput name="password" placeholder="Password" type="password" formControlName="password" (keyup.enter)="login()">
+            <mat-error *ngFor="let validation of loginValidationMessages.password">
+              <mat-error *ngIf="loginForm.get('password').hasError(validation.type) && (loginForm.get('password').dirty || loginForm.get('password').touched)">{{validation.message}}</mat-error>
+            </mat-error>
+          </mat-form-field>
+        </form> 
+        <mat-toolbar #buttonBar>
+          <button mat-raised-button name="login" color="primary" (click)="login()">Submit</button>
+          <span style="flex: 1 auto;"></span>
+          <button mat-raised-button name="register" routerLink="/register">Register</button>
+        </mat-toolbar>
+        <div class="row justify-content-right">      
+          <div class="col-2">
+          </div>
+          <div class="col-2">
+            </div>
+          <span style="flex: .1 auto;"></span>
+        </div>
+
+        <br *ngIf="errorMessage"/>
+        <div *ngIf="errorMessage" class="alert alert-danger" role="alert">
+          {{errorMessage}}
+        </div>
+
+        <br *ngIf="infoMessage"/>
+        <div *ngIf="infoMessage" class="alert alert-primary" role="alert">
+          {{infoMessage}}
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>
+
+<ng-template #modalContent let-close="close">
+  <div class="modal-header">
+    <h5 class="modal-title">Session Inactivity Warning</h5>
+    <button type="button" class="close" (click)="close()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <p>Sesssion inactivity detected. Session will be ended and you will be signed out in 5 minutes. Press continue to stayed logged in.</p>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-secondary" (click)="restart()" (click)="close()">Continue</button>
+  </div>
+</ng-template>

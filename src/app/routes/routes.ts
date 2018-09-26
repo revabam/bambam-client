@@ -1,13 +1,13 @@
+import { DashboardComponent } from '../routes/dashboard/dashboard.component';
 import { Routes } from '@angular/router';
-import { AppComponent } from '../../app/app.component';
-import { DashboardComponent } from '../../app/routes/pages/dashboard/dashboard.component';
-import { CalendarComponent } from '../../app/routes/pages/calendar/calendar.component';
-import { CreateVersionComponent } from '../../app/routes/pages/create-version/create-version.component';
-import { CurriculumEditorComponent } from '../../app/routes/pages/curriculum-editor/curriculum-editor.component';
-import { BoomComponent } from '../../app/routes/pages/boom/boom.component';
-import { LoginComponent } from './pages/login/login.component';
-import { RegisterComponent } from './pages/register/register.component';
-import { DialogViewComponent } from './pages/dialog-view/dialog-view.component';
+import { AppComponent } from '../app.component';
+import { CalendarComponent } from '../routes/calendar/calendar.component';
+import { CreateVersionComponent } from '../routes/curriculum-editor/create-version/create-version.component';
+import { CurriculumEditorComponent } from '../routes/curriculum-editor/curriculum-editor.component';
+import { BoomComponent } from '../routes/boom/boom.component';
+import { LoginComponent } from '../routes/login/login.component';
+import { RegisterComponent } from '../routes/register/register.component';
+import { DialogViewComponent } from '../routes/dialog-view/dialog-view.component';
 
 export const appRoutes: Routes = [
     {
