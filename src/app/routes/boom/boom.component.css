@@ -1,9 +1,14 @@
+td{
+    height: 89.4%;
+    width: 50%;
+}
+
 .chart{
     margin-top: 100px;
     margin: 15px;
     background-color: rgb(238, 238, 238);
     height: 530px;
-    width: 730px;
+    width: 720px;
 }
 .banner{
     text-align:center;

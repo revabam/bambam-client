@@ -58,12 +58,14 @@ export class BoomComponent implements OnInit {
   ];
 
   public barColors: Array<any> = [
-    { // correct color
+    {
+      // correct color
       backgroundColor: 'rgb(51, 230, 51)',
       borderColor: 'rgba(255,255,255,1)',
       pointBorderColor: 'rgba(255,255,255,1)',
     },
-    { // missed color
+    {
+      // missed color
       backgroundColor: 'rgb(255, 255, 56)',
       borderColor: 'rgba(255,255,255,1)',
       pointBorderColor: 'rgba(255,255,255,1)',
@@ -80,12 +82,17 @@ export class BoomComponent implements OnInit {
    */
   getProgres() {
     const prog: number[] = [0, 0];
-    for (let k = 0; k < this.data.length; k++) { // for each curriculum
-      for (let i = 0; i < this.data[k].curriculum.length; i++) { // for each week
-        for (let j = 0; j < this.data[k].curriculum[i].tasks.length; j++) { // for each task
-          if (this.data[k].curriculum[i].tasks[j].status === 1) { // if the task was completed
+    // for each curriculum
+    for (let k = 0; k < this.data.length; k++) {
+      // for each week
+      for (let i = 0; i < this.data[k].curriculum.length; i++) {
+        // for each task
+        for (let j = 0; j < this.data[k].curriculum[i].tasks.length; j++) {
+          // if the task was completed
+          if (this.data[k].curriculum[i].tasks[j].status === 1) {
             ++prog[0];
-          } else if (this.data[k].curriculum[i].tasks[j].status === 2) { // if the task was missed
+          // if the task was missed
+          } else if (this.data[k].curriculum[i].tasks[j].status === 2) {
             ++prog[1];
           }
         }
@@ -145,3 +152,7 @@ export class BoomComponent implements OnInit {
     this.getWeeklyProgress(0);
   }
 }
+
+/**
+ * @author Richard Iskra | Obosa Nosa Igeibaro | Eddie Grays
+ */
