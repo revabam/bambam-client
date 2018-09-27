@@ -56,7 +56,7 @@ export class CreateCurriculumComponent implements OnInit {
         // Creates the new day, numbers 2 - 5 for Monday through Friday
         const day: CurriculumDay = {
           dayNum: d,
-          supTopics: []
+          subTopics: []
         };
         days.push(day);
       }

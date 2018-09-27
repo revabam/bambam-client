@@ -6,5 +6,5 @@ export class CurriculumDay {
      * 0 - 6, Sunday - Saturday
      */
     dayNum: number;
-    supTopics: SubTopic[];
+    subTopics: SubTopic[];
 }
