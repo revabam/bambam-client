@@ -401,21 +401,55 @@ export class CalendarComponent implements OnInit, DoCheck {
     //     }
     //   }
     // }
-    console.log('generate Events');
-    console.log(this.selectedCurriculum);
     const startDate: Date = this.dropEvent.start;
-    const populationDay = startDate;
-    const numWeeks: number = this.selectedCurriculum.numberOfWeeks;
+    const subtopicStartTime = startDate;
     const weeks: CurriculumWeek[] = this.selectedCurriculum.curriculumWeeks;
     for ( const week of weeks) {
       for ( const day of week.curriculumDays ) {
         let hour = 9;
         const subTopicsToday = day.subTopics.length;
-        for ( const subtopic of day.subTopics ) {
-          populationDay.setHours(hour++);
-          hour += (7 / subTopicsToday);
+        const timeDifference = (7 / subTopicsToday);
+        /**
+         * if statement that skips weekends
+         */
+        if (subtopicStartTime.getDay() === 6) {
+          subtopicStartTime.setDate(subtopicStartTime.getDate() + 2);
+        } else if (subtopicStartTime.getDay() === 0) {
+          subtopicStartTime.setDate(subtopicStartTime.getDate() + 1);
         }
+        for ( const subtopic of day.subTopics ) {
+          if (hour > 12 && hour < 13) {
+            hour++;
+          }
+          /**
+           * sets start time of the subtopic
+           */
+          subtopicStartTime.setHours(Math.floor(hour));
+          subtopicStartTime.setMinutes((hour - Math.floor(hour)) * 60);
+          hour = hour + timeDifference;
+          const endTime = new Date(subtopicStartTime);
+          /**
+           * sets end time of the event based on how many subtopics are there that day
+           */
+          endTime.setHours(Math.floor(hour));
+          endTime.setMinutes((hour - Math.floor(hour)) * 60);
+          this.events.push({
+            start: new Date(subtopicStartTime),
+            end: new Date(endTime),
+            title: subtopic.name,
+            id: subtopic.id,
+            color: colors.blue,
+            actions: this.actions,
+            resizable: {
+              beforeStart: true,
+              afterEnd: true
+            },
+            draggable: true,
+          });
+        }
+        subtopicStartTime.setDate(subtopicStartTime.getDate() + 1);
       }
+      subtopicStartTime.setDate(subtopicStartTime.getDate() + 2);
     }
     this.persistCurriculum(this.selectedCurriculum);
     this.selectedCurriculum = null;

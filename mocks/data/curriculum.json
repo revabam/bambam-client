@@ -59,7 +59,115 @@
                             "curriculumDayId": 0,
                             "curriculumWeekId": 0,
                             "dayNum": 1,
-                            "supTopics": [
+                            "subTopics": [
+                                {
+                                    "id": 1,
+                                    "name": "Introduction to Java: Why Java?",
+                                    "parentTopicId": 1
+                                },
+                                {
+                                    "id": 2,
+                                    "name": "OOP Concepts in Depth: Polymorphism, Encapsulation, Inheritance, and Abstraction",
+                                    "parentTopicId": 1
+                                },
+                                {
+                                    "id": 4,
+                                    "name": "Constructors",
+                                    "parentTopicId": 1
+                                },
+                                {
+                                    "id": 5,
+                                    "name": "Methods and Parameters",
+                                    "parentTopicId": 1
+                                }
+                            ]
+                        },
+                        {
+                            "curriculumDayId": 1,
+                            "curriculumWeekId": 0,
+                            "dayNum": 2,
+                            "subTopics": [
+                                {
+                                    "id": 1,
+                                    "name": "Introduction to Java: Why Java?",
+                                    "parentTopicId": 1
+                                },
+                                {
+                                    "id": 2,
+                                    "name": "OOP Concepts in Depth: Polymorphism, Encapsulation, Inheritance, and Abstraction",
+                                    "parentTopicId": 1
+                                },
+                                {
+                                    "id": 4,
+                                    "name": "Constructors",
+                                    "parentTopicId": 1
+                                },
+                                {
+                                    "id": 5,
+                                    "name": "Methods and Parameters",
+                                    "parentTopicId": 1
+                                }
+                            ]
+                        },
+                        {
+                            "curriculumDayId": 2,
+                            "curriculumWeekId": 0,
+                            "dayNum": 3,
+                            "subTopics": [
+                                {
+                                    "id": 1,
+                                    "name": "Introduction to Java: Why Java?",
+                                    "parentTopicId": 1
+                                },
+                                {
+                                    "id": 2,
+                                    "name": "OOP Concepts in Depth: Polymorphism, Encapsulation, Inheritance, and Abstraction",
+                                    "parentTopicId": 1
+                                },
+                                {
+                                    "id": 4,
+                                    "name": "Constructors",
+                                    "parentTopicId": 1
+                                },
+                                {
+                                    "id": 5,
+                                    "name": "Methods and Parameters",
+                                    "parentTopicId": 1
+                                }
+                            ]
+                        },
+                        {
+                            "curriculumDayId": 3,
+                            "curriculumWeekId": 0,
+                            "dayNum": 4,
+                            "subTopics": [
+                                {
+                                    "id": 1,
+                                    "name": "Introduction to Java: Why Java?",
+                                    "parentTopicId": 1
+                                },
+                                {
+                                    "id": 2,
+                                    "name": "OOP Concepts in Depth: Polymorphism, Encapsulation, Inheritance, and Abstraction",
+                                    "parentTopicId": 1
+                                },
+                                {
+                                    "id": 4,
+                                    "name": "Constructors",
+                                    "parentTopicId": 1
+                                },
+                                {
+                                    "id": 5,
+                                    "name": "Methods and Parameters",
+                                    "parentTopicId": 1
+                                }
+                            ]
+                        },
+                        {
+                            "curriculumDayId": 4,
+                            "curriculumWeekId": 0,
+                            "dayNum": 5,
+                            "subTopics": [
                                 {
                                     "id": 1,
                                     "name": "Introduction to Java: Why Java?",
