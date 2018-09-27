@@ -29,8 +29,8 @@
           <h4>Curriculums</h4>
         </mat-card-title>
       </mat-card-header>
-
       <mat-divider></mat-divider>
+      <div *ngIf="curriculumEvents == null">Loading</div>
       <mat-list>
         <mat-list-item *ngFor="let curriculum of curriculumEvents" mwlDraggable [dropData]="{event: curriculum}" style="position:relative; z-index: 10">
           {{curriculum.title}} : Version {{curriculum.version}}</mat-list-item>

@@ -71,7 +71,8 @@ export class BoomComponent implements OnInit {
       pointBorderColor: 'rgba(255,255,255,1)',
     }];
 
-  // donut chart
+
+  // Donut chart
   public doughnutChartLabels: string[] = ['Completed', 'Missed'];
   public doughnutChartData: number[] = this.getProgres();
   public doughnutChartType = 'doughnut';

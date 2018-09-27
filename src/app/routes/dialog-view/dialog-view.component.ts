@@ -1,7 +1,7 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { TopicService } from '../../services/topic.service';
-import { SubtopicService } from '../../services/subtopic.service';
+import { SubTopicService } from '../../services/subtopic.service';
 import { Topic } from '../../models/topic';
 
 /**
