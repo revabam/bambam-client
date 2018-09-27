@@ -1,0 +1,11 @@
+.add-space {
+  flex: .6 .3 auto;
+}
+
+.closebtn {
+  color: rgba(142, 48, 48, 0.2);
+}
+
+.close:hover .closebtn {
+  color: rgba(142, 48, 48, 1);
+}

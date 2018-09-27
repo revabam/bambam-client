@@ -26,9 +26,17 @@
     </mat-card-title>
   </mat-card-title-group>
   <mat-card-content>
-    <ul droppable (onDrop)="onSubTopicDrop($event)" class="list-group">
+    <cdk-drop droppable (onDrop)="onSubTopicDrop($event)" (dropped)="onSubTopicRearranged($event)" class="list-group">
       <li *ngIf="!day.subTopics || day.subTopics.length == 0" class="list-group-item">Drop content here</li>
-      <li *ngFor="let subTopic of day.subTopics" class="list-group-item">{{subTopic.name}}</li>
-    </ul>
+      <li *ngFor="let subTopic of day.subTopics; let i=index" ng-mouseenter="test[i]=true" ng-mouseleave="test[i]=false" class="list-group-item" cdkDrag>
+        <p>{{subTopic.name}}</p>
+        <span class="add-space"></span>
+        <button mat-button mat-icon-button aria-label="add" (click)="removeSubTopic(i)" *ngIf="test[i]">
+          <mat-icon color="secondary">add</mat-icon>
+        </button>
+      </li>
+      
+
+    </cdk-drop>
   </mat-card-content>
 </div>
