@@ -362,45 +362,6 @@ export class CalendarComponent implements OnInit, DoCheck {
    * @author Marcin Salamon | Spark1806-USF-Java | Steven Kelsey
    */
   generateEvents() {
-    // this.subTopicsReceived = false;
-    // for (let j = 0; j < this.topicArr.length; j++) {
-    //   const subtopicTime = (this.topicLength * 5 * 7) / this.subtopicArrArr[j].length;
-    //   this.currTopicTime = subtopicTime;
-
-    //   for (let i = 0; i < this.subtopicArrArr[j].length; i++) {
-    //     if (isWeekend(addDays(addHours(startOfDay(this.dropEvent.start), 9 + this.hour), topicDay))) {
-    //       topicDay++;
-    //       if (isWeekend(addDays(addHours(startOfDay(this.dropEvent.start), 9 + this.hour), topicDay))) {
-    //         topicDay++;
-    //       }
-    //     }
-    //     if (this.hour + this.currTopicTime > 7 && !this.multiDayEventCreated) {
-    //       this.multidaySubtopic(this.subtopicArrArr[j][i], topicDay, (7 - this.hour), this.dropEvent, this.selectedCurriculum);
-    //       topicDay++;
-    //       i--;
-    //     } else {
-    //       this.events.push(
-    //         {
-    //           start: addDays(addHours(startOfDay(this.dropEvent.start), 9 + this.hour), topicDay),
-    //           end: addDays(addHours(startOfDay(this.dropEvent.start), 9 + this.hour + this.currTopicTime), topicDay),
-    //           title: this.subtopicArrArr[j][i].name,
-    //           id: this.subtopicArrArr[j][i].id,
-    //           color: colors.newColor,
-    //           actions: this.actions,
-    //           resizable: {
-    //             beforeStart: true,
-    //             afterEnd: true
-    //           },
-    //           draggable: true,
-    //         }
-    //       );
-    //       this.colorNum++;
-    //       this.hour += this.currTopicTime;
-    //       this.currTopicTime = subtopicTime;
-    //       this.multiDayEventCreated = false;
-    //     }
-    //   }
-    // }
     const startDate: Date = this.dropEvent.start;
     const subtopicStartTime = startDate;
     const weeks: CurriculumWeek[] = this.selectedCurriculum.curriculumWeeks;
