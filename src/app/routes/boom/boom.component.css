@@ -23,3 +23,7 @@ td{
     margin-left: 31px;
     width: 30%;
 }
+.input{
+    position: absolute;
+    bottom: 30px;
+}

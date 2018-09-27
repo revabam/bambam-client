@@ -73,33 +73,9 @@ export class BoomComponent implements OnInit {
 
   // donut chart
   public doughnutChartLabels: string[] = ['Completed', 'Missed'];
-  public doughnutChartData: number[] = this.getProgres();
+  public doughnutChartData: number[] = [this.data.length, 0];
   public doughnutChartType = 'doughnut';
   public donutColors = [{ backgroundColor: ['green', 'yellow'] }];
-
-  /**
-   * determines how many tasks have been completed and how many have been missed
-   */
-  getProgres() {
-    const prog: number[] = [0, 0];
-    // for each curriculum
-    for (let k = 0; k < this.data.length; k++) {
-      // for each week
-      for (let i = 0; i < this.data[k].curriculum.length; i++) {
-        // for each task
-        for (let j = 0; j < this.data[k].curriculum[i].tasks.length; j++) {
-          // if the task was completed
-          if (this.data[k].curriculum[i].tasks[j].status === 1) {
-            ++prog[0];
-            // if the task was missed
-          } else if (this.data[k].curriculum[i].tasks[j].status === 2) {
-            ++prog[1];
-          }
-        }
-      }
-    }
-    return prog;
-  }
 
   /**
    *  get the progress of the selected batch
@@ -148,6 +124,9 @@ export class BoomComponent implements OnInit {
     return;
   }
 
+  /**
+   * Updates pie chart data when users enter a value in the percentage input feild
+   */
   percent(event) {
     const prog: number[] = [0, 0];
     const percentile = event.target.value / 100;
