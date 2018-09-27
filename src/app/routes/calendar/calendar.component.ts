@@ -23,6 +23,7 @@ import { TopicService } from '../../services/topic.service';
 import { CalendarService } from '../../services/calendar.service';
 import { SubTopicService } from '../../services/subtopic.service';
 import { StartMondayModalComponent } from './start-monday-modal/start-monday-modal.component';
+import { CurriculumWeek } from '../../models/curriculum-week';
 
 const colors: any = {
   random: {
@@ -40,20 +41,15 @@ const colors: any = {
 export class CalendarComponent implements OnInit, DoCheck {
 
   user: BamUser = JSON.parse(sessionStorage.getItem('user'));
-  curriculumDataFetched = false;
-  renderCalendar = false;
   showSideNav = true;
 
   hour = 0;
-  subtopicsReceivedCount = 0;
-  topicLength = 0;
-  topicArr: Topic[];
-  subtopicArrArr: Array<SubTopic[]> = [];
   subTopicsReceived = false;
   multiDayEventCreated = false;
   selectedCurriculum: Curriculum;
   colorNum = 0;
 
+  docheck = true;
   storedEvents: cal_event.CalendarEvent[] = null;
 
   newSubtopicName: string;
@@ -65,10 +61,6 @@ export class CalendarComponent implements OnInit, DoCheck {
 
   activeDayIsOpen = false;
   dropEvent: CalendarEvent;
-  calendarCurriculums: CalendarCurriculum[];
-  calendarSubtopics: CalendarSubtopic[];
-  topics: Topic[];
-  subtopics: SubTopic[];
   curriculums: Curriculum[];
   currTopicTime: number;
 
@@ -88,7 +80,7 @@ export class CalendarComponent implements OnInit, DoCheck {
   actions: CalendarEventAction[] = [
     {
       label: '<span><mat-icon>edit</mat-icon></span>',
-      onClick: ({ event }: { event: MyEvent }): void => {
+      onClick: ({ event }: { event: CalendarEvent }): void => {
         this.events = this.events.filter(iEvent => iEvent !== event);
         this.handleEvent('Deleted', event);
       }
@@ -114,14 +106,7 @@ export class CalendarComponent implements OnInit, DoCheck {
 
     this.calendarService.getCurriculum().subscribe(response => {
       this.curriculums = response;
-      this.topicService.getAll().subscribe(response2 => {
-        this.topics = response2;
-        this.subtopicService.getAll().subscribe(response3 => {
-          this.subtopics = response3;
-          this.curriculumDataFetched = true;
-          this.convertCirriculum();
-        });
-      });
+      this.convertCirriculum();
     });
   }
 
@@ -133,8 +118,8 @@ export class CalendarComponent implements OnInit, DoCheck {
       this.initialRender = false;
       this.generateStoredEvents();
     }
-    this.renderCalendar = this.curriculumDataFetched;
-    if (this.subTopicsReceived && this.subtopicsReceivedCount === 0) {
+    if (this.selectedCurriculum != null && this.docheck) {
+      this.docheck = false;
       this.generateEvents();
     }
     this.refresh.next();
@@ -260,6 +245,7 @@ export class CalendarComponent implements OnInit, DoCheck {
    * @author Marcin Salamon | Spark1806-USF-Java | Steven Kelsey
    */
   openEventDuplicateDialog(name: string, date: Date) {
+    console.log(date.getDay());
     const dialogRef = this.dialog.open(EventDuplicateModalComponent,
       {
         width: '600px',
@@ -346,16 +332,6 @@ export class CalendarComponent implements OnInit, DoCheck {
         if (decision !== null) {
           event.start = decision;
           this.selectedCurriculum = curr;
-          this.topicLength = curr.numberOfWeeks / curr.topics.length;
-          this.topicArr = curr.topics;
-          for (let i = 0; i < curr.topics.length; i++) {
-            this.subtopicService.getSubTopicByParentId(curr.topics[i].id).subscribe(subResponse => {
-              this.subtopicArrArr.push(subResponse);
-              if (i === curr.topics.length - 1) {
-                this.subTopicsReceived = true;
-              }
-            });
-          }
           this.dropEvent = event;
         }
       });
@@ -381,53 +357,64 @@ export class CalendarComponent implements OnInit, DoCheck {
   }
   /**
    * method that takes the topics and subtopics and generated calendar events from them when dropped onto the calendar
+   * called when curriculum is dropped onto the calendar
    *
-   * currently populating the calendar takes a visible fraction of a second, needs a performance fix
-   * if someone can improve the code made by 1806-Java
+   * @author Marcin Salamon | Spark1806-USF-Java | Steven Kelsey
    */
   generateEvents() {
-    this.subTopicsReceived = false;
-    this.subtopicsReceivedCount++;
-    let topicDay = 0;
-    for (let j = 0; j < this.topicArr.length; j++) {
-      const subtopicTime = (this.topicLength * 5 * 7) / this.subtopicArrArr[j].length;
-      this.currTopicTime = subtopicTime;
-
-      for (let i = 0; i < this.subtopicArrArr[j].length; i++) {
-        if (isWeekend(addDays(addHours(startOfDay(this.dropEvent.start), 9 + this.hour), topicDay))) {
-          topicDay++;
-          if (isWeekend(addDays(addHours(startOfDay(this.dropEvent.start), 9 + this.hour), topicDay))) {
-            topicDay++;
+    const startDate: Date = this.dropEvent.start;
+    const subtopicStartTime = startDate;
+    const weeks: CurriculumWeek[] = this.selectedCurriculum.curriculumWeeks;
+    for ( const week of weeks) {
+      for ( const day of week.curriculumDays ) {
+        let hour = 9;
+        const subTopicsToday = day.subTopics.length;
+        const timeDifference = (7 / subTopicsToday);
+        /**
+         * if statement that skips weekends
+         */
+        if (subtopicStartTime.getDay() === 6) {
+          subtopicStartTime.setDate(subtopicStartTime.getDate() + 2);
+        } else if (subtopicStartTime.getDay() === 0) {
+          subtopicStartTime.setDate(subtopicStartTime.getDate() + 1);
+        }
+        for ( const subtopic of day.subTopics ) {
+          if (hour > 12 && hour < 13) {
+            hour++;
           }
+          /**
+           * sets start time of the subtopic
+           */
+          subtopicStartTime.setHours(Math.floor(hour));
+          subtopicStartTime.setMinutes((hour - Math.floor(hour)) * 60);
+          hour = hour + timeDifference;
+          const endTime = new Date(subtopicStartTime);
+          /**
+           * sets end time of the event based on how many subtopics are there that day
+           */
+          endTime.setHours(Math.floor(hour));
+          endTime.setMinutes((hour - Math.floor(hour)) * 60);
+          this.events.push({
+            start: new Date(subtopicStartTime),
+            end: new Date(endTime),
+            title: subtopic.name,
+            id: subtopic.id,
+            color: colors.blue,
+            actions: this.actions,
+            resizable: {
+              beforeStart: true,
+              afterEnd: true
+            },
+            draggable: true,
+          });
         }
-        if (this.hour + this.currTopicTime > 7 && !this.multiDayEventCreated) {
-          this.multidaySubtopic(this.subtopicArrArr[j][i], topicDay, (7 - this.hour), this.dropEvent, this.selectedCurriculum);
-          topicDay++;
-          i--;
-        } else {
-          this.events.push(
-            {
-              start: addDays(addHours(startOfDay(this.dropEvent.start), 9 + this.hour), topicDay),
-              end: addDays(addHours(startOfDay(this.dropEvent.start), 9 + this.hour + this.currTopicTime), topicDay),
-              title: this.subtopicArrArr[j][i].name,
-              id: this.subtopicArrArr[j][i].id,
-              color: colors.newColor,
-              actions: this.actions,
-              resizable: {
-                beforeStart: true,
-                afterEnd: true
-              },
-              draggable: true,
-            }
-          );
-          this.colorNum++;
-          this.hour += this.currTopicTime;
-          this.currTopicTime = subtopicTime;
-          this.multiDayEventCreated = false;
-        }
+        subtopicStartTime.setDate(subtopicStartTime.getDate() + 1);
       }
+      subtopicStartTime.setDate(subtopicStartTime.getDate() + 2);
     }
     this.persistCurriculum(this.selectedCurriculum);
+    this.selectedCurriculum = null;
+    this.docheck = true;
     this.persistEvents();
   }
 

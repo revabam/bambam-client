@@ -3,5 +3,5 @@ export class CurriculumDay {
     curriculumDayId?: number;
     curriculumWeekId?: number;
     dayNum: number;
-    supTopics: SubTopic[];
+    subTopics: SubTopic[];
 }
