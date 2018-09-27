@@ -7,11 +7,11 @@
 /* This is the styling for all mat-cards tags.
       Created this way to have ease of manipulation, if needed*/
 mat-card {
-    background-image: url('https://images.pexels.com/photos/1316484/pexels-photo-1316484.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260');
     border-style: outset;
     border-width: 4px;
     border-color: rgb(255, 94, 0);
     box-shadow: 0px 0px 5px 5px black;
+    position: fixed;
 }
 
 /* styling for all mat-card-headers */

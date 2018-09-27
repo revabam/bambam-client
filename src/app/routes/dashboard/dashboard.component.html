@@ -19,11 +19,12 @@
   </div>
   <!-- Dash -->
   <!-- Dash Info -->
+  
   <div class="d-flex flex-row justify-content-center">
     <span class="btn btn-outline-warn flex-fill justify-content-center"
       matTooltip="Show hidden batch information."
       matTooltipPosition="left">
-      <mat-slide-toggle class="flex-fill" color="warn" (click)="sidenav.toggle()">
+      <mat-slide-toggle id="batch" class="flex-fill" (click)="sidenav.toggle()">
         Batch
       </mat-slide-toggle>
     </span>
@@ -75,7 +76,7 @@
                   The actual rendered columns are set as a property on the row definition"
                 -->
           <ng-container matColumnDef="time">
-            <th mat-header-cell *matHeaderCellDef> Time </th>
+            <th style="font-size: 1vw; font-weight: bold" mat-header-cell *matHeaderCellDef> Time </th>
             <td mat-cell *matCellDef="let sub">
               <a id="timeBadge" class="badge badge-secondary text-monospace">
                 {{ sub.time | date:"h:mm a z"}}</a>
@@ -83,7 +84,7 @@
           </ng-container>
           <!-- Position Column -->
           <ng-container matColumnDef="flag" class="p-2 flex-fill bd-highlight">
-            <th mat-header-cell *matHeaderCellDef class="p-2 flex-fill bd-highlight"> ID </th>
+            <th style="font-size: 1vw; font-weight: bold" mat-header-cell *matHeaderCellDef class="p-2 flex-fill bd-highlight"> ID </th>
             <td mat-cell *matCellDef="let sub; let i = index;" class="p-2 flex-fill bd-highlight">
               <div (click)="flagRow(i,sub.flagged)">
                 <span *ngIf="!sub.flagged">
@@ -98,7 +99,7 @@
             </td>
           </ng-container>
           <ng-container matColumnDef="control" class="p-2 flex-fill bd-highlight">
-            <th mat-header-cell *matHeaderCellDef> Controls{{i}} </th>
+            <th style="font-size: 1vw; font-weight: bold" mat-header-cell *matHeaderCellDef> Controls{{i}} </th>
             <td mat-cell *matCellDef="let sub; let i = index;">
               <div class="d-flex">
                 <div class="flex-fill rounded border border-dark alert-success" #check
@@ -125,9 +126,9 @@
             </td>
           </ng-container>
           <!-- Name Column -->
-          <ng-container matColumnDef="sub" class="p-2 flex-fill bd-highlight">
-            <th mat-header-cell *matHeaderCellDef> Name </th>
-            <td mat-cell *matCellDef="let sub"> {{sub.name}} </td>
+          <ng-container  matColumnDef="sub" class="p-2 flex-fill bd-highlight">
+            <th style="font-size: 1vw; font-weight: bold" mat-header-cell  *matHeaderCellDef> Name </th>
+            <td mat-cell style="font-weight: bold" *matCellDef="let sub"> {{sub.name}} </td>
           </ng-container>
           <tr mat-header-row *matHeaderRowDef="headerColumns"></tr>
           <tr mat-row *matRowDef="let row; columns: headerColumns;"></tr>

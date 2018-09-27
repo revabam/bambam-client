@@ -1,5 +1,13 @@
+mat-card{
+    position: fixed;
+}
+
 .mat-button.mat-small {
     min-width: 1%
+}
+
+#curr{
+    width: 20%;
 }
 
 #title{
