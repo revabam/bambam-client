@@ -296,7 +296,7 @@ export class CalendarComponent implements OnInit, DoCheck {
    * for the action.
    * @param action The action that took place (drag, drop, edit, delete, click)
    * @param event The event that the action happened on
-   *
+
    * @author Marcin Salamon | Spark1806-USF-Java | Steven Kelsey
    */
   handleEvent(action: string, event: CalendarEvent): void {
