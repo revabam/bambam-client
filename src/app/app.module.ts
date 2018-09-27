@@ -35,7 +35,6 @@ import { CognitoService } from './services/cognito.service';
 import { DialogViewComponent } from './routes/dialog-view/dialog-view.component';
 
 
-
 @NgModule({
   declarations: [
     AppComponent,

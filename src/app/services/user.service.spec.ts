@@ -1,3 +1,4 @@
+import { BamUser } from 'src/app/models/bam-user';
 import { HttpClient, HttpHandler } from '@angular/common/http';
 import { TestBed, inject, async } from '@angular/core/testing';
 import { UserService } from './user.service';
@@ -16,5 +17,10 @@ describe('UserService', () => {
   it('should have getUserByEmail',
 async(inject([UserService], (service: UserService) => {
   expect(service.getUserByEmail).toBeTruthy();
+})));
+  it('should have register',
+async(inject([UserService], (service: UserService) => {
+  expect(service.register).not.toBeNull();
+  console.log(service);
 })));
 });
