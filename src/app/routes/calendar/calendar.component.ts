@@ -8,7 +8,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap/modal/modal.module';
 import { CalendarEvent, CalendarEventAction, CalendarEventTimesChangedEvent } from 'angular-calendar';
 
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
-import * as cal_event from '../../models/calendar-event';
+import * as CalEvent from '../../models/calendar-event';
 import { BamUser } from '../../models/bam-user';
 import { BatchService } from '../../services/batch.service';
 import { EventColor, EventAction } from 'calendar-utils';
@@ -31,7 +31,29 @@ const colors: any = {
     secondary: '#FAE3E3'
   }
 };
+/**
+ * class used to populate the calendar, implements the interface provided in the Angular Material Calendar
+ * has extra fields
+ */
+export class CustomCalendarEvent implements CalendarEvent<any> {
+  id?: string | number;
+  start: Date;
+  end?: Date;
+  title: string;
+  color?: EventColor;
+  actions?: EventAction[];
+  allDay?: boolean;
+  cssClass?: string;
+  resizable?: {
+    beforeStart?: boolean;
+    afterEnd?: boolean;
+  };
+  draggable?: boolean;
 
+  statusId: number;
+  subTopicId?: number;
+  flagged?: number;
+}
 @Component({
   selector: 'app-calendar',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -50,7 +72,10 @@ export class CalendarComponent implements OnInit, DoCheck {
   colorNum = 0;
 
   docheck = true;
-  storedEvents: cal_event.CalendarEvent[] = null;
+  /**
+   * because the schema is named the same as the interface the material calendar takes in to create events
+   */
+  storedEvents: CalEvent.CalendarEvent[] = null;
 
   newSubtopicName: string;
   newSubtopicDate: Date;
@@ -60,11 +85,11 @@ export class CalendarComponent implements OnInit, DoCheck {
   newColor: string;
 
   activeDayIsOpen = false;
-  dropEvent: CalendarEvent;
+  dropEvent: CustomCalendarEvent;
   curriculums: Curriculum[];
   currTopicTime: number;
 
-  curriculumEvents: CalendarEvent[] = null;
+  curriculumEvents: CustomCalendarEvent[] = null;
 
   @ViewChild('modalContent') modalContent: TemplateRef<any>;
 
@@ -74,7 +99,7 @@ export class CalendarComponent implements OnInit, DoCheck {
 
   modalData: {
     action: string;
-    event: CalendarEvent;
+    event: CustomCalendarEvent;
   };
 
   actions: CalendarEventAction[] = [
@@ -89,7 +114,7 @@ export class CalendarComponent implements OnInit, DoCheck {
 
   refresh: Subject<any> = new Subject();
 
-  events: CalendarEvent[] = [];
+  events: CustomCalendarEvent[] = [];
 
   constructor(private modal: NgbModal, private calendarService: CalendarService, private subtopicService: SubTopicService,
     private topicService: TopicService, private dialog: MatDialog, private batchService: BatchService) { }
@@ -99,7 +124,7 @@ export class CalendarComponent implements OnInit, DoCheck {
    */
   ngOnInit() {
     this.user = JSON.parse(sessionStorage.getItem('user'));
-    this.calendarService.getCalendarEventsList().subscribe(response => {
+    this.calendarService.getCalendarEvents(this.user.id).subscribe(response => {
       this.storedEvents = response;
       this.initialRender = true;
     });
@@ -150,7 +175,8 @@ export class CalendarComponent implements OnInit, DoCheck {
             beforeStart: true,
             afterEnd: true
           },
-          draggable: true
+          draggable: true,
+          statusId: 1
         });
     });
     // next line reloads the AngularMaterials
@@ -332,7 +358,7 @@ export class CalendarComponent implements OnInit, DoCheck {
         if (decision !== null) {
           event.start = decision;
           this.selectedCurriculum = curr;
-          this.dropEvent = event;
+          this.dropEvent = <CustomCalendarEvent> event;
         }
       });
     });
@@ -344,13 +370,15 @@ export class CalendarComponent implements OnInit, DoCheck {
    * lifecycle hook so that it is only called once the response from the ngOnInit call is complete.
    */
   generateStoredEvents() {
-    for (let i = 0; i < this.storedEvents.length; i++) {
+    for (const event of this.storedEvents) {
       this.events.push(
         {
-          start: new Date(this.storedEvents[i].startDateTime),
-          end: new Date(this.storedEvents[i].endDateTime),
-          title: this.storedEvents[i].title,
-          id: this.storedEvents[i].id,
+          start: new Date(event.startDateTime),
+          end: new Date(event.endDateTime),
+          title: event.title,
+          id: event.id,
+          statusId: event.statusId,
+          flagged: event.flagged
         });
     }
     this.refresh.next();
@@ -365,8 +393,8 @@ export class CalendarComponent implements OnInit, DoCheck {
     const startDate: Date = this.dropEvent.start;
     const subtopicStartTime = startDate;
     const weeks: CurriculumWeek[] = this.selectedCurriculum.curriculumWeeks;
-    for ( const week of weeks) {
-      for ( const day of week.curriculumDays ) {
+    for (const week of weeks) {
+      for (const day of week.curriculumDays) {
         let hour = 9;
         const subTopicsToday = day.subTopics.length;
         const timeDifference = (7 / subTopicsToday);
@@ -378,7 +406,7 @@ export class CalendarComponent implements OnInit, DoCheck {
         } else if (subtopicStartTime.getDay() === 0) {
           subtopicStartTime.setDate(subtopicStartTime.getDate() + 1);
         }
-        for ( const subtopic of day.subTopics ) {
+        for (const subtopic of day.subTopics) {
           if (hour > 12 && hour < 13) {
             hour++;
           }
@@ -399,13 +427,18 @@ export class CalendarComponent implements OnInit, DoCheck {
             end: new Date(endTime),
             title: subtopic.name,
             id: subtopic.id,
-            color: colors.blue,
+            color: {
+              primary: 'blue',
+              secondary: 'blue'
+            },
             actions: this.actions,
             resizable: {
               beforeStart: true,
               afterEnd: true
             },
             draggable: true,
+            statusId: 1,
+            flagged: 0
           });
         }
         subtopicStartTime.setDate(subtopicStartTime.getDate() + 1);
@@ -442,6 +475,8 @@ export class CalendarComponent implements OnInit, DoCheck {
           afterEnd: true
         },
         draggable: true,
+        statusId: 1,
+        flagged: 0
       }
     );
     this.currTopicTime = this.currTopicTime - timeLeft;
@@ -452,33 +487,43 @@ export class CalendarComponent implements OnInit, DoCheck {
    * persists all events in the event array.
    */
   persistEvents() {
-    const eventsToPersist: cal_event.CalendarEvent[] = [];
-    for (let i = 0; i < this.events.length; i++) {
-      eventsToPersist.push({
-        title: this.events[i].title,
-        description: this.events[i].title,
-        statusId: 0,
-        startDateTime: this.events[i].start,
-        endDateTime: this.events[i].end,
-        calendarSubtopicId: +this.events[i].id,
-      });
+    const eventsToPersist: CalEvent.CalendarEvent[] = [];
+
+    for (const event of this.events) {
+
+      const ev: CalEvent.CalendarEvent = {
+        title: event.title,
+        description: event.title,
+        statusId: event.statusId,
+        startDateTime: event.start,
+        endDateTime: event.end,
+        subTopicId: +event.id,
+        trainerId: this.user.id,
+        flagged: event.flagged
+      };
+
+      eventsToPersist.push(ev);
 
     }
-    this.calendarService.addCalendarEventList(eventsToPersist).subscribe(eventRes => {
+    this.calendarService.addCalendarEvents(eventsToPersist).subscribe(eventRes => {
     });
   }
   /**
    * Custom event to be persisted.
    * @param event an event to be persisted
    */
-  persistEvent(event: CalendarEvent) {
-    const calEvent: cal_event.CalendarEvent = {
+  persistEvent(event: CustomCalendarEvent) {
+
+    const calEvent: CalEvent.CalendarEvent = {
       title: event.title,
       description: event.title,
-      statusId: 0,
+      statusId: event.statusId,
       startDateTime: event.start,
       endDateTime: event.end,
-      calendarSubtopicId: +event.id,
+      subTopicId: +event.id,
+      trainerId: this.user.id,
+      flagged: event.flagged
+
     };
     this.calendarService.addCalendarEvent(calEvent).subscribe(eventRes => {
     },
@@ -518,7 +563,9 @@ export class CalendarComponent implements OnInit, DoCheck {
         resizable: {
           beforeStart: true,
           afterEnd: true
-        }
+        },
+        statusId: 2,
+        flagged: 0
       });
       this.refresh.next();
       this.persistEvents();
