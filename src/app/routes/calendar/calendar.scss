@@ -1,0 +1,15 @@
+$font-weight: bold;
+$color: rgb(231, 94, 2);
+
+button{
+    background-color: $color;
+    background-size: 20px;
+    border-radius: 13px 13px 13px 13px; 
+    color: white;
+    font-weight: bold;
+    border-style: outset;
+    border-width: 3px;
+    border-color: $color 0px 0px 2px 2px; 
+    font-size: .85vw;
+  
+  }

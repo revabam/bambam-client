@@ -1,6 +1,7 @@
 /* Specific styling for buttons related to the calendar */
+
+
 button{
-  background-color: rgb(252, 105, 21);
   border-radius: 13px 13px 13px 13px;
   color: white;
   font-weight: bold;
@@ -23,8 +24,4 @@ button:hover{
 /* Details inside the modal boxes bolded */
 #details{
   font-weight: bold;
-}
-
-mat-card{
-  background-image: url('https://images.pexels.com/photos/1316484/pexels-photo-1316484.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260');
 }

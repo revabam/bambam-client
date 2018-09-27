@@ -30,7 +30,7 @@ const colors: any = {
   selector: 'app-calendar',
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './calendar.component.html',
-  styleUrls: ['./calendar.component.css']
+  styleUrls: ['./calendar.scss']
 })
 export class CalendarComponent implements OnInit, DoCheck {
 

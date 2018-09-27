@@ -37,10 +37,14 @@
     "core-js": "^2.5.4",
     "flatpickr": "^4.5.1",
     "fullcalendar": "^3.9.0",
+    "gulp": "^3.9.1",
+    "gulp-less": "^4.0.1",
+    "gulp-sass": "^4.0.1",
     "jquery": "^3.3.1",
     "ng-mat-search-bar": "^1.0.0-rc.1",
     "ngx-bootstrap": "^3.0.1",
     "rxjs": "^6.0.0",
+    "sass": "^1.14.0",
     "zone.js": "^0.8.26"
   },
   "devDependencies": {
