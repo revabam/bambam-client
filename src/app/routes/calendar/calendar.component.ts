@@ -33,7 +33,12 @@ const colors: any = {
 };
 /**
  * class used to populate the calendar, implements the interface provided in the Angular Material Calendar
- * has extra fields
+ * adds extra fields
+ * statusId is numerical, correlates planned, completed, cancelled, missed
+ * subTopicId is the id of the subTopic used for viewing details
+ * flagged is used in dashboard to mark important events, numerical for different tiers
+ *
+ * @author Marcin Salamon | Spark1806-USF-Java | Steven Kelsey
  */
 export class CustomCalendarEvent implements CalendarEvent<any> {
   id?: string | number;
