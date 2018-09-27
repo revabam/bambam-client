@@ -53,7 +53,7 @@
                   </span>
                 </mat-panel-title>
               </mat-expansion-panel-header>
-              <div *ngFor="let subtopic of getSubtopicsByTopic(topic)">
+              <div draggable *ngFor="let subtopic of getSubtopicsByTopic(topic)" [dragData]="subtopic">
                 <div *ngIf="(!topicSearch || ((subtopic.name | lowercase).indexOf(topicSearch | lowercase) >= 0)) &amp;&amp; (subtopicService.reactivateName(subtopic.name) === subtopic.name)">
                   <mat-toolbar>
                     <span> {{(subtopic.name | slice:0:50) + ((subtopic.name.length > 50) ? "..." : "")}}</span>

@@ -44,6 +44,7 @@ import { StartMondayModalComponent } from './routes/calendar/start-monday-modal/
 import { ChartsModule } from 'ng2-charts';
 import { CurriculumWeekComponent } from './routes/curriculum-editor/curriculum-week/curriculum-week.component';
 import { TopicPoolComponent } from './routes/curriculum-editor/topic-pool/topic-pool.component';
+import { NgDragDropModule } from 'ng-drag-drop';
 
 
 @NgModule({
@@ -114,6 +115,7 @@ import { TopicPoolComponent } from './routes/curriculum-editor/topic-pool/topic-
     TimepickerModule.forRoot(),
     BrowserAnimationsModule,
     ReactiveFormsModule,
+    NgDragDropModule.forRoot(),
     NgbModalModule.forRoot(),
     FlatpickrModule.forRoot(),
     CalendarModule.forRoot(),

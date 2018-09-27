@@ -45,6 +45,14 @@ export class CurriculumService {
   }
 
   /**
+   * The function used to update a curriculum on the server
+   */
+  put(curriculum: Curriculum): Observable<Curriculum> {
+    return this.http.put<Curriculum>(environment.apiUrl + 'curriculums',
+      curriculum, HTTP_OPTIONS);
+  }
+
+  /**
    * The function used to deactivate a curriculum in the server
    */
   deactivate(curriculum: Curriculum): Observable<Object> {

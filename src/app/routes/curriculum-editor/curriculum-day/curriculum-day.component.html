@@ -25,5 +25,10 @@
       Unknown Day Num: {{day.dayNum}}
     </mat-card-title>
   </mat-card-title-group>
-  Subtopics go here
+  <mat-card-content>
+    <ul droppable (onDrop)="onSubTopicDrop($event)" class="list-group">
+      <li *ngIf="!day.subTopics || day.subTopics.length == 0" class="list-group-item">Drop content here</li>
+      <li *ngFor="let subTopic of day.subTopics" class="list-group-item">{{subTopic.name}}</li>
+    </ul>
+  </mat-card-content>
 </div>

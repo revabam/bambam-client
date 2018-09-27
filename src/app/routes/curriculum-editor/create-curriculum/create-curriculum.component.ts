@@ -52,7 +52,7 @@ export class CreateCurriculumComponent implements OnInit {
     const weeks = [];
     for (let i = 0; i < this.numberOfWeeks; i++) {
       const days = [];
-      for (let d = 2; d < 7; d++) {
+      for (let d = 1; d < 6; d++) {
         // Creates the new day, numbers 2 - 5 for Monday through Friday
         const day: CurriculumDay = {
           dayNum: d,
