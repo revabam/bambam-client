@@ -1,3 +1,5 @@
+import { CurriculumViewComponent } from './routes/curriculum-editor/curriculum-view/curriculum-view.component';
+import { CreateCurriculumComponent } from './routes/curriculum-editor/create-curriculum/create-curriculum.component';
 import { HttpClientModule } from '@angular/common/http';
 import { NgModule, Component } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -37,6 +39,9 @@ import { CalendarComponent } from './routes/calendar/calendar.component';
 import { CalendarModalComponent } from './routes/calendar/calendar-modal/calendar-modal.component';
 import { UserInfoComponent } from './shared-components/user-info/user-info.component';
 import { TopicsComponent } from './routes/topics/topics.component';
+import { CurriculumDayComponent } from './routes/curriculum-editor/curriculum-day/curriculum-day.component';
+import { StartMondayModalComponent } from './routes/calendar/start-monday-modal/start-monday-modal.component';
+
 
 
 @NgModule({
@@ -47,14 +52,18 @@ import { TopicsComponent } from './routes/topics/topics.component';
     CalendarComponent,
     CurriculumEditorComponent,
     CreateVersionComponent,
+    CreateCurriculumComponent,
     BoomComponent,
     LoginComponent,
     RegisterComponent,
     CalendarModalComponent,
     EventDuplicateModalComponent,
+    StartMondayModalComponent,
     DialogViewComponent,
     UserInfoComponent,
-    TopicsComponent
+    TopicsComponent,
+    CurriculumViewComponent,
+    CurriculumDayComponent
   ],
   imports: [
     NgbModule.forRoot(),
@@ -95,7 +104,7 @@ import { TopicsComponent } from './routes/topics/topics.component';
     MatTooltipModule,
     MatTreeModule,
     BrowserModule,
-    RouterModule.forRoot(appRoutes),
+    RouterModule.forRoot(appRoutes, {onSameUrlNavigation: 'reload'}),
     FormsModule,
     BsDatepickerModule.forRoot(),
     TimepickerModule.forRoot(),
@@ -106,7 +115,12 @@ import { TopicsComponent } from './routes/topics/topics.component';
     CalendarModule.forRoot(),
     UserIdleModule.forRoot({idle: 600, timeout: 300, ping: 60})
   ],
-  entryComponents: [CalendarModalComponent, EventDuplicateModalComponent, UserInfoComponent],
+  entryComponents: [
+    CalendarModalComponent,
+    EventDuplicateModalComponent,
+    UserInfoComponent,
+    CreateCurriculumComponent,
+    StartMondayModalComponent],
   providers: [
     UserService,
     CognitoService,

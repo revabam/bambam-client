@@ -22,7 +22,7 @@
 .row{
     margin-top: 5%;
     width: 70%;
-    margin-left: 15%;
+    margin-left: 15%; 
 }
 
 .mat-toolbar {
@@ -48,3 +48,8 @@ h2{
     font-weight: bolder;
     opacity: .8;
 }
+.panel-bar {
+    background-color: lightgrey;
+    font-size: 120%;
+}
+
