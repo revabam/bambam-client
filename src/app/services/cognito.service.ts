@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { Injectable } from '@angular/core';
 import * as AWSCognito from 'amazon-cognito-identity-js';
 import { CognitoIdToken } from 'amazon-cognito-identity-js';
@@ -9,6 +10,7 @@ import { BehaviorSubject } from 'rxjs';
 export class CognitoService {
 
   private userPool: AWSCognito.CognitoUserPool;
+  private static router : Router;
 
   /**
   * When the cognito service is intialized, it creates the user pool.
@@ -116,7 +118,42 @@ export class CognitoService {
 
     return resultStream;
   }
+
+   /**
+   * 
+   * This method will allow a user to reset their password if forgotten.  
+   * @param email The user's email that they used to register.
+   * The user will need to provide their email which Cognito for check the user
+   * pool to verify that that email exists and then it will prompt the user to 
+   * enter a new password.
+   * @author Jasmine C. Onwuzulike
+   */
+  resetPassword(email : string) {
+    const userData = {
+      Username: email,
+      Pool: this.userPool
+    };
+    
+    const cognitoUser = new AWSCognito.CognitoUser(userData);
+
+    cognitoUser.forgotPassword({
+      onSuccess: function (result) {
+        console.log('Success.')
+      },
+      onFailure: function(err) {
+          alert(err);
+      },
+      inputVerificationCode() {
+          var verificationCode = prompt('Please input verification code ' ,'');
+          var newPassword = prompt('Enter new password ' ,'');
+          cognitoUser.confirmPassword(verificationCode, newPassword, this);
+        
+      }
+  });
+  CognitoService.router.navigate['login'];
+  }
 }
 /**
  * @author Bradley Walker | 1806-Jun18-USF-Java | Wezley Singleton
  */
+
