@@ -17,7 +17,7 @@ export class BoomComponent implements OnInit {
       {
         week: 'week 3', tasks: [{ name: 'ts', status: 1 }, { name: 'angular', status: 1 },
         { name: 'sql', status: 1 }, { name: 'dev-ops', status: 1 }]
-      }, { week: 'week 4', tasks: [{ name: 'a thing', status: 3 }] }]
+      }, { week: 'week 4', tasks: [] }]
   },
   {
     title: '1802 Feb05 Java - August', id: 2, curriculum:
@@ -75,7 +75,7 @@ export class BoomComponent implements OnInit {
   public doughnutChartLabels: string[] = ['Completed', 'Missed'];
   public doughnutChartData: number[] = this.getProgres();
   public doughnutChartType = 'doughnut';
-  public donutColors = [{backgroundColor: ['rgb(51, 230, 51)', 'rgb(255, 255, 56)']}];
+  public donutColors = [{ backgroundColor: ['rgb(51, 230, 51)', 'rgb(255, 255, 56)'] }];
 
   /**
    * determines how many tasks have been completed and how many have been missed
@@ -91,7 +91,7 @@ export class BoomComponent implements OnInit {
           // if the task was completed
           if (this.data[k].curriculum[i].tasks[j].status === 1) {
             ++prog[0];
-          // if the task was missed
+            // if the task was missed
           } else if (this.data[k].curriculum[i].tasks[j].status === 2) {
             ++prog[1];
           }
@@ -146,6 +146,37 @@ export class BoomComponent implements OnInit {
       }
     }
     return;
+  }
+
+  percent(event) {
+    const prog: number[] = [0, 0];
+    const percentile = event.target.value / 100;
+    // for each curriculum
+    for (let k = 0; k < this.data.length; k++) {
+      let completed = 0;
+      let length = 0;
+      // for each week
+      for (let i = 0; i < this.data[k].curriculum.length; i++) {
+        // for each task
+        for (let j = 0; j < this.data[k].curriculum[i].tasks.length; j++) {
+          if (this.data[k].curriculum[i].tasks[j].status === 1) {
+            ++completed;
+          }
+          length++;
+        }
+      }
+      console.log(completed / length);
+      console.log(percentile);
+      if (completed / length >= percentile) {
+        ++prog[0];
+      } else {
+        ++prog[1];
+      }
+    }
+    console.log(prog);
+    let clone2 = JSON.parse(JSON.stringify(this.doughnutChartData));
+    clone2 = prog;
+    this.doughnutChartData = clone2;
   }
 
   ngOnInit() {
