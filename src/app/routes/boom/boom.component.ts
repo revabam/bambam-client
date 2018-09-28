@@ -18,7 +18,9 @@ export class BoomComponent implements OnInit {
       {
         week: 'week 3', tasks: [{ name: 'ts', status: 1 }, { name: 'angular', status: 1 },
                                 { name: 'sql', status: 1 }, { name: 'dev-ops', status: 2 }]
-      }, { week: 'week 4', tasks: [] }]
+      }, { week: 'week 4', tasks: [] }, { week: 'week 5', tasks: [] }, { week: 'week 6', tasks: [] }
+      { week: 'week 7', tasks: [] }, { week: 'week 8', tasks: [] },
+      { week: 'week 9', tasks: [] }, { week: 'week 10', tasks: [] }, { week: 'week 11', tasks: [] }, { week: 'week 12', tasks: [] }]
   },
   {
     title: '1802 Feb05 Java - August', id: 2, curriculum:

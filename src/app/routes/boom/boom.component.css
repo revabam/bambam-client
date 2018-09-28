@@ -1,16 +1,27 @@
 table{
     width: 100%;
 }
-td{
+#dchart{
     height: 89.5%;
-    width: 50%;
+    width: 40%;
 }
-.chart{
-    margin-top: 100px;
+#bchart{
+    height: 95%;
+    width: 60%;
+}
+.dcard{
+    position: relative;
+    bottom: 70px;
     margin: 15px;
     background-color: rgb(238, 238, 238);
-    height: 530px;
-    width: 95%px;
+    height: 450px;
+    width: 95%;
+}
+.bcard{
+    margin: 15px;
+    background-color: rgb(238, 238, 238);
+    height: 590px;
+    width: 95%;
 }
 .banner{
     text-align:center;
