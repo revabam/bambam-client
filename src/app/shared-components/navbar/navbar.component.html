@@ -1,19 +1,24 @@
 <mat-toolbar *ngIf="show">
   <img src="../../../../assets/bam.png" height="100px" width="200px" alt="" srcset="" class="p-3">
   <span style="margin-right: 10px;">
-    <button mat-raised-button [color]="getColor('dashboard')" routerLink="dashboard">Dashboard</button>
+    <button mat-raised-button [color]="getColor('dashboard')" routerLink="dashboard">
+      Dashboard
+    </button>
   </span>
-
   <span style="margin-right: 10px;">
-    <button mat-raised-button [color]="getColor('calendar')" routerLink="calendar">Calendar</button>
+    <button mat-raised-button [color]="getColor('calendar')" routerLink="calendar">
+      Calendar
+    </button>
   </span>
-
   <span style="margin-right: 10px;">
-    <button mat-raised-button [color]="getColor('curriculum/editor')" routerLink="curriculum/editor">Curriculum Editor</button>
+    <button mat-raised-button [color]="getColor('curriculum/editor')" routerLink="curriculum/editor">
+      Curriculum Editor
+    </button>
   </span>
-
   <span style="margin-right: 10px;">
-    <button mat-raised-button [color]="getColor('boom')" routerLink="boom">VP/QC (Boom)</button>
+    <button mat-raised-button [color]="getColor('boom')" routerLink="boom">
+      VP/QC (Boom)
+    </button>
   </span>
   <span style="flex: 1 auto;"></span>
   <span style="margin-right: 10px;">
@@ -24,5 +29,4 @@
   <span>
     <button mat-raised-button (click)="logout()">Logout</button>
   </span>
-
 </mat-toolbar>
