@@ -1,0 +1,25 @@
+.fill-remaining-space {
+    flex: 1 1 auto;
+}
+.mat-button.mat-small {
+    min-width: 1%;
+}
+.mat-toolbar {
+    background-color: rgb(0,0,0,0);
+}
+.mat-expansion-panel-header {
+    background-color: #fafafa;
+}
+.mat-expansion-panel {
+    background-color: #fafafa;
+}
+.mat-toolbar, .mat-toolbar h1, .mat-toolbar h2, .mat-toolbar h3, .mat-toolbar h4, .mat-toolbar h5, .mat-toolbar h6 {
+    font: 500 12px/24px Roboto, "Helvetica Neue", sans-serif;
+    margin: 0;
+}
+
+.panel-bar {
+    background-color: lightgrey;
+    font-size: 120%;
+}
+

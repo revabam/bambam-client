@@ -33,7 +33,6 @@ export class CurriculumService {
    * The function used to fetch all the curriculums from the server.
    */
   getAll(): Observable<Curriculum[]> {
-    console.log('[LOG] - In CurriculumService.getAll()');
     return this.http.get<Curriculum[]>(environment.apiUrl + 'curriculums', HTTP_OPTIONS);
   }
 
@@ -41,7 +40,6 @@ export class CurriculumService {
    * The function used to post a curriculum to a server
    */
   post(curriculum: Curriculum): Observable<Curriculum> {
-    console.log('[LOG] - In CurriculumService.post()');
     return this.http.post<Curriculum>(environment.apiUrl + 'curriculums',
       curriculum, HTTP_OPTIONS);
   }
@@ -50,7 +48,6 @@ export class CurriculumService {
    * The function used to deactivate a curriculum in the server
    */
   deactivate(curriculum: Curriculum): Observable<Object> {
-    console.log('[LOG] - In CurriculumService.deactivate()');
     curriculum.name = this.deactivateName(curriculum.name);
     return this.http.put(environment.apiUrl + `curriculums/${curriculum.id}`,
       curriculum, HTTP_OPTIONS);
@@ -60,7 +57,6 @@ export class CurriculumService {
    * The function used to reactivate a curriculum in theserver
    */
   reactivate(curriculum: Curriculum): Observable<Object> {
-    console.log('[LOG] - In CurriculumService.reactivate()');
     curriculum.name = this.reactivateName(curriculum.name);
     return this.http.put(environment.apiUrl + `curriculums/${curriculum.id}`,
       curriculum, HTTP_OPTIONS);

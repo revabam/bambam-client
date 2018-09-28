@@ -33,31 +33,39 @@ export class TopicService {
    * The function used to fetch all the topics from the server.
    */
   getAll(): Observable<Topic[]> {
-    console.log('[LOG] - In TopicService.getAll()');
     return this.http.get<Topic[]>(environment.apiUrl + 'topics', HTTP_OPTIONS);
   }
 
+  /**
+   * Function used to retrieve topics by name
+   * @param name The name of the topic to be retrieved
+   */
   getByName(name: string): Observable<Topic[]> {
-    console.log('[LOG] - In TopicService.getByName()');
     return this.http.get<Topic[]>(environment.apiUrl + `topics?name=${name}&name=${this.deactivateName(name)}`, HTTP_OPTIONS);
   }
 
+  /**
+   * Function used to create topic.
+   * Only pass the name as the id should be incremented and placed onto the topic on the backend
+   * @param name Name of the topic
+   */
   add(name: string): Observable<Topic> {
-    console.log('[LOG] - In TopicService.getAll()');
     const newTopic = new Topic();
     newTopic.name = name;
     return this.http.post<Topic>(environment.apiUrl + 'topics', JSON.stringify(newTopic), HTTP_OPTIONS);
   }
 
+  /**
+   * Get a topic by its unique id
+   * @param id Id of the topic
+   */
   getTopicById(id: number): Observable<Topic> {
-    console.log('[LOG] - In TopicService.getTopicById()');
     return this.http.get<Topic>(environment.apiUrl + `topics/${id}`, HTTP_OPTIONS);
   }
   /**
    * The function used to deactivate a topic in the server
    */
   deactivate(topic: Topic): Observable<Object> {
-    console.log('[LOG] - In TopicService.deactivate()');
     topic.name = this.deactivateName(topic.name);
     return this.http.put(environment.apiUrl + `topics/${topic.id}`,
       topic, HTTP_OPTIONS);
@@ -67,7 +75,6 @@ export class TopicService {
    * The function used to reactive a topic in theserver
    */
   reactivate(topic: Topic): Observable<Object> {
-    console.log('[LOG] - In TopicService.reactivate()');
     topic.name = this.reactivateName(topic.name);
     return this.http.put(environment.apiUrl + `topics/${topic.id}`,
       topic, HTTP_OPTIONS);

@@ -1,34 +1,15 @@
-import { Curriculum } from './curriculum';
-import { Topic } from './topic';
-import * as cal_event from 'angular-calendar';
-
-// CalendarEvent is also used for angular material calendar so there is a name conflict
-// import as needed to avoid conflict
-// interface MyEvent extends cal_event.CalendarEvent {
-//     curriculum?: Curriculum;
-//     numWeeks?: number;
-//     topics?: Topic[];
-//     version?: number;
-//     dropped?: boolean;
-//   }
-
+/**
+ * calendar event model that can be persisted to the database
+ * not to be confused with the CalendarEvent interface that is used to populate the MaterialCalendar
+ *
+ * @author Marcin Salamon | Spark1806-USF-Java | Steven Kelsey
+ */
 export class CalendarEvent {
     id?: number;
     title: string;
     description: string;
-    status_id: number;
+    statusId: number;
     startDateTime: Date;
     endDateTime: Date;
-    calendarSubtopic_id: number;
-    user_id: number;
-    resizable: Object;
-    color: Object;
-    actions: Object;
-    draggable: boolean;
-    curriculum: Curriculum;
-    numWeeks: number;
-    topics: Topic[];
-    version: number;
-    dropped: boolean;
+    calendarSubtopicId: number;
 }
-

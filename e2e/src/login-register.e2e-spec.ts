@@ -1,7 +1,7 @@
 import { AppPage } from './app.po';
 import { BamUser } from 'src/app/models/bam-user';
 import { HttpClient, HttpRequest } from 'selenium-webdriver/http';
-import { environment } from '../../src/environments/environment';
+import { environment } from 'src/environments/environment';
 
 describe('Testing login and register functionality', () => {
   const request = require('request');

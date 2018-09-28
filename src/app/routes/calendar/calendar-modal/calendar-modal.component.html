@@ -1,0 +1,13 @@
+<h6 mat-dialog-title>Curriculum: {{data.curriculum.name.toUpperCase()}}</h6><mat-divider></mat-divider>
+<div mat-dialog-content>
+    <p>Number of Weeks in Curriculum: {{data.numWeeks}}</p><br>
+    <p>Curriculum Version: {{data.version}}</p><br>
+    <span>Topics:</span>
+    <ul>
+        <li *ngFor="let topic of data.topics">{{topic.name}}</li>
+    </ul>
+    <p>Subtopic: {{data.title}}</p><br>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="close()">Ok</button>
+</div>
