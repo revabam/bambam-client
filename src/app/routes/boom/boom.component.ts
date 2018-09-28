@@ -36,8 +36,7 @@ export class BoomComponent implements OnInit {
         week: 'week 4', tasks: [{ name: 'stuff', status: 1 }, { name: 'more stuff', status: 2 },
                                 { name: 'even more stuff', status: 3 }, { name: 'yet even more stuff :O', status: 1 }]
       }]
-  }
-  ];
+  }];
 
   completed: number[] = [];
   missed: number[] = [];
@@ -82,7 +81,7 @@ export class BoomComponent implements OnInit {
     }];
 
   // donut chart
-  public doughnutChartLabels: string[] = ['Percentile rached', 'Under percentile'];
+  public doughnutChartLabels: string[] = ['Percentile reached', 'Under percentile'];
   public doughnutChartData: number[] = [this.data.length, 0];
   public doughnutChartType = 'doughnut';
   public donutColors = [{ backgroundColor: ['green', 'yellow'] }];
