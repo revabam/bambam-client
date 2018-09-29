@@ -1,19 +1,13 @@
-<mat-card id="cInfo" style="border-radius: 20px 20px 20px 20px">
-  <h4 mat-dialog-title>Curriculum: {{data.curriculum.name.toUpperCase()}}</h4>
-  <mat-divider></mat-divider>
-  <div mat-dialog-content>
-    <p>Number of Weeks in Curriculum: {{data.numWeeks}}</p>
-    <br>
-    <p>Curriculum Version: {{data.version}}</p>
-    <br>
+<h6 mat-dialog-title>Curriculum: {{data.curriculum.name.toUpperCase()}}</h6><mat-divider></mat-divider>
+<div mat-dialog-content>
+    <p>Number of Weeks in Curriculum: {{data.numWeeks}}</p><br>
+    <p>Curriculum Version: {{data.version}}</p><br>
     <span>Topics:</span>
-    <ul id="details">
-      <li *ngFor="let topic of data.topics">{{topic.name}}</li>
+    <ul>
+        <li *ngFor="let topic of data.topics">{{topic.name}}</li>
     </ul>
-    <p>Subtopic: {{data.title}}</p>
-    <br>
-  </div>
-  <div mat-dialog-actions>
-    <button mat-raised-button (click)="close()">OK</button>
-  </div>
-</mat-card>
+    <p>Subtopic: {{data.title}}</p><br>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="close()">Ok</button>
+</div>

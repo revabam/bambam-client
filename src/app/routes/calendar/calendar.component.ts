@@ -26,6 +26,10 @@ import { StartMondayModalComponent } from './start-monday-modal/start-monday-mod
 import { CurriculumWeek } from '../../models/curriculum-week';
 
 const colors: any = {
+  random: {
+    primary: '#ad2121',
+    secondary: '#FAE3E3'
+  }
 };
 /**
  * class used to populate the calendar, implements the interface provided in the Angular Material Calendar
@@ -59,7 +63,7 @@ export class CustomCalendarEvent implements CalendarEvent<any> {
   selector: 'app-calendar',
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './calendar.component.html',
-  styleUrls: ['./calendar.scss']
+  styleUrls: ['./calendar.component.css']
 })
 export class CalendarComponent implements OnInit, DoCheck {
 
@@ -119,14 +123,6 @@ export class CalendarComponent implements OnInit, DoCheck {
 
   constructor(private modal: NgbModal, private calendarService: CalendarService, private subtopicService: SubTopicService,
     private topicService: TopicService, private dialog: MatDialog, private batchService: BatchService) { }
-
-    /**
-     * Allow for color change when the object is clicked e.g. from orange to grey
-     */
-    getColor(path: string) {
-      return (`/${path}` === window.location.pathname) ? 'accent' : '';
-    }
-
 
   /**
    * Life hook for loading all calendar services

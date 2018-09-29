@@ -1,16 +1,16 @@
-<div id="dashAll" *ngIf="this.user" class="container">
+<div *ngIf="this.user" class="container">
   <!-- WAGBar -->
   <div class="row">
     <div class="col-sm mb-3 mt-2">
-      <mat-card style="border-radius: 20px 20px 20px 20px" id="card">
+      <mat-card>
         <mat-card-header>
           <div class="p-2 w-100 bd-highlight">
-            <h1 id="title">
+            <h1>
               Welcome, {{this.user.firstName}}
             </h1>
           </div>
         </mat-card-header>
-        <mat-card-content id="week">
+        <mat-card-content style="font-size: 18px">
           <span>Week At a Glance Bar</span>
         </mat-card-content>
       </mat-card>
@@ -18,115 +18,120 @@
   </div>
   <!-- Dash -->
   <!-- Dash Info -->
-
   <div class="d-flex flex-row justify-content-center">
-    <span class="btn btn-outline-warn flex-fill justify-content-center" matTooltip="Show hidden batch information." matTooltipPosition="left">
-      <mat-slide-toggle id="batch" class="flex-fill" (click)="sidenav.toggle()">
+    <span class="btn btn-outline-warn flex-fill justify-content-center"
+      matTooltip="Show hidden batch information."
+      matTooltipPosition="left">
+      <mat-slide-toggle class="flex-fill" color="warn" (click)="sidenav.toggle()">
         Batch
       </mat-slide-toggle>
     </span>
-    <button mat-button (click)="todayIsOpen=true ; topicsIsOpen=false" class="flex-fill btn btn-outline-warn text-monospace">View Today</button>
-    <button mat-button (click)="topicsIsOpen=true ; todayIsOpen=false" class="flex-fill btn btn-outline-warn text-monospace">View Topics</button>
+      <button mat-button (click)="todayIsOpen=true ; topicsIsOpen=false"
+        class="flex-fill btn btn-outline-warn text-monospace">View Today</button>
+      <button mat-button (click)="topicsIsOpen=true ; todayIsOpen=false"
+        class="flex-fill btn btn-outline-warn text-monospace">View Topics</button>
   </div>
   <!-- SIDENAV -->
-  <mat-sidenav-container style="border-radius: 20px 20px 20px 20px">
+  <mat-sidenav-container>
     <mat-sidenav #sidenav mode="side">
-      <mat-card>
-        <mat-card-header id="batchHeader">
+      <mat-card class="border border-dark rounded justify-content-center">
+        <mat-card-header id="batchHeader"
+          class="rounded border border-dark justify-content-center">
           {{batch.name}}
         </mat-card-header>
         <mat-list dense>
-          <mat-list-item id="bInfo">
+          <mat-list-item>
             <span *ngIf="this.batch">&nbsp;Batch Information</span>
           </mat-list-item>
           <mat-divider></mat-divider>
-          <br>
-          <mat-list-item id="bInfo">
+          <mat-list-item>
             Batch Week: #
             <span *ngIf="this.batch">&nbsp;{{this.batchWeek}}</span>
           </mat-list-item>
           <mat-divider></mat-divider>
-          <br>
-          <mat-list-item id="bInfo">
+          <mat-list-item>
             Start Date:
             <span *ngIf="this.batch">&nbsp;{{this.batch.startDate | date}}</span>
           </mat-list-item>
           <mat-divider></mat-divider>
-          <br>
-          <mat-list-item id="bInfo">
+          <mat-list-item>
             End Date:
             <span *ngIf="this.batch">&nbsp;{{this.batch.endDate | date}}</span>
           </mat-list-item>
         </mat-list>
       </mat-card>
     </mat-sidenav>
-    <mat-card style="border-radius: 20px 20px 20px 20px" *ngIf="todayIsOpen">
-      <mat-card-header class="justify-content-center border border-dark rounded">
-        <div class="d-flex">
-          <div>
-            {{DashTitle}}
+      <mat-card *ngIf="todayIsOpen" class="border border-dark rounded justify-content-center">
+        <mat-card-header class="justify-content-center border border-dark rounded">
+          <div class="d-flex">
+            <div>
+              {{DashTitle}}
+            </div>
           </div>
-        </div>
-      </mat-card-header>
-      <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
-        <!--- Note that these columns can be defined in any order.
+        </mat-card-header>
+        <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+          <!--- Note that these columns can be defined in any order.
                   The actual rendered columns are set as a property on the row definition"
                 -->
-        <ng-container matColumnDef="time">
-          <th style="font-size: 1vw; font-weight: bold" mat-header-cell *matHeaderCellDef> Time </th>
-          <td mat-cell *matCellDef="let sub">
-            <a id="timeBadge" class="badge badge-secondary text-monospace">
-              {{ sub.time | date:"h:mm a z"}}</a>
-          </td>
-        </ng-container>
-        <!-- Position Column -->
-        <ng-container matColumnDef="flag" class="p-2 flex-fill bd-highlight">
-          <th style="font-size: 1vw; font-weight: bold" mat-header-cell *matHeaderCellDef class="p-2 flex-fill bd-highlight"> ID </th>
-          <td mat-cell *matCellDef="let sub; let i = index;" class="p-2 flex-fill bd-highlight">
-            <div (click)="flagRow(i,sub.flagged)">
-              <span *ngIf="!sub.flagged">
-                <mat-icon class="material-icons flagColor-24">
-                  remove
+          <ng-container matColumnDef="time">
+            <th mat-header-cell *matHeaderCellDef> Time </th>
+            <td mat-cell *matCellDef="let sub">
+              <a id="timeBadge" class="badge badge-secondary text-monospace">
+                {{ sub.time | date:"h:mm a z"}}</a>
+            </td>
+          </ng-container>
+          <!-- Position Column -->
+          <ng-container matColumnDef="flag" class="p-2 flex-fill bd-highlight">
+            <th mat-header-cell *matHeaderCellDef class="p-2 flex-fill bd-highlight"> ID </th>
+            <td mat-cell *matCellDef="let sub; let i = index;" class="p-2 flex-fill bd-highlight">
+              <div (click)="flagRow(i,sub.flagged)">
+                <span *ngIf="!sub.flagged">
+                  <mat-icon class="material-icons flagColor-24" >
+                    remove
+                  </mat-icon>
+                </span>
+                <mat-icon class="material-icons flagColor-24" *ngIf="sub.flagged">
+                  assistant_photo
                 </mat-icon>
-              </span>
-              <mat-icon class="material-icons flagColor-24" *ngIf="sub.flagged">
-                assistant_photo
-              </mat-icon>
-            </div>
-          </td>
-        </ng-container>
-        <ng-container matColumnDef="control" class="p-2 flex-fill bd-highlight">
-          <th style="font-size: 1vw; font-weight: bold" mat-header-cell *matHeaderCellDef> Controls{{i}} </th>
-          <td mat-cell *matCellDef="let sub; let i = index;">
-            <div class="d-flex">
-              <div class="flex-fill rounded border border-dark alert-success" #check (click)="statusToggle(i,1)" [class.alert-success]="sub.status === 1"
-                [class.border-dark]="sub.status === 1">
-                &nbsp;
-                <mat-icon class="material-icons matSpecs-24">
-                  done
-                </mat-icon>
-                &nbsp;
               </div>
-              <div class="flex-fill rounded border border-dark alert-danger" #missed (click)="statusToggle(i,0)" [class.alert-danger]="sub.status === 0"
-                [class.border-dark]="sub.status === 0">
-                &nbsp;
-                <mat-icon class="material-icons matSpecs-24">
-                  priority_high
-                </mat-icon>
-                &nbsp;
+            </td>
+          </ng-container>
+          <ng-container matColumnDef="control" class="p-2 flex-fill bd-highlight">
+            <th mat-header-cell *matHeaderCellDef> Controls{{i}} </th>
+            <td mat-cell *matCellDef="let sub; let i = index;">
+              <div class="d-flex">
+                <div class="flex-fill rounded border border-dark alert-success" #check
+                  (click)="statusToggle(i,1)"
+                  [class.alert-success]="sub.status === 1"
+                  [class.border-dark]="sub.status === 1">
+                  &nbsp;
+                  <mat-icon class="material-icons matSpecs-24">
+                    done
+                  </mat-icon>
+                  &nbsp;
+                </div>
+                <div class="flex-fill rounded border border-dark alert-danger" #missed
+                  (click)="statusToggle(i,0)"
+                  [class.alert-danger]="sub.status === 0"
+                  [class.border-dark]="sub.status === 0">
+                  &nbsp;
+                  <mat-icon class="material-icons matSpecs-24">
+                    priority_high
+                  </mat-icon>
+                  &nbsp;
+                </div>
               </div>
-            </div>
-          </td>
-        </ng-container>
-        <!-- Name Column -->
-        <ng-container matColumnDef="sub" class="p-2 flex-fill bd-highlight">
-          <th style="font-size: 1vw; font-weight: bold" mat-header-cell *matHeaderCellDef> Name </th>
-          <td mat-cell style="font-weight: bold" *matCellDef="let sub"> {{sub.name}} </td>
-        </ng-container>
-        <tr mat-header-row *matHeaderRowDef="headerColumns"></tr>
-        <tr mat-row *matRowDef="let row; columns: headerColumns;"></tr>
-      </table>
-    </mat-card>
+            </td>
+          </ng-container>
+          <!-- Name Column -->
+          <ng-container matColumnDef="sub" class="p-2 flex-fill bd-highlight">
+            <th mat-header-cell *matHeaderCellDef> Name </th>
+            <td mat-cell *matCellDef="let sub"> {{sub.name}} </td>
+          </ng-container>
+          <tr mat-header-row *matHeaderRowDef="headerColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: headerColumns;"></tr>
+        </table>
+      </mat-card>
     <app-topics *ngIf="topicsIsOpen"></app-topics>
   </mat-sidenav-container>
 </div>
