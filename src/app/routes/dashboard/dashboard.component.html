@@ -29,9 +29,9 @@
     <button mat-button (click)="topicsIsOpen=true ; todayIsOpen=false" class="flex-fill btn btn-outline-warn text-monospace">View Topics</button>
   </div>
   <!-- SIDENAV -->
-  <mat-sidenav-container style="border-radius: 20px 20px 20px 20px">
+  <mat-sidenav-container style="border-radius: 20px 20px 20px 20px; opacity: .9;">
     <mat-sidenav #sidenav mode="side">
-      <mat-card>
+      <mat-card id="sideNav">
         <mat-card-header id="batchHeader">
           {{batch.name}}
         </mat-card-header>
@@ -60,7 +60,7 @@
         </mat-list>
       </mat-card>
     </mat-sidenav>
-    <mat-card style="border-radius: 20px 20px 20px 20px" *ngIf="todayIsOpen">
+    <mat-card style="border-radius: 20px 20px 20px 20px; opacity: .9;" *ngIf="todayIsOpen">
       <mat-card-header class="justify-content-center border border-dark rounded">
         <div class="d-flex">
           <div>

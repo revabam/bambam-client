@@ -47,6 +47,7 @@ import { CurriculumWeekComponent } from './routes/curriculum-editor/curriculum-w
 @NgModule({
   declarations: [
     AppComponent,
+    NavbarComponent,
     DashboardComponent,
     CalendarComponent,
     CurriculumEditorComponent,
@@ -56,7 +57,7 @@ import { CurriculumWeekComponent } from './routes/curriculum-editor/curriculum-w
     LoginComponent,
     RegisterComponent,
     CalendarModalComponent,
-    DialogViewComponent, NavbarComponent,
+    DialogViewComponent,
     EventDuplicateModalComponent,
     StartMondayModalComponent,
     DialogViewComponent,
@@ -114,8 +115,7 @@ import { CurriculumWeekComponent } from './routes/curriculum-editor/curriculum-w
     NgbModalModule.forRoot(),
     FlatpickrModule.forRoot(),
     CalendarModule.forRoot(),
-    UserIdleModule.forRoot({idle: 600, timeout: 300, ping: 60}),
-    NavbarComponent
+    UserIdleModule.forRoot({idle: 600, timeout: 300, ping: 60})
   ],
   exports: [
     NavbarComponent,

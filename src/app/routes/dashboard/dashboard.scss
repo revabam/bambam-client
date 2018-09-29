@@ -89,7 +89,8 @@ button{
 // info displayed when the batch button is clicked
 #bInfo{
     font-weight: $weight;
-    font-size: .9vw;
+    font-size: 1.1vw;
+    
 }
 
 #batchHeader {
@@ -99,10 +100,14 @@ button{
     font-weight: $weight;
     color: $wColor;
     width: $w100;
-    height: $w100;
+    opacity: .9;
 }
 #dashAll{
     margin-top: 3vw;
+}
+
+#sideNav{
+    height: $w100;
 }
 
 #timeBadge {
