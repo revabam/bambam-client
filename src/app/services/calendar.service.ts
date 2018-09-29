@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { Curriculum } from '../models/curriculum';
 import { environment } from '../../environments/environment';
 import { CalendarEvent } from '../models/calendar-event';
-import { Subtopic } from '../models/subtopic';
+import { SubTopic } from '../models/subtopic';
 import { CalendarCurriculum } from '../models/calendar-curriculum';
 import { CalendarSubtopic } from '../models/calendar-subtopic';
 
@@ -73,9 +73,9 @@ export class CalendarService {
    * addCalendarEvent.
    * @param events An array of calendar events
    */
-  addCalendarEventList(events: CalendarEvent[]): Observable<CalendarEvent[]> {
+  addCalendarEvents(events: CalendarEvent[]): Observable<CalendarEvent[]> {
     const json = JSON.stringify(events);
-    return this.http.post<CalendarEvent[]>(environment.apiUrl + 'calendar-events-list', json, HTTP_OPTIONS);
+    return this.http.post<CalendarEvent[]>(environment.zuulUrl + 'calendars/calendars/event', json, HTTP_OPTIONS);
   }
 
   /**
@@ -91,22 +91,15 @@ export class CalendarService {
    * Returns all stored calendar events.
    * This should be used when client side is connected to server side.
    */
-  getCalendarEvents(): Observable<CalendarEvent[]> {
-    return this.http.get<CalendarEvent[]>(environment.apiUrl + 'calendar-events', HTTP_OPTIONS);
-  }
-
-  /**
-   * For use with json server, returns the array of calendar events
-   */
-  getCalendarEventsList(): Observable<CalendarEvent[]> {
-    return this.http.get<any>(environment.apiUrl + 'calendar-events-list', HTTP_OPTIONS);
+  getCalendarEvents(id: number): Observable<CalendarEvent[]> {
+    return this.http.get<CalendarEvent[]>(environment.zuulUrl + `calendars/calendars/event/trainer/${id}`, HTTP_OPTIONS);
   }
 
   /**
    * Retrieve all stored calendar subtopics
    */
-  getCalendarSubtopics(): Observable<Subtopic[]> {
-    return this.http.get<Subtopic[]>(environment.apiUrl + 'calendar-subtopics', HTTP_OPTIONS);
+  getCalendarSubtopics(): Observable<SubTopic[]> {
+    return this.http.get<SubTopic[]>(environment.apiUrl + 'calendar-subtopics', HTTP_OPTIONS);
   }
 
   /**

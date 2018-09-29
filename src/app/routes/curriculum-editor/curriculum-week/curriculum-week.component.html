@@ -1,0 +1,18 @@
+<mat-expansion-panel *ngIf="week">
+  <mat-expansion-panel-header>
+    <mat-panel-title>
+      Week #{{week.weekNum}}
+    </mat-panel-title>
+    <mat-panel-description>
+      info graphics here
+    </mat-panel-description>
+  </mat-expansion-panel-header>
+  <div class="container">
+    <div class="row">
+      <div class="col-sm" *ngFor="let day of week.curriculumDays">
+        <app-curriculum-day [day]='day'></app-curriculum-day>
+      </div>
+    </div>
+  </div>
+
+</mat-expansion-panel>

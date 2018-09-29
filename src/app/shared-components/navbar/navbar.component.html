@@ -1,33 +1,28 @@
 <mat-toolbar *ngIf="show">
-    <img src="../../../../assets/bam.png" height="100px" width="200px" alt="" srcset="" class="p-3">
+  <img src="../../../../assets/bam.png" height="100px" width="200px" alt="" srcset="" class="p-3">
   <span style="margin-right: 10px;">
-    <a>
-      <button mat-raised-button [color]="getColor('dashboard')" routerLink="dashboard">Dashboard</button>
-    </a>
+    <button mat-raised-button [color]="getColor('dashboard')" routerLink="dashboard">Dashboard</button>
   </span>
 
   <span style="margin-right: 10px;">
-    <a>
-      <button mat-raised-button [color]="getColor('calendar')" routerLink="calendar">Calendar</button>
-    </a>
+    <button mat-raised-button [color]="getColor('calendar')" routerLink="calendar">Calendar</button>
   </span>
 
   <span style="margin-right: 10px;">
-    <a>
-      <button mat-raised-button [color]="getColor('curriculum/editor')" routerLink="curriculum/editor">Curriculum Editor</button>
-    </a>
+    <button mat-raised-button [color]="getColor('curriculum/editor')" routerLink="curriculum/editor">Curriculum Editor</button>
   </span>
 
   <span style="margin-right: 10px;">
-    <a>
-      <button mat-raised-button [color]="getColor('boom')" routerLink="boom">VP/QC (Boom)</button>
-    </a>
+    <button mat-raised-button [color]="getColor('boom')" routerLink="boom">VP/QC (Boom)</button>
   </span>
-
   <span style="flex: 1 auto;"></span>
-  <span>
-    <a>
-      <button mat-raised-button (click)="logout()">Logout</button>
-    </a>
+  <span style="margin-right: 10px;">
+    <button mat-raised-button (click)="editUserModal()">
+      <mat-icon>person</mat-icon>{{user.lastName}}
+    </button>
   </span>
+  <span>
+    <button mat-raised-button (click)="logout()">Logout</button>
+  </span>
+
 </mat-toolbar>

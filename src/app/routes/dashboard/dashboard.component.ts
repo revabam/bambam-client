@@ -3,9 +3,7 @@ import { BamUser } from '../../models/bam-user';
 import { Router } from '@angular/router';
 import { Batch } from '../../models/batch';
 import { BatchService } from '../../services/batch.service';
-import { UserIdleService } from 'angular-user-idle';
-import { timeout } from 'q';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { Curriculum } from '../../models/curriculum';
 import { UserService } from '../../services/user.service';
 
 /**
@@ -14,7 +12,46 @@ import { UserService } from '../../services/user.service';
  * information and batch information to the user.
  *
  * @author Bradley Walker | Khaleel Williams | 1806-Jun18-USF-Java | Wezley Singleton
+ * @author Joey Shannon | Drake Mapel | 1806-Spark | Steven Kelsey
  */
+export interface Topicz {
+  time: number;
+  flagged: number;
+  id: number;
+  name: string;
+  status: number;
+}
+
+const topics: Topicz[] = [
+  {
+    flagged: 0,
+    id: 1,
+    name: 'Java Data Types',
+    time: 1537899180000,
+    status: 0
+  },
+  {
+    flagged: 0,
+    id: 2,
+    name: 'Panels & Softskills',
+    time: 1537899180000,
+    status: 1
+  },
+  {
+    flagged: 0,
+    id: 3,
+    name: 'Overwatch Gameplay Trailers',
+    time: 1537899180000,
+    status: 0
+  },
+  {
+    flagged: 0,
+    id: 4,
+    name: 'Lifecycle of a Green Bean',
+    time: 1537899180000,
+    status: 1
+  }
+];
 
 @Component({
   selector: 'app-dashboard',
@@ -22,7 +59,8 @@ import { UserService } from '../../services/user.service';
   styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent implements OnInit {
-
+  dataSource = topics;
+  headerColumns: string[] = ['time', 'flag', 'sub',  'control'];
   user: BamUser;
   batch: Batch;
   batchWeek: number;
@@ -30,6 +68,13 @@ export class DashboardComponent implements OnInit {
   editing = false;
   firstName: string;
   lastName: string;
+  visibilityIcon = [
+    {num: 0, icon: 'visibility_off' },
+    {num: 1, icon: 'visibility'}
+  ];
+  DashTitle = 'Today';
+  todayIsOpen: boolean;
+  topicsIsOpen: boolean;
 
   constructor(
     private router: Router,
@@ -53,7 +98,7 @@ export class DashboardComponent implements OnInit {
         need to check if the user is a trainer or not, But this is where
         you might want to do that.
       */
-      this.batchService.getBatchesByTrainerId(this.user.id).subscribe(
+      this.batchService.getBatchesByTrainerId(12).subscribe(
         result => {
           // If the result is not null and not empty
           if (result && result.length !== 0) {
@@ -79,6 +124,21 @@ export class DashboardComponent implements OnInit {
           }
         }
       );
+      this.todayIsOpen = true;
+    }
+  }
+
+  statusToggle(index, yesNo) {
+    console.log(index, yesNo);
+    this.dataSource[index].status = yesNo;
+  }
+
+  flagRow(index, flag) {
+    console.log('item' + index + 'flagis' + this.dataSource[index].flagged);
+    if (!flag) {
+      this.dataSource[index].flagged = 1;
+    } else {
+      this.dataSource[index].flagged = 0;
     }
   }
 
