@@ -47,6 +47,7 @@ export class TopicPoolComponent implements OnInit {
   getAllTopics (): void {
     this.topicService.getAll().subscribe(topics => {
       this.topics = topics;
+      this.topicService.topics = topics;
       console.log('topics recieved');
       console.log(topics);
     });
