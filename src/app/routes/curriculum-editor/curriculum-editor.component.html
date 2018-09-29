@@ -33,6 +33,10 @@
                     <mat-toolbar>
                       <span *ngIf="curriculum.name === cname">
                         Version: {{curriculum.version}}
+                        <div *ngIf="curriculum.status == 1">DRAFT</div>
+                        <div *ngIf="curriculum.status == 2">NEEDS APPROVAL</div>
+                        <div *ngIf="curriculum.status == 3">READ ONLY</div>
+                        <div *ngIf="curriculum.status == 4">MASTER</div>
                       </span>
                       <span *ngIf="curriculum.name !== cname">
                         <del>Version: {{curriculum.version}}</del>
