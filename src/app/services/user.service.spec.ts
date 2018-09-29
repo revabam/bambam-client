@@ -10,6 +10,7 @@ describe('UserService', () => {
     });
   });
 
+  // Testing all methods within UserService
   it('should be created', inject([UserService], (service: UserService) => {
     expect(service).toBeTruthy();
   }));
@@ -18,9 +19,9 @@ describe('UserService', () => {
 async(inject([UserService], (service: UserService) => {
   expect(service.getUserByEmail).toBeTruthy();
 })));
+
   it('should have register',
 async(inject([UserService], (service: UserService) => {
   expect(service.register).not.toBeNull();
-  console.log(service);
 })));
 });

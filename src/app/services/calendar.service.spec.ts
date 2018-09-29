@@ -16,7 +16,7 @@ describe('CalendarService', () => {
   it('should call getCurriculumById', function() {
     const calendar = new CalendarService(null);
     spyOn(calendar, 'getCurriculumById');
-    calendar.getCurriculumById(23);
+    calendar.getCurriculumById(0);
     expect(calendar.getCurriculumById).toHaveBeenCalled();
   });
   it('should call getCurriculum', function() {
