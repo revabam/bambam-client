@@ -22,15 +22,4 @@ describe('BoomComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
-
-  it('should contain "boom works!"', () => {
-    const boomElement: HTMLElement = fixture.nativeElement;
-    expect(boomElement.textContent).toContain('boom works!');
-  });
-
-  it('should have <p> with "boom works!"', () => {
-    const boomElement: HTMLElement = fixture.nativeElement;
-    const p = boomElement.querySelector('p');
-    expect (p.textContent).toContain('boom !');
-  });
 });

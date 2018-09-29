@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 /* You can add global styles to this file, and also import other style files */
 @import "~ngx-bootstrap/datepicker/bs-datepicker.css";
 
@@ -54,3 +55,12 @@ button{
     border-radius: 13px 13px 13px 13px;
     width: 7vw;
   }
+=======
+#bg{
+    background-image: url("C:/Users/Richard/Desktop/background_pictures/amaterasu.jpg");
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center; 
+    background-size: cover; 
+}
+>>>>>>> 32ffa8643c49009daa3ba6ed9dc2bf773e2896f4
