@@ -11,11 +11,6 @@ import { DialogViewComponent } from '../routes/dialog-view/dialog-view.component
 
 export const appRoutes: Routes = [
     {
-        path: '',
-        pathMatch: 'full',
-        redirectTo: 'dashboard'
-    },
-    {
         path: 'dashboard',
         component: DashboardComponent
     },
@@ -41,17 +36,12 @@ export const appRoutes: Routes = [
     },
 
     {
-        path: 'curriculum/create-version',
-        component: CreateVersionComponent
-    },
-
-    {
         path: 'boom',
         component: BoomComponent
     },
-
     {
-        path: 'curriculum/dialog-view',
-        component: DialogViewComponent
+        path: '',
+        pathMatch: 'full',
+        redirectTo: 'dashboard'
     }
 ];
