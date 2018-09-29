@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { CurriculumService } from '../../services/curriculum.service';
 
 @Component({
   selector: 'app-boom',
@@ -7,6 +8,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class BoomComponent implements OnInit {
 
+  data2 = [];
   data = [{
     title: '1806Spark Jun25 Java - Steven', id: 1, curriculum:
       [{ week: 'week 1', tasks: [{ name: 'html', status: 1 }, { name: 'css', status: 1 },
@@ -18,9 +20,15 @@ export class BoomComponent implements OnInit {
       {
         week: 'week 3', tasks: [{ name: 'ts', status: 1 }, { name: 'angular', status: 1 },
                                 { name: 'sql', status: 1 }, { name: 'dev-ops', status: 2 }]
-      }, { week: 'week 4', tasks: [] }, { week: 'week 5', tasks: [] }, { week: 'week 6', tasks: [] }
-      { week: 'week 7', tasks: [] }, { week: 'week 8', tasks: [] },
-      { week: 'week 9', tasks: [] }, { week: 'week 10', tasks: [] }, { week: 'week 11', tasks: [] }, { week: 'week 12', tasks: [] }]
+      }, { week: 'week 4', tasks: [{ name: 'ts', status: 4 }, { name: 'angular', status: 4 }] },
+      { week: 'week 5', tasks: [{ name: 'ts', status: 4 }, { name: 'angular', status: 4 }] },
+      { week: 'week 6', tasks: [{ name: 'ts', status: 4 }, { name: 'angular', status: 4 }] },
+      { week: 'week 7', tasks: [{ name: 'ts', status: 4 }, { name: 'angular', status: 4 }] },
+      { week: 'week 8', tasks: [{ name: 'ts', status: 4 }, { name: 'angular', status: 4 }] },
+      { week: 'week 9', tasks: [{ name: 'ts', status: 4 }, { name: 'angular', status: 4 }] },
+      { week: 'week 10', tasks: [{ name: 'ts', status: 4 }, { name: 'angular', status: 4 }] },
+      { week: 'week 11', tasks: [{ name: 'ts', status: 4 }, { name: 'angular', status: 4 }] },
+      { week: 'week 12', tasks: [{ name: 'ts', status: 4 }, { name: 'angular', status: 4 }] }]
   },
   {
     title: '1802 Feb05 Java - August', id: 2, curriculum:
@@ -45,7 +53,7 @@ export class BoomComponent implements OnInit {
   canceled: number[] = [];
   weeks: string[] = [];
 
-  constructor() { }
+  constructor(private curriculumServ: CurriculumService) { }
 
   // bar chart
   public barChartOptions: any = {
@@ -156,7 +164,9 @@ export class BoomComponent implements OnInit {
       for (let i = 0; i < this.data[k].curriculum.length; i++) {
         // for each task
         for (let j = 0; j < this.data[k].curriculum[i].tasks.length; j++) {
-          if (this.data[k].curriculum[i].tasks[j].status === 1) {
+          if (this.data[k].curriculum[i].tasks[j].status === 4 || this.data[k].curriculum[i].tasks[j].status === 3) {
+            continue;
+          } else if (this.data[k].curriculum[i].tasks[j].status === 1) {
             ++completed;
           }
           length++;
@@ -176,6 +186,7 @@ export class BoomComponent implements OnInit {
 
   ngOnInit() {
     this.getWeeklyProgress(0);
+    this.curriculumServ.getAll().subscribe( x => { this.data2 = x; console.log(x); } );
   }
 }
 
