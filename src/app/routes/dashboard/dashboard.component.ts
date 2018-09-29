@@ -12,33 +12,44 @@ import { UserService } from '../../services/user.service';
  * information and batch information to the user.
  *
  * @author Bradley Walker | Khaleel Williams | 1806-Jun18-USF-Java | Wezley Singleton
+ * @author Joey Shannon | Drake Mapel | 1806-Spark | Steven Kelsey
  */
 export interface Topicz {
+  time: number;
+  flagged: number;
   id: number;
   name: string;
-  time: string;
+  status: number;
 }
 
 const topics: Topicz[] = [
   {
+    flagged: 0,
     id: 1,
-    name: 'science',
-    time: 'noon'
+    name: 'Java Data Types',
+    time: 1537899180000,
+    status: 0
   },
   {
+    flagged: 0,
     id: 2,
-    name: 'math',
-    time: 'noon'
+    name: 'Panels & Softskills',
+    time: 1537899180000,
+    status: 1
   },
   {
+    flagged: 0,
     id: 3,
-    name: 'mom',
-    time: 'noon'
+    name: 'Overwatch Gameplay Trailers',
+    time: 1537899180000,
+    status: 0
   },
   {
+    flagged: 0,
     id: 4,
-    name: 'SAT prep',
-    time: 'noon'
+    name: 'Lifecycle of a Green Bean',
+    time: 1537899180000,
+    status: 1
   }
 ];
 
@@ -49,8 +60,7 @@ const topics: Topicz[] = [
 })
 export class DashboardComponent implements OnInit {
   dataSource = topics;
-  headerColumns: string[] = ['idno', 'sub', 'time', 'control'];
-
+  headerColumns: string[] = ['time', 'flag', 'sub',  'control'];
   user: BamUser;
   batch: Batch;
   batchWeek: number;
@@ -58,12 +68,13 @@ export class DashboardComponent implements OnInit {
   editing = false;
   firstName: string;
   lastName: string;
-  isOpen: boolean;
-  visibilityIcon = [{num: 0, icon: 'visibility_off' },
-                    {num: 1, icon: 'visibility'}];
+  visibilityIcon = [
+    {num: 0, icon: 'visibility_off' },
+    {num: 1, icon: 'visibility'}
+  ];
   DashTitle = 'Today';
-
-
+  todayIsOpen: boolean;
+  topicsIsOpen: boolean;
 
   constructor(
     private router: Router,
@@ -77,7 +88,6 @@ export class DashboardComponent implements OnInit {
   * and info about the batch they are associated with.
   */
   ngOnInit() {
-
     this.user = JSON.parse(sessionStorage.getItem('user'));
 
     if (!this.user) {
@@ -114,15 +124,23 @@ export class DashboardComponent implements OnInit {
           }
         }
       );
+      this.todayIsOpen = true;
     }
   }
 
+  statusToggle(index, yesNo) {
+    console.log(index, yesNo);
+    this.dataSource[index].status = yesNo;
+  }
 
-  growl(x) {
-    console.log(x);
-       }
-
-
+  flagRow(index, flag) {
+    console.log('item' + index + 'flagis' + this.dataSource[index].flagged);
+    if (!flag) {
+      this.dataSource[index].flagged = 1;
+    } else {
+      this.dataSource[index].flagged = 0;
+    }
+  }
 
   /**
    * This method is used t sort throught a list of batches. Batches
@@ -130,9 +148,6 @@ export class DashboardComponent implements OnInit {
    * @param a A batch
    * @param b Another batch
    */
-
-
-
   compareBatches(a: Batch, b: Batch) {
     if (a.startDate < b.startDate) {
       return -1;
