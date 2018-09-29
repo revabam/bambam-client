@@ -28,14 +28,12 @@
   <mat-card-content>
     <cdk-drop droppable id='{{weekNum * 10 + day.dayNum}}' [data]="day.subTopics" [connectedTo]="['{{weekNum * 10 + day.dayNum + 1}}']" (onDrop)="onSubTopicDrop($event)" (dropped)="onSubTopicRearranged($event)" class="list-group">
       <li *ngIf="!day.subTopics || day.subTopics.length == 0" class="list-group-item">Drop content here</li>
-      <li *ngFor="let subTopic of day.subTopics; let i=index" ng-mouseenter="test[i]=true" ng-mouseleave="test[i]=false" class="list-group-item" cdkDrag>
-        <p>{{subTopic.name}}</p>
-        <span class="add-space"></span>
-        <button mat-button mat-icon-button aria-label="add" (click)="removeSubTopic(i)" *ngIf="test[i]">
-          <mat-icon color="secondary">add</mat-icon>
-        </button>
+      <li *ngFor="let subTopic of day.subTopics; let i = index" class="list-group-item cardsize">
+        <mat-icon class="cardbtn dragbtn" cdkDrag>format_line_spacing</mat-icon>
+        <mat-icon class="cardbtn closebtn" (click)="removeSubTopic(i)">close</mat-icon>
+        <p class="subTopicName">{{subTopic.name}}</p>
       </li>
-      
+
 
     </cdk-drop>
   </mat-card-content>
