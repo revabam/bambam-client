@@ -75,7 +75,7 @@ export class CalendarService {
    */
   addCalendarEvents(events: CalendarEvent[]): Observable<CalendarEvent[]> {
     const json = JSON.stringify(events);
-    return this.http.post<CalendarEvent[]>(environment.zuulUrl + 'calendars/event', json, HTTP_OPTIONS);
+    return this.http.post<CalendarEvent[]>(environment.zuulUrl + 'calendars/calendars/event', json, HTTP_OPTIONS);
   }
 
   /**
@@ -92,7 +92,14 @@ export class CalendarService {
    * This should be used when client side is connected to server side.
    */
   getCalendarEvents(id: number): Observable<CalendarEvent[]> {
-    return this.http.get<CalendarEvent[]>(environment.zuulUrl + `calendars/event/trainer/${id}`, HTTP_OPTIONS);
+    return this.http.get<CalendarEvent[]>(environment.zuulUrl + `calendars/calendars/event/trainer/${id}`, HTTP_OPTIONS);
+  }
+
+  /**
+   * Returns a calendar event by id
+   */
+  getCalendarEventsById(id: number): Observable<CalendarEvent> {
+    return this.http.get<CalendarEvent>(environment.zuulUrl + `calendars/calendars/event/${id}`, HTTP_OPTIONS);
   }
 
   /**
