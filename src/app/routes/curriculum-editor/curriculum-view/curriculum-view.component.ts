@@ -20,6 +20,7 @@ export class CurriculumViewComponent implements OnInit {
   }
 
   onWeekChange(event: CurriculumWeek) {
+    console.log('week changed');
     const index = this.curriculum.curriculumWeeks.findIndex( x => x.weekNum === event.weekNum);
     this.curriculum.curriculumWeeks[index] = event;
     this.curriculumService.put(this.curriculum).subscribe(
@@ -27,7 +28,6 @@ export class CurriculumViewComponent implements OnInit {
         console.log('curriculum updated');
       }
     );
-    console.log(JSON.stringify(this.curriculum));
   }
 
 }
