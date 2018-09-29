@@ -1,23 +1,13 @@
-td{
-    height: 89.4%;
-    width: 50%;
-}
-
 .chart{
     margin-top: 100px;
     margin: 15px;
     background-color: rgb(238, 238, 238);
-    height: 530px;
-    width: 720px;
+    height: 450px;
+    width: 730px;
 }
 .banner{
     text-align:center;
     background-color: orange;
     margin-bottom: 15px;
     padding: 8px;
-}
-#batchSelect{
-    margin-top: 30px;
-    margin-left: 31px;
-    width: 30%;
 }
