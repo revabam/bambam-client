@@ -10,7 +10,7 @@ describe('UserService', () => {
     });
   });
 
-  // Testing all methods within UserService
+  // Testing all methods within the UserService
   it('should be created', inject([UserService], (service: UserService) => {
     expect(service).toBeTruthy();
   }));
