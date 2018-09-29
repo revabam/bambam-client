@@ -37,6 +37,8 @@ export class CurriculumDayComponent implements OnInit {
    * @author - Chinedu Ozodi | 1806-Sep-18-USF-Java | Steven Kelsey
    */
   onSubTopicRearranged(event: any) {
+    console.log('subTopic rearranged');
+    console.log(event);
     const previousIndex: number = event.previousIndex;
     const currentIndex: number = event.currentIndex;
     const previousSubTopic = this.day.subTopics[previousIndex];

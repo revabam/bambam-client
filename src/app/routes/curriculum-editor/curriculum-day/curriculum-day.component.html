@@ -26,7 +26,7 @@
     </mat-card-title>
   </mat-card-title-group>
   <mat-card-content>
-    <cdk-drop droppable (onDrop)="onSubTopicDrop($event)" (dropped)="onSubTopicRearranged($event)" class="list-group">
+    <cdk-drop droppable id='{{weekNum * 10 + day.dayNum}}' [data]="day.subTopics" [connectedTo]="['{{weekNum * 10 + day.dayNum + 1}}']" (onDrop)="onSubTopicDrop($event)" (dropped)="onSubTopicRearranged($event)" class="list-group">
       <li *ngIf="!day.subTopics || day.subTopics.length == 0" class="list-group-item">Drop content here</li>
       <li *ngFor="let subTopic of day.subTopics; let i = index" class="list-group-item cardsize">
         <mat-icon class="cardbtn dragbtn" cdkDrag>format_line_spacing</mat-icon>
