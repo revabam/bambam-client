@@ -10,24 +10,8 @@
       </mat-toolbar>
     </mat-card-header>
     <mat-card-content style="overflow: auto; height: 470px;" *ngIf="curriculum.curriculumWeeks">
-        <mat-expansion-panel *ngFor="let week of curriculum.curriculumWeeks">
-            <mat-expansion-panel-header>
-              <mat-panel-title>
-                Week #{{week.weekNum}}
-              </mat-panel-title>
-              <mat-panel-description>
-                info graphics here
-              </mat-panel-description>
-            </mat-expansion-panel-header>
-          
-            <div class="container">
-              <div class="row">
-                <div class="col-sm" *ngFor="let day of week.curriculumDays">
-                  <app-curriculum-day [day]='day'></app-curriculum-day>
-                </div>
-              </div>
-            </div>
-          
-          </mat-expansion-panel>
+      <span *ngFor="let week of curriculum.curriculumWeeks">
+        <app-curriculum-week [week]='week'></app-curriculum-week>
+      </span>
     </mat-card-content>
   </mat-card>

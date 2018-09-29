@@ -1,25 +1,32 @@
 <table>
     <tr>
         <td>
-            <div class="chart">
-                <div class="banner">
+            <mat-card class="chart">
+                <mat-card-title class="banner">
                     <h2>Overall Progress</h2>
-                </div>
-                <div style="display: block">
-                    <canvas baseChart [data]="doughnutChartData" [labels]="doughnutChartLabels" [chartType]="doughnutChartType"></canvas>
-                </div>
-            </div>
+                </mat-card-title>
+                <mat-card-content>
+                    <canvas baseChart [data]="doughnutChartData" [labels]="doughnutChartLabels" [chartType]="doughnutChartType" [colors]="donutColors"></canvas>
+                    <mat-form-field>
+                        <input type="number" matInput>
+                    </mat-form-field>
+                </mat-card-content>
+            </mat-card>
         </td>
         <td>
-            <div class="chart">
-                <div class="banner">
+            <mat-card class="chart">
+                <mat-card-title class="banner">
                     <h2>Weekly Progress</h2>
-                </div>
-                <div style="display: block">
+                </mat-card-title>
+                <mat-card-content>
                     <canvas baseChart [datasets]="barChartData" [labels]="barChartLabels" [options]="barChartOptions" [legend]="barChartLegend"
-                        [chartType]="barChartType"></canvas>
-                </div>
-            </div>
+                        [chartType]="barChartType" [colors]="barColors"></canvas>
+                    <mat-select placeholder="1806Spark Jun25 Java - Steven" [(value)]="selected" (selectionChange)="selectedCurriculum($event)"
+                        id="batchSelect">
+                        <mat-option *ngFor='let batch of this.data' [value]='batch.id'>{{batch.title}}</mat-option>
+                    </mat-select>
+                </mat-card-content>
+            </mat-card>
         </td>
     </tr>
 </table>

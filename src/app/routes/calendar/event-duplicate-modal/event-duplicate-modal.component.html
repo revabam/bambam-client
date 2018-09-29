@@ -1,12 +1,14 @@
 <mat-card style="border-radius: 20px 20px 20px 20px">
-<h6 mat-dialog-title>Event Duplicate</h6><mat-divider></mat-divider>
-<div mat-dialog-content>
-    <p>Would you like to overwrite the event time?</p><br>
-    <p>{{data.eventName}}</p>
-    <p>{{data.eventDate}}</p>
-</div>
-<div mat-dialog-actions>
-    <button mat-button (click)="overrideEvent()">Yes</button>
-  <button mat-button (click)="close()">No</button>
-</div>
+    <h6 mat-dialog-title>Event Duplicate</h6>
+    <mat-divider></mat-divider>
+    <div mat-dialog-content>
+        <p>Would you like to overwrite the event time?</p>
+        <br>
+        <p>{{data.eventName}}</p>
+        <p>{{data.eventDate}}</p>
+    </div>
+    <div mat-dialog-actions>
+        <button mat-button (click)="overrideEvent()">Yes</button>
+        <button mat-button (click)="close()">No</button>
+    </div>
 </mat-card>
