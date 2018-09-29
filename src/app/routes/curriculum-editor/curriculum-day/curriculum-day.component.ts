@@ -1,5 +1,7 @@
+import { SubTopic } from './../../../models/subtopic';
 import { CurriculumDay } from './../../../models/curriculum-day';
 import { Component, OnInit, Input, Output, EventEmitter, DoCheck } from '@angular/core';
+import { Directive, HostBinding, HostListener } from '@angular/core';
 
 @Component({
   selector: 'app-curriculum-day',
@@ -8,10 +10,9 @@ import { Component, OnInit, Input, Output, EventEmitter, DoCheck } from '@angula
 })
 export class CurriculumDayComponent implements OnInit {
 
-  test = {};
-
   @Input() day: CurriculumDay;
   @Output() dayChange: EventEmitter<CurriculumDay> = new EventEmitter<CurriculumDay>();
+
   constructor() { }
 
   ngOnInit() {
@@ -55,7 +56,6 @@ export class CurriculumDayComponent implements OnInit {
    */
   removeSubTopic(index: number) {
     this.day.subTopics.splice(index, 1);
-
     // Tells parent that there has been a change to day variable
     this.dayChange.emit(this.day);
   }
