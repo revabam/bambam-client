@@ -52,7 +52,7 @@ export class NavbarComponent implements OnInit {
     @return       'primary' or '' depending on which page the user is on
   */
   getColor(path: string) {
-    return (`/${path}` === window.location.pathname) ? 'primary' : '';
+    return (`/${path}` === window.location.pathname) ? 'accent' : '';
   }
 
   /*

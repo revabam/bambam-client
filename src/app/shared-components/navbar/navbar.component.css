@@ -1,3 +1,25 @@
+.navbar-item {
+    flex: 1 1 auto;
+}
+
+.active-link {
+    color: rgb(230, 113, 36) !important;
+    border-bottom: 2px solid rgb(255, 255, 255) !important;
+}
+
 mat-toolbar {
     background-color: rgb(156, 156, 156, 0) !important;
+}
+
+button{
+    font-weight: bold;
+    color: rgba(255, 102, 0, 0.959);
+    border-style: solid;
+    border-width: 3px;
+    font-size: .9vw;
+    opacity: .8;
+}
+button:hover{
+    box-shadow: rgb(255, 115, 0) 0px 0px 3px 3px;
+    opacity: 1;
 }

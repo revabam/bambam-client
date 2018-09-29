@@ -56,7 +56,7 @@ const topics: Topicz[] = [
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
-  styleUrls: ['./dashboard.component.css']
+  styleUrls: ['./dashboard.scss']
 })
 export class DashboardComponent implements OnInit {
   dataSource = topics;

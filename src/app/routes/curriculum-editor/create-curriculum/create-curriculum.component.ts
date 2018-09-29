@@ -8,7 +8,7 @@ import { CurriculumDay } from '../../../models/curriculum-day';
 @Component({
   selector: 'app-create-curriculum',
   templateUrl: './create-curriculum.component.html',
-  styleUrls: ['./create-curriculum.component.css']
+  styleUrls: ['./create-curriculum.scss']
 })
 export class CreateCurriculumComponent implements OnInit {
 

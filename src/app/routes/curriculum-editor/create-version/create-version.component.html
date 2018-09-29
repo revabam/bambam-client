@@ -1,28 +1,30 @@
-<h6 mat-dialog-title class="col" style="margin-bottom: 10px;">Create a new version</h6>
-<div mat-dialog-content>
-  <mat-form-field class="col-9">
-    <mat-select placeholder="Curriculum Name" [(ngModel)]="selectedCurriculumName">
-      <mat-option *ngFor="let curriculumName of data.curriculumNames" [value]="curriculumName">
-        {{curriculumName}}
-      </mat-option>
-    </mat-select>
-  </mat-form-field>
-  <br />
-  <mat-form-field class="col-9">
-    <input matInput [(ngModel)]="numberOfWeeks" placeholder="Number of weeks">
-  </mat-form-field>
-  <br />
-  <mat-form-field class="col-9">
-    <mat-select multiple placeholder="Select Topics" [(ngModel)]="selectedTopics">
-      <mat-option *ngFor="let topic of data.topics" [value]="topic">
-        {{topic.name}}
-      </mat-option>
-    </mat-select>
-  </mat-form-field>
-</div>
-<div mat-dialog-actions>
-  <div class="col">
-    <button mat-raised-button (click)="close()">Cancel</button>
-    <button mat-raised-button color="primary" (click)="add()">Ok</button>
+<mat-card>
+  <h6 mat-dialog-title class="col" style="border-radius: 20px 20px 20px 20px">Create a new version</h6>
+  <div mat-dialog-content>
+    <mat-form-field class="col-9">
+      <mat-select placeholder="Curriculum Name" [(ngModel)]="selectedCurriculumName">
+        <mat-option *ngFor="let curriculumName of data.curriculumNames" [value]="curriculumName">
+          {{curriculumName}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <br />
+    <mat-form-field class="col-9">
+      <input matInput [(ngModel)]="numberOfWeeks" placeholder="Number of weeks">
+    </mat-form-field>
+    <br />
+    <mat-form-field class="col-9">
+      <mat-select multiple placeholder="Select Topics" [(ngModel)]="selectedTopics">
+        <mat-option *ngFor="let topic of data.topics" [value]="topic">
+          {{topic.name}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
   </div>
-</div>
+  <div mat-dialog-actions>
+    <div class="col">
+      <button mat-raised-button (click)="close()">Cancel</button>
+      <button mat-raised-button color="primary" (click)="add()">Ok</button>
+    </div>
+  </div>
+</mat-card>
