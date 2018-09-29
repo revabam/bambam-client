@@ -45,6 +45,7 @@ import { ChartsModule } from 'ng2-charts';
 import { CurriculumWeekComponent } from './routes/curriculum-editor/curriculum-week/curriculum-week.component';
 import { TopicPoolComponent } from './routes/curriculum-editor/topic-pool/topic-pool.component';
 import { NgDragDropModule } from 'ng-drag-drop';
+import {DragDropModule} from '@angular/cdk/drag-drop';
 
 
 @NgModule({
@@ -80,6 +81,7 @@ import { NgDragDropModule } from 'ng-drag-drop';
     MatButtonToggleModule,
     MatCardModule,
     MatCheckboxModule,
+    DragDropModule,
     MatChipsModule,
     MatStepperModule,
     MatDatepickerModule,
