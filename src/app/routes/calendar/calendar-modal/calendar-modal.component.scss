@@ -16,6 +16,9 @@ button{
     border-color: $oColor $shadow; 
     font-size: .85vw;
   }
+  button:hover{
+    box-shadow:  $oColor $shadow;
+  }
 
 /* Calendar date styling e.g. September 2018 */
 #currentDate{

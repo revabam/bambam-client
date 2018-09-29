@@ -14,7 +14,7 @@ import { CreateCurriculumComponent } from './create-curriculum/create-curriculum
 @Component({
   selector: 'app-curriculum-editor',
   templateUrl: './curriculum-editor.component.html',
-  styleUrls: ['./curriculum-editor.component.css']
+  styleUrls: ['./curriculum-editor.scss']
 })
 export class CurriculumEditorComponent implements OnInit {
   // Arrays of all the elements we're fetching from the server.

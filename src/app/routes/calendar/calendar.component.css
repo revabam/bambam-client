@@ -1,27 +1,2 @@
-/* Specific styling for buttons related to the calendar */
 
 
-button{
-  border-radius: 13px 13px 13px 13px;
-  color: white;
-  font-weight: bold;
-  border-style: outset;
-  border-width: 3px;
-  border-color: #ff5e00 0px 0px 2px 2px;
-  font-size: .85vw;
-
-}
-button:hover{
-  box-shadow:  rgb(255, 94, 0) 0px 0px 2px 2px;
-}
-
-/* Calendar date styling e.g. September 2018 */
-#currentDate{
-  font-size: 1.5vw;
-  font-weight: bold;
-}
-
-/* Details inside the modal boxes bolded */
-#details{
-  font-weight: bold;
-}

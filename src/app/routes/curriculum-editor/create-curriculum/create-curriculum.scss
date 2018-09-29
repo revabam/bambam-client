@@ -16,21 +16,3 @@ button{
     border-color: $oColor $shadow; 
     font-size: .85vw;
   }
-
-/* Calendar date styling e.g. September 2018 */
-#currentDate{
-  font-size: 1.5vw;
-  font-weight: $weight; 
-}
-
-/* Details inside the modal boxes bolded */
-#details{
-  font-weight: $weight;
-}
-
-// specific mat-card editting 
-mat-card{
-  background-color: #ffffffe7;
-  color: black;
-  font-weight: $weight;
-}

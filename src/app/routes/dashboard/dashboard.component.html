@@ -3,7 +3,7 @@
   <!-- WAGBar -->
   <div class="row">
     <div class="col-sm mb-3 mt-2">
-      <mat-card style="border-radius: 20px 20px 20px 20px" id="header">
+      <mat-card style="border-radius: 20px 20px 20px 20px" id="card">
         <mat-card-header>
           <div class="p-2 w-100 bd-highlight">
             <h1 id="title">
@@ -36,9 +36,8 @@
   <!-- SIDENAV -->
   <mat-sidenav-container style="border-radius: 20px 20px 20px 20px">
     <mat-sidenav #sidenav mode="side">
-      <mat-card style="border-radius: 20px 20px 20px 20px" class="border border-dark rounded justify-content-center">
-        <mat-card-header id="batchHeader"
-          class="rounded border border-dark justify-content-center">
+      <mat-card >
+        <mat-card-header id="batchHeader">
           {{batch.name}}
         </mat-card-header>
         <mat-list dense>
@@ -63,7 +62,7 @@
         </mat-list>
       </mat-card>
     </mat-sidenav>
-      <mat-card style="border-radius: 20px 20px 20px 20px" *ngIf="todayIsOpen" class="border border-dark rounded justify-content-center">
+      <mat-card style="border-radius: 20px 20px 20px 20px" *ngIf="todayIsOpen" >
         <mat-card-header class="justify-content-center border border-dark rounded">
           <div class="d-flex">
             <div>

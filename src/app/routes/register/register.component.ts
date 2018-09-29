@@ -15,7 +15,7 @@ import { BamUser } from '../../models/bam-user';
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
-  styleUrls: ['./register.component.css']
+  styleUrls: ['./register.scss']
 })
 export class RegisterComponent implements OnInit {
   // This string is used when we check if the password field matches
