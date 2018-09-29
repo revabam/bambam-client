@@ -47,7 +47,6 @@ import { CurriculumWeekComponent } from './routes/curriculum-editor/curriculum-w
 @NgModule({
   declarations: [
     AppComponent,
-    NavbarComponent,
     DashboardComponent,
     CalendarComponent,
     CurriculumEditorComponent,
