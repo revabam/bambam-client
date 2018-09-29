@@ -3,6 +3,9 @@ import { CurriculumDay } from './../../../models/curriculum-day';
 import { CurriculumWeek } from './../../../models/curriculum-week';
 import { Component, OnInit, Input, Output, EventEmitter, DoCheck } from '@angular/core';
 
+/**
+ * Allows user to a curriculums week.
+ */
 @Component({
   selector: 'app-curriculum-week',
   templateUrl: './curriculum-week.component.html',
