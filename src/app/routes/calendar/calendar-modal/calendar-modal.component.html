@@ -3,7 +3,12 @@
     <p>Description: {{data.description}}</p>
     <p>Start Time: {{data.startTime | date: 'shortTime'}}</p>
     <p>End Time: {{data.endTime | date: 'shortTime'}}</p>
-    <p>StatusId: {{data.statusId}}</p>
+    <span [ngSwitch] = "data.statusId">
+        <p *ngSwitchCase = '1'>Status: Planned</p>
+        <p *ngSwitchCase = '2'>Status: Completed</p>
+        <p *ngSwitchCase = '3'>Status: Cancelled</p>
+        <p *ngSwitchCase = '4'>Status: Missed</p>
+    </span>
 </div>
 <div mat-dialog-actions>
   <button mat-button (click)="close()">Ok</button>
