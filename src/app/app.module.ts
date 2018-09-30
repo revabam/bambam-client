@@ -115,7 +115,11 @@ import { CurriculumWeekComponent } from './routes/curriculum-editor/curriculum-w
     NgbModalModule.forRoot(),
     FlatpickrModule.forRoot(),
     CalendarModule.forRoot(),
+<<<<<<< HEAD
     UserIdleModule.forRoot({idle: 600, timeout: 300, ping: 60}),
+=======
+    UserIdleModule.forRoot({idle: 600, timeout: 300, ping: 60})
+>>>>>>> ae0c911ae195719ba1dd9d2cb8749dab289639bb
   ],
   exports: [
     ChartsModule
