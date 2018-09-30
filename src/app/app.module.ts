@@ -44,7 +44,6 @@ import { StartMondayModalComponent } from './routes/calendar/start-monday-modal/
 import { ChartsModule } from 'ng2-charts';
 import { CurriculumWeekComponent } from './routes/curriculum-editor/curriculum-week/curriculum-week.component';
 
-
 @NgModule({
   declarations: [
     AppComponent,
@@ -58,6 +57,7 @@ import { CurriculumWeekComponent } from './routes/curriculum-editor/curriculum-w
     LoginComponent,
     RegisterComponent,
     CalendarModalComponent,
+    DialogViewComponent, NavbarComponent,
     EventDuplicateModalComponent,
     StartMondayModalComponent,
     DialogViewComponent,
@@ -116,6 +116,10 @@ import { CurriculumWeekComponent } from './routes/curriculum-editor/curriculum-w
     FlatpickrModule.forRoot(),
     CalendarModule.forRoot(),
     UserIdleModule.forRoot({idle: 600, timeout: 300, ping: 60}),
+    NavbarComponent
+  ],
+  exports: [
+    NavbarComponent,
     ChartsModule
   ],
   entryComponents: [
