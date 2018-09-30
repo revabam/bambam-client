@@ -1,0 +1,29 @@
+<mat-card *ngIf="day">
+  <mat-card-title-group>
+    <mat-card-title *ngIf="day.dayNum == 1">
+      Sunday
+    </mat-card-title>
+    <mat-card-title *ngIf="day.dayNum == 2">
+      Monday
+    </mat-card-title>
+    <mat-card-title *ngIf="day.dayNum == 3">
+      Tuesday
+    </mat-card-title>
+    <mat-card-title *ngIf="day.dayNum == 4">
+      Wednesday
+    </mat-card-title>
+    <mat-card-title *ngIf="day.dayNum == 5">
+      Thursday
+    </mat-card-title>
+    <mat-card-title *ngIf="day.dayNum == 6">
+      Friday
+    </mat-card-title>
+    <mat-card-title *ngIf="day.dayNum == 7">
+      Saturday
+    </mat-card-title>
+    <mat-card-title *ngIf="day.dayNum > 7 && day.dayNum < 1">
+      Unknown Day Num: {{day.dayNum}}
+    </mat-card-title>
+  </mat-card-title-group>
+  Subtopics go here
+</mat-card>
