@@ -8,7 +8,7 @@ import {
   MatSelectModule, MatDialogRef, MatDialogModule, MAT_DIALOG_DATA, MatToolbar,
   MatToolbarModule, MatExpansionPanel
 } from '@angular/material';
-import { CurriculumEditorComponent } from '../curriculum-editor/curriculum-editor.component';
+
 
 /**
  * The Unit test to build this component.
@@ -16,13 +16,13 @@ import { CurriculumEditorComponent } from '../curriculum-editor/curriculum-edito
 describe('CreateVersionComponent', () => {
   let component: CreateVersionComponent;
   let fixture: ComponentFixture<CreateVersionComponent>;
-  let CurriculumServiceSub: Partial<CurriculumService>;
+
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [CreateVersionComponent],
       imports: [FormsModule, MatToolbarModule, MatFormFieldModule, MatIconModule, MatOptionModule, MatSelectModule, MatDialogModule],
       providers: [
-        { provide: CurriculumService, useValue: CurriculumServiceSub },
+        { provide: CurriculumService},
         { provide: MatDialogRef },
         { provide: MAT_DIALOG_DATA }
       ]
@@ -33,10 +33,8 @@ describe('CreateVersionComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(CreateVersionComponent);
     component = fixture.componentInstance;
-    // fixture.detectChanges();
+
   });
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
+
 });

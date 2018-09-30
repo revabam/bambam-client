@@ -34,7 +34,12 @@ const colors: any = {
 };
 /**
  * class used to populate the calendar, implements the interface provided in the Angular Material Calendar
- * has extra fields
+ * adds extra fields
+ * statusId is numerical, correlates planned, completed, cancelled, missed
+ * subTopicId is the id of the subTopic used for viewing details
+ * flagged is used in dashboard to mark important events, numerical for different tiers
+ *
+ * @author Marcin Salamon | Spark1806-USF-Java | Steven Kelsey
  */
 export class CustomCalendarEvent implements CalendarEvent<any> {
   id?: string | number;
@@ -268,7 +273,6 @@ export class CalendarComponent implements OnInit, DoCheck {
    * @author Marcin Salamon | Spark1806-USF-Java | Steven Kelsey
    */
   openEventDuplicateDialog(name: string, date: Date) {
-    console.log(date.getDay());
     const dialogRef = this.dialog.open(EventDuplicateModalComponent,
       {
         width: '600px',
@@ -349,7 +353,6 @@ export class CalendarComponent implements OnInit, DoCheck {
    * @author Marcin Salamon | Alex Moraga | Spark1806-USF-Java | Steven Kelsey
    */
   populateCalendar(id: number, event: CalendarEvent): void {
-    console.log(event);
     this.calendarService.getCurriculumById(id).subscribe(curr => {
       this.openEventInsertCurriculum(curr.name, event.start).subscribe(decision => {
         if (decision !== null) {

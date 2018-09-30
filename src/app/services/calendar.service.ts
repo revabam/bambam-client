@@ -93,6 +93,7 @@ export class CalendarService {
    */
   getCalendarEvents(id: number): Observable<CalendarEvent[]> {
     return this.http.get<CalendarEvent[]>(environment.zuulUrl + `calendars/calendars/event/trainer/${id}`, HTTP_OPTIONS);
+
   }
 
   /**
@@ -100,6 +101,7 @@ export class CalendarService {
    */
   getCalendarEventsById(id: number): Observable<CalendarEvent> {
     return this.http.get<CalendarEvent>(environment.zuulUrl + `calendars/calendars/event/${id}`, HTTP_OPTIONS);
+
   }
 
   /**
