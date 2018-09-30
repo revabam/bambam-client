@@ -29,11 +29,13 @@
     <cdk-drop droppable (onDrop)="onSubTopicDrop($event)" (dropped)="onSubTopicRearranged($event)" class="list-group">
       <li *ngIf="!day.subTopics || day.subTopics.length == 0" class="list-group-item">Drop content here</li>
       <li *ngFor="let subTopic of day.subTopics; let i = index" class="list-group-item cardsize">
-        <span *ngIf="curriculums !== null">
-        <mat-icon *ngIf="curriculums[0].status == 1" class="cardbtn dragbtn" cdkDrag>format_line_spacing</mat-icon>
-        <mat-icon *ngIf="curriculums[0].status == 1" class="cardbtn closebtn" (click)="removeSubTopic(i)">close</mat-icon>
+        <span *ngIf="curriculums[0]">
+          <span *ngIf="curriculums[0].status">
+            <mat-icon *ngIf="curriculums[0].status == 1" class="cardbtn dragbtn" cdkDrag>format_line_spacing</mat-icon>
+            <mat-icon *ngIf="curriculums[0].status == 1" class="cardbtn closebtn" (click)="removeSubTopic(i)">close</mat-icon>
+          </span>
+        </span>
         <p class="subTopicName">{{subTopic.name}}</p>
-      </span>
       </li>
 
 
