@@ -239,7 +239,8 @@ export class CalendarComponent implements OnInit, DoCheck {
      * in the modal.
      */
     let eventTopic: Topic;
-    this.topicService.getTopicById(+event.id).subscribe(response => {
+    const custEvent: CustomCalendarEvent = <CustomCalendarEvent> event;
+    this.topicService.getTopicById(custEvent.subTopicId).subscribe(response => {
       eventTopic = response;
       let curriculum: Curriculum;
       this.curriculums.forEach(curr => {
@@ -267,7 +268,7 @@ export class CalendarComponent implements OnInit, DoCheck {
         }
       );
       dialogRef.afterClosed().subscribe(decision => {
-        this.moveEvents(decision);
+        this.moveEvents(decision, event);
       });
     });
   }
@@ -322,8 +323,20 @@ export class CalendarComponent implements OnInit, DoCheck {
     return dialogRef.afterClosed();
   }
 
-  moveEvents(decision) {
-    console.log(decision);
+  moveEvents(decision, event: CalendarEvent) {
+    if (decision !== 0 && decision !== undefined) {
+      const eventStartDate = event.start.getDate();
+      for (const ev of this.events) {
+        if (ev.start.getDate() >= eventStartDate) {
+          ev.start.setDate(ev.start.getDate() + decision);
+          ev.end.setDate(ev.end.getDate() + decision);
+          if (ev.start.getDay() ===  6 || ev.start.getDay() === 0) {
+            ev.start.setDate(ev.start.getDate() + (2 * decision));
+            ev.end.setDate(ev.end.getDate() + (2 * decision));
+          }
+        }
+      }
+    }
   }
 
   /**
@@ -367,6 +380,7 @@ export class CalendarComponent implements OnInit, DoCheck {
       this.openEventInsertCurriculum(curr.name, event.start).subscribe(decision => {
         if (decision !== null) {
           event.start = decision;
+          decision = null;
           this.selectedCurriculum = curr;
           this.dropEvent = <CustomCalendarEvent> event;
         }
@@ -436,7 +450,6 @@ export class CalendarComponent implements OnInit, DoCheck {
             start: new Date(subtopicStartTime),
             end: new Date(endTime),
             title: subtopic.name,
-            id: subtopic.id,
             color: {
               primary: 'blue',
               secondary: 'blue'
@@ -447,6 +460,7 @@ export class CalendarComponent implements OnInit, DoCheck {
               afterEnd: true
             },
             draggable: true,
+            subTopicId: subtopic.id,
             statusId: 1,
             flagged: 0
           });
@@ -461,38 +475,6 @@ export class CalendarComponent implements OnInit, DoCheck {
     this.persistEvents();
   }
 
-  /**
-   * Used for subtopics that span multiple days.
-   * If there is not enought time in the current day to complete a subtopic, this method is used
-   * to split the subtopic and make multiple events from it.
-   * @param subtopic subTopic to be added to calendar
-   * @param topicDay the current day that the subtopic is on
-   * @param timeLeft time left in a day (hours until 4pm)
-   * @param event the event to be pushed to calendar
-   * @param curr curr is the curriculum to be pushed
-   */
-  multidaySubtopic(subtopic: SubTopic, topicDay: number, timeLeft: number, event: CalendarEvent, curr: Curriculum) {
-    this.events.push(
-      {
-        start: addDays(addHours(startOfDay(event.start), 9 + this.hour), topicDay),
-        end: addDays(addHours(startOfDay(event.start), 16), topicDay),
-        title: subtopic.name,
-        id: subtopic.id,
-        color: colors.newColor,
-        actions: this.actions,
-        resizable: {
-          beforeStart: true,
-          afterEnd: true
-        },
-        draggable: true,
-        statusId: 1,
-        flagged: 0
-      }
-    );
-    this.currTopicTime = this.currTopicTime - timeLeft;
-    this.hour = 0;
-    this.multiDayEventCreated = true;
-  }
   /**
    * persists all events in the event array.
    */
