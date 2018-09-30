@@ -12,6 +12,8 @@ import { Component, OnInit, Input, Output, EventEmitter, DoCheck } from '@angula
   styleUrls: ['./curriculum-week.component.css']
 })
 export class CurriculumWeekComponent implements OnInit {
+
+  @Input() status: number;
   /**
    * Used to pull the object keys from the subTopicInfo key value pair object
    */

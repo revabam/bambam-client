@@ -1,7 +1,9 @@
 import { SubTopic } from './../../../models/subtopic';
 import { CurriculumDay } from './../../../models/curriculum-day';
+import { Curriculum } from '../../../models/curriculum';
 import { Component, OnInit, Input, Output, EventEmitter, DoCheck } from '@angular/core';
 import { Directive, HostBinding, HostListener } from '@angular/core';
+import { CurriculumService } from '../../../services/curriculum.service';
 
 @Component({
   selector: 'app-curriculum-day',
@@ -9,13 +11,45 @@ import { Directive, HostBinding, HostListener } from '@angular/core';
   styleUrls: ['./curriculum-day.component.css']
 })
 export class CurriculumDayComponent implements OnInit {
+  /**
+     * explanation HERE
+     */
+  @Input() status: number;
+  // Arrays of all the elements we're fetching from the server.
+  curriculums: Curriculum[] = [];
+  curriculumNames: string[] = [];
+
+  selectedCurriculum: Curriculum;
 
   @Input() day: CurriculumDay;
   @Output() dayChange: EventEmitter<CurriculumDay> = new EventEmitter<CurriculumDay>();
 
-  constructor() { }
+  constructor(private curriculumService: CurriculumService) { }
 
   ngOnInit() {
+    this.getAllCurriculums();
+  }
+
+  getAllCurriculums(): void {
+    this.curriculumService.getAll().subscribe(curriculums => {
+      this.curriculums = curriculums;
+      console.log('getting curriculums' + this.curriculums);
+      console.log(curriculums);
+      this.curriculumNames = this.getUniqueNames();
+    });
+  }
+
+  /**
+   * Gets us distinct curriculum names from the list of all
+   * curriculums
+   * @author - Andrew Li | 1806-Jun-18-USF-Java | Wezley Singleton
+   */
+  getUniqueNames(): string[] {
+    let names: string[] = this.curriculums.map(curr => curr.name);
+    // If it is deactivated, then we don't create a
+    // separate unique name for that.
+    names = names.map((name) => this.curriculumService.reactivateName(name));
+    return names.filter((name, i, arr) => name && arr.indexOf(name) === i);
   }
 
   /**
@@ -37,8 +71,6 @@ export class CurriculumDayComponent implements OnInit {
    * @author - Chinedu Ozodi | 1806-Sep-18-USF-Java | Steven Kelsey
    */
   onSubTopicRearranged(event: any) {
-    console.log('subTopic rearranged');
-    console.log(event);
     const previousIndex: number = event.previousIndex;
     const currentIndex: number = event.currentIndex;
     const previousSubTopic = this.day.subTopics[previousIndex];

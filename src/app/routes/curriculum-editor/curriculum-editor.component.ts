@@ -67,7 +67,6 @@ export class CurriculumEditorComponent implements OnInit {
     names = names.map((name) => this.curriculumService.reactivateName(name));
     return names.filter((name, i, arr) => name && arr.indexOf(name) === i);
   }
-
   /**
    * Gets us all of the curriculums that have a certain name.
    * Also, orders it from highest version to lowest version.

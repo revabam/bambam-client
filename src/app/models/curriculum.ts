@@ -15,4 +15,7 @@ export class Curriculum {
     numberOfWeeks: number;
     topics: Topic[];
     curriculumWeeks: CurriculumWeek[];
+
+    constructor(id: number, name: string, version: number, creatorId: number, approvedById: number, status: number,
+        dateCreated: Date, numberOfWeeks: number, topics: Topic[], curriculumWeeks: CurriculumWeek[]) {}
 }
