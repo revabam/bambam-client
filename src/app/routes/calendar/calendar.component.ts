@@ -323,13 +323,26 @@ export class CalendarComponent implements OnInit, DoCheck {
     return dialogRef.afterClosed();
   }
 
-  moveEvents(decision, event: CalendarEvent) {
+  /**
+   * function takes in a direction in which to move events and then based on that moves them back or forth a day
+   * if the new day falls on a Saturday or Sunday, it gets moved to next week instead
+   * does not currently change start time
+   *
+   * @param decision numerical decision whether to push future events back or forward a day
+   * @param event event from which to start moving other events
+   * @author Marcin Salamon | Spark1806-USF-Java | Steven Kelsey
+   */
+  moveEvents(decision: number, event: CalendarEvent) {
     if (decision !== 0 && decision !== undefined) {
+      this.activeDayIsOpen = false;
       const eventStartDate = event.start.getDate();
       for (const ev of this.events) {
         if (ev.start.getDate() >= eventStartDate) {
           ev.start.setDate(ev.start.getDate() + decision);
           ev.end.setDate(ev.end.getDate() + decision);
+          /**
+           * check if the new day falls on Saturday or Sunday
+           */
           if (ev.start.getDay() ===  6 || ev.start.getDay() === 0) {
             ev.start.setDate(ev.start.getDate() + (2 * decision));
             ev.end.setDate(ev.end.getDate() + (2 * decision));
@@ -337,6 +350,7 @@ export class CalendarComponent implements OnInit, DoCheck {
         }
       }
     }
+    this.persistEvents();
   }
 
   /**
