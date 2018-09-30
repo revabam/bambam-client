@@ -4,14 +4,33 @@
     <div class="col-sm mb-3 mt-2">
       <mat-card>
         <mat-card-header>
-          <div class="p-2 w-100 bd-highlight">
-            <h1>
-              Welcome, {{this.user.firstName}}
+          <div class="p-2 w-100 bd-highlight text-monospace">
+            <h1 class='text-monospace'>
+              Welcome, {{this.user.firstName}} Trainer
             </h1>
           </div>
         </mat-card-header>
         <mat-card-content style="font-size: 18px">
           <span>Week At a Glance Bar</span>
+
+          <mat-grid-list cols="7" rowHeight="2:1" class='border border-dark'>
+              <mat-grid-tile>Monday</mat-grid-tile>
+              <mat-grid-tile>Tuesday</mat-grid-tile>
+              <mat-grid-tile>Wednesday</mat-grid-tile>
+              <mat-grid-tile>Thursday</mat-grid-tile>
+              <mat-grid-tile>Friday</mat-grid-tile>
+              <mat-grid-tile>Saturday</mat-grid-tile>
+              <mat-grid-tile>Sunday</mat-grid-tile>
+  
+                <mat-grid-tile>Monday</mat-grid-tile>
+                <mat-grid-tile>Tuesday</mat-grid-tile>
+                <mat-grid-tile>Wednesday</mat-grid-tile>
+                <mat-grid-tile>Thursday</mat-grid-tile>
+                <mat-grid-tile>Friday</mat-grid-tile>
+                <mat-grid-tile>Saturday</mat-grid-tile>
+                <mat-grid-tile>Sunday</mat-grid-tile>
+              </mat-grid-list>
+
         </mat-card-content>
       </mat-card>
     </div>
@@ -63,21 +82,29 @@
     </mat-sidenav>
       <mat-card *ngIf="todayIsOpen" class="border border-dark rounded justify-content-center">
         <mat-card-header class="justify-content-center border border-dark rounded">
-          <div class="d-flex">
+          <div >
             <div>
               {{DashTitle}}
             </div>
           </div>
         </mat-card-header>
-        <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+        <mat-card-content class='d-flex '>
+
+        
+        <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 flex-fill">
           <!--- Note that these columns can be defined in any order.
                   The actual rendered columns are set as a property on the row definition"
                 -->
           <ng-container matColumnDef="time">
             <th mat-header-cell *matHeaderCellDef> Time </th>
             <td mat-cell *matCellDef="let sub">
-              <a id="timeBadge" class="badge badge-secondary text-monospace">
-                {{ sub.time | date:"h:mm a z"}}</a>
+              <a id="timeBadge" class="badge badge-dark text-monospace">
+                {{ sub.time | date:"h:mm a z"}}
+              </a>
+              x
+              <a id="timeBadge" class="badge badge-success text-monospace">
+                  {{ sub.time | date:"h:mm a z"}}
+                </a>
             </td>
           </ng-container>
           <!-- Position Column -->
@@ -100,7 +127,7 @@
             <th mat-header-cell *matHeaderCellDef> Controls{{i}} </th>
             <td mat-cell *matCellDef="let sub; let i = index;">
               <div class="d-flex">
-                <div class="flex-fill rounded border border-dark alert-success" #check
+                <div class="rounded border border-dark alert-success" #check
                   (click)="statusToggle(i,1)"
                   [class.alert-success]="sub.status === 1"
                   [class.border-dark]="sub.status === 1">
@@ -110,7 +137,7 @@
                   </mat-icon>
                   &nbsp;
                 </div>
-                <div class="flex-fill rounded border border-dark alert-danger" #missed
+                <div class="rounded border border-dark alert-danger" #missed
                   (click)="statusToggle(i,0)"
                   [class.alert-danger]="sub.status === 0"
                   [class.border-dark]="sub.status === 0">
@@ -131,6 +158,7 @@
           <tr mat-header-row *matHeaderRowDef="headerColumns"></tr>
           <tr mat-row *matRowDef="let row; columns: headerColumns;"></tr>
         </table>
+      </mat-card-content>
       </mat-card>
     <app-topics *ngIf="topicsIsOpen"></app-topics>
   </mat-sidenav-container>
