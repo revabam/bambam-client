@@ -57,7 +57,7 @@ import { CurriculumWeekComponent } from './routes/curriculum-editor/curriculum-w
     LoginComponent,
     RegisterComponent,
     CalendarModalComponent,
-    DialogViewComponent, NavbarComponent,
+    DialogViewComponent,
     EventDuplicateModalComponent,
     StartMondayModalComponent,
     DialogViewComponent,
@@ -116,10 +116,8 @@ import { CurriculumWeekComponent } from './routes/curriculum-editor/curriculum-w
     FlatpickrModule.forRoot(),
     CalendarModule.forRoot(),
     UserIdleModule.forRoot({idle: 600, timeout: 300, ping: 60}),
-    NavbarComponent
   ],
   exports: [
-    NavbarComponent,
     ChartsModule
   ],
   entryComponents: [
