@@ -108,6 +108,7 @@ export class CognitoService {
     cognitoUser.authenticateUser(authenticationDetails, {
       onSuccess: function(session: AWSCognito.CognitoUserSession) {
         resultStream.next(session.getIdToken());
+        console.log(session.getAccessToken());
       },
       onFailure: function(err: any) {
         resultStream.next(err);

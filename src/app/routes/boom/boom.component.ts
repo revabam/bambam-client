@@ -97,6 +97,7 @@ export class BoomComponent implements OnInit {
 
   /**
    *  get the progress of the selected batch
+   *  @author Richard Iskra | Obosa Nosa-Igiebor
    */
   getWeeklyProgress(curriculumId) {
     this.completed = [];
@@ -138,6 +139,7 @@ export class BoomComponent implements OnInit {
 
   /**
    * Find the selected batch curriculum
+   * @author Richard Iskra
    */
   selectedCurriculum(event) {
     const id = event.value;
@@ -150,7 +152,8 @@ export class BoomComponent implements OnInit {
   }
 
   /**
-   * Updates pie chart data when users enter a value in the percentage input feild
+   * Updates pie chart data when users enter a value in the percentage input field
+   *  @author Richard Iskra | Eddie Grays
    */
   percent(event) {
     const prog: number[] = [0, 0];
@@ -189,5 +192,5 @@ export class BoomComponent implements OnInit {
 }
 
 /**
- * @author Richard Iskra | Obosa Nosa-Igiebor | Eddie Grays
+ * @author Richard Iskra | Obosa Nosa-Igiebor | Eddie Grays | 1806Spark-Jun25-USF-Java Steven Kelsey
  */
