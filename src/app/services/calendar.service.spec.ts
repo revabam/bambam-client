@@ -43,24 +43,24 @@ describe('CalendarService', () => {
     addSubtopic.addCalendarSubtopic(null);
     expect(addSubtopic.addCalendarSubtopic).toHaveBeenCalled();
   });
-  it('should call addCalendarEventList', function() {
-    const eventList = new CalendarService(null);
-    spyOn(eventList, 'addCalendarEventList');
-    eventList.addCalendarEventList(null);
-    expect(eventList.addCalendarEventList).toHaveBeenCalled();
-  });
+  // it('should call addCalendarEventList', function() {
+  //   const eventList = new CalendarService(null);
+  //   spyOn(eventList, 'addCalendarEventList');
+  //   eventList.addCalendarEventList(null);
+  //   expect(eventList.addCalendarEventList).toHaveBeenCalled();
+  // });
   it('should call addCalendarEvent', function() {
     const event = new CalendarService(null);
     spyOn(event, 'addCalendarEvent');
     event.addCalendarEvent(null);
     expect(event.addCalendarEvent).toHaveBeenCalled();
   });
-  it('should call getCalendarEvents', function() {
-    const eventGet = new CalendarService(null);
-    spyOn(eventGet, 'getCalendarEvents');
-    eventGet.getCalendarEvents();
-    expect(eventGet.getCalendarEvents).toHaveBeenCalled();
-  });
+  // it('should call getCalendarEvents', function() {
+  //   const eventGet = new CalendarService(null);
+  //   spyOn(eventGet, 'getCalendarEvents');
+  //   eventGet.getCalendarEvents();
+  //   expect(eventGet.getCalendarEvents).toHaveBeenCalled();
+  // });
   it('should call getCalendarSubtopics', function() {
     const subtopic = new CalendarService(null);
     spyOn(subtopic, 'getCalendarSubtopics');

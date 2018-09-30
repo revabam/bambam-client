@@ -1,10 +1,10 @@
 <h6 mat-dialog-title class="col mb-5">Create a Curriculum</h6>
 <div mat-dialog-content>
   <mat-form-field class="col-9">
-    <input matInput [(ngModel)]="curriculumName" placeholder="Curriculum Name">
+    <input matInput [(ngModel)]="curriculumName" placeholder="Curriculum Name" required minlength="1">
   </mat-form-field>
   <mat-form-field class="col-9">
-      <input matInput [(ngModel)]="numberOfWeeks" placeholder="Number of weeks">
+      <input matInput [(ngModel)]="numberOfWeeks" placeholder="Number of weeks" required min="1">
     </mat-form-field>
 </div>
 <div mat-dialog-actions>

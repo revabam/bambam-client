@@ -86,7 +86,26 @@ export class CreateCurriculumComponent implements OnInit {
      * so that the user can see the changes.
      */
     this.data['curriculumService'].post(newCurriculum).subscribe(curr => {
+      const newVersion = curr.version;
+      let nameNum = 1;
+      for (let i = 0; i < this.data['curriculums'].length; i++) {
+        if (this.data['curriculums'][i].name === newCurriculum.name) {
+          if (this.data['curriculums'][i].version >= nameNum) {
+            ++nameNum;
+          }
+           if (newCurriculum.numberOfWeeks < 1) {
+             console.log('no');
+            // if (newCurriculum.name.length < 1) {
+              // console.log ('no');
+            }
+            break;
+        } else {
+          continue;
+        }
+      }
+      curr.version = nameNum;
       if (curr !== undefined && curr !== null) {
+        console.log('hitting first if');
         this.data['curriculums'].push(curr);
       } else {
         console.log('returned null');
@@ -95,7 +114,7 @@ export class CreateCurriculumComponent implements OnInit {
     }, err => {
       console.log('[ERROR] Create-curriculum: An error occured');
       console.log(err);
-      this.data['curriculums'].push(newCurriculum);
+      // this.data['curriculums'].push(newCurriculum);
     });
     // After the curriculum is added, we're done with the modal.
     this.close();

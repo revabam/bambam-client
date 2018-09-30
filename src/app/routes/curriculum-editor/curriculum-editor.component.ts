@@ -98,6 +98,8 @@ export class CurriculumEditorComponent implements OnInit {
   getAllSubtopics (): void {
     this.subtopicService.getAll().subscribe(subtopics => {
       this.subtopics = subtopics;
+      console.log('subtopics loaded');
+      console.log(subtopics);
     });
   }
 
