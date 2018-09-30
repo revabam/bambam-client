@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { BatchService } from '../../services/batch.service';
+import { CalendarService } from '../../services/calendar.service';
 import { CurriculumService } from '../../services/curriculum.service';
+import { TopicService } from '../../services/topic.service';
+import { SubtopicService } from '../../services/subtopic.service';
 
 @Component({
   selector: 'app-boom',
@@ -53,7 +57,8 @@ export class BoomComponent implements OnInit {
   canceled: number[] = [];
   weeks: string[] = [];
 
-  constructor(private curriculumServ: CurriculumService) { }
+  constructor(private calendarServ: CalendarService, private curriculumServ: CurriculumService,
+  private topicServ: TopicService, private subtopicServ: SubtopicService, private batchServ: BatchService) { }
 
   // bar chart
   public barChartOptions: any = {
@@ -186,7 +191,6 @@ export class BoomComponent implements OnInit {
 
   ngOnInit() {
     this.getWeeklyProgress(0);
-    this.curriculumServ.getAll().subscribe( x => { this.data2 = x; console.log(x); } );
   }
 }
 
