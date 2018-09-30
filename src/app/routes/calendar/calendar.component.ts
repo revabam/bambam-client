@@ -249,7 +249,7 @@ export class CalendarComponent implements OnInit, DoCheck {
           }
         });
       });
-      this.dialog.open(CalendarModalComponent,
+      const dialogRef = this.dialog.open(CalendarModalComponent,
         /*
         * An object is passed in as the second parameter, which
         * defines properties of the dialog modal, as well as the
@@ -266,6 +266,9 @@ export class CalendarComponent implements OnInit, DoCheck {
           }
         }
       );
+      dialogRef.afterClosed().subscribe(decision => {
+        this.moveEvents(decision);
+      });
     });
   }
 
@@ -317,6 +320,10 @@ export class CalendarComponent implements OnInit, DoCheck {
     });
 
     return dialogRef.afterClosed();
+  }
+
+  moveEvents(decision) {
+    console.log(decision);
   }
 
   /**
