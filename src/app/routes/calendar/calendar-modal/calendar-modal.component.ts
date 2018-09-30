@@ -6,9 +6,6 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
   templateUrl: './calendar-modal.component.html',
   styleUrls: ['./calendar-modal.component.css']
 })
-/**
-
- */
 export class CalendarModalComponent {
 
   /**
