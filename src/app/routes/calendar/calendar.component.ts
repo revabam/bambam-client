@@ -241,11 +241,9 @@ export class CalendarComponent implements OnInit, DoCheck {
      * The open method passes in a component that we'll use
      * in the modal.
      */
-    console.log(event);
     let calendarEvent: CalendarEventModel;
     this.calendarService.getCalendarEventsById(+event.id).subscribe(response => {
       calendarEvent = response;
-      console.log(calendarEvent);
       this.dialog.open(CalendarModalComponent,
         /*
         * An object is passed in as the second parameter, which
