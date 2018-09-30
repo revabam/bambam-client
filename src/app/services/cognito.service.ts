@@ -138,7 +138,6 @@ export class CognitoService {
 
     cognitoUser.forgotPassword({
       onSuccess: function (result) {
-        console.log('Success.')
       },
       onFailure: function(err) {
           alert(err);
@@ -147,7 +146,6 @@ export class CognitoService {
           var verificationCode = prompt('Please input verification code ' ,'');
           var newPassword = prompt('Enter new password ' ,'');
           cognitoUser.confirmPassword(verificationCode, newPassword, this);
-        
       }
   });
   CognitoService.router.navigate['login'];
