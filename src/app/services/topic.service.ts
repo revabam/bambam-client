@@ -26,6 +26,8 @@ const HTTP_OPTIONS = {
 })
 export class TopicService {
 
+  topics: Topic[];
+
   // The dependency to be injected, in order to use an HttpClient.
   constructor(private http: HttpClient) { }
 

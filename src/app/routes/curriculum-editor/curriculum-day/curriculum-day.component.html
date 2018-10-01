@@ -1,29 +1,44 @@
-<mat-card *ngIf="day">
+<div class="column" *ngIf="day">
   <mat-card-title-group>
-    <mat-card-title *ngIf="day.dayNum == 1">
+    <mat-card-title *ngIf="day.dayNum == 0">
       Sunday
     </mat-card-title>
-    <mat-card-title *ngIf="day.dayNum == 2">
+    <mat-card-title *ngIf="day.dayNum == 1">
       Monday
     </mat-card-title>
-    <mat-card-title *ngIf="day.dayNum == 3">
+    <mat-card-title *ngIf="day.dayNum == 2">
       Tuesday
     </mat-card-title>
-    <mat-card-title *ngIf="day.dayNum == 4">
+    <mat-card-title *ngIf="day.dayNum == 3">
       Wednesday
     </mat-card-title>
-    <mat-card-title *ngIf="day.dayNum == 5">
+    <mat-card-title *ngIf="day.dayNum == 4">
       Thursday
     </mat-card-title>
-    <mat-card-title *ngIf="day.dayNum == 6">
+    <mat-card-title *ngIf="day.dayNum == 5">
       Friday
     </mat-card-title>
-    <mat-card-title *ngIf="day.dayNum == 7">
+    <mat-card-title *ngIf="day.dayNum == 6">
       Saturday
     </mat-card-title>
-    <mat-card-title *ngIf="day.dayNum > 7 && day.dayNum < 1">
+    <mat-card-title *ngIf="day.dayNum > 6 && day.dayNum < 0">
       Unknown Day Num: {{day.dayNum}}
     </mat-card-title>
   </mat-card-title-group>
-  Subtopics go here
-</mat-card>
+  <mat-card-content>
+    <cdk-drop droppable (onDrop)="onSubTopicDrop($event)" (dropped)="onSubTopicRearranged($event)" class="list-group">
+      <li *ngIf="!day.subTopics || day.subTopics.length == 0" class="list-group-item">Drop content here</li>
+      <li *ngFor="let subTopic of day.subTopics; let i = index" class="list-group-item cardsize">
+        <span *ngIf="curriculums[0]">
+          <span *ngIf="curriculums[0].status">
+            <mat-icon *ngIf="curriculums[0].status == 1" class="cardbtn dragbtn" cdkDrag>format_line_spacing</mat-icon>
+            <mat-icon *ngIf="curriculums[0].status == 1" class="cardbtn closebtn" (click)="removeSubTopic(i)">close</mat-icon>
+          </span>
+        </span>
+        <p class="subTopicName">{{subTopic.name}}</p>
+      </li>
+
+
+    </cdk-drop>
+  </mat-card-content>
+</div>
