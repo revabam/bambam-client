@@ -1,3 +1,4 @@
+import { Batch } from './../../models/batch';
 import { CalendarEvent as CalendarEventModel } from './../../models/calendar-event';
 import * as $ from 'jquery';
 import * as moment from 'moment';
@@ -235,69 +236,15 @@ export class CalendarComponent implements OnInit, DoCheck {
    *
    * @author Alicia Douglas | Spark1806-USF-Java | Steven Kelsey
    */
-  // openDialog(event: CalendarEvent): void {
-  //   /*
-  //    * this.dialog is an injected dependency for the modal
-  //    * The open method passes in a component that we'll use
-  //    * in the modal.
-  //    */
-  //   let calendarEvent: CalendarEventModel;
-  //   this.calendarService.getCalendarEventsById(+event.id).subscribe(response => {
-  //     calendarEvent = response;
-  //     this.dialog.open(CalendarModalComponent,
-  //   let eventTopic: Topic;
-  //   // const custEvent: CustomCalendarEvent = <CustomCalendarEvent> event;
-  //   // this.topicService.getTopicById(custEvent.subTopicId).subscribe(response => {
-  //   //   eventTopic = response;
-  //   //   let curriculum: Curriculum;
-  //   //   this.curriculums.forEach(curr => {
-  //   //     curr.topics.forEach(topic => {
-  //   //       if (topic = eventTopic) {
-  //   //         curriculum = curr;
-  //   //       }
-  //       // });
-  //     }
-  //   );
-  //     const dialogRef = this.dialog.open(CalendarModalComponent,
-  //       /*
-  //       * An object is passed in as the second parameter, which
-  //       * defines properties of the dialog modal, as well as the
-  //       * data that we'll pass in for the modal component to access.
-  //       */
-  //       {
-  //         width: '600px',
-  //         data: {
-  //           title: calendarEvent.title,
-  //           description: calendarEvent.description,
-  //           startTime: calendarEvent.startDateTime,
-  //           endTime: calendarEvent.endDateTime,
-  //           statusId: calendarEvent.statusId
-  //         }
-  //       }
-  //     );
-  //     dialogRef.afterClosed().subscribe(decision => {
-  //       this.moveEvents(decision, event);
-  //     });
-  //   });
-  // }
   openDialog(event: CalendarEvent): void {
     /*
      * this.dialog is an injected dependency for the modal
      * The open method passes in a component that we'll use
      * in the modal.
      */
-    let eventTopic: Topic;
-    const custEvent: CustomCalendarEvent = <CustomCalendarEvent> event;
-    this.topicService.getTopicById(custEvent.subTopicId).subscribe(response => {
-      eventTopic = response;
-      let curriculum: Curriculum;
-      this.curriculums.forEach(curr => {
-        curr.topics.forEach(topic => {
-          if (topic = eventTopic) {
-            curriculum = curr;
-          }
-        });
-      });
+    let calendarEvent: CalendarEventModel;
+    this.calendarService.getCalendarEventsById(+event.id).subscribe(response => {
+      calendarEvent = response;
       const dialogRef = this.dialog.open(CalendarModalComponent,
         /*
         * An object is passed in as the second parameter, which
@@ -307,11 +254,11 @@ export class CalendarComponent implements OnInit, DoCheck {
         {
           width: '600px',
           data: {
-            title: curriculum.name,
-            topics: curriculum.topics,
-            curriculum: curriculum,
-            version: curriculum.version,
-            numWeeks: curriculum.numberOfWeeks
+            title: calendarEvent.title,
+            description: calendarEvent.description,
+            startTime: calendarEvent.startDateTime,
+            endTime: calendarEvent.endDateTime,
+            statusId: calendarEvent.statusId
           }
         }
       );
@@ -391,7 +338,7 @@ export class CalendarComponent implements OnInit, DoCheck {
           /**
            * check if the new day falls on Saturday or Sunday
            */
-          if (ev.start.getDay() ===  6 || ev.start.getDay() === 0) {
+          if (ev.start.getDay() === 6 || ev.start.getDay() === 0) {
             ev.start.setDate(ev.start.getDate() + (2 * decision));
             ev.end.setDate(ev.end.getDate() + (2 * decision));
           }
@@ -542,7 +489,6 @@ export class CalendarComponent implements OnInit, DoCheck {
    */
   persistEvents() {
     const eventsToPersist: CalEvent.CalendarEvent[] = [];
-
     for (const event of this.events) {
 
       const ev: CalEvent.CalendarEvent = {
@@ -562,6 +508,7 @@ export class CalendarComponent implements OnInit, DoCheck {
     this.calendarService.addCalendarEvents(eventsToPersist).subscribe(eventRes => {
     });
   }
+
   /**
    * Custom event to be persisted.
    * @param event an event to be persisted
