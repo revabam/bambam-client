@@ -36,12 +36,12 @@
 
 
     </cdk-drop> -->
-    <cdk-drop id = "{{day.id}}" [connectedTo]="daySubTopicService.dragAndDropList" [data]="day.subTopics" (dropped)="drop($event)" class="list-group">
-      <li *ngIf="!day.subTopics || day.subTopics.length == 0" class="list-group-item">Drop content here</li>
-      <li *ngFor="let subTopic of day.subTopics; let i = index" class="list-group-item cardsize">
+    <cdk-drop id = "{{day.id}}" [connectedTo]="daySubTopicService.dragAndDropList" [data]="day.daySubTopics" (dropped)="drop($event)" class="list-group">
+      <li *ngIf="!day.daySubTopics || day.daySubTopics.length == 0" class="list-group-item">Drop content here</li>
+      <li *ngFor="let daySubTopic of day.daySubTopics; let i = index" class="list-group-item cardsize">
         <mat-icon class="cardbtn dragbtn" cdkDrag>format_line_spacing</mat-icon>
         <mat-icon class="cardbtn closebtn" (click)="removeSubTopic(i)">close</mat-icon>
-        <p class="subTopicName">{{subTopic.name}}</p>
+        <p class="subTopicName">{{daySubTopic.index}}: {{daySubTopic.name}}</p>
       </li>
 
 

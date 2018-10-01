@@ -55,6 +55,8 @@ export class CurriculumEditorComponent implements OnInit {
   getAllCurriculums(): void {
     this.curriculumService.getAll().subscribe(curriculums => {
       this.curriculums = curriculums;
+      console.log('curriculums');
+      console.log(curriculums);
       this.curriculumNames = this.getUniqueNames();
     });
   }

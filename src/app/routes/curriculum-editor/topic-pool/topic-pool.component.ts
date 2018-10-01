@@ -49,8 +49,6 @@ export class TopicPoolComponent implements OnInit {
   getAllTopics (): void {
     this.topicService.getAll().subscribe(topics => {
       this.topics = topics;
-      console.log('topics recieved');
-      console.log(topics);
     });
   }
 
@@ -63,8 +61,6 @@ export class TopicPoolComponent implements OnInit {
   getAllSubtopics (): void {
     this.subtopicService.getAll().subscribe(subtopics => {
       this.subtopics = subtopics;
-      console.log('Subtopics recieved');
-      console.log(subtopics);
     });
   }
 
