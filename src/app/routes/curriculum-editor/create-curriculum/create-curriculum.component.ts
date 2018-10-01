@@ -55,7 +55,6 @@ export class CreateCurriculumComponent implements OnInit {
    * @author - Chinedu Ozodi | 1806-Sep-18-USF-Java | Steven Kelsey
    */
   createNewCurriculum(): void {
-    console.log('Creating curriculum');
     // Creates the weeks and days to add the curriculum
     const weeks = [];
     for (let i = 0; i < this.numberOfWeeks; i++) {
@@ -87,11 +86,12 @@ export class CreateCurriculumComponent implements OnInit {
       curriculumWeeks: weeks
     };
 
-    /*
+    /** 
      * After the Curriculum object is created, we make
      * an http post. Also, if the post is successful, we
      * push it to the parent component's curriculum array
      * so that the user can see the changes.
+     * @author - Chinedu Ozodi | 1806-Sep-18-USF-Java | Steven Kelsey
      */
     this.data['curriculumService'].post(newCurriculum).subscribe(curr => {
       const newVersion = curr.version;
@@ -107,10 +107,8 @@ export class CreateCurriculumComponent implements OnInit {
       }
       curr.version = nameNum;
       if (curr !== undefined && curr !== null) {
-        console.log('hitting first if');
         this.data['curriculums'].push(curr);
       } else {
-        console.log('returned null');
         this.data['curriculums'].push(newCurriculum);
       }
     }, err => {
@@ -123,7 +121,6 @@ export class CreateCurriculumComponent implements OnInit {
   // here we are performing validation for the curriculum entered
   //    the submit button is disabled until both name and weeks are entered correctly
   validate() {
-    console.log('validating user input');
     this.isValid = true;
     // validating user input
     if (!this.curriculumName || !this.numberOfWeeks) {
