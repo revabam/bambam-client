@@ -133,6 +133,7 @@ export class CurriculumEditorComponent implements OnInit {
     });
     return curriculumsWithName;
   }
+
   /**
    * Selects the passed in curriculum to be injected into the curriculum view component.
    * @param curriculum the curriculum you want to display in the curriculum view component.
@@ -152,6 +153,7 @@ export class CurriculumEditorComponent implements OnInit {
     return this.subtopics.filter(
       (subtopic) => subtopic && subtopic.parentTopicId === topic.id);
   }
+
   /**
    * When we invoke this function, it opens up the modal that we use
    * to create new curriculum.
@@ -184,6 +186,7 @@ export class CurriculumEditorComponent implements OnInit {
       }
     );
   }
+
   /**
    * When we invoke this function, it opens up the modal that we use
    * to create new versions of a curriculum.
@@ -216,6 +219,7 @@ export class CurriculumEditorComponent implements OnInit {
       }
     );
   }
+
   /**
    * Calls the deactivate function from the curriculum
    * service.
@@ -242,6 +246,7 @@ export class CurriculumEditorComponent implements OnInit {
       }
     );
   }
+
   /**
    * Calls the reactivate function from the curriculum
    * service.
@@ -268,6 +273,7 @@ export class CurriculumEditorComponent implements OnInit {
       }
     );
   }
+
   /**
    * Calls the deactivate function from the topic
    * service.
@@ -298,6 +304,7 @@ export class CurriculumEditorComponent implements OnInit {
     );
     this.collapseTopic(topic.id);
   }
+
   /**
    * Calls the reactivate function from the topic
    * service.
@@ -329,6 +336,7 @@ export class CurriculumEditorComponent implements OnInit {
     );
     this.collapseTopic(topic.id);
   }
+
   /*
    * collapseTopic, expandTopic, and isExpanded are functions
    * used to check and control the expansion of a topic panel
@@ -344,6 +352,7 @@ export class CurriculumEditorComponent implements OnInit {
   expandTopic(topicId: number): void {
     this.topicExpansions[`topic_${topicId}`] = true;
   }
+
   /**
    * Sets the value to false for a dictionary key with
    * the given topic id.
@@ -354,6 +363,7 @@ export class CurriculumEditorComponent implements OnInit {
   collapseTopic(topicId: number): void {
     this.topicExpansions[`topic_${topicId}`] = false;
   }
+
   /**
    * Checks whether or not a topic is expanded. If it
    * value in the dictionary is true, it is expanded,
@@ -366,6 +376,7 @@ export class CurriculumEditorComponent implements OnInit {
   isExpanded(topicId: number): boolean {
     return this.topicExpansions[`topic_${topicId}`] === true;
   }
+
   /**
    * Calls the deactivate function from the subtopic
    * service.
@@ -392,6 +403,7 @@ export class CurriculumEditorComponent implements OnInit {
       }
     );
   }
+
   /**
    * Calls the reactivate function from the subtopic
    * service.
