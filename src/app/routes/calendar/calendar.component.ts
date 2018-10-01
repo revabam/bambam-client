@@ -522,6 +522,7 @@ export class CalendarComponent implements OnInit, DoCheck {
            */
           subtopicStartTime.setHours(Math.floor(hour));
           subtopicStartTime.setMinutes((hour - Math.floor(hour)) * 60);
+          console.log(subtopicStartTime.toString());
           hour = hour + timeDifference;
           const endTime = new Date(subtopicStartTime);
           /**
