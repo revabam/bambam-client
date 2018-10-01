@@ -1,5 +1,4 @@
 import { Batch } from './../../models/batch';
-import { CalendarEvent as CalendarEventModel } from './../../models/calendar-event';
 import * as $ from 'jquery';
 import * as moment from 'moment';
 import 'fullcalendar';
@@ -337,9 +336,9 @@ export class CalendarComponent implements OnInit, DoCheck {
   moveEvents(decision: number, event: CalendarEvent) {
     if (decision !== 0 && decision !== undefined) {
       this.activeDayIsOpen = false;
-      const eventStartDate = event.start.getDate();
+      const eventStartDate = new Date(event.start);
       for (const ev of this.events) {
-        if (ev.start.getDate() >= eventStartDate) {
+        if (ev.start >= eventStartDate) {
           ev.start.setDate(ev.start.getDate() + decision);
           ev.end.setDate(ev.end.getDate() + decision);
           /**
@@ -382,6 +381,7 @@ export class CalendarComponent implements OnInit, DoCheck {
       if (event.start.getDate() !== event.end.getDate() || event.start.getMonth() !== event.end.getMonth()) {
         this.populateCalendar(id, event);
       }
+      this.persistEvents();
       this.refresh.next();
     }
   }
@@ -452,12 +452,38 @@ export class CalendarComponent implements OnInit, DoCheck {
    */
   generateStoredEvents() {
     for (const event of this.storedEvents) {
+      let color;
+      switch (event.statusId) {
+        case 1:
+          color = colors.blue;
+          break;
+        case 2:
+          color = colors.green;
+          break;
+        case 3:
+          color = colors.red;
+          break;
+        case 4:
+          color = colors.yellow;
+          break;
+        default:
+          break;
+      }
       this.events.push(
         {
+          id: event.id,
           start: new Date(event.startDateTime),
           end: new Date(event.endDateTime),
           title: event.title,
-          id: event.id,
+          description: event.description,
+          color: color,
+          actions: this.actions,
+          resizable: {
+            beforeStart: true,
+            afterEnd: true
+          },
+          draggable: true,
+          subTopicId: event.subTopicId,
           statusId: event.statusId,
           flagged: event.flagged
         });
@@ -516,7 +542,7 @@ export class CalendarComponent implements OnInit, DoCheck {
               beforeStart: true,
               afterEnd: true
             },
-            draggable: true,
+            draggable: false,
             subTopicId: subtopic.id,
             statusId: 1,
             flagged: 0
@@ -540,20 +566,24 @@ export class CalendarComponent implements OnInit, DoCheck {
     for (const event of this.events) {
 
       const ev: CalEvent.CalendarEvent = {
+        id: +event.id,
         title: event.title,
         description: event.title,
         statusId: event.statusId,
         startDateTime: event.start,
         endDateTime: event.end,
-        subTopicId: +event.id,
+        subTopicId: event.subTopicId,
         trainerId: this.user.id,
         flagged: event.flagged
       };
 
       eventsToPersist.push(ev);
-
     }
     this.calendarService.addCalendarEvents(eventsToPersist).subscribe(eventRes => {
+      for (let i = 0; i < this.events.length; i++) {
+          this.events[i].id = eventRes[i].id;
+          this.events[i].draggable = true;
+      }
     });
   }
 
