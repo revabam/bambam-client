@@ -477,7 +477,7 @@ export class CalendarComponent implements OnInit, DoCheck {
     for (const week of weeks) {
       for (const day of week.curriculumDays) {
         let hour = 9;
-        const subTopicsToday = day.subTopics.length;
+        const subTopicsToday = day.daySubTopics.length;
         const timeDifference = (7 / subTopicsToday);
         /**
          * if statement that skips weekends
@@ -487,7 +487,7 @@ export class CalendarComponent implements OnInit, DoCheck {
         } else if (subtopicStartTime.getDay() === 0) {
           subtopicStartTime.setDate(subtopicStartTime.getDate() + 1);
         }
-        for (const subtopic of day.subTopics) {
+        for (const subtopic of day.daySubTopics) {
           if (hour > 12 && hour < 13) {
             hour++;
           }
