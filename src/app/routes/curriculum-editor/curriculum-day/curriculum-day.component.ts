@@ -33,23 +33,7 @@ export class CurriculumDayComponent implements OnInit {
   getAllCurriculums(): void {
     this.curriculumService.getAll().subscribe(curriculums => {
       this.curriculums = curriculums;
-      console.log('getting curriculums' + this.curriculums);
-      console.log(curriculums);
-      this.curriculumNames = this.getUniqueNames();
     });
-  }
-
-  /**
-   * Gets us distinct curriculum names from the list of all
-   * curriculums
-   * @author - Andrew Li | 1806-Jun-18-USF-Java | Wezley Singleton
-   */
-  getUniqueNames(): string[] {
-    let names: string[] = this.curriculums.map(curr => curr.name);
-    // If it is deactivated, then we don't create a
-    // separate unique name for that.
-    names = names.map((name) => this.curriculumService.reactivateName(name));
-    return names.filter((name, i, arr) => name && arr.indexOf(name) === i);
   }
 
   /**
