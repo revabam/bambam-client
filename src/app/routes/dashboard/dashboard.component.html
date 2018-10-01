@@ -2,7 +2,7 @@
   <!-- WAGBar -->
   <div class="row">
     <div class="col-sm mb-3 mt-2">
-      <mat-card style="border-radius: 20px 20px 20px 20px" id="card">
+      <mat-card style="border-radius: 20px 20px 20px 20px; box-shadow: 5px 5px 20px rgba(212, 52, 3, 0.555)" id="card">
         <mat-card-header>
           <div class="p-2 w-100 bd-highlight">
             <h1 id="title">
@@ -19,9 +19,9 @@
   <!-- Dash -->
   <!-- Dash Info -->
 
-  <div class="d-flex flex-row justify-content-center">
+  <div class="d-flex ">
     <span class="btn btn-outline-warn flex-fill justify-content-center" matTooltip="Show hidden batch information." matTooltipPosition="left">
-      <mat-slide-toggle id="batch" class="flex-fill" (click)="sidenav.toggle()">
+      <mat-slide-toggle id="batch" (click)="sidenav.toggle()">
         Batch
       </mat-slide-toggle>
     </span>
@@ -29,7 +29,7 @@
     <button mat-button (click)="topicsIsOpen=true ; todayIsOpen=false" class="flex-fill btn btn-outline-warn text-monospace">View Topics</button>
   </div>
   <!-- SIDENAV -->
-  <mat-sidenav-container style="border-radius: 20px 20px 20px 20px; opacity: .9;">
+  <mat-sidenav-container style="border-radius: 20px 20px 20px 20px; opacity: .9; box-shadow: 5px 5px 20px rgba(212, 52, 3, 0.555)">
     <mat-sidenav #sidenav mode="side">
       <mat-card id="sideNav">
         <mat-card-header id="batchHeader">
@@ -60,7 +60,7 @@
         </mat-list>
       </mat-card>
     </mat-sidenav>
-    <mat-card style="border-radius: 20px 20px 20px 20px; opacity: .9;" *ngIf="todayIsOpen">
+    <mat-card style="border-radius: 20px 20px 20px 20px; opacity: .9; box-shadow: 5px 5px 20px rgba(212, 52, 3, 0.555)" *ngIf="todayIsOpen">
       <mat-card-header class="justify-content-center border border-dark rounded">
         <div class="d-flex">
           <div>
@@ -68,15 +68,18 @@
           </div>
         </div>
       </mat-card-header>
-      <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+      <mat-card-content class="d-flex">
+      <table  mat-table [dataSource]="dataSource" class="mat-elevation-z8; flex-fill">
         <!--- Note that these columns can be defined in any order.
                   The actual rendered columns are set as a property on the row definition"
                 -->
         <ng-container matColumnDef="time">
           <th style="font-size: 1vw; font-weight: bold" mat-header-cell *matHeaderCellDef> Time </th>
           <td mat-cell *matCellDef="let sub">
-            <a id="timeBadge" class="badge badge-secondary text-monospace">
-              {{ sub.time | date:"h:mm a z"}}</a>
+            <a id="timeBadge1" class="badge badge-secondary text-monospace">
+              {{ sub.time | date:"h:mm a z"}}</a> x
+              <a id="timeBadge2" class="badge badge-success text-monospace">
+                {{ sub.time | date:"h:mm a z"}}</a>
           </td>
         </ng-container>
         <!-- Position Column -->
@@ -99,7 +102,7 @@
           <th style="font-size: 1vw; font-weight: bold" mat-header-cell *matHeaderCellDef> Controls{{i}} </th>
           <td mat-cell *matCellDef="let sub; let i = index;">
             <div class="d-flex">
-              <div class="flex-fill rounded border border-dark alert-success" #check (click)="statusToggle(i,1)" [class.alert-success]="sub.status === 1"
+              <div class="rounded border border-dark alert-success" #check (click)="statusToggle(i,1)" [class.alert-success]="sub.status === 1"
                 [class.border-dark]="sub.status === 1">
                 &nbsp;
                 <mat-icon class="material-icons matSpecs-24">
@@ -107,7 +110,7 @@
                 </mat-icon>
                 &nbsp;
               </div>
-              <div class="flex-fill rounded border border-dark alert-danger" #missed (click)="statusToggle(i,0)" [class.alert-danger]="sub.status === 0"
+              <div class=" rounded border border-dark alert-danger" #missed (click)="statusToggle(i,0)" [class.alert-danger]="sub.status === 0"
                 [class.border-dark]="sub.status === 0">
                 &nbsp;
                 <mat-icon class="material-icons matSpecs-24">
@@ -126,6 +129,7 @@
         <tr mat-header-row *matHeaderRowDef="headerColumns"></tr>
         <tr mat-row *matRowDef="let row; columns: headerColumns;"></tr>
       </table>
+    </mat-card-content>
     </mat-card>
     <app-topics *ngIf="topicsIsOpen"></app-topics>
   </mat-sidenav-container>

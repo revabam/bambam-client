@@ -1,11 +1,9 @@
 // Variables
 // font
 $weight: bold; 
-
 // color 
 $oColor: rgb(231, 94, 2); 
 $wColor: white; 
-
 // border
 $radius: 13px 13px 13px 13px; // border radius
 $shadow: 0px 0px 2px 2px; //shadow effect on buttons related to Calender
@@ -14,6 +12,11 @@ $shadow: 0px 0px 2px 2px; //shadow effect on buttons related to Calender
 mat-card{
     position: fixed;
     border-radius: $radius;
+    opacity: .9;
+    box-shadow: 5px 5px 20px rgba(212, 52, 3, 0.555);
+}
+mat-card:hover{
+    opacity: 1;
 }
 
 #btn{
@@ -26,7 +29,6 @@ mat-card{
     border-width: 3px;
     border-color: $oColor $shadow; 
     font-size: .85vw;
-    border-radius: 13px 13px 13px 13px;
     width: 7vw;
     height: 2.5vw;
   }
@@ -45,6 +47,7 @@ button{
 // specific mat-card styling
 #curr{
     width: 20%;
+    box-shadow: 5px 5px 20px rgba(212, 52, 3, 0.555);
 }
 
 .row{

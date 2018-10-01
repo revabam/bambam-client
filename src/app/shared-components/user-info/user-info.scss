@@ -1,6 +1,6 @@
 // Variables
 $weight: bold; // font-weight
-$oColor: rgb(238, 95, 0); 
+$oColor: rgb(231, 94, 2); 
 $radius: 13px 13px 13px 13px; // border radius
 $shadow: 0px 0px 2px 2px; //shadow effect on buttons related to Calender
 
@@ -15,24 +15,9 @@ button{
     border-width: 3px;
     border-color: $oColor $shadow; 
     font-size: .85vw;
-    width: 2vw;
   }
 
-/* Calendar date styling e.g. September 2018 */
-#currentDate{
-  font-size: 1.8vw;
-  font-weight: $weight; 
+h6{
+font-size: 1.2vw;
 }
 
-/* Details inside the modal boxes bolded */
-#details{
-  font-weight: $weight;
-}
-
-// specific mat-card editting 
-mat-card{
-  background-color: #ffffffe5;
-  color: black;
-  font-weight: $weight; 
-  box-shadow: rgba(0, 0, 0, 0.322);
-}

@@ -2,9 +2,9 @@
 <div class="p-5 m-auto">
   <div>
     <div>
-      <mat-tab-group>
+      <mat-tab-group style="width: 21%">
         <mat-tab label="Curriculum">
-          <h4 class="m-0 p-0" style="font-size: 1.7vw;">Curriculum</h4>
+          <h4 class="m-0 p-0" style="font-size: 2.5vw;">Curriculum</h4>
           <mat-card id="curr">
             <mat-card-header>
               <mat-toolbar class="panel-bar">
@@ -22,13 +22,13 @@
               <mat-accordion>
                 <mat-expansion-panel *ngFor="let cname of curriculumNames">
                   <mat-expansion-panel-header>
-                    <mat-panel-title>
+                    <mat-panel-title style="font-weight: bold">
                       {{cname}}
                     </mat-panel-title>
                   </mat-expansion-panel-header>
                   <div *ngFor="let curriculum of getCurriculumsByName(cname)">
                     <mat-toolbar>
-                      <span *ngIf="curriculum.name === cname">
+                      <span *ngIf="curriculum.name === cname" >
                         Version: {{curriculum.version}}
                       </span>
                       <span *ngIf="curriculum.name !== cname">
@@ -56,7 +56,7 @@
 
 
         <mat-tab label="Topic Pool">
-          <h4 class="m-0 p-0" style="font-size: 1.7vw;">Topic Tool</h4>
+          <h4 class="m-0 p-0"  style="font-size: 2vw; text-align: right">Topic Tool</h4>
           <mat-card id="curr">
             <mat-card-header>
               <mat-toolbar>

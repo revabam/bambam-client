@@ -1,10 +1,10 @@
-<div  class="border border-success">
+<mat-card>
 
 <mat-card-header>
   <h4 style="font-size: 140%">Personal Information</h4>
   <span style="flex: 1 1 auto"></span>
-  <button mat-button (click)="toggleEdit()">
-    <mat-icon style="color: white">border_color</mat-icon>
+  <button mat-button (click)="toggleEdit()">Edit Profile
+    <mat-icon ></mat-icon>
   </button>
 </mat-card-header>
 
@@ -13,7 +13,7 @@
     <mat-list dense>
       <mat-list-item>
         <div class="col-3">
-          <h6>First Name: </h6>
+          <h6 >First Name: </h6>
         </div>
         <div class="col-9 text-left">
           <h6>{{this.user.firstName}}</h6>
@@ -38,7 +38,7 @@
     </mat-list>
     <div mat-actions style="opacity: 0;">
       <button mat-raised-button (click)="cancelEdit()" class="mr-2">Cancel</button>
-      <button mat-raised-button color="primary" (click)="saveChanges()">Ok</button>
+      <button mat-raised-button (click)="saveChanges()">Ok</button>
     </div>
   </div>
 
@@ -75,9 +75,9 @@
     </mat-list>
     <div mat-actions>
       <button mat-raised-button (click)="cancelEdit()" class="mr-2">Cancel</button>
-      <button mat-raised-button color="primary" (click)="saveChanges()">Ok</button>
+      <button mat-raised-button (click)="saveChanges()">Ok</button>
     </div>
   </div>
 </mat-card-content>
 
-</div>
+</mat-card>

@@ -78,8 +78,8 @@ button{
 
 // mat-card for Welcome, and week at a glance
 #card{
-    width: 50%;
-    margin-left: 24%;
+    width: 45%;
+    margin-left: 27%;
 }
 
 // info displayed when the batch button is clicked
@@ -89,38 +89,45 @@ button{
     
 }
 
-// 
+#dashAll{
+    margin-top: 5%;
+}
+
+// editting for batch name when batch button is pressed
 #batchHeader {
-    background-color: rgb(189, 69, 0);
+    background-color: rgb(218, 81, 2);
     text-align: $mid;
     font-weight: $weight;
     color: $wColor;
     width: $w100;
     opacity: .9;
 }
-#dashAll{
-    margin-top: 3vw;
-}
 
+// editting the batch card height to fit the entire space
 #sideNav{
     height: $w100;
 }
 
-#timeBadge {
+// (left)  time badge displayed in the today section of the dashboard
+#timeBadge1 {
     color: $wColor;
+    background-color: rgb(71, 71, 71);
+}
+// (right)  time badge displayed in the today section of the dashboard
+#timeBadge2 {
+    color: $wColor;
+    background-color: orangered;
 }
 
+// check mark and exclamation mark 
 .material-icons.matSpecs-24 {
     font-weight: $weight;
     font-size: 24px;
-    color: rgba(116, 11, 11, 0.625)
+    color: rgba(0, 0, 0, 0.747)
 }
+// flag styling
 .material-icons.flagColor-24 {
     font-weight: $weight;
     font-size: 24px;
-    color: rgba(237, 19, 19, 0.625)
-}
-
-th{
-    color: black;   
+    color: rgba(237, 19, 19, 0.897)
 }

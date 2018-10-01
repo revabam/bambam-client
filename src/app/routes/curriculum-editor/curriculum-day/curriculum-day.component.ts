@@ -4,7 +4,7 @@ import { Component, OnInit, Input } from '@angular/core';
 @Component({
   selector: 'app-curriculum-day',
   templateUrl: './curriculum-day.component.html',
-  styleUrls: ['./curriculum-day.component.css']
+  styleUrls: ['./curriculum-day.scss']
 })
 export class CurriculumDayComponent implements OnInit {
 

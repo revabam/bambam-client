@@ -25,22 +25,22 @@
 <br>
 <div class="row justify-content-center mx-4 pb-4">
   <div class="col-md-2" *ngIf="showSideNav">
-    <mat-card style="border-radius: 20px 20px 20px 20px" >
+    <mat-card style="border-radius: 20px 20px 20px 20px; box-shadow: 5px 5px 20px rgba(212, 52, 3, 0.555)" >
       <mat-card-header>
         <mat-card-title>
-          <h4 style="text-align: center; margin-left: -15%">Curriculums</h4>
+          <h4 style=" font-size: 1.7vw">Curriculums</h4>
         </mat-card-title>
       </mat-card-header>
       <mat-divider></mat-divider>
       <mat-list>
-        <mat-list-item *ngFor="let curriculum of curriculumEvents" mwlDraggable [dropData]="{event: curriculum}" style="position:relative; z-index: 10; font-weight: bold">
+        <mat-list-item *ngFor="let curriculum of curriculumEvents" mwlDraggable [dropData]="{event: curriculum}" style="position:relative; z-index: 10; font-weight: bold; font-size: 1.1vw">
           {{curriculum.title}} : Version {{curriculum.version}}</mat-list-item>
       </mat-list>
     </mat-card>
-    <mat-card style="border-radius: 20px 20px 20px 20px" class="mt-4">
+    <mat-card style="border-radius: 20px 20px 20px 20px;box-shadow: 5px 5px 20px rgba(212, 52, 3, 0.555)" class="mt-4">
       <mat-card-header>
         <mat-card-title>
-          <h4 style="text-align: center;">Create Event</h4>
+          <h4 style="font-size: 1.6vw">Create Event</h4>
         </mat-card-title>
       </mat-card-header>
       <mat-divider></mat-divider>
@@ -53,24 +53,24 @@
           <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
           <mat-datepicker #picker startView="year" [startAt]="startDate"></mat-datepicker>
         </mat-form-field>
-        <button style="margin-left: 10%" mat-raised-button (click)="addEvent()">Create Event</button>
+        <button style="margin-left: 3vw" mat-raised-button (click)="addEvent()">Create</button>
       </mat-card-content>
     </mat-card>
   </div>
   <div class="col-md-10">
-    <mat-card style="border-radius: 20px 20px 20px 20px " >
+    <mat-card style="border-radius: 20px 20px 20px 20px; box-shadow: 5px 5px 20px rgba(212, 52, 3, 0.555) " >
       <mat-card-header class="text-center text-center align-content-center align-center justify-content-center">
         <mat-toolbar style="background-color: rgba(0, 0, 0, 0)">
-          <button mat-button color="accent" mat-icon-button aria-label="add" (click)="toggleSideNav()">
+          <button mat-button  mat-icon-button aria-label="add" (click)="toggleSideNav()">
               <mat-icon>add</mat-icon>
             </button>
           <span style="flex: 1 1 auto;"></span>
             <span class="btn-group">
               <span mwlCalendarPreviousView [view]="view" [(viewDate)]="viewDate" (viewDateChange)="activeDayIsOpen = false">
-                <button mat-raised-button >< Previous</button>
+                <button mat-button >< Prev.</button>
               </span>
               <span mwlCalendarToday [(viewDate)]="viewDate">
-                <button mat-stroked-button color="accent">Today</button>
+                <button mat-stroked-button >Today</button>
               </span>
               <span mwlCalendarNextView [view]="view" [(viewDate)]="viewDate" (viewDateChange)="activeDayIsOpen = false">
                 <button mat-raised-button >Next ></button>
@@ -101,7 +101,7 @@
 
         </div>
         <div [ngSwitch]="view">
-          <mwl-calendar-month-view *ngSwitchCase="'month'" [viewDate]="viewDate" [events]="events" [refresh]="refresh" [activeDayIsOpen]="activeDayIsOpen"
+          <mwl-calendar-month-view style="font-size: 1vw; color: black" *ngSwitchCase="'month'" [viewDate]="viewDate" [events]="events" [refresh]="refresh" [activeDayIsOpen]="activeDayIsOpen"
             (dayClicked)="dayClicked($event.day)" (eventClicked)="handleEvent('Clicked', $event.event)" (eventTimesChanged)="eventTimesChanged($event)">
           </mwl-calendar-month-view>
           <mwl-calendar-week-view *ngSwitchCase="'week'" [viewDate]="viewDate" [events]="events" [refresh]="refresh" (eventClicked)="handleEvent('Clicked', $event.event)"
