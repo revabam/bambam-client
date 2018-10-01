@@ -2,12 +2,14 @@
 <h6 mat-dialog-title class="col mb-5">Create a Curriculum</h6>
 <div mat-dialog-content>
   <mat-form-field class="col-9">
+    <!-- valiadating the curriculum name -->
     <input matInput [(ngModel)]="curriculumName" (blur)='validate()' [formControl]="cnameFormControl" placeholder="Curriculum Name">
     <mat-error *ngIf="cnameFormControl.hasError('required')">
       Curriculum name is <strong>required</strong>
     </mat-error>
   </mat-form-field>
   <mat-form-field class="col-9">
+    <!-- validating the curriculum weeks -->
       <input type= 'number' matInput [(ngModel)]="numberOfWeeks" (blur)='validate()' [formControl]="cweekFormControl" placeholder="Number of weeks">
       <mat-error *ngIf="cweekFormControl.hasError('required')">
         Number of week is <strong>required</strong>

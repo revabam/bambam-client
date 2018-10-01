@@ -103,13 +103,7 @@ export class CreateCurriculumComponent implements OnInit {
           } else {
             continue;
           }
-          // if (newCurriculum.numberOfWeeks < 1) {
-          //  console.log('no');
-          // if (newCurriculum.name.length < 1) {
-          // console.log ('no');
         }
-        // break;
-        // }
       }
       curr.version = nameNum;
       if (curr !== undefined && curr !== null) {
@@ -122,20 +116,24 @@ export class CreateCurriculumComponent implements OnInit {
     }, err => {
       console.log('[ERROR] Create-curriculum: An error occured');
       console.log(err);
-      // this.data['curriculums'].push(newCurriculum);
     });
     // After the curriculum is added, we're done with the modal.
     this.close();
   }
+  // here we are performing validation for the curriculum entered
+  //    the submit button is disabled until both name and weeks are entered correctly
   validate() {
     console.log('validating user input');
     this.isValid = true;
+    // validating user input
     if (!this.curriculumName || !this.numberOfWeeks) {
       this.isValid = false;
     } else {
+      // if curriculum name is valid
       if (this.curriculumName.length < 2) {
         this.isValid = false;
       }
+      // if curriculum weeks is valid
       if (this.numberOfWeeks < 1) {
         this.isValid = false;
       }
