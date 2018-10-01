@@ -3,6 +3,7 @@ import { HttpClientModule, HttpClient, HttpHandler } from '@angular/common/http'
 import { TestBed, inject, async } from '@angular/core/testing';
 import { TopicService } from './topic.service';
 import { Observable } from 'rxjs';
+import { SubTopic } from '../models/subtopic';
 
 describe('TopicService', () => {
   beforeEach(() => {
@@ -15,10 +16,44 @@ describe('TopicService', () => {
     expect(service).toBeTruthy();
   }));
 
-  // Testing methods within topic service
+  /** getTopicById length Test
+   *  @param number
+   */
   it('should get topic by id',
   async(inject([TopicService], (service: TopicService) => {
     expect(service.getTopicById.length).toEqual(1);
   })));
 
+  /**
+   * getAll Test
+   * @param none
+   */
+  it('should call getAll', () => {
+    const topicService = new TopicService(null);
+    spyOn(topicService, 'getAll');
+    topicService.getAll();
+    expect(topicService.getAll).toHaveBeenCalled();
+  });
+
+  /**
+   * getByName
+   * @param string
+   */
+  it('should call getByName', () => {
+    const topicService = new TopicService(null);
+    spyOn(topicService, 'getByName');
+    topicService.getByName(name);
+    expect(topicService.getByName).toHaveBeenCalled();
+  });
+
+  /**
+   * add Test
+   * @param string
+   */
+  it('should call add', () => {
+    const topicService = new TopicService(null);
+    spyOn(topicService, 'add');
+    topicService.add(name);
+    expect(topicService.add).toHaveBeenCalled();
+  });
 });
