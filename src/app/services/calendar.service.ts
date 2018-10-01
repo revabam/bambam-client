@@ -38,6 +38,50 @@ export class CalendarService {
     return this.http.get<Curriculum>(environment.apiUrl + `curriculums/${id}`, HTTP_OPTIONS);
   }
 
+
+  // THIS IS THE CURRENT METHOD TO GRAB THE CALENDAR EVENTS BY TRAINER - JOEY
+  getCalendarEventsByTrainerId(trainerId: number) {
+    return this.http.get<CalendarEvent[]>(`http://localhost:9994/calendars/event/trainer/${trainerId}`, HTTP_OPTIONS);
+  }
+
+  /*
+  const startDate = new Date();
+    const endDate = new Date();
+    return [{
+      id:  1,
+      title: 'e1',
+      description: 'desasdasdasdc',
+      statusId: 1,
+      startDateTime: startDate,
+      endDateTime: endDate,
+      subTopicId: 1,
+      trainerId: 12,
+      flagged: 1
+    },
+    {
+      id:  1,
+      title: 'e2',
+      description: 'ddfsdfadfesc',
+      statusId: 1,
+      startDateTime: startDate,
+      endDateTime: endDate,
+      subTopicId: 2,
+      trainerId: 12,
+      flagged: 1
+    },
+    {
+      id:  1,
+      title: 'e3',
+      description: 'descsad',
+      statusId: 1,
+      startDateTime: startDate,
+      endDateTime: endDate,
+      subTopicId: 2,
+      trainerId: 12,
+      flagged: 1
+    }
+  ]; */
+
   /**
    * Create a calendar event
    * @param event CalendarEvent
