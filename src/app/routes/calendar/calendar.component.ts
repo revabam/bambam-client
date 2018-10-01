@@ -1,3 +1,5 @@
+import { Batch } from './../../models/batch';
+import { CalendarEvent as CalendarEventModel } from './../../models/calendar-event';
 import * as $ from 'jquery';
 import * as moment from 'moment';
 import 'fullcalendar';
@@ -66,7 +68,7 @@ export class CustomCalendarEvent implements CalendarEvent<any> {
     afterEnd?: boolean;
   };
   draggable?: boolean;
-
+  description?: string;
   statusId: number;
   subTopicId?: number;
   flagged?: number;
@@ -240,8 +242,10 @@ export class CalendarComponent implements OnInit, DoCheck {
   }
   /**
    * When the title of an event on the calendar is clicked, a modal is opened with relevant
-   * information about the event (curriculum, topics, etc.).
+   * information about the event (event name, description, time, etc.).
    * @param event The event that was clicked
+   *
+   * @author Alicia Douglas | Spark1806-USF-Java | Steven Kelsey
    */
   openDialog(event: CalendarEvent): void {
     /*
@@ -249,18 +253,9 @@ export class CalendarComponent implements OnInit, DoCheck {
      * The open method passes in a component that we'll use
      * in the modal.
      */
-    let eventTopic: Topic;
-    const custEvent: CustomCalendarEvent = <CustomCalendarEvent>event;
-    this.topicService.getTopicById(custEvent.subTopicId).subscribe(response => {
-      eventTopic = response;
-      let curriculum: Curriculum;
-      this.curriculums.forEach(curr => {
-        curr.topics.forEach(topic => {
-          if (topic = eventTopic) {
-            curriculum = curr;
-          }
-        });
-      });
+    let calendarEvent: CalendarEventModel;
+    this.calendarService.getCalendarEventsById(+event.id).subscribe(response => {
+      calendarEvent = response;
       const dialogRef = this.dialog.open(CalendarModalComponent,
         /*
         * An object is passed in as the second parameter, which
@@ -270,11 +265,11 @@ export class CalendarComponent implements OnInit, DoCheck {
         {
           width: '600px',
           data: {
-            title: curriculum.name,
-            topics: curriculum.topics,
-            curriculum: curriculum,
-            version: curriculum.version,
-            numWeeks: curriculum.numberOfWeeks
+            title: calendarEvent.title,
+            description: calendarEvent.description,
+            startTime: calendarEvent.startDateTime,
+            endTime: calendarEvent.endDateTime,
+            statusId: calendarEvent.statusId
           }
         }
       );
@@ -448,7 +443,7 @@ export class CalendarComponent implements OnInit, DoCheck {
           event.start = decision;
           decision = null;
           this.selectedCurriculum = curr;
-          this.dropEvent = <CustomCalendarEvent> event;
+          this.dropEvent = <CustomCalendarEvent>event;
         }
       });
     });
@@ -546,7 +541,6 @@ export class CalendarComponent implements OnInit, DoCheck {
    */
   persistEvents() {
     const eventsToPersist: CalEvent.CalendarEvent[] = [];
-
     for (const event of this.events) {
 
       const ev: CalEvent.CalendarEvent = {
@@ -566,6 +560,7 @@ export class CalendarComponent implements OnInit, DoCheck {
     this.calendarService.addCalendarEvents(eventsToPersist).subscribe(eventRes => {
     });
   }
+
   /**
    * Custom event to be persisted.
    * @param event an event to be persisted
