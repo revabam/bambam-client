@@ -232,24 +232,13 @@ export class CalendarComponent implements OnInit, DoCheck {
    * information about the event (curriculum, topics, etc.).
    * @param event The event that was clicked
    */
-  openDialog(event: CalendarEvent): void {
+  openDialog(event: CustomCalendarEvent): void {
     /*
      * this.dialog is an injected dependency for the modal
      * The open method passes in a component that we'll use
      * in the modal.
      */
-    let eventTopic: Topic;
-    this.topicService.getTopicById(+event.id).subscribe(response => {
-      eventTopic = response;
-      let curriculum: Curriculum;
-      this.curriculums.forEach(curr => {
-        curr.topics.forEach(topic => {
-          if (topic = eventTopic) {
-            curriculum = curr;
-          }
-        });
-      });
-      this.dialog.open(CalendarModalComponent,
+      const dialogRef = this.dialog.open(CalendarModalComponent,
         /*
         * An object is passed in as the second parameter, which
         * defines properties of the dialog modal, as well as the
@@ -258,15 +247,17 @@ export class CalendarComponent implements OnInit, DoCheck {
         {
           width: '600px',
           data: {
-            title: curriculum.name,
-            topics: curriculum.topics,
-            curriculum: curriculum,
-            version: curriculum.version,
-            numWeeks: curriculum.numberOfWeeks
+            title: event.title,
+            description: event.description,
+            startTime: event.start,
+            endTime: event.end,
+            statusId: event.statusId
           }
         }
       );
-    });
+      dialogRef.afterClosed().subscribe(decision => {
+        this.moveEvents(decision, event);
+      });
   }
 
   /**
@@ -331,7 +322,7 @@ export class CalendarComponent implements OnInit, DoCheck {
    */
   handleEvent(action: string, event: CalendarEvent): void {
     if (action === 'Clicked') {
-      this.openDialog(event);
+      this.openDialog(<CustomCalendarEvent> event);
     } else if (action === 'Edited') {
     } else if (action === 'Deleted') {
     } else {
