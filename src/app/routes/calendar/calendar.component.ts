@@ -395,6 +395,16 @@ export class CalendarComponent implements OnInit, DoCheck {
     }
   }
 
+  /**
+   * changes status in sequence:
+   * 1 - planned - blue
+   * 2 - completed - green
+   * 3 - cancelled - red
+   * 4 - missed - yellow
+   * when event is in the past, it can't go into planned status
+   * @param event event to change status on
+   * @author Marcin Salamon | Spark1806-USF-Java | Steven Kelsey
+   */
   changeStatus(event: CalendarEvent) {
     const custEvent = <CustomCalendarEvent> event;
       custEvent.statusId++;
@@ -438,7 +448,7 @@ export class CalendarComponent implements OnInit, DoCheck {
           event.start = decision;
           decision = null;
           this.selectedCurriculum = curr;
-          this.dropEvent = <CustomCalendarEvent>event;
+          this.dropEvent = <CustomCalendarEvent> event;
         }
       });
     });
