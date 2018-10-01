@@ -93,6 +93,7 @@ export class CurriculumEditorComponent implements OnInit {
     });
     return curriculumsWithName;
   }
+
   /**
    * Selects the passed in curriculum to be injected into the curriculum view component.
    * Pulls the week data and the day and subtopic data for the curriculum
@@ -207,6 +208,7 @@ export class CurriculumEditorComponent implements OnInit {
       }
     );
   }
+
   /**
    * When we invoke this function, it opens up the modal that we use
    * to create new versions of a curriculum.
@@ -239,6 +241,7 @@ export class CurriculumEditorComponent implements OnInit {
       }
     );
   }
+
   /**
    * Calls the deactivate function from the curriculum
    * service.
@@ -265,6 +268,7 @@ export class CurriculumEditorComponent implements OnInit {
       }
     );
   }
+
   /**
    * Calls the reactivate function from the curriculum
    * service.
