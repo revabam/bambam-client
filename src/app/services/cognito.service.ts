@@ -171,6 +171,7 @@ export class CognitoService {
 
   /**
    * This method will get the current logged in user's attributes.
+   * @author Jasmine C. Onwuzulike
    * 
    */
   getUserAttributes(): string {
