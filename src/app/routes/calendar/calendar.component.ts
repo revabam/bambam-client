@@ -28,9 +28,21 @@ import { StartMondayModalComponent } from './start-monday-modal/start-monday-mod
 import { CurriculumWeek } from '../../models/curriculum-week';
 
 const colors: any = {
-  random: {
-    primary: '#ad2121',
-    secondary: '#FAE3E3'
+  blue: {
+    primary: 'blue',
+    secondary: 'blue'
+  },
+  red: {
+    primary: 'red',
+    second: 'red'
+  },
+  green: {
+    primary: 'green',
+    secondary: 'green'
+  },
+  yellow: {
+    primary: 'yellow',
+    secondary: 'yellow'
   }
 };
 /**
@@ -111,10 +123,9 @@ export class CalendarComponent implements OnInit, DoCheck {
 
   actions: CalendarEventAction[] = [
     {
-      label: '<span><mat-icon>edit</mat-icon></span>',
+      label: '<span><mat-icon>change status</mat-icon></span>',
       onClick: ({ event }: { event: CalendarEvent }): void => {
-        this.events = this.events.filter(iEvent => iEvent !== event);
-        this.handleEvent('Deleted', event);
+        this.handleEvent('Status', event);
       }
     }
   ];
@@ -363,6 +374,8 @@ export class CalendarComponent implements OnInit, DoCheck {
       this.openDialog(event);
     } else if (action === 'Edited') {
     } else if (action === 'Deleted') {
+    } else if (action === 'Status') {
+      this.changeStatus(event);
     } else {
       const id: number = +event.id;
       /**
@@ -375,6 +388,45 @@ export class CalendarComponent implements OnInit, DoCheck {
       }
       this.refresh.next();
     }
+  }
+
+  /**
+   * changes status in sequence:
+   * 1 - planned - blue
+   * 2 - completed - green
+   * 3 - cancelled - red
+   * 4 - missed - yellow
+   * when event is in the past, it can't go into planned status
+   * @param event event to change status on
+   * @author Marcin Salamon | Spark1806-USF-Java | Steven Kelsey
+   */
+  changeStatus(event: CalendarEvent) {
+    const custEvent = <CustomCalendarEvent> event;
+      custEvent.statusId++;
+      if (custEvent.statusId === 5) {
+        custEvent.statusId = 1;
+      }
+      switch (custEvent.statusId) {
+        case 1:
+          custEvent.color = colors.blue;
+          if (event.start < new Date()) {
+            custEvent.statusId = 2;
+            custEvent.color = colors.green;
+          }
+          break;
+        case 2:
+          custEvent.color = colors.green;
+          break;
+        case 3:
+          custEvent.color = colors.red;
+          break;
+        case 4:
+          custEvent.color = colors.yellow;
+          break;
+        default:
+          break;
+      }
+      this.persistEvents();
   }
 
   /**
