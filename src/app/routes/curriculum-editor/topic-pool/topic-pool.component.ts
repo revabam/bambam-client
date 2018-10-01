@@ -211,14 +211,20 @@ export class TopicPoolComponent implements OnInit {
       });
     }
 //  method to delete a subtopic by subTopic ID
-  deleteTopic(topic: Topic): void {
-    this.topicService.deleteTopicById(topic).subscribe(
+  deleteTopicById(topic: Topic): void {
+    console.log(topic.id);
+    console.log(this.subtopicService.getSubTopicByParentId(topic.id).subscribe(subtopics => {
+      this.subtopics = subtopics; }));
+    this.subtopicService.deleteSubTopicByParentId(topic.id);
+    this.topicService.deleteTopicById(topic.id).subscribe(
       data => {
         if (data['id'] === undefined || data['id'] === null) {
           return;
         }
+
       });
     }
+
   // deactivateSubtopic NOT CURRENTLY BEING USED, MAY INCLUDE ON SERVER endpoint
     deactivateSubtopic(subtopic: SubTopic): void {
     this.subtopicService.deactivate(subtopic).subscribe(

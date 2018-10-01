@@ -56,6 +56,11 @@ export class SubTopicService {
     return this.http.get<SubTopic[]>(environment.apiUrl + `SubTopics?parentTopic_id=${id}`, HTTP_OPTIONS);
   }
 
+  // Delete sub topics by parent id
+  deleteSubTopicByParentId(id: number): Observable<SubTopic[]> {
+    return this.http.delete<SubTopic[]>(environment.apiUrl + `SubTopics?parentTopic_id=${id}`, HTTP_OPTIONS);
+  }
+
   deleteSubTopic(subTopic: SubTopic): Observable<SubTopic[]> {
     return this.http.delete<SubTopic[]>(environment.apiUrl + `SubTopics/deleteSubTopicById${subTopic.id}`,
     HTTP_OPTIONS);

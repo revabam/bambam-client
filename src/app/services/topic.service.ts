@@ -73,8 +73,8 @@ export class TopicService {
       topic, HTTP_OPTIONS);
   }
 
-  deleteTopicById(topic: Topic): Observable<Topic[]> {
-    return this.http.delete<Topic[]>(environment.apiUrl + `Topics/deleteTopicById${topic.id}`,
+  deleteTopicById(id: number): Observable<Topic> {
+    return this.http.delete<Topic>(environment.apiUrl + `Topics/deleteTopicById${id}`,
     HTTP_OPTIONS);
 }
 
