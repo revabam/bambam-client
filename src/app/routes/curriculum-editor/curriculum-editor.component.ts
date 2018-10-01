@@ -555,4 +555,6 @@ export class CurriculumEditorComponent implements OnInit {
     return this.topics.filter((topic) => this.hasTopic(search, topic)
       || this.inSearch(search, topic.name));
   }
+
+
 }

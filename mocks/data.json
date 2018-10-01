@@ -41,6 +41,38 @@
       "calendarCurriculum_id": 2
     }
   ],
+  "calendar-curriculums": [
+    {
+      "id": 1,
+      "curriculum_id": 1,
+      "batch_id": 1
+    },
+    {
+      "id": 2,
+      "curriculum_id": 1,
+      "batch_id": 1
+    },
+    {
+      "id": 3,
+      "curriculum_id": 1,
+      "batch_id": 1
+    },
+    {
+      "id": 4,
+      "curriculum_id": 1,
+      "batch_id": 1
+    },
+    {
+      "id": 5,
+      "curriculum_id": 1,
+      "batch_id": 1
+    },
+    {
+      "id": 6,
+      "curriculum_id": 1,
+      "batch_id": 5
+    }
+  ],
   "calendar-subtopics": [
     {
       "id": 1,
@@ -65,323 +97,6 @@
     {
       "id": 6,
       "subtopic_id": 6
-    }
-  ],
-  "subtopics": [
-    {
-      "id": 1,
-      "name": "Introduction to Java: Why Java?",
-      "parentTopic_id": 1
-    },
-    {
-      "id": 2,
-      "name": "OOP Concepts in Depth: Polymorphism, Encapsulation, Inheritance, and Abstraction",
-      "parentTopic_id": 1
-    },
-    {
-      "id": 4,
-      "name": "Constructors",
-      "parentTopic_id": 1
-    },
-    {
-      "id": 5,
-      "name": "Methods and Parameters",
-      "parentTopic_id": 1
-    },
-    {
-      "id": 6,
-      "name": "Scopes of a Variable in Java",
-      "parentTopic_id": 1
-    },
-    {
-      "id": 8,
-      "name": "Array",
-      "parentTopic_id": 1
-    },
-    {
-      "id": 11,
-      "name": "Access Modifiers",
-      "parentTopic_id": 1
-    },
-    {
-      "id": 12,
-      "name": "String API",
-      "parentTopic_id": 1
-    },
-    {
-      "id": 13,
-      "name": "StringBuilder and StringBuffer",
-      "parentTopic_id": 1
-    },
-    {
-      "id": 14,
-      "name": "Exception Handling - try, catch, finally",
-      "parentTopic_id": 1
-    },
-    {
-      "id": 18,
-      "name": "Reflection",
-      "parentTopic_id": 1
-    },
-    {
-      "id": 19,
-      "name": "Inheritance",
-      "parentTopic_id": 1
-    },
-    {
-      "id": 23,
-      "name": "File I/O: FileInputStream/FileReader/FileWriter",
-      "parentTopic_id": 1
-    },
-    {
-      "id": 25,
-      "name": "Serialization",
-      "parentTopic_id": 1
-    },
-    {
-      "id": 26,
-      "name": "Collection Framework",
-      "parentTopic_id": 1
-    },
-    {
-      "id": 31,
-      "name": "Object Class",
-      "parentTopic_id": 1
-    },
-    {
-      "id": 32,
-      "name": "Equals and Hashcode",
-      "parentTopic_id": 1
-    },
-    {
-      "id": 33,
-      "name": "Thread model",
-      "parentTopic_id": 1
-    },
-    {
-      "id": 40,
-      "name": "Creational Design Patterns: Singleton and Factory",
-      "parentTopic_id": 1
-    },
-    {
-      "id": 41,
-      "name": "Introduction to Unit Testing",
-      "parentTopic_id": 1
-    },
-    {
-      "id": 45,
-      "name": "Introduction to Maven",
-      "parentTopic_id": 1
-    },
-    {
-      "id": 46,
-      "name": "Maven Project Object Model (POM)",
-      "parentTopic_id": 1
-    },
-    {
-      "id": 50,
-      "name": "Relational Database Service (RDS)",
-      "parentTopic_id": 2
-    },
-    {
-      "id": 52,
-      "name": "Introduction to DBMS",
-      "parentTopic_id": 2
-    },
-    {
-      "id": 53,
-      "name": "DML, DDL, DQL",
-      "parentTopic_id": 2
-    },
-    {
-      "id": 54,
-      "name": "Basic SQL Queries",
-      "parentTopic_id": 2
-    },
-    {
-      "id": 66,
-      "name": "Introduction to JDBC",
-      "parentTopic_id": 2
-    },
-    {
-      "id": 67,
-      "name": "Connection Interface",
-      "parentTopic_id": 2
-    },
-    {
-      "id": 68,
-      "name": "Simple and Prepared Statements",
-      "parentTopic_id": 2
-    },
-    {
-      "id": 74,
-      "name": "HTML 5",
-      "parentTopic_id": 3
-    },
-    {
-      "id": 78,
-      "name": "JavaScript Overview",
-      "parentTopic_id": 3
-    },
-    {
-      "id": 84,
-      "name": "DOM Selection",
-      "parentTopic_id": 3
-    },
-    {
-      "id": 93,
-      "name": "AJAX Introduction",
-      "parentTopic_id": 3
-    },
-    {
-      "id": 100,
-      "name": "Introduction to XML",
-      "parentTopic_id": 3
-    },
-    {
-      "id": 105,
-      "name": "Design Patterns: MVC, Front Controllers, Business Delegate",
-      "parentTopic_id": 3
-    },
-    {
-      "id": 106,
-      "name": "Servlet Introduction",
-      "parentTopic_id": 4
-    },
-    {
-      "id": 120,
-      "name": "Introduction to TypeScript",
-      "parentTopic_id": 5
-    },
-    {
-      "id": 126,
-      "name": "Components",
-      "parentTopic_id": 5
-    },
-    {
-      "id": 132,
-      "name": "RxJS Promises vs Observable",
-      "parentTopic_id": 5
-    },
-    {
-      "id": 133,
-      "name": "AngularJS vs Angular 4",
-      "parentTopic_id": 5
-    },
-    {
-      "id": 137,
-      "name": "Amazon Web Services Introduction",
-      "parentTopic_id": 6
-    },
-    {
-      "id": 145,
-      "name": "Continuous Integration (CI)",
-      "parentTopic_id": 6
-    },
-    {
-      "id": 150,
-      "name": "Hibernate Object States",
-      "parentTopic_id": 7
-    },
-    {
-      "id": 156,
-      "name": "DAO Implementation",
-      "parentTopic_id": 7
-    },
-    {
-      "id": 157,
-      "name": "Hibernate Criteria API",
-      "parentTopic_id": 7
-    },
-    {
-      "id": 162,
-      "name": "Introduction to Spring",
-      "parentTopic_id": 8
-    },
-    {
-      "id": 163,
-      "name": "Bean Lifecycle",
-      "parentTopic_id": 8
-    },
-    {
-      "id": 168,
-      "name": "Annotations",
-      "parentTopic_id": 8
-    },
-    {
-      "id": 169,
-      "name": "@Component, @Repository, @Service, @Inject, @Autowired",
-      "parentTopic_id": 8
-    },
-    {
-      "id": 170,
-      "name": "Aspect-Oriented Programming (AOP)",
-      "parentTopic_id": 8
-    },
-    {
-      "id": 182,
-      "name": "Spring Data",
-      "parentTopic_id": 8
-    },
-    {
-      "id": 188,
-      "name": "Overview of Web Services",
-      "parentTopic_id": 9
-    },
-    {
-      "id": 189,
-      "name": "Why We use Web Services",
-      "parentTopic_id": 9
-    },
-    {
-      "id": 190,
-      "name": "REST (Spring)",
-      "parentTopic_id": 9
-    },
-    {
-      "id": 191,
-      "name": "Exposing/Consuming REST",
-      "parentTopic_id": 9
-    },
-    {
-      "id": 198,
-      "name": "WSDL",
-      "parentTopic_id": 9
-    },
-    {
-      "id": 199,
-      "name": "Contract First/Contract Last",
-      "parentTopic_id": 9
-    },
-    {
-      "id": 205,
-      "name": "Microservices-(Discovery)",
-      "parentTopic_id": 10
-    },
-    {
-      "id": 206,
-      "name": "Microservices Architecture",
-      "parentTopic_id": 10
-    },
-    {
-      "id": 207,
-      "name": "API Gateway-Zuul/MS Web API",
-      "parentTopic_id": 10
-    },
-    {
-      "id": 208,
-      "name": "Service Discovery & Registry-Eureka(Ribbon)/Consul",
-      "parentTopic_id": 10
-    },
-    {
-      "id": 209,
-      "name": "Deployment Environment",
-      "parentTopic_id": 10
-    },
-    {
-      "id": 210,
-      "name": "Containerization-Docker",
-      "parentTopic_id": 10
     }
   ],
   "calendar-events": [
@@ -420,80 +135,6 @@
       "startDateTime": 376542356,
       "endDateTime": 478764567765,
       "calendarSubtopic_id": 1
-    }
-  ],
-  "calendar-curriculums": [
-    {
-      "id": 1,
-      "curriculum_id": 1,
-      "batch_id": 1
-    },
-    {
-      "id": 2,
-      "curriculum_id": 1,
-      "batch_id": 1
-    },
-    {
-      "id": 3,
-      "curriculum_id": 1,
-      "batch_id": 1
-    },
-    {
-      "id": 4,
-      "curriculum_id": 1,
-      "batch_id": 1
-    },
-    {
-      "id": 5,
-      "curriculum_id": 1,
-      "batch_id": 1
-    },
-    {
-      "id": 6,
-      "curriculum_id": 1,
-      "batch_id": 5
-    }
-  ],
-  "topics": [
-    {
-      "id": 1,
-      "name": "Core Java"
-    },
-    {
-      "id": 2,
-      "name": "SQL"
-    },
-    {
-      "id": 3,
-      "name": "Client-Side Technologies"
-    },
-    {
-      "id": 4,
-      "name": "Servlets"
-    },
-    {
-      "id": 5,
-      "name": "Angular"
-    },
-    {
-      "id": 6,
-      "name": "DevOps"
-    },
-    {
-      "id": 7,
-      "name": "Hibernate"
-    },
-    {
-      "id": 8,
-      "name": "Spring"
-    },
-    {
-      "id": 9,
-      "name": "Web Services"
-    },
-    {
-      "id": 10,
-      "name": "Microservices"
     }
   ],
   "curriculums": [
@@ -1441,10 +1082,11 @@
       "id": 3
     },
     {
+      "name": "Java/JEE",
       "version": 1,
       "creatorId": 1,
-      "dateCreated": "2018-09-30T22:52:11.383Z",
-      "numberOfWeeks": "2",
+      "dateCreated": "2018-10-01T15:13:19.376Z",
+      "numberOfWeeks": 10,
       "topics": [],
       "curriculumWeeks": [
         {
@@ -1496,9 +1138,1504 @@
             }
           ],
           "weekNum": 2
+        },
+        {
+          "curriculumDays": [
+            {
+              "dayNum": 2,
+              "subTopics": []
+            },
+            {
+              "dayNum": 3,
+              "subTopics": []
+            },
+            {
+              "dayNum": 4,
+              "subTopics": []
+            },
+            {
+              "dayNum": 5,
+              "subTopics": []
+            },
+            {
+              "dayNum": 6,
+              "subTopics": []
+            }
+          ],
+          "weekNum": 3
+        },
+        {
+          "curriculumDays": [
+            {
+              "dayNum": 2,
+              "subTopics": []
+            },
+            {
+              "dayNum": 3,
+              "subTopics": []
+            },
+            {
+              "dayNum": 4,
+              "subTopics": []
+            },
+            {
+              "dayNum": 5,
+              "subTopics": []
+            },
+            {
+              "dayNum": 6,
+              "subTopics": []
+            }
+          ],
+          "weekNum": 4
+        },
+        {
+          "curriculumDays": [
+            {
+              "dayNum": 2,
+              "subTopics": []
+            },
+            {
+              "dayNum": 3,
+              "subTopics": []
+            },
+            {
+              "dayNum": 4,
+              "subTopics": []
+            },
+            {
+              "dayNum": 5,
+              "subTopics": []
+            },
+            {
+              "dayNum": 6,
+              "subTopics": []
+            }
+          ],
+          "weekNum": 5
+        },
+        {
+          "curriculumDays": [
+            {
+              "dayNum": 2,
+              "subTopics": []
+            },
+            {
+              "dayNum": 3,
+              "subTopics": []
+            },
+            {
+              "dayNum": 4,
+              "subTopics": []
+            },
+            {
+              "dayNum": 5,
+              "subTopics": []
+            },
+            {
+              "dayNum": 6,
+              "subTopics": []
+            }
+          ],
+          "weekNum": 6
+        },
+        {
+          "curriculumDays": [
+            {
+              "dayNum": 2,
+              "subTopics": []
+            },
+            {
+              "dayNum": 3,
+              "subTopics": []
+            },
+            {
+              "dayNum": 4,
+              "subTopics": []
+            },
+            {
+              "dayNum": 5,
+              "subTopics": []
+            },
+            {
+              "dayNum": 6,
+              "subTopics": []
+            }
+          ],
+          "weekNum": 7
+        },
+        {
+          "curriculumDays": [
+            {
+              "dayNum": 2,
+              "subTopics": []
+            },
+            {
+              "dayNum": 3,
+              "subTopics": []
+            },
+            {
+              "dayNum": 4,
+              "subTopics": []
+            },
+            {
+              "dayNum": 5,
+              "subTopics": []
+            },
+            {
+              "dayNum": 6,
+              "subTopics": []
+            }
+          ],
+          "weekNum": 8
+        },
+        {
+          "curriculumDays": [
+            {
+              "dayNum": 2,
+              "subTopics": []
+            },
+            {
+              "dayNum": 3,
+              "subTopics": []
+            },
+            {
+              "dayNum": 4,
+              "subTopics": []
+            },
+            {
+              "dayNum": 5,
+              "subTopics": []
+            },
+            {
+              "dayNum": 6,
+              "subTopics": []
+            }
+          ],
+          "weekNum": 9
+        },
+        {
+          "curriculumDays": [
+            {
+              "dayNum": 2,
+              "subTopics": []
+            },
+            {
+              "dayNum": 3,
+              "subTopics": []
+            },
+            {
+              "dayNum": 4,
+              "subTopics": []
+            },
+            {
+              "dayNum": 5,
+              "subTopics": []
+            },
+            {
+              "dayNum": 6,
+              "subTopics": []
+            }
+          ],
+          "weekNum": 10
         }
       ],
       "id": 4
+    },
+    {
+      "name": "Java/JEE",
+      "version": 1,
+      "creatorId": 1,
+      "dateCreated": "2018-10-01T15:13:34.656Z",
+      "numberOfWeeks": 37,
+      "topics": [],
+      "curriculumWeeks": [
+        {
+          "curriculumDays": [
+            {
+              "dayNum": 2,
+              "subTopics": []
+            },
+            {
+              "dayNum": 3,
+              "subTopics": []
+            },
+            {
+              "dayNum": 4,
+              "subTopics": []
+            },
+            {
+              "dayNum": 5,
+              "subTopics": []
+            },
+            {
+              "dayNum": 6,
+              "subTopics": []
+            }
+          ],
+          "weekNum": 1
+        },
+        {
+          "curriculumDays": [
+            {
+              "dayNum": 2,
+              "subTopics": []
+            },
+            {
+              "dayNum": 3,
+              "subTopics": []
+            },
+            {
+              "dayNum": 4,
+              "subTopics": []
+            },
+            {
+              "dayNum": 5,
+              "subTopics": []
+            },
+            {
+              "dayNum": 6,
+              "subTopics": []
+            }
+          ],
+          "weekNum": 2
+        },
+        {
+          "curriculumDays": [
+            {
+              "dayNum": 2,
+              "subTopics": []
+            },
+            {
+              "dayNum": 3,
+              "subTopics": []
+            },
+            {
+              "dayNum": 4,
+              "subTopics": []
+            },
+            {
+              "dayNum": 5,
+              "subTopics": []
+            },
+            {
+              "dayNum": 6,
+              "subTopics": []
+            }
+          ],
+          "weekNum": 3
+        },
+        {
+          "curriculumDays": [
+            {
+              "dayNum": 2,
+              "subTopics": []
+            },
+            {
+              "dayNum": 3,
+              "subTopics": []
+            },
+            {
+              "dayNum": 4,
+              "subTopics": []
+            },
+            {
+              "dayNum": 5,
+              "subTopics": []
+            },
+            {
+              "dayNum": 6,
+              "subTopics": []
+            }
+          ],
+          "weekNum": 4
+        },
+        {
+          "curriculumDays": [
+            {
+              "dayNum": 2,
+              "subTopics": []
+            },
+            {
+              "dayNum": 3,
+              "subTopics": []
+            },
+            {
+              "dayNum": 4,
+              "subTopics": []
+            },
+            {
+              "dayNum": 5,
+              "subTopics": []
+            },
+            {
+              "dayNum": 6,
+              "subTopics": []
+            }
+          ],
+          "weekNum": 5
+        },
+        {
+          "curriculumDays": [
+            {
+              "dayNum": 2,
+              "subTopics": []
+            },
+            {
+              "dayNum": 3,
+              "subTopics": []
+            },
+            {
+              "dayNum": 4,
+              "subTopics": []
+            },
+            {
+              "dayNum": 5,
+              "subTopics": []
+            },
+            {
+              "dayNum": 6,
+              "subTopics": []
+            }
+          ],
+          "weekNum": 6
+        },
+        {
+          "curriculumDays": [
+            {
+              "dayNum": 2,
+              "subTopics": []
+            },
+            {
+              "dayNum": 3,
+              "subTopics": []
+            },
+            {
+              "dayNum": 4,
+              "subTopics": []
+            },
+            {
+              "dayNum": 5,
+              "subTopics": []
+            },
+            {
+              "dayNum": 6,
+              "subTopics": []
+            }
+          ],
+          "weekNum": 7
+        },
+        {
+          "curriculumDays": [
+            {
+              "dayNum": 2,
+              "subTopics": []
+            },
+            {
+              "dayNum": 3,
+              "subTopics": []
+            },
+            {
+              "dayNum": 4,
+              "subTopics": []
+            },
+            {
+              "dayNum": 5,
+              "subTopics": []
+            },
+            {
+              "dayNum": 6,
+              "subTopics": []
+            }
+          ],
+          "weekNum": 8
+        },
+        {
+          "curriculumDays": [
+            {
+              "dayNum": 2,
+              "subTopics": []
+            },
+            {
+              "dayNum": 3,
+              "subTopics": []
+            },
+            {
+              "dayNum": 4,
+              "subTopics": []
+            },
+            {
+              "dayNum": 5,
+              "subTopics": []
+            },
+            {
+              "dayNum": 6,
+              "subTopics": []
+            }
+          ],
+          "weekNum": 9
+        },
+        {
+          "curriculumDays": [
+            {
+              "dayNum": 2,
+              "subTopics": []
+            },
+            {
+              "dayNum": 3,
+              "subTopics": []
+            },
+            {
+              "dayNum": 4,
+              "subTopics": []
+            },
+            {
+              "dayNum": 5,
+              "subTopics": []
+            },
+            {
+              "dayNum": 6,
+              "subTopics": []
+            }
+          ],
+          "weekNum": 10
+        },
+        {
+          "curriculumDays": [
+            {
+              "dayNum": 2,
+              "subTopics": []
+            },
+            {
+              "dayNum": 3,
+              "subTopics": []
+            },
+            {
+              "dayNum": 4,
+              "subTopics": []
+            },
+            {
+              "dayNum": 5,
+              "subTopics": []
+            },
+            {
+              "dayNum": 6,
+              "subTopics": []
+            }
+          ],
+          "weekNum": 11
+        },
+        {
+          "curriculumDays": [
+            {
+              "dayNum": 2,
+              "subTopics": []
+            },
+            {
+              "dayNum": 3,
+              "subTopics": []
+            },
+            {
+              "dayNum": 4,
+              "subTopics": []
+            },
+            {
+              "dayNum": 5,
+              "subTopics": []
+            },
+            {
+              "dayNum": 6,
+              "subTopics": []
+            }
+          ],
+          "weekNum": 12
+        },
+        {
+          "curriculumDays": [
+            {
+              "dayNum": 2,
+              "subTopics": []
+            },
+            {
+              "dayNum": 3,
+              "subTopics": []
+            },
+            {
+              "dayNum": 4,
+              "subTopics": []
+            },
+            {
+              "dayNum": 5,
+              "subTopics": []
+            },
+            {
+              "dayNum": 6,
+              "subTopics": []
+            }
+          ],
+          "weekNum": 13
+        },
+        {
+          "curriculumDays": [
+            {
+              "dayNum": 2,
+              "subTopics": []
+            },
+            {
+              "dayNum": 3,
+              "subTopics": []
+            },
+            {
+              "dayNum": 4,
+              "subTopics": []
+            },
+            {
+              "dayNum": 5,
+              "subTopics": []
+            },
+            {
+              "dayNum": 6,
+              "subTopics": []
+            }
+          ],
+          "weekNum": 14
+        },
+        {
+          "curriculumDays": [
+            {
+              "dayNum": 2,
+              "subTopics": []
+            },
+            {
+              "dayNum": 3,
+              "subTopics": []
+            },
+            {
+              "dayNum": 4,
+              "subTopics": []
+            },
+            {
+              "dayNum": 5,
+              "subTopics": []
+            },
+            {
+              "dayNum": 6,
+              "subTopics": []
+            }
+          ],
+          "weekNum": 15
+        },
+        {
+          "curriculumDays": [
+            {
+              "dayNum": 2,
+              "subTopics": []
+            },
+            {
+              "dayNum": 3,
+              "subTopics": []
+            },
+            {
+              "dayNum": 4,
+              "subTopics": []
+            },
+            {
+              "dayNum": 5,
+              "subTopics": []
+            },
+            {
+              "dayNum": 6,
+              "subTopics": []
+            }
+          ],
+          "weekNum": 16
+        },
+        {
+          "curriculumDays": [
+            {
+              "dayNum": 2,
+              "subTopics": []
+            },
+            {
+              "dayNum": 3,
+              "subTopics": []
+            },
+            {
+              "dayNum": 4,
+              "subTopics": []
+            },
+            {
+              "dayNum": 5,
+              "subTopics": []
+            },
+            {
+              "dayNum": 6,
+              "subTopics": []
+            }
+          ],
+          "weekNum": 17
+        },
+        {
+          "curriculumDays": [
+            {
+              "dayNum": 2,
+              "subTopics": []
+            },
+            {
+              "dayNum": 3,
+              "subTopics": []
+            },
+            {
+              "dayNum": 4,
+              "subTopics": []
+            },
+            {
+              "dayNum": 5,
+              "subTopics": []
+            },
+            {
+              "dayNum": 6,
+              "subTopics": []
+            }
+          ],
+          "weekNum": 18
+        },
+        {
+          "curriculumDays": [
+            {
+              "dayNum": 2,
+              "subTopics": []
+            },
+            {
+              "dayNum": 3,
+              "subTopics": []
+            },
+            {
+              "dayNum": 4,
+              "subTopics": []
+            },
+            {
+              "dayNum": 5,
+              "subTopics": []
+            },
+            {
+              "dayNum": 6,
+              "subTopics": []
+            }
+          ],
+          "weekNum": 19
+        },
+        {
+          "curriculumDays": [
+            {
+              "dayNum": 2,
+              "subTopics": []
+            },
+            {
+              "dayNum": 3,
+              "subTopics": []
+            },
+            {
+              "dayNum": 4,
+              "subTopics": []
+            },
+            {
+              "dayNum": 5,
+              "subTopics": []
+            },
+            {
+              "dayNum": 6,
+              "subTopics": []
+            }
+          ],
+          "weekNum": 20
+        },
+        {
+          "curriculumDays": [
+            {
+              "dayNum": 2,
+              "subTopics": []
+            },
+            {
+              "dayNum": 3,
+              "subTopics": []
+            },
+            {
+              "dayNum": 4,
+              "subTopics": []
+            },
+            {
+              "dayNum": 5,
+              "subTopics": []
+            },
+            {
+              "dayNum": 6,
+              "subTopics": []
+            }
+          ],
+          "weekNum": 21
+        },
+        {
+          "curriculumDays": [
+            {
+              "dayNum": 2,
+              "subTopics": []
+            },
+            {
+              "dayNum": 3,
+              "subTopics": []
+            },
+            {
+              "dayNum": 4,
+              "subTopics": []
+            },
+            {
+              "dayNum": 5,
+              "subTopics": []
+            },
+            {
+              "dayNum": 6,
+              "subTopics": []
+            }
+          ],
+          "weekNum": 22
+        },
+        {
+          "curriculumDays": [
+            {
+              "dayNum": 2,
+              "subTopics": []
+            },
+            {
+              "dayNum": 3,
+              "subTopics": []
+            },
+            {
+              "dayNum": 4,
+              "subTopics": []
+            },
+            {
+              "dayNum": 5,
+              "subTopics": []
+            },
+            {
+              "dayNum": 6,
+              "subTopics": []
+            }
+          ],
+          "weekNum": 23
+        },
+        {
+          "curriculumDays": [
+            {
+              "dayNum": 2,
+              "subTopics": []
+            },
+            {
+              "dayNum": 3,
+              "subTopics": []
+            },
+            {
+              "dayNum": 4,
+              "subTopics": []
+            },
+            {
+              "dayNum": 5,
+              "subTopics": []
+            },
+            {
+              "dayNum": 6,
+              "subTopics": []
+            }
+          ],
+          "weekNum": 24
+        },
+        {
+          "curriculumDays": [
+            {
+              "dayNum": 2,
+              "subTopics": []
+            },
+            {
+              "dayNum": 3,
+              "subTopics": []
+            },
+            {
+              "dayNum": 4,
+              "subTopics": []
+            },
+            {
+              "dayNum": 5,
+              "subTopics": []
+            },
+            {
+              "dayNum": 6,
+              "subTopics": []
+            }
+          ],
+          "weekNum": 25
+        },
+        {
+          "curriculumDays": [
+            {
+              "dayNum": 2,
+              "subTopics": []
+            },
+            {
+              "dayNum": 3,
+              "subTopics": []
+            },
+            {
+              "dayNum": 4,
+              "subTopics": []
+            },
+            {
+              "dayNum": 5,
+              "subTopics": []
+            },
+            {
+              "dayNum": 6,
+              "subTopics": []
+            }
+          ],
+          "weekNum": 26
+        },
+        {
+          "curriculumDays": [
+            {
+              "dayNum": 2,
+              "subTopics": []
+            },
+            {
+              "dayNum": 3,
+              "subTopics": []
+            },
+            {
+              "dayNum": 4,
+              "subTopics": []
+            },
+            {
+              "dayNum": 5,
+              "subTopics": []
+            },
+            {
+              "dayNum": 6,
+              "subTopics": []
+            }
+          ],
+          "weekNum": 27
+        },
+        {
+          "curriculumDays": [
+            {
+              "dayNum": 2,
+              "subTopics": []
+            },
+            {
+              "dayNum": 3,
+              "subTopics": []
+            },
+            {
+              "dayNum": 4,
+              "subTopics": []
+            },
+            {
+              "dayNum": 5,
+              "subTopics": []
+            },
+            {
+              "dayNum": 6,
+              "subTopics": []
+            }
+          ],
+          "weekNum": 28
+        },
+        {
+          "curriculumDays": [
+            {
+              "dayNum": 2,
+              "subTopics": []
+            },
+            {
+              "dayNum": 3,
+              "subTopics": []
+            },
+            {
+              "dayNum": 4,
+              "subTopics": []
+            },
+            {
+              "dayNum": 5,
+              "subTopics": []
+            },
+            {
+              "dayNum": 6,
+              "subTopics": []
+            }
+          ],
+          "weekNum": 29
+        },
+        {
+          "curriculumDays": [
+            {
+              "dayNum": 2,
+              "subTopics": []
+            },
+            {
+              "dayNum": 3,
+              "subTopics": []
+            },
+            {
+              "dayNum": 4,
+              "subTopics": []
+            },
+            {
+              "dayNum": 5,
+              "subTopics": []
+            },
+            {
+              "dayNum": 6,
+              "subTopics": []
+            }
+          ],
+          "weekNum": 30
+        },
+        {
+          "curriculumDays": [
+            {
+              "dayNum": 2,
+              "subTopics": []
+            },
+            {
+              "dayNum": 3,
+              "subTopics": []
+            },
+            {
+              "dayNum": 4,
+              "subTopics": []
+            },
+            {
+              "dayNum": 5,
+              "subTopics": []
+            },
+            {
+              "dayNum": 6,
+              "subTopics": []
+            }
+          ],
+          "weekNum": 31
+        },
+        {
+          "curriculumDays": [
+            {
+              "dayNum": 2,
+              "subTopics": []
+            },
+            {
+              "dayNum": 3,
+              "subTopics": []
+            },
+            {
+              "dayNum": 4,
+              "subTopics": []
+            },
+            {
+              "dayNum": 5,
+              "subTopics": []
+            },
+            {
+              "dayNum": 6,
+              "subTopics": []
+            }
+          ],
+          "weekNum": 32
+        },
+        {
+          "curriculumDays": [
+            {
+              "dayNum": 2,
+              "subTopics": []
+            },
+            {
+              "dayNum": 3,
+              "subTopics": []
+            },
+            {
+              "dayNum": 4,
+              "subTopics": []
+            },
+            {
+              "dayNum": 5,
+              "subTopics": []
+            },
+            {
+              "dayNum": 6,
+              "subTopics": []
+            }
+          ],
+          "weekNum": 33
+        },
+        {
+          "curriculumDays": [
+            {
+              "dayNum": 2,
+              "subTopics": []
+            },
+            {
+              "dayNum": 3,
+              "subTopics": []
+            },
+            {
+              "dayNum": 4,
+              "subTopics": []
+            },
+            {
+              "dayNum": 5,
+              "subTopics": []
+            },
+            {
+              "dayNum": 6,
+              "subTopics": []
+            }
+          ],
+          "weekNum": 34
+        },
+        {
+          "curriculumDays": [
+            {
+              "dayNum": 2,
+              "subTopics": []
+            },
+            {
+              "dayNum": 3,
+              "subTopics": []
+            },
+            {
+              "dayNum": 4,
+              "subTopics": []
+            },
+            {
+              "dayNum": 5,
+              "subTopics": []
+            },
+            {
+              "dayNum": 6,
+              "subTopics": []
+            }
+          ],
+          "weekNum": 35
+        },
+        {
+          "curriculumDays": [
+            {
+              "dayNum": 2,
+              "subTopics": []
+            },
+            {
+              "dayNum": 3,
+              "subTopics": []
+            },
+            {
+              "dayNum": 4,
+              "subTopics": []
+            },
+            {
+              "dayNum": 5,
+              "subTopics": []
+            },
+            {
+              "dayNum": 6,
+              "subTopics": []
+            }
+          ],
+          "weekNum": 36
+        },
+        {
+          "curriculumDays": [
+            {
+              "dayNum": 2,
+              "subTopics": []
+            },
+            {
+              "dayNum": 3,
+              "subTopics": []
+            },
+            {
+              "dayNum": 4,
+              "subTopics": []
+            },
+            {
+              "dayNum": 5,
+              "subTopics": []
+            },
+            {
+              "dayNum": 6,
+              "subTopics": []
+            }
+          ],
+          "weekNum": 37
+        }
+      ],
+      "id": 5
+    }
+  ],
+  "subtopics": [
+    {
+      "id": 1,
+      "name": "Introduction to Java: Why Java?",
+      "parentTopic_id": 1
+    },
+    {
+      "id": 2,
+      "name": "OOP Concepts in Depth: Polymorphism, Encapsulation, Inheritance, and Abstraction",
+      "parentTopic_id": 1
+    },
+    {
+      "id": 4,
+      "name": "Constructors",
+      "parentTopic_id": 1
+    },
+    {
+      "id": 5,
+      "name": "Methods and Parameters",
+      "parentTopic_id": 1
+    },
+    {
+      "id": 6,
+      "name": "Scopes of a Variable in Java",
+      "parentTopic_id": 1
+    },
+    {
+      "id": 8,
+      "name": "Array",
+      "parentTopic_id": 1
+    },
+    {
+      "id": 11,
+      "name": "Access Modifiers",
+      "parentTopic_id": 1
+    },
+    {
+      "id": 12,
+      "name": "String API",
+      "parentTopic_id": 1
+    },
+    {
+      "id": 13,
+      "name": "StringBuilder and StringBuffer",
+      "parentTopic_id": 1
+    },
+    {
+      "id": 14,
+      "name": "Exception Handling - try, catch, finally",
+      "parentTopic_id": 1
+    },
+    {
+      "id": 18,
+      "name": "Reflection",
+      "parentTopic_id": 1
+    },
+    {
+      "id": 19,
+      "name": "Inheritance",
+      "parentTopic_id": 1
+    },
+    {
+      "id": 23,
+      "name": "File I/O: FileInputStream/FileReader/FileWriter",
+      "parentTopic_id": 1
+    },
+    {
+      "id": 25,
+      "name": "Serialization",
+      "parentTopic_id": 1
+    },
+    {
+      "id": 26,
+      "name": "Collection Framework",
+      "parentTopic_id": 1
+    },
+    {
+      "id": 31,
+      "name": "Object Class",
+      "parentTopic_id": 1
+    },
+    {
+      "id": 32,
+      "name": "Equals and Hashcode",
+      "parentTopic_id": 1
+    },
+    {
+      "id": 33,
+      "name": "Thread model",
+      "parentTopic_id": 1
+    },
+    {
+      "id": 40,
+      "name": "Creational Design Patterns: Singleton and Factory",
+      "parentTopic_id": 1
+    },
+    {
+      "id": 41,
+      "name": "Introduction to Unit Testing",
+      "parentTopic_id": 1
+    },
+    {
+      "id": 45,
+      "name": "Introduction to Maven",
+      "parentTopic_id": 1
+    },
+    {
+      "id": 46,
+      "name": "Maven Project Object Model (POM)",
+      "parentTopic_id": 1
+    },
+    {
+      "id": 50,
+      "name": "Relational Database Service (RDS)",
+      "parentTopic_id": 2
+    },
+    {
+      "id": 52,
+      "name": "Introduction to DBMS",
+      "parentTopic_id": 2
+    },
+    {
+      "id": 53,
+      "name": "DML, DDL, DQL",
+      "parentTopic_id": 2
+    },
+    {
+      "id": 54,
+      "name": "Basic SQL Queries",
+      "parentTopic_id": 2
+    },
+    {
+      "id": 66,
+      "name": "Introduction to JDBC",
+      "parentTopic_id": 2
+    },
+    {
+      "id": 67,
+      "name": "Connection Interface",
+      "parentTopic_id": 2
+    },
+    {
+      "id": 68,
+      "name": "Simple and Prepared Statements",
+      "parentTopic_id": 2
+    },
+    {
+      "id": 74,
+      "name": "HTML 5",
+      "parentTopic_id": 3
+    },
+    {
+      "id": 78,
+      "name": "JavaScript Overview",
+      "parentTopic_id": 3
+    },
+    {
+      "id": 84,
+      "name": "DOM Selection",
+      "parentTopic_id": 3
+    },
+    {
+      "id": 93,
+      "name": "AJAX Introduction",
+      "parentTopic_id": 3
+    },
+    {
+      "id": 100,
+      "name": "Introduction to XML",
+      "parentTopic_id": 3
+    },
+    {
+      "id": 105,
+      "name": "Design Patterns: MVC, Front Controllers, Business Delegate",
+      "parentTopic_id": 3
+    },
+    {
+      "id": 106,
+      "name": "Servlet Introduction",
+      "parentTopic_id": 4
+    },
+    {
+      "id": 120,
+      "name": "Introduction to TypeScript",
+      "parentTopic_id": 5
+    },
+    {
+      "id": 126,
+      "name": "Components",
+      "parentTopic_id": 5
+    },
+    {
+      "id": 132,
+      "name": "RxJS Promises vs Observable",
+      "parentTopic_id": 5
+    },
+    {
+      "id": 133,
+      "name": "AngularJS vs Angular 4",
+      "parentTopic_id": 5
+    },
+    {
+      "id": 137,
+      "name": "Amazon Web Services Introduction",
+      "parentTopic_id": 6
+    },
+    {
+      "id": 145,
+      "name": "Continuous Integration (CI)",
+      "parentTopic_id": 6
+    },
+    {
+      "id": 150,
+      "name": "Hibernate Object States",
+      "parentTopic_id": 7
+    },
+    {
+      "id": 156,
+      "name": "DAO Implementation",
+      "parentTopic_id": 7
+    },
+    {
+      "id": 157,
+      "name": "Hibernate Criteria API",
+      "parentTopic_id": 7
+    },
+    {
+      "id": 162,
+      "name": "Introduction to Spring",
+      "parentTopic_id": 8
+    },
+    {
+      "id": 163,
+      "name": "Bean Lifecycle",
+      "parentTopic_id": 8
+    },
+    {
+      "id": 168,
+      "name": "Annotations",
+      "parentTopic_id": 8
+    },
+    {
+      "id": 169,
+      "name": "@Component, @Repository, @Service, @Inject, @Autowired",
+      "parentTopic_id": 8
+    },
+    {
+      "id": 170,
+      "name": "Aspect-Oriented Programming (AOP)",
+      "parentTopic_id": 8
+    },
+    {
+      "id": 182,
+      "name": "Spring Data",
+      "parentTopic_id": 8
+    },
+    {
+      "id": 188,
+      "name": "Overview of Web Services",
+      "parentTopic_id": 9
+    },
+    {
+      "id": 189,
+      "name": "Why We use Web Services",
+      "parentTopic_id": 9
+    },
+    {
+      "id": 190,
+      "name": "REST (Spring)",
+      "parentTopic_id": 9
+    },
+    {
+      "id": 191,
+      "name": "Exposing/Consuming REST",
+      "parentTopic_id": 9
+    },
+    {
+      "id": 198,
+      "name": "WSDL",
+      "parentTopic_id": 9
+    },
+    {
+      "id": 199,
+      "name": "Contract First/Contract Last",
+      "parentTopic_id": 9
+    },
+    {
+      "id": 205,
+      "name": "Microservices-(Discovery)",
+      "parentTopic_id": 10
+    },
+    {
+      "id": 206,
+      "name": "Microservices Architecture",
+      "parentTopic_id": 10
+    },
+    {
+      "id": 207,
+      "name": "API Gateway-Zuul/MS Web API",
+      "parentTopic_id": 10
+    },
+    {
+      "id": 208,
+      "name": "Service Discovery & Registry-Eureka(Ribbon)/Consul",
+      "parentTopic_id": 10
+    },
+    {
+      "id": 209,
+      "name": "Deployment Environment",
+      "parentTopic_id": 10
+    },
+    {
+      "id": 210,
+      "name": "Containerization-Docker",
+      "parentTopic_id": 10
+    }
+  ],
+  "topics": [
+    {
+      "id": 1,
+      "name": "Core Java"
+    },
+    {
+      "id": 2,
+      "name": "SQL"
+    },
+    {
+      "id": 3,
+      "name": "Client-Side Technologies"
+    },
+    {
+      "id": 4,
+      "name": "Servlets"
+    },
+    {
+      "id": 5,
+      "name": "Angular"
+    },
+    {
+      "id": 6,
+      "name": "DevOps"
+    },
+    {
+      "id": 7,
+      "name": "Hibernate"
+    },
+    {
+      "id": 8,
+      "name": "Spring"
+    },
+    {
+      "id": 9,
+      "name": "Web Services"
+    },
+    {
+      "id": 10,
+      "name": "Microservices"
     }
   ],
   "users": [
