@@ -27,13 +27,5 @@ describe('CalendarComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
 
-  it('should have <h3> of the title', () => {
-    component = fixture.componentInstance;
-    const h5: HTMLElement = fixture.nativeElement.querySelector('h5');
-    expect(h5.textContent).toContain('Event action occurred');
-  });
 });
