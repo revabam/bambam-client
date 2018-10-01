@@ -242,9 +242,6 @@ export class CalendarComponent implements OnInit, DoCheck {
      * The open method passes in a component that we'll use
      * in the modal.
      */
-    // let calendarEvent: CalendarEventModel;
-    // this.calendarService.getCalendarEventsById(+event.id).subscribe(response => {
-    //   calendarEvent = response;
       const dialogRef = this.dialog.open(CalendarModalComponent,
         /*
         * An object is passed in as the second parameter, which
@@ -253,13 +250,6 @@ export class CalendarComponent implements OnInit, DoCheck {
         */
         {
           width: '600px',
-          // data: {
-          //   title: calendarEvent.title,
-          //   description: calendarEvent.description,
-          //   startTime: calendarEvent.startDateTime,
-          //   endTime: calendarEvent.endDateTime,
-          //   statusId: calendarEvent.statusId
-          // }
           data: {
             title: event.title,
             description: event.description,
