@@ -6,6 +6,11 @@ import { Component, OnInit, Inject } from '@angular/core';
 import { CurriculumDay } from '../../../models/curriculum-day';
 import { FormControl, Validators } from '@angular/forms';
 
+export interface Status {
+  value: string;
+  viewValue: string;
+}
+
 @Component({
   selector: 'app-create-curriculum',
   templateUrl: './create-curriculum.component.html',
@@ -13,8 +18,16 @@ import { FormControl, Validators } from '@angular/forms';
 })
 export class CreateCurriculumComponent implements OnInit {
 
+  curriculumStatus: Status[] = [
+    {value: '1', viewValue: 'Draft'},
+    {value: '2', viewValue: 'Needs Approval'},
+    {value: '3', viewValue: 'Read Only'},
+    {value: '4', viewValue: 'Master'}
+  ];
+
   curriculumName: string;
   numberOfWeeks: number;
+  selectedStatus: number;
   isValid = false;
 
   /**
@@ -33,6 +46,9 @@ export class CreateCurriculumComponent implements OnInit {
   cweekFormControl = new FormControl('', [
     Validators.required,
     Validators.minLength(1)
+  ]);
+  statusFormControl = new FormControl('', [
+    Validators.required
   ]);
   constructor(
     public dialogRef: MatDialogRef<CreateVersionComponent>,
@@ -59,7 +75,7 @@ export class CreateCurriculumComponent implements OnInit {
     const weeks = [];
     for (let i = 0; i < this.numberOfWeeks; i++) {
       const days = [];
-      for (let d = 1; d < 6; d++) {
+      for (let d = 2; d < 7; d++) {
         // Creates the new day, numbers 2 - 5 for Monday through Friday
         const day: CurriculumDay = {
           dayNum: d,
@@ -80,9 +96,9 @@ export class CreateCurriculumComponent implements OnInit {
       name: this.curriculumName,
       version: 1,
       creatorId: JSON.parse(sessionStorage['user'])['id'],
+      status: this.selectedStatus,
       dateCreated: new Date(),
       numberOfWeeks: this.numberOfWeeks,
-      status: 1,
       topics: [],
       curriculumWeeks: weeks
     };
@@ -122,7 +138,7 @@ export class CreateCurriculumComponent implements OnInit {
   validate() {
     this.isValid = true;
     // validating user input
-    if (!this.curriculumName || !this.numberOfWeeks) {
+    if (!this.curriculumName || !this.numberOfWeeks || !this.selectedStatus) {
       this.isValid = false;
     } else {
       // if curriculum name is valid

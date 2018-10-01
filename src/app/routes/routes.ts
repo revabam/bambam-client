@@ -1,4 +1,3 @@
-
 import { DashboardComponent } from '../routes/dashboard/dashboard.component';
 import { Routes } from '@angular/router';
 import { AppComponent } from '../app.component';
@@ -9,7 +8,6 @@ import { BoomComponent } from '../routes/boom/boom.component';
 import { LoginComponent } from '../routes/login/login.component';
 import { RegisterComponent } from '../routes/register/register.component';
 import { DialogViewComponent } from '../routes/dialog-view/dialog-view.component';
-import { ForgottenPasswordComponent } from './forgotten-password/forgotten-password.component';
 
 export const appRoutes: Routes = [
     {
@@ -40,10 +38,6 @@ export const appRoutes: Routes = [
     {
         path: 'boom',
         component: BoomComponent
-    },
-    {
-        path: 'forgotten/password',
-        component: ForgottenPasswordComponent
     },
     {
         path: '',
