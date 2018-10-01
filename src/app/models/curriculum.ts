@@ -13,6 +13,6 @@ export class Curriculum {
     status: number;
     dateCreated: Date;
     numberOfWeeks: number;
-    topics: Topic[];
-    curriculumWeeks: CurriculumWeek[];
+    topics?: Topic[];
+    curriculumWeeks?: CurriculumWeek[];
 }

@@ -1,3 +1,4 @@
+import { DaySubtopicService } from './../../../services/day-subtopic.service';
 import { DialogViewComponent } from './../../dialog-view/dialog-view.component';
 import { MatDialog } from '@angular/material';
 import { TopicService } from './../../../services/topic.service';
@@ -30,7 +31,8 @@ export class TopicPoolComponent implements OnInit {
   constructor(
     private subtopicService: SubTopicService,
     private topicService: TopicService,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    public daySubtopicService: DaySubtopicService
   ) { }
 
   ngOnInit() {

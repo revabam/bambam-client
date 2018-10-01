@@ -1,9 +1,11 @@
+import { CurriculumWeekService } from './../../../services/curriculum-week.service';
 import { CurriculumWeek } from './../../../models/curriculum-week';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { CreateVersionComponent } from './../create-version/create-version.component';
 import { Curriculum } from './../../../models/curriculum';
 import { Component, OnInit, Inject } from '@angular/core';
 import { CurriculumDay } from '../../../models/curriculum-day';
+import { CurriculumDayService } from '../../../services/curriculum-day.service';
 
 @Component({
   selector: 'app-create-curriculum',
@@ -26,7 +28,10 @@ export class CreateCurriculumComponent implements OnInit {
    */
   constructor(
     public dialogRef: MatDialogRef<CreateVersionComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: object) { }
+    @Inject(MAT_DIALOG_DATA) public data: object,
+    private curriculumDayService: CurriculumDayService,
+    private curriculumWeekService: CurriculumWeekService
+    ) { }
 
   ngOnInit() {
   }
@@ -49,35 +54,13 @@ export class CreateCurriculumComponent implements OnInit {
   createNewCurriculum(): void {
     console.log('Creating curriculum');
     // Creates the weeks and days to add the curriculum
-    const weeks = [];
-    for (let i = 0; i < this.numberOfWeeks; i++) {
-      const days = [];
-      for (let d = 1; d < 6; d++) {
-        // Creates the new day, numbers 2 - 5 for Monday through Friday
-        const day: CurriculumDay = {
-          dayNum: d,
-          subTopics: []
-        };
-        days.push(day);
-      }
-
-      // Creates the weeks here
-      const week: CurriculumWeek = {
-        curriculumDays: days,
-        weekNum: i + 1
-      };
-      weeks.push(week);
-    }
-
     const newCurriculum: Curriculum = {
       name: this.curriculumName,
       version: 1,
-      creatorId: JSON.parse(sessionStorage['user'])['id'],
+      creatorId: 1,
       dateCreated: new Date(),
       numberOfWeeks: this.numberOfWeeks,
       status: 1,
-      topics: [],
-      curriculumWeeks: weeks
     };
 
     /*
@@ -86,9 +69,34 @@ export class CreateCurriculumComponent implements OnInit {
      * push it to the parent component's curriculum array
      * so that the user can see the changes.
      */
-    this.data['curriculumService'].post(newCurriculum).subscribe(curr => {
+    this.data['curriculumService'].post(newCurriculum).subscribe( (curr: Curriculum) => {
       if (curr !== undefined && curr !== null) {
         this.data['curriculums'].push(curr);
+
+        // add weeks to the curriculum
+        for (let i = 0; i < this.numberOfWeeks; i++) {
+          // Creates the weeks here
+          const week: CurriculumWeek = {
+            curriculumId: curr.id,
+            weekNum: i + 1
+          };
+          this.curriculumWeekService.post(week).subscribe( (savedWeek) => {
+            console.log('saved week');
+            console.log(savedWeek);
+
+            for (let d = 1; d < 6; d++) {
+              // Creates the new day, numbers 2 - 5 for Monday through Friday
+              const day: CurriculumDay = {
+                dayNum: d,
+                weekId: savedWeek.id,
+                daySubTopics: []
+              };
+              this.curriculumDayService.post(day).subscribe( (savedDay) => {
+              });
+            }
+          });
+        }
+
       } else {
         console.log('returned null');
         this.data['curriculums'].push(newCurriculum);

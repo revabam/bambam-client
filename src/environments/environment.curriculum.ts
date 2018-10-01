@@ -6,7 +6,7 @@ export const environment = {
   production: false,
   envName: `curriculum`,
   context: `http://localhost:4200`,
-  apiUrl: 'http://localhost:9996/'
+  apiUrl: 'http://localhost:3000/'
 };
 
 /*

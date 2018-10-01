@@ -1,9 +1,14 @@
+import { DaySubtopicService } from './../../services/day-subtopic.service';
+import { CurriculumWeekService } from './../../services/curriculum-week.service';
+import { CurriculumDay } from './../../models/curriculum-day';
 import { CreateVersionComponent } from '../../routes/curriculum-editor/create-version/create-version.component';
 import { Component, OnInit } from '@angular/core';
 import { CurriculumService } from '../../services/curriculum.service';
 import { Curriculum } from '../../models/curriculum';
 import { MatDialog } from '@angular/material';
 import { CreateCurriculumComponent } from './create-curriculum/create-curriculum.component';
+import { CurriculumDayService } from '../../services/curriculum-day.service';
+import { weekdays } from 'moment';
 
 
 @Component({
@@ -21,24 +26,23 @@ export class CurriculumEditorComponent implements OnInit {
   /**
    * @param curriculumService - The service (defined by us)
    * that we're using to fetch all the curriculums from a server.
-   * @param subtopicService - The service (defined by us) that
-   * we're using to fetch all the subtopics.
-   * @param topicService - The service (defined by us) that
-   * we're using to fetch all topics.
    * @param dialog - The dialog is injected into our component so
    * that we can use the modals.
    * @author - Andrew Li | 1806-Jun-18-USF-Java | Wezley Singleton
    */
   constructor(
     private curriculumService: CurriculumService,
-    public dialog: MatDialog
+    private curriculumDayService: CurriculumDayService,
+    private curriculumWeekService: CurriculumWeekService,
+    private daySubTopicService: DaySubtopicService,
+    public dialog: MatDialog,
   ) { }
 
   /*
    * We're invoking our services' fetch statements so
    * that we can display our data on our page.
    */
-  ngOnInit () {
+  ngOnInit() {
     this.getAllCurriculums();
   }
 
@@ -48,7 +52,7 @@ export class CurriculumEditorComponent implements OnInit {
    * from the Observable returned by the service.
    * @author - Andrew Li | 1806-Jun-18-USF-Java | Wezley Singleton
    */
-  getAllCurriculums (): void {
+  getAllCurriculums(): void {
     this.curriculumService.getAll().subscribe(curriculums => {
       this.curriculums = curriculums;
       this.curriculumNames = this.getUniqueNames();
@@ -60,7 +64,7 @@ export class CurriculumEditorComponent implements OnInit {
    * curriculums
    * @author - Andrew Li | 1806-Jun-18-USF-Java | Wezley Singleton
    */
-  getUniqueNames (): string[] {
+  getUniqueNames(): string[] {
     let names: string[] = this.curriculums.map(curr => curr.name);
     // If it is deactivated, then we don't create a
     // separate unique name for that.
@@ -75,13 +79,13 @@ export class CurriculumEditorComponent implements OnInit {
    * @param name - the name of the curricula that we seek.
    * @author - Andrew Li | 1806-Jun-18-USF-Java | Wezley Singleton
    */
-  getCurriculumsByName (name: string): Curriculum[] {
+  getCurriculumsByName(name: string): Curriculum[] {
     const curriculumsWithName: Curriculum[] = this.curriculums.filter(
       (curriculum) => curriculum && (curriculum.name === name
         || this.curriculumService.reactivateName(curriculum.name)
         === name));
     // Ordering from highest version to lowest version
-    curriculumsWithName.sort(function(makeBigger: Curriculum,
+    curriculumsWithName.sort(function (makeBigger: Curriculum,
       makeSmaller: Curriculum): number {
       return makeSmaller.version - makeBigger.version;
     });
@@ -89,11 +93,84 @@ export class CurriculumEditorComponent implements OnInit {
   }
   /**
    * Selects the passed in curriculum to be injected into the curriculum view component.
+   * Pulls the week data and the day and subtopic data for the curriculum
    * @param curriculum the curriculum you want to display in the curriculum view component.
    * @author - Chinedu Ozodi | 1806-Sep-18-USF-Java | Steven Kelsey
    */
   selectCurriculum(curriculum: Curriculum) {
-    this.selectedCurriculum = curriculum;
+    this.getAllCurriculumData(curriculum);
+  }
+
+  /**
+   * Gets all the days, weeks, and subtopics for a given curriculum. Also updates the drag and drop
+   * id list
+   * @param curriculum the curriculum you wnat to eager load
+   * @author - Chinedu Ozodi | 1806-Sep-18-USF-Java | Steven Kelsey
+   */
+  getAllCurriculumData(curriculum: Curriculum): Curriculum {
+    // reset curriculumWeeks
+    curriculum.curriculumWeeks = [];
+
+    // this list is needed to allow drag and drop
+    const curriculumDayIds: string[] = [];
+
+    // Get all daySubTopics, days, and weeks
+    this.daySubTopicService.getAll().subscribe((daySubTopics) => {
+      console.log('got all daySubtopics');
+      console.log(daySubTopics);
+      this.curriculumDayService.getAll().subscribe((curriculumDays) => {
+        console.log('got all days');
+        console.log(curriculumDays);
+        this.curriculumWeekService.getAll().subscribe((curriculumWeeks) => {
+          console.log('got all days');
+          console.log(curriculumWeeks);
+          // Add weeks to the curriculum
+          curriculumWeeks.forEach((week) => {
+            if (week.curriculumId === curriculum.id) {
+              curriculum.curriculumWeeks.push(week);
+            }
+          });
+          // sort week by weekNum
+          curriculum.curriculumWeeks.sort((a, b) => a.weekNum - b.weekNum);
+
+          // Add days to weeks
+          curriculum.curriculumWeeks.forEach((week) => {
+            week.curriculumDays = [];
+            curriculumDays.forEach((day) => {
+              if (day.weekId === week.id) {
+                week.curriculumDays.push(day);
+                // add to list of day id's for drag and drop
+                curriculumDayIds.push(day.id.toString());
+              }
+            });
+
+            // Sort day by dayNum
+            week.curriculumDays.sort((a, b) => a.dayNum - b.dayNum);
+
+            // Add subtopics to days
+            week.curriculumDays.forEach((day) => {
+              day.daySubTopics = [];
+              daySubTopics.forEach((daySubTopic) => {
+                if (daySubTopic.dayId === day.id) {
+                  day.daySubTopics.push(daySubTopic);
+                }
+              });
+
+              // sort saySubTopic by index
+              day.daySubTopics.sort((a, b) => a.index - b.index);
+            });
+          });
+
+          // set as current curriculum
+          this.selectedCurriculum = curriculum;
+
+          // save the id's for drag and drop
+          this.daySubTopicService.dragAndDropList = curriculumDayIds;
+        });
+      });
+    });
+
+    return curriculum;
   }
 
   /**
@@ -108,14 +185,14 @@ export class CurriculumEditorComponent implements OnInit {
      * in the modal.
      */
     const dialogRef = this.dialog.open(CreateCurriculumComponent,
-     /*
-     * An object is passed in as the second parameter, which
-     * defines properties of the dialog modal, as well as the
-     * data that we'll pass in for the modal component to access.
-     * We need to allow the child component to access the
-     * getCurriculumsByName so that the child component can get
-     * the highest version number and increment by one.
-     */
+      /*
+      * An object is passed in as the second parameter, which
+      * defines properties of the dialog modal, as well as the
+      * data that we'll pass in for the modal component to access.
+      * We need to allow the child component to access the
+      * getCurriculumsByName so that the child component can get
+      * the highest version number and increment by one.
+      */
       {
         width: '600px',
         data: {
@@ -140,14 +217,14 @@ export class CurriculumEditorComponent implements OnInit {
      * in the modal.
      */
     const dialogRef = this.dialog.open(CreateVersionComponent,
-     /*
-     * An object is passed in as the second parameter, which
-     * defines properties of the dialog modal, as well as the
-     * data that we'll pass in for the modal component to access.
-     * We need to allow the child component to access the
-     * getCurriculumsByName so that the child component can get
-     * the highest version number and increment by one.
-     */
+      /*
+      * An object is passed in as the second parameter, which
+      * defines properties of the dialog modal, as well as the
+      * data that we'll pass in for the modal component to access.
+      * We need to allow the child component to access the
+      * getCurriculumsByName so that the child component can get
+      * the highest version number and increment by one.
+      */
       {
         width: '600px',
         data: {

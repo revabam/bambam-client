@@ -41,7 +41,7 @@ export class CurriculumService {
    */
   post(curriculum: Curriculum): Observable<Curriculum> {
     console.log('curriculum post:' + environment.apiUrl);
-    return this.http.post<Curriculum>('http://localhost:9996/curriculums',
+    return this.http.post<Curriculum>(environment.apiUrl + 'curriculums',
       curriculum, HTTP_OPTIONS);
   }
 
