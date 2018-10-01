@@ -1,16 +1,16 @@
-<div id="dashAll" *ngIf="this.user" class="container">
+<div *ngIf="this.user" class="container">
   <!-- WAGBar -->
   <div class="row">
     <div class="col-sm mb-3 mt-2">
       <mat-card style="border-radius: 20px 20px 20px 20px; box-shadow: 5px 5px 20px rgba(212, 52, 3, 0.555)" id="card">
         <mat-card-header>
           <div class="p-2 w-100 bd-highlight">
-            <h1 id="title">
+            <h1>
               Welcome, {{this.user.firstName}}
             </h1>
           </div>
         </mat-card-header>
-        <mat-card-content id="week">
+        <mat-card-content style="font-size: 18px">
           <span>Week At a Glance Bar</span>
         </mat-card-content>
       </mat-card>
@@ -25,8 +25,10 @@
         Batch
       </mat-slide-toggle>
     </span>
-    <button mat-button (click)="todayIsOpen=true ; topicsIsOpen=false" class="flex-fill btn btn-outline-warn text-monospace">View Today</button>
-    <button mat-button (click)="topicsIsOpen=true ; todayIsOpen=false" class="flex-fill btn btn-outline-warn text-monospace">View Topics</button>
+      <button mat-button (click)="todayIsOpen=true ; topicsIsOpen=false"
+        class="flex-fill btn btn-outline-warn text-monospace">View Today</button>
+      <button mat-button (click)="topicsIsOpen=true ; todayIsOpen=false"
+        class="flex-fill btn btn-outline-warn text-monospace">View Topics</button>
   </div>
   <!-- SIDENAV -->
   <mat-sidenav-container style="border-radius: 20px 20px 20px 20px; opacity: .9; box-shadow: 5px 5px 20px rgba(212, 52, 3, 0.555)">
@@ -36,24 +38,21 @@
           {{batch.name}}
         </mat-card-header>
         <mat-list dense>
-          <mat-list-item id="bInfo">
+          <mat-list-item>
             <span *ngIf="this.batch">&nbsp;Batch Information</span>
           </mat-list-item>
           <mat-divider></mat-divider>
-          <br>
-          <mat-list-item id="bInfo">
+          <mat-list-item>
             Batch Week: #
             <span *ngIf="this.batch">&nbsp;{{this.batchWeek}}</span>
           </mat-list-item>
           <mat-divider></mat-divider>
-          <br>
-          <mat-list-item id="bInfo">
+          <mat-list-item>
             Start Date:
             <span *ngIf="this.batch">&nbsp;{{this.batch.startDate | date}}</span>
           </mat-list-item>
           <mat-divider></mat-divider>
-          <br>
-          <mat-list-item id="bInfo">
+          <mat-list-item>
             End Date:
             <span *ngIf="this.batch">&nbsp;{{this.batch.endDate | date}}</span>
           </mat-list-item>

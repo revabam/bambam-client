@@ -15,7 +15,7 @@ import { CognitoService } from '../../services/cognito.service';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.scss']
+  styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
   // This is used to display non-error related information to the user

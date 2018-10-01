@@ -9,10 +9,14 @@
             <mat-card-header>
               <mat-toolbar class="panel-bar">
                 <span style="flex: 1 1 auto"></span>
+                <span>
+
+                  <h4 class="m-0 p-0" style="font-size: 140%;">Curriculum</h4>
+                </span>
                 <span style="flex: .6 .3 auto"></span>
                 <span>
-                  <button id="btn" aria-label="add" (click)="createNewCurriculumDialog()">
-                    <mat-icon>add</mat-icon>
+                  <button mat-button color="accent" mat-icon-button aria-label="add" (click)="createNewCurriculumDialog()">
+                    <mat-icon color="secondary">add</mat-icon>
                   </button>
                 </span>
                 <span style="flex: 0.3 1 auto"></span>
@@ -37,13 +41,13 @@
                       <span class="fill-remaining-space">
                       </span>
                       <span *ngIf="curriculum.name === cname">
-                        <button mat-icon-button color="black" (click)="selectCurriculum(curriculum)">
-                          <mat-icon>visibility</mat-icon>
+                        <button mat-icon-button color="" (click)="selectCurriculum(curriculum)">
+                          <mat-icon color="secondary">visibility</mat-icon>
                         </button>
                       </span>
                       <span *ngIf="curriculum.name !== cname">
-                        <button mat-icon-button color="black" (click)="reactivateCurriculum(curriculum)">
-                          <mat-icon>add</mat-icon>
+                        <button mat-icon-button color="" (click)="reactivateCurriculum(curriculum)">
+                          <mat-icon color="">add</mat-icon>
                         </button>
                       </span>
                     </mat-toolbar>
@@ -53,29 +57,30 @@
             </mat-card-content>
           </mat-card>
         </mat-tab>
-
-
         <mat-tab label="Topic Pool">
           <h4 class="m-0 p-0"  style="font-size: 2vw; text-align: right">Topic Tool</h4>
           <mat-card id="curr">
             <mat-card-header>
-              <mat-toolbar>
+              <mat-toolbar class="panel-bar">
+                <span style="flex: 0.3 1 auto"></span>
+                <!-- <h4 class="m-0 p-0" style="font-size: 140%;">Topic Pool</h4> -->
                 <span style="flex: 1 1 auto"></span>
-                <mat-form-field style="width: 12vw" class="my-0 pb-0">
-                  <input style="width: 1vw" matInput type="text" placeholder="Search Subtopic" [(ngModel)]="topicSearch">
+                <mat-form-field class="my-0 pb-0" style="color: grey;">
+                  <input style="color: white;" matInput color="accent" type="text" placeholder="Search Subtopic"
+                    [(ngModel)]="topicSearch">
                   <button mat-button *ngIf="value" matSuffix mat-icon-button aria-label="Clear" (click)="value=''">
                     <mat-icon>close</mat-icon>
                   </button>
                 </mat-form-field>
                 <span>
-                  <button mat-button mat-icon-button aria-label="add" (click)="openNewDialog()">
+                  <button mat-button color="accent" mat-icon-button aria-label="add" (click)="openNewDialog()">
                     <mat-icon>add</mat-icon>
                   </button>
                 </span>
                 <span style="flex: 0.3 1 auto"></span>
               </mat-toolbar>
             </mat-card-header>
-            <mat-card-content>
+            <mat-card-content style="overflow: auto; height: 470px;">
               <mat-accordion *ngIf="topicSearch.length < 2">
                 <mat-card-content>
                   <div *ngFor="let topic of topics">
@@ -83,14 +88,15 @@
                       (opened)="expandTopic(topic.id)" (closed)="collapseTopic(topic.id)">
                       <mat-expansion-panel-header>
                         <mat-panel-title *ngIf="topic.name === topicService.reactivateName(topic.name)">
-                          <span style="font-weight: bold">
+
+                          <span>
                             {{topic.name}}
                           </span>
                           <span class="fill-remaining-space">
                           </span>
                           <span>
-                            <button mat-icon-button (click)="deactivateTopic(topic)">
-                              <mat-icon>clear</mat-icon>
+                            <button mat-icon-button color="primary" (click)="deactivateTopic(topic)">
+                              <mat-icon color="primary">clear</mat-icon>
                             </button>
                           </span>
 
@@ -102,8 +108,8 @@
                           <span class="fill-remaining-space">
                           </span>
                           <span>
-                            <button mat-icon-button (click)="reactivateTopic(topic)">
-                              <mat-icon>add</mat-icon>
+                            <button mat-icon-button color="" (click)="reactivateTopic(topic)">
+                              <mat-icon color="">add</mat-icon>
                             </button>
                           </span>
                         </mat-panel-title>
@@ -111,11 +117,11 @@
                       <div *ngFor="let subtopic of getSubtopicsByTopic(topic)">
                         <div *ngIf="(!topicSearch || ((subtopic.name | lowercase).indexOf(topicSearch | lowercase) >= 0)) &amp;&amp; (subtopicService.reactivateName(subtopic.name) === subtopic.name)">
                           <mat-toolbar>
-                            <span {{(subtopic.name | slice:0:50) + ((subtopic.name.length> 50) ? "..." : "")}}</span>
+                            <span> {{(subtopic.name | slice:0:50) + ((subtopic.name.length > 50) ? "..." : "")}}</span>
                             <span class="fill-remaining-space"></span>
                             <span>
-                              <button mat-icon-button (click)="deactivateSubtopic(subtopic)">
-                                <mat-icon>clear</mat-icon>
+                              <button mat-icon-button color="" (click)="deactivateSubtopic(subtopic)">
+                                <mat-icon color="primary">clear</mat-icon>
                               </button>
                             </span>
                           </mat-toolbar>
@@ -127,8 +133,8 @@
                             </span>
                             <span class="fill-remaining-space"> </span>
                             <span>
-                              <button mat-icon-button (click)="reactivateSubtopic(subtopic)">
-                                <mat-icon>add</mat-icon>
+                              <button mat-icon-button color="" (click)="reactivateSubtopic(subtopic)">
+                                <mat-icon color="">add</mat-icon>
                               </button>
                             </span>
                           </mat-toolbar>
@@ -150,8 +156,8 @@
                     <span class="fill-remaining-space">
                     </span>
                     <span>
-                      <button mat-icon-button (click)="deactivateTopic(topic)">
-                        <mat-icon id="btnC">clear</mat-icon>
+                      <button mat-icon-button color="primary" (click)="deactivateTopic(topic)">
+                        <mat-icon color="primary">clear</mat-icon>
                       </button>
                     </span>
                     <mat-list *ngIf="hasTopic(topicSearch, topic)">
@@ -162,8 +168,8 @@
                         <span class="fill-remaining-space">
                         </span>
                         <span>
-                          <button mat-icon-button (click)="deactivateTopic(topic)">
-                            <mat-icon>clear</mat-icon>
+                          <button mat-icon-button color="primary" (click)="deactivateTopic(topic)">
+                            <mat-icon color="primary">clear</mat-icon>
                           </button>
                         </span>
                       </mat-list-item>
@@ -181,3 +187,4 @@
       <app-curriculum-view [curriculum]='selectedCurriculum'></app-curriculum-view>
     </div>
   </div>
+</div>
