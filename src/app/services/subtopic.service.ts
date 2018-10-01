@@ -56,6 +56,11 @@ export class SubTopicService {
     return this.http.get<SubTopic[]>(environment.apiUrl + `SubTopics?parentTopic_id=${id}`, HTTP_OPTIONS);
   }
 
+  deleteSubTopic(subTopic: SubTopic): Observable<SubTopic[]> {
+    return this.http.delete<SubTopic[]>(environment.apiUrl + `SubTopics/deleteSubTopicById${subTopic.id}`,
+    HTTP_OPTIONS);
+}
+
   /**
    * The function used to deactivate a SubTopic in the server
    */
@@ -83,6 +88,10 @@ export class SubTopicService {
    */
   deactivateName(SubTopicName: string): string {
     return '(DEACTIVATED) ' + SubTopicName;
+  }
+
+  removeSubTopic(topicId: number): string {
+    return ' (DELETED) ' + topicId;
   }
 
   /**

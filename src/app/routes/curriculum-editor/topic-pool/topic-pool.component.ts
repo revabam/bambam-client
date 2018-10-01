@@ -44,7 +44,7 @@ export class TopicPoolComponent implements OnInit {
    * from the Observable returned by the service.
    * @author - Andrew Li | 1806-Jun-18-USF-Java | Wezley Singleton
    */
-  getAllTopics (): void {
+  getAllTopics(): void {
     this.topicService.getAll().subscribe(topics => {
       this.topics = topics;
       this.topicService.topics = topics;
@@ -59,7 +59,7 @@ export class TopicPoolComponent implements OnInit {
    * from the Observable returned by the service.
    * @author - Andrew Li | 1806-Jun-18-USF-Java | Wezley Singleton
    */
-  getAllSubtopics (): void {
+  getAllSubtopics(): void {
     this.subtopicService.getAll().subscribe(subtopics => {
       this.subtopics = subtopics;
       console.log('Subtopics recieved');
@@ -73,7 +73,7 @@ export class TopicPoolComponent implements OnInit {
    * @param topic - the parent topic of the subtopics that we seek
    * @author - Andrew Li | 1806-Jun-18-USF-Java | Wezley Singleton
    */
-  getSubtopicsByTopic (topic: Topic): SubTopic[] {
+  getSubtopicsByTopic(topic: Topic): SubTopic[] {
     // console.log('Filter for: ' + topic.name);
     // console.log(this.subtopics.filter((subtopic) => subtopic && subtopic.parentTopicId === topic.id));
     return this.subtopics.filter(
@@ -95,23 +95,23 @@ export class TopicPoolComponent implements OnInit {
      * in the modal.
      */
     const dialogRef = this.dialog.open(DialogViewComponent,
-    /*
-     * An object is passed in as the second parameter, which
-     * defines properties of the dialog modal, as well as the
-     * data that we'll pass in for the modal component to access.
-     * We need to allow the child component to access the
-     * getCurriculumsByName so that the child component can get
-     * the highest version number and increment by one.
-     */
-    {
-      width: '600px',
-      data: {
-        topics: this.topics,
-        subtopics: this.subtopics,
-        topicService: this.topicService,
-        subtopicService: this.subtopicService
-      }
-    });
+      /*
+       * An object is passed in as the second parameter, which
+       * defines properties of the dialog modal, as well as the
+       * data that we'll pass in for the modal component to access.
+       * We need to allow the child component to access the
+       * getCurriculumsByName so that the child component can get
+       * the highest version number and increment by one.
+       */
+      {
+        width: '600px',
+        data: {
+          topics: this.topics,
+          subtopics: this.subtopics,
+          topicService: this.topicService,
+          subtopicService: this.subtopicService
+        }
+      });
   }
 
   /**
@@ -200,7 +200,27 @@ export class TopicPoolComponent implements OnInit {
    * @param subtopic - The subtopic to be deactivated.
    * @author - Andrew Li | 1806-Jun-18-USF-Java | Wezley Singleton
    */
-  deactivateSubtopic(subtopic: SubTopic): void {
+
+  //  method to delete a subtopic by subTopic ID
+  deleteSubTopic(subtopic: SubTopic): void {
+    this.subtopicService.deleteSubTopic(subtopic).subscribe(
+      data => {
+        if (data['id'] === undefined || data['id'] === null) {
+          return;
+        }
+      });
+    }
+//  method to delete a subtopic by subTopic ID
+  deleteTopic(topic: Topic): void {
+    this.topicService.deleteTopicById(topic).subscribe(
+      data => {
+        if (data['id'] === undefined || data['id'] === null) {
+          return;
+        }
+      });
+    }
+  // deactivateSubtopic NOT CURRENTLY BEING USED, MAY INCLUDE ON SERVER endpoint
+    deactivateSubtopic(subtopic: SubTopic): void {
     this.subtopicService.deactivate(subtopic).subscribe(
       data => {
         if (data['name'] === undefined || data['name'] === null) {

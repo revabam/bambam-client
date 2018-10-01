@@ -129,7 +129,9 @@ import {DragDropModule} from '@angular/cdk/drag-drop';
     EventDuplicateModalComponent,
     UserInfoComponent,
     CreateCurriculumComponent,
-    StartMondayModalComponent],
+    StartMondayModalComponent,
+    DialogViewComponent
+  ],
   providers: [
     UserService,
     CognitoService,

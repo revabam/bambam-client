@@ -73,6 +73,11 @@ export class TopicService {
       topic, HTTP_OPTIONS);
   }
 
+  deleteTopicById(topic: Topic): Observable<Topic[]> {
+    return this.http.delete<Topic[]>(environment.apiUrl + `Topics/deleteTopicById${topic.id}`,
+    HTTP_OPTIONS);
+}
+
   /**
    * The function used to reactive a topic in theserver
    */
@@ -93,6 +98,9 @@ export class TopicService {
     return '(DEACTIVATED) ' + topicName;
   }
 
+  removeTopic(topicId: number): string {
+    return ' (DELETED) ' + topicId;
+  }
   /**
    * Helper function to remove '(DEACTIVATED) ' from the
    * beginning of the topic name
