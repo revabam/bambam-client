@@ -235,16 +235,70 @@ export class CalendarComponent implements OnInit, DoCheck {
    *
    * @author Alicia Douglas | Spark1806-USF-Java | Steven Kelsey
    */
+  // openDialog(event: CalendarEvent): void {
+  //   /*
+  //    * this.dialog is an injected dependency for the modal
+  //    * The open method passes in a component that we'll use
+  //    * in the modal.
+  //    */
+  //   let calendarEvent: CalendarEventModel;
+  //   this.calendarService.getCalendarEventsById(+event.id).subscribe(response => {
+  //     calendarEvent = response;
+  //     this.dialog.open(CalendarModalComponent,
+  //   let eventTopic: Topic;
+  //   // const custEvent: CustomCalendarEvent = <CustomCalendarEvent> event;
+  //   // this.topicService.getTopicById(custEvent.subTopicId).subscribe(response => {
+  //   //   eventTopic = response;
+  //   //   let curriculum: Curriculum;
+  //   //   this.curriculums.forEach(curr => {
+  //   //     curr.topics.forEach(topic => {
+  //   //       if (topic = eventTopic) {
+  //   //         curriculum = curr;
+  //   //       }
+  //       // });
+  //     }
+  //   );
+  //     const dialogRef = this.dialog.open(CalendarModalComponent,
+  //       /*
+  //       * An object is passed in as the second parameter, which
+  //       * defines properties of the dialog modal, as well as the
+  //       * data that we'll pass in for the modal component to access.
+  //       */
+  //       {
+  //         width: '600px',
+  //         data: {
+  //           title: calendarEvent.title,
+  //           description: calendarEvent.description,
+  //           startTime: calendarEvent.startDateTime,
+  //           endTime: calendarEvent.endDateTime,
+  //           statusId: calendarEvent.statusId
+  //         }
+  //       }
+  //     );
+  //     dialogRef.afterClosed().subscribe(decision => {
+  //       this.moveEvents(decision, event);
+  //     });
+  //   });
+  // }
   openDialog(event: CalendarEvent): void {
     /*
      * this.dialog is an injected dependency for the modal
      * The open method passes in a component that we'll use
      * in the modal.
      */
-    let calendarEvent: CalendarEventModel;
-    this.calendarService.getCalendarEventsById(+event.id).subscribe(response => {
-      calendarEvent = response;
-      this.dialog.open(CalendarModalComponent,
+    let eventTopic: Topic;
+    const custEvent: CustomCalendarEvent = <CustomCalendarEvent> event;
+    this.topicService.getTopicById(custEvent.subTopicId).subscribe(response => {
+      eventTopic = response;
+      let curriculum: Curriculum;
+      this.curriculums.forEach(curr => {
+        curr.topics.forEach(topic => {
+          if (topic = eventTopic) {
+            curriculum = curr;
+          }
+        });
+      });
+      const dialogRef = this.dialog.open(CalendarModalComponent,
         /*
         * An object is passed in as the second parameter, which
         * defines properties of the dialog modal, as well as the
@@ -253,14 +307,17 @@ export class CalendarComponent implements OnInit, DoCheck {
         {
           width: '600px',
           data: {
-            title: calendarEvent.title,
-            description: calendarEvent.description,
-            startTime: calendarEvent.startDateTime,
-            endTime: calendarEvent.endDateTime,
-            statusId: calendarEvent.statusId
+            title: curriculum.name,
+            topics: curriculum.topics,
+            curriculum: curriculum,
+            version: curriculum.version,
+            numWeeks: curriculum.numberOfWeeks
           }
         }
       );
+      dialogRef.afterClosed().subscribe(decision => {
+        this.moveEvents(decision, event);
+      });
     });
   }
 
@@ -315,6 +372,36 @@ export class CalendarComponent implements OnInit, DoCheck {
   }
 
   /**
+   * function takes in a direction in which to move events and then based on that moves them back or forth a day
+   * if the new day falls on a Saturday or Sunday, it gets moved to next week instead
+   * does not currently change start time
+   *
+   * @param decision numerical decision whether to push future events back or forward a day
+   * @param event event from which to start moving other events
+   * @author Marcin Salamon | Spark1806-USF-Java | Steven Kelsey
+   */
+  moveEvents(decision: number, event: CalendarEvent) {
+    if (decision !== 0 && decision !== undefined) {
+      this.activeDayIsOpen = false;
+      const eventStartDate = event.start.getDate();
+      for (const ev of this.events) {
+        if (ev.start.getDate() >= eventStartDate) {
+          ev.start.setDate(ev.start.getDate() + decision);
+          ev.end.setDate(ev.end.getDate() + decision);
+          /**
+           * check if the new day falls on Saturday or Sunday
+           */
+          if (ev.start.getDay() ===  6 || ev.start.getDay() === 0) {
+            ev.start.setDate(ev.start.getDate() + (2 * decision));
+            ev.end.setDate(ev.end.getDate() + (2 * decision));
+          }
+        }
+      }
+    }
+    this.persistEvents();
+  }
+
+  /**
    * Whenever an event happens on the calendar (click, drag, drop, edit, delete), this method is called
    * with the actions of the event and the event itself.
    * Becaused the pencil icon does not render correctly, we removed it and do not have any functionality
@@ -355,6 +442,7 @@ export class CalendarComponent implements OnInit, DoCheck {
       this.openEventInsertCurriculum(curr.name, event.start).subscribe(decision => {
         if (decision !== null) {
           event.start = decision;
+          decision = null;
           this.selectedCurriculum = curr;
           this.dropEvent = <CustomCalendarEvent>event;
         }
@@ -424,7 +512,6 @@ export class CalendarComponent implements OnInit, DoCheck {
             start: new Date(subtopicStartTime),
             end: new Date(endTime),
             title: subtopic.name,
-            id: subtopic.id,
             color: {
               primary: 'blue',
               secondary: 'blue'
@@ -435,6 +522,7 @@ export class CalendarComponent implements OnInit, DoCheck {
               afterEnd: true
             },
             draggable: true,
+            subTopicId: subtopic.id,
             statusId: 1,
             flagged: 0
           });
@@ -449,38 +537,6 @@ export class CalendarComponent implements OnInit, DoCheck {
     this.persistEvents();
   }
 
-  /**
-   * Used for subtopics that span multiple days.
-   * If there is not enought time in the current day to complete a subtopic, this method is used
-   * to split the subtopic and make multiple events from it.
-   * @param subtopic subTopic to be added to calendar
-   * @param topicDay the current day that the subtopic is on
-   * @param timeLeft time left in a day (hours until 4pm)
-   * @param event the event to be pushed to calendar
-   * @param curr curr is the curriculum to be pushed
-   */
-  multidaySubtopic(subtopic: SubTopic, topicDay: number, timeLeft: number, event: CalendarEvent, curr: Curriculum) {
-    this.events.push(
-      {
-        start: addDays(addHours(startOfDay(event.start), 9 + this.hour), topicDay),
-        end: addDays(addHours(startOfDay(event.start), 16), topicDay),
-        title: subtopic.name,
-        id: subtopic.id,
-        color: colors.newColor,
-        actions: this.actions,
-        resizable: {
-          beforeStart: true,
-          afterEnd: true
-        },
-        draggable: true,
-        statusId: 1,
-        flagged: 0
-      }
-    );
-    this.currTopicTime = this.currTopicTime - timeLeft;
-    this.hour = 0;
-    this.multiDayEventCreated = true;
-  }
   /**
    * persists all events in the event array.
    */

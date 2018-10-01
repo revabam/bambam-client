@@ -1,15 +1,29 @@
 <h6 mat-dialog-title>Event Name: {{data.title.toUpperCase()}}</h6><mat-divider></mat-divider>
-<div mat-dialog-content>
-    <p>Description: {{data.description}}</p>
-    <p>Start Time: {{data.startTime | date: 'shortTime'}}</p>
-    <p>End Time: {{data.endTime | date: 'shortTime'}}</p>
-    <span [ngSwitch] = "data.statusId">
-        <p *ngSwitchCase = '1'>Status: Planned</p>
-        <p *ngSwitchCase = '2'>Status: Completed</p>
-        <p *ngSwitchCase = '3'>Status: Cancelled</p>
-        <p *ngSwitchCase = '4'>Status: Missed</p>
-    </span>
+<div mat-card *ngIf="!moving">
+    <div mat-dialog-content>
+        <p>Description: {{data.description}}</p>
+        <p>Start Time: {{data.startTime | date: 'shortTime'}}</p>
+        <p>End Time: {{data.endTime | date: 'shortTime'}}</p>
+        <span [ngSwitch] = "data.statusId">
+            <p *ngSwitchCase = '1'>Status: Planned</p>
+            <p *ngSwitchCase = '2'>Status: Completed</p>
+            <p *ngSwitchCase = '3'>Status: Cancelled</p>
+            <p *ngSwitchCase = '4'>Status: Missed</p>
+        </span>
+    </div>
+    <div mat-dialog-actions>
+      <button mat-button (click)="close()">Ok</button>
+      <button mat-button (click)="moveEvents()">Move Events</button>
+    </div>
 </div>
-<div mat-dialog-actions>
-  <button mat-button (click)="close()">Ok</button>
+<div mat-card *ngIf="moving">
+    <button mat-button (click)="back()" class="btn-margin">Go Back</button>
+    <div mat-dialog-content>
+        <p>Would you like to move future events?</p>
+    </div>
+    <div mat-dialog-actions>
+        <button mat-button (click)="moveForward()">Move Forward</button>
+        <button mat-button (click)="moveBack()">Move Back</button>
+    </div>
 </div>
+
