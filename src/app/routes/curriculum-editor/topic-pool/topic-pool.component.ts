@@ -157,58 +157,6 @@ export class TopicPoolComponent implements OnInit {
    * @param topic - The topic to be deactivated.
    * @author - Andrew Li | 1806-Jun-18-USF-Java | Wezley Singleton
    */
-  deactivateTopic(topic: Topic): void {
-    this.topicService.deactivate(topic).subscribe(
-      data => {
-        if (data['name'] === undefined || data['name'] === null) {
-          return;
-        }
-        /*
-         * After we deactivate from the server, we also want to
-         * deactivate from the client-side array binded to our
-         * template (so the user immediately sees that it's
-         * deactivated)
-         */
-        topic.name = this.topicService.deactivateName(
-          topic.name
-        );
-      },
-      err => {
-      }
-    );
-    this.collapseTopic(topic.id);
-  }
-  /**
-   * Calls the reactivate function from the topic
-   * service.
-   * collapseTopic is called because we don't want
-   * the reactivation to automatically expand a panel,
-   * or if the button is clicked.
-   * @param topic - The topic to be reactivated.
-   * @author - Andrew Li | 1806-Jun-18-USF-Java | Wezley Singleton
-   */
-  reactivateTopic(topic: Topic): void {
-    this.topicService.reactivate(topic).subscribe(
-      data => {
-        this.collapseTopic(topic.id);
-        if (data['name'] === undefined || data['name'] === null) {
-          return;
-        }
-        /*
-         * After we deactivate from the server, we also want to
-         * deactivate from the client-side array binded to our
-         * template (so the user immediately sees that it's
-         * deactivated)
-         */
-        topic.name = this.topicService.reactivateName(
-          topic.name
-        );
-      },
-      err => {
-      }
-    );
-    this.collapseTopic(topic.id);
-  }
   /*
    * collapseTopic, expandTopic, and isExpanded are functions
    * used to check and control the expansion of a topic panel
