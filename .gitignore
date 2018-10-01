@@ -34,7 +34,6 @@ testem.log
 data.json
 /typings
 /stash
-/mocks
 
 # e2e
 /e2e/*.js
