@@ -5,6 +5,7 @@ import { Batch } from '../../models/batch';
 import { BatchService } from '../../services/batch.service';
 import { Curriculum } from '../../models/curriculum';
 import { UserService } from '../../services/user.service';
+import { CognitoService } from '../../services/cognito.service';
 
 /**
  * This component is the dashboard page. It is the page that the
@@ -60,7 +61,7 @@ const topics: Topicz[] = [
 })
 export class DashboardComponent implements OnInit {
   dataSource = topics;
-  headerColumns: string[] = ['time', 'flag', 'sub',  'control'];
+  headerColumns: string[] = ['time', 'flag', 'sub', 'control'];
   user: BamUser;
   batch: Batch;
   batchWeek: number;
@@ -69,17 +70,18 @@ export class DashboardComponent implements OnInit {
   firstName: string;
   lastName: string;
   visibilityIcon = [
-    {num: 0, icon: 'visibility_off' },
-    {num: 1, icon: 'visibility'}
+    { num: 0, icon: 'visibility_off' },
+    { num: 1, icon: 'visibility' }
   ];
   DashTitle = 'Today';
   todayIsOpen: boolean;
   topicsIsOpen: boolean;
-
+  list : string[];
   constructor(
     private router: Router,
     private batchService: BatchService,
-    private userService: UserService
+    private userService: UserService,
+    private cognito: CognitoService
   ) { }
 
   /**
@@ -88,11 +90,13 @@ export class DashboardComponent implements OnInit {
   * and info about the batch they are associated with.
   */
   ngOnInit() {
-    this.user = JSON.parse(sessionStorage.getItem('user'));
-
-    if (!this.user) {
+    const ss = this.cognito.getLoggedInUser();
+    console.log('The current logged in user is ' + ss);
+    
+    if (!ss) {
       this.router.navigate(['login']);
     } else {
+      this.cognito.getUserAttributes();
       /*
         In our sprint, only trainers can use the program so there is no
         need to check if the user is a trainer or not, But this is where
