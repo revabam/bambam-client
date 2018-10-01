@@ -116,13 +116,14 @@ import { CurriculumWeekComponent } from './routes/curriculum-editor/curriculum-w
     TimepickerModule.forRoot(),
     BrowserAnimationsModule,
     ReactiveFormsModule,
+    ChartsModule,
     NgbModalModule.forRoot(),
     FlatpickrModule.forRoot(),
     CalendarModule.forRoot(),
     UserIdleModule.forRoot({idle: 600, timeout: 300, ping: 60})
   ],
   exports: [
-    ChartsModule
+  
   ],
   entryComponents: [
     CalendarModalComponent,
