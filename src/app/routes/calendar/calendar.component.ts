@@ -262,7 +262,6 @@ export class CalendarComponent implements OnInit, DoCheck {
       dialogRef.afterClosed().subscribe(decision => {
         this.moveEvents(decision, event);
       });
-    // });
   }
 
   /**
