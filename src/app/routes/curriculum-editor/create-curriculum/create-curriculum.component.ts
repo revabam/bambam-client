@@ -86,7 +86,7 @@ export class CreateCurriculumComponent implements OnInit {
       curriculumWeeks: weeks
     };
 
-    /** 
+    /**
      * After the Curriculum object is created, we make
      * an http post. Also, if the post is successful, we
      * push it to the parent component's curriculum array
@@ -112,8 +112,6 @@ export class CreateCurriculumComponent implements OnInit {
         this.data['curriculums'].push(newCurriculum);
       }
     }, err => {
-      console.log('[ERROR] Create-curriculum: An error occured');
-      console.log(err);
     });
     // After the curriculum is added, we're done with the modal.
     this.close();
