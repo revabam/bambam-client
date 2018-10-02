@@ -5,6 +5,8 @@ import { Batch } from '../../models/batch';
 import { BatchService } from '../../services/batch.service';
 import { Curriculum } from '../../models/curriculum';
 import { UserService } from '../../services/user.service';
+import { CalendarService } from '../../services/calendar.service';
+import { CalendarEvent } from '../../models/calendar-event';
 
 /**
  * This component is the dashboard page. It is the page that the
@@ -22,36 +24,36 @@ export interface Topicz {
   status: number;
 }
 
-const topics: Topicz[] = [
-  {
-    flagged: 0,
-    id: 1,
-    name: 'Java Data Types',
-    time: 1537899180000,
-    status: 0
-  },
-  {
-    flagged: 0,
-    id: 2,
-    name: 'Panels & Softskills',
-    time: 1537899180000,
-    status: 1
-  },
-  {
-    flagged: 0,
-    id: 3,
-    name: 'Overwatch Gameplay Trailers',
-    time: 1537899180000,
-    status: 0
-  },
-  {
-    flagged: 0,
-    id: 4,
-    name: 'Lifecycle of a Green Bean',
-    time: 1537899180000,
-    status: 1
-  }
-];
+// const topics: Topicz[] = [
+//   {
+//     flagged: 0,
+//     id: 1,
+//     name: 'Java Data Types',
+//     time: 1537899180000,
+//     status: 0
+//   },
+//   {
+//     flagged: 0,
+//     id: 2,
+//     name: 'Panels & Softskills',
+//     time: 1537899180000,
+//     status: 1
+//   },
+//   {
+//     flagged: 0,
+//     id: 3,
+//     name: 'Overwatch Gameplay Trailers',
+//     time: 1537899180000,
+//     status: 0
+//   },
+//   {
+//     flagged: 0,
+//     id: 4,
+//     name: 'Lifecycle of a Green Bean',
+//     time: 1537899180000,
+//     status: 1
+//   }
+// ];
 
 @Component({
   selector: 'app-dashboard',
@@ -59,10 +61,12 @@ const topics: Topicz[] = [
   styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent implements OnInit {
-  dataSource = topics;
-  headerColumns: string[] = ['time', 'flag', 'sub',  'control'];
+  dataSource;
+  topics = this.calendarService.getCalendarEventsByTrainerId(1);
+  currentBatch;
+  headerColumns: string[] = ['time', 'flagged', 'sub',  'control'];
   user: BamUser;
-  batch: Batch;
+  batch;
   batchWeek: number;
   percentCompletion: number;
   editing = false;
@@ -75,11 +79,13 @@ export class DashboardComponent implements OnInit {
   DashTitle = 'Today';
   todayIsOpen: boolean;
   topicsIsOpen: boolean;
+  eventsThisWeek: CalendarEvent[];
 
   constructor(
     private router: Router,
     private batchService: BatchService,
-    private userService: UserService
+    private userService: UserService,
+    private calendarService: CalendarService
   ) { }
 
   /**
@@ -88,7 +94,16 @@ export class DashboardComponent implements OnInit {
   * and info about the batch they are associated with.
   */
   ngOnInit() {
+    
     this.user = JSON.parse(sessionStorage.getItem('user'));
+    this.dataSource = this.topics;
+    this.batchService.getBatchByTrainer(1).subscribe(
+      result => {
+      this.currentBatch = result[0];
+    }
+    );
+
+ //   this.eventsThisWeek = this.calendarService.getCalendarEventsByTrainerIdAndWeek(1, new Date());
 
     if (!this.user) {
       this.router.navigate(['login']);
@@ -98,7 +113,7 @@ export class DashboardComponent implements OnInit {
         need to check if the user is a trainer or not, But this is where
         you might want to do that.
       */
-      this.batchService.getBatchesByTrainerId(12).subscribe(
+      this.batchService.getBatchesByTrainerId(1).subscribe(
         result => {
           // If the result is not null and not empty
           if (result && result.length !== 0) {
@@ -127,18 +142,27 @@ export class DashboardComponent implements OnInit {
       this.todayIsOpen = true;
     }
   }
+  
+// function to select specific days of the week to display
+showThisDay() {
+  console.log('monday');
+  
+}
 
-  statusToggle(index, yesNo) {
-    console.log(index, yesNo);
-    this.dataSource[index].status = yesNo;
+
+// function for if something is completed or in progress
+  statusToggle(sub, yesNo) {
+
+    sub.statusId = yesNo;
+
   }
+// function to flag an item
+  flagRow(sub) {
 
-  flagRow(index, flag) {
-    console.log('item' + index + 'flagis' + this.dataSource[index].flagged);
-    if (!flag) {
-      this.dataSource[index].flagged = 1;
+    if (!sub.flaggedId) {
+      sub.flaggedId = 1;
     } else {
-      this.dataSource[index].flagged = 0;
+      sub.flaggedId = 0;
     }
   }
 

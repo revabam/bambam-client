@@ -38,12 +38,6 @@ export class CalendarService {
     return this.http.get<Curriculum>(environment.apiUrl + `curriculums/${id}`, HTTP_OPTIONS);
   }
 
-  // THIS IS THE CURRENT METHOD TO GRAB THE CALENDAR EVENTS BY TRAINER - JOEY
-
-  getCalendarEventsByTrainerId(trainerId: number) {
-    return this.http.get<CalendarEvent[]>(`http://localhost:9994/calendars/event`, HTTP_OPTIONS);
-  }
-
   /**
    * Create a calendar event
    * @param event CalendarEvent
@@ -99,6 +93,15 @@ export class CalendarService {
    */
   getCalendarEvents(id: number): Observable<CalendarEvent[]> {
     return this.http.get<CalendarEvent[]>(environment.zuulUrl + `calendars/calendars/event/trainer/${id}`, HTTP_OPTIONS);
+
+  }
+
+  /**
+   * Returns a calendar event by id
+   */
+  getCalendarEventsById(id: number): Observable<CalendarEvent> {
+    return this.http.get<CalendarEvent>(environment.zuulUrl + `calendars/calendars/event/${id}`, HTTP_OPTIONS);
+
   }
 
   /**

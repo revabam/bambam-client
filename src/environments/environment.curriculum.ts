@@ -1,14 +1,12 @@
 // This file can be replaced during build by using the `fileReplacements` array.
-// `ng build ---prod` replaces `environment.ts` with `environment.prod.ts`.
+// `ng build ---zuul` replaces `environment.ts` with `environment.zuul.ts`.
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
   production: false,
-  envName: `dev`,
+  envName: `curriculum`,
   context: `http://localhost:4200`,
-  apiUrl: 'http://localhost:3000/',
-  testUrl: 'http://localhost:9997/',
-  zuulUrl: 'http://localhost:8765/bam/'
+  apiUrl: 'http://localhost:3000/'
 };
 
 /*

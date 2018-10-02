@@ -44,6 +44,9 @@ import { StartMondayModalComponent } from './routes/calendar/start-monday-modal/
 import { ChartsModule } from 'ng2-charts';
 import { ForgottenPasswordComponent } from './routes/forgotten-password/forgotten-password.component';
 import { CurriculumWeekComponent } from './routes/curriculum-editor/curriculum-week/curriculum-week.component';
+import { TopicPoolComponent } from './routes/curriculum-editor/topic-pool/topic-pool.component';
+import { NgDragDropModule } from 'ng-drag-drop';
+import {DragDropModule} from '@angular/cdk/drag-drop';
 
 
 @NgModule({
@@ -67,9 +70,9 @@ import { CurriculumWeekComponent } from './routes/curriculum-editor/curriculum-w
     TopicsComponent,
     CurriculumViewComponent,
     CurriculumDayComponent,
-    ForgottenPasswordComponent,
-    CurriculumWeekComponent
-
+    CurriculumWeekComponent,
+    TopicPoolComponent,
+    ForgottenPasswordComponent
   ],
   imports: [
     NgbModule.forRoot(),
@@ -81,6 +84,7 @@ import { CurriculumWeekComponent } from './routes/curriculum-editor/curriculum-w
     MatButtonToggleModule,
     MatCardModule,
     MatCheckboxModule,
+    DragDropModule,
     MatChipsModule,
     MatStepperModule,
     MatDatepickerModule,
@@ -116,6 +120,7 @@ import { CurriculumWeekComponent } from './routes/curriculum-editor/curriculum-w
     TimepickerModule.forRoot(),
     BrowserAnimationsModule,
     ReactiveFormsModule,
+    NgDragDropModule.forRoot(),
     NgbModalModule.forRoot(),
     FlatpickrModule.forRoot(),
     CalendarModule.forRoot(),
@@ -129,7 +134,9 @@ import { CurriculumWeekComponent } from './routes/curriculum-editor/curriculum-w
     EventDuplicateModalComponent,
     UserInfoComponent,
     CreateCurriculumComponent,
-    StartMondayModalComponent],
+    StartMondayModalComponent,
+    DialogViewComponent
+  ],
   providers: [
     UserService,
     CognitoService,
