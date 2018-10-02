@@ -5,6 +5,7 @@ import { Batch } from '../../models/batch';
 import { BatchService } from '../../services/batch.service';
 import { Curriculum } from '../../models/curriculum';
 import { UserService } from '../../services/user.service';
+import { CognitoService } from '../../services/cognito.service';
 
 /**
  * This component is the dashboard page. It is the page that the
@@ -79,7 +80,8 @@ export class DashboardComponent implements OnInit {
   constructor(
     private router: Router,
     private batchService: BatchService,
-    private userService: UserService
+    private userService: UserService,
+    private cognito : CognitoService
   ) { }
 
   /**
@@ -88,11 +90,10 @@ export class DashboardComponent implements OnInit {
   * and info about the batch they are associated with.
   */
   ngOnInit() {
-    this.user = JSON.parse(sessionStorage.getItem('user'));
 
-    if (!this.user) {
-      this.router.navigate(['login']);
-    } else {
+    
+
+
       /*
         In our sprint, only trainers can use the program so there is no
         need to check if the user is a trainer or not, But this is where
@@ -126,7 +127,7 @@ export class DashboardComponent implements OnInit {
       );
       this.todayIsOpen = true;
     }
-  }
+  
 
   statusToggle(index, yesNo) {
     console.log(index, yesNo);
