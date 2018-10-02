@@ -36,7 +36,7 @@ export class DashboardComponent implements OnInit {
   dataSource;
   topics = this.calendarService.getCalendarEventsByTrainerId(1);
   currentBatch;
-  headerColumns: string[] = ['time', 'flagged', 'sub',  'control'];
+  headerColumns: string[] = ['time', 'flagged', 'sub', 'control'];
   user: BamUser;
   batch;
   batchWeek: number;
@@ -45,8 +45,8 @@ export class DashboardComponent implements OnInit {
   firstName: string;
   lastName: string;
   visibilityIcon = [
-    {num: 0, icon: 'visibility_off' },
-    {num: 1, icon: 'visibility'}
+    { num: 0, icon: 'visibility_off' },
+    { num: 1, icon: 'visibility' }
   ];
   DashTitle = 'Today';
   todayIsOpen: boolean;
@@ -69,30 +69,42 @@ export class DashboardComponent implements OnInit {
   * and info about the batch they are associated with.
   */
 
- sortData() {
-  return this.curriculumDay.sort((a, b) => {
-    return <any>(b.dayNum) - <any>(a.dayNum);
-  });
-}
+  sortData() {
+    return this.curriculumDay.sort((a, b) => {
+      return <any>(b.dayNum) - <any>(a.dayNum);
+    });
+  }
+
   ngOnInit() {
-    
+
     this.user = JSON.parse(sessionStorage.getItem('user'));
     this.dataSource = this.topics;
     this.currentBatch = this.batchService.getBatchByTrainer(1);
     this.cs.getCurriculumByWeek(1).subscribe((week: any) => {
       this.curriculumWeek = week;
       this.curriculumDay = week.curriculumDay;
+      this.curriculumDay = this.curriculumDay.sort((n1, n2) => {
+        if (n1 > n2) {
+          return 1;
+        }
+
+        if (n1 < n2) {
+          return -1;
+        }
+
+        return 0;
+      });
     });
-    
+
 
 
     this.batchService.getBatchByTrainer(1).subscribe(
       result => {
-      this.currentBatch = result[0];
-    }
+        this.currentBatch = result[0];
+      }
     );
 
- //   this.eventsThisWeek = this.calendarService.getCalendarEventsByTrainerIdAndWeek(1, new Date());
+    //   this.eventsThisWeek = this.calendarService.getCalendarEventsByTrainerIdAndWeek(1, new Date());
 
     if (!this.user) {
       this.router.navigate(['login']);
@@ -132,22 +144,22 @@ export class DashboardComponent implements OnInit {
     }
   }
 
-  
-  
+
+
   // function to select specific days of the week to display
-    showDay(x) {
-      console.log(this.dataSource);
+  showDay(x) {
+    console.log(this.dataSource);
 
 
-    }
+  }
 
 
 
-// function for if something is completed or in progress
+  // function for if something is completed or in progress
   statusToggle(sub, yesNo) {
     sub.statusId = yesNo;
   }
-// function to flag an item
+  // function to flag an item
   flagRow(sub) {
 
     if (!sub.flaggedId) {

@@ -38,7 +38,7 @@ export class CurriculumService {
   }
 
 
-  //fix this tomorrow - joeys messs this is for grabbing the curriculum by 
+  // get items by week.
   getCurriculumByWeek(id): Observable<CurriculumWeek> {
     return this.http.get<CurriculumWeek>(`http://localhost:9996/curriculums/weeks/${id}`, HTTP_OPTIONS)
   } 
