@@ -44,6 +44,7 @@ import { StartMondayModalComponent } from './routes/calendar/start-monday-modal/
 import { ChartsModule } from 'ng2-charts';
 import { ForgottenPasswordComponent } from './routes/forgotten-password/forgotten-password.component';
 import { CurriculumWeekComponent } from './routes/curriculum-editor/curriculum-week/curriculum-week.component';
+import { GlanceBarComponent } from './routes/dashboard/glance-bar/glance-bar.component';
 
 
 @NgModule({
@@ -68,7 +69,8 @@ import { CurriculumWeekComponent } from './routes/curriculum-editor/curriculum-w
     CurriculumViewComponent,
     CurriculumDayComponent,
     ForgottenPasswordComponent,
-    CurriculumWeekComponent
+    CurriculumWeekComponent,
+    GlanceBarComponent
 
   ],
   imports: [

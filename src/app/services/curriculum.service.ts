@@ -13,6 +13,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Curriculum } from '../models/curriculum';
 import { Observable } from 'rxjs';
 import { environment } from '../../environments/environment';
+import { CurriculumWeek } from '../models/curriculum-week';
 
 // The content type for our HTTP requests is JSON.
 const HTTP_OPTIONS = {
@@ -35,6 +36,12 @@ export class CurriculumService {
   getAll(): Observable<Curriculum[]> {
     return this.http.get<Curriculum[]>(environment.apiUrl + 'curriculums', HTTP_OPTIONS);
   }
+
+
+  //fix this tomorrow - joeys messs this is for grabbing the curriculum by 
+  getCurriculumByWeek(id): Observable<CurriculumWeek> {
+    return this.http.get<CurriculumWeek>(`http://localhost:9996/curriculums/weeks/${id}`, HTTP_OPTIONS)
+  } 
 
   /**
    * The function used to post a curriculum to a server

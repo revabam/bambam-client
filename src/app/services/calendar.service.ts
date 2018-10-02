@@ -39,48 +39,19 @@ export class CalendarService {
   }
 
 
-  // THIS IS THE CURRENT METHOD TO GRAB THE CALENDAR EVENTS BY TRAINER - JOEY
+/**
+ * populates subtopic fields from REST data,follows CalendarEvent
+ * statusId is numerical, correlates completed, uncomplete
+ * subTopicId is the id of the subTopic used for viewing details
+ * flagged is used in dashboard to mark important events, numerical for different tiers
+ *
+ * @author Joey Shannon | Spark1806-USF-Java | Steven Kelsey
+ */
   getCalendarEventsByTrainerId(trainerId: number) {
     return this.http.get<CalendarEvent[]>(`http://localhost:9994/calendars/event/trainer/${trainerId}`, HTTP_OPTIONS);
   }
 
-  /*
-  const startDate = new Date();
-    const endDate = new Date();
-    return [{
-      id:  1,
-      title: 'e1',
-      description: 'desasdasdasdc',
-      statusId: 1,
-      startDateTime: startDate,
-      endDateTime: endDate,
-      subTopicId: 1,
-      trainerId: 12,
-      flagged: 1
-    },
-    {
-      id:  1,
-      title: 'e2',
-      description: 'ddfsdfadfesc',
-      statusId: 1,
-      startDateTime: startDate,
-      endDateTime: endDate,
-      subTopicId: 2,
-      trainerId: 12,
-      flagged: 1
-    },
-    {
-      id:  1,
-      title: 'e3',
-      description: 'descsad',
-      statusId: 1,
-      startDateTime: startDate,
-      endDateTime: endDate,
-      subTopicId: 2,
-      trainerId: 12,
-      flagged: 1
-    }
-  ]; */
+  
 
   /**
    * Create a calendar event
