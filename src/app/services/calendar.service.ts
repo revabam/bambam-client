@@ -38,6 +38,12 @@ export class CalendarService {
     return this.http.get<Curriculum>(environment.apiUrl + `curriculums/${id}`, HTTP_OPTIONS);
   }
 
+  // THIS IS THE CURRENT METHOD TO GRAB THE CALENDAR EVENTS BY TRAINER - JOEY
+
+  getCalendarEventsByTrainerId(trainerId: number) {
+    return this.http.get<CalendarEvent[]>(`http://localhost:9994/calendars/event`, HTTP_OPTIONS);
+  }
+
   /**
    * Create a calendar event
    * @param event CalendarEvent
