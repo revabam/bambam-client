@@ -26,24 +26,7 @@ import { SubTopicService } from '../../services/subtopic.service';
 import { StartMondayModalComponent } from './start-monday-modal/start-monday-modal.component';
 import { CurriculumWeek } from '../../models/curriculum-week';
 
-const colors: any = {
-  blue: {
-    primary: 'blue',
-    secondary: 'blue'
-  },
-  red: {
-    primary: 'red',
-    second: 'red'
-  },
-  green: {
-    primary: 'green',
-    secondary: 'green'
-  },
-  yellow: {
-    primary: 'yellow',
-    secondary: 'yellow'
-  }
-};
+
 /**
  * class used to populate the calendar, implements the interface provided in the Angular Material Calendar
  * adds extra fields
@@ -79,10 +62,29 @@ export class CustomCalendarEvent implements CalendarEvent<any> {
   styleUrls: ['./calendar.component.css']
 })
 export class CalendarComponent implements OnInit, DoCheck {
-
+  colors: any = {
+    blue: {
+      primary: 'blue',
+      secondary: 'blue'
+    },
+    red: {
+      primary: 'red',
+      second: 'red'
+    },
+    green: {
+      primary: 'green',
+      secondary: 'green'
+    },
+    yellow: {
+      primary: 'yellow',
+      secondary: 'yellow'
+    }
+  };
   user: BamUser = JSON.parse(sessionStorage.getItem('user'));
   showSideNav = true;
 
+  startHour = 8;
+  endHour = 18;
   hour = 0;
   subTopicsReceived = false;
   multiDayEventCreated = false;
@@ -186,7 +188,7 @@ export class CalendarComponent implements OnInit, DoCheck {
           end: addWeeks(new Date(), curriculum.numberOfWeeks),
           title: curriculum.name,
           id: curriculum.id,
-          color: colors.yellow,
+          color: this.colors.yellow,
           actions: this.actions,
           resizable: {
             beforeStart: true,
@@ -404,20 +406,20 @@ export class CalendarComponent implements OnInit, DoCheck {
       }
       switch (custEvent.statusId) {
         case 1:
-          custEvent.color = colors.blue;
+          custEvent.color = this.colors.blue;
           if (event.start < new Date()) {
             custEvent.statusId = 2;
-            custEvent.color = colors.green;
+            custEvent.color = this.colors.green;
           }
           break;
         case 2:
-          custEvent.color = colors.green;
+          custEvent.color = this.colors.green;
           break;
         case 3:
-          custEvent.color = colors.red;
+          custEvent.color = this.colors.red;
           break;
         case 4:
-          custEvent.color = colors.yellow;
+          custEvent.color = this.colors.yellow;
           break;
         default:
           break;
@@ -452,19 +454,27 @@ export class CalendarComponent implements OnInit, DoCheck {
    */
   generateStoredEvents() {
     for (const event of this.storedEvents) {
+      const startTimeDate = new Date(event.startDateTime);
+      const endTimeDate = new Date(event.endDateTime);
+      if (startTimeDate.getHours() < 8) {
+        this.startHour = startTimeDate.getHours();
+      }
+      if (endTimeDate.getHours() > 18) {
+        this.endHour = endTimeDate.getHours();
+      }
       let color;
       switch (event.statusId) {
         case 1:
-          color = colors.blue;
+          color = this.colors.blue;
           break;
         case 2:
-          color = colors.green;
+          color = this.colors.green;
           break;
         case 3:
-          color = colors.red;
+          color = this.colors.red;
           break;
         case 4:
-          color = colors.yellow;
+          color = this.colors.yellow;
           break;
         default:
           break;
@@ -522,6 +532,7 @@ export class CalendarComponent implements OnInit, DoCheck {
            */
           subtopicStartTime.setHours(Math.floor(hour));
           subtopicStartTime.setMinutes((hour - Math.floor(hour)) * 60);
+          console.log(subtopicStartTime.toString());
           hour = hour + timeDifference;
           const endTime = new Date(subtopicStartTime);
           /**
@@ -637,7 +648,7 @@ export class CalendarComponent implements OnInit, DoCheck {
         title: this.newSubtopicName,
         start: addHours(this.newSubtopicDate, 9),
         end: addHours(this.newSubtopicDate, 10),
-        color: colors.red,
+        color: this.colors.red,
         draggable: true,
         resizable: {
           beforeStart: true,

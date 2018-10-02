@@ -2,7 +2,7 @@
 <div mat-dialog-content>
   <mat-form-field class="col-9">
     <!-- valiadating the curriculum name -->
-    <input matInput [(ngModel)]="curriculumName" (blur)='validate()' [formControl]="cnameFormControl" placeholder="Curriculum Name">
+    <input matInput [(ngModel)]="curriculumName" (keyup)='validate()' [formControl]="cnameFormControl" placeholder="Curriculum Name">
     <mat-error *ngIf="cnameFormControl.hasError('required')">
       Curriculum name is <strong>required</strong>
     </mat-error>

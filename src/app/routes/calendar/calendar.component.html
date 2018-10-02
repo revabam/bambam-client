@@ -106,7 +106,7 @@
             (eventTimesChanged)="eventTimesChanged($event)">
           </mwl-calendar-week-view>
           <mwl-calendar-day-view *ngSwitchCase="'day'" [viewDate]="viewDate" [events]="events" [refresh]="refresh" (eventClicked)="handleEvent('Clicked', $event.event)"
-            (eventTimesChanged)="eventTimesChanged($event)" dayStartHour="8" dayEndHour="18">
+            (eventTimesChanged)="eventTimesChanged($event)" dayStartHour={{startHour}} dayEndHour={{endHour}}>
           </mwl-calendar-day-view>
         </div>
       </mat-card-content>
