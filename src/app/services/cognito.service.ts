@@ -161,10 +161,8 @@ export class CognitoService {
    * @author Jasmine C. Onwuzulike
    */
   getLoggedInUser() {
-    console.log('In Cognito getLoggedInUser()........');
     const cognitoUser = this.userPool.getCurrentUser();
     if (cognitoUser != null) {
-      console.log('Successfully got the logged in user.');
       return cognitoUser.getUsername();
     }
   }
@@ -182,14 +180,11 @@ export class CognitoService {
         if (err) {
           alert(err);
         }
-        console.log('session validity: ' + session.isValid());
         cognitoUser.getUserAttributes(function (err, result) {
           if (err) {
             alert(err);
           }
           else {
-            console.log('Trying to log results.');
-            console.log(result);
            CognitoService.attributeList = result;
           }
         });
