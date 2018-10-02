@@ -34,7 +34,7 @@ mat-card{
     color: black;
     font-weight: $weight;
     border-radius: 20px 20px 20px 20px;
-    opacity: .8;
+    opacity: 1;
 }
 
 // all mat-card-headers related to dashboard
@@ -99,7 +99,7 @@ button{
 }
 
 #dashAll{
-    margin-top: 5%;
+    margin-top: 7%;
 }
 
 // editting for batch name when batch button is pressed
