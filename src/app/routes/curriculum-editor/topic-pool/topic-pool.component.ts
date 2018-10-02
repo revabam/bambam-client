@@ -195,16 +195,12 @@ export class TopicPoolComponent implements OnInit {
 
   //  method to delete a subtopic by subTopic ID
   deleteSubTopic(subtopic: SubTopic): void {
-    this.subtopicService.deleteSubTopic(subtopic).subscribe(
-      data => {
-        if (data['id'] === undefined || data['id'] === null) {
-          return;
-        }
-      });
-    }
+    console.log (subtopic);
+    this.subtopicService.deleteSubTopic(subtopic).subscribe();
+      }
 //  method to delete a Topic by ID along with all of the associated Subtopics
   deleteTopicById(topic: Topic): void {
-    this.subtopicService.deleteSubTopicByParentId(topic.id);
+    this.subtopicService.deleteSubTopicByParentId(topic.id).subscribe();
     this.topicService.deleteTopicById(topic.id).subscribe(
       data => {
         if (data['id'] === undefined || data['id'] === null) {

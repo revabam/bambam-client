@@ -61,7 +61,7 @@ export class SubTopicService {
    * @param id The id of the topic
    */
   deleteSubTopicByParentId(id: number): Observable<SubTopic[]> {
-    return this.http.delete<SubTopic[]>(environment.apiUrl + `SubTopics?parentTopic_id=${id}`, HTTP_OPTIONS);
+    return this.http.delete<SubTopic[]>(environment.zuulUrl + `SubTopics?parentTopic_id=${id}`, HTTP_OPTIONS);
   }
 
    /**
@@ -69,7 +69,9 @@ export class SubTopicService {
    * @param id The id of the topic
    */
   deleteSubTopic(subTopic: SubTopic): Observable<SubTopic[]> {
-    return this.http.delete<SubTopic[]>(environment.apiUrl + `SubTopics/deleteSubTopicById${subTopic.id}`,
+    console.log('deleting subtopic' + subTopic);
+    console.log('deleting subtopic' + subTopic.id);
+    return this.http.delete<SubTopic[]>(environment.zuulUrl + `curriculums/subtopic/${subTopic}`,
     HTTP_OPTIONS);
 }
 

@@ -41,7 +41,7 @@
                 </mat-panel-title>
               </mat-expansion-panel-header>
               <div draggable *ngFor="let subtopic of getSubtopicsByTopic(topic)" [dragData]="subtopic">
-                <div *ngIf="(!topicSearch || ((subtopic.name | lowercase).indexOf(topicSearch | lowercase) >= 0)) &amp;&amp; (subtopicService.reactivateName(subtopic.name) === subtopic.name)">
+                <div *ngIf="(!topicSearch || ((subtopic.name | lowercase).indexOf(topicSearch | lowercase) >= 0))">
                   <mat-toolbar>
                     <span> {{(subtopic.name | slice:0:50) + ((subtopic.name.length > 50) ? "..." : "")}}</span>
                     <span class="fill-remaining-space"></span>
@@ -53,11 +53,8 @@
                     </span>
                   </mat-toolbar>
                 </div>
-                <div *ngIf="(!topicSearch || ((subtopic.name | lowercase).indexOf(topicSearch | lowercase) >= 0)) &amp;&amp; (subtopicService.reactivateName(subtopic.name) !== subtopic.name)">
+                <div *ngIf="(!topicSearch || ((subtopic.name | lowercase).indexOf(topicSearch | lowercase) >= 0))">
                   <mat-toolbar>
-                    <span>
-                      <del>{{ subtopicService.reactivateName(subtopic.name) }}</del>
-                    </span>
                     <span class="fill-remaining-space"> </span>
                   </mat-toolbar>
                 </div>
