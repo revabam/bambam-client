@@ -1,8 +1,6 @@
 export class BamUser {
-    id?: number;
+    id?: string;
     firstName?: string;
     lastName?: string;
     email?: string;
-    role_id?: number;
-    status_id?: number;
 }
