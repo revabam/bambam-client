@@ -70,6 +70,16 @@ export class CurriculumEditorComponent implements OnInit {
     });
   }
 
+   // here is where the master version of the curriculum is copied so that it can be edited
+   copyCurriculum(curriculum){
+    this.curriculums.push(curriculum);
+    let currArr=this.curriculums.slice(0,this.curriculums.length-1);
+    ++currArr[currArr.length-1].version;
+    this.curriculums[this.curriculums.length-1]=currArr[currArr.length-1];
+    console.log(curriculum);
+    console.log(this.curriculums);
+  }
+
   /**
    * Gets us distinct curriculum names from the list of all
    * curriculums

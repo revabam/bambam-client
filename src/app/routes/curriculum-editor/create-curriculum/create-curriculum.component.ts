@@ -7,6 +7,7 @@ import { Component, OnInit, Inject } from '@angular/core';
 import { CurriculumDay } from '../../../models/curriculum-day';
 import { CurriculumDayService } from '../../../services/curriculum-day.service';
 import { FormControl, Validators } from '@angular/forms';
+import { CurriculumEditorComponent } from '../curriculum-editor.component';
 
 @Component({
   selector: 'app-create-curriculum',
@@ -40,7 +41,8 @@ export class CreateCurriculumComponent implements OnInit {
     public dialogRef: MatDialogRef<CreateVersionComponent>,
     @Inject(MAT_DIALOG_DATA) public data: object,
     private curriculumDayService: CurriculumDayService,
-    private curriculumWeekService: CurriculumWeekService
+    private curriculumWeekService: CurriculumWeekService,
+    private curriculumEditor: CurriculumEditorComponent, 
     ) { }
 
   ngOnInit() {
@@ -83,7 +85,7 @@ export class CreateCurriculumComponent implements OnInit {
       for (let i = 0; i < this.data['curriculums'].length; i++) {
         if (this.data['curriculums'][i].name === newCurriculum.name) {
           if (this.data['curriculums'][i].version >= nameNum) {
-            ++nameNum;
+            nameNum+=1;
           } else {
             continue;
           }
@@ -125,6 +127,10 @@ export class CreateCurriculumComponent implements OnInit {
     // After the curriculum is added, we're done with the modal.
     this.close();
   }
+
+  
+
+
   // here we are performing validation for the curriculum entered
   //    the submit button is disabled until both name and weeks are entered correctly
   validate() {
