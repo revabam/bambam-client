@@ -157,8 +157,6 @@ export class CognitoService {
   }
 
 
-
-
   /**
    * This methods checks to see the current user. It will check the Cognito User Pool to see
    * the current logged in user and then return their token.
@@ -170,7 +168,6 @@ export class CognitoService {
       return cognitoUser.getUsername();
     }
   }
-
 
   /**
    * This method will get the current logged in user's attributes.
@@ -216,4 +213,4 @@ export class CognitoService {
     return CognitoService.aList;
   }
 }
-}
+

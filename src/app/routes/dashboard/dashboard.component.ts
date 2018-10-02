@@ -240,5 +240,5 @@ showThisDay() {
     );
     this.editing = false;
   }
-}
+
 }
