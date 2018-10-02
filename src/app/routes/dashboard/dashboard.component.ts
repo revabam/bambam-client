@@ -24,37 +24,6 @@ export interface Topicz {
   status: number;
 }
 
-// const topics: Topicz[] = [
-//   {
-//     flagged: 0,
-//     id: 1,
-//     name: 'Java Data Types',
-//     time: 1537899180000,
-//     status: 0
-//   },
-//   {
-//     flagged: 0,
-//     id: 2,
-//     name: 'Panels & Softskills',
-//     time: 1537899180000,
-//     status: 1
-//   },
-//   {
-//     flagged: 0,
-//     id: 3,
-//     name: 'Overwatch Gameplay Trailers',
-//     time: 1537899180000,
-//     status: 0
-//   },
-//   {
-//     flagged: 0,
-//     id: 4,
-//     name: 'Lifecycle of a Green Bean',
-//     time: 1537899180000,
-//     status: 1
-//   }
-// ];
-
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',

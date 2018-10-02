@@ -1,3 +1,4 @@
+import { SubTopic } from './../../../models/subtopic';
 import { TopicService } from './../../../services/topic.service';
 import { CurriculumDay } from './../../../models/curriculum-day';
 import { CurriculumWeek } from './../../../models/curriculum-week';
@@ -43,7 +44,7 @@ export class CurriculumWeekComponent implements OnInit {
     for (let i = 0; i < this.week.curriculumDays.length; i++) {
       const day = this.week.curriculumDays[i];
 
-      day.subTopics.forEach((subTopic) => {
+      day.SubTopic.forEach((subTopic) => {
         const topicId = subTopic.parentTopicId;
         let topicName: string;
         if (this.topicService.topics) {

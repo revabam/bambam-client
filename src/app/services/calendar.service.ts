@@ -18,6 +18,7 @@ const HTTP_OPTIONS = {
   providedIn: 'root'
 })
 export class CalendarService {
+  getCalendarEventsByTrainerId: any;
 
   constructor(private http: HttpClient) { }
 
