@@ -28,6 +28,8 @@
     "@angular/router": "^6.0.3",
     "@fortawesome/fontawesome-free": "^5.1.0",
     "@ng-bootstrap/ng-bootstrap": "^2.2.2",
+    "@types/gapi": "0.0.36",
+    "@types/gapi.auth2": "0.0.47",
     "@types/jquery": "^3.2.7",
     "amazon-cognito-identity-js": "^2.0.21",
     "angular-calendar": "^0.25.2",

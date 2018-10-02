@@ -9,8 +9,8 @@ import { BehaviorSubject } from 'rxjs';
 })
 export class CognitoService {
 
+  private static router: Router;
   private userPool: AWSCognito.CognitoUserPool;
-  private static router : Router;
 
   /**
   * When the cognito service is intialized, it creates the user pool.
@@ -120,7 +120,7 @@ export class CognitoService {
   }
 
    /**
-   * 
+   *
    * This method will allow a user to reset their password if forgotten.  
    * @param email The user's email that they used to register.
    * The user will need to provide their email which Cognito for check the user

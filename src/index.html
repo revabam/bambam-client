@@ -3,7 +3,13 @@
 
 <head>
   <meta charset="utf-8">
-  <meta name="google-signin-client_id" content="1014618440153-cg30prldigrrsgpp3suvd81uf17bi8rb.apps.googleusercontent.com.apps.googleusercontent.com">
+  <meta name="google-signin-scope" content="email">
+  <!-- <meta name="google-signin-scope" content="given_name"> -->
+  <!-- <meta name="google-signin-scope" content="family_name"> -->
+  <!-- <meta name="google-signin-scope" content="status"> -->
+  <!-- <meta name="google-signin-scope" content="role"> -->
+  <!-- <meta name="google-signin-scope" content="sub"> -->
+  <meta name="google-signin-client_id" content="1014618440153-cg30prldigrrsgpp3suvd81uf17bi8rb.apps.googleusercontent.com">
   <title>BambamClient</title>
   <base href="/">
 
@@ -27,6 +33,24 @@
       version: []
     };
   </script>
+  <script>
+  function signinCallback(authResult) {
+  if (authResult['status']['signed_in']) {
+     // Add the Google access token to the Cognito credentials login map.
+     AWS.config.credentials = new AWS.CognitoIdentityCredentials({
+        IdentityPoolId: 'n5l1l6id094g0lk2f3vc1h6h7',
+        Logins: {
+           'accounts.google.com': authResult['id_token']
+        }
+     });
+
+     // Obtain AWS credentials
+     AWS.config.credentials.get(function(){
+        // Access AWS resources here.
+     });
+  }
+}
+</script>
 </head>
 
 <body>
