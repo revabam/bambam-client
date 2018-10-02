@@ -17,11 +17,11 @@
 
 .cardsize {
   padding: 5px;
-  min-height: 100px;
 }
 
 .subTopicName {
   padding-left: 24px;
+  width: 130px;
 }
 
 .cardsize:hover .closebtn {

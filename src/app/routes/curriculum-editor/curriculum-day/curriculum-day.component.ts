@@ -1,9 +1,12 @@
+import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
 import { SubTopic } from './../../../models/subtopic';
 import { CurriculumDay } from './../../../models/curriculum-day';
 import { Curriculum } from '../../../models/curriculum';
 import { Component, OnInit, Input, Output, EventEmitter, DoCheck } from '@angular/core';
 import { Directive, HostBinding, HostListener } from '@angular/core';
 import { CurriculumService } from '../../../services/curriculum.service';
+import { DaySubtopicService } from '../../../services/day-subtopic.service';
+import { DaySubTopic } from '../../../models/day-subtopic';
 
 @Component({
   selector: 'app-curriculum-day',
@@ -24,7 +27,9 @@ export class CurriculumDayComponent implements OnInit {
   @Input() day: CurriculumDay;
   @Output() dayChange: EventEmitter<CurriculumDay> = new EventEmitter<CurriculumDay>();
 
-  constructor(private curriculumService: CurriculumService) { }
+  constructor(private curriculumService: CurriculumService,
+    public daySubTopicService: DaySubtopicService) { }
+
 
   ngOnInit() {
     this.getAllCurriculums();
@@ -34,6 +39,50 @@ export class CurriculumDayComponent implements OnInit {
     this.curriculumService.getAll().subscribe(curriculums => {
       this.curriculums = curriculums;
     });
+  }
+
+  drop(event: CdkDragDrop<any>) {
+    if (!event.previousContainer || !event.previousContainer.data || !event.previousContainer.data.length) {
+      // This means that it is a subtopic from the topic pool and should be converted into a day-subtopic
+      console.log('from topic pool');
+      const daySubTopic: DaySubTopic = {
+        dayId: this.day.id,
+        index: event.currentIndex,
+        name: event.previousContainer.data.name,
+        parentTopicId: event.previousContainer.data.parentTopicId,
+        subTopicId: event.previousContainer.data.id
+      };
+
+      // Saving daySubTopic to db
+      this.daySubTopicService.post(daySubTopic).subscribe((savedDaySubTopic) => {
+        this.day.daySubTopics.splice(event.currentIndex, 0, savedDaySubTopic);
+        this.updateDaySubTopicIndexes();
+      });
+    } else {
+      // This is a transfer of daySubTopic from one day to either the same day or another day
+      if (event.previousContainer === event.container) {
+        // rearranges the daySubTopics
+        console.log('rearranging');
+        this.onSubTopicRearranged(event);
+      } else {
+        // transfer from one day to another
+        console.log('transfering');
+        transferArrayItem(event.previousContainer.data,
+          event.container.data,
+          event.previousIndex,
+          event.currentIndex);
+        this.updateDaySubTopicIndexes();
+      }
+    }
+  }
+
+  updateDaySubTopicIndexes() {
+    for (let i = 0; i < this.day.daySubTopics.length; i++) {
+      const daySubTopic = this.day.daySubTopics[i];
+      daySubTopic.index = i;
+      this.daySubTopicService.put(daySubTopic).subscribe();
+    }
+    this.dayChange.emit(this.day);
   }
 
   /**
@@ -46,7 +95,7 @@ export class CurriculumDayComponent implements OnInit {
     console.log(event);
     console.log(event.dragData);
     // TODO: needs to not just be added to the end, but the location the user dragged it to.
-    this.day.subTopics.push(event.dragData);
+    this.day.daySubTopics.push(event.dragData);
     this.dayChange.emit(this.day);
   }
   /**
@@ -57,15 +106,15 @@ export class CurriculumDayComponent implements OnInit {
   onSubTopicRearranged(event: any) {
     const previousIndex: number = event.previousIndex;
     const currentIndex: number = event.currentIndex;
-    const previousSubTopic = this.day.subTopics[previousIndex];
-    const currentSubTop = this.day.subTopics[currentIndex];
+    const previousSubTopic = this.day.daySubTopics[previousIndex];
+    const currentSubTop = this.day.daySubTopics[currentIndex];
 
     // Swap the subtopics
-    this.day.subTopics.splice(previousIndex, 1, currentSubTop);
-    this.day.subTopics.splice(currentIndex, 1, previousSubTopic);
+    this.day.daySubTopics.splice(previousIndex, 1, currentSubTop);
+    this.day.daySubTopics.splice(currentIndex, 1, previousSubTopic);
 
-    // Tells parent that there has been a change to day variable
-    this.dayChange.emit(this.day);
+    // updates indexes
+    this.updateDaySubTopicIndexes();
   }
   /**
    * Removes a subtopic from the subtopic list in this.day.
@@ -73,7 +122,7 @@ export class CurriculumDayComponent implements OnInit {
    * @author - Chinedu Ozodi | 1806-Sep-18-USF-Java | Steven Kelsey
    */
   removeSubTopic(index: number) {
-    this.day.subTopics.splice(index, 1);
+    this.day.daySubTopics.splice(index, 1);
     // Tells parent that there has been a change to day variable
     this.dayChange.emit(this.day);
   }
