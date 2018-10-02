@@ -87,7 +87,7 @@ export class LoginComponent implements OnInit {
     if (
       this.loginForm.get('email').errors ||
       this.loginForm.get('password').errors
-    ) {
+    ) { 
       this.errorMessage = 'Errors exist on the form';
     } else {
       // No form errors. Attempt to login.

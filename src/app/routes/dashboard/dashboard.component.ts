@@ -18,13 +18,7 @@ import { CalendarEvent } from '../../models/calendar-event';
  * @author Bradley Walker | Khaleel Williams | 1806-Jun18-USF-Java | Wezley Singleton
  * @author Joey Shannon | Drake Mapel | 1806-Spark | Steven Kelsey
  */
-export interface Topicz {
-  time: number;
-  flagged: number;
-  id: number;
-  name: string;
-  status: number;
-}
+
 
 // const topics: Topicz[] = [
 //   {
@@ -83,7 +77,7 @@ export class DashboardComponent implements OnInit {
   DashTitle = 'Today';
   todayIsOpen: boolean;
   topicsIsOpen: boolean;
-  list : string[];
+  list: string[];
   eventsThisWeek: CalendarEvent[];
   constructor(
     private router: Router,
@@ -101,9 +95,9 @@ export class DashboardComponent implements OnInit {
   ngOnInit() {
     const ss = this.cognito.getLoggedInUser();
     console.log('The current logged in user is ' + ss);
-    
+
     if (!ss) {
-    
+
     this.user = JSON.parse(sessionStorage.getItem('user'));
     this.dataSource = this.topics;
     this.batchService.getBatchByTrainer(1).subscribe(
@@ -152,11 +146,12 @@ export class DashboardComponent implements OnInit {
       this.todayIsOpen = true;
     }
   }
-  
+}
+
 // function to select specific days of the week to display
 showThisDay() {
   console.log('monday');
-  
+
 }
 
 
