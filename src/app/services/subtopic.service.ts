@@ -56,62 +56,21 @@ export class SubTopicService {
     return this.http.get<SubTopic[]>(environment.apiUrl + `SubTopics?parentTopic_id=${id}`, HTTP_OPTIONS);
   }
 
-  // Delete sub topics by parent id
+   /**
+   * Delete SubTopics related to a parents topic ID
+   * @param id The id of the topic
+   */
   deleteSubTopicByParentId(id: number): Observable<SubTopic[]> {
     return this.http.delete<SubTopic[]>(environment.apiUrl + `SubTopics?parentTopic_id=${id}`, HTTP_OPTIONS);
   }
 
+   /**
+   * Delete SubTopics related to a parents topic ID
+   * @param id The id of the topic
+   */
   deleteSubTopic(subTopic: SubTopic): Observable<SubTopic[]> {
     return this.http.delete<SubTopic[]>(environment.apiUrl + `SubTopics/deleteSubTopicById${subTopic.id}`,
     HTTP_OPTIONS);
 }
 
-  /**
-   * The function used to deactivate a SubTopic in the server
-   */
-  deactivate(subTopic: SubTopic): Observable<Object> {
-    subTopic.name = this.deactivateName(subTopic.name);
-    return this.http.put(environment.apiUrl + `SubTopics/${subTopic.id}`,
-      subTopic, HTTP_OPTIONS);
-  }
-
-  /**
-   * The function used to reactivate a SubTopic in the server
-   */
-  reactivate(subTopic: SubTopic): Observable<Object> {
-    subTopic.name = this.reactivateName(subTopic.name);
-    return this.http.put(environment.apiUrl + `SubTopics/${subTopic.id}`,
-      subTopic, HTTP_OPTIONS);
-  }
-
-  /**
-   * Helper function to append '(DEACTIVATED) ' to the
-   * beginning of the SubTopic name, to show that
-   * the SubTopic is deactivated.
-   * @param SubTopicName - The string that we want to
-   * append '(DEACTIVATED) ' to.
-   */
-  deactivateName(SubTopicName: string): string {
-    return '(DEACTIVATED) ' + SubTopicName;
-  }
-
-  removeSubTopic(topicId: number): string {
-    return ' (DELETED) ' + topicId;
-  }
-
-  /**
-   * Helper function to remove '(DEACTIVATED) ' from the
-   * beginning of the SubTopic name
-   * @param SubTopicName - The string that we want to
-   * append '(DEACTIVATED) ' to.
-   */
-  reactivateName(SubTopicName: string): string {
-    if (SubTopicName.indexOf('(DEACTIVATED) ') >= 0) {
-      SubTopicName = SubTopicName.substring(
-        SubTopicName.lastIndexOf('(DEACTIVATED) ')
-        + ('(DEACTIVATED) ').length
-      );
-    }
-    return SubTopicName;
-  }
 }

@@ -74,8 +74,6 @@ export class TopicPoolComponent implements OnInit {
    * @author - Andrew Li | 1806-Jun-18-USF-Java | Wezley Singleton
    */
   getSubtopicsByTopic(topic: Topic): SubTopic[] {
-    // console.log('Filter for: ' + topic.name);
-    // console.log(this.subtopics.filter((subtopic) => subtopic && subtopic.parentTopicId === topic.id));
     return this.subtopics.filter(
       (subtopic) => subtopic && subtopic.parentTopicId === topic.id);
   }
@@ -194,12 +192,6 @@ export class TopicPoolComponent implements OnInit {
   isExpanded(topicId: number): boolean {
     return this.topicExpansions[`topic_${topicId}`] === true;
   }
-  /**
-   * Calls the deactivate function from the subtopic
-   * service.
-   * @param subtopic - The subtopic to be deactivated.
-   * @author - Andrew Li | 1806-Jun-18-USF-Java | Wezley Singleton
-   */
 
   //  method to delete a subtopic by subTopic ID
   deleteSubTopic(subtopic: SubTopic): void {
@@ -210,11 +202,8 @@ export class TopicPoolComponent implements OnInit {
         }
       });
     }
-//  method to delete a subtopic by subTopic ID
+//  method to delete a Topic by ID along with all of the associated Subtopics
   deleteTopicById(topic: Topic): void {
-    console.log(topic.id);
-    console.log(this.subtopicService.getSubTopicByParentId(topic.id).subscribe(subtopics => {
-      this.subtopics = subtopics; }));
     this.subtopicService.deleteSubTopicByParentId(topic.id);
     this.topicService.deleteTopicById(topic.id).subscribe(
       data => {
@@ -225,53 +214,6 @@ export class TopicPoolComponent implements OnInit {
       });
     }
 
-  // deactivateSubtopic NOT CURRENTLY BEING USED, MAY INCLUDE ON SERVER endpoint
-    deactivateSubtopic(subtopic: SubTopic): void {
-    this.subtopicService.deactivate(subtopic).subscribe(
-      data => {
-        if (data['name'] === undefined || data['name'] === null) {
-          return;
-        }
-        /*
-         * After we deactivate from the server, we also want to
-         * deactivate from the client-side array binded to our
-         * template (so the user immediately sees that it's
-         * deactivated)
-         */
-        subtopic.name = this.subtopicService.deactivateName(
-          subtopic.name
-        );
-      },
-      err => {
-      }
-    );
-  }
-  /**
-   * Calls the reactivate function from the subtopic
-   * service.
-   * @param subtopic - The subtopic to be reactivated.
-   * @author - Andrew Li | 1806-Jun-18-USF-Java | Wezley Singleton
-   */
-  reactivateSubtopic(subtopic: SubTopic): void {
-    this.subtopicService.reactivate(subtopic).subscribe(
-      data => {
-        if (data['name'] === undefined || data['name'] === null) {
-          return;
-        }
-        /*
-         * After we reactivate on the server, we also want to
-         * reactivate from the client-side array binded to our
-         * template (so the user immediately sees that it's
-         * reactivated)
-         */
-        subtopic.name = this.subtopicService.reactivateName(
-          subtopic.name
-        );
-      },
-      err => {
-      }
-    );
-  }
   /**
    * Checks whether or not a word begins with a sequence of characters
    * A string with multiple words can be inputted into the function,

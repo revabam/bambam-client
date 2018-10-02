@@ -43,7 +43,7 @@ export class TopicService {
    * @param name The name of the topic to be retrieved
    */
   getByName(name: string): Observable<Topic[]> {
-    return this.http.get<Topic[]>(environment.apiUrl + `topics?name=${name}&name=${this.deactivateName(name)}`, HTTP_OPTIONS);
+    return this.http.get<Topic[]>(environment.apiUrl + `topics?name=${name}`, HTTP_OPTIONS);
   }
 
   /**
@@ -64,56 +64,12 @@ export class TopicService {
   getTopicById(id: number): Observable<Topic> {
     return this.http.get<Topic>(environment.apiUrl + `topics/${id}`, HTTP_OPTIONS);
   }
-  /**
-   * The function used to deactivate a topic in the server
-   */
-  deactivate(topic: Topic): Observable<Object> {
-    topic.name = this.deactivateName(topic.name);
-    return this.http.put(environment.apiUrl + `topics/${topic.id}`,
-      topic, HTTP_OPTIONS);
-  }
 
+  /**
+   * The function used to delete a topic by topic id
+   */
   deleteTopicById(id: number): Observable<Topic> {
     return this.http.delete<Topic>(environment.apiUrl + `Topics/deleteTopicById${id}`,
-    HTTP_OPTIONS);
-}
-
-  /**
-   * The function used to reactive a topic in theserver
-   */
-  reactivate(topic: Topic): Observable<Object> {
-    topic.name = this.reactivateName(topic.name);
-    return this.http.put(environment.apiUrl + `topics/${topic.id}`,
-      topic, HTTP_OPTIONS);
-  }
-
-  /**
-   * Helper function to append '(DEACTIVATED) ' to the
-   * beginning of the topic name, to show that
-   * the topic is deactivated.
-   * @param topicName - The string that we want to
-   * append '(DEACTIVATED) ' to.
-   */
-  deactivateName(topicName: string): string {
-    return '(DEACTIVATED) ' + topicName;
-  }
-
-  removeTopic(topicId: number): string {
-    return ' (DELETED) ' + topicId;
-  }
-  /**
-   * Helper function to remove '(DEACTIVATED) ' from the
-   * beginning of the topic name
-   * @param topicName - The string that we want to
-   * append '(DEACTIVATED) ' to.
-   */
-  reactivateName(topicName: string): string {
-    if (topicName.indexOf('(DEACTIVATED) ') >= 0) {
-      topicName = topicName.substring(
-        topicName.lastIndexOf('(DEACTIVATED) ')
-        + ('(DEACTIVATED) ').length
-      );
-    }
-    return topicName;
+      HTTP_OPTIONS);
   }
 }
