@@ -11,7 +11,7 @@
     </mat-card-header>
     <mat-card-content style="overflow: auto; height: 470px;" *ngIf="curriculum.curriculumWeeks">
       <span *ngFor="let week of curriculum.curriculumWeeks">
-        <app-curriculum-week [week]='week' (weekChange)='onWeekChange($event)'></app-curriculum-week>
+        <app-curriculum-week [week]='week'></app-curriculum-week>
       </span>
     </mat-card-content>
   </mat-card>

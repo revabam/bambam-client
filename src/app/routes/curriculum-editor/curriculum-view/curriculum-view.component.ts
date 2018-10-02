@@ -1,7 +1,5 @@
-import { CurriculumWeek } from './../../../models/curriculum-week';
 import { Curriculum } from './../../../models/curriculum';
 import { Component, OnInit, Input } from '@angular/core';
-import { CurriculumWeekService } from '../../../services/curriculum-week.service';
 
 @Component({
   selector: 'app-curriculum-view',
@@ -12,19 +10,9 @@ export class CurriculumViewComponent implements OnInit {
 
   @Input()
   curriculum: Curriculum;
-  constructor(
-    private curriculumWeekService: CurriculumWeekService
-  ) { }
+  constructor() { }
 
   ngOnInit() {
-  }
-
-  onWeekChange(event: CurriculumWeek) {
-    const index = this.curriculum.curriculumWeeks.findIndex( x => x.weekNum === event.weekNum);
-    this.curriculum.curriculumWeeks[index] = event;
-    this.curriculumWeekService.put(event).subscribe( () => {
-      console.log('week updated');
-    });
   }
 
 }

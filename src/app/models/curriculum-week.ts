@@ -1,7 +1,7 @@
 import { CurriculumDay } from './curriculum-day';
 export class CurriculumWeek {
-    id?: number;
+    curriculumWeekId?: number;
+    curriculumId?: number;
     weekNum: number;
-    curriculumId: number;
-    curriculumDays?: CurriculumDay[];
+    curriculumDays: CurriculumDay[];
 }

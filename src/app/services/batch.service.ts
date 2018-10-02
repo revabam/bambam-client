@@ -36,6 +36,13 @@ export class BatchService {
     @param  id  the id of the trainer
     @return     an Observable to return the list of batches
   */
+
+
+  // THIS IS THE CURRENT METHOD TO GET BACK BY TRAINER ID - JOEY
+ getBatchByTrainer(trainerId): Observable<Batch> {
+   return this.http.get<Batch>(`http://localhost:9997/trainer/${trainerId}`, HTTP_OPTIONS);
+
+ }
   getBatchesByTrainerId(id: number): Observable<Batch[]> {
     return this.http.get<Batch[]>(environment.apiUrl + `batches?trainer_id=${id}`, HTTP_OPTIONS);
   }

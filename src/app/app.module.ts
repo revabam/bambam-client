@@ -44,9 +44,6 @@ import { StartMondayModalComponent } from './routes/calendar/start-monday-modal/
 import { ChartsModule } from 'ng2-charts';
 import { ForgottenPasswordComponent } from './routes/forgotten-password/forgotten-password.component';
 import { CurriculumWeekComponent } from './routes/curriculum-editor/curriculum-week/curriculum-week.component';
-import { TopicPoolComponent } from './routes/curriculum-editor/topic-pool/topic-pool.component';
-import { NgDragDropModule } from 'ng-drag-drop';
-import {DragDropModule} from '@angular/cdk/drag-drop';
 
 
 @NgModule({
@@ -70,9 +67,9 @@ import {DragDropModule} from '@angular/cdk/drag-drop';
     TopicsComponent,
     CurriculumViewComponent,
     CurriculumDayComponent,
-    CurriculumWeekComponent,
-    TopicPoolComponent,
-    ForgottenPasswordComponent
+    ForgottenPasswordComponent,
+    CurriculumWeekComponent
+
   ],
   imports: [
     NgbModule.forRoot(),
@@ -84,7 +81,6 @@ import {DragDropModule} from '@angular/cdk/drag-drop';
     MatButtonToggleModule,
     MatCardModule,
     MatCheckboxModule,
-    DragDropModule,
     MatChipsModule,
     MatStepperModule,
     MatDatepickerModule,
@@ -120,23 +116,20 @@ import {DragDropModule} from '@angular/cdk/drag-drop';
     TimepickerModule.forRoot(),
     BrowserAnimationsModule,
     ReactiveFormsModule,
-    NgDragDropModule.forRoot(),
     NgbModalModule.forRoot(),
     FlatpickrModule.forRoot(),
     CalendarModule.forRoot(),
-    UserIdleModule.forRoot({idle: 600, timeout: 300, ping: 60}),
-    ChartsModule
+    UserIdleModule.forRoot({idle: 600, timeout: 300, ping: 60})
   ],
   exports: [
+    ChartsModule
   ],
   entryComponents: [
     CalendarModalComponent,
     EventDuplicateModalComponent,
     UserInfoComponent,
     CreateCurriculumComponent,
-    StartMondayModalComponent,
-    DialogViewComponent
-  ],
+    StartMondayModalComponent],
   providers: [
     UserService,
     CognitoService,

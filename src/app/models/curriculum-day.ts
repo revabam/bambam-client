@@ -1,10 +1,7 @@
-import { DaySubTopic } from './day-subtopic';
+import { SubTopic } from './subtopic';
 export class CurriculumDay {
-    id?: number;
-    /**
-     * 0 - 6, Sunday - Saturday
-     */
+    curriculumDayId?: number;
+    curriculumWeekId?: number;
     dayNum: number;
-    weekId: number;
-    daySubTopics: DaySubTopic[];
+    subTopics: SubTopic[];
 }

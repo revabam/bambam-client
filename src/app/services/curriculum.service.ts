@@ -40,16 +40,7 @@ export class CurriculumService {
    * The function used to post a curriculum to a server
    */
   post(curriculum: Curriculum): Observable<Curriculum> {
-    console.log('curriculum post:' + environment.apiUrl);
     return this.http.post<Curriculum>(environment.apiUrl + 'curriculums',
-      curriculum, HTTP_OPTIONS);
-  }
-
-  /**
-   * The function used to update a curriculum on the server
-   */
-  put(curriculum: Curriculum): Observable<Curriculum> {
-    return this.http.put<Curriculum>(environment.apiUrl + 'curriculums',
       curriculum, HTTP_OPTIONS);
   }
 
