@@ -21,7 +21,7 @@
                 <mat-card-content>
                     <canvas baseChart [datasets]="barChartData" [labels]="barChartLabels" [options]="barChartOptions" [legend]="barChartLegend"
                         [chartType]="barChartType" [colors]="barColors"></canvas>
-                    <mat-select class="input" placeholder="1806-June18-USF-Java3" [(value)]="selected" (selectionChange)="selectedCurriculum($event)"
+                    <mat-select class="input" placeholder="Select a batch" [(value)]="selected" (selectionChange)="selectedCurriculum($event)"
                         id="batchSelect">
                         <mat-option *ngFor='let batch of this.curriculums' [value]='batch.id'>{{batch.name}}</mat-option>
                     </mat-select>
