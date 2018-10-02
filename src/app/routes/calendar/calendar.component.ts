@@ -64,12 +64,12 @@ export class CustomCalendarEvent implements CalendarEvent<any> {
 export class CalendarComponent implements OnInit, DoCheck {
   colors: any = {
     blue: {
-      primary: 'blue',
-      secondary: 'blue'
+      primary: '#45c1f7',
+      secondary: '#45c1f7'
     },
     red: {
-      primary: 'red',
-      second: 'red'
+      primary: '#e23434',
+      second: '#e23434'
     },
     green: {
       primary: 'green',
@@ -124,10 +124,11 @@ export class CalendarComponent implements OnInit, DoCheck {
 
   actions: CalendarEventAction[] = [
     {
-      label: '<span><mat-icon>change status</mat-icon></span>',
+      label: '<i class="material-icons">update</i>',
       onClick: ({ event }: { event: CalendarEvent }): void => {
         this.handleEvent('Status', event);
-      }
+      },
+      cssClass: 'md-18 orange600'
     }
   ];
 
@@ -501,8 +502,7 @@ export class CalendarComponent implements OnInit, DoCheck {
     this.refresh.next();
   }
   /**
-   * method that takes the topics and subtopics and generated calendar events from them when dropped onto the calendar
-   * called when curriculum is dropped onto the calendar
+   * method that creates calendar events when dropped curriculum is dropped onto the calendar
    *
    * @author Marcin Salamon | Spark1806-USF-Java | Steven Kelsey
    */
@@ -532,7 +532,6 @@ export class CalendarComponent implements OnInit, DoCheck {
            */
           subtopicStartTime.setHours(Math.floor(hour));
           subtopicStartTime.setMinutes((hour - Math.floor(hour)) * 60);
-          console.log(subtopicStartTime.toString());
           hour = hour + timeDifference;
           const endTime = new Date(subtopicStartTime);
           /**
@@ -650,11 +649,12 @@ export class CalendarComponent implements OnInit, DoCheck {
         end: addHours(this.newSubtopicDate, 10),
         color: this.colors.red,
         draggable: true,
+        actions: this.actions,
         resizable: {
           beforeStart: true,
           afterEnd: true
         },
-        statusId: 2,
+        statusId: 3,
         flagged: 0
       });
       this.refresh.next();
