@@ -139,9 +139,16 @@ export class CalendarComponent implements OnInit, DoCheck {
    */
   ngOnInit() {
     this.user = JSON.parse(sessionStorage.getItem('user'));
-    this.calendarService.getCalendarEvents(this.user.id).subscribe(response => {
-      this.storedEvents = response;
-      this.initialRender = true;
+    this.calendarService.getCalendarEvents(this.user.id).subscribe(events => {
+      this.storedEvents = events;
+      this.calendarService.getCustomCalendarEvents().subscribe(customEvents => {
+        for (const cEv of customEvents) {
+          if (cEv.trainerId !== this.user.id) {
+            this.storedEvents.push(cEv);
+          }
+        }
+        this.initialRender = true;
+      });
     });
 
     this.calendarService.getCurriculum().subscribe(response => {
@@ -631,7 +638,8 @@ export class CalendarComponent implements OnInit, DoCheck {
           afterEnd: true
         },
         statusId: 3,
-        flagged: 0
+        flagged: 0,
+        subTopicId: -1
       });
       this.refresh.next();
       this.persistEvents();
