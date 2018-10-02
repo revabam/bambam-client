@@ -68,6 +68,8 @@ export class CreateCurriculumComponent implements OnInit {
       dateCreated: new Date(),
       numberOfWeeks: this.numberOfWeeks,
       status: 1,
+      topics: [],
+      curriculumWeeks: []
     };
 
     /**
@@ -137,7 +139,8 @@ export class CreateCurriculumComponent implements OnInit {
     const day: CurriculumDay = {
       dayNum: index,
       weekId: week.id,
-      daySubTopics: []
+      daySubTopics: [],
+      SubTopic: []
     };
     this.curriculumDayService.post(day).subscribe(() => {
       // make sure there is only 5 days in a work week
