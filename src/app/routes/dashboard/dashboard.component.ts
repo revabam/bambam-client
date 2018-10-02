@@ -4,9 +4,12 @@ import { Router } from '@angular/router';
 import { Batch } from '../../models/batch';
 import { BatchService } from '../../services/batch.service';
 import { Curriculum } from '../../models/curriculum';
+import { CurriculumService } from '../../services/curriculum.service';
 import { UserService } from '../../services/user.service';
 import { CalendarService } from '../../services/calendar.service';
 import { CalendarEvent } from '../../models/calendar-event';
+import { CurriculumWeek } from '../../models/curriculum-week';
+import { CurriculumDay } from '../../models/curriculum-day';
 
 /**
  * This component is the dashboard page. It is the page that the
@@ -24,37 +27,6 @@ export interface Topicz {
   status: number;
 }
 
-// const topics: Topicz[] = [
-//   {
-//     flagged: 0,
-//     id: 1,
-//     name: 'Java Data Types',
-//     time: 1537899180000,
-//     status: 0
-//   },
-//   {
-//     flagged: 0,
-//     id: 2,
-//     name: 'Panels & Softskills',
-//     time: 1537899180000,
-//     status: 1
-//   },
-//   {
-//     flagged: 0,
-//     id: 3,
-//     name: 'Overwatch Gameplay Trailers',
-//     time: 1537899180000,
-//     status: 0
-//   },
-//   {
-//     flagged: 0,
-//     id: 4,
-//     name: 'Lifecycle of a Green Bean',
-//     time: 1537899180000,
-//     status: 1
-//   }
-// ];
-
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
@@ -64,7 +36,7 @@ export class DashboardComponent implements OnInit {
   dataSource;
   topics = this.calendarService.getCalendarEventsByTrainerId(1);
   currentBatch;
-  headerColumns: string[] = ['time', 'flagged', 'sub',  'control'];
+  headerColumns: string[] = ['time', 'flagged', 'sub', 'control'];
   user: BamUser;
   batch;
   batchWeek: number;
@@ -73,19 +45,22 @@ export class DashboardComponent implements OnInit {
   firstName: string;
   lastName: string;
   visibilityIcon = [
-    {num: 0, icon: 'visibility_off' },
-    {num: 1, icon: 'visibility'}
+    { num: 0, icon: 'visibility_off' },
+    { num: 1, icon: 'visibility' }
   ];
   DashTitle = 'Today';
   todayIsOpen: boolean;
   topicsIsOpen: boolean;
   eventsThisWeek: CalendarEvent[];
+  curriculumDay: CurriculumDay[];
+  curriculumWeek: CurriculumWeek;
 
   constructor(
     private router: Router,
     private batchService: BatchService,
     private userService: UserService,
-    private calendarService: CalendarService
+    private calendarService: CalendarService,
+    private cs: CurriculumService
   ) { }
 
   /**
@@ -93,17 +68,43 @@ export class DashboardComponent implements OnInit {
   * data from the session storage and display both the user's personal info,
   * and info about the batch they are associated with.
   */
+
+  sortData() {
+    return this.curriculumDay.sort((a, b) => {
+      return <any>(b.dayNum) - <any>(a.dayNum);
+    });
+  }
+
   ngOnInit() {
-    
+
     this.user = JSON.parse(sessionStorage.getItem('user'));
     this.dataSource = this.topics;
+    this.currentBatch = this.batchService.getBatchByTrainer(1);
+    this.cs.getCurriculumByWeek(1).subscribe((week: any) => {
+      this.curriculumWeek = week;
+      this.curriculumDay = week.curriculumDay;
+      this.curriculumDay = this.curriculumDay.sort((n1, n2) => {
+        if (n1 > n2) {
+          return 1;
+        }
+
+        if (n1 < n2) {
+          return -1;
+        }
+
+        return 0;
+      });
+    });
+
+
+
     this.batchService.getBatchByTrainer(1).subscribe(
       result => {
-      this.currentBatch = result[0];
-    }
+        this.currentBatch = result[0];
+      }
     );
 
- //   this.eventsThisWeek = this.calendarService.getCalendarEventsByTrainerIdAndWeek(1, new Date());
+    //   this.eventsThisWeek = this.calendarService.getCalendarEventsByTrainerIdAndWeek(1, new Date());
 
     if (!this.user) {
       this.router.navigate(['login']);
@@ -142,21 +143,23 @@ export class DashboardComponent implements OnInit {
       this.todayIsOpen = true;
     }
   }
-  
-// function to select specific days of the week to display
-showThisDay() {
-  console.log('monday');
-  
-}
 
 
-// function for if something is completed or in progress
-  statusToggle(sub, yesNo) {
 
-    sub.statusId = yesNo;
+  // function to select specific days of the week to display
+  showDay(x) {
+    console.log(this.dataSource);
+
 
   }
-// function to flag an item
+
+
+
+  // function for if something is completed or in progress
+  statusToggle(sub, yesNo) {
+    sub.statusId = yesNo;
+  }
+  // function to flag an item
   flagRow(sub) {
 
     if (!sub.flaggedId) {
