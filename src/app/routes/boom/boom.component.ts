@@ -111,15 +111,12 @@ export class BoomComponent implements OnInit {
         this.getWeeklyProgress(i);
       }
     }
-    return;
   }
-
 
   /**
    * Updates pie chart data when users enter a value in the percentage input field
    *  @author Richard Iskra | Eddie Grays | 1806Spark-Jun25-USF-Java | Steven Kelsey
    */
-
   percent(event) {
     const prog: number[] = [0, 0];
     const percentile = event.target.value / 100;
@@ -146,14 +143,15 @@ export class BoomComponent implements OnInit {
       }
     }
     // update the data
-    let clone2 = JSON.parse(JSON.stringify(this.doughnutChartData));
-    clone2 = prog;
-    this.doughnutChartData = clone2;
+    let clone = JSON.parse(JSON.stringify(this.doughnutChartData));
+    clone = prog;
+    this.doughnutChartData = clone;
   }
 
   ngOnInit() {
     this.boomServ.getAllEvents().subscribe(x => { this.events = x; });
-    this.boomServ.getAllBatches().subscribe(x => { this.batches = x; this.boomServ.getAllCurriculums()
+    this.boomServ.getAllBatches().subscribe(x => {
+    this.batches = x; this.boomServ.getAllCurriculums()
       .subscribe(y => { this.curriculums = y; this.getData(); });
     });
   }
