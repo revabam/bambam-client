@@ -88,6 +88,7 @@ export class CreateCurriculumComponent implements OnInit {
           }
         }
       }
+
       curr.version = nameNum;
       if (curr !== undefined && curr !== null) {
         this.data['curriculums'].push(curr);
