@@ -44,6 +44,11 @@
                           <mat-icon color="secondary">visibility</mat-icon>
                         </button>
                       </span>
+                      <span *ngIf="curriculum.name === cname">
+                        <button mat-icon-button color="" (click)="copyCurriculum(curriculum)">
+                          <mat-icon svgIcon="copy"></mat-icon>
+                        </button>
+                      </span>
                       <span *ngIf="curriculum.name !== cname">
                         <button mat-icon-button color="" (click)="reactivateCurriculum(curriculum)">
                           <mat-icon color="">add</mat-icon>

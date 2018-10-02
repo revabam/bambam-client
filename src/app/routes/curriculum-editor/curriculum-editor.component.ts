@@ -9,6 +9,8 @@ import { MatDialog } from '@angular/material';
 import { CreateCurriculumComponent } from './create-curriculum/create-curriculum.component';
 import { CurriculumDayService } from '../../services/curriculum-day.service';
 import { weekdays } from 'moment';
+import { MatIconRegistry } from "@angular/material/icon";
+import { DomSanitizer } from "@angular/platform-browser";
 
 
 @Component({
@@ -31,12 +33,19 @@ export class CurriculumEditorComponent implements OnInit {
    * @author - Andrew Li | 1806-Jun-18-USF-Java | Wezley Singleton
    */
   constructor(
+    private matIconRegistry: MatIconRegistry,
+    private domSanitizer: DomSanitizer,
     private curriculumService: CurriculumService,
     private curriculumDayService: CurriculumDayService,
     private curriculumWeekService: CurriculumWeekService,
     private daySubTopicService: DaySubtopicService,
     public dialog: MatDialog,
-  ) { }
+  ) { 
+      this.matIconRegistry.addSvgIcon(
+        "copy",
+        this.domSanitizer.bypassSecurityTrustResourceUrl("../assets/copy_icon.svg")
+      );
+  }
 
   /*
    * We're invoking our services' fetch statements so
