@@ -33,7 +33,7 @@ export class SubTopicService {
    * The function used to fetch all the SubTopics from the server.
    */
   getAll(): Observable<SubTopic[]> {
-    return this.http.get<SubTopic[]>(environment.apiUrl + 'SubTopics', HTTP_OPTIONS);
+    return this.http.get<SubTopic[]>(environment.apiUrl + 'curriculums/subtopic', HTTP_OPTIONS);
   }
 
   /**
@@ -45,15 +45,7 @@ export class SubTopicService {
     const newSubTopic = new SubTopic();
     newSubTopic.name = name;
     newSubTopic.parentTopicId = parentId;
-    return this.http.post<SubTopic>(environment.apiUrl + 'SubTopics', JSON.stringify(newSubTopic), HTTP_OPTIONS);
-  }
-
-  /**
-   * Get SubTopics related to a particular topic
-   * @param id The id of the topic
-   */
-  getSubTopicByParentId(id: number): Observable<SubTopic[]> {
-    return this.http.get<SubTopic[]>(environment.apiUrl + `SubTopics?parentTopic_id=${id}`, HTTP_OPTIONS);
+    return this.http.post<SubTopic>(environment.apiUrl + 'curriculums/subtopic', JSON.stringify(newSubTopic), HTTP_OPTIONS);
   }
 
   /**
@@ -61,7 +53,7 @@ export class SubTopicService {
    */
   deactivate(subTopic: SubTopic): Observable<Object> {
     subTopic.name = this.deactivateName(subTopic.name);
-    return this.http.put(environment.apiUrl + `SubTopics/${subTopic.id}`,
+    return this.http.put(environment.apiUrl + `curriculums/subtopic/${subTopic.id}`,
       subTopic, HTTP_OPTIONS);
   }
 
@@ -70,7 +62,7 @@ export class SubTopicService {
    */
   reactivate(subTopic: SubTopic): Observable<Object> {
     subTopic.name = this.reactivateName(subTopic.name);
-    return this.http.put(environment.apiUrl + `SubTopics/${subTopic.id}`,
+    return this.http.put(environment.apiUrl + `curriculums/subtopic/${subTopic.id}`,
       subTopic, HTTP_OPTIONS);
   }
 

@@ -1,3 +1,4 @@
+import { Subject } from 'rxjs';
 import { DaySubtopicService } from './../../services/day-subtopic.service';
 import { CurriculumWeekService } from './../../services/curriculum-week.service';
 import { CurriculumDay } from './../../models/curriculum-day';
@@ -20,7 +21,7 @@ export class CurriculumEditorComponent implements OnInit {
   // Arrays of all the elements we're fetching from the server.
   curriculums: Curriculum[] = [];
   curriculumNames: string[] = [];
-
+  refresh: Subject<any> = new Subject();
   selectedCurriculum: Curriculum;
 
   /**
@@ -207,6 +208,14 @@ export class CurriculumEditorComponent implements OnInit {
         }
       }
     );
+    dialogRef.afterClosed().subscribe(curriculum => {
+      console.log('new curriculum');
+      if (curriculum !== null) {
+        this.curriculums.push(curriculum);
+        this.getUniqueNames();
+        this.refresh.next();
+      }
+    });
   }
 
   /**

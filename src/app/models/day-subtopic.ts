@@ -4,5 +4,5 @@ export class DaySubTopic {
     name: string;
     index: number;
     subTopicId: number;
-    parentTopicId: number;
+    parentTopicId?: number;
 }

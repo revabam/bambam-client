@@ -1,3 +1,4 @@
+import { Subject } from 'rxjs';
 import { CurriculumWeekService } from './../../../services/curriculum-week.service';
 import { CurriculumWeek } from './../../../models/curriculum-week';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
@@ -14,11 +15,13 @@ import { FormControl, Validators } from '@angular/forms';
   styleUrls: ['./create-curriculum.component.css']
 })
 export class CreateCurriculumComponent implements OnInit {
-
+  /**
+   * used to refresh angular materials
+   */
   curriculumName: string;
   numberOfWeeks: number;
   isValid = false;
-
+  curriculum: Curriculum;
   /**
    * @param dialogRef - The reference to the dialog using our
    * component, which allows us to close the dialog when we're
@@ -36,6 +39,7 @@ export class CreateCurriculumComponent implements OnInit {
     Validators.required,
     Validators.minLength(1)
   ]);
+
   constructor(
     public dialogRef: MatDialogRef<CreateVersionComponent>,
     @Inject(MAT_DIALOG_DATA) public data: object,
@@ -45,12 +49,13 @@ export class CreateCurriculumComponent implements OnInit {
 
   ngOnInit() {
   }
+
   /**
    * When the user decides to close the dialog.
    * @author - Chinedu Ozodi | 1806-Sep-18-USF-Java | Steven Kelsey
    */
   close(): void {
-    this.dialogRef.close();
+    this.dialogRef.close(this.curriculum);
   }
 
   /**
@@ -150,6 +155,10 @@ export class CreateCurriculumComponent implements OnInit {
           // Save the next week
           const weekNum = week.weekNum + 1;
           this.saveWeek(curriculum, weekNum);
+        } else {
+          // done with all days and weeks, refresh page
+          console.log('Resfreshing page');
+          // this.refresh.next();
         }
       }
     });
