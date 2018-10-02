@@ -1,4 +1,3 @@
-
 import { BamUser } from './../models/bam-user';
 import { Router } from '@angular/router';
 import { Injectable } from '@angular/core';
@@ -119,7 +118,6 @@ export class CognitoService {
         resultStream.next(err);
       }
     });
-
     return resultStream;
   }
   /**
@@ -159,15 +157,20 @@ export class CognitoService {
   }
 
 
+
+
   /**
-    * This methods checks to see the current user. It will check the Cognito User Pool to see
-    * the current logged in user and then return their token.
-    * @author Jasmine C. Onwuzulike
-    */
+   * This methods checks to see the current user. It will check the Cognito User Pool to see
+   * the current logged in user and then return their token.
+   * @author Jasmine C. Onwuzulike
+   */
   getLoggedInUser() {
     const cognitoUser = this.userPool.getCurrentUser();
-    return cognitoUser.getUsername();
+    if (cognitoUser != null) {
+      return cognitoUser.getUsername();
+    }
   }
+
 
   /**
    * This method will get the current logged in user's attributes.
@@ -212,4 +215,5 @@ export class CognitoService {
 
     return CognitoService.aList;
   }
+}
 }
