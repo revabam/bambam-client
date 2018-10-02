@@ -25,7 +25,7 @@
 <br>
 <div class="row justify-content-center mx-4 pb-4">
   <div class="col-md-2" *ngIf="showSideNav">
-    <mat-card style="border-radius: 20px 20px 20px 20px; box-shadow: 5px 5px 20px rgba(212, 52, 3, 0.555)" >
+    <mat-card id="currAll" style="border-radius: 20px 20px 20px 20px; box-shadow: 15px 15px 35px rgba(0, 0, 0, 0.555)" >
       <mat-card-header>
         <mat-card-title>
           <h4 style=" font-size: 1.7vw">Curriculums</h4>
@@ -33,14 +33,14 @@
       </mat-card-header>
       <mat-divider></mat-divider>
       <mat-list>
-        <mat-list-item *ngFor="let curriculum of curriculumEvents" mwlDraggable [dropData]="{event: curriculum}" style="position:relative; z-index: 10; font-weight: bold; font-size: 1.1vw">
+        <mat-list-item *ngFor="let curriculum of curriculumEvents" mwlDraggable [dropData]="{event: curriculum}" style="position:relative; z-index: 10; font-weight: bold; font-size: 1.1vw"><mat-icon>drag_indicator</mat-icon>
           {{curriculum.title}} : Version {{curriculum.version}}</mat-list-item>
       </mat-list>
     </mat-card>
-    <mat-card style="border-radius: 20px 20px 20px 20px;box-shadow: 5px 5px 20px rgba(212, 52, 3, 0.555)" class="mt-4">
+    <mat-card id="cEvent" style="border-radius: 20px 20px 20px 20px;box-shadow: 15px 15px 35px rgba(0, 0, 0, 0.555)" class="mt-4">
       <mat-card-header>
         <mat-card-title>
-          <h4 style="font-size: 1.6vw">Create Event</h4>
+          <h4 style="font-size: 1.5vw">Create Event</h4>
         </mat-card-title>
       </mat-card-header>
       <mat-divider></mat-divider>
@@ -58,7 +58,7 @@
     </mat-card>
   </div>
   <div class="col-md-10">
-    <mat-card style="border-radius: 20px 20px 20px 20px; box-shadow: 5px 5px 20px rgba(212, 52, 3, 0.555) " >
+    <mat-card style="border-radius: 20px 20px 20px 20px; box-shadow: 15px 15px 35px rgba(0, 0, 0, 0.555) " >
       <mat-card-header class="text-center text-center align-content-center align-center justify-content-center">
         <mat-toolbar style="background-color: rgba(0, 0, 0, 0)">
           <button mat-button  mat-icon-button aria-label="add" (click)="toggleSideNav()">

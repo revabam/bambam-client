@@ -21,12 +21,20 @@ $w100: 100%; // width
     background: $wColor;
 }
 
+#sideCard{
+    opacity: .8;
+}
+#sideCard:hover{
+    opacity: 1;
+}
+
 // specific mat-card editting 
 mat-card{
     background-color: #ffffffe7;
     color: black;
     font-weight: $weight;
     border-radius: 20px 20px 20px 20px;
+    opacity: .8;
 }
 
 // all mat-card-headers related to dashboard
@@ -47,6 +55,7 @@ mat-card-header{
     height: $w100;
     font-size: 1.3vw;
 }
+
 
 // button configuration for specific button editting
 button{
@@ -110,12 +119,18 @@ button{
 
 // (left)  time badge displayed in the today section of the dashboard
 #timeBadge1 {
+    width: 25%;
+    height: 35%;
     color: $wColor;
+    font-size: .7vw;
     background-color: rgb(71, 71, 71);
 }
 // (right)  time badge displayed in the today section of the dashboard
 #timeBadge2 {
+    width: 25%;
+    height: 35%;
     color: $wColor;
+    font-size: .7vw;
     background-color: orangered;
 }
 

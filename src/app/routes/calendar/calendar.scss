@@ -31,8 +31,30 @@ button{
 
 // specific mat-card editting 
 mat-card{
-  background-color: #ffffffe5;
+  background-color: #ffffffe1;
   color: black;
   font-weight: $weight; 
   box-shadow: rgba(0, 0, 0, 0.322);
+}
+
+#currAll{
+  background-color: #ffffffe1;
+  color: black;
+  font-weight: $weight; 
+  box-shadow: rgba(0, 0, 0, 0.322);
+  opacity: .8;
+}
+#currAll:hover{
+  opacity: 1;
+}
+
+#cEvent{
+  background-color: #ffffffe1;
+  color: black;
+  font-weight: $weight; 
+  box-shadow: rgba(0, 0, 0, 0.322);
+  opacity: .8;
+}
+#cEvent:hover{
+  opacity: 1;
 }

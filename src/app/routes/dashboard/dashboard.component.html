@@ -2,7 +2,7 @@
   <!-- WAGBar -->
   <div class="row">
     <div class="col-sm mb-3 mt-2">
-      <mat-card style="border-radius: 20px 20px 20px 20px; box-shadow: 5px 5px 20px rgba(212, 52, 3, 0.555)" id="card">
+      <mat-card style="border-radius: 20px 20px 20px 20px; box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.555)" id="card">
         <mat-card-header>
           <div class="p-2 w-100 bd-highlight">
             <h1 id="title">
@@ -25,15 +25,16 @@
         Batch
       </mat-slide-toggle>
     </span>
-    <button mat-button (click)="todayIsOpen=true ; topicsIsOpen=false" class="flex-fill btn btn-outline-warn text-monospace">View Today</button>
+    
+    <button mat-button (click)="todayIsOpen=true ; topicsIsOpen=false" class="flex-fill btn btn-outline-warn text-monospace" >View Today</button>
     <button mat-button (click)="topicsIsOpen=true ; todayIsOpen=false" class="flex-fill btn btn-outline-warn text-monospace">View Topics</button>
   </div>
   <!-- SIDENAV -->
-  <mat-sidenav-container style="border-radius: 20px 20px 20px 20px; opacity: .9; box-shadow: 5px 5px 20px rgba(212, 52, 3, 0.555)">
+  <mat-sidenav-container id="sideCard" style="border-radius: 20px 20px 20px 20px; box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.555)">
     <mat-sidenav #sidenav mode="side">
       <mat-card id="sideNav">
         <mat-card-header id="batchHeader">
-          {{batch.name}}
+          <!-- {{batch.name}} -->
         </mat-card-header>
         <mat-list dense>
           <mat-list-item id="bInfo">
@@ -60,7 +61,7 @@
         </mat-list>
       </mat-card>
     </mat-sidenav>
-    <mat-card style="border-radius: 20px 20px 20px 20px; opacity: .9; box-shadow: 5px 5px 20px rgba(212, 52, 3, 0.555)" *ngIf="todayIsOpen">
+    <mat-card style="border-radius: 20px 20px 20px 20px; opacity: .9; box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.555)" *ngIf="todayIsOpen">
       <mat-card-header class="justify-content-center border border-dark rounded">
         <div class="d-flex">
           <div>

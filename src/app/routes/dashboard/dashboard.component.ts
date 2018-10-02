@@ -98,7 +98,7 @@ export class DashboardComponent implements OnInit {
         need to check if the user is a trainer or not, But this is where
         you might want to do that.
       */
-      this.batchService.getBatchesByTrainerId(12).subscribe(
+      this.batchService.getBatchesByTrainerId(1).subscribe(
         result => {
           // If the result is not null and not empty
           if (result && result.length !== 0) {
@@ -127,6 +127,16 @@ export class DashboardComponent implements OnInit {
       this.todayIsOpen = true;
     }
   }
+
+    /*
+    Returns the color for the navbar buttons
+
+    @param  path  the path of the navbar button
+    @return       'primary' or '' depending on which page the user is on
+  */
+ getColor(path: string) {
+  return (`/${path}` === window.location.pathname) ? 'accent' : '';
+}
 
   statusToggle(index, yesNo) {
     console.log(index, yesNo);

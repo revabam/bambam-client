@@ -4,11 +4,15 @@
 /* If two seperate elements are together than they are related.
         e.g. mat-card-header and mat-card-content
 
+/**
+* @author Alexander Hudson | 1806-Spark | Steven Kelsey
+*/ 
+
 /* This is the styling for all mat-cards tags.
       Created this way to have ease of manipulation, if needed*/
 mat-card {
     border-style: outset;
-    border-width: 4px;
+    border-width: 4.5px;
     border-color: rgb(255, 94, 0);
     position: fixed;
 }
@@ -52,3 +56,5 @@ button{
     border-radius: 13px 13px 13px 13px;
     width: 9vw;
   }
+
+/* Rest of project implemented using SASS  */

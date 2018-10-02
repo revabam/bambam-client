@@ -68,6 +68,7 @@ import { CurriculumWeekComponent } from './routes/curriculum-editor/curriculum-w
     CurriculumWeekComponent
   ],
   imports: [
+    ChartsModule,
     NgbModule.forRoot(),
     HttpClientModule,
     MatAutocompleteModule,
@@ -118,8 +119,7 @@ import { CurriculumWeekComponent } from './routes/curriculum-editor/curriculum-w
     UserIdleModule.forRoot({idle: 600, timeout: 300, ping: 60})
   ],
   exports: [
-    NavbarComponent,
-    ChartsModule
+    NavbarComponent
   ],
   entryComponents: [
     CalendarModalComponent,
