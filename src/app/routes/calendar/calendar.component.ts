@@ -1,3 +1,4 @@
+import { Batch } from './../../models/batch';
 import * as $ from 'jquery';
 import * as moment from 'moment';
 import 'fullcalendar';
@@ -26,9 +27,21 @@ import { StartMondayModalComponent } from './start-monday-modal/start-monday-mod
 import { CurriculumWeek } from '../../models/curriculum-week';
 
 const colors: any = {
-  random: {
-    primary: '#ad2121',
-    secondary: '#FAE3E3'
+  blue: {
+    primary: 'blue',
+    secondary: 'blue'
+  },
+  red: {
+    primary: 'red',
+    second: 'red'
+  },
+  green: {
+    primary: 'green',
+    secondary: 'green'
+  },
+  yellow: {
+    primary: 'yellow',
+    secondary: 'yellow'
   }
 };
 /**
@@ -54,7 +67,7 @@ export class CustomCalendarEvent implements CalendarEvent<any> {
     afterEnd?: boolean;
   };
   draggable?: boolean;
-
+  description?: string;
   statusId: number;
   subTopicId?: number;
   flagged?: number;
@@ -109,10 +122,9 @@ export class CalendarComponent implements OnInit, DoCheck {
 
   actions: CalendarEventAction[] = [
     {
-      label: '<span><mat-icon>edit</mat-icon></span>',
+      label: '<span><mat-icon>change status</mat-icon></span>',
       onClick: ({ event }: { event: CalendarEvent }): void => {
-        this.events = this.events.filter(iEvent => iEvent !== event);
-        this.handleEvent('Deleted', event);
+        this.handleEvent('Status', event);
       }
     }
   ];
@@ -229,27 +241,17 @@ export class CalendarComponent implements OnInit, DoCheck {
   }
   /**
    * When the title of an event on the calendar is clicked, a modal is opened with relevant
-   * information about the event (curriculum, topics, etc.).
+   * information about the event (event name, description, time, etc.).
    * @param event The event that was clicked
+   *
+   * @author Alicia Douglas | Spark1806-USF-Java | Steven Kelsey
    */
-  openDialog(event: CalendarEvent): void {
+  openDialog(event: CustomCalendarEvent): void {
     /*
      * this.dialog is an injected dependency for the modal
      * The open method passes in a component that we'll use
      * in the modal.
      */
-    let eventTopic: Topic;
-    const custEvent: CustomCalendarEvent = <CustomCalendarEvent> event;
-    this.topicService.getTopicById(custEvent.subTopicId).subscribe(response => {
-      eventTopic = response;
-      let curriculum: Curriculum;
-      this.curriculums.forEach(curr => {
-        curr.topics.forEach(topic => {
-          if (topic = eventTopic) {
-            curriculum = curr;
-          }
-        });
-      });
       const dialogRef = this.dialog.open(CalendarModalComponent,
         /*
         * An object is passed in as the second parameter, which
@@ -259,18 +261,17 @@ export class CalendarComponent implements OnInit, DoCheck {
         {
           width: '600px',
           data: {
-            title: curriculum.name,
-            topics: curriculum.topics,
-            curriculum: curriculum,
-            version: curriculum.version,
-            numWeeks: curriculum.numberOfWeeks
+            title: event.title,
+            description: event.description,
+            startTime: event.start,
+            endTime: event.end,
+            statusId: event.statusId
           }
         }
       );
       dialogRef.afterClosed().subscribe(decision => {
         this.moveEvents(decision, event);
       });
-    });
   }
 
   /**
@@ -335,15 +336,15 @@ export class CalendarComponent implements OnInit, DoCheck {
   moveEvents(decision: number, event: CalendarEvent) {
     if (decision !== 0 && decision !== undefined) {
       this.activeDayIsOpen = false;
-      const eventStartDate = event.start.getDate();
+      const eventStartDate = new Date(event.start);
       for (const ev of this.events) {
-        if (ev.start.getDate() >= eventStartDate) {
+        if (ev.start >= eventStartDate) {
           ev.start.setDate(ev.start.getDate() + decision);
           ev.end.setDate(ev.end.getDate() + decision);
           /**
            * check if the new day falls on Saturday or Sunday
            */
-          if (ev.start.getDay() ===  6 || ev.start.getDay() === 0) {
+          if (ev.start.getDay() === 6 || ev.start.getDay() === 0) {
             ev.start.setDate(ev.start.getDate() + (2 * decision));
             ev.end.setDate(ev.end.getDate() + (2 * decision));
           }
@@ -365,9 +366,11 @@ export class CalendarComponent implements OnInit, DoCheck {
    */
   handleEvent(action: string, event: CalendarEvent): void {
     if (action === 'Clicked') {
-      this.openDialog(event);
+      this.openDialog(<CustomCalendarEvent> event);
     } else if (action === 'Edited') {
     } else if (action === 'Deleted') {
+    } else if (action === 'Status') {
+      this.changeStatus(event);
     } else {
       const id: number = +event.id;
       /**
@@ -378,8 +381,48 @@ export class CalendarComponent implements OnInit, DoCheck {
       if (event.start.getDate() !== event.end.getDate() || event.start.getMonth() !== event.end.getMonth()) {
         this.populateCalendar(id, event);
       }
+      this.persistEvents();
       this.refresh.next();
     }
+  }
+
+  /**
+   * changes status in sequence:
+   * 1 - planned - blue
+   * 2 - completed - green
+   * 3 - cancelled - red
+   * 4 - missed - yellow
+   * when event is in the past, it can't go into planned status
+   * @param event event to change status on
+   * @author Marcin Salamon | Spark1806-USF-Java | Steven Kelsey
+   */
+  changeStatus(event: CalendarEvent) {
+    const custEvent = <CustomCalendarEvent> event;
+      custEvent.statusId++;
+      if (custEvent.statusId === 5) {
+        custEvent.statusId = 1;
+      }
+      switch (custEvent.statusId) {
+        case 1:
+          custEvent.color = colors.blue;
+          if (event.start < new Date()) {
+            custEvent.statusId = 2;
+            custEvent.color = colors.green;
+          }
+          break;
+        case 2:
+          custEvent.color = colors.green;
+          break;
+        case 3:
+          custEvent.color = colors.red;
+          break;
+        case 4:
+          custEvent.color = colors.yellow;
+          break;
+        default:
+          break;
+      }
+      this.persistEvents();
   }
 
   /**
@@ -396,7 +439,7 @@ export class CalendarComponent implements OnInit, DoCheck {
           event.start = decision;
           decision = null;
           this.selectedCurriculum = curr;
-          this.dropEvent = <CustomCalendarEvent> event;
+          this.dropEvent = <CustomCalendarEvent>event;
         }
       });
     });
@@ -409,12 +452,38 @@ export class CalendarComponent implements OnInit, DoCheck {
    */
   generateStoredEvents() {
     for (const event of this.storedEvents) {
+      let color;
+      switch (event.statusId) {
+        case 1:
+          color = colors.blue;
+          break;
+        case 2:
+          color = colors.green;
+          break;
+        case 3:
+          color = colors.red;
+          break;
+        case 4:
+          color = colors.yellow;
+          break;
+        default:
+          break;
+      }
       this.events.push(
         {
+          id: event.id,
           start: new Date(event.startDateTime),
           end: new Date(event.endDateTime),
           title: event.title,
-          id: event.id,
+          description: event.description,
+          color: color,
+          actions: this.actions,
+          resizable: {
+            beforeStart: true,
+            afterEnd: true
+          },
+          draggable: true,
+          subTopicId: event.subTopicId,
           statusId: event.statusId,
           flagged: event.flagged
         });
@@ -434,7 +503,7 @@ export class CalendarComponent implements OnInit, DoCheck {
     for (const week of weeks) {
       for (const day of week.curriculumDays) {
         let hour = 9;
-        const subTopicsToday = day.subTopics.length;
+        const subTopicsToday = day.daySubTopics.length;
         const timeDifference = (7 / subTopicsToday);
         /**
          * if statement that skips weekends
@@ -444,7 +513,7 @@ export class CalendarComponent implements OnInit, DoCheck {
         } else if (subtopicStartTime.getDay() === 0) {
           subtopicStartTime.setDate(subtopicStartTime.getDate() + 1);
         }
-        for (const subtopic of day.subTopics) {
+        for (const subtopic of day.daySubTopics) {
           if (hour > 12 && hour < 13) {
             hour++;
           }
@@ -453,6 +522,7 @@ export class CalendarComponent implements OnInit, DoCheck {
            */
           subtopicStartTime.setHours(Math.floor(hour));
           subtopicStartTime.setMinutes((hour - Math.floor(hour)) * 60);
+          console.log(subtopicStartTime.toString());
           hour = hour + timeDifference;
           const endTime = new Date(subtopicStartTime);
           /**
@@ -473,7 +543,7 @@ export class CalendarComponent implements OnInit, DoCheck {
               beforeStart: true,
               afterEnd: true
             },
-            draggable: true,
+            draggable: false,
             subTopicId: subtopic.id,
             statusId: 1,
             flagged: 0
@@ -494,26 +564,30 @@ export class CalendarComponent implements OnInit, DoCheck {
    */
   persistEvents() {
     const eventsToPersist: CalEvent.CalendarEvent[] = [];
-
     for (const event of this.events) {
 
       const ev: CalEvent.CalendarEvent = {
+        id: +event.id,
         title: event.title,
         description: event.title,
         statusId: event.statusId,
         startDateTime: event.start,
         endDateTime: event.end,
-        subTopicId: +event.id,
+        subTopicId: event.subTopicId,
         trainerId: this.user.id,
         flagged: event.flagged
       };
 
       eventsToPersist.push(ev);
-
     }
     this.calendarService.addCalendarEvents(eventsToPersist).subscribe(eventRes => {
+      for (let i = 0; i < this.events.length; i++) {
+          this.events[i].id = eventRes[i].id;
+          this.events[i].draggable = true;
+      }
     });
   }
+
   /**
    * Custom event to be persisted.
    * @param event an event to be persisted

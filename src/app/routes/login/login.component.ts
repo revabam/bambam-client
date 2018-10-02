@@ -111,7 +111,7 @@ export class LoginComponent implements OnInit {
              * This method will take the user attributes from cognito and create a bam user.
              */
             const list :string[] = this.cognitoService.getUserAttributes();
-            // console.log(list);
+             console.log(list);
 
             // sessionStorage.setItem('user', JSON.stringify(user));
             // this.userService.user.next(user);
