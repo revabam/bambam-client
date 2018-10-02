@@ -21,6 +21,7 @@
 
 .subTopicName {
   padding-left: 24px;
+  width: 130px;
 }
 
 .cardsize:hover .closebtn {
