@@ -33,7 +33,7 @@ export class TopicService {
    * The function used to fetch all the topics from the server.
    */
   getAll(): Observable<Topic[]> {
-    return this.http.get<Topic[]>(environment.apiUrl + 'topics', HTTP_OPTIONS);
+    return this.http.get<Topic[]>(environment.apiUrl + 'curriculums/topic', HTTP_OPTIONS);
   }
 
   /**
@@ -41,7 +41,7 @@ export class TopicService {
    * @param name The name of the topic to be retrieved
    */
   getByName(name: string): Observable<Topic[]> {
-    return this.http.get<Topic[]>(environment.apiUrl + `topics?name=${name}&name=${this.deactivateName(name)}`, HTTP_OPTIONS);
+    return this.http.get<Topic[]>(environment.apiUrl + `curriculums/topic?name=${name}&name=${this.deactivateName(name)}`, HTTP_OPTIONS);
   }
 
   /**
@@ -52,7 +52,7 @@ export class TopicService {
   add(name: string): Observable<Topic> {
     const newTopic = new Topic();
     newTopic.name = name;
-    return this.http.post<Topic>(environment.apiUrl + 'topics', JSON.stringify(newTopic), HTTP_OPTIONS);
+    return this.http.post<Topic>(environment.apiUrl + 'curriculums/topic', JSON.stringify(newTopic), HTTP_OPTIONS);
   }
 
   /**
@@ -60,14 +60,14 @@ export class TopicService {
    * @param id Id of the topic
    */
   getTopicById(id: number): Observable<Topic> {
-    return this.http.get<Topic>(environment.apiUrl + `topics/${id}`, HTTP_OPTIONS);
+    return this.http.get<Topic>(environment.apiUrl + `curriculums/topic/${id}`, HTTP_OPTIONS);
   }
   /**
    * The function used to deactivate a topic in the server
    */
   deactivate(topic: Topic): Observable<Object> {
     topic.name = this.deactivateName(topic.name);
-    return this.http.put(environment.apiUrl + `topics/${topic.id}`,
+    return this.http.put(environment.apiUrl + `curriculums/topic/${topic.id}`,
       topic, HTTP_OPTIONS);
   }
 
@@ -76,7 +76,7 @@ export class TopicService {
    */
   reactivate(topic: Topic): Observable<Object> {
     topic.name = this.reactivateName(topic.name);
-    return this.http.put(environment.apiUrl + `topics/${topic.id}`,
+    return this.http.put(environment.apiUrl + `curriculums/topic/${topic.id}`,
       topic, HTTP_OPTIONS);
   }
 
