@@ -4,6 +4,7 @@ import { UserService } from '../../services/user.service';
 import { BamUser } from '../../models/bam-user';
 import { MatDialog } from '@angular/material';
 import { UserInfoComponent } from '../user-info/user-info.component';
+import { CognitoService } from '../../services/cognito.service';
 
 /**
  * Shows current page view and navigates to different page views of application.
@@ -24,25 +25,19 @@ export class NavbarComponent implements OnInit {
   constructor(
     private userService: UserService,
     private router: Router,
-    public modal: MatDialog
+    public modal: MatDialog,
+    public cognito: CognitoService
   ) { }
 
   ngOnInit() {
-    this.userService.user.subscribe(
-      user => {
-        // If user is not logged in, don't show the navbar
-        this.show = user !== null;
-
-        if (!this.show && JSON.parse(sessionStorage.getItem('user'))) {
-          this.userService.user.next(JSON.parse(sessionStorage.getItem('user')));
-        } else if (!this.show && !JSON.parse(sessionStorage.getItem('user'))) {
-          if (window.location.pathname !== '/login' && window.location.pathname !== '/register') {
-            this.router.navigate(['login']);
-          }
-        }
+    this.user = this.cognito.getUserAttributes();
+    if (!this.user) {
+      this.router.navigate(['login']);
+    } else if (!this.show && !this.user) {
+      if (window.location.pathname !== '/login' && window.location.pathname !== '/register') {
+        this.router.navigate(['login']);
       }
-    );
-    this.user = JSON.parse(sessionStorage.getItem('user'));
+    }
   }
 
   /*
@@ -65,7 +60,6 @@ export class NavbarComponent implements OnInit {
 
     // Push null onto the user subject so that the navbar disappears
     this.userService.user.next(null);
-
     this.router.navigate(['login']);
   }
 

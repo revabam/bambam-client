@@ -9,6 +9,8 @@ import { MatDialog } from '@angular/material';
 import { CreateCurriculumComponent } from './create-curriculum/create-curriculum.component';
 import { CurriculumDayService } from '../../services/curriculum-day.service';
 import { weekdays } from 'moment';
+import { MatIconRegistry } from '@angular/material/icon';
+import { DomSanitizer } from '@angular/platform-browser';
 
 
 @Component({
@@ -31,12 +33,19 @@ export class CurriculumEditorComponent implements OnInit {
    * @author - Andrew Li | 1806-Jun-18-USF-Java | Wezley Singleton
    */
   constructor(
+    private matIconRegistry: MatIconRegistry,
+    private domSanitizer: DomSanitizer,
     private curriculumService: CurriculumService,
     private curriculumDayService: CurriculumDayService,
     private curriculumWeekService: CurriculumWeekService,
     private daySubTopicService: DaySubtopicService,
     public dialog: MatDialog,
-  ) { }
+  ) {
+    this.matIconRegistry.addSvgIcon(
+      'copy',
+      this.domSanitizer.bypassSecurityTrustResourceUrl('../assets/copy_icon.svg')
+    );
+  }
 
   /*
    * We're invoking our services' fetch statements so
@@ -61,6 +70,33 @@ export class CurriculumEditorComponent implements OnInit {
     });
   }
 
+  // here is where the master version of the curriculum is copied so that it can be edited
+  copyCurriculum(curriculum: Curriculum) {
+    const copiedCurriculum: Curriculum = {
+      name: curriculum.name,
+      version: this.highestVersion(curriculum.name),
+      creatorId: curriculum.creatorId,
+      status: 1,
+      dateCreated: new Date(),
+      numberOfWeeks: curriculum.numberOfWeeks,
+      topics: curriculum.topics,
+      curriculumWeeks: curriculum.curriculumWeeks
+    };
+    this.curriculums.push(copiedCurriculum);
+    this.curriculumService.post(copiedCurriculum).subscribe(result => {
+      copiedCurriculum.id = result.id;
+    });
+  }
+
+  highestVersion(name: string): number {
+    let count = 1;
+    for (const curriculum of this.curriculums) {
+      if (curriculum.name === name) {
+        count++;
+      }
+    }
+    return count;
+  }
   /**
    * Gets us distinct curriculum names from the list of all
    * curriculums
