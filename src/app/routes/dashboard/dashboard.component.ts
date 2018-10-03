@@ -130,10 +130,6 @@ export class DashboardComponent implements OnInit {
 
   ngOnInit() {
      this.user = JSON.parse(sessionStorage.getItem('user'));
-     console.log('user in session...');
-     console.log(this.user);
-    console.log('after login');
-    console.log(this.user);
     this.calendarService.getCalendarEventsByTrainerId(1).subscribe(response => {
       this.calendarEvents = response;
       this.currentWeekEvents = this.getCurrentWeekEvents(this.calendarEvents);
@@ -148,8 +144,6 @@ export class DashboardComponent implements OnInit {
     );
 
     this.cs.getCurriculumByWeek(1).subscribe((values: CurriculumWeek) => {
-      console.log('values');
-      console.log(values);
       this.curriculumWeek = values;
       this.curriculumDay = values.curriculumDays;
       this.curriculumDay = this.curriculumDay.sort((n1, n2) => {
