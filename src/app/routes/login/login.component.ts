@@ -18,13 +18,15 @@ import { CognitoService } from '../../services/cognito.service';
   templateUrl: './login.component.html',
   styleUrls: ['./login.scss']
 })
-
 export class LoginComponent implements OnInit {
   // This is used to display non-error related information to the user
   infoMessage: string;
 
   // This is used to display errors to the user
   errorMessage: string;
+
+  // This is used to get the user.
+  bamUser: BamUser;
 
   // Build the form controls.
   loginForm = new FormBuilder().group({
@@ -57,8 +59,7 @@ export class LoginComponent implements OnInit {
   * is logged in and, if they are, sends them to the dashboard page.
   */
   ngOnInit() {
-    const user = JSON.parse(sessionStorage.getItem('user'));
-    if (user.id) {
+    if (sessionStorage.getItem('user')) {
       this.userService.user.next(JSON.parse(sessionStorage.getItem('user')));
       this.router.navigate(['dashboard']);
     }
@@ -115,12 +116,15 @@ export class LoginComponent implements OnInit {
               lastName: result.payload.family_name
             };
 
+            console.log('User');
+            console.log(user);
             /**
              * This method will take the user attributes from cognito and create a bam user.
              */
+            this.bamUser = user;
             this.userService.user.next(user);
             this.cognitoService.bamUser = user;
-            sessionStorage.setItem('user', JSON.stringify(user));
+            console.log(this.bamUser);
             this.router.navigate(['dashboard']);
           }
         }

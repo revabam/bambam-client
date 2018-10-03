@@ -20,6 +20,8 @@ export class NavbarComponent implements OnInit {
 
   user: BamUser;
 
+  show = true;
+
   constructor(
     private userService: UserService,
     private router: Router,
@@ -28,6 +30,14 @@ export class NavbarComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.user = this.cognito.getUserAttributes();
+    if (!this.user) {
+      this.router.navigate(['login']);
+    } else if (!this.show && !this.user) {
+      if (window.location.pathname !== '/login' && window.location.pathname !== '/register') {
+        this.router.navigate(['login']);
+      }
+    }
   }
 
   /*
@@ -47,6 +57,7 @@ export class NavbarComponent implements OnInit {
   logout() {
     // Clear the user out of session strorage
     sessionStorage.clear();
+
     // Push null onto the user subject so that the navbar disappears
     this.userService.user.next(null);
 
