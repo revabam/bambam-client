@@ -20,13 +20,13 @@ import { CurriculumDay } from '../../models/curriculum-day';
  * @author Joey Shannon | Drake Mapel | 1806-Spark | Steven Kelsey
  */
 
-
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent implements OnInit {
+  headerColumns: string[] = ['time', 'flag', 'sub', 'control'];
   dataSource;
   dayInfo;
   Today = new Date().setDate(new Date().getDate() + 1);
@@ -35,8 +35,15 @@ export class DashboardComponent implements OnInit {
   calendarEvents = null;
   selectedDate = this.cs.getCurriculumByWeek(1);
   currentBatch;
+
   headerColumns: string[] = ['time', 'flagged', 'sub', 'control'];
-  user: BamUser;
+  user: BamUser = {
+    id: '',
+    firstName: '',
+    lastName: '',
+    email: ''
+  }
+
   batch;
   batchWeek: number;
   percentCompletion: number;
@@ -50,6 +57,7 @@ export class DashboardComponent implements OnInit {
   DashTitle = 'Today';
   todayIsOpen: boolean;
   topicsIsOpen: boolean;
+  list: string[];
   eventsThisWeek: CalendarEvent[];
   curriculumDay: CurriculumDay[];
   curriculumWeek: CurriculumWeek[];
@@ -178,7 +186,8 @@ export class DashboardComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.user = JSON.parse(sessionStorage.getItem('user'));
+
+     this.user = this.cognito.getUserAttributes();
     this.calendarService.getCalendarEventsByTrainerId(this.user.id).subscribe(response => {
       this.calendarEvents = response;
       this.currentWeekEvents = this.getCurrentWeekEvents(this.calendarEvents);
@@ -220,31 +229,47 @@ export class DashboardComponent implements OnInit {
       */
       this.batchService.getBatchesByTrainerId(this.user.id).subscribe(
         result => {
-          // If the result is not null and not empty
-          if (result && result.length !== 0) {
-            // Get the most recent batch
-            this.batch = result.sort(this.compareBatches)[result.length - 1];
-
-            // Figure out what week the batch is in
-            this.batchWeek = this.calculateWeeksBetween(new Date(this.batch.startDate), new Date()) + 1;
-            const totalWeeks = this.calculateWeeksBetween(new Date(this.batch.startDate), new Date(this.batch.endDate));
-
-            // Calculate the % progress
-            const totalTime = new Date(this.batch.endDate).getTime() - new Date(this.batch.startDate).getTime();
-            const elapsedTime = new Date().getTime() - new Date(this.batch.startDate).getTime();
-            this.percentCompletion = elapsedTime / totalTime;
-
-            // Percent completion must be between 0 and 1
-            this.percentCompletion = (this.percentCompletion < 0) ? 0 : this.percentCompletion;
-            this.percentCompletion = (this.percentCompletion > 1) ? 1 : this.percentCompletion;
-
-            // Batch week must be > 0 and < the total number of weeks
-            this.batchWeek = (this.batchWeek < 0) ? 1 : this.batchWeek;
-            this.batchWeek = (this.batchWeek > totalWeeks) ? totalWeeks : this.batchWeek;
-          }
+          this.currentBatch = result[0];
         }
       );
-      this.todayIsOpen = true;
+
+      if (!this.user) {
+        this.router.navigate(['login']);
+      } else {
+        this.cognito.getUserAttributes();
+        /*
+          In our sprint, only trainers can use the program so there is no
+          need to check if the user is a trainer or not, But this is where
+          you might want to do that.
+        */
+        this.batchService.getBatchesByTrainerId(1).subscribe(
+          result => {
+            // If the result is not null and not empty
+            if (result && result.length !== 0) {
+              // Get the most recent batch
+              this.batch = result.sort(this.compareBatches)[result.length - 1];
+
+              // Figure out what week the batch is in
+              this.batchWeek = this.calculateWeeksBetween(new Date(this.batch.startDate), new Date()) + 1;
+              const totalWeeks = this.calculateWeeksBetween(new Date(this.batch.startDate), new Date(this.batch.endDate));
+
+              // Calculate the % progress
+              const totalTime = new Date(this.batch.endDate).getTime() - new Date(this.batch.startDate).getTime();
+              const elapsedTime = new Date().getTime() - new Date(this.batch.startDate).getTime();
+              this.percentCompletion = elapsedTime / totalTime;
+
+              // Percent completion must be between 0 and 1
+              this.percentCompletion = (this.percentCompletion < 0) ? 0 : this.percentCompletion;
+              this.percentCompletion = (this.percentCompletion > 1) ? 1 : this.percentCompletion;
+
+              // Batch week must be > 0 and < the total number of weeks
+              this.batchWeek = (this.batchWeek < 0) ? 1 : this.batchWeek;
+              this.batchWeek = (this.batchWeek > totalWeeks) ? totalWeeks : this.batchWeek;
+            }
+          }
+        );
+        this.todayIsOpen = true;
+      }
     }
   }
 
@@ -386,4 +411,5 @@ export class DashboardComponent implements OnInit {
     );
     this.editing = false;
   }
+
 }

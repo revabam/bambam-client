@@ -4,6 +4,11 @@ import { TestBed, inject } from '@angular/core/testing';
 
 import { BatchService } from './batch.service';
 
+/**
+ * Here we are testing the methods within calender service
+ * @name calenderTest
+ * @author Chris Holmes | Spark1806-USF-Java | Steven Kelsey
+ */
 describe('BatchService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
@@ -15,6 +20,10 @@ describe('BatchService', () => {
     expect(service).toBeTruthy();
   }));
 
+  /**
+   * getBatchesByTrainerId Test
+   * @param id
+   */
   it('should return a trainer by ID', function() {
     const fakeHandle = { handle: () => new Observable<HttpEvent<any>>()};
     const trainer = new BatchService(new HttpClient(fakeHandle as HttpHandler));
@@ -22,6 +31,11 @@ describe('BatchService', () => {
     trainer.getBatchesByTrainerId(1);
     expect(trainer.getBatchesByTrainerId).toBeDefined();
   });
+
+  /**
+   * createBatch Test
+   * @param name
+   */
   it('should create a batch ', function() {
     const batch = new BatchService(null);
     spyOn(batch, 'createBatch');
