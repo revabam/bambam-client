@@ -1,11 +1,10 @@
 <br>
 <div class="p-5 m-auto">
-  <div>
-    <div>
-      <mat-tab-group style="width: 21%">
+  <div class="row">
+    <div class="col-sm-3 mt-2">
+      <mat-tab-group>
         <mat-tab label="Curriculum">
-          <h4 class="m-0 p-0" style="font-size: 2.5vw; color: white">Curriculum</h4>
-          <mat-card id="curr">
+          <mat-card>
             <mat-card-header>
               <mat-toolbar class="panel-bar">
                 <span style="flex: 1 1 auto"></span>
@@ -26,13 +25,13 @@
               <mat-accordion>
                 <mat-expansion-panel *ngFor="let cname of curriculumNames">
                   <mat-expansion-panel-header>
-                    <mat-panel-title style="font-weight: bold">
+                    <mat-panel-title>
                       {{cname}}
                     </mat-panel-title>
                   </mat-expansion-panel-header>
                   <div *ngFor="let curriculum of getCurriculumsByName(cname)">
                     <mat-toolbar>
-                      <span *ngIf="curriculum.name === cname" >
+                      <span *ngIf="curriculum.name === cname">
                         Version: {{curriculum.version}}
                       </span>
                       <span *ngIf="curriculum.name !== cname">
@@ -63,124 +62,6 @@
           </mat-card>
         </mat-tab>
         <mat-tab label="Topic Pool">
-          
-          <h4 style="font-size: 2vw; text-align: right; color: white">Topic Tool</h4>
-          <mat-card id="curr">
-            <mat-card-header>
-              <mat-toolbar>
-                <span style="flex: 1 1 auto"></span>
-                <mat-form-field style="width: 12vw" class="my-0 pb-0">
-                  <input style="width: 1vw" matInput type="text" placeholder="Search Subtopic" [(ngModel)]="topicSearch">
-                  <button mat-button *ngIf="value" matSuffix mat-icon-button aria-label="Clear" (click)="value=''">
-                    <mat-icon>close</mat-icon>
-                  </button>
-                </mat-form-field>
-                <span>
-                  <button mat-button mat-icon-button aria-label="add" (click)="openNewDialog()">
-                    <mat-icon>add</mat-icon>
-                  </button>
-                </span>
-                <span style="flex: 0.3 1 auto"></span>
-              </mat-toolbar>
-            </mat-card-header>
-            <mat-card-content>
-              <mat-accordion *ngIf="topicSearch.length < 2">
-                <mat-card-content>
-                  <div *ngFor="let topic of topics">
-                    <mat-expansion-panel [disabled]="topic.name !== topicService.reactivateName(topic.name)" [expanded]="topic.name === topicService.reactivateName(topic.name) &amp;&amp; isExpanded(topic.id)"
-                      (opened)="expandTopic(topic.id)" (closed)="collapseTopic(topic.id)">
-                      <mat-expansion-panel-header>
-                        <mat-panel-title *ngIf="topic.name === topicService.reactivateName(topic.name)">
-                          <span style="font-weight: bold">
-                            {{topic.name}}
-                          </span>
-                          <span class="fill-remaining-space">
-                          </span>
-                          <span>
-                            <button mat-icon-button (click)="deactivateTopic(topic)">
-                              <mat-icon>clear</mat-icon>
-                            </button>
-                          </span>
-
-                        </mat-panel-title>
-                        <mat-panel-title *ngIf="topic.name !== topicService.reactivateName(topic.name)">
-                          <span>
-                            <del>{{topicService.reactivateName(topic.name)}}</del>
-                          </span>
-                          <span class="fill-remaining-space">
-                          </span>
-                          <span>
-                            <button mat-icon-button (click)="reactivateTopic(topic)">
-                              <mat-icon>add</mat-icon>
-                            </button>
-                          </span>
-                        </mat-panel-title>
-                      </mat-expansion-panel-header>
-                      <div *ngFor="let subtopic of getSubtopicsByTopic(topic)">
-                        <div *ngIf="(!topicSearch || ((subtopic.name | lowercase).indexOf(topicSearch | lowercase) >= 0)) &amp;&amp; (subtopicService.reactivateName(subtopic.name) === subtopic.name)">
-                          <mat-toolbar>
-                            <span {{(subtopic.name | slice:0:50) + ((subtopic.name.length> 50) ? "..." : "")}}</span>
-                            <span class="fill-remaining-space"></span>
-                            <span>
-                              <button mat-icon-button (click)="deactivateSubtopic(subtopic)">
-                                <mat-icon>clear</mat-icon>
-                              </button>
-                            </span>
-                          </mat-toolbar>
-                        </div>
-                        <div *ngIf="(!topicSearch || ((subtopic.name | lowercase).indexOf(topicSearch | lowercase) >= 0)) &amp;&amp; (subtopicService.reactivateName(subtopic.name) !== subtopic.name)">
-                          <mat-toolbar>
-                            <span>
-                              <del>{{ subtopicService.reactivateName(subtopic.name) }}</del>
-                            </span>
-                            <span class="fill-remaining-space"> </span>
-                            <span>
-                              <button mat-icon-button (click)="reactivateSubtopic(subtopic)">
-                                <mat-icon>add</mat-icon>
-                              </button>
-                            </span>
-                          </mat-toolbar>
-                        </div>
-                      </div>
-                      <div *ngIf="getSubtopicsByTopic(topic).length == 0">
-                        No Subtopics for {{ topic.name }}
-                      </div>
-                    </mat-expansion-panel>
-                  </div>
-                </mat-card-content>
-              </mat-accordion>
-              <mat-accordion *ngIf="topicSearch.length > 1">
-                <mat-card-content>
-                  <div *ngFor="let topic of searchTopics(topicSearch)">
-                    <span>
-                      {{topic.name}}
-                    </span>
-                    <span class="fill-remaining-space">
-                    </span>
-                    <span>
-                      <button mat-icon-button (click)="deactivateTopic(topic)">
-                        <mat-icon id="btnC">clear</mat-icon>
-                      </button>
-                    </span>
-                    <mat-list *ngIf="hasTopic(topicSearch, topic)">
-                      <mat-list-item *ngFor="let subtopic of searchSubtopics(topicSearch)">
-                        <span>
-                          {{subtopic.name}}
-                        </span>
-                        <span class="fill-remaining-space">
-                        </span>
-                        <span>
-                          <button mat-icon-button (click)="deactivateTopic(topic)">
-                            <mat-icon>clear</mat-icon>
-                          </button>
-                        </span>
-                      </mat-list-item>
-                    </mat-list>
-                  </div>
-                </mat-card-content>
-              </mat-accordion>
-            </mat-card-content>
-          </mat-card>
           <app-topic-pool></app-topic-pool>
         </mat-tab>
       </mat-tab-group>
