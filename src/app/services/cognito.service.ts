@@ -11,12 +11,7 @@ import { BehaviorSubject } from 'rxjs';
 export class CognitoService {
 
   private userPool: AWSCognito.CognitoUserPool;
-  public bamUser: BamUser = {
-    id: '',
-    firstName: '',
-    lastName: '',
-    email: ''
-  };
+  public bamUser: BamUser;
 
 
   /**

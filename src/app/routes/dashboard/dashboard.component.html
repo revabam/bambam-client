@@ -17,10 +17,10 @@
           </mat-card-content>
         </mat-card>
         <!-- Button Bar Content -->
-        <mat-grid-list cols="7" rowHeight="2:1" class='border border-dark'>
+        <mat-grid-list cols="7" rowHeight="2:1" class='border border-dark' *ngIf="curriculumDay">
           <mat-grid-tile class='d-flex justify-content-center' *ngFor='let day of curriculumDay; let i = index;'>
 
-            <button type="button" class="btn btn-outline-primary" [class.active]="dayArr[day.dayNum].selected">
+            <button type="button" class="btn btn-outline-primary" [class.active]="dayArr[day.dayNum].selected" >
               <span *ngFor='let date of dayArr' (click)='showDay(date.dayNum) ; todayIsOpen=false ;'>
                 <span *ngIf='date.dayNum == day.dayNum'>
                   {{date.today}}
@@ -51,7 +51,7 @@
   <!-- SIDENAV -->
   <mat-sidenav-container id="sideCard" style="border-radius: 20px 20px 20px 20px; box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.555)">
     <mat-sidenav #sidenav mode="side">
-      <mat-card id="sideNav">
+      <mat-card id="sideNav" *ngIf="currentBatch">
         <mat-card-header id="batchHeader">
           <!-- {{currentBatch.name}} -->
           1806-June18-USF-Java4

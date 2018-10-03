@@ -140,7 +140,6 @@ import {DragDropModule} from '@angular/cdk/drag-drop';
     DialogViewComponent
   ],
   providers: [
-    NavbarComponent,
     UserService,
     CognitoService,
     BatchService,

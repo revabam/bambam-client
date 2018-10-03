@@ -20,8 +20,6 @@ export class NavbarComponent implements OnInit {
 
   user: BamUser;
 
-  public show = true;
-
   constructor(
     private userService: UserService,
     private router: Router,
