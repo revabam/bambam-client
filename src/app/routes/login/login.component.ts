@@ -1,5 +1,4 @@
 import { BamUser } from 'src/app/models/bam-user';
-import { BamUser } from './../../models/bam-user';
 import { Component, OnInit, ViewChild, TemplateRef } from '@angular/core';
 import { UserService } from '../../services/user.service';
 import { Router } from '@angular/router';
