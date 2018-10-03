@@ -1,18 +1,20 @@
-<mat-card>
-    <mat-card-header>
+<mat-card style="border-radius: 13px 13px 13px 13px;">
+    <mat-card-header style="margin-left: -2vw" >
       <mat-toolbar class="panel-bar">
+          <span>
+              <h4 class="m-0 p-0" style="font-size: 2vw;">Topics</h4>
+            </span>
         <span style="flex: 0.3 1 auto"></span>
-        <!-- <h4 class="m-0 p-0" style="font-size: 140%;">Topic Pool</h4> -->
-        <span style="flex: 1 1 auto"></span>
-        <mat-form-field class="my-0 pb-0" style="color: grey;">
-          <input style="color: white;" matInput color="accent" type="text" placeholder="Search Subtopic"
+        <span style="flex: 1 1 auto"></span><br>
+        <mat-form-field class="my-0 pb-0">
+          <input style="color: rgb(0, 0, 0);" matInput type="text" placeholder="Search Subtopic"
             [(ngModel)]="topicSearch">
           <button mat-button *ngIf="value" matSuffix mat-icon-button aria-label="Clear" (click)="value=''">
             <mat-icon>close</mat-icon>
           </button>
         </mat-form-field>
         <span>
-          <button mat-button color="accent" mat-icon-button aria-label="add" (click)="openNewDialog()">
+          <button mat-button mat-icon-button aria-label="add" (click)="openNewDialog()">
             <mat-icon>add</mat-icon>
           </button>
         </span>
@@ -28,14 +30,14 @@
               <mat-expansion-panel-header>
                 <mat-panel-title *ngIf="topic.name === topicService.reactivateName(topic.name)">
 
-                  <span>
+                  <span style="font-weight: bold; font-size: .9vw">
                     {{topic.name}}
                   </span>
                   <span class="fill-remaining-space">
                   </span>
                   <span>
-                    <button mat-icon-button color="primary" (click)="deactivateTopic(topic)">
-                      <mat-icon color="primary">clear</mat-icon>
+                    <button mat-icon-button  (click)="deactivateTopic(topic)">
+                      <mat-icon >clear</mat-icon>
                     </button>
                   </span>
 
@@ -57,18 +59,18 @@
                 <span cdkDrag>
                   <div *ngIf="(!topicSearch || ((subtopic.name | lowercase).indexOf(topicSearch | lowercase) >= 0)) &amp;&amp; (subtopicService.reactivateName(subtopic.name) === subtopic.name)">
                     <mat-toolbar>
-                      <span> {{(subtopic.name | slice:0:20) + ((subtopic.name.length > 20) ? "..." : "")}}</span>
+                      <span> <mat-icon>drag_indicator</mat-icon> {{(subtopic.name | slice:0:20) + ((subtopic.name.length > 20) ? "..." : "")}}</span>
                       <span class="fill-remaining-space"></span>
                       <span>
                         <button mat-icon-button color="" (click)="deactivateSubtopic(subtopic)">
-                          <mat-icon color="primary">clear</mat-icon>
+                          <mat-icon >clear</mat-icon>
                         </button>
                       </span>
                     </mat-toolbar>
                   </div>
                   <div *ngIf="(!topicSearch || ((subtopic.name | lowercase).indexOf(topicSearch | lowercase) >= 0)) &amp;&amp; (subtopicService.reactivateName(subtopic.name) !== subtopic.name)">
                     <mat-toolbar>
-                      <span>
+                      <span >
                         <del>{{ subtopicService.reactivateName(subtopic.name) }}</del>
                       </span>
                       <span class="fill-remaining-space"> </span>
@@ -97,8 +99,8 @@
             <span class="fill-remaining-space">
             </span>
             <span>
-              <button mat-icon-button color="primary" (click)="deactivateTopic(topic)">
-                <mat-icon color="primary">clear</mat-icon>
+              <button mat-icon-button  (click)="deactivateTopic(topic)">
+                <mat-icon >clear</mat-icon>
               </button>
             </span>
             <mat-list *ngIf="hasTopic(topicSearch, topic)">
@@ -109,8 +111,8 @@
                 <span class="fill-remaining-space">
                 </span>
                 <span>
-                  <button mat-icon-button color="primary" (click)="deactivateTopic(topic)">
-                    <mat-icon color="primary">clear</mat-icon>
+                  <button mat-icon-button  (click)="deactivateTopic(topic)">
+                    <mat-icon >clear</mat-icon>
                   </button>
                 </span>
               </mat-list-item>

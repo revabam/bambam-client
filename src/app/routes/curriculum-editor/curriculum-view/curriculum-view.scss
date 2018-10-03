@@ -4,13 +4,9 @@ $radius: 13px 13px 13px 13px; // border radius
 // Specific mat-card editting
 mat-card{
     position: fixed;
-    width: 70%;
-    margin-left: 23vw;
-    margin-top: -1vw;
+    width: 67%;
+    margin-left: -5vw;
+    margin-top: 2.8vw;
     border-radius: $radius;
-    opacity: .9;
     font-size: 4vw;
-}
-mat-card:hover{
-    opacity: 1;
 }

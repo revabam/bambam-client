@@ -44,7 +44,7 @@ export class NavbarComponent implements OnInit {
     Returns the color for the navbar buttons
 
     @param  path  the path of the navbar button
-    @return       'primary' or '' depending on which page the user is on
+    @return       'accent' or '' depending on which page the user is on
   */
   getColor(path: string) {
     return (`/${path}` === window.location.pathname) ? 'accent' : '';

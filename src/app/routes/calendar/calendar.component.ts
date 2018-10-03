@@ -60,12 +60,12 @@ export class CustomCalendarEvent implements CalendarEvent<any> {
 export class CalendarComponent implements OnInit, DoCheck {
   colors: any = {
     blue: {
-      primary: '#45c1f7',
-      secondary: '#45c1f7'
+      primary: 'blue',
+      secondary: 'lightblue'
     },
     red: {
       primary: '#e23434',
-      second: '#e23434'
+      secondary: '#e23434'
     },
     green: {
       primary: 'green',
