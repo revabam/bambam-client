@@ -11,13 +11,13 @@ import { BehaviorSubject } from 'rxjs';
 export class CognitoService {
 
   private userPool: AWSCognito.CognitoUserPool;
-  private bamUser: BamUser = {
+  public bamUser: BamUser = {
     id: '',
     firstName: '',
     lastName: '',
     email: ''
   };
-  private aList: string[];
+
 
   /**
   * When the cognito service is intialized, it creates the user pool.
@@ -119,6 +119,7 @@ export class CognitoService {
     cognitoUser.authenticateUser(authenticationDetails, {
       onSuccess: function(session: AWSCognito.CognitoUserSession) {
         resultStream.next(session.getIdToken());
+        console.log(session.getIdToken());
       },
       onFailure: function(err: any) {
         resultStream.next(err);
@@ -178,8 +179,10 @@ export class CognitoService {
    */
   getUserAttributes(): BamUser {
     const cognitoUser = this.userPool.getCurrentUser();
+    console.log('user pool' + cognitoUser);
 
     if (cognitoUser != null) {
+      console.log('no user in pool');
       cognitoUser.getSession(function (err, session) {
         if (err) {
           alert(err);
@@ -193,7 +196,7 @@ export class CognitoService {
         });
       });
     }
-
+    sessionStorage.setItem('user', JSON.stringify(this.bamUser));
     return this.bamUser;
   }
 }
