@@ -1,3 +1,4 @@
+import { BamUser } from './../../models/bam-user';
 import { Component, OnInit, ViewChild, TemplateRef } from '@angular/core';
 import { UserService } from '../../services/user.service';
 import { Router } from '@angular/router';
@@ -23,6 +24,9 @@ export class LoginComponent implements OnInit {
 
   // This is used to display errors to the user
   errorMessage: string;
+
+  // This is used to get the user.
+  bamUser: BamUser;
 
   // Build the form controls.
   loginForm = new FormBuilder().group({
@@ -104,8 +108,11 @@ export class LoginComponent implements OnInit {
               this.errorMessage = 'Invalid credentials';
               return;
             }
-            // sessionStorage.setItem('user', JSON.stringify(result));
-            this.cognitoService.getUserAttributes();
+            /**
+             * This method will take the user attributes from cognito and create a bam user.
+             */
+            this.bamUser = this.cognitoService.getUserAttributes();
+            console.log(this.bamUser);
             this.router.navigate(['dashboard']);
           }
         }

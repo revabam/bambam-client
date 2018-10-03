@@ -1,7 +1,7 @@
 <h6 mat-dialog-title>Event Name: {{data.title.toUpperCase()}}</h6><mat-divider></mat-divider>
 <div mat-card *ngIf="!moving">
     <div mat-dialog-content>
-        <p>Description: {{data.description}}</p>
+        <p *ngIf="data.description">Description: {{data.description}}</p>
         <p>Start Time: {{data.startTime | date: 'shortTime'}}</p>
         <p>End Time: {{data.endTime | date: 'shortTime'}}</p>
         <span [ngSwitch] = "data.statusId">
