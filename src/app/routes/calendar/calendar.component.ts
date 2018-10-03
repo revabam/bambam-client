@@ -7,7 +7,7 @@ import { startOfDay, endOfDay, subDays, addDays, endOfMonth, isSameDay, isSameMo
 import { Subject, Observable, BehaviorSubject } from 'rxjs';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap/modal/modal.module';
 import { CalendarEvent, CalendarEventAction, CalendarEventTimesChangedEvent } from 'angular-calendar';
-
+import { MatIconModule } from '@angular/material/icon';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import * as CalEvent from '../../models/calendar-event';
 import { BamUser } from '../../models/bam-user';
@@ -15,11 +15,7 @@ import { BatchService } from '../../services/batch.service';
 import { EventColor, EventAction } from 'calendar-utils';
 import { EventDuplicateModalComponent } from './event-duplicate-modal/event-duplicate-modal.component';
 import { CalendarModalComponent } from './calendar-modal/calendar-modal.component';
-import { Topic } from '../../models/topic';
-import { SubTopic } from '../../models/subtopic';
 import { Curriculum } from '../../models/curriculum';
-import { CalendarCurriculum } from '../../models/calendar-curriculum';
-import { CalendarSubtopic } from '../../models/calendar-subtopic';
 import { TopicService } from '../../services/topic.service';
 import { CalendarService } from '../../services/calendar.service';
 import { SubTopicService } from '../../services/subtopic.service';
@@ -64,12 +60,12 @@ export class CustomCalendarEvent implements CalendarEvent<any> {
 export class CalendarComponent implements OnInit, DoCheck {
   colors: any = {
     blue: {
-      primary: 'blue',
-      secondary: 'blue'
+      primary: '#45c1f7',
+      secondary: '#45c1f7'
     },
     red: {
-      primary: 'red',
-      second: 'red'
+      primary: '#e23434',
+      second: '#e23434'
     },
     green: {
       primary: 'green',
@@ -124,7 +120,7 @@ export class CalendarComponent implements OnInit, DoCheck {
 
   actions: CalendarEventAction[] = [
     {
-      label: '<span><mat-icon>change status</mat-icon></span>',
+      label: '<i class="fa fa-fw fa-check"></i>',
       onClick: ({ event }: { event: CalendarEvent }): void => {
         this.handleEvent('Status', event);
       }
@@ -143,9 +139,16 @@ export class CalendarComponent implements OnInit, DoCheck {
    */
   ngOnInit() {
     this.user = JSON.parse(sessionStorage.getItem('user'));
-    this.calendarService.getCalendarEvents(this.user.id).subscribe(response => {
-      this.storedEvents = response;
-      this.initialRender = true;
+    this.calendarService.getCalendarEvents(this.user.id).subscribe(events => {
+      this.storedEvents = events;
+      this.calendarService.getCustomCalendarEvents().subscribe(customEvents => {
+        for (const cEv of customEvents) {
+          if (cEv.trainerId !== this.user.id) {
+            this.storedEvents.push(cEv);
+          }
+        }
+        this.initialRender = true;
+      });
     });
 
     this.calendarService.getCurriculum().subscribe(response => {
@@ -254,26 +257,26 @@ export class CalendarComponent implements OnInit, DoCheck {
      * The open method passes in a component that we'll use
      * in the modal.
      */
-      const dialogRef = this.dialog.open(CalendarModalComponent,
-        /*
-        * An object is passed in as the second parameter, which
-        * defines properties of the dialog modal, as well as the
-        * data that we'll pass in for the modal component to access.
-        */
-        {
-          width: '600px',
-          data: {
-            title: event.title,
-            description: event.description,
-            startTime: event.start,
-            endTime: event.end,
-            statusId: event.statusId
-          }
+    const dialogRef = this.dialog.open(CalendarModalComponent,
+      /*
+      * An object is passed in as the second parameter, which
+      * defines properties of the dialog modal, as well as the
+      * data that we'll pass in for the modal component to access.
+      */
+      {
+        width: '600px',
+        data: {
+          title: event.title,
+          description: event.description,
+          startTime: event.start,
+          endTime: event.end,
+          statusId: event.statusId
         }
-      );
-      dialogRef.afterClosed().subscribe(decision => {
-        this.moveEvents(decision, event);
-      });
+      }
+    );
+    dialogRef.afterClosed().subscribe(decision => {
+      this.moveEvents(decision, event);
+    });
   }
 
   /**
@@ -368,7 +371,7 @@ export class CalendarComponent implements OnInit, DoCheck {
    */
   handleEvent(action: string, event: CalendarEvent): void {
     if (action === 'Clicked') {
-      this.openDialog(<CustomCalendarEvent> event);
+      this.openDialog(<CustomCalendarEvent>event);
     } else if (action === 'Edited') {
     } else if (action === 'Deleted') {
     } else if (action === 'Status') {
@@ -399,32 +402,32 @@ export class CalendarComponent implements OnInit, DoCheck {
    * @author Marcin Salamon | Spark1806-USF-Java | Steven Kelsey
    */
   changeStatus(event: CalendarEvent) {
-    const custEvent = <CustomCalendarEvent> event;
-      custEvent.statusId++;
-      if (custEvent.statusId === 5) {
-        custEvent.statusId = 1;
-      }
-      switch (custEvent.statusId) {
-        case 1:
-          custEvent.color = this.colors.blue;
-          if (event.start < new Date()) {
-            custEvent.statusId = 2;
-            custEvent.color = this.colors.green;
-          }
-          break;
-        case 2:
+    const custEvent = <CustomCalendarEvent>event;
+    custEvent.statusId++;
+    if (custEvent.statusId === 5) {
+      custEvent.statusId = 1;
+    }
+    switch (custEvent.statusId) {
+      case 1:
+        custEvent.color = this.colors.blue;
+        if (event.start < new Date()) {
+          custEvent.statusId = 2;
           custEvent.color = this.colors.green;
-          break;
-        case 3:
-          custEvent.color = this.colors.red;
-          break;
-        case 4:
-          custEvent.color = this.colors.yellow;
-          break;
-        default:
-          break;
-      }
-      this.persistEvents();
+        }
+        break;
+      case 2:
+        custEvent.color = this.colors.green;
+        break;
+      case 3:
+        custEvent.color = this.colors.red;
+        break;
+      case 4:
+        custEvent.color = this.colors.yellow;
+        break;
+      default:
+        break;
+    }
+    this.persistEvents();
   }
 
   /**
@@ -501,8 +504,7 @@ export class CalendarComponent implements OnInit, DoCheck {
     this.refresh.next();
   }
   /**
-   * method that takes the topics and subtopics and generated calendar events from them when dropped onto the calendar
-   * called when curriculum is dropped onto the calendar
+   * method that creates calendar events when dropped curriculum is dropped onto the calendar
    *
    * @author Marcin Salamon | Spark1806-USF-Java | Steven Kelsey
    */
@@ -532,7 +534,6 @@ export class CalendarComponent implements OnInit, DoCheck {
            */
           subtopicStartTime.setHours(Math.floor(hour));
           subtopicStartTime.setMinutes((hour - Math.floor(hour)) * 60);
-          console.log(subtopicStartTime.toString());
           hour = hour + timeDifference;
           const endTime = new Date(subtopicStartTime);
           /**
@@ -563,7 +564,6 @@ export class CalendarComponent implements OnInit, DoCheck {
       }
       subtopicStartTime.setDate(subtopicStartTime.getDate() + 2);
     }
-    this.persistCurriculum(this.selectedCurriculum);
     this.selectedCurriculum = null;
     this.docheck = true;
     this.persistEvents();
@@ -592,8 +592,8 @@ export class CalendarComponent implements OnInit, DoCheck {
     }
     this.calendarService.addCalendarEvents(eventsToPersist).subscribe(eventRes => {
       for (let i = 0; i < this.events.length; i++) {
-          this.events[i].id = eventRes[i].id;
-          this.events[i].draggable = true;
+        this.events[i].id = eventRes[i].id;
+        this.events[i].draggable = true;
       }
     });
   }
@@ -620,24 +620,6 @@ export class CalendarComponent implements OnInit, DoCheck {
       err => {
       });
   }
-  /**
-   * Persists a curriculum.
-   * @param curriculum a curriculum object to be persisted.
-   */
-  persistCurriculum(curriculum: Curriculum) {
-    let batchId = 0;
-    this.batchService.getBatchesByTrainerId(this.user.id).subscribe(batches => {
-      if (batches === []) {
-        batchId = batches[0].id;
-      }
-    });
-    const calCurriculum: CalendarCurriculum = {
-      curriculumId: curriculum.id,
-      batchId: batchId
-    };
-    this.calendarService.addCalendarCirriculum(calCurriculum).subscribe(curr => {
-    });
-  }
 
   /**
    * creates an event for the calander persisting the event and reloading the calendar.
@@ -650,12 +632,14 @@ export class CalendarComponent implements OnInit, DoCheck {
         end: addHours(this.newSubtopicDate, 10),
         color: this.colors.red,
         draggable: true,
+        actions: this.actions,
         resizable: {
           beforeStart: true,
           afterEnd: true
         },
-        statusId: 2,
-        flagged: 0
+        statusId: 3,
+        flagged: 0,
+        subTopicId: -1
       });
       this.refresh.next();
       this.persistEvents();
