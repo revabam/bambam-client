@@ -9,6 +9,11 @@ import { CurriculumDayService } from '../../../services/curriculum-day.service';
 import { FormControl, Validators } from '@angular/forms';
 import { CurriculumEditorComponent } from '../curriculum-editor.component';
 
+export interface Status {
+  value: string;
+  viewValue: string;
+}
+
 @Component({
   selector: 'app-create-curriculum',
   templateUrl: './create-curriculum.component.html',
@@ -16,8 +21,16 @@ import { CurriculumEditorComponent } from '../curriculum-editor.component';
 })
 export class CreateCurriculumComponent implements OnInit {
 
+  curriculumStatus: Status[] = [
+    {value: '1', viewValue: 'Draft'},
+    {value: '2', viewValue: 'Needs Approval'},
+    {value: '3', viewValue: 'Read Only'},
+    {value: '4', viewValue: 'Master'}
+  ];
+
   curriculumName: string;
   numberOfWeeks: number;
+  selectedStatus: number;
   isValid = false;
 
   /**
@@ -44,6 +57,7 @@ export class CreateCurriculumComponent implements OnInit {
     private curriculumWeekService: CurriculumWeekService,
     private curriculumEditor: CurriculumEditorComponent, 
     ) { }
+
 
   ngOnInit() {
   }
@@ -77,9 +91,8 @@ export class CreateCurriculumComponent implements OnInit {
      * an http post. Also, if the post is successful, we
      * push it to the parent component's curriculum array
      * so that the user can see the changes.
-     * @author - Chinedu Ozodi | 1806-Sep-18-USF-Java | Steven Kelsey
      */
-    this.data['curriculumService'].post(newCurriculum).subscribe(curr => {
+    this.data['curriculumService'].post(newCurriculum).subscribe( (curr: Curriculum) => {
       const newVersion = curr.version;
       let nameNum = 1;
       for (let i = 0; i < this.data['curriculums'].length; i++) {
@@ -91,32 +104,15 @@ export class CreateCurriculumComponent implements OnInit {
           }
         }
       }
+
       curr.version = nameNum;
       if (curr !== undefined && curr !== null) {
         this.data['curriculums'].push(curr);
 
-        // add weeks to the curriculum
-        for (let i = 0; i < this.numberOfWeeks; i++) {
-          // Creates the weeks here
-          const week: CurriculumWeek = {
-            curriculumId: curr.id,
-            weekNum: i + 1
-          };
-          this.curriculumWeekService.post(week).subscribe( (savedWeek) => {
-            console.log('saved week');
-            console.log(savedWeek);
-
-            for (let d = 1; d < 6; d++) {
-              // Creates the new day, numbers 2 - 5 for Monday through Friday
-              const day: CurriculumDay = {
-                dayNum: d,
-                weekId: savedWeek.id,
-                daySubTopics: []
-              };
-              this.curriculumDayService.post(day).subscribe( (savedDay) => {
-              });
-            }
-          });
+        // save weeks
+        if (curr.numberOfWeeks > 0) {
+          // save the first week, start from week 1
+          this.saveWeek(curr, 1);
         }
 
       } else {
@@ -128,15 +124,59 @@ export class CreateCurriculumComponent implements OnInit {
     this.close();
   }
 
-  
+  /**
+   * Creates and persists a week for the given curriculum
+   * @param curriculum curriculum to save to
+   * @param weekNum weekNum for week to create and save
+   * @author - Chinedu Ozodi | 1806-Sep-18-USF-Java | Steven Kelsey
+   */
+  saveWeek(curriculum: Curriculum, weekNum: number) {
+    // Creates the weeks here
+    const week: CurriculumWeek = {
+      curriculumId: curriculum.id,
+      weekNum: weekNum
+    };
+    this.curriculumWeekService.post(week).subscribe((savedWeek) => {
+      // creates and persists the days for the week starting from 1 (Monday)
+      this.saveDay(curriculum, savedWeek, 1);
+    });
+  }
 
+  /**
+   * Creates and persists days for a given week
+   * @param curriculum curriculum to save to
+   * @param week week to save to
+   * @param index index/day to create and save
+   * @author - Chinedu Ozodi | 1806-Sep-18-USF-Java | Steven Kelsey
+   */
+  saveDay(curriculum: Curriculum, week: CurriculumWeek, index: number) {
+    const day: CurriculumDay = {
+      dayNum: index,
+      weekId: week.id,
+      daySubTopics: []
+    };
+    this.curriculumDayService.post(day).subscribe(() => {
+      // make sure there is only 5 days in a work week
+      if (index < 5) {
+        index++;
+        this.saveDay(curriculum, week, index);
+      } else {
+        // check to see if it needs more weeks to be created
+        if (week.weekNum < curriculum.numberOfWeeks) {
+          // Save the next week
+          const weekNum = week.weekNum + 1;
+          this.saveWeek(curriculum, weekNum);
+        }
+      }
+    });
+  }
 
   // here we are performing validation for the curriculum entered
   //    the submit button is disabled until both name and weeks are entered correctly
   validate() {
     this.isValid = true;
     // validating user input
-    if (!this.curriculumName || !this.numberOfWeeks) {
+    if (!this.curriculumName || !this.numberOfWeeks || !this.selectedStatus) {
       this.isValid = false;
     } else {
       // if curriculum name is valid
