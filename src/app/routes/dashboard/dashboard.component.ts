@@ -189,7 +189,9 @@ export class DashboardComponent implements OnInit {
   }
 
   ngOnInit() {
-     this.user = this.cognito.getUserAttributes();
+     this.user = JSON.parse(sessionStorage.getItem('user'));
+     console.log('user in session...');
+     console.log(this.user);
     console.log('after login');
     console.log(this.user);
     this.navbar.ngOnInit();
@@ -221,28 +223,10 @@ export class DashboardComponent implements OnInit {
     });
 
 
-
-    //   this.eventsThisWeek = this.calendarService.getCalendarEventsByTrainerIdAndWeek(1, new Date());
-    if (!this.user.id) {
-      this.router.navigate(['login']);
-    } else {
-
-      /*
-        In our sprint, only trainers can use the program so there is no
-        need to check if the user is a trainer or not, But this is where
-        you might want to do that.
-      */
-      this.batchService.getBatchByTrainer(1).subscribe(
-        result => {
-          console.log(result);
-          this.currentBatch = result[0];
-        }
-      );
-
       if (!this.user) {
         this.router.navigate(['login']);
       } else {
-        this.cognito.getUserAttributes();
+
         /*
           In our sprint, only trainers can use the program so there is no
           need to check if the user is a trainer or not, But this is where
@@ -276,7 +260,6 @@ export class DashboardComponent implements OnInit {
         );
         this.todayIsOpen = true;
       }
-    }
   }
 
   selectDay(dayNum: number) {
