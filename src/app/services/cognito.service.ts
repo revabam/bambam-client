@@ -1,3 +1,4 @@
+import { BamUser } from 'src/app/models/bam-user';
 import { BamUser } from './../models/bam-user';
 import { Router } from '@angular/router';
 import { Injectable } from '@angular/core';
@@ -12,7 +13,12 @@ export class CognitoService {
 
   private userPool: AWSCognito.CognitoUserPool;
   private static router: Router;
-  private static bamUser: BamUser;
+  private static bamUser: BamUser = {
+    id: '',
+    firstName: '',
+    lastName: '',
+    email: ''
+  }
   private static aList: string[];
 
   /**
@@ -174,12 +180,8 @@ export class CognitoService {
    * @author Jasmine C. Onwuzulike
    * 
    */
-  getUserAttributes(): string[] {
-
-    console.log('In Cognito getUserAttributes().........');
+  getUserAttributes(): BamUser {
     const cognitoUser = this.userPool.getCurrentUser();
-    console.log('This' + cognitoUser)
-
 
     if (cognitoUser != null) {
       cognitoUser.getSession(function (err, session) {
@@ -188,29 +190,15 @@ export class CognitoService {
         }
 
         cognitoUser.getUserAttributes(function (err, result) {
-          console.log('Getting attributes.....')
-          console.log(result);
-          console.log(result[2].getValue());
-         
-
-
-
-          // for (let i = 0; i < result.length; i++) {
-          //   console.log('attribute ' + result[i].getName() + ' has value ' + result[i].getValue());
-
-          // CognitoService.bamUser.id = result[0].getValue().toString();
-          // CognitoService.bamUser.firstName = result[2].getValue().toString();
-          // CognitoService.bamUser.lastName = result[3].getValue().toString();
-          // CognitoService.bamUser.email = result[4].getValue().toString();
-
-          // console.log(CognitoService.bamUser);
-          // }
-          ;
-        })
+          CognitoService.bamUser.firstName = result[2].getValue() ;
+          CognitoService.bamUser.id = cognitoUser.getUsername();
+          CognitoService.bamUser.lastName = result[3].getValue();
+          CognitoService.bamUser.email = result[4].getValue();     
+        })    
       })
     }
 
-    return CognitoService.aList;
+    return CognitoService.bamUser;
   }
-}
+} 
 

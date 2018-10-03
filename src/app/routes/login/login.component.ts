@@ -25,6 +25,7 @@ export class LoginComponent implements OnInit {
   // This is used to display errors to the user
   errorMessage: string;
 
+  //This is used to get the user.
   bamUser: BamUser;
 
   // Build the form controls.
@@ -106,17 +107,11 @@ export class LoginComponent implements OnInit {
               this.errorMessage = 'Invalid credentials';
               return;
             }
-            console.log(this.cognitoService.getLoggedInUser());
             /**
              * This method will take the user attributes from cognito and create a bam user.
              */
-            const list :string[] = this.cognitoService.getUserAttributes();
-             console.log(list);
-
-            // sessionStorage.setItem('user', JSON.stringify(user));
-            // this.userService.user.next(user);
-          
-            // this.router.navigate(['dashboard']);
+            this.bamUser = this.cognitoService.getUserAttributes();
+            this.router.navigate(['dashboard']);
           }
         }
       );
