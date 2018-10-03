@@ -40,11 +40,11 @@ export class LoginComponent implements OnInit {
   // The list of error messages displayed in the mat-error elements
   loginValidationMessages = {
     'email': [
-      { type: 'required', message: 'Email is required' },
-      { type: 'email', message: 'Not a valid email' }
+      {type: 'required', message: 'Email is required'},
+      {type: 'email', message: 'Not a valid email'}
     ],
     'password': [
-      { type: 'required', message: 'Password is required' }
+      {type: 'required', message: 'Password is required'}
     ]
   };
 
@@ -118,4 +118,3 @@ export class LoginComponent implements OnInit {
     }
   }
 }
-

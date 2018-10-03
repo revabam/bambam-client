@@ -5,10 +5,8 @@ import { Batch } from '../../models/batch';
 import { BatchService } from '../../services/batch.service';
 import { Curriculum } from '../../models/curriculum';
 import { UserService } from '../../services/user.service';
-import { CognitoService } from '../../services/cognito.service';
 import { CalendarService } from '../../services/calendar.service';
 import { CalendarEvent } from '../../models/calendar-event';
-
 
 /**
  * This component is the dashboard page. It is the page that the
@@ -25,37 +23,6 @@ export interface Topicz {
   name: string;
   status: number;
 }
-
-// const topics: Topicz[] = [
-//   {
-//     flagged: 0,
-//     id: 1,
-//     name: 'Java Data Types',
-//     time: 1537899180000,
-//     status: 0
-//   },
-//   {
-//     flagged: 0,
-//     id: 2,
-//     name: 'Panels & Softskills',
-//     time: 1537899180000,
-//     status: 1
-//   },
-//   {
-//     flagged: 0,
-//     id: 3,
-//     name: 'Overwatch Gameplay Trailers',
-//     time: 1537899180000,
-//     status: 0
-//   },
-//   {
-//     flagged: 0,
-//     id: 4,
-//     name: 'Lifecycle of a Green Bean',
-//     time: 1537899180000,
-//     status: 1
-//   }
-// ];
 
 @Component({
   selector: 'app-dashboard',
@@ -80,19 +47,19 @@ export class DashboardComponent implements OnInit {
   firstName: string;
   lastName: string;
   visibilityIcon = [
-    { num: 0, icon: 'visibility_off' },
-    { num: 1, icon: 'visibility' }
+    {num: 0, icon: 'visibility_off' },
+    {num: 1, icon: 'visibility'}
   ];
   DashTitle = 'Today';
   todayIsOpen: boolean;
   topicsIsOpen: boolean;
   list: string[];
   eventsThisWeek: CalendarEvent[];
+
   constructor(
     private router: Router,
     private batchService: BatchService,
     private userService: UserService,
-    private cognito: CognitoService,
     private calendarService: CalendarService
   ) { }
 
@@ -111,8 +78,6 @@ export class DashboardComponent implements OnInit {
           this.currentBatch = result[0];
         }
       );
-
-      //   this.eventsThisWeek = this.calendarService.getCalendarEventsByTrainerIdAndWeek(1, new Date());
 
       if (!this.user) {
         this.router.navigate(['login']);
@@ -163,10 +128,9 @@ export class DashboardComponent implements OnInit {
 
   // function for if something is completed or in progress
   statusToggle(sub, yesNo) {
-
     sub.statusId = yesNo;
-
   }
+  
   // function to flag an item
   flagRow(sub) {
 
