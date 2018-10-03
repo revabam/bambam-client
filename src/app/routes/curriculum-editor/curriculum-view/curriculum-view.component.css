@@ -1,0 +1,5 @@
+.currV {
+  display: flex;
+  flex-direction: column;
+  max-width:1010px;
+}

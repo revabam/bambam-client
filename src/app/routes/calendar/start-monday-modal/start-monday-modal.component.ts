@@ -4,7 +4,7 @@ import { Component, OnInit, Inject } from '@angular/core';
 @Component({
   selector: 'app-start-monday-modal',
   templateUrl: './start-monday-modal.component.html',
-  styleUrls: ['./start-monday-modal.component.css']
+  styleUrls: ['./start-monday.scss']
 })
 /**
  * modal box that pops up when you try to insert a new curriculum into the calendar

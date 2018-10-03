@@ -1,0 +1,15 @@
+// Variables
+$radius: 13px 13px 13px 13px; // border radius
+
+// Specific mat-card editting
+mat-card{
+    position: fixed;
+    width: 70%;
+    margin-top: -1vw;
+    border-radius: $radius;
+    opacity: .9;
+    font-size: 4vw;
+}
+mat-card:hover{
+    opacity: 1;
+}

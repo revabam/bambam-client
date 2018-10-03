@@ -31,10 +31,9 @@
 /libpeerconnection.log
 npm-debug.log
 testem.log
-data.json
+*data.json
 /typings
 /stash
-/mocks
 
 # e2e
 /e2e/*.js

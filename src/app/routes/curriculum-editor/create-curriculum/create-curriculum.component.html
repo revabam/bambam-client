@@ -1,15 +1,31 @@
 <h6 mat-dialog-title class="col mb-5">Create a Curriculum</h6>
 <div mat-dialog-content>
   <mat-form-field class="col-9">
-    <input matInput [(ngModel)]="curriculumName" placeholder="Curriculum Name">
+    <!-- valiadating the curriculum name -->
+    <input matInput [(ngModel)]="curriculumName" (keyup)='validate()' [formControl]="cnameFormControl" placeholder="Curriculum Name">
+    <mat-error *ngIf="cnameFormControl.hasError('required')">
+      Curriculum name is <strong>required</strong>
+    </mat-error>
   </mat-form-field>
   <mat-form-field class="col-9">
-      <input matInput [(ngModel)]="numberOfWeeks" placeholder="Number of weeks">
-    </mat-form-field>
+    <!-- validating the curriculum weeks -->
+    <input type='number' matInput [(ngModel)]="numberOfWeeks" (blur)='validate()' [formControl]="cweekFormControl"
+      placeholder="Number of weeks">
+    <mat-error *ngIf="cweekFormControl.hasError('required')">
+      Number of week is <strong>required</strong>
+    </mat-error>
+  </mat-form-field>
+  <mat-form-field class="col-9">
+    <mat-select placeholder="Curriculum Status" [(ngModel)]="selectedStatus" (blur)='validate()' [formControl]="statusFormControl">
+      <mat-option *ngFor="let status of curriculumStatus" [value]="status.value">
+        {{status.viewValue}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
 </div>
 <div mat-dialog-actions>
   <div class="col">
     <button mat-raised-button (click)="close()">Cancel</button>
-    <button mat-raised-button color="primary" (click)="createNewCurriculum()">Ok</button>
+    <button style="background-color:rgb(80, 80, 223); color:white" mat-raised-button (click)="createNewCurriculum()">Ok</button>
   </div>
 </div>
