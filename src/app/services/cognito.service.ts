@@ -10,15 +10,16 @@ import { BehaviorSubject } from 'rxjs';
 })
 export class CognitoService {
 
-  private userPool: AWSCognito.CognitoUserPool;
-  private static router: Router;
   private static bamUser: BamUser = {
     id: '',
     firstName: '',
     lastName: '',
     email: ''
-  }
-  private static aList: string[];
+  };
+
+  private userPool: AWSCognito.CognitoUserPool;
+
+
 
   /**
   * When the cognito service is intialized, it creates the user pool.
@@ -26,7 +27,7 @@ export class CognitoService {
   * be hard coded. I didn't have the time to fix this when I was working
   * on the project.
   */
-  constructor() {
+  constructor(private router: Router) {
     const poolData = {
       UserPoolId : 'us-east-1_7bWZrc3vS',
       ClientId : 'n5l1l6id094g0lk2f3vc1h6h7'
@@ -118,6 +119,7 @@ export class CognitoService {
     cognitoUser.authenticateUser(authenticationDetails, {
       onSuccess: function(session: AWSCognito.CognitoUserSession) {
         resultStream.next(session.getIdToken());
+        console.log(session.getIdToken());
       },
       onFailure: function(err: any) {
         resultStream.next(err);
@@ -128,20 +130,20 @@ export class CognitoService {
   }
 
    /**
-   * 
-   * This method will allow a user to reset their password if forgotten.  
+   *
+   * This method will allow a user to reset their password if forgotten.
    * @param email The user's email that they used to register.
    * The user will need to provide their email which Cognito for check the user
-   * pool to verify that that email exists and then it will prompt the user to 
+   * pool to verify that that email exists and then it will prompt the user to
    * enter a new password.
    * @author Jasmine C. Onwuzulike
    */
-  resetPassword(email : string) {
+  resetPassword(email: string) {
     const userData = {
       Username: email,
       Pool: this.userPool
     };
-    
+
     const cognitoUser = new AWSCognito.CognitoUser(userData);
 
     cognitoUser.forgotPassword({
@@ -151,12 +153,13 @@ export class CognitoService {
           alert(err);
       },
       inputVerificationCode() {
-          var verificationCode = prompt('Please input verification code ' ,'');
-          var newPassword = prompt('Enter new password ' ,'');
+          const verificationCode = prompt('Please input verification code ' , '');
+          const newPassword = prompt('Enter new password ' , '');
           cognitoUser.confirmPassword(verificationCode, newPassword, this);
       }
     });
-    CognitoService.router.navigate['login'];
+    // tslint:disable-next-line:no-unused-expression
+    this.router.navigate['login'];
   }
 
   /**
@@ -188,11 +191,12 @@ export class CognitoService {
           CognitoService.bamUser.firstName = result[2].getValue() ;
           CognitoService.bamUser.id = cognitoUser.getUsername();
           CognitoService.bamUser.lastName = result[3].getValue();
-          CognitoService.bamUser.email = result[4].getValue();     
-        })    
-      })
+          CognitoService.bamUser.email = result[4].getValue();
+        });
+      });
     }
-
+    sessionStorage.setItem('user', JSON.stringify(CognitoService.bamUser));
     return CognitoService.bamUser;
   }
-} 
+}
+

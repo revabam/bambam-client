@@ -40,11 +40,11 @@ export class LoginComponent implements OnInit {
   // The list of error messages displayed in the mat-error elements
   loginValidationMessages = {
     'email': [
-      {type: 'required', message: 'Email is required'},
-      {type: 'email', message: 'Not a valid email'}
+      { type: 'required', message: 'Email is required' },
+      { type: 'email', message: 'Not a valid email' }
     ],
     'password': [
-      {type: 'required', message: 'Password is required'}
+      { type: 'required', message: 'Password is required' }
     ]
   };
 
@@ -102,6 +102,7 @@ export class LoginComponent implements OnInit {
       this.cognitoService.signIn(email, password).subscribe(
         result => {
           if (result) {
+            console.log(result);
             // If there was an error
             if (result['message']) {
               this.errorMessage = 'Invalid credentials';
@@ -111,6 +112,7 @@ export class LoginComponent implements OnInit {
              * This method will take the user attributes from cognito and create a bam user.
              */
             this.bamUser = this.cognitoService.getUserAttributes();
+            console.log(this.bamUser);
             this.router.navigate(['dashboard']);
           }
         }
@@ -118,3 +120,4 @@ export class LoginComponent implements OnInit {
     }
   }
 }
+
