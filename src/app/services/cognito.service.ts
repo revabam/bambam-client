@@ -1,4 +1,3 @@
-import { BamUser } from 'src/app/models/bam-user';
 import { BamUser } from './../models/bam-user';
 import { Router } from '@angular/router';
 import { Injectable } from '@angular/core';
@@ -201,4 +200,3 @@ export class CognitoService {
     return CognitoService.bamUser;
   }
 } 
-

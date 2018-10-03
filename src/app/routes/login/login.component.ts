@@ -74,6 +74,15 @@ export class LoginComponent implements OnInit {
     }
   }
 
+  //Google sign in.
+  onSignIn(googleUser) {
+    var profile = googleUser.getBasicProfile();
+    console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
+    console.log('Name: ' + profile.getName());
+    console.log('Image URL: ' + profile.getImageUrl());
+    console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
+  }
+
   /**
   * This method is called whenever the user clicks the login button. It will attempt
   * to authenticate the user in the cognito user pool and if the credentials are valid
@@ -86,6 +95,7 @@ export class LoginComponent implements OnInit {
     // Clear sessionStorage as well
     this.infoMessage = '';
     sessionStorage.clear();
+
 
     // Check if there are any errors in the form
     if (

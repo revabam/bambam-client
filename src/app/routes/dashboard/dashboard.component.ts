@@ -111,9 +111,7 @@ export class DashboardComponent implements OnInit {
           this.currentBatch = result[0];
         }
       );
-
-      //   this.eventsThisWeek = this.calendarService.getCalendarEventsByTrainerIdAndWeek(1, new Date());
-
+      
       if (!this.user) {
         this.router.navigate(['login']);
       } else {
