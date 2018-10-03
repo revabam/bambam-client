@@ -5,6 +5,11 @@ import { TopicService } from './topic.service';
 import { Observable } from 'rxjs';
 import { SubTopic } from '../models/subtopic';
 
+/**
+ * Here we are testing the methods within the SubTopic Service class
+ * @name SubTopicTest
+ * @author Chris Holmes | Spark1806-USF-Java | Steven Kelsey
+ */
 describe('TopicService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
@@ -20,9 +25,9 @@ describe('TopicService', () => {
    *  @param number
    */
   it('should get topic by id',
-  async(inject([TopicService], (service: TopicService) => {
-    expect(service.getTopicById.length).toEqual(1);
-  })));
+    async(inject([TopicService], (service: TopicService) => {
+      expect(service.getTopicById.length).toEqual(1);
+    })));
 
   /**
    * getAll Test
