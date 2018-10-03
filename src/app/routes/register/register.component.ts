@@ -15,7 +15,7 @@ import { BamUser } from '../../models/bam-user';
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
-  styleUrls: ['./register.component.css']
+  styleUrls: ['./register.scss']
 })
 export class RegisterComponent implements OnInit {
   // This string is used when we check if the password field matches
@@ -158,8 +158,8 @@ export class RegisterComponent implements OnInit {
                 firstName: firstName,
                 lastName: lastName,
                 email: email,
-                role_id: 1,
-                status_id: 1
+                // role_id: 1,
+                // status_id: 1
               };
               this.userService.register(user).subscribe(
                 u => {

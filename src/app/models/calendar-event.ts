@@ -11,5 +11,8 @@ export class CalendarEvent {
     statusId: number;
     startDateTime: Date;
     endDateTime: Date;
-    calendarSubtopicId: number;
+    subTopicId: number;
+    trainerId: string;
+    batchId?: number;
+    flagged?: number;
 }

@@ -21,6 +21,9 @@ export class CalendarService {
 
   constructor(private http: HttpClient) { }
 
+  getCalendarEventsByTrainerId(id) {
+    return this.http.get(`http://localhost:9994/calendars/event/trainer/${id}`, HTTP_OPTIONS);
+  }
   /**
    * Get all stored curriculums
    * @returns Observable of curriculum[]
@@ -73,9 +76,9 @@ export class CalendarService {
    * addCalendarEvent.
    * @param events An array of calendar events
    */
-  addCalendarEventList(events: CalendarEvent[]): Observable<CalendarEvent[]> {
+  addCalendarEvents(events: CalendarEvent[]): Observable<CalendarEvent[]> {
     const json = JSON.stringify(events);
-    return this.http.post<CalendarEvent[]>(environment.apiUrl + 'calendar-events-list', json, HTTP_OPTIONS);
+    return this.http.post<CalendarEvent[]>(environment.zuulUrl + 'calendars/calendars/event', json, HTTP_OPTIONS);
   }
 
   /**
@@ -91,15 +94,25 @@ export class CalendarService {
    * Returns all stored calendar events.
    * This should be used when client side is connected to server side.
    */
-  getCalendarEvents(): Observable<CalendarEvent[]> {
-    return this.http.get<CalendarEvent[]>(environment.apiUrl + 'calendar-events', HTTP_OPTIONS);
+  getCalendarEvents(id: string): Observable<CalendarEvent[]> {
+    return this.http.get<CalendarEvent[]>(environment.zuulUrl + `calendars/calendars/event/trainer/${id}`, HTTP_OPTIONS);
   }
 
   /**
-   * For use with json server, returns the array of calendar events
+   * Returns custom calendar events, every trainer can see them
+   *
+   * @author Marcin Salamon | Spark1806-USF-Java | Steven Kelsey
    */
-  getCalendarEventsList(): Observable<CalendarEvent[]> {
-    return this.http.get<any>(environment.apiUrl + 'calendar-events-list', HTTP_OPTIONS);
+  getCustomCalendarEvents(): Observable<CalendarEvent[]> {
+    return this.http.get<CalendarEvent[]>(environment.zuulUrl + `calendars/calendars/event/custom`, HTTP_OPTIONS);
+  }
+
+  /**
+   * Returns a calendar event by id
+   */
+  getCalendarEventsById(id: number): Observable<CalendarEvent> {
+    return this.http.get<CalendarEvent>(environment.zuulUrl + `calendars/calendars/event/${id}`, HTTP_OPTIONS);
+
   }
 
   /**

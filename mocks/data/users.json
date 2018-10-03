@@ -2,9 +2,9 @@
     "users": [
         {
             "id":1,
-            "firstName":"Wezley",
-            "lastName":"Singleton",
-            "email":"wezleysingleton@reva.com",
+            "firstName":"Steven",
+            "lastName":"Kelsey",
+            "email":"steven.kelsey@revature.com",
             "role_id":1,
             "status_id":1
         },
@@ -108,7 +108,15 @@
             "id":14,
             "firstName":"Andrew",
             "lastName":"Li",
-            "email":"andrewli@reva.com",
+            "email":"shannonjeg@gmail.com",
+            "role_id":2,
+            "status_id":1
+        },
+        {
+            "id":15,
+            "firstName":"Humphrey",
+            "lastName":"Minott",
+            "email":"humphreyminott@yahoo.com",
             "role_id":2,
             "status_id":1
         }

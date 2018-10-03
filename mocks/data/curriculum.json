@@ -1,52 +1,101 @@
 {
     "curriculums": [
         {
+            "name": "java",
+            "version": 1,
+            "creatorId": 1,
+            "dateCreated": "2018-10-02T23:12:49.500Z",
+            "numberOfWeeks": 12,
+            "status": 1,
             "id": 1,
-            "name": "Java/JEE",
-            "version": "1",
-            "creator_id": 4,
-            "dateCreated": 99257573426,
-            "numberOfWeeks": 10,
-            "topics": [
+            "curriculumWeeks": [
                 {
+                    "curriculumId": 1,
+                    "weekNum": 1,
                     "id": 1,
-                    "name": "Core Java"
+                    "curriculumDays": [
+                        {
+                            "dayNum": 1,
+                            "weekId": 1,
+                            "daySubTopics": [
+                                {
+                                    "id": 1,
+                                    "name": "Introduction to Java: Why Java?",
+                                    "parentTopicId": 1
+                                },
+                                {
+                                    "id": 2,
+                                    "name": "OOP Concepts in Depth: Polymorphism, Encapsulation, Inheritance, and Abstraction",
+                                    "parentTopicId": 1
+                                },
+                                {
+                                    "id": 4,
+                                    "name": "Constructors",
+                                    "parentTopicId": 1
+                                },
+                                {
+                                    "id": 5,
+                                    "name": "Methods and Parameters",
+                                    "parentTopicId": 1
+                                },
+                                {
+                                    "id": 6,
+                                    "name": "Scopes of a Variable in Java",
+                                    "parentTopicId": 1
+                                },
+                                {
+                                    "id": 8,
+                                    "name": "Array",
+                                    "parentTopicId": 1
+                                },
+                                {
+                                    "id": 11,
+                                    "name": "Access Modifiers",
+                                    "parentTopicId": 1
+                                }
+                            ],
+                            "id": 1
+                        },
+                        {
+                            "dayNum": 2,
+                            "weekId": 1,
+                            "daySubTopics": [],
+                            "id": 2
+                        },
+                        {
+                            "dayNum": 3,
+                            "weekId": 1,
+                            "daySubTopics": [],
+                            "id": 3
+                        },
+                        {
+                            "dayNum": 4,
+                            "weekId": 1,
+                            "daySubTopics": [],
+                            "id": 4
+                        },
+                        {
+                            "dayNum": 5,
+                            "weekId": 1,
+                            "daySubTopics": [],
+                            "id": 5
+                        }
+                    ]
                 },
                 {
-                    "id": 2,
-                    "name": "SQL"
+                    "curriculumId": 1,
+                    "weekNum": 2,
+                    "id": 2
                 },
                 {
-                    "id": 3,
-                    "name": "Client-Side Technologies"
+                    "curriculumId": 1,
+                    "weekNum": 3,
+                    "id": 3
                 },
                 {
-                    "id": 4,
-                    "name": "Servlets"
-                },
-                {
-                    "id": 5,
-                    "name": "Angular"
-                },
-                {
-                    "id": 6,
-                    "name": "DevOps"
-                },
-                {
-                    "id": 7,
-                    "name": "Hibernate"
-                },
-                {
-                    "id": 8,
-                    "name": "Spring"
-                },
-                {
-                    "id": 9,
-                    "name": "Web Services"
-                },
-                {
-                    "id": 10,
-                    "name": "Microservices"
+                    "curriculumId": 1,
+                    "weekNum": 4,
+                    "id": 4
                 }
             ]
         }
