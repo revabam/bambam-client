@@ -526,18 +526,13 @@ export class CalendarComponent implements OnInit, DoCheck {
   generateEvents() {
     this.subtopicService.getAll().subscribe((subTopics) => {
       this.subtopicService.subtopics = subTopics;
-      console.log(this.selectedCurriculum);
       this.selectedCurriculum = this.subtopicService.setDayTopicNames(this.selectedCurriculum);
-      console.log('after adding names');
-      console.log(this.selectedCurriculum);
       const startDate: Date = this.dropEvent.start;
       const subtopicStartTime = startDate;
       const weeks: CurriculumWeek[] = this.selectedCurriculum.curriculumWeeks;
       for (const week of weeks) {
         for (const day of week.curriculumDays) {
           let hour = 9;
-          console.log(day);
-          console.log('day');
           const subTopicsToday = day.daySubTopics.length;
           const timeDifference = (7 / subTopicsToday);
           /**
@@ -569,10 +564,7 @@ export class CalendarComponent implements OnInit, DoCheck {
               end: new Date(endTime),
               title: subtopic.name,
               version: this.selectedCurriculum.version,
-              color: {
-                primary: 'blue',
-                secondary: 'blue'
-              },
+              color: this.colors.blue,
               actions: this.actions,
               resizable: {
                 beforeStart: true,
@@ -586,7 +578,6 @@ export class CalendarComponent implements OnInit, DoCheck {
           }
           subtopicStartTime.setDate(subtopicStartTime.getDate() + 1);
         }
-        subtopicStartTime.setDate(subtopicStartTime.getDate() + 2);
       }
       this.selectedCurriculum = null;
       this.docheck = true;
