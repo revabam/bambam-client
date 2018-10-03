@@ -1,5 +1,8 @@
+import { Curriculum } from './../../models/curriculum';
+import { SubTopicService } from './../../services/subtopic.service';
 import { Component, OnInit } from '@angular/core';
 import { BoomService } from '../../services/boom.service';
+import { CurriculumService } from '../../services/curriculum.service';
 
 @Component({
   selector: 'app-boom',
@@ -10,13 +13,17 @@ export class BoomComponent implements OnInit {
 
   events: any[] = [];
   batches: any[] = [];
-  curriculums: any[] = [];
+  curriculums: Curriculum[] = [];
   completed: number[] = [];
   missed: number[] = [];
   canceled: number[] = [];
   weeks: number[] = [];
 
-  constructor(private boomServ: BoomService) { }
+  constructor(
+    private boomServ: BoomService,
+    private curriculumService: CurriculumService,
+    private subtopicService: SubTopicService
+  ) { }
 
   // bar chart
   public barChartOptions: any = {
@@ -69,21 +76,21 @@ export class BoomComponent implements OnInit {
     this.canceled = [];
     this.weeks = [];
 
-    for (let j = 0; j < this.curriculums[curriculumId].curriculumWeek.length; j++) {
+    for (let j = 0; j < this.curriculums[curriculumId].curriculumWeeks.length; j++) {
       this.weeks.push(j);
     }
 
-    for (let j = 0; j < this.curriculums[curriculumId].curriculumWeek.length; j++) {
+    for (let j = 0; j < this.curriculums[curriculumId].curriculumWeeks.length; j++) {
       let completed = 0;
       let missed = 0;
       let canceled = 0;
-      for (let k = 0; k < this.curriculums[curriculumId].curriculumWeek[j].curriculumDay.length; k++) {
-        for (let l = 0; l < this.curriculums[curriculumId].curriculumWeek[j].curriculumDay[k].subTopic.length; l++) {
-          if (this.curriculums[curriculumId].curriculumWeek[j].curriculumDay[k].subTopic[l].statusId === 2) {
+      for (let k = 0; k < this.curriculums[curriculumId].curriculumWeeks[j].curriculumDays.length; k++) {
+        for (let l = 0; l < this.curriculums[curriculumId].curriculumWeeks[j].curriculumDays[k].daySubTopics.length; l++) {
+          if (this.curriculums[curriculumId].curriculumWeeks[j].curriculumDays[k].daySubTopics[l].statusId === 2) {
             ++completed;
-          } else if (this.curriculums[curriculumId].curriculumWeek[j].curriculumDay[k].subTopic[l].statusId === 4) {
+          } else if (this.curriculums[curriculumId].curriculumWeeks[j].curriculumDays[k].daySubTopics[l].statusId === 4) {
             ++missed;
-          } else if (this.curriculums[curriculumId].curriculumWeek[j].curriculumDay[k].subTopic[l].statusId === 3) {
+          } else if (this.curriculums[curriculumId].curriculumWeeks[j].curriculumDays[k].daySubTopics[l].statusId === 3) {
             ++canceled;
           }
         }
@@ -123,13 +130,13 @@ export class BoomComponent implements OnInit {
     for (let i = 0; i < this.curriculums.length; i++) {
       let completed = 0;
       let length = 0;
-      for (let j = 0; j < this.curriculums[i].curriculumWeek.length; j++) {
-        for (let k = 0; k < this.curriculums[i].curriculumWeek[j].curriculumDay.length; k++) {
-          for (let l = 0; l < this.curriculums[i].curriculumWeek[j].curriculumDay[k].subTopic.length; l++) {
-            if (this.curriculums[i].curriculumWeek[j].curriculumDay[k].subTopic[l].statusId === 1
-              || this.curriculums[i].curriculumWeek[j].curriculumDay[k].subTopic[l].statusId === 3) {
+      for (let j = 0; j < this.curriculums[i].curriculumWeeks.length; j++) {
+        for (let k = 0; k < this.curriculums[i].curriculumWeeks[j].curriculumDays.length; k++) {
+          for (let l = 0; l < this.curriculums[i].curriculumWeeks[j].curriculumDays[k].daySubTopics.length; l++) {
+            if (this.curriculums[i].curriculumWeeks[j].curriculumDays[k].daySubTopics[l].statusId === 1
+              || this.curriculums[i].curriculumWeeks[j].curriculumDays[k].daySubTopics[l].statusId === 3) {
               continue;
-            } else if (this.curriculums[i].curriculumWeek[j].curriculumDay[k].subTopic[l].statusId === 2) {
+            } else if (this.curriculums[i].curriculumWeeks[j].curriculumDays[k].daySubTopics[l].statusId === 2) {
               ++completed;
             }
             ++length;
@@ -149,10 +156,25 @@ export class BoomComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.boomServ.getAllEvents().subscribe(x => { this.events = x; });
+    this.boomServ.getAllEvents().subscribe(x => {
+      this.events = x;
+      console.log('events');
+      console.log(x);
+    });
     this.boomServ.getAllBatches().subscribe(x => {
-    this.batches = x; this.boomServ.getAllCurriculums()
-      .subscribe(y => { this.curriculums = y; this.getData(); });
+      console.log('batches');
+      console.log(x);
+      this.batches = x;
+      this.curriculumService.getAll().subscribe ( (curriculums) => {
+        this.curriculums = curriculums;
+        this.subtopicService.getAll().subscribe( (subtopcs) => {
+          this.subtopicService.subtopics = subtopcs;
+          this.curriculums.forEach( (curriculum) => {
+            curriculum = this.subtopicService.setDayTopicNames(curriculum);
+          });
+          this.getData();
+        });
+      });
     });
   }
 
@@ -164,15 +186,17 @@ export class BoomComponent implements OnInit {
     while (this.events === [] || this.batches === [] || this.curriculums === []) {
     }
     for (let i = 0; i < this.curriculums.length; i++) {
-      for (let j = 0; j < this.curriculums[i].curriculumWeek.length; j++) {
-        for (let k = 0; k < this.curriculums[i].curriculumWeek[j].curriculumDay.length; k++) {
-          for (let l = 0; l < this.curriculums[i].curriculumWeek[j].curriculumDay[k].subTopic.length; l++) {
+      console.log('curriculums');
+      console.log(this.curriculums);
+      for (let j = 0; j < this.curriculums[i].curriculumWeeks.length; j++) {
+        for (let k = 0; k < this.curriculums[i].curriculumWeeks[j].curriculumDays.length; k++) {
+          for (let l = 0; l < this.curriculums[i].curriculumWeeks[j].curriculumDays[k].daySubTopics.length; l++) {
             for (let m = 0; m < this.events.length; m++) {
-              if (this.curriculums[i].curriculumWeek[j].curriculumDay[k].subTopic[l].id === this.events[m].subTopicId) {
-                this.curriculums[i].curriculumWeek[j].curriculumDay[k].subTopic[l].statusId = this.events[m].statusId;
+              if (this.curriculums[i].curriculumWeeks[j].curriculumDays[k].daySubTopics[l].id === this.events[m].subTopicId) {
+                this.curriculums[i].curriculumWeeks[j].curriculumDays[k].daySubTopics[l].statusId = this.events[m].statusId;
                 break;
               } else {
-                this.curriculums[i].curriculumWeek[j].curriculumDay[k].subTopic[l].statusId = 1;
+                this.curriculums[i].curriculumWeeks[j].curriculumDays[k].daySubTopics[l].statusId = 1;
               }
             }
           }
