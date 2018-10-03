@@ -10,6 +10,7 @@ import { CalendarService } from '../../services/calendar.service';
 import { CalendarEvent } from '../../models/calendar-event';
 import { CurriculumWeek } from '../../models/curriculum-week';
 import { CurriculumDay } from '../../models/curriculum-day';
+import { CognitoService } from '../../services/cognito.service';
 
 /**
  * This component is the dashboard page. It is the page that the
@@ -26,7 +27,7 @@ import { CurriculumDay } from '../../models/curriculum-day';
   styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent implements OnInit {
-  headerColumns: string[] = ['time', 'flag', 'sub', 'control'];
+  headerColumns: string[] = ['time', 'flagged', 'sub', 'control'];
   dataSource;
   dayInfo;
   Today = new Date().setDate(new Date().getDate() + 1);
@@ -36,9 +37,8 @@ export class DashboardComponent implements OnInit {
   selectedDate = this.cs.getCurriculumByWeek(1);
   currentBatch;
 
-  headerColumns: string[] = ['time', 'flagged', 'sub', 'control'];
   user: BamUser = {
-    id: '',
+    id: null,
     firstName: '',
     lastName: '',
     email: ''
@@ -170,7 +170,8 @@ export class DashboardComponent implements OnInit {
     private batchService: BatchService,
     private userService: UserService,
     private calendarService: CalendarService,
-    private cs: CurriculumService
+    private cs: CurriculumService,
+    private cognito: CognitoService
   ) { }
 
   /**
@@ -188,13 +189,18 @@ export class DashboardComponent implements OnInit {
   ngOnInit() {
 
      this.user = this.cognito.getUserAttributes();
-    this.calendarService.getCalendarEventsByTrainerId(this.user.id).subscribe(response => {
+
+    this.calendarService.getCalendarEventsByTrainerId(1).subscribe(response => {
       this.calendarEvents = response;
       this.currentWeekEvents = this.getCurrentWeekEvents(this.calendarEvents);
       this.showCurrentDay();
     });
-
-    this.currentBatch = this.batchService.getBatchByTrainer(this.user.id);
+    this.batchService.getBatchByTrainer(1).subscribe(
+      result => {
+        this.currentBatch = result[0];
+      }
+    );
+   
     this.cs.getCurriculumByWeek(1).subscribe((values: any) => {
       this.curriculumWeek = values;
       this.curriculumDay = values.curriculumDay;
@@ -211,11 +217,7 @@ export class DashboardComponent implements OnInit {
       });
     });
 
-    this.batchService.getBatchByTrainer(this.user.id).subscribe(
-      result => {
-        this.currentBatch = result[0];
-      }
-    );
+
 
     //   this.eventsThisWeek = this.calendarService.getCalendarEventsByTrainerIdAndWeek(1, new Date());
 
@@ -227,8 +229,9 @@ export class DashboardComponent implements OnInit {
         need to check if the user is a trainer or not, But this is where
         you might want to do that.
       */
-      this.batchService.getBatchesByTrainerId(this.user.id).subscribe(
+      this.batchService.getBatchByTrainer(1).subscribe(
         result => {
+          console.log(result)
           this.currentBatch = result[0];
         }
       );

@@ -52,7 +52,7 @@
     <mat-sidenav #sidenav mode="side">
       <mat-card class="border border-dark rounded justify-content-center">
         <mat-card-header id="batchHeader" class="rounded border border-dark justify-content-center">
-          {{currentBatch.name}}
+          {{currentBatch}}
         </mat-card-header>
         <mat-list dense>
           <mat-list-item class='d-flex'>
@@ -85,11 +85,8 @@
         </div>
       </mat-card-header>
       <mat-card-content class='d-flex'>
-        <h1 *ngIf="!dataSource"> Unable to find response.</h1>
+        <h1 *ngIf="!dataSource"> Unable to find table data.</h1>
         <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 flex-fill" *ngIf="dataSource">
-
-          <span>
-
 
             <!-- TIME COLUMN -->
             <ng-container matColumnDef="time">
@@ -166,7 +163,7 @@
 
             <tr mat-header-row *matHeaderRowDef="headerColumns"></tr>
             <tr mat-row *matRowDef="let row; columns: headerColumns;"></tr>
-          </span>
+          
         </table>
       </mat-card-content>
     </mat-card>
