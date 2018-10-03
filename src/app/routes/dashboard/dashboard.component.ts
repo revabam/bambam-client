@@ -19,13 +19,7 @@ import { CurriculumDay } from '../../models/curriculum-day';
  * @author Bradley Walker | Khaleel Williams | 1806-Jun18-USF-Java | Wezley Singleton
  * @author Joey Shannon | Drake Mapel | 1806-Spark | Steven Kelsey
  */
-export interface Topicz {
-  time: number;
-  flagged: number;
-  id: number;
-  name: string;
-  status: number;
-}
+
 
 @Component({
   selector: 'app-dashboard',
@@ -34,7 +28,12 @@ export interface Topicz {
 })
 export class DashboardComponent implements OnInit {
   dataSource;
-  topics = this.calendarService.getCalendarEventsByTrainerId(1);
+  dayInfo;
+  Today = new Date().setDate(new Date().getDate() + 1);
+  Tomorrow = new Date().setDate(new Date().getDate() + 2);
+  daySelected = new Date().setDate(new Date().getDate() + 1);
+  calendarEvents = null;
+  selectedDate = this.cs.getCurriculumByWeek(1);
   currentBatch;
   headerColumns: string[] = ['time', 'flagged', 'sub', 'control'];
   user: BamUser;
@@ -53,7 +52,9 @@ export class DashboardComponent implements OnInit {
   topicsIsOpen: boolean;
   eventsThisWeek: CalendarEvent[];
   curriculumDay: CurriculumDay[];
-  curriculumWeek: CurriculumWeek;
+  curriculumWeek: CurriculumWeek[];
+
+  currentWeekEvents: CalendarEvent[];
 
   constructor(
     private router: Router,
@@ -74,29 +75,125 @@ export class DashboardComponent implements OnInit {
       return <any>(b.dayNum) - <any>(a.dayNum);
     });
   }
+  log(x) {
+    console.log(x);
+  }
+  dayArr = [
+    {
+      dayNum: 0,
+      today: 'Sunday',
+    },
+    {
+      dayNum: 1,
+      today: 'Monday'
+    },
+    {
+      dayNum: 2,
+      today: 'Tuesday'
+    },
+    {
+      dayNum: 3,
+      today: 'Wednesday'
+    },
+    {
+      dayNum: 4,
+      today: 'Thursday'
+    },
+    {
+      dayNum: 5,
+      today: 'Friday'
+    },
+    {
+      dayNum: 6,
+      today: 'Saturday'
+    },
+    {
+      dayNum: 7,
+      today: 'Sunday'
+    }]
+
+  subsArr = [
+    {
+      "nameId": 1,
+      "topicName": "For Loops",
+      "topicId": 1
+    },
+    {
+      "nameId": 2,
+      "topicName": "While Loops",
+      "topicId": 2
+    },
+    {
+      "nameId": 3,
+      "topicName": "Do While",
+      "topicId": 3
+    },
+    {
+      "nameId": 4,
+      "topicName": "If statments",
+      "topicId": 4
+    },
+    {
+      "nameId": 5,
+      "topicName": "Normalization",
+      "topicId": 2
+    },
+    {
+      "nameId": 6,
+      "topicName": "Stored Procedures",
+      "topicId": 2
+    },
+    {
+      "nameId": 7,
+      "topicName": "HTML elements",
+      "topicId": 3
+    },
+    {
+      "nameId": 8,
+      "topicName": "JavaScript DOM manipulation",
+      "topicId": 3
+    },
+    {
+      "nameId": 9,
+      "topicName": "Inline, internal, and external CSS",
+      "topicId": 3
+    },
+    {
+      "nameId": 10,
+      "topicName": "Node",
+      "topicId": 4
+    },
+    {
+      "nameId": 11,
+      "topicName": "Express APIs",
+      "topicId": 4
+    }
+  ]
 
   ngOnInit() {
+    this.calendarService.getCalendarEventsByTrainerId(1).subscribe(response => {
+      this.calendarEvents = response;
+      this.currentWeekEvents = this.getCurrentWeekEvents(this.calendarEvents);
+    });
 
     this.user = JSON.parse(sessionStorage.getItem('user'));
-    this.dataSource = this.topics;
+
     this.currentBatch = this.batchService.getBatchByTrainer(1);
-    this.cs.getCurriculumByWeek(1).subscribe((week: any) => {
-      this.curriculumWeek = week;
-      this.curriculumDay = week.curriculumDay;
+    this.cs.getCurriculumByWeek(1).subscribe((values: any) => {
+      this.curriculumWeek = values;
+      this.curriculumDay = values.curriculumDay;
       this.curriculumDay = this.curriculumDay.sort((n1, n2) => {
-        if (n1 > n2) {
+        if (n1.dayNum > n2.dayNum) {
           return 1;
         }
 
-        if (n1 < n2) {
+        if (n1.dayNum < n2.dayNum) {
           return -1;
         }
 
         return 0;
       });
     });
-
-
 
     this.batchService.getBatchByTrainer(1).subscribe(
       result => {
@@ -144,24 +241,49 @@ export class DashboardComponent implements OnInit {
     }
   }
 
+  
 
-
-  // function to select specific days of the week to display
-  showDay(x) {
-    console.log(this.dataSource);
-
-
+  getCurrentWeekEvents(events: CalendarEvent[]): CalendarEvent[] {
+    const currentWeekEvents: CalendarEvent[] = [];
+    let week: Date[] = [];
+    const monday = new Date();
+    while (monday.getDay() > 1 && monday.getDay() !== 0) {
+      if (monday.getDay() === 0) {
+        monday.setDate(monday.getDate() + 1);
+      } else {
+        monday.setDate(monday.getDate() - 1);
+      }
+    }
+    for (let i = 0; i < 5; i++) {
+      const day = new Date(monday);
+      day.setDate(monday.getDate() + i);
+      week.push(day);
+    }
+    for (const event of events) {
+      for (const day of week) {
+        if (event.startDateTime.getDate() === day.getDate() && event.startDateTime.getMonth() === day.getMonth()){
+          currentWeekEvents.push(event);
+        }
+      }
+    }
+    return currentWeekEvents;
   }
 
-
-
-  // function for if something is completed or in progress
+  // Sets the DashTitle to the selected day of the week. - Joey
+  showDay(dayNumber) {
+    this.dataSource = [];
+    for (const event of this.currentWeekEvents) {
+      if (event.startDateTime.getDay() === dayNumber) {
+        this.dataSource.push(event);
+      }
+    }
+  }
+  // Changes the statusId of a particular event on screen. - Joey
   statusToggle(sub, yesNo) {
     sub.statusId = yesNo;
   }
-  // function to flag an item
+  // Changes the flagged state of an item to mark it important - Joey
   flagRow(sub) {
-
     if (!sub.flaggedId) {
       sub.flaggedId = 1;
     } else {
