@@ -1,3 +1,4 @@
+import { BamUser } from './../../models/bam-user';
 import { Component, OnInit, ViewChild, TemplateRef } from '@angular/core';
 import { UserService } from '../../services/user.service';
 import { Router } from '@angular/router';
@@ -23,6 +24,9 @@ export class LoginComponent implements OnInit {
 
   // This is used to display errors to the user
   errorMessage: string;
+
+  //This is used to get the user.
+  bamUser: BamUser;
 
   // Build the form controls.
   loginForm = new FormBuilder().group({
@@ -103,34 +107,11 @@ export class LoginComponent implements OnInit {
               this.errorMessage = 'Invalid credentials';
               return;
             }
-
-            /*
-            * If the app gets to this point, then the user exists, has the correct
-            * password, and has verified their email address. Now we need to get
-            * their information from the database.
-            */
-
-            this.userService.getUserByEmail(email).subscribe(
-              user => {
-                if (user) {
-                  /*
-                  * This is here to fix a strange problem. We are using json server
-                  * to mimic a functional backend. When you query json server for a
-                  * record, it tends to return a list even if there is only one matching
-                  * row in the database. In the future when the real backend is connected,
-                  * that won't be a problem. So I decided to check if the result is an
-                  * array and if so get the first item as the user.
-                  */
-                  if (user['length']) {
-                    user = user[0];
-                  }
-
-                  sessionStorage.setItem('user', JSON.stringify(user));
-                  this.userService.user.next(user);
-                  this.router.navigate(['dashboard']);
-                }
-              }
-            );
+            /**
+             * This method will take the user attributes from cognito and create a bam user.
+             */
+            this.bamUser = this.cognitoService.getUserAttributes();
+            this.router.navigate(['dashboard']);
           }
         }
       );
