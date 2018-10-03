@@ -11,7 +11,12 @@ import { BehaviorSubject } from 'rxjs';
 export class CognitoService {
 
   private userPool: AWSCognito.CognitoUserPool;
-  public bamUser: BamUser;
+  public bamUser: BamUser = {
+    id: '',
+    firstName: '',
+    lastName: '',
+    email: ''
+  };
 
 
   /**
@@ -168,4 +173,30 @@ export class CognitoService {
     }
   }
 
+  /**
+   * This method will get the current logged in user's attributes.
+   * @author Jasmine C. Onwuzulike
+   */
+  getUserAttributes(): BamUser {
+    const cognitoUser = this.userPool.getCurrentUser();
+    console.log('user pool' + cognitoUser);
+
+    if (cognitoUser != null) {
+      console.log('no user in pool');
+      cognitoUser.getSession(function (err, session) {
+        if (err) {
+          alert(err);
+        }
+
+        cognitoUser.getUserAttributes(function (err, result) {
+          this.bamUser.firstName = result[2].getValue() ;
+          this.bamUser.id = cognitoUser.getUsername();
+          this.bamUser.lastName = result[3].getValue();
+          this.bamUser.email = result[4].getValue();
+        });
+      });
+    }
+    sessionStorage.setItem('user', JSON.stringify(this.bamUser));
+    return this.bamUser;
+  }
 }
