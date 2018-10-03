@@ -78,6 +78,7 @@ export class CalendarService {
    */
   addCalendarEvents(events: CalendarEvent[]): Observable<CalendarEvent[]> {
     const json = JSON.stringify(events);
+    console.log(json);
     return this.http.post<CalendarEvent[]>(environment.zuulUrl + 'calendars/calendars/event', json, HTTP_OPTIONS);
   }
 

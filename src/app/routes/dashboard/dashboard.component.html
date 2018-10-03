@@ -6,8 +6,8 @@
         <mat-card>
           <mat-card-header>
             <div class="d-flex p-2 w-100 bd-highlight text-monospace justify-content-center">
-              <p class='text-monospace'>
-                Welcome, Trainer Steve
+              <p *ngIf="user" class='text-monospace'>
+                Welcome, {{this.user.firstName}}.
               </p>
             </div>
           </mat-card-header>
