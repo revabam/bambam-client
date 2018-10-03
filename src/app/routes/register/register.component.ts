@@ -158,8 +158,8 @@ export class RegisterComponent implements OnInit {
                 firstName: firstName,
                 lastName: lastName,
                 email: email,
-                role_id: 1,
-                status_id: 1
+                // role_id: 1,
+                // status_id: 1
               };
               this.userService.register(user).subscribe(
                 u => {

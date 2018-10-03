@@ -5,7 +5,7 @@ import { Observable } from 'rxjs';
 @Component({
   selector: 'app-event-duplicate-modal',
   templateUrl: './event-duplicate-modal.component.html',
-  styleUrls: ['./event-duplicate-modal.component.scss']
+  styleUrls: ['./event-duplicate.scss']
 })
 export class EventDuplicateModalComponent {
 

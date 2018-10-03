@@ -9,10 +9,14 @@
             <mat-card-header>
               <mat-toolbar class="panel-bar">
                 <span style="flex: 1 1 auto"></span>
+                <span>
+
+                  <h4 class="m-0 p-0" style="font-size: 140%;">Curriculum</h4>
+                </span>
                 <span style="flex: .6 .3 auto"></span>
                 <span>
-                  <button id="btn" aria-label="add" (click)="createNewCurriculumDialog()">
-                    <mat-icon>add</mat-icon>
+                  <button mat-button color="accent" mat-icon-button aria-label="add" (click)="createNewCurriculumDialog()">
+                    <mat-icon color="secondary">add</mat-icon>
                   </button>
                 </span>
                 <span style="flex: 0.3 1 auto"></span>
@@ -37,13 +41,13 @@
                       <span class="fill-remaining-space">
                       </span>
                       <span *ngIf="curriculum.name === cname">
-                        <button mat-icon-button color="black" (click)="selectCurriculum(curriculum)">
-                          <mat-icon>visibility</mat-icon>
+                        <button mat-icon-button color="" (click)="selectCurriculum(curriculum)">
+                          <mat-icon color="secondary">visibility</mat-icon>
                         </button>
                       </span>
                       <span *ngIf="curriculum.name !== cname">
-                        <button mat-icon-button color="black" (click)="reactivateCurriculum(curriculum)">
-                          <mat-icon>add</mat-icon>
+                        <button mat-icon-button color="" (click)="reactivateCurriculum(curriculum)">
+                          <mat-icon color="">add</mat-icon>
                         </button>
                       </span>
                     </mat-toolbar>
@@ -53,9 +57,8 @@
             </mat-card-content>
           </mat-card>
         </mat-tab>
-
-
         <mat-tab label="Topic Pool">
+          
           <h4 style="font-size: 2vw; text-align: right; color: white">Topic Tool</h4>
           <mat-card id="curr">
             <mat-card-header>
@@ -173,11 +176,13 @@
               </mat-accordion>
             </mat-card-content>
           </mat-card>
+          <app-topic-pool></app-topic-pool>
         </mat-tab>
       </mat-tab-group>
 
     </div>
-    <div class="col-sm-auto mt-2" *ngIf="selectedCurriculum">
+    <div class="col-sm-auto mt-2 curriculum-view">
       <app-curriculum-view [curriculum]='selectedCurriculum'></app-curriculum-view>
     </div>
   </div>
+</div>

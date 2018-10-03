@@ -56,7 +56,8 @@ export class CreateVersionComponent {
       dateCreated: new Date(),
       numberOfWeeks: this.numberOfWeeks,
       topics: this.selectedTopics,
-      curriculumWeeks: []
+      curriculumWeeks: [],
+      status: 1
     };
     /*
      * After the Curriculum object is created, we make

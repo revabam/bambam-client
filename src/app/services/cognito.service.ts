@@ -1,3 +1,5 @@
+import { BamUser } from './../models/bam-user';
+import { Router } from '@angular/router';
 import { Injectable } from '@angular/core';
 import * as AWSCognito from 'amazon-cognito-identity-js';
 import { CognitoIdToken } from 'amazon-cognito-identity-js';
@@ -9,6 +11,14 @@ import { BehaviorSubject } from 'rxjs';
 export class CognitoService {
 
   private userPool: AWSCognito.CognitoUserPool;
+  private static router: Router;
+  private static bamUser: BamUser = {
+    id: '',
+    firstName: '',
+    lastName: '',
+    email: ''
+  }
+  private static aList: string[];
 
   /**
   * When the cognito service is intialized, it creates the user pool.
@@ -116,7 +126,73 @@ export class CognitoService {
 
     return resultStream;
   }
-}
-/**
- * @author Bradley Walker | 1806-Jun18-USF-Java | Wezley Singleton
- */
+
+   /**
+   * 
+   * This method will allow a user to reset their password if forgotten.  
+   * @param email The user's email that they used to register.
+   * The user will need to provide their email which Cognito for check the user
+   * pool to verify that that email exists and then it will prompt the user to 
+   * enter a new password.
+   * @author Jasmine C. Onwuzulike
+   */
+  resetPassword(email : string) {
+    const userData = {
+      Username: email,
+      Pool: this.userPool
+    };
+    
+    const cognitoUser = new AWSCognito.CognitoUser(userData);
+
+    cognitoUser.forgotPassword({
+      onSuccess: function (result) {
+      },
+      onFailure: function(err) {
+          alert(err);
+      },
+      inputVerificationCode() {
+          var verificationCode = prompt('Please input verification code ' ,'');
+          var newPassword = prompt('Enter new password ' ,'');
+          cognitoUser.confirmPassword(verificationCode, newPassword, this);
+      }
+    });
+    CognitoService.router.navigate['login'];
+  }
+
+  /**
+   * This methods checks to see the current user. It will check the Cognito User Pool to see
+   * the current logged in user and then return their token.
+   * @author Jasmine C. Onwuzulike
+   */
+  getLoggedInUser() {
+    const cognitoUser = this.userPool.getCurrentUser();
+    if (cognitoUser != null) {
+      return cognitoUser.getUsername();
+    }
+  }
+
+  /**
+   * This method will get the current logged in user's attributes.
+   * @author Jasmine C. Onwuzulike
+   */
+  getUserAttributes(): BamUser {
+    const cognitoUser = this.userPool.getCurrentUser();
+
+    if (cognitoUser != null) {
+      cognitoUser.getSession(function (err, session) {
+        if (err) {
+          alert(err);
+        }
+
+        cognitoUser.getUserAttributes(function (err, result) {
+          CognitoService.bamUser.firstName = result[2].getValue() ;
+          CognitoService.bamUser.id = cognitoUser.getUsername();
+          CognitoService.bamUser.lastName = result[3].getValue();
+          CognitoService.bamUser.email = result[4].getValue();     
+        })    
+      })
+    }
+
+    return CognitoService.bamUser;
+  }
+} 

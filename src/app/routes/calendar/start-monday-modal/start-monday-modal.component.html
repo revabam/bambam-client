@@ -1,31 +1,31 @@
 <mat-card>
-  <h6 mat-dialog-title>Curriculum Start </h6>
-  <mat-divider></mat-divider>
-  <div mat-card *ngIf="(data.startDate != prevMonday) && prevMonday">
+<h6 mat-dialog-title>Curriculum Start </h6>
+<mat-divider></mat-divider>
+<div mat-card *ngIf="(data.startDate != prevMonday) && prevMonday">
     <div mat-dialog-content>
-      <p>You selected {{data.startDate | date:'EEEE, MMM d'}}</p>
-      <p> Would you like to start {{data.curriculumName}} on {{prevMonday | date:'EEEE, MMM d'}}?</p>
-    </div>
+        <p>You selected {{data.startDate | date:'EEEE, MMM d'}}</p>
+        <p> Would you like to start {{data.curriculumName}} on {{prevMonday | date:'EEEE, MMM d'}}?</p>
+      </div>
     <div mat-dialog-actions>
-      <button mat-button (click)="startOnMonday()">Monday</button>
-    </div>
-    <div mat-dialog-actions>
-      <button mat-button (click)="startOnCurrentDay()">{{data.startDate | date:'EEEE'}}</button>
-    </div>
-    <div mat-dialog-actions>
-      <button mat-button (click)="close()">No</button>
-    </div>
-  </div>
-  <div mat-card *ngIf="!prevMonday">
+        <button mat-button (click)="startOnMonday()">Monday</button>
+      </div>
+      <div mat-dialog-actions>
+        <button mat-button (click)="startOnCurrentDay()">{{data.startDate | date:'EEEE'}}</button>
+      </div>
+      <div mat-dialog-actions>
+        <button mat-button (click)="close()">No</button>
+      </div>
+</div>
+<div mat-card *ngIf="!prevMonday">
     <div mat-dialog-content>
-      <p>You selected {{data.startDate | date:'EEEE, MMM d'}}</p>
-      <p> Would you like to start on this day?</p>
-    </div>
+        <p>You selected {{data.startDate | date:'EEEE, MMM d'}}</p>
+        <p> Would you like to start on this day?</p>
+      </div>
     <div mat-dialog-actions>
-      <button (click)="startOnCurrentDay()">Yes</button>
-    </div>
-    <div mat-dialog-actions>
-      <button (click)="close()">No</button>
-    </div>
-  </div>
+        <button mat-button (click)="startOnCurrentDay()">Yes</button>
+      </div>
+      <div mat-dialog-actions>
+        <button mat-button (click)="close()">No</button>
+      </div>
+</div>
 </mat-card>

@@ -1,6 +1,6 @@
 // Variables
 $weight: bold; // font-weight
-$oColor: rgb(238, 95, 0); 
+$oColor: rgb(231, 94, 2); 
 $radius: 13px 13px 13px 13px; // border radius
 $shadow: 0px 0px 2px 2px; //shadow effect on buttons related to Calender
 
@@ -15,12 +15,14 @@ button{
     border-width: 3px;
     border-color: $oColor $shadow; 
     font-size: .85vw;
-    width: 2vw;
+  }
+  button:hover{
+    box-shadow:  $oColor $shadow;
   }
 
 /* Calendar date styling e.g. September 2018 */
 #currentDate{
-  font-size: 1.8vw;
+  font-size: 1.5vw;
   font-weight: $weight; 
 }
 
@@ -29,45 +31,9 @@ button{
   font-weight: $weight;
 }
 
-// specific mat-card editting for calendar
+// specific mat-card editting 
 mat-card{
-  background-color: #ffffffe8;
+  background-color: #ffffffe7;
   color: black;
-  font-weight: $weight; 
-  box-shadow: rgba(0, 0, 0, 0.322);
-  margin-left: 5%;
-}
-
-// styling for the curriculum portion of the calendar page,
-//  individually styled each portion to avoid slight specific changes 
-//    from being carried throughout each object
-#currAll{
-  background-color: #ffffffe1;
-  color: black;
-  font-weight: $weight; 
-  box-shadow: rgba(0, 0, 0, 0.322);
-  opacity: .8;
-  margin-top: 25%;
-}
-// :hover will listen for when the cursor is over the specified 
-//  object and will display the information below
-#currAll:hover{
-  opacity: 1;
-}
-
-// Create Event styling, has same poperties as #currAll 
-//  but margin-top was implemented to utilize seperation 
-//   between the two
-#cEvent{
-  background-color: #ffffffe1;
-  color: black;
-  font-weight: $weight; 
-  box-shadow: rgba(0, 0, 0, 0.322);
-  opacity: .8;
-  margin-top: 10%;
-}
-// :hover will listen for when the cursor is over the specified 
-//  object and will display the information below
-#cEvent:hover{
-  opacity: 1;
+  font-weight: $weight;
 }

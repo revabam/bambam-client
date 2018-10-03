@@ -1,9 +1,10 @@
-<mat-card style="box-shadow: 15px 15px 35px rgba(0, 0, 0, 0.555)" *ngIf="curriculum">
+<div class="currV">
+  <mat-card style="box-shadow: 15px 15px 35px rgba(0, 0, 0, 0.555)" *ngIf="curriculum; else defaultView">
     <mat-card-header>
       <mat-toolbar class="panel-bar">
         <h3 style="font-size: 2vw; font-weight: bold" class="m-0 p-0">Curriculum View: {{curriculum.name}}</h3>
         <span>
-          <button mat-button mat-icon-button aria-label="add" (click)="openNewDialog()">
+          <button mat-button color="accent" mat-icon-button aria-label="add" (click)="openNewDialog()">
             <mat-icon>add</mat-icon>
           </button>
         </span>
@@ -11,7 +12,20 @@
     </mat-card-header>
     <mat-card-content  style="overflow: auto; height: 470px;" *ngIf="curriculum.curriculumWeeks">
       <span *ngFor="let week of curriculum.curriculumWeeks">
-        <app-curriculum-week [week]='week'></app-curriculum-week>
+        <app-curriculum-week [week]='week' (weekChange)='onWeekChange($event)'></app-curriculum-week>
       </span>
     </mat-card-content>
   </mat-card>
+  <ng-template #defaultView>
+    <mat-card>
+      <mat-card-header>
+        <mat-toolbar class="panel-bar">
+          <h3 class="m-0 p-0">Curriculum View</h3>
+        </mat-toolbar>
+      </mat-card-header>
+      <mat-card-content style="overflow: auto; height: 400px; width: 800px;">
+      </mat-card-content>
+    </mat-card>
+  </ng-template>
+  
+</div>

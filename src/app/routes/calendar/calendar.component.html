@@ -1,6 +1,4 @@
-
-
-<ng-template class="container-fluid" #modalContent let-close="close">
+<ng-template #modalContent let-close="close">
   <div class="modal-header">
     <h5 class="modal-title">Event action occurred</h5>
     <button type="button" class="close" (click)="close()">
@@ -32,6 +30,7 @@
         </mat-card-title>
       </mat-card-header>
       <mat-divider></mat-divider>
+      <div *ngIf="curriculumEvents == null">Loading</div>
       <mat-list>
         <mat-list-item *ngFor="let curriculum of curriculumEvents" mwlDraggable [dropData]="{event: curriculum}" style="position:relative; z-index: 10; font-weight: bold; font-size: .9vw"><mat-icon>drag_indicator</mat-icon>
           {{curriculum.title}} : Version {{curriculum.version}}</mat-list-item>
@@ -44,11 +43,11 @@
         </mat-card-title>
       </mat-card-header>
       <mat-divider></mat-divider>
-      <mat-card-content >
-        <mat-form-field style="width: 9vw;">
+      <mat-card-content>
+        <mat-form-field>
           <input matInput #addSubtopic [(ngModel)]="newSubtopicName" placeholder="Event Name">
         </mat-form-field>
-        <mat-form-field style="width: 9vw;">
+        <mat-form-field>
           <input matInput [matDatepicker]="picker" [(ngModel)]="newSubtopicDate" placeholder="Choose a starting date">
           <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
           <mat-datepicker #picker startView="year" [startAt]="startDate"></mat-datepicker>
@@ -73,29 +72,28 @@
                 <button mat-stroked-button >Today</button>
               </span>
               <span mwlCalendarNextView [view]="view" [(viewDate)]="viewDate" (viewDateChange)="activeDayIsOpen = false">
-                <button mat-raised-button >Next ></button>
+                <button mat-raised-button color="primary">Next</button>
               </span>
             </span>
             <span style="flex: .1 1 auto;"></span>
           <span class="col-md-4">
-            <h1 id="currentDate">{{ viewDate | calendarDate:(view + 'ViewTitle'):'en' }}</h1>
+            <h3>{{ viewDate | calendarDate:(view + 'ViewTitle'):'en' }}</h3>
           </span>
           <span style="flex: .7 1 auto;"></span>
             <span class="btn-group">
               <span (click)="view = 'month'" [class.active]="view === 'month'">
-                <button mat-raised-button >Month</button>
+                <button mat-raised-button color="primary">Month</button>
               </span>
               <span (click)="view = 'week'" [class.active]="view === 'week'">
-                <button mat-raised-button >Week</button>
+                <button mat-raised-button color="primary">Week</button>
               </span>
               <span (click)="view = 'day'" [class.active]="view === 'day'">
-                <button mat-raised-button >Day</button>
+                <button mat-raised-button color="primary">Day</button>
               </span>
             </span>
             <span style="flex: 1 1 auto;"></span>
       </mat-toolbar>
       </mat-card-header>
-      <mat-divider></mat-divider>
       <mat-card-content>
         <div #numWeek class="float-left">
 
@@ -108,7 +106,7 @@
             (eventTimesChanged)="eventTimesChanged($event)">
           </mwl-calendar-week-view>
           <mwl-calendar-day-view *ngSwitchCase="'day'" [viewDate]="viewDate" [events]="events" [refresh]="refresh" (eventClicked)="handleEvent('Clicked', $event.event)"
-            (eventTimesChanged)="eventTimesChanged($event)" dayStartHour="8" dayEndHour="18">
+            (eventTimesChanged)="eventTimesChanged($event)" dayStartHour={{startHour}} dayEndHour={{endHour}}>
           </mwl-calendar-day-view>
         </div>
       </mat-card-content>
