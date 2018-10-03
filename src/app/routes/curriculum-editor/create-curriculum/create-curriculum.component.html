@@ -1,21 +1,24 @@
-<h6 mat-dialog-title class="col" style="margin-bottom: 10px;">Create a new version</h6>
+<h6 mat-dialog-title class="col mb-5">Create a Curriculum</h6>
 <div mat-dialog-content>
   <mat-form-field class="col-9">
-    <mat-select placeholder="Curriculum Name" [(ngModel)]="selectedCurriculumName">
-      <mat-option *ngFor="let curriculumName of data.curriculumNames" [value]="curriculumName">
-        {{curriculumName}}
-      </mat-option>
-    </mat-select>
+    <!-- valiadating the curriculum name -->
+    <input matInput [(ngModel)]="curriculumName" (keyup)='validate()' [formControl]="cnameFormControl" placeholder="Curriculum Name">
+    <mat-error *ngIf="cnameFormControl.hasError('required')">
+      Curriculum name is <strong>required</strong>
+    </mat-error>
   </mat-form-field>
-  <br />
   <mat-form-field class="col-9">
-    <input matInput [(ngModel)]="numberOfWeeks" placeholder="Number of weeks">
+    <!-- validating the curriculum weeks -->
+    <input type='number' matInput [(ngModel)]="numberOfWeeks" (blur)='validate()' [formControl]="cweekFormControl"
+      placeholder="Number of weeks">
+    <mat-error *ngIf="cweekFormControl.hasError('required')">
+      Number of week is <strong>required</strong>
+    </mat-error>
   </mat-form-field>
-  <br />
   <mat-form-field class="col-9">
-    <mat-select multiple placeholder="Select Topics" [(ngModel)]="selectedTopics">
-      <mat-option *ngFor="let topic of data.topics" [value]="topic">
-        {{topic.name}}
+    <mat-select placeholder="Curriculum Status" [(ngModel)]="selectedStatus" (blur)='validate()' [formControl]="statusFormControl">
+      <mat-option *ngFor="let status of curriculumStatus" [value]="status.value">
+        {{status.viewValue}}
       </mat-option>
     </mat-select>
   </mat-form-field>
