@@ -94,7 +94,7 @@ export class DashboardComponent implements OnInit {
   * and info about the batch they are associated with.
   */
   ngOnInit() {
-    
+
     this.user = JSON.parse(sessionStorage.getItem('user'));
     this.dataSource = this.topics;
     this.batchService.getBatchByTrainer(1).subscribe(
@@ -142,11 +142,10 @@ export class DashboardComponent implements OnInit {
       this.todayIsOpen = true;
     }
   }
-  
+
 // function to select specific days of the week to display
 showThisDay() {
   console.log('monday');
-  
 }
 
 

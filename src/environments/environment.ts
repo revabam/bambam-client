@@ -7,7 +7,7 @@ export const environment = {
   envName: `dev`,
   context: `http://localhost:4200`,
   apiUrl: 'http://localhost:8765/bam/',
-  testUrl: 'http://localhost:9997/',
+  curriculumUrl: 'http://localhost:9996/',
   zuulUrl: 'http://localhost:8765/bam/'
 };
 
