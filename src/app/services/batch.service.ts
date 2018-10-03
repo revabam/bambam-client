@@ -39,8 +39,8 @@ export class BatchService {
 
 
   // THIS IS THE CURRENT METHOD TO GET BACK BY TRAINER ID - JOEY
- getBatchByTrainer(trainerId): Observable<Batch> {
-   return this.http.get<Batch>(`http://localhost:9997/trainer/${trainerId}`, HTTP_OPTIONS);
+ getBatchByTrainer(trainerId): Observable<Batch[]> {
+   return this.http.get<Batch[]>(`http://localhost:9997/batches/trainer/${trainerId}`, HTTP_OPTIONS);
 
  }
   getBatchesByTrainerId(id: number): Observable<Batch[]> {
