@@ -76,6 +76,7 @@ import {DragDropModule} from '@angular/cdk/drag-drop';
     ForgottenPasswordComponent
   ],
   imports: [
+    ChartsModule,
     NgbModule.forRoot(),
     HttpClientModule,
     MatAutocompleteModule,

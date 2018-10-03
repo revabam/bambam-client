@@ -3,7 +3,7 @@ import { TestBed, inject } from '@angular/core/testing';
 import { CurriculumService } from './curriculum.service';
 
 /**
- * Here we are testing the methods within calender service
+ * Here we are testing the methods within curriculum service
  * @name calenderTest
  * @author Chris Holmes | Spark1806-USF-Java | Steven Kelsey
  */

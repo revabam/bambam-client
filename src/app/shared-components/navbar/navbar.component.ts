@@ -14,13 +14,9 @@ import { CognitoService } from '../../services/cognito.service';
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
-  styleUrls: ['./navbar.component.css']
+  styleUrls: ['./navbar.scss']
 })
 export class NavbarComponent implements OnInit {
-
-  user: BamUser;
-
-  show = true;
 
   constructor(
     private userService: UserService,
@@ -30,13 +26,8 @@ export class NavbarComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.user = this.cognito.getUserAttributes();
-    if (!this.user) {
-      this.router.navigate(['login']);
-    } else if (!this.show && !this.user) {
-      if (window.location.pathname !== '/login' && window.location.pathname !== '/register') {
-        this.router.navigate(['login']);
-      }
+    if (sessionStorage.getItem('user')) {
+      this.cognito.bamUser = JSON.parse(sessionStorage.getItem('user'));
     }
   }
 
@@ -47,7 +38,7 @@ export class NavbarComponent implements OnInit {
     @return       'primary' or '' depending on which page the user is on
   */
   getColor(path: string) {
-    return (`/${path}` === window.location.pathname) ? 'primary' : '';
+    return (`/${path}` === window.location.pathname) ? 'accent' : '';
   }
 
   /*
@@ -58,9 +49,10 @@ export class NavbarComponent implements OnInit {
     // Clear the user out of session strorage
     sessionStorage.clear();
 
+    this.cognito.bamUser = null;
     // Push null onto the user subject so that the navbar disappears
     this.userService.user.next(null);
-    
+
     this.router.navigate(['login']);
   }
 

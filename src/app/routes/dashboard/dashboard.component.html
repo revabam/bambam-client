@@ -6,7 +6,7 @@
         <mat-card>
           <mat-card-header>
             <div class="d-flex p-2 w-100 bd-highlight text-monospace justify-content-center">
-              <p class='text-monospace'>
+              <p *ngIf="user" class='text-monospace'>
                 Welcome, {{this.user.firstName}}.
               </p>
             </div>
@@ -16,10 +16,10 @@
           </mat-card-content>
         </mat-card>
         <!-- Button Bar Content -->
-        <mat-grid-list cols="7" rowHeight="2:1" class='border border-dark'>
+        <mat-grid-list cols="7" rowHeight="2:1" class='border border-dark' *ngIf="curriculumDay">
           <mat-grid-tile class='d-flex justify-content-center' *ngFor='let day of curriculumDay; let i = index;'>
 
-            <button type="button" class="btn btn-outline-primary" [class.active]="dayArr[day.dayNum].selected">
+            <button type="button" class="btn btn-outline-primary" [class.active]="dayArr[day.dayNum].selected" >
               <span *ngFor='let date of dayArr' (click)='showDay(date.dayNum) ; todayIsOpen=false ;'>
                 <span *ngIf='date.dayNum == day.dayNum'>
                   {{date.today}}
@@ -35,10 +35,10 @@
   </div>
   <!-- Dash -->
   <!-- Dash Info -->
-  <div class="d-flex flex-row justify-content-center">
-    <span class="btn btn-outline-warn flex-fill justify-content-center" matTooltip="Show hidden batch information."
-      matTooltipPosition="left">
-      <mat-slide-toggle class="flex-fill" color="warn" (click)="sidenav.toggle()">
+
+  <div class="d-flex border col-sm mb-3 mt-2">
+    <span class="btn btn-outline-warn flex-fill justify-content-center" matTooltip="Show hidden batch information." matTooltipPosition="left">
+      <mat-slide-toggle id="batch" (click)="sidenav.toggle()">
         Batch
       </mat-slide-toggle>
     </span>
@@ -48,11 +48,12 @@
       Topics</button>
   </div>
   <!-- SIDENAV -->
-  <mat-sidenav-container>
+  <mat-sidenav-container id="sideCard" style="border-radius: 20px 20px 20px 20px; box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.555)">
     <mat-sidenav #sidenav mode="side">
-      <mat-card class="border border-dark rounded justify-content-center">
-        <mat-card-header id="batchHeader" class="rounded border border-dark justify-content-center">
-          {{currentBatch}}
+      <mat-card id="sideNav" *ngIf="currentBatch">
+        <mat-card-header id="batchHeader">
+          <!-- {{currentBatch.name}} -->
+          1806-June18-USF-Java4
         </mat-card-header>
         <mat-list dense>
           <mat-list-item class='d-flex'>
@@ -76,7 +77,7 @@
         </mat-list>
       </mat-card>
     </mat-sidenav>
-    <mat-card class="border border-dark rounded justify-content-center">
+    <mat-card style="border-radius: 20px 20px 20px 20px; opacity: .9; box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.555)" *ngIf="todayIsOpen">
       <mat-card-header class="justify-content-center border border-dark rounded">
         <div>
           <div>
@@ -86,7 +87,7 @@
       </mat-card-header>
       <mat-card-content class='d-flex'>
         <h1 *ngIf="!dataSource"> Unable to find table data.</h1>
-        <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 flex-fill" *ngIf="dataSource">
+        <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 flex-fill" >
 
             <!-- TIME COLUMN -->
             <ng-container matColumnDef="time">
