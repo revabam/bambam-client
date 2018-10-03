@@ -27,7 +27,14 @@ export class BoomComponent implements OnInit {
   // bar chart
   public barChartOptions: any = {
     scaleShowVerticalLines: false,
-    responsive: true
+    responsive: true,
+    scales: {
+      yAxes: [{
+        ticks: {
+          beginAtZero: true
+        }
+      }]
+    }
   };
   public barChartLabels: number[] = this.weeks;
   public barChartType = 'bar';
@@ -189,7 +196,7 @@ export class BoomComponent implements OnInit {
       }
       for (let n = 0; n < this.batches.length; n++) {
         if (this.batches[n].calendarCurriculum_id === this.curriculums[i].id) {
-          this.curriculums[i].name = this.batches[n].name;
+          this.curriculums[i].name = this.batches[n].name + ' ' + this.batches[n].version;
         }
       }
     }
