@@ -54,7 +54,7 @@ export class DashboardComponent implements OnInit {
     { num: 0, icon: 'visibility_off' },
     { num: 1, icon: 'visibility' }
   ];
-  DashTitle = 'Today';
+  DashTitle = '';
   todayIsOpen: boolean;
   topicsIsOpen: boolean;
   list: string[];
@@ -250,6 +250,7 @@ export class DashboardComponent implements OnInit {
   // Marcin
   showCurrentDay() {
     this.showDay(new Date().getDay());
+    this.DashTitle = 'Today';
   }
   // Changes the statusId of a particular event on screen. - Joey
   statusToggle(sub, yesNo) {
