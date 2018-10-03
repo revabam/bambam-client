@@ -7,6 +7,7 @@ import { Component, OnInit, Inject } from '@angular/core';
 import { CurriculumDay } from '../../../models/curriculum-day';
 import { CurriculumDayService } from '../../../services/curriculum-day.service';
 import { FormControl, Validators } from '@angular/forms';
+import { CurriculumEditorComponent } from '../curriculum-editor.component';
 
 export interface Status {
   value: string;
