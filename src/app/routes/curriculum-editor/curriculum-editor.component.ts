@@ -40,11 +40,11 @@ export class CurriculumEditorComponent implements OnInit {
     private curriculumWeekService: CurriculumWeekService,
     private daySubTopicService: DaySubtopicService,
     public dialog: MatDialog,
-  ) { 
-      this.matIconRegistry.addSvgIcon(
-        "copy",
-        this.domSanitizer.bypassSecurityTrustResourceUrl("../assets/copy_icon.svg")
-      );
+  ) {
+    this.matIconRegistry.addSvgIcon(
+      'copy',
+      this.domSanitizer.bypassSecurityTrustResourceUrl('../assets/copy_icon.svg')
+    );
   }
 
   /*
@@ -70,16 +70,33 @@ export class CurriculumEditorComponent implements OnInit {
     });
   }
 
-   // here is where the master version of the curriculum is copied so that it can be edited
-   copyCurriculum(curriculum){
-    this.curriculums.push(curriculum);
-    let currArr=this.curriculums.slice(0,this.curriculums.length-1);
-    ++currArr[currArr.length-1].version;
-    this.curriculums[this.curriculums.length-1]=currArr[currArr.length-1];
-    console.log(curriculum);
-    console.log(this.curriculums);
+  // here is where the master version of the curriculum is copied so that it can be edited
+  copyCurriculum(curriculum: Curriculum) {
+    const copiedCurriculum: Curriculum = {
+      name: curriculum.name,
+      version: this.highestVersion(curriculum.name),
+      creatorId: curriculum.creatorId,
+      status: 1,
+      dateCreated: new Date(),
+      numberOfWeeks: curriculum.numberOfWeeks,
+      topics: curriculum.topics,
+      curriculumWeeks: curriculum.curriculumWeeks
+    };
+    this.curriculums.push(copiedCurriculum);
+    this.curriculumService.post(copiedCurriculum).subscribe(result => {
+      copiedCurriculum.id = result.id;
+    });
   }
 
+  highestVersion(name: string): number {
+    let count = 1;
+    for (const curriculum of this.curriculums) {
+      if (curriculum.name === name) {
+        count++;
+      }
+    }
+    return count;
+  }
   /**
    * Gets us distinct curriculum names from the list of all
    * curriculums
