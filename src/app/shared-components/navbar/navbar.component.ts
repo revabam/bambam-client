@@ -14,7 +14,7 @@ import { CognitoService } from '../../services/cognito.service';
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
-  styleUrls: ['./navbar.component.css']
+  styleUrls: ['./navbar.scss']
 })
 export class NavbarComponent implements OnInit {
 
@@ -47,7 +47,7 @@ export class NavbarComponent implements OnInit {
     @return       'primary' or '' depending on which page the user is on
   */
   getColor(path: string) {
-    return (`/${path}` === window.location.pathname) ? 'primary' : '';
+    return (`/${path}` === window.location.pathname) ? 'accent' : '';
   }
 
   /*
@@ -60,7 +60,7 @@ export class NavbarComponent implements OnInit {
 
     // Push null onto the user subject so that the navbar disappears
     this.userService.user.next(null);
-    
+
     this.router.navigate(['login']);
   }
 

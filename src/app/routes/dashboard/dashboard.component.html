@@ -35,10 +35,10 @@
   </div>
   <!-- Dash -->
   <!-- Dash Info -->
-  <div class="d-flex flex-row justify-content-center">
-    <span class="btn btn-outline-warn flex-fill justify-content-center" matTooltip="Show hidden batch information."
-      matTooltipPosition="left">
-      <mat-slide-toggle class="flex-fill" color="warn" (click)="sidenav.toggle()">
+
+  <div class="d-flex ">
+    <span class="btn btn-outline-warn flex-fill justify-content-center" matTooltip="Show hidden batch information." matTooltipPosition="left">
+      <mat-slide-toggle id="batch" (click)="sidenav.toggle()">
         Batch
       </mat-slide-toggle>
     </span>
@@ -48,10 +48,10 @@
       Topics</button>
   </div>
   <!-- SIDENAV -->
-  <mat-sidenav-container>
+  <mat-sidenav-container id="sideCard" style="border-radius: 20px 20px 20px 20px; box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.555)">
     <mat-sidenav #sidenav mode="side">
-      <mat-card class="border border-dark rounded justify-content-center">
-        <mat-card-header id="batchHeader" class="rounded border border-dark justify-content-center">
+      <mat-card id="sideNav">
+        <mat-card-header id="batchHeader">
           {{currentBatch}}
         </mat-card-header>
         <mat-list dense>
@@ -76,7 +76,7 @@
         </mat-list>
       </mat-card>
     </mat-sidenav>
-    <mat-card class="border border-dark rounded justify-content-center">
+    <mat-card style="border-radius: 20px 20px 20px 20px; opacity: .9; box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.555)" *ngIf="todayIsOpen">
       <mat-card-header class="justify-content-center border border-dark rounded">
         <div>
           <div>

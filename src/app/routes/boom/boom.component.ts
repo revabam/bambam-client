@@ -4,7 +4,7 @@ import { BoomService } from '../../services/boom.service';
 @Component({
   selector: 'app-boom',
   templateUrl: './boom.component.html',
-  styleUrls: ['./boom.component.css']
+  styleUrls: ['./boom.scss']
 })
 export class BoomComponent implements OnInit {
 

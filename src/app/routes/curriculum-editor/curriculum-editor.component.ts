@@ -9,14 +9,14 @@ import { MatDialog } from '@angular/material';
 import { CreateCurriculumComponent } from './create-curriculum/create-curriculum.component';
 import { CurriculumDayService } from '../../services/curriculum-day.service';
 import { weekdays } from 'moment';
-import { MatIconRegistry } from "@angular/material/icon";
-import { DomSanitizer } from "@angular/platform-browser";
+import { MatIconRegistry } from '@angular/material/icon';
+import { DomSanitizer } from '@angular/platform-browser';
 
 
 @Component({
   selector: 'app-curriculum-editor',
   templateUrl: './curriculum-editor.component.html',
-  styleUrls: ['./curriculum-editor.component.css']
+  styleUrls: ['./curriculum-editor.scss']
 })
 export class CurriculumEditorComponent implements OnInit {
   // Arrays of all the elements we're fetching from the server.

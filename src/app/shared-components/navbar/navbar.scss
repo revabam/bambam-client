@@ -1,0 +1,30 @@
+// Variables
+// font
+$weight: bold; // font-weight
+// color 
+$oColor: rgb(231, 94, 2); 
+$wColor: white; 
+// border
+$radius: 13px 13px 13px 13px; // border radius
+$shadow: 0px 0px 2px 2px; //shadow effect on buttons related to Calender
+// size
+$w100: 100%; // width
+
+// Transparency of navbar background
+mat-toolbar {
+    background-color: rgba(156, 156, 156, 0);
+}
+
+// button configuration for specific button editting 
+button{
+    font-weight: $weight;
+    color: $oColor;
+    border-style: solid;
+    border-width: 3px;
+    font-size: .9vw;
+    opacity: .8;
+}
+button:hover{
+    box-shadow: rgb(255, 115, 0) $shadow;
+    opacity: 1;
+}

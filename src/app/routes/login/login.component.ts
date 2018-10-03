@@ -16,7 +16,7 @@ import { CognitoService } from '../../services/cognito.service';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+  styleUrls: ['./login.scss']
 })
 export class LoginComponent implements OnInit {
   // This is used to display non-error related information to the user
@@ -25,7 +25,7 @@ export class LoginComponent implements OnInit {
   // This is used to display errors to the user
   errorMessage: string;
 
-  //This is used to get the user.
+  // This is used to get the user.
   bamUser: BamUser;
 
   // Build the form controls.

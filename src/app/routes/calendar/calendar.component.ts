@@ -55,7 +55,7 @@ export class CustomCalendarEvent implements CalendarEvent<any> {
   selector: 'app-calendar',
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './calendar.component.html',
-  styleUrls: ['./calendar.component.css']
+  styleUrls: ['./calendar.scss']
 })
 export class CalendarComponent implements OnInit, DoCheck {
   colors: any = {
@@ -139,7 +139,7 @@ export class CalendarComponent implements OnInit, DoCheck {
    */
   ngOnInit() {
     this.user = JSON.parse(sessionStorage.getItem('user'));
-    this.user.id = 1;
+    this.user.id = '1';
     this.calendarService.getCalendarEvents(this.user.id).subscribe(events => {
       this.storedEvents = events;
       this.calendarService.getCustomCalendarEvents().subscribe(customEvents => {

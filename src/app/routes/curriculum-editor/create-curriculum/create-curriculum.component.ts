@@ -17,7 +17,7 @@ export interface Status {
 @Component({
   selector: 'app-create-curriculum',
   templateUrl: './create-curriculum.component.html',
-  styleUrls: ['./create-curriculum.component.css']
+  styleUrls: ['./create-curriculum.scss']
 })
 export class CreateCurriculumComponent implements OnInit {
 
@@ -54,8 +54,7 @@ export class CreateCurriculumComponent implements OnInit {
     public dialogRef: MatDialogRef<CreateVersionComponent>,
     @Inject(MAT_DIALOG_DATA) public data: object,
     private curriculumDayService: CurriculumDayService,
-    private curriculumWeekService: CurriculumWeekService,
-    private curriculumEditor: CurriculumEditorComponent, 
+    private curriculumWeekService: CurriculumWeekService
     ) { }
 
 
@@ -98,7 +97,7 @@ export class CreateCurriculumComponent implements OnInit {
       for (let i = 0; i < this.data['curriculums'].length; i++) {
         if (this.data['curriculums'][i].name === newCurriculum.name) {
           if (this.data['curriculums'][i].version >= nameNum) {
-            nameNum+=1;
+            nameNum += 1;
           } else {
             continue;
           }

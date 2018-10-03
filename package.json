@@ -43,6 +43,7 @@
     "ng-drag-drop": "^5.0.0",
     "ng-mat-search-bar": "^1.0.0-rc.1",
     "ng2-charts": "^1.6.0",
+    "sass": "^1.14.0",
     "ngx-bootstrap": "^3.0.1",
     "rxjs": "^6.3.3",
     "zone.js": "^0.8.26"
