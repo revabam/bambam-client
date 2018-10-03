@@ -6,6 +6,7 @@ import { SubTopicService } from './subtopic.service';
 /**
  * Here we are testing the methods within the SubTopic Service class
  * @name SubTopicTest
+ * @author Daniel Sidhu | Spark1806-USF-Java | Steven Kelsey
  */
 describe('SubtopicService', () => {
   beforeEach(() => {
