@@ -53,8 +53,109 @@ export class DashboardComponent implements OnInit {
   eventsThisWeek: CalendarEvent[];
   curriculumDay: CurriculumDay[];
   curriculumWeek: CurriculumWeek[];
-
+  selectedDay;
   currentWeekEvents: CalendarEvent[];
+
+  dayArr = [
+    {
+      dayNum: 0,
+      today: 'Sunday',
+      selected: false
+    },
+    {
+      dayNum: 1,
+      today: 'Monday',
+      selected: false
+    },
+    {
+      dayNum: 2,
+      today: 'Tuesday',
+      selected: false
+    },
+    {
+      dayNum: 3,
+      today: 'Wednesday',
+      selected: false
+    },
+    {
+      dayNum: 4,
+      today: 'Thursday',
+      selected: false
+    },
+    {
+      dayNum: 5,
+      today: 'Friday',
+      selected: false
+    },
+    {
+      dayNum: 6,
+      today: 'Saturday',
+      selected: false
+    },
+    {
+      dayNum: 7,
+      today: 'Sunday',
+      selected: false
+    }
+  ];
+
+  subsArr = [
+    {
+      'nameId': 1,
+      'topicName': 'For Loops',
+      'topicId': 1
+    },
+    {
+      'nameId': 2,
+      'topicName': 'While Loops',
+      'topicId': 2
+    },
+    {
+      'nameId': 3,
+      'topicName': 'Do While',
+      'topicId': 3
+    },
+    {
+      'nameId': 4,
+      'topicName': 'If statments',
+      'topicId': 4
+    },
+    {
+      'nameId': 5,
+      'topicName': 'Normalization',
+      'topicId': 2
+    },
+    {
+      'nameId': 6,
+      'topicName': 'Stored Procedures',
+      'topicId': 2
+    },
+    {
+      'nameId': 7,
+      'topicName': 'HTML elements',
+      'topicId': 3
+    },
+    {
+      'nameId': 8,
+      'topicName': 'JavaScript DOM manipulation',
+      'topicId': 3
+    },
+    {
+      'nameId': 9,
+      'topicName': 'Inline, internal, and external CSS',
+      'topicId': 3
+    },
+    {
+      'nameId': 10,
+      'topicName': 'Node',
+      'topicId': 4
+    },
+    {
+      'nameId': 11,
+      'topicName': 'Express APIs',
+      'topicId': 4
+    }
+  ];
 
   constructor(
     private router: Router,
@@ -78,102 +179,12 @@ export class DashboardComponent implements OnInit {
   log(x) {
     console.log(x);
   }
-  dayArr = [
-    {
-      dayNum: 0,
-      today: 'Sunday',
-    },
-    {
-      dayNum: 1,
-      today: 'Monday'
-    },
-    {
-      dayNum: 2,
-      today: 'Tuesday'
-    },
-    {
-      dayNum: 3,
-      today: 'Wednesday'
-    },
-    {
-      dayNum: 4,
-      today: 'Thursday'
-    },
-    {
-      dayNum: 5,
-      today: 'Friday'
-    },
-    {
-      dayNum: 6,
-      today: 'Saturday'
-    },
-    {
-      dayNum: 7,
-      today: 'Sunday'
-    }]
-
-  subsArr = [
-    {
-      "nameId": 1,
-      "topicName": "For Loops",
-      "topicId": 1
-    },
-    {
-      "nameId": 2,
-      "topicName": "While Loops",
-      "topicId": 2
-    },
-    {
-      "nameId": 3,
-      "topicName": "Do While",
-      "topicId": 3
-    },
-    {
-      "nameId": 4,
-      "topicName": "If statments",
-      "topicId": 4
-    },
-    {
-      "nameId": 5,
-      "topicName": "Normalization",
-      "topicId": 2
-    },
-    {
-      "nameId": 6,
-      "topicName": "Stored Procedures",
-      "topicId": 2
-    },
-    {
-      "nameId": 7,
-      "topicName": "HTML elements",
-      "topicId": 3
-    },
-    {
-      "nameId": 8,
-      "topicName": "JavaScript DOM manipulation",
-      "topicId": 3
-    },
-    {
-      "nameId": 9,
-      "topicName": "Inline, internal, and external CSS",
-      "topicId": 3
-    },
-    {
-      "nameId": 10,
-      "topicName": "Node",
-      "topicId": 4
-    },
-    {
-      "nameId": 11,
-      "topicName": "Express APIs",
-      "topicId": 4
-    }
-  ]
 
   ngOnInit() {
     this.calendarService.getCalendarEventsByTrainerId(1).subscribe(response => {
       this.calendarEvents = response;
       this.currentWeekEvents = this.getCurrentWeekEvents(this.calendarEvents);
+      this.showCurrentDay();
     });
 
     this.user = JSON.parse(sessionStorage.getItem('user'));
@@ -241,11 +252,27 @@ export class DashboardComponent implements OnInit {
     }
   }
 
-  
+  selectDay(dayNum: number) {
+    for ( const day of this.dayArr ) {
+      day.selected = false;
+    }
+    this.dayArr[dayNum].selected = true;
+  }
 
+  getCurrentDayEvents(dayNumber) {
+    let counter = 0;
+    for (const event of this.currentWeekEvents) {
+      if (new Date(event.startDateTime).getDay() === dayNumber) {
+        counter++;
+      }
+    }
+    return counter;
+  }
+
+  // Marcin
   getCurrentWeekEvents(events: CalendarEvent[]): CalendarEvent[] {
     const currentWeekEvents: CalendarEvent[] = [];
-    let week: Date[] = [];
+    const week: Date[] = [];
     const monday = new Date();
     while (monday.getDay() > 1 && monday.getDay() !== 0) {
       if (monday.getDay() === 0) {
@@ -261,7 +288,8 @@ export class DashboardComponent implements OnInit {
     }
     for (const event of events) {
       for (const day of week) {
-        if (event.startDateTime.getDate() === day.getDate() && event.startDateTime.getMonth() === day.getMonth()){
+        const eventDate: Date = new Date(event.startDateTime);
+        if (eventDate.getDate() === day.getDate() && eventDate.getMonth() === day.getMonth()) {
           currentWeekEvents.push(event);
         }
       }
@@ -271,12 +299,18 @@ export class DashboardComponent implements OnInit {
 
   // Sets the DashTitle to the selected day of the week. - Joey
   showDay(dayNumber) {
+    this.selectDay(dayNumber);
     this.dataSource = [];
     for (const event of this.currentWeekEvents) {
-      if (event.startDateTime.getDay() === dayNumber) {
+      if (new Date(event.startDateTime).getDay() === dayNumber) {
         this.dataSource.push(event);
       }
     }
+  }
+
+  // Marcin
+  showCurrentDay() {
+    this.showDay(new Date().getDay());
   }
   // Changes the statusId of a particular event on screen. - Joey
   statusToggle(sub, yesNo) {
