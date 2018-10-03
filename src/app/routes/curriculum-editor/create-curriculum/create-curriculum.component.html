@@ -9,18 +9,11 @@
   </mat-form-field>
   <mat-form-field class="col-9">
     <!-- validating the curriculum weeks -->
-    <input type='number' matInput [(ngModel)]="numberOfWeeks" (blur)='validate()' [formControl]="cweekFormControl"
+    <input type='number' matInput [(ngModel)]="numberOfWeeks" (keyup)='validate()' [formControl]="cweekFormControl"
       placeholder="Number of weeks">
     <mat-error *ngIf="cweekFormControl.hasError('required')">
       Number of week is <strong>required</strong>
     </mat-error>
-  </mat-form-field>
-  <mat-form-field class="col-9">
-    <mat-select placeholder="Curriculum Status" [(ngModel)]="selectedStatus" (blur)='validate()' [formControl]="statusFormControl">
-      <mat-option *ngFor="let status of curriculumStatus" [value]="status.value">
-        {{status.viewValue}}
-      </mat-option>
-    </mat-select>
   </mat-form-field>
 </div>
 <div mat-dialog-actions>

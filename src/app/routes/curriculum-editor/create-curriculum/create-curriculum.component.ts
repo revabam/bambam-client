@@ -8,26 +8,14 @@ import { CurriculumDay } from '../../../models/curriculum-day';
 import { CurriculumDayService } from '../../../services/curriculum-day.service';
 import { FormControl, Validators } from '@angular/forms';
 
-export interface Status {
-  value: string;
-  viewValue: string;
-}
-
 @Component({
   selector: 'app-create-curriculum',
   templateUrl: './create-curriculum.component.html',
   styleUrls: ['./create-curriculum.component.css']
 })
 export class CreateCurriculumComponent implements OnInit {
-  curriculumStatus: Status[] = [
-    {value: '1', viewValue: 'Draft'},
-    {value: '2', viewValue: 'Needs Approval'},
-    {value: '3', viewValue: 'Read Only'},
-    {value: '4', viewValue: 'Master'}
-  ];
   curriculumName: string;
   numberOfWeeks: number;
-  selectedStatus: number;
   isValid = false;
   curriculum: Curriculum;
   /**
@@ -173,12 +161,18 @@ export class CreateCurriculumComponent implements OnInit {
     });
   }
 
-  // here we are performing validation for the curriculum entered
-  //    the submit button is disabled until both name and weeks are entered correctly
+  /**
+   * validation for the curriculum entered
+   * the submit button is disabled until both name and weeks are entered correctly
+   * @param curriculumName user input to validate
+   * @param numberOfWeeks user input to validate
+   * @return enable submit button
+   * @author - Stephen Hong | Spark1806-USF-Java | Steven Kelsey
+   */
   validate() {
     this.isValid = true;
     // validating user input
-    if (!this.curriculumName || !this.numberOfWeeks || !this.selectedStatus) {
+    if (!this.curriculumName || !this.numberOfWeeks) {
       this.isValid = false;
     } else {
       // if curriculum name is valid
