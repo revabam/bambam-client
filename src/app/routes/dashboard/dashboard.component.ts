@@ -4,9 +4,12 @@ import { Router } from '@angular/router';
 import { Batch } from '../../models/batch';
 import { BatchService } from '../../services/batch.service';
 import { Curriculum } from '../../models/curriculum';
+import { CurriculumService } from '../../services/curriculum.service';
 import { UserService } from '../../services/user.service';
 import { CalendarService } from '../../services/calendar.service';
 import { CalendarEvent } from '../../models/calendar-event';
+import { CurriculumWeek } from '../../models/curriculum-week';
+import { CurriculumDay } from '../../models/curriculum-day';
 import { CognitoService } from '../../services/cognito.service';
 
 /**
@@ -17,30 +20,30 @@ import { CognitoService } from '../../services/cognito.service';
  * @author Bradley Walker | Khaleel Williams | 1806-Jun18-USF-Java | Wezley Singleton
  * @author Joey Shannon | Drake Mapel | 1806-Spark | Steven Kelsey
  */
-export interface Topicz {
-  time: number;
-  flagged: number;
-  id: number;
-  name: string;
-  status: number;
-}
 
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
-  styleUrls: ['./dashboard.scss']
+  styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent implements OnInit {
-  headerColumns: string[] = ['time', 'flag', 'sub', 'control'];
+  headerColumns: string[] = ['time', 'flagged', 'sub', 'control'];
   dataSource;
-  topics = this.calendarService.getCalendarEventsById(1);
+  dayInfo;
+  Today = new Date().setDate(new Date().getDate() + 1);
+  Tomorrow = new Date().setDate(new Date().getDate() + 2);
+  daySelected = new Date().setDate(new Date().getDate() + 1);
+  calendarEvents = null;
+  selectedDate = this.cs.getCurriculumByWeek(1);
   currentBatch;
+
   user: BamUser = {
-    id: '',
+    id: null,
     firstName: '',
     lastName: '',
     email: ''
   };
+
   batch;
   batchWeek: number;
   percentCompletion: number;
@@ -48,20 +51,126 @@ export class DashboardComponent implements OnInit {
   firstName: string;
   lastName: string;
   visibilityIcon = [
-    {num: 0, icon: 'visibility_off' },
-    {num: 1, icon: 'visibility'}
+    { num: 0, icon: 'visibility_off' },
+    { num: 1, icon: 'visibility' }
   ];
   DashTitle = 'Today';
   todayIsOpen: boolean;
   topicsIsOpen: boolean;
   list: string[];
   eventsThisWeek: CalendarEvent[];
+  curriculumDay: CurriculumDay[];
+  curriculumWeek: CurriculumWeek[];
+  selectedDay;
+  currentWeekEvents: CalendarEvent[];
+
+  dayArr = [
+    {
+      dayNum: 0,
+      today: 'Sunday',
+      selected: false
+    },
+    {
+      dayNum: 1,
+      today: 'Monday',
+      selected: false
+    },
+    {
+      dayNum: 2,
+      today: 'Tuesday',
+      selected: false
+    },
+    {
+      dayNum: 3,
+      today: 'Wednesday',
+      selected: false
+    },
+    {
+      dayNum: 4,
+      today: 'Thursday',
+      selected: false
+    },
+    {
+      dayNum: 5,
+      today: 'Friday',
+      selected: false
+    },
+    {
+      dayNum: 6,
+      today: 'Saturday',
+      selected: false
+    },
+    {
+      dayNum: 7,
+      today: 'Sunday',
+      selected: false
+    }
+  ];
+
+  subsArr = [
+    {
+      'nameId': 1,
+      'topicName': 'For Loops',
+      'topicId': 1
+    },
+    {
+      'nameId': 2,
+      'topicName': 'While Loops',
+      'topicId': 2
+    },
+    {
+      'nameId': 3,
+      'topicName': 'Do While',
+      'topicId': 3
+    },
+    {
+      'nameId': 4,
+      'topicName': 'If statments',
+      'topicId': 4
+    },
+    {
+      'nameId': 5,
+      'topicName': 'Normalization',
+      'topicId': 2
+    },
+    {
+      'nameId': 6,
+      'topicName': 'Stored Procedures',
+      'topicId': 2
+    },
+    {
+      'nameId': 7,
+      'topicName': 'HTML elements',
+      'topicId': 3
+    },
+    {
+      'nameId': 8,
+      'topicName': 'JavaScript DOM manipulation',
+      'topicId': 3
+    },
+    {
+      'nameId': 9,
+      'topicName': 'Inline, internal, and external CSS',
+      'topicId': 3
+    },
+    {
+      'nameId': 10,
+      'topicName': 'Node',
+      'topicId': 4
+    },
+    {
+      'nameId': 11,
+      'topicName': 'Express APIs',
+      'topicId': 4
+    }
+  ];
 
   constructor(
     private router: Router,
     private batchService: BatchService,
     private userService: UserService,
     private calendarService: CalendarService,
+    private cs: CurriculumService,
     private cognito: CognitoService
   ) { }
 
@@ -70,13 +179,59 @@ export class DashboardComponent implements OnInit {
   * data from the session storage and display both the user's personal info,
   * and info about the batch they are associated with.
   */
+
+  sortData() {
+    return this.curriculumDay.sort((a, b) => {
+      return <any>(b.dayNum) - <any>(a.dayNum);
+    });
+  }
+
   ngOnInit() {
-    /* Gets the current logged in user. */
-    this.user = this.cognito.getUserAttributes();
+
+     this.user = this.cognito.getUserAttributes();
+
+    this.calendarService.getCalendarEventsByTrainerId(1).subscribe(response => {
+      this.calendarEvents = response;
+      this.currentWeekEvents = this.getCurrentWeekEvents(this.calendarEvents);
+      this.showCurrentDay();
+    });
+    this.batchService.getBatchByTrainer(1).subscribe(
+      result => {
+        this.currentBatch = result[0];
+      }
+    );
+
+    this.cs.getCurriculumByWeek(1).subscribe((values: any) => {
+      this.curriculumWeek = values;
+      this.curriculumDay = values.curriculumDay;
+      this.curriculumDay = this.curriculumDay.sort((n1, n2) => {
+        if (n1.dayNum > n2.dayNum) {
+          return 1;
+        }
+
+        if (n1.dayNum < n2.dayNum) {
+          return -1;
+        }
+
+        return 0;
+      });
+    });
+
+
+
+    //   this.eventsThisWeek = this.calendarService.getCalendarEventsByTrainerIdAndWeek(1, new Date());
+
     if (!this.user) {
-      this.dataSource = this.topics;
+      this.router.navigate(['login']);
+    } else {
+      /*
+        In our sprint, only trainers can use the program so there is no
+        need to check if the user is a trainer or not, But this is where
+        you might want to do that.
+      */
       this.batchService.getBatchByTrainer(1).subscribe(
         result => {
+          console.log(result);
           this.currentBatch = result[0];
         }
       );
@@ -121,31 +276,72 @@ export class DashboardComponent implements OnInit {
     }
   }
 
-    /*
-    Returns the color for the navbar buttons
-
-    @param  path  the path of the navbar button
-    @return       'primary' or '' depending on which page the user is on
-  */
- getColor(path: string) {
-  return (`/${path}` === window.location.pathname) ? 'accent' : '';
-}
-
-  // function to select specific days of the week to display
-  showThisDay() {
-    console.log('monday');
-
+  selectDay(dayNum: number) {
+    for (const day of this.dayArr) {
+      day.selected = false;
+    }
+    this.dayArr[dayNum].selected = true;
   }
 
+  getCurrentDayEvents(dayNumber) {
+    let counter = 0;
+    for (const event of this.currentWeekEvents) {
+      if (new Date(event.startDateTime).getDay() === dayNumber) {
+        counter++;
+      }
+    }
+    return counter;
+  }
 
-  // function for if something is completed or in progress
+  // Marcin
+  getCurrentWeekEvents(events: CalendarEvent[]): CalendarEvent[] {
+    const currentWeekEvents: CalendarEvent[] = [];
+    const week: Date[] = [];
+    const monday = new Date();
+    while (monday.getDay() > 1 && monday.getDay() !== 0) {
+      if (monday.getDay() === 0) {
+        monday.setDate(monday.getDate() + 1);
+      } else {
+        monday.setDate(monday.getDate() - 1);
+      }
+    }
+    for (let i = 0; i < 5; i++) {
+      const day = new Date(monday);
+      day.setDate(monday.getDate() + i);
+      week.push(day);
+    }
+    for (const event of events) {
+      for (const day of week) {
+        const eventDate: Date = new Date(event.startDateTime);
+        if (eventDate.getDate() === day.getDate() && eventDate.getMonth() === day.getMonth()) {
+          currentWeekEvents.push(event);
+        }
+      }
+    }
+    return currentWeekEvents;
+  }
+
+  // Sets the DashTitle to the selected day of the week. - Joey
+  showDay(dayNumber) {
+    this.selectDay(dayNumber);
+    this.dataSource = [];
+    for (const event of this.currentWeekEvents) {
+      if (new Date(event.startDateTime).getDay() === dayNumber) {
+        this.dataSource.push(event);
+      }
+    }
+  }
+
+  // Marcin
+  showCurrentDay() {
+    this.showDay(new Date().getDay());
+  }
+  // Changes the statusId of a particular event on screen. - Joey
   statusToggle(sub, yesNo) {
     sub.statusId = yesNo;
   }
-
-  // function to flag an item
+  // Changes the flagged state of an item to mark it important - Joey
   flagRow(sub) {
-
     if (!sub.flaggedId) {
       sub.flaggedId = 1;
     } else {

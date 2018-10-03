@@ -139,6 +139,7 @@ export class CalendarComponent implements OnInit, DoCheck {
    */
   ngOnInit() {
     this.user = JSON.parse(sessionStorage.getItem('user'));
+    this.user.id = '1';
     this.calendarService.getCalendarEvents(this.user.id).subscribe(events => {
       this.storedEvents = events;
       this.calendarService.getCustomCalendarEvents().subscribe(customEvents => {

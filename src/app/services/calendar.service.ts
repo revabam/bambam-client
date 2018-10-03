@@ -21,6 +21,9 @@ export class CalendarService {
 
   constructor(private http: HttpClient) { }
 
+  getCalendarEventsByTrainerId(id) {
+    return this.http.get(`http://localhost:9994/calendars/event/trainer/${id}`, HTTP_OPTIONS);
+  }
   /**
    * Get all stored curriculums
    * @returns Observable of curriculum[]

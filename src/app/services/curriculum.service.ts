@@ -13,6 +13,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Curriculum } from '../models/curriculum';
 import { Observable } from 'rxjs';
 import { environment } from '../../environments/environment';
+import { CurriculumWeek } from '../models/curriculum-week';
 
 // The content type for our HTTP requests is JSON.
 const HTTP_OPTIONS = {
@@ -30,6 +31,12 @@ export class CurriculumService {
   // The dependency to be injected, in order to use an HttpClient.
   constructor(private http: HttpClient) { }
    curriculums=this.getAll();
+
+
+   // get items by week.
+   getCurriculumByWeek(id) {
+    return this.http.get(`http://localhost:9996/curriculums/weeks/${id}`, HTTP_OPTIONS)
+  } 
 
   /**
    * The function used to fetch all the curriculums from the server.
