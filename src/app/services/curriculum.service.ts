@@ -27,7 +27,6 @@ const HTTP_OPTIONS = {
 })
 export class CurriculumService {
 
-
   // The dependency to be injected, in order to use an HttpClient.
   constructor(private http: HttpClient) { }
    curriculums = this.getAll().subscribe();
