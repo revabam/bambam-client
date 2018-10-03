@@ -157,7 +157,9 @@ export class RegisterComponent implements OnInit {
               const user: BamUser = {
                 firstName: firstName,
                 lastName: lastName,
-                email: email
+                email: email,
+                // role_id: 1,
+                // status_id: 1
               };
               this.userService.register(user).subscribe(
                 u => {
