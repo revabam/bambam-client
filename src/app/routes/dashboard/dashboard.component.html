@@ -7,7 +7,7 @@
           <mat-card-header>
             <div class="d-flex p-2 w-100 bd-highlight text-monospace justify-content-center">
               <p class='text-monospace'>
-                Welcome, {{this.user.firstName}}.
+                Welcome, Trainer Steve
               </p>
             </div>
           </mat-card-header>
@@ -36,7 +36,7 @@
   <!-- Dash -->
   <!-- Dash Info -->
 
-  <div class="d-flex ">
+  <div class="d-flex border col-sm mb-3 mt-2">
     <span class="btn btn-outline-warn flex-fill justify-content-center" matTooltip="Show hidden batch information." matTooltipPosition="left">
       <mat-slide-toggle id="batch" (click)="sidenav.toggle()">
         Batch
@@ -52,7 +52,8 @@
     <mat-sidenav #sidenav mode="side">
       <mat-card id="sideNav">
         <mat-card-header id="batchHeader">
-          {{currentBatch}}
+          <!-- {{currentBatch.name}} -->
+          1806-June18-USF-Java4
         </mat-card-header>
         <mat-list dense>
           <mat-list-item class='d-flex'>
@@ -86,7 +87,7 @@
       </mat-card-header>
       <mat-card-content class='d-flex'>
         <h1 *ngIf="!dataSource"> Unable to find table data.</h1>
-        <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 flex-fill" *ngIf="dataSource">
+        <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 flex-fill" >
 
             <!-- TIME COLUMN -->
             <ng-container matColumnDef="time">
