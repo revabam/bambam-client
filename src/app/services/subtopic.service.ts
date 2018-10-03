@@ -1,3 +1,4 @@
+import { Curriculum } from './../models/curriculum';
 import { Injectable } from '@angular/core';
 /*
  * HttpClient - What we use to make the http request.
@@ -54,6 +55,24 @@ export class SubTopicService {
    */
   getSubTopicByParentId(id: number): Observable<SubTopic[]> {
     return this.http.get<SubTopic[]>(environment.apiUrl + `curriculums/subtopic?parentTopic_id=${id}`, HTTP_OPTIONS);
+  }
+
+  /**
+   * Sets the names of the daySubTopics of a curriculum since it is not being persisted to the db
+   * @param curriculum the curriculum to update topic names
+   * @author - Chinedu Ozodi | 1806-Sep-18-USF-Java | Steven Kelsey
+   */
+  setDayTopicNames(curriculum: Curriculum): Curriculum {
+    curriculum.curriculumWeeks.forEach( (week) => {
+      week.curriculumDays.forEach( (day) => {
+        day.daySubTopics.forEach ( (daySubTopic) => {
+          if (this.subtopics) {
+            daySubTopic.name = this.subtopics.find( (subtopic) => subtopic.id === daySubTopic.subTopicId).name;
+          }
+        });
+      });
+    });
+    return curriculum;
   }
 
   /**

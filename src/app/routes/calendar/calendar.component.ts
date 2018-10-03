@@ -1,3 +1,4 @@
+import { CurriculumService } from './../../services/curriculum.service';
 import { Batch } from './../../models/batch';
 import * as $ from 'jquery';
 import * as moment from 'moment';
@@ -37,6 +38,7 @@ export class CustomCalendarEvent implements CalendarEvent<any> {
   start: Date;
   end?: Date;
   title: string;
+  version: number;
   color?: EventColor;
   actions?: EventAction[];
   allDay?: boolean;
@@ -132,7 +134,8 @@ export class CalendarComponent implements OnInit, DoCheck {
   events: CustomCalendarEvent[] = [];
 
   constructor(private modal: NgbModal, private calendarService: CalendarService, private subtopicService: SubTopicService,
-    private topicService: TopicService, private dialog: MatDialog, private batchService: BatchService) { }
+    private topicService: TopicService, private dialog: MatDialog, private batchService: BatchService,
+    private curriculumService: CurriculumService) { }
 
   /**
    * Life hook for loading all calendar services
@@ -152,7 +155,7 @@ export class CalendarComponent implements OnInit, DoCheck {
       });
     });
 
-    this.calendarService.getCurriculum().subscribe(response => {
+    this.curriculumService.getAll().subscribe(response => {
       this.curriculums = response;
       this.convertCirriculum();
     });
@@ -192,6 +195,7 @@ export class CalendarComponent implements OnInit, DoCheck {
           end: addWeeks(new Date(), curriculum.numberOfWeeks),
           title: curriculum.name,
           id: curriculum.id,
+          version: curriculum.version,
           color: this.colors.yellow,
           actions: this.actions,
           resizable: {
@@ -385,7 +389,7 @@ export class CalendarComponent implements OnInit, DoCheck {
        * providing a way to check if something is a curriculum being dragged or not
        */
       if (event.start.getDate() !== event.end.getDate() || event.start.getMonth() !== event.end.getMonth()) {
-        this.populateCalendar(id, event);
+        this.populateCalendar(event);
       }
       this.persistEvents();
       this.refresh.next();
@@ -438,17 +442,19 @@ export class CalendarComponent implements OnInit, DoCheck {
    * @param event that is dragged and dropped
    * @author Marcin Salamon | Alex Moraga | Spark1806-USF-Java | Steven Kelsey
    */
-  populateCalendar(id: number, event: CalendarEvent): void {
-    this.calendarService.getCurriculumById(id).subscribe(curr => {
-      this.openEventInsertCurriculum(curr.name, event.start).subscribe(decision => {
-        if (decision !== null) {
-          event.start = decision;
-          decision = null;
-          this.selectedCurriculum = curr;
-          this.dropEvent = <CustomCalendarEvent>event;
-        }
-      });
-    });
+  populateCalendar(event: CalendarEvent): void {
+    for (const curr of this.curriculums) {
+      if (curr.id === event.id) {
+        this.openEventInsertCurriculum(curr.name, event.start).subscribe(decision => {
+          if (decision !== null) {
+            event.start = decision;
+            decision = null;
+            this.selectedCurriculum = curr;
+            this.dropEvent = <CustomCalendarEvent>event;
+          }
+        });
+      }
+    }
   }
 
   /**
@@ -490,6 +496,7 @@ export class CalendarComponent implements OnInit, DoCheck {
           end: new Date(event.endDateTime),
           title: event.title,
           description: event.description,
+          version: event.version,
           color: color,
           actions: this.actions,
           resizable: {
@@ -510,64 +517,74 @@ export class CalendarComponent implements OnInit, DoCheck {
    * @author Marcin Salamon | Spark1806-USF-Java | Steven Kelsey
    */
   generateEvents() {
-    const startDate: Date = this.dropEvent.start;
-    const subtopicStartTime = startDate;
-    const weeks: CurriculumWeek[] = this.selectedCurriculum.curriculumWeeks;
-    for (const week of weeks) {
-      for (const day of week.curriculumDays) {
-        let hour = 9;
-        const subTopicsToday = day.daySubTopics.length;
-        const timeDifference = (7 / subTopicsToday);
-        /**
-         * if statement that skips weekends
-         */
-        if (subtopicStartTime.getDay() === 6) {
-          subtopicStartTime.setDate(subtopicStartTime.getDate() + 2);
-        } else if (subtopicStartTime.getDay() === 0) {
+    this.subtopicService.getAll().subscribe((subTopics) => {
+      this.subtopicService.subtopics = subTopics;
+      console.log(this.selectedCurriculum);
+      this.selectedCurriculum = this.subtopicService.setDayTopicNames(this.selectedCurriculum);
+      console.log('after adding names');
+      console.log(this.selectedCurriculum);
+      const startDate: Date = this.dropEvent.start;
+      const subtopicStartTime = startDate;
+      const weeks: CurriculumWeek[] = this.selectedCurriculum.curriculumWeeks;
+      for (const week of weeks) {
+        for (const day of week.curriculumDays) {
+          let hour = 9;
+          console.log(day);
+          console.log('day');
+          const subTopicsToday = day.daySubTopics.length;
+          const timeDifference = (7 / subTopicsToday);
+          /**
+           * if statement that skips weekends
+           */
+          if (subtopicStartTime.getDay() === 6) {
+            subtopicStartTime.setDate(subtopicStartTime.getDate() + 2);
+          } else if (subtopicStartTime.getDay() === 0) {
+            subtopicStartTime.setDate(subtopicStartTime.getDate() + 1);
+          }
+          for (const subtopic of day.daySubTopics) {
+            if (hour > 12 && hour < 13) {
+              hour++;
+            }
+            /**
+             * sets start time of the subtopic
+             */
+            subtopicStartTime.setHours(Math.floor(hour));
+            subtopicStartTime.setMinutes((hour - Math.floor(hour)) * 60);
+            hour = hour + timeDifference;
+            const endTime = new Date(subtopicStartTime);
+            /**
+             * sets end time of the event based on how many subtopics are there that day
+             */
+            endTime.setHours(Math.floor(hour));
+            endTime.setMinutes((hour - Math.floor(hour)) * 60);
+            this.events.push({
+              start: new Date(subtopicStartTime),
+              end: new Date(endTime),
+              title: subtopic.name,
+              version: this.selectedCurriculum.version,
+              color: {
+                primary: 'blue',
+                secondary: 'blue'
+              },
+              actions: this.actions,
+              resizable: {
+                beforeStart: true,
+                afterEnd: true
+              },
+              draggable: false,
+              subTopicId: subtopic.id,
+              statusId: 1,
+              flagged: 0
+            });
+          }
           subtopicStartTime.setDate(subtopicStartTime.getDate() + 1);
         }
-        for (const subtopic of day.daySubTopics) {
-          if (hour > 12 && hour < 13) {
-            hour++;
-          }
-          /**
-           * sets start time of the subtopic
-           */
-          subtopicStartTime.setHours(Math.floor(hour));
-          subtopicStartTime.setMinutes((hour - Math.floor(hour)) * 60);
-          hour = hour + timeDifference;
-          const endTime = new Date(subtopicStartTime);
-          /**
-           * sets end time of the event based on how many subtopics are there that day
-           */
-          endTime.setHours(Math.floor(hour));
-          endTime.setMinutes((hour - Math.floor(hour)) * 60);
-          this.events.push({
-            start: new Date(subtopicStartTime),
-            end: new Date(endTime),
-            title: subtopic.name,
-            color: {
-              primary: 'blue',
-              secondary: 'blue'
-            },
-            actions: this.actions,
-            resizable: {
-              beforeStart: true,
-              afterEnd: true
-            },
-            draggable: false,
-            subTopicId: subtopic.id,
-            statusId: 1,
-            flagged: 0
-          });
-        }
-        subtopicStartTime.setDate(subtopicStartTime.getDate() + 1);
+        subtopicStartTime.setDate(subtopicStartTime.getDate() + 2);
       }
-      subtopicStartTime.setDate(subtopicStartTime.getDate() + 2);
-    }
-    this.selectedCurriculum = null;
-    this.docheck = true;
-    this.persistEvents();
+      this.selectedCurriculum = null;
+      this.docheck = true;
+      this.persistEvents();
+    });
   }
 
   /**
@@ -634,6 +651,7 @@ export class CalendarComponent implements OnInit, DoCheck {
         color: this.colors.red,
         draggable: true,
         actions: this.actions,
+        version: 1,
         resizable: {
           beforeStart: true,
           afterEnd: true
