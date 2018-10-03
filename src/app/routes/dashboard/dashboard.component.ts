@@ -176,20 +176,16 @@ export class DashboardComponent implements OnInit {
       return <any>(b.dayNum) - <any>(a.dayNum);
     });
   }
-  log(x) {
-    console.log(x);
-  }
 
   ngOnInit() {
-    this.calendarService.getCalendarEventsByTrainerId(1).subscribe(response => {
+    this.user = JSON.parse(sessionStorage.getItem('user'));
+    this.calendarService.getCalendarEventsByTrainerId(this.user.id).subscribe(response => {
       this.calendarEvents = response;
       this.currentWeekEvents = this.getCurrentWeekEvents(this.calendarEvents);
       this.showCurrentDay();
     });
 
-    this.user = JSON.parse(sessionStorage.getItem('user'));
-
-    this.currentBatch = this.batchService.getBatchByTrainer(1);
+    this.currentBatch = this.batchService.getBatchByTrainer(this.user.id);
     this.cs.getCurriculumByWeek(1).subscribe((values: any) => {
       this.curriculumWeek = values;
       this.curriculumDay = values.curriculumDay;
@@ -206,7 +202,7 @@ export class DashboardComponent implements OnInit {
       });
     });
 
-    this.batchService.getBatchByTrainer(1).subscribe(
+    this.batchService.getBatchByTrainer(this.user.id).subscribe(
       result => {
         this.currentBatch = result[0];
       }
@@ -222,7 +218,7 @@ export class DashboardComponent implements OnInit {
         need to check if the user is a trainer or not, But this is where
         you might want to do that.
       */
-      this.batchService.getBatchesByTrainerId(1).subscribe(
+      this.batchService.getBatchesByTrainerId(this.user.id).subscribe(
         result => {
           // If the result is not null and not empty
           if (result && result.length !== 0) {
@@ -253,7 +249,7 @@ export class DashboardComponent implements OnInit {
   }
 
   selectDay(dayNum: number) {
-    for ( const day of this.dayArr ) {
+    for (const day of this.dayArr) {
       day.selected = false;
     }
     this.dayArr[dayNum].selected = true;
