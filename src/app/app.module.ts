@@ -19,6 +19,7 @@ import { FlatpickrModule } from 'angularx-flatpickr';
 import { appRoutes } from './routes/routes';
 import { AppComponent } from './app.component';
 import { BoomComponent } from './routes/boom/boom.component';
+import { CreateVersionComponent } from './routes/curriculum-editor/create-version/create-version.component';
 import { CurriculumEditorComponent } from './routes/curriculum-editor/curriculum-editor.component';
 import { NgbModalModule } from '@ng-bootstrap/ng-bootstrap/modal/modal.module';
 import { CalendarModule } from 'angular-calendar';
@@ -56,6 +57,7 @@ import {DragDropModule} from '@angular/cdk/drag-drop';
     DashboardComponent,
     CalendarComponent,
     CurriculumEditorComponent,
+    CreateVersionComponent,
     CreateCurriculumComponent,
     BoomComponent,
     LoginComponent,
