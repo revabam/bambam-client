@@ -26,15 +26,19 @@ const HTTP_OPTIONS = {
 })
 export class CurriculumService {
 
+
   // The dependency to be injected, in order to use an HttpClient.
   constructor(private http: HttpClient) { }
+   curriculums=this.getAll();
 
   /**
    * The function used to fetch all the curriculums from the server.
    */
   getAll(): Observable<Curriculum[]> {
-    return this.http.get<Curriculum[]>(environment.apiUrl + 'curriculums', HTTP_OPTIONS);
+    this.curriculums= this.http.get<Curriculum[]>(environment.apiUrl + 'curriculums', HTTP_OPTIONS);
+    return this.curriculums;
   }
+
 
   /**
    * The function used to post a curriculum to a server
