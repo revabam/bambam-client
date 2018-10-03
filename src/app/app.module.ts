@@ -118,9 +118,6 @@ import { CurriculumWeekComponent } from './routes/curriculum-editor/curriculum-w
     CalendarModule.forRoot(),
     UserIdleModule.forRoot({idle: 600, timeout: 300, ping: 60})
   ],
-  exports: [
-    NavbarComponent
-  ],
   entryComponents: [
     CalendarModalComponent,
     EventDuplicateModalComponent,
