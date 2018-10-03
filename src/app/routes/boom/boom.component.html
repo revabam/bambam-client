@@ -6,7 +6,8 @@
                     <h2>Overall Progress</h2>
                 </mat-card-title>
                 <mat-card-content>
-                    <canvas baseChart [data]="doughnutChartData" [labels]="doughnutChartLabels" [chartType]="doughnutChartType" [colors]="donutColors"></canvas>
+                    <canvas baseChart [data]="doughnutChartData" [labels]="doughnutChartLabels" 
+                                      [chartType]="doughnutChartType" [colors]="donutColors"></canvas>
                     <mat-form-field class="input">
                         <input placeholder="Input percent (0-100)" type="number" matInput min="0" max="100" (input)="percent($event)">
                     </mat-form-field>

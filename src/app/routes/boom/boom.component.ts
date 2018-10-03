@@ -1,6 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { BoomService } from '../../services/boom.service';
 
+
+/**
+ * BOOM (Bootcamp Overall Objective Manager) Displays the progress of batches
+ * using charts from the ng2-charts dependency.
+ * @author Richard Iskra | Obosa Nosa-Igiebor | Eddie Grays | 1806Spark-Jun25-USF-Java | Steven Kelsey
+ */
 @Component({
   selector: 'app-boom',
   templateUrl: './boom.component.html',
@@ -61,6 +67,7 @@ export class BoomComponent implements OnInit {
 
   /**
    *  get the progress of the selected batch
+   *  @param number
    *  @author Richard Iskra | Obosa Nosa-Igiebor | 1806Spark-Jun25-USF-Java | Steven Kelsey
    */
   getWeeklyProgress(curriculumId) {
@@ -102,6 +109,7 @@ export class BoomComponent implements OnInit {
 
   /**
    * Find the selected curriculum
+   * @param curriculum
    * @author Richard Iskra | 1806Spark-Jun25-USF-Java | Steven Kelsey
    */
   selectedCurriculum(event) {
@@ -115,6 +123,7 @@ export class BoomComponent implements OnInit {
 
   /**
    * Updates pie chart data when users enter a value in the percentage input field
+   * @param number
    *  @author Richard Iskra | Eddie Grays | 1806Spark-Jun25-USF-Java | Steven Kelsey
    */
   percent(event) {
@@ -187,7 +196,3 @@ export class BoomComponent implements OnInit {
     this.getWeeklyProgress(0);
   }
 }
-
-/**
- * @author Richard Iskra | Obosa Nosa-Igiebor | Eddie Grays | 1806Spark-Jun25-USF-Java | Steven Kelsey
- */
