@@ -2,7 +2,6 @@ import { Subject } from 'rxjs';
 import { CurriculumWeekService } from './../../../services/curriculum-week.service';
 import { CurriculumWeek } from './../../../models/curriculum-week';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
-import { CreateVersionComponent } from './../create-version/create-version.component';
 import { Curriculum } from './../../../models/curriculum';
 import { Component, OnInit, Inject } from '@angular/core';
 import { CurriculumDay } from '../../../models/curriculum-day';
@@ -50,7 +49,7 @@ export class CreateCurriculumComponent implements OnInit {
   ]);
 
   constructor(
-    public dialogRef: MatDialogRef<CreateVersionComponent>,
+    public dialogRef: MatDialogRef<CreateCurriculumComponent>,
     @Inject(MAT_DIALOG_DATA) public data: object,
     private curriculumDayService: CurriculumDayService,
     private curriculumWeekService: CurriculumWeekService

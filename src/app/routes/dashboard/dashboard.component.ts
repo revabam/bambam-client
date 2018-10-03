@@ -62,7 +62,7 @@ export interface Topicz {
 })
 export class DashboardComponent implements OnInit {
   dataSource;
-  topics = this.calendarService.getCalendarEventsByTrainerId(1);
+  topics = this.calendarService.getCalendarEventsById(1);
   currentBatch;
   headerColumns: string[] = ['time', 'flagged', 'sub',  'control'];
   user: BamUser;
