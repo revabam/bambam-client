@@ -224,6 +224,7 @@ export class CalendarComponent implements OnInit, DoCheck {
     event.end = newEnd;
     this.handleEvent('Dropped or resized', event);
   }
+
   /**
    * Should be used for creating a random color for the curriculum when it is dropped on the calendar
    * but it is not implemented.

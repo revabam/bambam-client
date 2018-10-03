@@ -19,6 +19,7 @@ mat-card:hover{
     opacity: 1;
 }
 
+// styling for the big + button on the curriculum tab 
 #btn{
     background-color: $oColor;
     background-size: 20px;
@@ -33,6 +34,7 @@ mat-card:hover{
     height: 2.5vw;
   }
 
+// all button styling for this page
 button{
     background-color: $oColor;
     border-radius: $radius; 
@@ -56,21 +58,21 @@ button{
     margin-left: 15%; 
 }
 
+// all mat-toolbars of this component
 .mat-toolbar {
     background-color: rgba(0, 0, 0, 0.014);
 }
 
+// mat-expansion-panel of this component 
 .mat-expansion-panel-header {
     background-color: #fafafa;
 }
-
 .mat-expansion-panel {
     background-color: #fafafa;
     font-weight: $weight;
 }
 
-
-
+// specific h2 styling 
 h2{
     width: 200%;
     font-weight: $weight;

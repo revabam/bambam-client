@@ -13,7 +13,7 @@ import { UserInfoComponent } from '../user-info/user-info.component';
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
-  styleUrls: ['./navbar.component.css']
+  styleUrls: ['./navbar.scss']
 })
 export class NavbarComponent implements OnInit {
 

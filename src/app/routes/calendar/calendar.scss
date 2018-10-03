@@ -29,15 +29,18 @@ button{
   font-weight: $weight;
 }
 
-// specific mat-card editting 
+// specific mat-card editting for calendar
 mat-card{
-  background-color: #ffffffe1;
+  background-color: #ffffffe8;
   color: black;
   font-weight: $weight; 
   box-shadow: rgba(0, 0, 0, 0.322);
   margin-left: 5%;
 }
 
+// styling for the curriculum portion of the calendar page,
+//  individually styled each portion to avoid slight specific changes 
+//    from being carried throughout each object
 #currAll{
   background-color: #ffffffe1;
   color: black;
@@ -46,10 +49,15 @@ mat-card{
   opacity: .8;
   margin-top: 25%;
 }
+// :hover will listen for when the cursor is over the specified 
+//  object and will display the information below
 #currAll:hover{
   opacity: 1;
 }
 
+// Create Event styling, has same poperties as #currAll 
+//  but margin-top was implemented to utilize seperation 
+//   between the two
 #cEvent{
   background-color: #ffffffe1;
   color: black;
@@ -58,6 +66,8 @@ mat-card{
   opacity: .8;
   margin-top: 10%;
 }
+// :hover will listen for when the cursor is over the specified 
+//  object and will display the information below
 #cEvent:hover{
   opacity: 1;
 }

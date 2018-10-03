@@ -2,15 +2,12 @@
 // font
 $weight: bold; // font-weight
 $mid: center; // text-align
-
 // color 
 $oColor: rgb(231, 94, 2); 
 $wColor: white; 
-
 // border
 $radius: 13px 13px 13px 13px; // border radius
 $shadow: 0px 0px 2px 2px; //shadow effect on buttons related to Calender
-
 // size
 $w100: 100%; // width 
 
@@ -41,7 +38,8 @@ button{
     display: flex;
     flex-direction: column;
   }
-  
-  .example-container > * {
-    width: $w100;
-  }
+
+// example text of the registration component  
+.example-container > * {
+  width: $w100;
+}

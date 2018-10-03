@@ -61,8 +61,8 @@
     <mat-card style="border-radius: 20px 20px 20px 20px; box-shadow: 15px 15px 35px rgba(0, 0, 0, 0.555); width: 90% " >
       <mat-card-header class="text-center text-center align-content-center align-center justify-content-center">
         <mat-toolbar style="background-color: rgba(0, 0, 0, 0)">
-          <button mat-button  mat-icon-button aria-label="add" (click)="toggleSideNav()">
-              <mat-icon>add</mat-icon>
+          <button mat-button  mat-icon-button  (click)="toggleSideNav()">
+              <mat-icon>arrow_back_ios</mat-icon>
             </button>
           <span style="flex: 1 1 auto;"></span>
             <span class="btn-group">
@@ -101,7 +101,7 @@
 
         </div>
         <div [ngSwitch]="view">
-          <mwl-calendar-month-view style="font-size: 1vw; color: black" *ngSwitchCase="'month'" [viewDate]="viewDate" [events]="events" [refresh]="refresh" [activeDayIsOpen]="activeDayIsOpen"
+          <mwl-calendar-month-view style="font-size: 1vw; " *ngSwitchCase="'month'" [viewDate]="viewDate" [events]="events" [refresh]="refresh" [activeDayIsOpen]="activeDayIsOpen"
             (dayClicked)="dayClicked($event.day)" (eventClicked)="handleEvent('Clicked', $event.event)" (eventTimesChanged)="eventTimesChanged($event)">
           </mwl-calendar-month-view>
           <mwl-calendar-week-view *ngSwitchCase="'week'" [viewDate]="viewDate" [events]="events" [refresh]="refresh" (eventClicked)="handleEvent('Clicked', $event.event)"
