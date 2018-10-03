@@ -1,3 +1,4 @@
+import { CognitoService } from './../../services/cognito.service';
 import { DaySubtopicService } from './../../services/day-subtopic.service';
 import { CurriculumWeekService } from './../../services/curriculum-week.service';
 import { CurriculumDay } from './../../models/curriculum-day';
@@ -11,6 +12,7 @@ import { CurriculumDayService } from '../../services/curriculum-day.service';
 import { weekdays } from 'moment';
 import { MatIconRegistry } from '@angular/material/icon';
 import { DomSanitizer } from '@angular/platform-browser';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -39,6 +41,8 @@ export class CurriculumEditorComponent implements OnInit {
     private curriculumDayService: CurriculumDayService,
     private curriculumWeekService: CurriculumWeekService,
     private daySubTopicService: DaySubtopicService,
+    private router: Router,
+    private cognito: CognitoService,
     public dialog: MatDialog,
   ) {
     this.matIconRegistry.addSvgIcon(
@@ -52,6 +56,11 @@ export class CurriculumEditorComponent implements OnInit {
    * that we can display our data on our page.
    */
   ngOnInit() {
+    if (!sessionStorage.getItem('user')) {
+      this.router.navigate(['login']);
+    } else {
+      this.cognito.bamUser = JSON.parse(sessionStorage.getItem('user'));
+    }
     this.getAllCurriculums();
   }
 
