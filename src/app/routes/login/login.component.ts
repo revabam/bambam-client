@@ -87,7 +87,7 @@ export class LoginComponent implements OnInit {
     if (
       this.loginForm.get('email').errors ||
       this.loginForm.get('password').errors
-    ) { 
+    ) {
       this.errorMessage = 'Errors exist on the form';
     } else {
       // No form errors. Attempt to login.
@@ -98,12 +98,14 @@ export class LoginComponent implements OnInit {
       this.cognitoService.signIn(email, password).subscribe(
         result => {
           if (result) {
+            console.log(result);
             // If there was an error
             if (result['message']) {
               this.errorMessage = 'Invalid credentials';
               return;
             }
             // sessionStorage.setItem('user', JSON.stringify(result));
+            this.cognitoService.getUserAttributes();
             this.router.navigate(['dashboard']);
           }
         }

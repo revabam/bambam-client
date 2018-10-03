@@ -120,7 +120,6 @@ import {DragDropModule} from '@angular/cdk/drag-drop';
     TimepickerModule.forRoot(),
     BrowserAnimationsModule,
     ReactiveFormsModule,
-    ChartsModule,
     NgDragDropModule.forRoot(),
     NgbModalModule.forRoot(),
     FlatpickrModule.forRoot(),
