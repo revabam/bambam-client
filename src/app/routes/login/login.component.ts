@@ -1,3 +1,4 @@
+import { BamUser } from 'src/app/models/bam-user';
 import { BamUser } from './../../models/bam-user';
 import { Component, OnInit, ViewChild, TemplateRef } from '@angular/core';
 import { UserService } from '../../services/user.service';
@@ -100,7 +101,7 @@ export class LoginComponent implements OnInit {
 
       // First get the user's id token from cognito
       this.cognitoService.signIn(email, password).subscribe(
-        result => {
+        (result: any) => {
           if (result) {
             console.log(result);
             // If there was an error
@@ -108,10 +109,22 @@ export class LoginComponent implements OnInit {
               this.errorMessage = 'Invalid credentials';
               return;
             }
+
+            const user: BamUser = {
+              id: result.jwtToken,
+              email: result.payload.email,
+              firstName: result.payload.given_name,
+              lastName: result.payload.family_name
+            };
+
+            console.log('User');
+            console.log(user);
             /**
              * This method will take the user attributes from cognito and create a bam user.
              */
-            this.bamUser = this.cognitoService.getUserAttributes();
+            this.bamUser = user;
+            this.userService.user.next(user);
+            this.cognitoService.bamUser = user;
             console.log(this.bamUser);
             this.router.navigate(['dashboard']);
           }

@@ -1,13 +1,12 @@
+import { Subject } from 'rxjs';
 import { CurriculumWeekService } from './../../../services/curriculum-week.service';
 import { CurriculumWeek } from './../../../models/curriculum-week';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
-import { CreateVersionComponent } from './../create-version/create-version.component';
 import { Curriculum } from './../../../models/curriculum';
 import { Component, OnInit, Inject } from '@angular/core';
 import { CurriculumDay } from '../../../models/curriculum-day';
 import { CurriculumDayService } from '../../../services/curriculum-day.service';
 import { FormControl, Validators } from '@angular/forms';
-import { CurriculumEditorComponent } from '../curriculum-editor.component';
 
 export interface Status {
   value: string;
@@ -17,22 +16,20 @@ export interface Status {
 @Component({
   selector: 'app-create-curriculum',
   templateUrl: './create-curriculum.component.html',
-  styleUrls: ['./create-curriculum.scss']
+  styleUrls: ['./create-curriculum.component.css']
 })
 export class CreateCurriculumComponent implements OnInit {
-
   curriculumStatus: Status[] = [
     {value: '1', viewValue: 'Draft'},
     {value: '2', viewValue: 'Needs Approval'},
     {value: '3', viewValue: 'Read Only'},
     {value: '4', viewValue: 'Master'}
   ];
-
   curriculumName: string;
   numberOfWeeks: number;
   selectedStatus: number;
   isValid = false;
-
+  curriculum: Curriculum;
   /**
    * @param dialogRef - The reference to the dialog using our
    * component, which allows us to close the dialog when we're
@@ -50,22 +47,24 @@ export class CreateCurriculumComponent implements OnInit {
     Validators.required,
     Validators.minLength(1)
   ]);
+
   constructor(
-    public dialogRef: MatDialogRef<CreateVersionComponent>,
+    public dialogRef: MatDialogRef<CreateCurriculumComponent>,
     @Inject(MAT_DIALOG_DATA) public data: object,
     private curriculumDayService: CurriculumDayService,
-    private curriculumWeekService: CurriculumWeekService
+    private curriculumWeekService: CurriculumWeekService,
     ) { }
 
 
   ngOnInit() {
   }
+
   /**
    * When the user decides to close the dialog.
    * @author - Chinedu Ozodi | 1806-Sep-18-USF-Java | Steven Kelsey
    */
   close(): void {
-    this.dialogRef.close();
+    this.dialogRef.close(this.curriculum);
   }
 
   /**
@@ -165,6 +164,10 @@ export class CreateCurriculumComponent implements OnInit {
           // Save the next week
           const weekNum = week.weekNum + 1;
           this.saveWeek(curriculum, weekNum);
+        } else {
+          // done with all days and weeks, refresh page
+          console.log('Refreshing page');
+          // this.refresh.next();
         }
       }
     });

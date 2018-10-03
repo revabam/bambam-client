@@ -1,3 +1,5 @@
+import { SubTopicService } from './../../../services/subtopic.service';
+import { NavbarComponent } from './../../../shared-components/navbar/navbar.component';
 import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
 import { SubTopic } from './../../../models/subtopic';
 import { CurriculumDay } from './../../../models/curriculum-day';
@@ -17,16 +19,23 @@ export class CurriculumDayComponent implements OnInit {
   @Output() dayChange: EventEmitter<CurriculumDay> = new EventEmitter<CurriculumDay>();
 
   constructor(
-    public daySubTopicService: DaySubtopicService
+    public daySubTopicService: DaySubtopicService,
+    private subTopicService: SubTopicService
   ) { }
 
   ngOnInit() {
+    this.getAllSubTopicNames();
+  }
+
+  ngOnChange() {
+    console.log('change call');
   }
 
   drop(event: CdkDragDrop<any>) {
+    this.getAllSubTopicNames();
     if (!event.previousContainer || !event.previousContainer.data || !event.previousContainer.data.length) {
       // This means that it is a subtopic from the topic pool and should be converted into a day-subtopic
-      console.log('from topic pool');
+      console.log('from topic pool: ' + event.previousContainer.data.name);
       const daySubTopic: DaySubTopic = {
         dayId: this.day.id,
         index: event.currentIndex,
@@ -44,11 +53,9 @@ export class CurriculumDayComponent implements OnInit {
       // This is a transfer of daySubTopic from one day to either the same day or another day
       if (event.previousContainer === event.container) {
         // rearranges the daySubTopics
-        console.log('rearranging');
         this.onSubTopicRearranged(event);
       } else {
         // transfer from one day to another
-        console.log('transfering');
         transferArrayItem(event.previousContainer.data,
           event.container.data,
           event.previousIndex,
@@ -56,6 +63,13 @@ export class CurriculumDayComponent implements OnInit {
         this.updateDaySubTopicIndexes();
       }
     }
+  }
+
+  getAllSubTopicNames() {
+    this.day.daySubTopics.forEach( (daySubTopic) => {
+      const subTopic = this.subTopicService.subtopics.find( (x) => x.id === daySubTopic.subTopicId);
+      daySubTopic.name = subTopic.name;
+    });
   }
 
   updateDaySubTopicIndexes() {

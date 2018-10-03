@@ -6,7 +6,7 @@ export const environment = {
   production: false,
   envName: `zuul`,
   context: `http://localhost:4200`,
-  apiUrl: 'http://localhost:8765/'
+  apiUrl: 'http://localhost:8765/bam/'
 };
 
 /*

@@ -10,15 +10,13 @@ import { BehaviorSubject } from 'rxjs';
 })
 export class CognitoService {
 
-  private static bamUser: BamUser = {
+  private userPool: AWSCognito.CognitoUserPool;
+  public bamUser: BamUser = {
     id: '',
     firstName: '',
     lastName: '',
     email: ''
   };
-
-  private userPool: AWSCognito.CognitoUserPool;
-
 
 
   /**
@@ -27,7 +25,9 @@ export class CognitoService {
   * be hard coded. I didn't have the time to fix this when I was working
   * on the project.
   */
-  constructor(private router: Router) {
+  constructor(
+    private router: Router
+  ) {
     const poolData = {
       UserPoolId : 'us-east-1_7bWZrc3vS',
       ClientId : 'n5l1l6id094g0lk2f3vc1h6h7'
@@ -158,8 +158,7 @@ export class CognitoService {
           cognitoUser.confirmPassword(verificationCode, newPassword, this);
       }
     });
-    // tslint:disable-next-line:no-unused-expression
-    this.router.navigate['login'];
+    this.router.navigate(['login']);
   }
 
   /**
@@ -180,23 +179,24 @@ export class CognitoService {
    */
   getUserAttributes(): BamUser {
     const cognitoUser = this.userPool.getCurrentUser();
+    console.log('user pool' + cognitoUser);
 
     if (cognitoUser != null) {
+      console.log('no user in pool');
       cognitoUser.getSession(function (err, session) {
         if (err) {
           alert(err);
         }
 
         cognitoUser.getUserAttributes(function (err, result) {
-          CognitoService.bamUser.firstName = result[2].getValue() ;
-          CognitoService.bamUser.id = cognitoUser.getUsername();
-          CognitoService.bamUser.lastName = result[3].getValue();
-          CognitoService.bamUser.email = result[4].getValue();
+          this.bamUser.firstName = result[2].getValue() ;
+          this.bamUser.id = cognitoUser.getUsername();
+          this.bamUser.lastName = result[3].getValue();
+          this.bamUser.email = result[4].getValue();
         });
       });
     }
-    sessionStorage.setItem('user', JSON.stringify(CognitoService.bamUser));
-    return CognitoService.bamUser;
+    sessionStorage.setItem('user', JSON.stringify(this.bamUser));
+    return this.bamUser;
   }
 }
-

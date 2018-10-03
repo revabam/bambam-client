@@ -32,7 +32,7 @@
       <li *ngFor="let daySubTopic of day.daySubTopics; let i = index" class="list-group-item cardsize">
         <mat-icon class="cardbtn dragbtn" cdkDrag>format_line_spacing</mat-icon>
         <mat-icon class="cardbtn closebtn" (click)="removeSubTopic(i)">close</mat-icon>
-        <p class="subTopicName">{{daySubTopic.index}}: {{daySubTopic.name}}</p>
+        <p class="subTopicName">{{daySubTopic.name}}</p>
       </li>
 
 
