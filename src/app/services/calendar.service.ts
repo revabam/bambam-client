@@ -21,6 +21,9 @@ export class CalendarService {
 
   constructor(private http: HttpClient) { }
 
+  getCalendarEventsByTrainerId(id) {
+    return this.http.get(`http://localhost:9994/calendars/event/trainer/${id}`, HTTP_OPTIONS);
+  }
   /**
    * Get all stored curriculums
    * @returns Observable of curriculum[]
@@ -93,7 +96,15 @@ export class CalendarService {
    */
   getCalendarEvents(id: number): Observable<CalendarEvent[]> {
     return this.http.get<CalendarEvent[]>(environment.zuulUrl + `calendars/calendars/event/trainer/${id}`, HTTP_OPTIONS);
+  }
 
+  /**
+   * Returns custom calendar events, every trainer can see them
+   *
+   * @author Marcin Salamon | Spark1806-USF-Java | Steven Kelsey
+   */
+  getCustomCalendarEvents(): Observable<CalendarEvent[]> {
+    return this.http.get<CalendarEvent[]>(environment.zuulUrl + `calendars/calendars/event/custom`, HTTP_OPTIONS);
   }
 
   /**

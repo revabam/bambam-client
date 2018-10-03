@@ -7,4 +7,5 @@ export class CurriculumDay {
     dayNum: number;
     weekId: number;
     daySubTopics: DaySubTopic[];
+    dayIs?: String;
 }

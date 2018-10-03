@@ -1,3 +1,4 @@
+import { BamUser } from './../models/bam-user';
 import { Router } from '@angular/router';
 import { Injectable } from '@angular/core';
 import * as AWSCognito from 'amazon-cognito-identity-js';
@@ -10,7 +11,14 @@ import { BehaviorSubject } from 'rxjs';
 export class CognitoService {
 
   private userPool: AWSCognito.CognitoUserPool;
-  private static router : Router;
+  private static router: Router;
+  private static bamUser: BamUser = {
+    id: '',
+    firstName: '',
+    lastName: '',
+    email: ''
+  }
+  private static aList: string[];
 
   /**
   * When the cognito service is intialized, it creates the user pool.
@@ -147,11 +155,44 @@ export class CognitoService {
           var newPassword = prompt('Enter new password ' ,'');
           cognitoUser.confirmPassword(verificationCode, newPassword, this);
       }
-  });
-  CognitoService.router.navigate['login'];
+    });
+    CognitoService.router.navigate['login'];
   }
-}
-/**
- * @author Bradley Walker | 1806-Jun18-USF-Java | Wezley Singleton
- */
 
+  /**
+   * This methods checks to see the current user. It will check the Cognito User Pool to see
+   * the current logged in user and then return their token.
+   * @author Jasmine C. Onwuzulike
+   */
+  getLoggedInUser() {
+    const cognitoUser = this.userPool.getCurrentUser();
+    if (cognitoUser != null) {
+      return cognitoUser.getUsername();
+    }
+  }
+
+  /**
+   * This method will get the current logged in user's attributes.
+   * @author Jasmine C. Onwuzulike
+   */
+  getUserAttributes(): BamUser {
+    const cognitoUser = this.userPool.getCurrentUser();
+
+    if (cognitoUser != null) {
+      cognitoUser.getSession(function (err, session) {
+        if (err) {
+          alert(err);
+        }
+
+        cognitoUser.getUserAttributes(function (err, result) {
+          CognitoService.bamUser.firstName = result[2].getValue() ;
+          CognitoService.bamUser.id = cognitoUser.getUsername();
+          CognitoService.bamUser.lastName = result[3].getValue();
+          CognitoService.bamUser.email = result[4].getValue();     
+        })    
+      })
+    }
+
+    return CognitoService.bamUser;
+  }
+} 
