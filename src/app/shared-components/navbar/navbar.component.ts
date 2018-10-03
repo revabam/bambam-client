@@ -60,7 +60,6 @@ export class NavbarComponent implements OnInit {
 
     // Push null onto the user subject so that the navbar disappears
     this.userService.user.next(null);
-    
     this.router.navigate(['login']);
   }
 

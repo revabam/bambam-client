@@ -12,7 +12,7 @@ export class CalendarEvent {
     startDateTime: Date;
     endDateTime: Date;
     subTopicId: number;
-    trainerId: number;
+    trainerId: string;
     batchId?: number;
     flagged?: number;
 }

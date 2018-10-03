@@ -42,7 +42,7 @@ export class DashboardComponent implements OnInit {
     firstName: '',
     lastName: '',
     email: ''
-  }
+  };
 
   batch;
   batchWeek: number;
@@ -200,7 +200,7 @@ export class DashboardComponent implements OnInit {
         this.currentBatch = result[0];
       }
     );
-   
+
     this.cs.getCurriculumByWeek(1).subscribe((values: any) => {
       this.curriculumWeek = values;
       this.curriculumDay = values.curriculumDay;
@@ -231,7 +231,7 @@ export class DashboardComponent implements OnInit {
       */
       this.batchService.getBatchByTrainer(1).subscribe(
         result => {
-          console.log(result)
+          console.log(result);
           this.currentBatch = result[0];
         }
       );
