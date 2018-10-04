@@ -108,8 +108,7 @@ export class DashboardComponent implements OnInit {
     private cognito: CognitoService,
     private userService: UserService,
     private calendarService: CalendarService,
-    private cs: CurriculumService,
-    private cognito: CognitoService
+    private cs: CurriculumService
   ) { }
 
   /**
