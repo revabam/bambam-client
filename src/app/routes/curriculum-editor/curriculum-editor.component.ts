@@ -225,6 +225,10 @@ export class CurriculumEditorComponent implements OnInit {
     return curriculum;
   }
 
+  /**
+   * Method to set the background color on the tabs.
+   * @author - Alex Moraga | 1806-Sep-18-USF-Java | Steven Kelsey
+   */
   toggleBackground() {
     this.background = this.background ? '' : 'primary';
   }
