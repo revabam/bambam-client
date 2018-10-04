@@ -27,6 +27,8 @@ export class CurriculumEditorComponent implements OnInit {
 
   selectedCurriculum: Curriculum;
 
+  background = '';
+
   /**
    * @param curriculumService - The service (defined by us)
    * that we're using to fetch all the curriculums from a server.
@@ -62,6 +64,7 @@ export class CurriculumEditorComponent implements OnInit {
       this.cognito.bamUser = JSON.parse(sessionStorage.getItem('user'));
     }
     this.getAllCurriculums();
+    this.toggleBackground();
   }
 
   /**
@@ -137,6 +140,14 @@ export class CurriculumEditorComponent implements OnInit {
       return makeSmaller.version - makeBigger.version;
     });
     return curriculumsWithName;
+  }
+
+  /**
+   * Method to set the background color on the tabs.
+   * @author - Alex Moraga | 1806-Sep-18-USF-Java | Steven Kelsey
+   */
+  toggleBackground() {
+    this.background = this.background ? '' : 'primary';
   }
 
   /**

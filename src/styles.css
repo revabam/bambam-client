@@ -12,7 +12,7 @@
     or larger screens.
 
     Every CSS file incorporated in the application, excluding the current file, 
-    will be empty. SASS (scss files) was implemented throughout this sprint to reduce boilerplate 
+    will be empty unless there remains minimum styling. SASS (scss files) was implemented throughout this sprint to reduce boilerplate 
     code and increase efficiency using Variables. This iteration only utilize variables,
     but documentation will be provided emcompassing all of SASS functionalities that are availible. 
 

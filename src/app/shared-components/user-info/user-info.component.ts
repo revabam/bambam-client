@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { Batch } from '../../models/batch';
 import { BatchService } from '../../services/batch.service';
 import { UserService } from '../../services/user.service';
+import { MatDialogRef } from '@angular/material';
 
 /**
  * This component is the dashboard page. It is the page that the
@@ -29,6 +30,7 @@ export class UserInfoComponent implements OnInit {
   lastName: string;
 
   constructor(
+    public dialogRef: MatDialogRef<UserInfoComponent>,
     private router: Router,
     private batchService: BatchService,
     private userService: UserService
@@ -51,6 +53,14 @@ export class UserInfoComponent implements OnInit {
     this.firstName = this.user.firstName;
     this.lastName = this.user.lastName;
     this.editing = true;
+  }
+
+  /**
+   * When the user decides to close the dialog.
+   * @author - Andrew Li | 1806-Jun-18-USF-Java | Wezley Singleton
+   */
+  close(): void {
+    this.dialogRef.close();
   }
 
   /**
