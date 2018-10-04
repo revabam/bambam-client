@@ -156,31 +156,21 @@ export class CurriculumEditorComponent implements OnInit {
    * @author - Chinedu Ozodi | 1806-Sep-18-USF-Java | Steven Kelsey
    */
   getAllCurriculumData(curriculum: Curriculum): Curriculum {
-    // reset curriculumWeeks
-    console.log('why');
     // this list is needed to allow drag and drop
     const curriculumDayIds: string[] = [];
     curriculum.curriculumWeeks = curriculum.curriculumWeeks.sort((a, b) => {
       return a.weekNum - b.weekNum;
     });
     for (const curriculumWeek of curriculum.curriculumWeeks) {
-      console.log('week');
-      console.log(curriculumWeek);
       curriculumWeek.curriculumDays = curriculumWeek.curriculumDays.sort((a, b) => {
         return a.dayNum - b.dayNum;
       });
       for (const curriculumDay of curriculumWeek.curriculumDays) {
-        console.log('day');
-        console.log(curriculumDay);
         curriculumDay.daySubTopics = curriculumDay.daySubTopics.sort((a, b) => {
           return a.index - b.index;
         });
         for (const daySubTopics of curriculumDay.daySubTopics) {
-          console.log('subs');
-          console.log(daySubTopics);
-
-          // Add days to weeks
-
+          curriculumDayIds.push(curriculumDay.id.toString());
           // set as current curriculum
           this.selectedCurriculum = curriculum;
 
@@ -189,7 +179,6 @@ export class CurriculumEditorComponent implements OnInit {
         }
       }
     }
-
     return curriculum;
   }
 
