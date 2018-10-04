@@ -156,68 +156,29 @@ export class CurriculumEditorComponent implements OnInit {
    * @author - Chinedu Ozodi | 1806-Sep-18-USF-Java | Steven Kelsey
    */
   getAllCurriculumData(curriculum: Curriculum): Curriculum {
-    // reset curriculumWeeks
-    curriculum.curriculumWeeks = [];
-
     // this list is needed to allow drag and drop
     const curriculumDayIds: string[] = [];
-
-    // Get all daySubTopics, days, and weeks
-    this.daySubTopicService.getAll().subscribe((daySubTopics) => {
-      console.log('got all daySubtopics');
-      console.log(daySubTopics);
-      this.curriculumDayService.getAll().subscribe((curriculumDays) => {
-        console.log('got all days');
-        console.log(curriculumDays);
-        this.curriculumWeekService.getAll().subscribe((curriculumWeeks) => {
-          console.log('got all days');
-          console.log(curriculumWeeks);
-          // Add weeks to the curriculum
-          curriculumWeeks.forEach((week) => {
-            if (week.curriculumId === curriculum.id) {
-              curriculum.curriculumWeeks.push(week);
-            }
-          });
-          // sort week by weekNum
-          curriculum.curriculumWeeks.sort((a, b) => a.weekNum - b.weekNum);
-
-          // Add days to weeks
-          curriculum.curriculumWeeks.forEach((week) => {
-            week.curriculumDays = [];
-            curriculumDays.forEach((day) => {
-              if (day.weekId === week.id) {
-                week.curriculumDays.push(day);
-                // add to list of day id's for drag and drop
-                curriculumDayIds.push(day.id.toString());
-              }
-            });
-
-            // Sort day by dayNum
-            week.curriculumDays.sort((a, b) => a.dayNum - b.dayNum);
-
-            // Add subtopics to days
-            week.curriculumDays.forEach((day) => {
-              day.daySubTopics = [];
-              daySubTopics.forEach((daySubTopic) => {
-                if (daySubTopic.dayId === day.id) {
-                  day.daySubTopics.push(daySubTopic);
-                }
-              });
-
-              // sort saySubTopic by index
-              day.daySubTopics.sort((a, b) => a.index - b.index);
-            });
-          });
-
+    curriculum.curriculumWeeks = curriculum.curriculumWeeks.sort((a, b) => {
+      return a.weekNum - b.weekNum;
+    });
+    for (const curriculumWeek of curriculum.curriculumWeeks) {
+      curriculumWeek.curriculumDays = curriculumWeek.curriculumDays.sort((a, b) => {
+        return a.dayNum - b.dayNum;
+      });
+      for (const curriculumDay of curriculumWeek.curriculumDays) {
+        curriculumDay.daySubTopics = curriculumDay.daySubTopics.sort((a, b) => {
+          return a.index - b.index;
+        });
+        for (const daySubTopics of curriculumDay.daySubTopics) {
+          curriculumDayIds.push(curriculumDay.id.toString());
           // set as current curriculum
           this.selectedCurriculum = curriculum;
 
           // save the id's for drag and drop
           this.daySubTopicService.dragAndDropList = curriculumDayIds;
-        });
-      });
-    });
-
+        }
+      }
+    }
     return curriculum;
   }
 
