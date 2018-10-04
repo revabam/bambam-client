@@ -111,10 +111,10 @@ export class DashboardComponent implements OnInit {
   constructor(
     private router: Router,
     private batchService: BatchService,
+    private cognito: CognitoService,
     private userService: UserService,
     private calendarService: CalendarService,
-    private cs: CurriculumService,
-    private cognito: CognitoService
+    private cs: CurriculumService
   ) { }
 
   /**
