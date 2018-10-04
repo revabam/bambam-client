@@ -3,7 +3,7 @@ import { DaySubtopicService } from './../../services/day-subtopic.service';
 import { CurriculumWeekService } from './../../services/curriculum-week.service';
 import { CurriculumDay } from './../../models/curriculum-day';
 import { CreateVersionComponent } from '../../routes/curriculum-editor/create-version/create-version.component';
-import { Component, OnInit, ViewEncapsulation} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CurriculumService } from '../../services/curriculum.service';
 import { Curriculum } from '../../models/curriculum';
 import { MatDialog } from '@angular/material';
@@ -18,8 +18,7 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-curriculum-editor',
   templateUrl: './curriculum-editor.component.html',
-  styleUrls: ['./curriculum-editor.scss'],
-  encapsulation: ViewEncapsulation.None
+  styleUrls: ['./curriculum-editor.scss']
 })
 export class CurriculumEditorComponent implements OnInit {
   // Arrays of all the elements we're fetching from the server.
@@ -144,6 +143,14 @@ export class CurriculumEditorComponent implements OnInit {
   }
 
   /**
+   * Method to set the background color on the tabs.
+   * @author - Alex Moraga | 1806-Sep-18-USF-Java | Steven Kelsey
+   */
+  toggleBackground() {
+    this.background = this.background ? '' : 'primary';
+  }
+
+  /**
    * Selects the passed in curriculum to be injected into the curriculum view component.
    * Pulls the week data and the day and subtopic data for the curriculum
    * @param curriculum the curriculum you want to display in the curriculum view component.
@@ -184,14 +191,6 @@ export class CurriculumEditorComponent implements OnInit {
       }
     }
     return curriculum;
-  }
-
-  /**
-   * Method to set the background color on the tabs.
-   * @author - Alex Moraga | 1806-Sep-18-USF-Java | Steven Kelsey
-   */
-  toggleBackground() {
-    this.background = this.background ? '' : 'primary';
   }
 
   /**

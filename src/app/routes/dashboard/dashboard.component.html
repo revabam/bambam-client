@@ -43,18 +43,15 @@
           Batch
         </mat-slide-toggle>
       </span>
-    <button mat-button (click)="todayIsOpen=true && 'DashTitle'; topicsisOpen=false; showCurrentDay()" class="flex-fill btn btn-outline-warn text-monospace">Day View
-    </button>
-    <button (click)="todayIsOpen=true && DashTitle='Today'; topicsIsOpen=false; showCurrentDay()" class="flex-fill text-monospace">Today</button>
-
+    <button disabled class="flex-fill btn btn-outline-light text-monospace">Day View</button>
+    <button (click)="todayIsOpen=true && DashTitle='Today'; topicsIsOpen=false; showCurrentDay()" class="flex-fill btn btn-primary text-monospace">Today</button>
   </div>
   <!-- SIDENAV -->
   <mat-sidenav-container id="sideCard" style="border-radius: 20px 20px 20px 20px; box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.555)">
     <mat-sidenav #sidenav mode="side">
       <mat-card id="sideNav" *ngIf="currentBatch">
         <mat-card-header id="batchHeader">
-          <!-- {{currentBatch.name}} -->
-          1806-June18-USF-Java4
+          {{currentBatch.name}}
         </mat-card-header>
         <mat-list dense>
           <mat-list-item class='d-flex'>
