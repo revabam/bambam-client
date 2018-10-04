@@ -9,7 +9,7 @@
   </mat-expansion-panel-header>
   <div class="container">
     <div class="row">
-      <div class="col-sm" *ngFor="let day of week.curriculumDays">
+      <div class="col" *ngFor="let day of week.curriculumDays">
         <app-curriculum-day [day]='day' (dayChange)="onDayChange($event)"></app-curriculum-day>
         <!-- <app-curriculum-day [day]='day' [weekNum]='week.weekNum' (dayChange)="onDayChange($event)"></app-curriculum-day> -->
       </div>
