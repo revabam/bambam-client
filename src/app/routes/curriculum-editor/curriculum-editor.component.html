@@ -2,8 +2,8 @@
 <div class="p-5 m-auto">
   <div class="row">
     <div class="col-sm-3 mt-2">
-      <mat-tab-group  [backgroundColor]="background">
-        <mat-tab label="Curriculum">
+      <mat-tab-group style="margin-left: -10vw">
+        <mat-tab  label="Curriculum"> 
           <mat-card>
             <mat-card-header>
               <mat-toolbar class="panel-bar">
@@ -44,7 +44,7 @@
                         <div *ngIf="curriculum.status == 3">READ ONLY</div>
                         <div *ngIf="curriculum.status == 4">MASTER</div>
                       </span>
-
+                      
                       <span class="fill-remaining-space">
                       </span>
                       <span *ngIf="curriculum.name === cname">
