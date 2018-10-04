@@ -24,7 +24,7 @@ import { CognitoService } from '../../services/cognito.service';
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
-  styleUrls: ['./dashboard.component.css']
+  styleUrls: ['./dashboard.scss']
 })
 export class DashboardComponent implements OnInit {
   headerColumns: string[] = ['time', 'flagged', 'sub', 'control'];
@@ -68,42 +68,42 @@ export class DashboardComponent implements OnInit {
   dayArr = [
     {
       dayNum: 0,
-      today: 'Sunday',
+      today: 'SUN',
       selected: false
     },
     {
       dayNum: 1,
-      today: 'Monday',
+      today: 'MON',
       selected: false
     },
     {
       dayNum: 2,
-      today: 'Tuesday',
+      today: 'TUE',
       selected: false
     },
     {
       dayNum: 3,
-      today: 'Wednesday',
+      today: 'WED',
       selected: false
     },
     {
       dayNum: 4,
-      today: 'Thursday',
+      today: 'THU',
       selected: false
     },
     {
       dayNum: 5,
-      today: 'Friday',
+      today: 'FRI',
       selected: false
     },
     {
       dayNum: 6,
-      today: 'Saturday',
+      today: 'SAT',
       selected: false
     },
     {
       dayNum: 7,
-      today: 'Sunday',
+      today: 'SUN',
       selected: false
     }
   ];
