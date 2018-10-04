@@ -29,11 +29,6 @@ import { CognitoService } from '../../services/cognito.service';
 export class DashboardComponent implements OnInit {
   headerColumns: string[] = ['time', 'flagged', 'sub', 'control'];
   dataSource;
-<<<<<<< HEAD
-  topics = this.calendarService.getCalendarEvents(1);
-  currentBatch;
-  headerColumns: string[] = ['time', 'flagged', 'sub',  'control'];
-=======
   dayInfo;
   Today = new Date().setDate(new Date().getDate() + 1);
   Tomorrow = new Date().setDate(new Date().getDate() + 2);
@@ -42,7 +37,6 @@ export class DashboardComponent implements OnInit {
   selectedDate = this.cs.getCurriculumByWeek(1);
   currentBatch: Batch;
 
->>>>>>> 69498f4c8a39b60d581260c421c2f0c439b923be
   user: BamUser;
 
   batch;
