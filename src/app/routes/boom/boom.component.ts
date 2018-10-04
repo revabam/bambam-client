@@ -13,37 +13,41 @@ export class BoomComponent implements OnInit {
 
   events: any[] = [];
   batches: any[] = [];
-  curriculums: any[] = [{name: 'Java 1', curriculumId: 1, curriculumWeeks: [{curriculumDays: [
-                                                             {daySubTopics: [{statusId: 2}, {statusId: 3}]},
-                                                             {daySubTopics: [{statusId: 2}, {statusId: 4}]},
-                                                             {daySubTopics: [{statusId: 2}, {statusId: 2}]}]},
-                                           {curriculumDays: [{daySubTopics: [{statusId: 2}, {statusId: 3}]},
-                                                             {daySubTopics: [{statusId: 2}, {statusId: 2}]},
-                                                             {daySubTopics: [{statusId: 2}, {statusId: 3}]}]},
-                                           {curriculumDays: [{daySubTopics: [{statusId: 2}, {statusId: 3}]},
-                                                             {daySubTopics: [{statusId: 2}, {statusId: 2}]},
-                                                             {daySubTopics: [{statusId: 4}, {statusId: 4}]}]}]},
-                        {name: 'Java 2', curriculumId: 2, curriculumWeeks: [{curriculumDays: [
-                                                             {daySubTopics: [{statusId: 2}, {statusId: 3}]},
-                                                             {daySubTopics: [{statusId: 2}, {statusId: 4}]},
-                                                             {daySubTopics: [{statusId: 2}, {statusId: 4}]}]},
-                                           {curriculumDays: [{daySubTopics: [{statusId: 2}, {statusId: 3}]},
-                                                             {daySubTopics: [{statusId: 2}, {statusId: 2}]},
-                                                             {daySubTopics: [{statusId: 2}, {statusId: 4}]}]},
-                                           {curriculumDays: [{daySubTopics: [{statusId: 2}, {statusId: 2}]},
-                                                             {daySubTopics: [{statusId: 2}, {statusId: 2}]},
-                                                             {daySubTopics: [{statusId: 2}, {statusId: 3}]}]}]},
-                        {name: 'Java 3', curriculumId: 3, curriculumWeeks: [{curriculumDays: [
-                                                             {daySubTopics: [{statusId: 2}, {statusId: 2}]},
-                                                             {daySubTopics: [{statusId: 2}, {statusId: 2}]},
-                                                             {daySubTopics: [{statusId: 2}, {statusId: 3}]}]},
-                                           {curriculumDays: [{daySubTopics: [{statusId: 2}, {statusId: 2}]},
-                                                             {daySubTopics: [{statusId: 4}, {statusId: 2}]},
-                                                             {daySubTopics: [{statusId: 2}, {statusId: 4}]}]},
-                                           {curriculumDays: [{daySubTopics: [{statusId: 2}, {statusId: 2}]},
-                                                             {daySubTopics: [{statusId: 2}, {statusId: 2}]},
-                                                             {daySubTopics: [{statusId: 3}, {statusId: 2}]},
-                                                             {daySubTopics: [{statusId: 2}, {statusId: 4}]}]}]}];
+  curriculums: any[] = [{
+    name: 'Java 1', curriculumId: 1, curriculumWeeks: [
+      {curriculumDays: [
+        {daySubTopics: [{statusId: 2}, {statusId: 3}]},
+        {daySubTopics: [{statusId: 2}, {statusId: 4}]},
+        {daySubTopics: [{statusId: 2}, {statusId: 2}]}]},
+      {curriculumDays: [{daySubTopics: [{statusId: 2}, {statusId: 3}]},
+        {daySubTopics: [{statusId: 2}, {statusId: 2}]},
+        {daySubTopics: [{statusId: 2}, {statusId: 3}]}]},
+      {curriculumDays: [{daySubTopics: [{statusId: 2}, {statusId: 3}]},
+        {daySubTopics: [{statusId: 2}, {statusId: 2}]},
+        {daySubTopics: [{statusId: 4}, {statusId: 4}]}]}]},
+    {name: 'Java 2', curriculumId: 2, curriculumWeeks: [
+      {curriculumDays: [
+        {daySubTopics: [{statusId: 2}, {statusId: 3}]},
+        {daySubTopics: [{statusId: 2}, {statusId: 4}]},
+        {daySubTopics: [{statusId: 2}, {statusId: 4}]}]},
+      {curriculumDays: [{daySubTopics: [{statusId: 2}, {statusId: 3}]},
+        {daySubTopics: [{statusId: 2}, {statusId: 2}]},
+        {daySubTopics: [{statusId: 2}, {statusId: 4}]}]},
+      {curriculumDays: [{daySubTopics: [{statusId: 2}, {statusId: 2}]},
+        {daySubTopics: [{statusId: 2}, {statusId: 2}]},
+        {daySubTopics: [{statusId: 2}, {statusId: 3}]}]}]},
+    {name: 'Java 3', curriculumId: 3, curriculumWeeks: [{curriculumDays: [
+        {daySubTopics: [{statusId: 2}, {statusId: 2}]},
+        {daySubTopics: [{statusId: 2}, {statusId: 2}]},
+        {daySubTopics: [{statusId: 2}, {statusId: 3}]}]},
+    {curriculumDays: [{daySubTopics: [{statusId: 2}, {statusId: 2}]},
+        {daySubTopics: [{statusId: 4}, {statusId: 2}]},
+        {daySubTopics: [{statusId: 2}, {statusId: 4}]}]},
+    {curriculumDays: [{daySubTopics: [{statusId: 2}, {statusId: 2}]},
+        {daySubTopics: [{statusId: 2}, {statusId: 2}]},
+        {daySubTopics: [{statusId: 3}, {statusId: 2}]},
+        {daySubTopics: [{statusId: 2}, {statusId: 4}]}]}]}];
+        
   completed: number[] = [];
   missed: number[] = [];
   canceled: number[] = [];
