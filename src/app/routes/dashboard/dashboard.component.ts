@@ -25,11 +25,16 @@ import { MatDialogRef } from '@angular/material';
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
-  styleUrls: ['./dashboard.component.css']
+  styleUrls: ['./dashboard.scss']
 })
 export class DashboardComponent implements OnInit {
   headerColumns: string[] = ['time', 'flagged', 'sub', 'control'];
   dataSource;
+<<<<<<< HEAD
+  topics = this.calendarService.getCalendarEvents(1);
+  currentBatch;
+  headerColumns: string[] = ['time', 'flagged', 'sub',  'control'];
+=======
   dayInfo;
   Today = new Date().setDate(new Date().getDate() + 1);
   Tomorrow = new Date().setDate(new Date().getDate() + 2);
@@ -38,6 +43,7 @@ export class DashboardComponent implements OnInit {
   selectedDate = this.cs.getCurriculumByWeek(1);
   currentBatch: Batch;
 
+>>>>>>> 69498f4c8a39b60d581260c421c2f0c439b923be
   user: BamUser;
 
   batch;
@@ -63,42 +69,42 @@ export class DashboardComponent implements OnInit {
   dayArr = [
     {
       dayNum: 0,
-      today: 'Sunday',
+      today: 'SUN',
       selected: false
     },
     {
       dayNum: 1,
-      today: 'Monday',
+      today: 'MON',
       selected: false
     },
     {
       dayNum: 2,
-      today: 'Tuesday',
+      today: 'TUE',
       selected: false
     },
     {
       dayNum: 3,
-      today: 'Wednesday',
+      today: 'WED',
       selected: false
     },
     {
       dayNum: 4,
-      today: 'Thursday',
+      today: 'THU',
       selected: false
     },
     {
       dayNum: 5,
-      today: 'Friday',
+      today: 'FRI',
       selected: false
     },
     {
       dayNum: 6,
-      today: 'Saturday',
+      today: 'SAT',
       selected: false
     },
     {
       dayNum: 7,
-      today: 'Sunday',
+      today: 'SUN',
       selected: false
     }
   ];

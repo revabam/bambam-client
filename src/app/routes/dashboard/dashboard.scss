@@ -21,17 +21,9 @@ $w100: 100%; // width
     background: $wColor;
 }
 
-// styling for the whole batch sideNav card
-#sideCard{
-    opacity: .8;
-}
-#sideCard:hover{
-    opacity: 1;
-}
-
 // specific mat-card editting 
 mat-card{
-    background-color: #ffffffe7;
+    background-color: #ffffff;
     color: black;
     font-weight: $weight;
     border-radius: 20px 20px 20px 20px;
@@ -55,6 +47,7 @@ mat-card-header{
     width: 30%;
     height: $w100;
     font-size: 1.3vw;
+    margin-left: 5.5vw;
 }
 
 
@@ -67,7 +60,8 @@ button{
     border-style: outset;
     border-width: 3px;
     border-color: $oColor $shadow;
-    font-size: 1.3vw;
+    font-size: 1vw;
+    width: 7vw;
   }
   button:hover{
     box-shadow:  $oColor $shadow;
@@ -86,10 +80,16 @@ button{
   font-size: 2.5vw;
 }
 
+#wel{
+    width: 82%;
+    margin-left: 11.5%;
+}
+
 // mat-card for Welcome, and week at a glance
 #card{
-    width: 45%;
+    width: 50%;
     margin-left: 27%;
+    border-radius: $radius;
 }
 
 // info displayed when the batch button is clicked
