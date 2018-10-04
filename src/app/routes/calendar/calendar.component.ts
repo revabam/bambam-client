@@ -138,18 +138,18 @@ export class CalendarComponent implements OnInit, DoCheck {
    * Life hook for loading all calendar services
    */
   ngOnInit() {
-    this.user = JSON.parse(sessionStorage.getItem('user'));
-    this.calendarService.getCalendarEvents(this.user.id).subscribe(events => {
-      this.storedEvents = events;
-      this.calendarService.getCustomCalendarEvents().subscribe(customEvents => {
-        for (const cEv of customEvents) {
-          if (cEv.trainerId !== this.user.id) {
-            this.storedEvents.push(cEv);
-          }
-        }
-        this.initialRender = true;
-      });
-    });
+    // this.user = JSON.parse(sessionStorage.getItem('user'));
+    // // this.calendarService.getCalendarEvents(this.user.id).subscribe(events => {
+    //   this.storedEvents = events;
+    //   this.calendarService.getCustomCalendarEvents().subscribe(customEvents => {
+    //     for (const cEv of customEvents) {
+    //       // if (cEv.trainerId !== this.user.id) {
+    //         this.storedEvents.push(cEv);
+    //       }
+    //     }
+    //     // this.initialRender = true;
+    //   });
+    // });
 
     this.calendarService.getCurriculum().subscribe(response => {
       this.curriculums = response;

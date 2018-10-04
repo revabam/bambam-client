@@ -1,3 +1,4 @@
+import { CognitoIdToken } from 'amazon-cognito-identity-js';
 import { BamUser } from './../../models/bam-user';
 import { Component, OnInit, ViewChild, TemplateRef } from '@angular/core';
 import { UserService } from '../../services/user.service';
@@ -25,7 +26,7 @@ export class LoginComponent implements OnInit {
   // This is used to display errors to the user
   errorMessage: string;
 
-  //This is used to get the user.
+  // This is used to get the user.
   bamUser: BamUser;
 
   // Build the form controls.
@@ -62,6 +63,7 @@ export class LoginComponent implements OnInit {
     if (sessionStorage.getItem('user')) {
       this.userService.user.next(JSON.parse(sessionStorage.getItem('user')));
       this.router.navigate(['dashboard']);
+      console.log(CognitoIdToken);
     }
 
     /*

@@ -1,3 +1,4 @@
+import { CognitoService } from './../../services/cognito.service';
 import { Component, OnInit } from '@angular/core';
 import { BamUser } from '../../models/bam-user';
 import { Router } from '@angular/router';
@@ -32,14 +33,15 @@ export interface Topicz {
 export class DashboardComponent implements OnInit {
   headerColumns: string[] = ['time', 'flag', 'sub', 'control'];
   dataSource;
-  topics = this.calendarService.getCalendarEventsByTrainerId(1);
+  // topics = this.calendarService.getCalendarEventsByTrainerId(1);
   currentBatch;
   user: BamUser = {
     id: '',
     firstName: '',
     lastName: '',
     email: ''
-  }
+  };
+
   batch;
   batchWeek: number;
   percentCompletion: number;
@@ -59,6 +61,7 @@ export class DashboardComponent implements OnInit {
   constructor(
     private router: Router,
     private batchService: BatchService,
+    private cognito: CognitoService,
     private userService: UserService,
     private calendarService: CalendarService
   ) { }
@@ -69,10 +72,10 @@ export class DashboardComponent implements OnInit {
   * and info about the batch they are associated with.
   */
   ngOnInit() {
-    //Gets the current logged in user.
+    // Gets the current logged in user.
     this.user = this.cognito.getUserAttributes();
     if (!this.user) {
-      this.dataSource = this.topics;
+      // this.dataSource = this.topics;
       this.batchService.getBatchByTrainer(1).subscribe(
         result => {
           this.currentBatch = result[0];
@@ -130,7 +133,7 @@ export class DashboardComponent implements OnInit {
   statusToggle(sub, yesNo) {
     sub.statusId = yesNo;
   }
-  
+
   // function to flag an item
   flagRow(sub) {
 
