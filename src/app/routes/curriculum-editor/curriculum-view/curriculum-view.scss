@@ -1,0 +1,12 @@
+// Variables
+$radius: 13px 13px 13px 13px; // border radius
+
+// Specific mat-card editting
+mat-card{
+    position: fixed;
+    width: 67%;
+    margin-left: -5vw;
+    margin-top: 2.8vw;
+    border-radius: $radius;
+    font-size: 4vw;
+}

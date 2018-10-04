@@ -1,0 +1,148 @@
+@import "~ngx-bootstrap/datepicker/bs-datepicker.css";
+
+// Variables
+// font
+$weight: bold; // font-weight
+$mid: center; // text-align
+// color 
+$oColor: rgb(231, 94, 2); 
+$wColor: white; 
+// border
+$radius: 13px 13px 13px 13px; // border radius
+$shadow: 0px 0px 2px 2px; //shadow effect on buttons related to Calender
+// size
+$w100: 100%; // width 
+
+::ng-deep .mat-progress-bar-fill::after {
+    background-color: #E43D37;
+}
+
+::ng-deep .mat-progress-bar-buffer {
+    background: $wColor;
+}
+
+// specific mat-card editting 
+mat-card{
+    background-color: #ffffff;
+    color: black;
+    font-weight: $weight;
+    border-radius: 20px 20px 20px 20px;
+    opacity: 1;
+}
+
+// all mat-card-headers related to dashboard
+mat-card-header{
+    font-size: 1.3vw;
+}
+
+// batch button above Today bar
+#batch{
+    background-color: $oColor;
+    border-radius: $radius;
+    border-style: outset;
+    border-width: 3px;
+    border-color: $oColor $shadow;
+    color: $wColor;
+    font-weight: $weight;
+    width: 30%;
+    height: $w100;
+    font-size: 1.3vw;
+    margin-left: 5.5vw;
+}
+
+
+// button configuration for specific button editting
+button{
+    background-color: $oColor;
+    border-radius: $radius;
+    color: $wColor;
+    font-weight: $weight;
+    border-style: outset;
+    border-width: 3px;
+    border-color: $oColor $shadow;
+    font-size: 1vw;
+    width: 7vw;
+  }
+  button:hover{
+    box-shadow:  $oColor $shadow;
+  }
+
+// Week at a glance
+#week{
+  font-weight: $weight;
+  font-size: 2vw;
+  text-align: $mid;
+}
+
+// Welcome, 
+#title{
+  text-align: $mid;
+  font-size: 2.5vw;
+}
+
+#wel{
+    width: 82%;
+    margin-left: 11.5%;
+}
+
+// mat-card for Welcome, and week at a glance
+#card{
+    width: 50%;
+    margin-left: 27%;
+    border-radius: $radius;
+}
+
+// info displayed when the batch button is clicked
+#bInfo{
+    font-weight: $weight;
+    font-size: 1.1vw;
+}
+
+#dashAll{
+    margin-top: 7%;
+}
+
+// editting for batch name when batch button is pressed
+#batchHeader {
+    background-color: rgb(218, 81, 2);
+    text-align: $mid;
+    font-weight: $weight;
+    color: $wColor;
+    width: $w100;
+    opacity: .9;
+}
+
+// editting the batch card height to fit the entire space
+#sideNav{
+    height: $w100;
+}
+
+// (left)  time badge displayed in the today section of the dashboard
+#timeBadge1 {
+    width: 25%;
+    height: 35%;
+    color: $wColor;
+    font-size: .7vw;
+    background-color: rgb(71, 71, 71);
+}
+// (right)  time badge displayed in the today section of the dashboard
+#timeBadge2 {
+    width: 25%;
+    height: 35%;
+    color: $wColor;
+    font-size: .7vw;
+    background-color: orangered;
+}
+
+// check mark and exclamation mark 
+.material-icons.matSpecs-24 {
+    font-weight: $weight;
+    font-size: 24px;
+    color: rgba(0, 0, 0, 0.747)
+}
+// flag styling
+.material-icons.flagColor-24 {
+    font-weight: $weight;
+    font-size: 24px;
+    color: rgba(237, 19, 19, 0.897)
+}

@@ -1,0 +1,44 @@
+{
+    "topics": [
+        {
+            "id": 1,
+            "name": "Core Java"
+        },
+        {
+            "id": 2,
+            "name": "SQL"
+        },
+        {
+            "id": 3,
+            "name": "Client-Side Technologies"
+        },
+        {
+            "id": 4,
+            "name": "Servlets"
+        },
+        {
+            "id": 5,
+            "name": "Angular"
+        },
+        {
+            "id": 6,
+            "name": "DevOps"
+        },
+        {
+            "id": 7,
+            "name": "Hibernate"
+        },
+        {
+            "id": 8,
+            "name": "Spring"
+        },
+        {
+            "id": 9,
+            "name": "Web Services"
+        },
+        {
+            "id": 10,
+            "name": "Microservices"
+        }
+    ]
+}
