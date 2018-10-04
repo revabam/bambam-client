@@ -10,6 +10,7 @@ import { LoginComponent } from '../routes/login/login.component';
 import { RegisterComponent } from '../routes/register/register.component';
 import { DialogViewComponent } from '../routes/dialog-view/dialog-view.component';
 import { ForgottenPasswordComponent } from './forgotten-password/forgotten-password.component';
+import { CurriculumViewComponent } from './curriculum-editor/curriculum-view/curriculum-view.component';
 
 export const appRoutes: Routes = [
     {
@@ -36,7 +37,10 @@ export const appRoutes: Routes = [
         path: 'curriculum/editor',
         component: CurriculumEditorComponent
     },
-
+        {
+            path: 'curriculum/views',
+            component: CurriculumViewComponent
+        },
     {
         path: 'boom',
         component: BoomComponent

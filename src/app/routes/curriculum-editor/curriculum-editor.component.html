@@ -47,8 +47,8 @@
                       
                       <span class="fill-remaining-space">
                       </span>
-                      <span *ngIf="curriculum.name === cname">
-                        <button mat-icon-button color="" (click)="selectCurriculum(curriculum)">
+                      <span *ngIf="curriculum.name === cname && curriculum">
+                        <button mat-icon-button  (click)="selectCurriculum(curriculum)">
                           <mat-icon color="secondary">visibility</mat-icon>
                         </button>
                       </span>
