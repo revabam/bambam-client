@@ -11,6 +11,7 @@ import { CalendarEvent } from '../../models/calendar-event';
 import { CurriculumWeek } from '../../models/curriculum-week';
 import { CurriculumDay } from '../../models/curriculum-day';
 import { CognitoService } from '../../services/cognito.service';
+import { MatDialogRef } from '@angular/material';
 
 /**
 * This component is the dashboard page. It is the page that the
@@ -109,6 +110,7 @@ export class DashboardComponent implements OnInit {
   ];
 
   constructor(
+    public dialogRef: MatDialogRef<DashboardComponent>,
     private router: Router,
     private batchService: BatchService,
     private userService: UserService,
