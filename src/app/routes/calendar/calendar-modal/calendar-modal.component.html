@@ -1,4 +1,6 @@
-<h6 mat-dialog-title>Event Name: {{data.title.toUpperCase()}}</h6><mat-divider></mat-divider>
+<mat-card id="cInfo" style="border-radius: 20px 20px 20px 20px; box-shadow: 15px 15px 35px rgba(0, 0, 0, 0.555)">
+<h6 mat-dialog-title>Event Name: {{data.title.toUpperCase()}}</h6>
+<mat-divider></mat-divider>
 <div mat-card *ngIf="!moving">
     <div mat-dialog-content>
         <p *ngIf="data.description">Description: {{data.description}}</p>
@@ -26,4 +28,4 @@
         <button mat-button (click)="moveBack()">Move Back</button>
     </div>
 </div>
-
+</mat-card>

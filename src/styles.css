@@ -1,0 +1,70 @@
+
+/* You can add global styles to this file, and also import other style files */
+@import "~ngx-bootstrap/datepicker/bs-datepicker.css";
+
+/* 
+
+/**
+* This style sheet was kept to add very simple, very fast designs, 
+    for creating a mock version of the application, allowing for better 
+    understanding of the web flow. If the vw viewport unit is used, its to make sure the 
+    specified object will resize automatically to accomodate for smaller 
+    or larger screens.
+
+    Every CSS file incorporated in the application, excluding the current file, 
+    will be empty. SASS (scss files) was implemented throughout this sprint to reduce boilerplate 
+    code and increase efficiency using Variables. This iteration only utilize variables,
+    but documentation will be provided emcompassing all of SASS functionalities that are availible. 
+
+*   @author Alexander Hudson | 1806-Spark | Steven Kelsey
+*/ 
+
+/* This is the styling for all mat-cards tags.
+      Created this way to have ease of manipulation 
+        of all mat-cards, if needed*/
+mat-card {
+    border-style: outset;
+    border-width: 4.5px;
+    border-color: rgb(255, 94, 0);
+    position: fixed;
+}
+
+/* styling for all mat-card-headers */
+mat-card-header {
+    padding: 15px;
+    font-weight: bold;
+}
+
+/* all headers to maintain consistency */
+h1,h2,h3,h4,h6 {
+    font-size: 1.5vw;
+    font-weight: bold;
+    color: rgba(255, 94, 0, 0.788);
+    font-family: initial;
+    text-shadow: 3px 3px 2px rgba(151, 151, 151, 0.5);
+}
+
+/* all p tags */
+p{
+    font-weight: bold;
+    font-size: 150%;
+}
+
+/* Background Wallpaper */
+#bgImg{
+  width: 100vw;
+  height: 100%;
+  position: fixed;
+  z-index: -2;
+  opacity: .9;
+  
+}
+
+/* All button tags */
+button{
+    background-position-y: 250px;
+    border-radius: 13px 13px 13px 13px;
+    width: 9vw;
+  }
+
+/* Rest of project implemented using SASS  */

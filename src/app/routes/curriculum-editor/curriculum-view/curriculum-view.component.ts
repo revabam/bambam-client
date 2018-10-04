@@ -6,7 +6,7 @@ import { CurriculumWeekService } from '../../../services/curriculum-week.service
 @Component({
   selector: 'app-curriculum-view',
   templateUrl: './curriculum-view.component.html',
-  styleUrls: ['./curriculum-view.component.css']
+  styleUrls: ['./curriculum-view.scss']
 })
 export class CurriculumViewComponent implements OnInit {
 

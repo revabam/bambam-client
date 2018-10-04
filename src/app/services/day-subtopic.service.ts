@@ -29,7 +29,7 @@ export class DaySubtopicService {
   * @author - Chinedu Ozodi | 1806-Sep-18-USF-Java | Steven Kelsey
   */
  getAll(): Observable<DaySubTopic[]> {
-   return this.http.get<DaySubTopic[]>(environment.apiUrl + 'day-subtopics', HTTP_OPTIONS);
+   return this.http.get<DaySubTopic[]>(environment.apiUrl + 'curriculums/subtopic/day', HTTP_OPTIONS);
  }
 
  /**
@@ -37,7 +37,7 @@ export class DaySubtopicService {
   * @author - Chinedu Ozodi | 1806-Sep-18-USF-Java | Steven Kelsey
   */
  post(curriculumWeek: DaySubTopic): Observable<DaySubTopic> {
-   return this.http.post<DaySubTopic>(environment.apiUrl + 'day-subtopics',
+   return this.http.post<DaySubTopic>(environment.apiUrl + 'curriculums/subtopic/day',
    curriculumWeek, HTTP_OPTIONS);
  }
 
@@ -46,7 +46,7 @@ export class DaySubtopicService {
   * @author - Chinedu Ozodi | 1806-Sep-18-USF-Java | Steven Kelsey
   */
  put(curriculumWeek: DaySubTopic): Observable<DaySubTopic> {
-   return this.http.put<DaySubTopic>(environment.apiUrl + 'day-subtopics',
+   return this.http.put<DaySubTopic>(environment.apiUrl + 'curriculums/subtopic/day',
    curriculumWeek, HTTP_OPTIONS);
  }
 }

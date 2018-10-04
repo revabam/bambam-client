@@ -33,15 +33,29 @@
                     <mat-toolbar>
                       <span *ngIf="curriculum.name === cname">
                         Version: {{curriculum.version}}
+                        <div *ngIf="curriculum.status == 1">DRAFT</div>
+                        <div *ngIf="curriculum.status == 2">NEEDS APPROVAL</div>
+                        <div *ngIf="curriculum.status == 3">READ ONLY</div>
+                        <div *ngIf="curriculum.status == 4">MASTER</div>
                       </span>
                       <span *ngIf="curriculum.name !== cname">
                         <del>Version: {{curriculum.version}}</del>
+                        <div *ngIf="curriculum.status == 1">DRAFT</div>
+                        <div *ngIf="curriculum.status == 2">NEEDS APPROVAL</div>
+                        <div *ngIf="curriculum.status == 3">READ ONLY</div>
+                        <div *ngIf="curriculum.status == 4">MASTER</div>
                       </span>
+                      
                       <span class="fill-remaining-space">
                       </span>
                       <span *ngIf="curriculum.name === cname">
                         <button mat-icon-button color="" (click)="selectCurriculum(curriculum)">
                           <mat-icon color="secondary">visibility</mat-icon>
+                        </button>
+                      </span>
+                      <span *ngIf="curriculum.name === cname">
+                        <button mat-icon-button color="" (click)="copyCurriculum(curriculum)">
+                          <mat-icon svgIcon="copy"></mat-icon>
                         </button>
                       </span>
                       <span *ngIf="curriculum.name !== cname">
