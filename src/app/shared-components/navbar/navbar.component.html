@@ -1,4 +1,4 @@
-<mat-toolbar *ngIf="show">
+<mat-toolbar *ngIf="cognito.bamUser">
   <img src="../../../../assets/bam.png" height="100px" width="200px" class="p-3">
   <span style="margin-right: 10px;">
     <button style="border-radius: 10px 10px 10px 10px; box-shadow: 15px 15px 35px rgba(0, 0, 0, 0.555)" mat-raised-button [color]="getColor('dashboard')" routerLink="dashboard">Dashboard</button>
@@ -18,7 +18,7 @@
   <span style="flex: 1 auto;"></span>
   <span style="margin-right: 10px;">
     <button style="border-radius: 10px 10px 10px 10px; box-shadow: 15px 15px 35px rgba(0, 0, 0, 0.555)" mat-raised-button (click)="editUserModal()">
-      <mat-icon>person</mat-icon>{{user.lastName}}
+      <mat-icon>person</mat-icon> <span>{{cognito.bamUser.lastName}}</span>
     </button>
   </span>
   <span>

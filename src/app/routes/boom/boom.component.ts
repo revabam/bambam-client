@@ -1,8 +1,11 @@
+import { CognitoService } from './../../services/cognito.service';
 import { Curriculum } from './../../models/curriculum';
 import { SubTopicService } from './../../services/subtopic.service';
 import { Component, OnInit } from '@angular/core';
 import { BoomService } from '../../services/boom.service';
 import { CurriculumService } from '../../services/curriculum.service';
+import { Router } from '@angular/router';
+import { CognitoUser } from 'amazon-cognito-identity-js';
 
 @Component({
   selector: 'app-boom',
@@ -20,9 +23,11 @@ export class BoomComponent implements OnInit {
   weeks: number[] = [];
 
   constructor(
+    private router: Router,
     private boomServ: BoomService,
     private curriculumService: CurriculumService,
-    private subtopicService: SubTopicService
+    private subtopicService: SubTopicService,
+    private cognito: CognitoService
   ) { }
 
   // bar chart
@@ -156,6 +161,11 @@ export class BoomComponent implements OnInit {
   }
 
   ngOnInit() {
+    if (!sessionStorage.getItem('user')) {
+      this.router.navigate(['login']);
+    } else {
+      this.cognito.bamUser = JSON.parse(sessionStorage.getItem('user'));
+    }
     this.boomServ.getAllEvents().subscribe(x => {
       this.events = x;
       console.log('events');

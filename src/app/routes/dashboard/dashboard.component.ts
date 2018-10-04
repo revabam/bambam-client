@@ -37,12 +37,7 @@ export class DashboardComponent implements OnInit {
   selectedDate = this.cs.getCurriculumByWeek(1);
   currentBatch: Batch;
 
-  user: BamUser = {
-    id: null,
-    firstName: '',
-    lastName: '',
-    email: ''
-  };
+  user: BamUser;
 
   batch;
   batchWeek: number;
@@ -54,8 +49,8 @@ export class DashboardComponent implements OnInit {
     { num: 0, icon: 'visibility_off' },
     { num: 1, icon: 'visibility' }
   ];
-  DashTitle = '';
-  todayIsOpen: boolean;
+  DashTitle = 'Today';
+  todayIsOpen = true;
   topicsIsOpen: boolean;
   list: string[];
   eventsThisWeek: CalendarEvent[];
@@ -129,8 +124,12 @@ export class DashboardComponent implements OnInit {
   }
 
   ngOnInit() {
-
-     this.user = this.cognito.getUserAttributes();
+    if (!sessionStorage.getItem('user')) {
+      this.router.navigate(['login']);
+    } else {
+      this.cognito.bamUser = JSON.parse(sessionStorage.getItem('user'));
+    }
+    this.user = JSON.parse(sessionStorage.getItem('user'));
 
     this.calendarService.getCalendarEventsByTrainerId(1).subscribe(response => {
       this.calendarEvents = response;
@@ -146,8 +145,6 @@ export class DashboardComponent implements OnInit {
     );
 
     this.cs.getCurriculumByWeek(1).subscribe((values: CurriculumWeek) => {
-      console.log('values');
-      console.log(values);
       this.curriculumWeek = values;
       this.curriculumDay = values.curriculumDays;
       this.curriculumDay = this.curriculumDay.sort((n1, n2) => {
@@ -162,33 +159,6 @@ export class DashboardComponent implements OnInit {
         return 0;
       });
     });
-
-
-
-    //   this.eventsThisWeek = this.calendarService.getCalendarEventsByTrainerIdAndWeek(1, new Date());
-
-    if (!this.user) {
-      this.router.navigate(['login']);
-    } else {
-      /*
-        In our sprint, only trainers can use the program so there is no
-        need to check if the user is a trainer or not, But this is where
-        you might want to do that.
-      */
-      this.batchService.getBatchByTrainer(1).subscribe(
-        result => {
-          console.log(result);
-          this.currentBatch = result[0];
-        }
-      );
-
-      if (!this.user) {
-        this.router.navigate(['login']);
-      } else {
-        this.cognito.getUserAttributes();
-        this.todayIsOpen = true;
-      }
-    }
   }
 
 /**

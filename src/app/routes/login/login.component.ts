@@ -25,9 +25,6 @@ export class LoginComponent implements OnInit {
   // This is used to display errors to the user
   errorMessage: string;
 
-  // This is used to get the user.
-  bamUser: BamUser;
-
   // Build the form controls.
   loginForm = new FormBuilder().group({
     email: new FormControl('', Validators.compose([
@@ -59,7 +56,8 @@ export class LoginComponent implements OnInit {
   * is logged in and, if they are, sends them to the dashboard page.
   */
   ngOnInit() {
-    if (sessionStorage.getItem('user')) {
+    const user = JSON.parse(sessionStorage.getItem('user'));
+    if (user.id) {
       this.userService.user.next(JSON.parse(sessionStorage.getItem('user')));
       this.router.navigate(['dashboard']);
     }
@@ -116,15 +114,12 @@ export class LoginComponent implements OnInit {
               lastName: result.payload.family_name
             };
 
-            console.log('User');
-            console.log(user);
             /**
              * This method will take the user attributes from cognito and create a bam user.
              */
-            this.bamUser = user;
             this.userService.user.next(user);
             this.cognitoService.bamUser = user;
-            console.log(this.bamUser);
+            sessionStorage.setItem('user', JSON.stringify(user));
             this.router.navigate(['dashboard']);
           }
         }

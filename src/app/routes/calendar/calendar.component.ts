@@ -1,3 +1,4 @@
+import { CognitoService } from './../../services/cognito.service';
 import { CurriculumService } from './../../services/curriculum.service';
 import { Batch } from './../../models/batch';
 import * as $ from 'jquery';
@@ -22,6 +23,7 @@ import { CalendarService } from '../../services/calendar.service';
 import { SubTopicService } from '../../services/subtopic.service';
 import { StartMondayModalComponent } from './start-monday-modal/start-monday-modal.component';
 import { CurriculumWeek } from '../../models/curriculum-week';
+import { Router } from '@angular/router';
 
 
 /**
@@ -78,7 +80,7 @@ export class CalendarComponent implements OnInit, DoCheck {
       secondary: 'yellow'
     }
   };
-  user: BamUser = JSON.parse(sessionStorage.getItem('user'));
+  user: BamUser;
   showSideNav = true;
 
   startHour = 8;
@@ -135,12 +137,17 @@ export class CalendarComponent implements OnInit, DoCheck {
 
   constructor(private modal: NgbModal, private calendarService: CalendarService, private subtopicService: SubTopicService,
     private topicService: TopicService, private dialog: MatDialog, private batchService: BatchService,
-    private curriculumService: CurriculumService) { }
+    private curriculumService: CurriculumService, private router: Router, private cognito: CognitoService) { }
 
   /**
    * Life hook for loading all calendar services
    */
   ngOnInit() {
+    if (!sessionStorage.getItem('user')) {
+      this.router.navigate(['login']);
+    } else {
+      this.cognito.bamUser = JSON.parse(sessionStorage.getItem('user'));
+    }
     this.user = JSON.parse(sessionStorage.getItem('user'));
     this.user.id = '1';
     this.calendarService.getCalendarEvents(this.user.id).subscribe(events => {
@@ -519,18 +526,13 @@ export class CalendarComponent implements OnInit, DoCheck {
   generateEvents() {
     this.subtopicService.getAll().subscribe((subTopics) => {
       this.subtopicService.subtopics = subTopics;
-      console.log(this.selectedCurriculum);
       this.selectedCurriculum = this.subtopicService.setDayTopicNames(this.selectedCurriculum);
-      console.log('after adding names');
-      console.log(this.selectedCurriculum);
       const startDate: Date = this.dropEvent.start;
       const subtopicStartTime = startDate;
       const weeks: CurriculumWeek[] = this.selectedCurriculum.curriculumWeeks;
       for (const week of weeks) {
         for (const day of week.curriculumDays) {
           let hour = 9;
-          console.log(day);
-          console.log('day');
           const subTopicsToday = day.daySubTopics.length;
           const timeDifference = (7 / subTopicsToday);
           /**
@@ -562,10 +564,7 @@ export class CalendarComponent implements OnInit, DoCheck {
               end: new Date(endTime),
               title: subtopic.name,
               version: this.selectedCurriculum.version,
-              color: {
-                primary: 'blue',
-                secondary: 'blue'
-              },
+              color: this.colors.blue,
               actions: this.actions,
               resizable: {
                 beforeStart: true,
@@ -579,7 +578,6 @@ export class CalendarComponent implements OnInit, DoCheck {
           }
           subtopicStartTime.setDate(subtopicStartTime.getDate() + 1);
         }
-        subtopicStartTime.setDate(subtopicStartTime.getDate() + 2);
       }
       this.selectedCurriculum = null;
       this.docheck = true;
