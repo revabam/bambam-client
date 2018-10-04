@@ -8,36 +8,23 @@ import { CurriculumDay } from '../../../models/curriculum-day';
 import { CurriculumDayService } from '../../../services/curriculum-day.service';
 import { FormControl, Validators } from '@angular/forms';
 
-export interface Status {
-  value: string;
-  viewValue: string;
-}
-
 @Component({
   selector: 'app-create-curriculum',
   templateUrl: './create-curriculum.component.html',
   styleUrls: ['./create-curriculum.component.css']
 })
 export class CreateCurriculumComponent implements OnInit {
-  curriculumStatus: Status[] = [
-    {value: '1', viewValue: 'Draft'},
-    {value: '2', viewValue: 'Needs Approval'},
-    {value: '3', viewValue: 'Read Only'},
-    {value: '4', viewValue: 'Master'}
-  ];
   curriculumName: string;
   numberOfWeeks: number;
-  selectedStatus: number;
   isValid = false;
   curriculum: Curriculum;
   /**
-   * @param dialogRef - The reference to the dialog using our
+   * dialogRef - The reference to the dialog using our
    * component, which allows us to close the dialog when we're
    * done.
-   * @param data - Received from the parent component
+   * data - Received from the parent component
    * of this modal component, enabling the current component
    * to retrieve and update what's in the parent component
-   * @author - Chinedu Ozodi | 1806-Sep-18-USF-Java | Steven Kelsey
    */
   cnameFormControl = new FormControl('', [
     Validators.required,
@@ -173,12 +160,17 @@ export class CreateCurriculumComponent implements OnInit {
     });
   }
 
-  // here we are performing validation for the curriculum entered
-  //    the submit button is disabled until both name and weeks are entered correctly
+  /**
+   * validation for the curriculum entered
+   * the submit button is disabled until both name and weeks are entered correctly
+   * curriculumName user input to validate
+   * numberOfWeeks user input to validate
+   * @author - Stephen Hong | Spark1806-USF-Java | Steven Kelsey
+   */
   validate() {
     this.isValid = true;
     // validating user input
-    if (!this.curriculumName || !this.numberOfWeeks || !this.selectedStatus) {
+    if (!this.curriculumName || !this.numberOfWeeks) {
       this.isValid = false;
     } else {
       // if curriculum name is valid
