@@ -2,16 +2,14 @@
   <!-- WAGBar -->
   <div class="row">
     <div class="col-sm mb-3 mt-2">
-      <mat-card>
-        <mat-card>
+      <mat-card id="wel">
+        <mat-card >
           <mat-card-header>
             <div class="d-flex p-2 w-100 bd-highlight text-monospace justify-content-center">
-              <p *ngIf="this.user" class='text-monospace'>
+              <p *ngIf="this.user"  class='text-monospace'>
                 Welcome, {{user.firstName}}
               </p>
-              <p *ngIf="!this.user" class='text-monospace'>
-                Welcome, Trainer.
-              </p>
+             
             </div>
           </mat-card-header>
           <mat-card-content style="font-size: 18px">
@@ -19,13 +17,13 @@
           </mat-card-content>
         </mat-card>
         <!-- Button Bar Content -->
-        <mat-grid-list cols="7" rowHeight="2:1" class='border border-dark'>
+        <mat-grid-list style="margin-left: 11vw; margin-top: 2vw" cols="7" rowHeight="2:1" >
           <mat-grid-tile class='d-flex justify-content-center' *ngFor='let day of curriculumDay; let i = index;'>
 
-            <button type="button" class="btn btn-outline-primary" [class.active]="dayArr[day.dayNum].selected">
+            <button  type="button" class="btn" [class.active]="dayArr[day.dayNum].selected">
               <span *ngFor='let date of dayArr' (click)='showDay(date.dayNum) ; todayIsOpen=false ;'>
                 <span *ngIf='date.dayNum == day.dayNum'>
-                  {{date.today}}
+                  {{date.today}}&nbsp;&nbsp;
                 </span>
               </span>
               <span class="badge btn btn-outline-danger btn-outline-success" [class.btn-outline-success]='1'
@@ -39,19 +37,15 @@
   <!-- Dash -->
   <!-- Dash Info -->
 
-  <div class="d-flex border col-sm mb-3 mt-2">
+  <div class="d-flex col-sm mb-3 mt-2">
     <span class="flex-fill justify-content-center" matTooltip="Show hidden batch information." matTooltipPosition="left">
-      <span class='d-flex justify-content-center btn btn-danger'>
-
         <mat-slide-toggle id="batch" (click)="sidenav.toggle()">
           Batch
         </mat-slide-toggle>
       </span>
-    </span>
-    <span disabled class="flex-fill btn btn-outline-light text-monospace">Day View
-
-    </span>
-    <span (click)="todayIsOpen=true && DashTitle='Today'; topicsIsOpen=false; showCurrentDay()" class="flex-fill btn btn-primary text-monospace">Today</span>
+    <button mat-button (click)="todayIsOpen=true && 'DashTitle'; topicsisOpen=false; showCurrentDay()" class="flex-fill btn btn-outline-warn text-monospace">Day View
+    </button>
+    <button (click)="todayIsOpen=true && DashTitle='Today'; topicsIsOpen=false; showCurrentDay()" class="flex-fill text-monospace">Today</button>
 
   </div>
   <!-- SIDENAV -->
@@ -105,11 +99,11 @@
             <td mat-cell *matCellDef="let sub">
               <!-- <span *ngIf='sub.startDateTimeToday'> -->
 
-              <a id="timeBadge" class="badge badge-dark text-monospace">
+              <a id="timeBadge1" class="badge badge-dark text-monospace">
                 {{ sub.startDateTime | date:"h:mm a z"}}
               </a>
               x
-              <a id="timeBadge" class="badge badge-success text-monospace">
+              <a id="timeBadge2" class="badge badge-success text-monospace">
                 {{ sub.endDateTime | date:"h:mm a z"}}
               </a>
               <!-- </span> -->
