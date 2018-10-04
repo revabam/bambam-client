@@ -19,13 +19,12 @@ export class CreateCurriculumComponent implements OnInit {
   isValid = false;
   curriculum: Curriculum;
   /**
-   * @param dialogRef - The reference to the dialog using our
+   * dialogRef - The reference to the dialog using our
    * component, which allows us to close the dialog when we're
    * done.
-   * @param data - Received from the parent component
+   * data - Received from the parent component
    * of this modal component, enabling the current component
    * to retrieve and update what's in the parent component
-   * @author - Chinedu Ozodi | 1806-Sep-18-USF-Java | Steven Kelsey
    */
   cnameFormControl = new FormControl('', [
     Validators.required,
@@ -164,9 +163,8 @@ export class CreateCurriculumComponent implements OnInit {
   /**
    * validation for the curriculum entered
    * the submit button is disabled until both name and weeks are entered correctly
-   * @param curriculumName user input to validate
-   * @param numberOfWeeks user input to validate
-   * @return enable submit button
+   * curriculumName user input to validate
+   * numberOfWeeks user input to validate
    * @author - Stephen Hong | Spark1806-USF-Java | Steven Kelsey
    */
   validate() {
