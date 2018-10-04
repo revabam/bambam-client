@@ -46,9 +46,10 @@ export class TopicPoolComponent implements OnInit {
    * from the Observable returned by the service.
    * @author - Andrew Li | 1806-Jun-18-USF-Java | Wezley Singleton
    */
-  getAllTopics (): void {
+  getAllTopics(): void {
     this.topicService.getAll().subscribe(topics => {
       this.topics = topics;
+      this.topicService.topics = topics;
     });
   }
 
@@ -58,7 +59,7 @@ export class TopicPoolComponent implements OnInit {
    * from the Observable returned by the service.
    * @author - Andrew Li | 1806-Jun-18-USF-Java | Wezley Singleton
    */
-  getAllSubtopics (): void {
+  getAllSubtopics(): void {
     this.subtopicService.getAll().subscribe(subtopics => {
       this.subtopics = subtopics;
       this.subtopicService.subtopics = subtopics;
@@ -71,9 +72,7 @@ export class TopicPoolComponent implements OnInit {
    * @param topic - the parent topic of the subtopics that we seek
    * @author - Andrew Li | 1806-Jun-18-USF-Java | Wezley Singleton
    */
-  getSubtopicsByTopic (topic: Topic): SubTopic[] {
-    // console.log('Filter for: ' + topic.name);
-    // console.log(this.subtopics.filter((subtopic) => subtopic && subtopic.parentTopicId === topic.id));
+  getSubtopicsByTopic(topic: Topic): SubTopic[] {
     return this.subtopics.filter(
       (subtopic) => subtopic && subtopic.parentTopicId === topic.id);
   }
@@ -93,23 +92,23 @@ export class TopicPoolComponent implements OnInit {
      * in the modal.
      */
     const dialogRef = this.dialog.open(DialogViewComponent,
-    /*
-     * An object is passed in as the second parameter, which
-     * defines properties of the dialog modal, as well as the
-     * data that we'll pass in for the modal component to access.
-     * We need to allow the child component to access the
-     * getCurriculumsByName so that the child component can get
-     * the highest version number and increment by one.
-     */
-    {
-      width: '600px',
-      data: {
-        topics: this.topics,
-        subtopics: this.subtopics,
-        topicService: this.topicService,
-        subtopicService: this.subtopicService
-      }
-    });
+      /*
+       * An object is passed in as the second parameter, which
+       * defines properties of the dialog modal, as well as the
+       * data that we'll pass in for the modal component to access.
+       * We need to allow the child component to access the
+       * getCurriculumsByName so that the child component can get
+       * the highest version number and increment by one.
+       */
+      {
+        width: '600px',
+        data: {
+          topics: this.topics,
+          subtopics: this.subtopics,
+          topicService: this.topicService,
+          subtopicService: this.subtopicService
+        }
+      });
   }
 
   /**
@@ -136,6 +135,11 @@ export class TopicPoolComponent implements OnInit {
     return subtopics.length > 0;
   }
 
+  //  method to delete a subtopic by subTopic ID
+  deleteSubTopic(subtopic: SubTopic): void {
+    this.subtopicService.deleteSubTopic(subtopic).subscribe();
+  }
+
   /**
    * Filters out the list of topics so that only the topics (with
    * a name matching a search criteria) would show.
@@ -145,67 +149,6 @@ export class TopicPoolComponent implements OnInit {
   searchTopics(search: string): Topic[] {
     return this.topics.filter((topic) => this.hasTopic(search, topic)
       || this.inSearch(search, topic.name));
-  }
-  /**
-   * Calls the deactivate function from the topic
-   * service.
-   * this.collapseTopic is called because we want
-   * the panel to be collapsed if the deactivate
-   * button is clicked.
-   * @param topic - The topic to be deactivated.
-   * @author - Andrew Li | 1806-Jun-18-USF-Java | Wezley Singleton
-   */
-  deactivateTopic(topic: Topic): void {
-    this.topicService.deactivate(topic).subscribe(
-      data => {
-        if (data['name'] === undefined || data['name'] === null) {
-          return;
-        }
-        /*
-         * After we deactivate from the server, we also want to
-         * deactivate from the client-side array binded to our
-         * template (so the user immediately sees that it's
-         * deactivated)
-         */
-        topic.name = this.topicService.deactivateName(
-          topic.name
-        );
-      },
-      err => {
-      }
-    );
-    this.collapseTopic(topic.id);
-  }
-  /**
-   * Calls the reactivate function from the topic
-   * service.
-   * collapseTopic is called because we don't want
-   * the reactivation to automatically expand a panel,
-   * or if the button is clicked.
-   * @param topic - The topic to be reactivated.
-   * @author - Andrew Li | 1806-Jun-18-USF-Java | Wezley Singleton
-   */
-  reactivateTopic(topic: Topic): void {
-    this.topicService.reactivate(topic).subscribe(
-      data => {
-        this.collapseTopic(topic.id);
-        if (data['name'] === undefined || data['name'] === null) {
-          return;
-        }
-        /*
-         * After we deactivate from the server, we also want to
-         * deactivate from the client-side array binded to our
-         * template (so the user immediately sees that it's
-         * deactivated)
-         */
-        topic.name = this.topicService.reactivateName(
-          topic.name
-        );
-      },
-      err => {
-      }
-    );
-    this.collapseTopic(topic.id);
   }
   /*
    * collapseTopic, expandTopic, and isExpanded are functions
@@ -243,58 +186,6 @@ export class TopicPoolComponent implements OnInit {
    */
   isExpanded(topicId: number): boolean {
     return this.topicExpansions[`topic_${topicId}`] === true;
-  }
-  /**
-   * Calls the deactivate function from the subtopic
-   * service.
-   * @param subtopic - The subtopic to be deactivated.
-   * @author - Andrew Li | 1806-Jun-18-USF-Java | Wezley Singleton
-   */
-  deactivateSubtopic(subtopic: SubTopic): void {
-    this.subtopicService.deactivate(subtopic).subscribe(
-      data => {
-        if (data['name'] === undefined || data['name'] === null) {
-          return;
-        }
-        /*
-         * After we deactivate from the server, we also want to
-         * deactivate from the client-side array binded to our
-         * template (so the user immediately sees that it's
-         * deactivated)
-         */
-        subtopic.name = this.subtopicService.deactivateName(
-          subtopic.name
-        );
-      },
-      err => {
-      }
-    );
-  }
-  /**
-   * Calls the reactivate function from the subtopic
-   * service.
-   * @param subtopic - The subtopic to be reactivated.
-   * @author - Andrew Li | 1806-Jun-18-USF-Java | Wezley Singleton
-   */
-  reactivateSubtopic(subtopic: SubTopic): void {
-    this.subtopicService.reactivate(subtopic).subscribe(
-      data => {
-        if (data['name'] === undefined || data['name'] === null) {
-          return;
-        }
-        /*
-         * After we reactivate on the server, we also want to
-         * reactivate from the client-side array binded to our
-         * template (so the user immediately sees that it's
-         * reactivated)
-         */
-        subtopic.name = this.subtopicService.reactivateName(
-          subtopic.name
-        );
-      },
-      err => {
-      }
-    );
   }
   /**
    * Checks whether or not a word begins with a sequence of characters

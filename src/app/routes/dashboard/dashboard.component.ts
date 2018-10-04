@@ -138,8 +138,6 @@ export class DashboardComponent implements OnInit {
     });
     this.batchService.getBatchByTrainer(1).subscribe(
       (result: Batch[]) => {
-        console.log('batch');
-        console.log(result[0]);
         this.currentBatch = result[0];
       }
     );

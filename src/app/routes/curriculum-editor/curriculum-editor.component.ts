@@ -1,3 +1,4 @@
+import { SubTopicService } from './../../services/subtopic.service';
 import { CognitoService } from './../../services/cognito.service';
 import { DaySubtopicService } from './../../services/day-subtopic.service';
 import { CurriculumWeekService } from './../../services/curriculum-week.service';
@@ -41,7 +42,7 @@ export class CurriculumEditorComponent implements OnInit {
     private domSanitizer: DomSanitizer,
     private curriculumService: CurriculumService,
     private curriculumDayService: CurriculumDayService,
-    private curriculumWeekService: CurriculumWeekService,
+    private subTopicService: SubTopicService,
     private daySubTopicService: DaySubtopicService,
     private router: Router,
     private cognito: CognitoService,
@@ -76,13 +77,14 @@ export class CurriculumEditorComponent implements OnInit {
   getAllCurriculums(): void {
     this.curriculumService.getAll().subscribe(curriculums => {
       this.curriculums = curriculums;
-      console.log('curriculums');
-      console.log(curriculums);
       this.curriculumNames = this.getUniqueNames();
     });
   }
 
   // here is where the master version of the curriculum is copied so that it can be edited
+  // Note: This function does not actually work, because each daySubTopic,
+  // day, week, the curriculum itself should all have new id's. A post to curriculum service does not automatically
+  // do that
   copyCurriculum(curriculum: Curriculum) {
     const copiedCurriculum: Curriculum = {
       name: curriculum.name,
@@ -157,11 +159,12 @@ export class CurriculumEditorComponent implements OnInit {
    * @author - Chinedu Ozodi | 1806-Sep-18-USF-Java | Steven Kelsey
    */
   selectCurriculum(curriculum: Curriculum) {
+    curriculum = this.subTopicService.setDayTopicNames(curriculum);
     this.getAllCurriculumData(curriculum);
   }
 
   /**
-   * Gets all the days, weeks, and subtopics for a given curriculum. Also updates the drag and drop
+   * Sorts all the days, weeks, and subtopics for a given curriculum. Also updates the drag and drop
    * id list
    * @param curriculum the curriculum you wnat to eager load
    * @author - Chinedu Ozodi | 1806-Sep-18-USF-Java | Steven Kelsey

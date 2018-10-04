@@ -14,13 +14,13 @@
                 <span style="flex: .6 .3 auto"></span>
                 <span>
                   <button mat-button color="accent" mat-icon-button aria-label="add" (click)="createNewCurriculumDialog()">
-                    <mat-icon >add</mat-icon>
+                    <mat-icon style="vertical-align: baseline;">add</mat-icon>
                   </button>
                 </span>
                 <span style="flex: 0.3 1 auto"></span>
               </mat-toolbar>
             </mat-card-header>
-            <mat-card-content>
+            <mat-card-content >
               <mat-accordion>
                 <mat-expansion-panel *ngFor="let cname of curriculumNames">
                   <mat-expansion-panel-header>
@@ -29,37 +29,24 @@
                     </mat-panel-title>
                   </mat-expansion-panel-header>
                   <div *ngFor="let curriculum of getCurriculumsByName(cname)">
-                    <mat-toolbar>
-                      <span *ngIf="curriculum.name === cname">
+                    <mat-toolbar style="font-size: .75vw">
+                      <span *ngIf="curriculum.name === cname" style="padding-right: 1vw">
                         Version: {{curriculum.version}}
-                        <div *ngIf="curriculum.status == 1">DRAFT</div>
-                        <div *ngIf="curriculum.status == 2">NEEDS APPROVAL</div>
-                        <div *ngIf="curriculum.status == 3">READ ONLY</div>
-                        <div *ngIf="curriculum.status == 4">MASTER</div>
-                      </span>
-                      <span *ngIf="curriculum.name !== cname">
-                        <del>Version: {{curriculum.version}}</del>
-                        <div *ngIf="curriculum.status == 1">DRAFT</div>
-                        <div *ngIf="curriculum.status == 2">NEEDS APPROVAL</div>
-                        <div *ngIf="curriculum.status == 3">READ ONLY</div>
-                        <div *ngIf="curriculum.status == 4">MASTER</div>
-                      </span>
-                      
+                        <span *ngIf="curriculum.status == 1">DRAFT</span>
+                        <span *ngIf="curriculum.status == 2">NEEDS APPROVAL</span>
+                        <span *ngIf="curriculum.status == 3">READ ONLY</span>
+                        <span *ngIf="curriculum.status == 4">MASTER</span>
+                      </span>                      
                       <span class="fill-remaining-space">
                       </span>
                       <span *ngIf="curriculum.name === cname">
                         <button mat-icon-button color="" (click)="selectCurriculum(curriculum)">
-                          <mat-icon color="secondary">visibility</mat-icon>
+                          <mat-icon color="secondary" style="vertical-align: baseline;">visibility</mat-icon>
                         </button>
                       </span>
                       <span *ngIf="curriculum.name === cname">
                         <button mat-icon-button color="" (click)="copyCurriculum(curriculum)">
-                          <mat-icon svgIcon="copy"></mat-icon>
-                        </button>
-                      </span>
-                      <span *ngIf="curriculum.name !== cname">
-                        <button mat-icon-button color="" (click)="reactivateCurriculum(curriculum)">
-                          <mat-icon color="">add</mat-icon>
+                          <mat-icon svgIcon="copy" style="vertical-align: top;"></mat-icon>
                         </button>
                       </span>
                     </mat-toolbar>

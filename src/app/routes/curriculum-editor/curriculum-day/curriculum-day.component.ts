@@ -27,10 +27,6 @@ export class CurriculumDayComponent implements OnInit {
     this.getAllSubTopicNames();
   }
 
-  ngOnChange() {
-    console.log('change call');
-  }
-
   drop(event: CdkDragDrop<any>) {
     if (!event.previousContainer || !event.previousContainer.data || !event.previousContainer.data.length) {
       // This means that it is a subtopic from the topic pool and should be converted into a day-subtopic
@@ -41,11 +37,11 @@ export class CurriculumDayComponent implements OnInit {
         parentTopicId: event.previousContainer.data.parentTopicId,
         subTopicId: event.previousContainer.data.id
       };
-
       // Saving daySubTopic to db
       this.daySubTopicService.post(daySubTopic).subscribe((savedDaySubTopic) => {
         // reassigns the name variable because it is not being persisted to the db to avoid redundancy
         savedDaySubTopic.name = event.previousContainer.data.name;
+        savedDaySubTopic.parentTopicId = event.previousContainer.data.parentTopicId;
         this.day.daySubTopics.splice(event.currentIndex, 0, savedDaySubTopic);
         this.updateDaySubTopicIndexes();
       });

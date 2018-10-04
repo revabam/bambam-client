@@ -68,8 +68,6 @@ export class DialogViewComponent implements OnInit {
         this.subtopics.forEach(subtopic => this.data['subtopicService'].add(subtopic, topics[0].id).subscribe(
           (addedSubtopic) => {
             this.data['subtopics'].push(addedSubtopic);
-            console.log('subtopic added');
-            console.log(addedSubtopic);
         }));
       }
       this.dialogRef.close();
