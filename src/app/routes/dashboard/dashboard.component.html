@@ -3,59 +3,64 @@
   <div class="row">
     <div class="col-sm mb-3 mt-2">
       <mat-card>
-        <mat-card-header>
-          <div class="p-2 w-100 bd-highlight text-monospace">
-            <h1 class='text-monospace'>
-              Welcome, {{this.user.firstName}} Trainer
-            </h1>
-          </div>
-        </mat-card-header>
-        <mat-card-content style="font-size: 18px">
-          <span>Week At a Glance Bar</span>
+        <mat-card>
+          <mat-card-header>
+            <div class="d-flex p-2 w-100 bd-highlight text-monospace justify-content-center">
+              <p *ngIf="this.user" class='text-monospace'>
+                Welcome, {{user.firstName}}
+              </p>
+              <p *ngIf="!this.user" class='text-monospace'>
+                Welcome, Trainer.
+              </p>
+            </div>
+          </mat-card-header>
+          <mat-card-content style="font-size: 18px">
 
-          <mat-grid-list cols="7" rowHeight="2:1" class='border border-dark'>
-            <mat-grid-tile class='d-flex justify-content-center'>
-              <mat-card>
+          </mat-card-content>
+        </mat-card>
+        <!-- Button Bar Content -->
+        <mat-grid-list cols="7" rowHeight="2:1" class='border border-dark'>
+          <mat-grid-tile class='d-flex justify-content-center' *ngFor='let day of curriculumDay; let i = index;'>
 
-                <button type="button" class="btn btn-outline-primary" (click)='showThisDay()'>
-                  Monday <span class="badge btn btn-outline-danger btn-outline-success" [class.btn-outline-success]='1'
-                    [class.btn-outline-danger]='0'>9</span>
-                </button>
-
-              </mat-card>
-            </mat-grid-tile>
-            <mat-grid-tile>
-              <button type="button" class="btn btn-outline-primary" (click)='showThisDay()'>
-                Tuesday <span class="badge btn btn-outline-danger btn-outline-success" [class.btn-outline-success]='0'
-                  [class.btn-outline-danger]='1'>9</span>
-              </button>
-            </mat-grid-tile>
-          </mat-grid-list>
-
-        </mat-card-content>
+            <button type="button" class="btn btn-outline-primary" [class.active]="dayArr[day.dayNum].selected">
+              <span *ngFor='let date of dayArr' (click)='showDay(date.dayNum) ; todayIsOpen=false ;'>
+                <span *ngIf='date.dayNum == day.dayNum'>
+                  {{date.today}}
+                </span>
+              </span>
+              <span class="badge btn btn-outline-danger btn-outline-success" [class.btn-outline-success]='1'
+                [class.btn-outline-danger]='0' [class.active]="dayArr[day.dayNum].selected">{{getCurrentDayEvents(day.dayNum)}}</span>
+            </button>
+          </mat-grid-tile>
+        </mat-grid-list>
       </mat-card>
     </div>
   </div>
   <!-- Dash -->
   <!-- Dash Info -->
-  <div class="d-flex flex-row justify-content-center">
-    <span class="btn btn-outline-warn flex-fill justify-content-center" matTooltip="Show hidden batch information."
-      matTooltipPosition="left">
-      <mat-slide-toggle class="flex-fill" color="warn" (click)="sidenav.toggle()">
-        Batch
-      </mat-slide-toggle>
+
+  <div class="d-flex border col-sm mb-3 mt-2">
+    <span class="flex-fill justify-content-center" matTooltip="Show hidden batch information." matTooltipPosition="left">
+      <span class='d-flex justify-content-center btn btn-danger'>
+
+        <mat-slide-toggle id="batch" (click)="sidenav.toggle()">
+          Batch
+        </mat-slide-toggle>
+      </span>
     </span>
-    <button mat-button (click)="todayIsOpen=true ; topicsIsOpen=false" class="flex-fill btn btn-outline-warn text-monospace">View
-      Today</button>
-    <button mat-button (click)="topicsIsOpen=true ; todayIsOpen=false" class="flex-fill btn btn-outline-warn text-monospace">View
-      Topics</button>
+    <span disabled class="flex-fill btn btn-outline-light text-monospace">Day View
+
+    </span>
+    <span (click)="todayIsOpen=true && DashTitle='Today'; topicsIsOpen=false; showCurrentDay()" class="flex-fill btn btn-primary text-monospace">Today</span>
+
   </div>
   <!-- SIDENAV -->
-  <mat-sidenav-container>
+  <mat-sidenav-container id="sideCard" style="border-radius: 20px 20px 20px 20px; box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.555)">
     <mat-sidenav #sidenav mode="side">
-      <mat-card class="border border-dark rounded justify-content-center">
-        <mat-card-header id="batchHeader" class="rounded border border-dark justify-content-center">
-          {{currentBatch.name}}
+      <mat-card id="sideNav" *ngIf="currentBatch">
+        <mat-card-header id="batchHeader">
+          <!-- {{currentBatch.name}} -->
+          1806-June18-USF-Java4
         </mat-card-header>
         <mat-list dense>
           <mat-list-item class='d-flex'>
@@ -69,34 +74,37 @@
           <mat-divider></mat-divider>
           <mat-list-item>
             Start Date:
-            <span>&nbsp;{{currentBatch.startDate | date:"h:mm a z"}}</span>
+            <span>&nbsp;{{currentBatch.startDate | date:"h:mm a"}}</span>
           </mat-list-item>
           <mat-divider></mat-divider>
           <mat-list-item>
             End Date:
-            <span>&nbsp;{{currentBatch.endDate | date:"h:mm a z"}}</span>
+            <span>&nbsp;{{currentBatch.endDate | date:"h:mm a"}}</span>
           </mat-list-item>
         </mat-list>
       </mat-card>
     </mat-sidenav>
-    <mat-card *ngIf="todayIsOpen" class="border border-dark rounded justify-content-center">
+    <mat-card style="border-radius: 20px 20px 20px 20px; opacity: .9; box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.555)">
       <mat-card-header class="justify-content-center border border-dark rounded">
         <div>
           <div>
-            {{DashTitle}}
+            {{DashTitle}} {{daySelected | date:'shortDate'}} {{daySelected | date:'h:mm a'}}
           </div>
         </div>
+
       </mat-card-header>
+
       <mat-card-content class='d-flex'>
 
-
+        <h1 *ngIf="!dataSource"> Unable to find table data.</h1>
         <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 flex-fill">
-
 
           <!-- TIME COLUMN -->
           <ng-container matColumnDef="time">
             <th mat-header-cell *matHeaderCellDef> Time </th>
             <td mat-cell *matCellDef="let sub">
+              <!-- <span *ngIf='sub.startDateTimeToday'> -->
+
               <a id="timeBadge" class="badge badge-dark text-monospace">
                 {{ sub.startDateTime | date:"h:mm a z"}}
               </a>
@@ -104,6 +112,7 @@
               <a id="timeBadge" class="badge badge-success text-monospace">
                 {{ sub.endDateTime | date:"h:mm a z"}}
               </a>
+              <!-- </span> -->
             </td>
 
           </ng-container>
@@ -165,6 +174,7 @@
 
           <tr mat-header-row *matHeaderRowDef="headerColumns"></tr>
           <tr mat-row *matRowDef="let row; columns: headerColumns;"></tr>
+
         </table>
       </mat-card-content>
     </mat-card>

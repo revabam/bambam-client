@@ -1,3 +1,4 @@
+import { CognitoService } from './../../services/cognito.service';
 import { DaySubtopicService } from './../../services/day-subtopic.service';
 import { CurriculumWeekService } from './../../services/curriculum-week.service';
 import { CurriculumDay } from './../../models/curriculum-day';
@@ -9,12 +10,15 @@ import { MatDialog } from '@angular/material';
 import { CreateCurriculumComponent } from './create-curriculum/create-curriculum.component';
 import { CurriculumDayService } from '../../services/curriculum-day.service';
 import { weekdays } from 'moment';
+import { MatIconRegistry } from '@angular/material/icon';
+import { DomSanitizer } from '@angular/platform-browser';
+import { Router } from '@angular/router';
 
 
 @Component({
   selector: 'app-curriculum-editor',
   templateUrl: './curriculum-editor.component.html',
-  styleUrls: ['./curriculum-editor.component.css']
+  styleUrls: ['./curriculum-editor.scss']
 })
 export class CurriculumEditorComponent implements OnInit {
   // Arrays of all the elements we're fetching from the server.
@@ -31,18 +35,32 @@ export class CurriculumEditorComponent implements OnInit {
    * @author - Andrew Li | 1806-Jun-18-USF-Java | Wezley Singleton
    */
   constructor(
+    private matIconRegistry: MatIconRegistry,
+    private domSanitizer: DomSanitizer,
     private curriculumService: CurriculumService,
     private curriculumDayService: CurriculumDayService,
     private curriculumWeekService: CurriculumWeekService,
     private daySubTopicService: DaySubtopicService,
+    private router: Router,
+    private cognito: CognitoService,
     public dialog: MatDialog,
-  ) { }
+  ) {
+    this.matIconRegistry.addSvgIcon(
+      'copy',
+      this.domSanitizer.bypassSecurityTrustResourceUrl('../assets/copy_icon.svg')
+    );
+  }
 
   /*
    * We're invoking our services' fetch statements so
    * that we can display our data on our page.
    */
   ngOnInit() {
+    if (!sessionStorage.getItem('user')) {
+      this.router.navigate(['login']);
+    } else {
+      this.cognito.bamUser = JSON.parse(sessionStorage.getItem('user'));
+    }
     this.getAllCurriculums();
   }
 
@@ -61,6 +79,33 @@ export class CurriculumEditorComponent implements OnInit {
     });
   }
 
+  // here is where the master version of the curriculum is copied so that it can be edited
+  copyCurriculum(curriculum: Curriculum) {
+    const copiedCurriculum: Curriculum = {
+      name: curriculum.name,
+      version: this.highestVersion(curriculum.name),
+      creatorId: curriculum.creatorId,
+      status: 1,
+      dateCreated: new Date(),
+      numberOfWeeks: curriculum.numberOfWeeks,
+      topics: curriculum.topics,
+      curriculumWeeks: curriculum.curriculumWeeks
+    };
+    this.curriculums.push(copiedCurriculum);
+    this.curriculumService.post(copiedCurriculum).subscribe(result => {
+      copiedCurriculum.id = result.id;
+    });
+  }
+
+  highestVersion(name: string): number {
+    let count = 1;
+    for (const curriculum of this.curriculums) {
+      if (curriculum.name === name) {
+        count++;
+      }
+    }
+    return count;
+  }
   /**
    * Gets us distinct curriculum names from the list of all
    * curriculums

@@ -49,6 +49,7 @@ import { NgDragDropModule } from 'ng-drag-drop';
 import {DragDropModule} from '@angular/cdk/drag-drop';
 
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -75,6 +76,7 @@ import {DragDropModule} from '@angular/cdk/drag-drop';
     ForgottenPasswordComponent
   ],
   imports: [
+    ChartsModule,
     NgbModule.forRoot(),
     HttpClientModule,
     MatAutocompleteModule,

@@ -1,13 +1,12 @@
 <table>
     <tr>
         <td id="dchart">
-            <mat-card class="dcard">
+            <mat-card style="border-radius: 20px 20px 20px 20px" class="dcard">
                 <mat-card-title class="banner">
                     <h2>Overall Progress</h2>
                 </mat-card-title>
                 <mat-card-content>
-                    <canvas baseChart [data]="doughnutChartData" [labels]="doughnutChartLabels" 
-                                      [chartType]="doughnutChartType" [colors]="donutColors"></canvas>
+                    <canvas baseChart [data]="doughnutChartData" [labels]="doughnutChartLabels" [chartType]="doughnutChartType" [colors]="donutColors"></canvas>
                     <mat-form-field class="input">
                         <input placeholder="Input percent (0-100)" type="number" matInput min="0" max="100" (input)="percent($event)">
                     </mat-form-field>
@@ -15,7 +14,7 @@
             </mat-card>
         </td>
         <td id="bchart">
-            <mat-card class="bcard">
+            <mat-card style="border-radius: 20px 20px 20px 20px" class="bcard">
                 <mat-card-title class="banner">
                     <h2>Weekly Progress</h2>
                 </mat-card-title>
@@ -24,10 +23,10 @@
                         [chartType]="barChartType" [colors]="barColors"></canvas>
                     <mat-select class="input" placeholder="Select a batch" [(value)]="selected" (selectionChange)="selectedCurriculum($event)"
                         id="batchSelect">
-                        <mat-option *ngFor='let batch of this.curriculums' [value]='batch.id'>{{batch.name}}</mat-option>
+                        <mat-option *ngFor='let batch of this.curriculums' [value]='batch.curriculumId'>{{batch.name}}</mat-option>
                     </mat-select>
                 </mat-card-content>
             </mat-card>
         </td>
     </tr>
-</table>
+ </table>

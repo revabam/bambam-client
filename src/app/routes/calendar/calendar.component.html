@@ -21,25 +21,25 @@
 </ng-template>
 
 <br>
-<div class="row justify-content-center mx-4 pb-4">
+<div class="row justify-content-center mx-4 pb-4" >
   <div class="col-md-2" *ngIf="showSideNav">
-    <mat-card>
+    <mat-card id="currAll" style="border-radius: 20px 20px 20px 20px; box-shadow: 15px 15px 35px rgba(0, 0, 0, 0.555); margin-top: 50%" >
       <mat-card-header>
         <mat-card-title>
-          <h4>Curriculums</h4>
+          <h4 style=" font-size: 1.7vw">Curriculums</h4>
         </mat-card-title>
       </mat-card-header>
       <mat-divider></mat-divider>
       <div *ngIf="curriculumEvents == null">Loading</div>
       <mat-list>
-        <mat-list-item *ngFor="let curriculum of curriculumEvents" mwlDraggable [dropData]="{event: curriculum}" style="position:relative; z-index: 10">
+        <mat-list-item *ngFor="let curriculum of curriculumEvents" mwlDraggable [dropData]="{event: curriculum}" style="position:relative; z-index: 10; font-weight: bold; font-size: .9vw"><mat-icon>drag_indicator</mat-icon>
           {{curriculum.title}} : Version {{curriculum.version}}</mat-list-item>
       </mat-list>
     </mat-card>
-    <mat-card class="mt-4">
+    <mat-card id="cEvent" style="border-radius: 20px 20px 20px 20px;box-shadow: 15px 15px 35px rgba(0, 0, 0, 0.555); ">
       <mat-card-header>
         <mat-card-title>
-          <h4>Create Event</h4>
+          <h4 style="font-size: 1.35vw">Create Event</h4>
         </mat-card-title>
       </mat-card-header>
       <mat-divider></mat-divider>
@@ -52,43 +52,43 @@
           <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
           <mat-datepicker #picker startView="year" [startAt]="startDate"></mat-datepicker>
         </mat-form-field>
-        <button mat-raised-button color="primary" (click)="addEvent()">Create Event</button>
+        <button style="margin-left: 3vw" mat-raised-button (click)="addEvent()">Create</button>
       </mat-card-content>
     </mat-card>
   </div>
   <div class="col-md-10">
-    <mat-card>
+    <mat-card style="border-radius: 20px 20px 20px 20px; box-shadow: 15px 15px 35px rgba(0, 0, 0, 0.555); width: 90%; " >
       <mat-card-header class="text-center text-center align-content-center align-center justify-content-center">
-        <mat-toolbar style="background-color: rgba(0,0,0,0)">
-          <button mat-button color="accent" mat-icon-button aria-label="add" (click)="toggleSideNav()">
-              <mat-icon>add</mat-icon>
+        <mat-toolbar style="background-color: rgba(0, 0, 0, 0)">
+          <button mat-button  mat-icon-button  (click)="toggleSideNav()">
+              <mat-icon>arrow_back_ios</mat-icon>
             </button>
           <span style="flex: 1 1 auto;"></span>
             <span class="btn-group">
               <span mwlCalendarPreviousView [view]="view" [(viewDate)]="viewDate" (viewDateChange)="activeDayIsOpen = false">
-                <button mat-raised-button color="primary">Previous</button>
+                <button mat-button >< Prev.</button>
               </span>
               <span mwlCalendarToday [(viewDate)]="viewDate">
-                <button mat-stroked-button color="accent">Today</button>
+                <button mat-stroked-button >Today</button>
               </span>
               <span mwlCalendarNextView [view]="view" [(viewDate)]="viewDate" (viewDateChange)="activeDayIsOpen = false">
-                <button mat-raised-button color="primary">Next</button>
+                <button mat-raised-button >Next</button>
               </span>
             </span>
             <span style="flex: .1 1 auto;"></span>
           <span class="col-md-4">
-            <h3>{{ viewDate | calendarDate:(view + 'ViewTitle'):'en' }}</h3>
+            <h3 id="currentDate">{{ viewDate | calendarDate:(view + 'ViewTitle'):'en' }}</h3>
           </span>
           <span style="flex: .7 1 auto;"></span>
             <span class="btn-group">
               <span (click)="view = 'month'" [class.active]="view === 'month'">
-                <button mat-raised-button color="primary">Month</button>
+                <button mat-raised-button >Month</button>
               </span>
               <span (click)="view = 'week'" [class.active]="view === 'week'">
-                <button mat-raised-button color="primary">Week</button>
+                <button mat-raised-button >Week</button>
               </span>
               <span (click)="view = 'day'" [class.active]="view === 'day'">
-                <button mat-raised-button color="primary">Day</button>
+                <button mat-raised-button >Day</button>
               </span>
             </span>
             <span style="flex: 1 1 auto;"></span>
@@ -99,7 +99,7 @@
 
         </div>
         <div [ngSwitch]="view">
-          <mwl-calendar-month-view *ngSwitchCase="'month'" [viewDate]="viewDate" [events]="events" [refresh]="refresh" [activeDayIsOpen]="activeDayIsOpen"
+          <mwl-calendar-month-view style="font-size: 1vw; " *ngSwitchCase="'month'" [viewDate]="viewDate" [events]="events" [refresh]="refresh" [activeDayIsOpen]="activeDayIsOpen"
             (dayClicked)="dayClicked($event.day)" (eventClicked)="handleEvent('Clicked', $event.event)" (eventTimesChanged)="eventTimesChanged($event)">
           </mwl-calendar-month-view>
           <mwl-calendar-week-view *ngSwitchCase="'week'" [viewDate]="viewDate" [events]="events" [refresh]="refresh" (eventClicked)="handleEvent('Clicked', $event.event)"

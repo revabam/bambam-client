@@ -5,4 +5,8 @@ export class DaySubTopic {
     index: number;
     subTopicId: number;
     parentTopicId: number;
+    /**
+     * used for boom transfer of status from the event models
+     */
+    statusId?: number;
 }

@@ -1,7 +1,7 @@
+import { Subject } from 'rxjs';
 import { CurriculumWeekService } from './../../../services/curriculum-week.service';
 import { CurriculumWeek } from './../../../models/curriculum-week';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
-import { CreateVersionComponent } from './../create-version/create-version.component';
 import { Curriculum } from './../../../models/curriculum';
 import { Component, OnInit, Inject } from '@angular/core';
 import { CurriculumDay } from '../../../models/curriculum-day';
@@ -14,19 +14,17 @@ import { FormControl, Validators } from '@angular/forms';
   styleUrls: ['./create-curriculum.component.css']
 })
 export class CreateCurriculumComponent implements OnInit {
-
   curriculumName: string;
   numberOfWeeks: number;
   isValid = false;
-
+  curriculum: Curriculum;
   /**
-   * @param dialogRef - The reference to the dialog using our
+   * dialogRef - The reference to the dialog using our
    * component, which allows us to close the dialog when we're
    * done.
-   * @param data - Received from the parent component
+   * data - Received from the parent component
    * of this modal component, enabling the current component
    * to retrieve and update what's in the parent component
-   * @author - Chinedu Ozodi | 1806-Sep-18-USF-Java | Steven Kelsey
    */
   cnameFormControl = new FormControl('', [
     Validators.required,
@@ -36,21 +34,24 @@ export class CreateCurriculumComponent implements OnInit {
     Validators.required,
     Validators.minLength(1)
   ]);
+
   constructor(
-    public dialogRef: MatDialogRef<CreateVersionComponent>,
+    public dialogRef: MatDialogRef<CreateCurriculumComponent>,
     @Inject(MAT_DIALOG_DATA) public data: object,
     private curriculumDayService: CurriculumDayService,
-    private curriculumWeekService: CurriculumWeekService
-  ) { }
+    private curriculumWeekService: CurriculumWeekService,
+    ) { }
+
 
   ngOnInit() {
   }
+
   /**
    * When the user decides to close the dialog.
    * @author - Chinedu Ozodi | 1806-Sep-18-USF-Java | Steven Kelsey
    */
   close(): void {
-    this.dialogRef.close();
+    this.dialogRef.close(this.curriculum);
   }
 
   /**
@@ -82,7 +83,7 @@ export class CreateCurriculumComponent implements OnInit {
       for (let i = 0; i < this.data['curriculums'].length; i++) {
         if (this.data['curriculums'][i].name === newCurriculum.name) {
           if (this.data['curriculums'][i].version >= nameNum) {
-            ++nameNum;
+            nameNum += 1;
           } else {
             continue;
           }
@@ -150,13 +151,22 @@ export class CreateCurriculumComponent implements OnInit {
           // Save the next week
           const weekNum = week.weekNum + 1;
           this.saveWeek(curriculum, weekNum);
+        } else {
+          // done with all days and weeks, refresh page
+          console.log('Refreshing page');
+          // this.refresh.next();
         }
       }
     });
   }
 
-  // here we are performing validation for the curriculum entered
-  //    the submit button is disabled until both name and weeks are entered correctly
+  /**
+   * validation for the curriculum entered
+   * the submit button is disabled until both name and weeks are entered correctly
+   * curriculumName user input to validate
+   * numberOfWeeks user input to validate
+   * @author - Stephen Hong | Spark1806-USF-Java | Steven Kelsey
+   */
   validate() {
     this.isValid = true;
     // validating user input

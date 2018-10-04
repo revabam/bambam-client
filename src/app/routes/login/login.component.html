@@ -1,27 +1,27 @@
 <div class="row justify-content-center mx-2">
 
-  <img src="../../../../assets/bam.png" height="200px" width="300px" alt="" srcset="" class="py-3">
+  <img src="../../../../assets/bam.png" style="margin-top: 6%" height="200px" width="300px" class="py-3">
 </div>
 <div class="row justify-content-center mx-2">
   <div class="col-4">
 
-    <mat-card>
+    <mat-card style="border-radius: 20px 20px 20px 20px; box-shadow: 15px 15px 35px rgba(0, 0, 0, 0.555)">
       <mat-card-header>
         <mat-card-title>
           <h2>Login</h2>
         </mat-card-title>
       </mat-card-header>
       <mat-card-content style="background-color: rgb(245,245,245)">
-        <form [formGroup]="loginForm"> 
-          <mat-form-field class="col-9">
-            <input matInput name="email" placeholder="Email" type="email" formControlName="email" (keyup.enter)="login()">
+        <form [formGroup]="loginForm">
+          <mat-form-field style="margin-left: 10%" class="col-9">
+            <input  matInput name="email" placeholder="Email" type="email" formControlName="email" (keyup.enter)="login()">
             <mat-error *ngFor="let validation of loginValidationMessages.email">
               <mat-error *ngIf="loginForm.get('email').hasError(validation.type) && (loginForm.get('email').dirty || loginForm.get('email').touched)">{{validation.message}}</mat-error>
             </mat-error>
           </mat-form-field>
           <br/>
-          
-          <mat-form-field class="col-9">
+
+          <mat-form-field style="margin-left: 10%" class="col-9">
             <input matInput name="password" placeholder="Password" type="password" formControlName="password" (keyup.enter)="login()">
             <mat-error *ngFor="let validation of loginValidationMessages.password">
               <mat-error *ngIf="loginForm.get('password').hasError(validation.type) && (loginForm.get('password').dirty || loginForm.get('password').touched)">{{validation.message}}</mat-error>
@@ -30,7 +30,7 @@
         </form> 
         <a routerLink = "/forgotten/password">Forgot Password?</a>
         <mat-toolbar #buttonBar>
-          <button mat-raised-button name="login" color="primary" (click)="login()">Submit</button>
+          <button mat-raised-button name="login" (click)="login()">Submit</button>
           <span style="flex: 1 auto;"></span>
           <button mat-raised-button name="register" routerLink="/register">Register</button>
         </mat-toolbar>

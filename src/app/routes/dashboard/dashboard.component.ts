@@ -1,59 +1,25 @@
+import { Batch } from './../../models/batch';
 import { Component, OnInit } from '@angular/core';
 import { BamUser } from '../../models/bam-user';
 import { Router } from '@angular/router';
-import { Batch } from '../../models/batch';
 import { BatchService } from '../../services/batch.service';
 import { Curriculum } from '../../models/curriculum';
+import { CurriculumService } from '../../services/curriculum.service';
 import { UserService } from '../../services/user.service';
 import { CalendarService } from '../../services/calendar.service';
 import { CalendarEvent } from '../../models/calendar-event';
+import { CurriculumWeek } from '../../models/curriculum-week';
+import { CurriculumDay } from '../../models/curriculum-day';
+import { CognitoService } from '../../services/cognito.service';
 
 /**
- * This component is the dashboard page. It is the page that the
- * user is directed to after they login. It displays personal
- * information and batch information to the user.
- *
- * @author Bradley Walker | Khaleel Williams | 1806-Jun18-USF-Java | Wezley Singleton
- * @author Joey Shannon | Drake Mapel | 1806-Spark | Steven Kelsey
- */
-export interface Topicz {
-  time: number;
-  flagged: number;
-  id: number;
-  name: string;
-  status: number;
-}
-
-// const topics: Topicz[] = [
-//   {
-//     flagged: 0,
-//     id: 1,
-//     name: 'Java Data Types',
-//     time: 1537899180000,
-//     status: 0
-//   },
-//   {
-//     flagged: 0,
-//     id: 2,
-//     name: 'Panels & Softskills',
-//     time: 1537899180000,
-//     status: 1
-//   },
-//   {
-//     flagged: 0,
-//     id: 3,
-//     name: 'Overwatch Gameplay Trailers',
-//     time: 1537899180000,
-//     status: 0
-//   },
-//   {
-//     flagged: 0,
-//     id: 4,
-//     name: 'Lifecycle of a Green Bean',
-//     time: 1537899180000,
-//     status: 1
-//   }
-// ];
+* This component is the dashboard page. It is the page that the
+* user is directed to after they login. It displays personal
+* information and batch information to the user.
+*
+* @author Bradley Walker | Khaleel Williams | 1806-Jun18-USF-Java | Wezley Singleton
+* @author Joey Shannon | Drake Mapel | 1806-Spark | Steven Kelsey
+*/
 
 @Component({
   selector: 'app-dashboard',
@@ -61,11 +27,24 @@ export interface Topicz {
   styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent implements OnInit {
+  headerColumns: string[] = ['time', 'flagged', 'sub', 'control'];
   dataSource;
+<<<<<<< HEAD
   topics = this.calendarService.getCalendarEvents(1);
   currentBatch;
   headerColumns: string[] = ['time', 'flagged', 'sub',  'control'];
+=======
+  dayInfo;
+  Today = new Date().setDate(new Date().getDate() + 1);
+  Tomorrow = new Date().setDate(new Date().getDate() + 2);
+  daySelected = new Date().setDate(new Date().getDate() + 1);
+  calendarEvents = null;
+  selectedDate = this.cs.getCurriculumByWeek(1);
+  currentBatch: Batch;
+
+>>>>>>> 69498f4c8a39b60d581260c421c2f0c439b923be
   user: BamUser;
+
   batch;
   batchWeek: number;
   percentCompletion: number;
@@ -73,19 +52,69 @@ export class DashboardComponent implements OnInit {
   firstName: string;
   lastName: string;
   visibilityIcon = [
-    {num: 0, icon: 'visibility_off' },
-    {num: 1, icon: 'visibility'}
+    { num: 0, icon: 'visibility_off' },
+    { num: 1, icon: 'visibility' }
   ];
   DashTitle = 'Today';
-  todayIsOpen: boolean;
+  todayIsOpen = true;
   topicsIsOpen: boolean;
+  list: string[];
   eventsThisWeek: CalendarEvent[];
+  curriculumDay: CurriculumDay[];
+  curriculumWeek: CurriculumWeek;
+  selectedDay;
+  currentWeekEvents: CalendarEvent[];
+
+  dayArr = [
+    {
+      dayNum: 0,
+      today: 'Sunday',
+      selected: false
+    },
+    {
+      dayNum: 1,
+      today: 'Monday',
+      selected: false
+    },
+    {
+      dayNum: 2,
+      today: 'Tuesday',
+      selected: false
+    },
+    {
+      dayNum: 3,
+      today: 'Wednesday',
+      selected: false
+    },
+    {
+      dayNum: 4,
+      today: 'Thursday',
+      selected: false
+    },
+    {
+      dayNum: 5,
+      today: 'Friday',
+      selected: false
+    },
+    {
+      dayNum: 6,
+      today: 'Saturday',
+      selected: false
+    },
+    {
+      dayNum: 7,
+      today: 'Sunday',
+      selected: false
+    }
+  ];
 
   constructor(
     private router: Router,
     private batchService: BatchService,
     private userService: UserService,
-    private calendarService: CalendarService
+    private calendarService: CalendarService,
+    private cs: CurriculumService,
+    private cognito: CognitoService
   ) { }
 
   /**
@@ -93,69 +122,174 @@ export class DashboardComponent implements OnInit {
   * data from the session storage and display both the user's personal info,
   * and info about the batch they are associated with.
   */
+
+  sortData() {
+    return this.curriculumDay.sort((a, b) => {
+      return <any>(b.dayNum) - <any>(a.dayNum);
+    });
+  }
+
   ngOnInit() {
-    this.user = JSON.parse(sessionStorage.getItem('user'));
-    this.dataSource = this.topics;
-    this.batchService.getBatchByTrainer(1).subscribe(
-      result => {
-      this.currentBatch = result[0];
-    }
-    );
-
- //   this.eventsThisWeek = this.calendarService.getCalendarEventsByTrainerIdAndWeek(1, new Date());
-
-    if (!this.user) {
+    if (!sessionStorage.getItem('user')) {
       this.router.navigate(['login']);
     } else {
-      /*
-        In our sprint, only trainers can use the program so there is no
-        need to check if the user is a trainer or not, But this is where
-        you might want to do that.
-      */
-      this.batchService.getBatchesByTrainerId(1).subscribe(
-        result => {
-          // If the result is not null and not empty
-          if (result && result.length !== 0) {
-            // Get the most recent batch
-            this.batch = result.sort(this.compareBatches)[result.length - 1];
+      this.cognito.bamUser = JSON.parse(sessionStorage.getItem('user'));
+    }
+    this.user = JSON.parse(sessionStorage.getItem('user'));
 
-            // Figure out what week the batch is in
-            this.batchWeek = this.calculateWeeksBetween(new Date(this.batch.startDate), new Date()) + 1;
-            const totalWeeks = this.calculateWeeksBetween(new Date(this.batch.startDate), new Date(this.batch.endDate));
+    this.calendarService.getCalendarEventsByTrainerId(1).subscribe(response => {
+      this.calendarEvents = response;
+      this.currentWeekEvents = this.getCurrentWeekEvents(this.calendarEvents);
+      this.showCurrentDay();
+    });
+    this.batchService.getBatchByTrainer(1).subscribe(
+      (result: Batch[]) => {
+        console.log('batch');
+        console.log(result[0]);
+        this.currentBatch = result[0];
+      }
+    );
 
-            // Calculate the % progress
-            const totalTime = new Date(this.batch.endDate).getTime() - new Date(this.batch.startDate).getTime();
-            const elapsedTime = new Date().getTime() - new Date(this.batch.startDate).getTime();
-            this.percentCompletion = elapsedTime / totalTime;
-
-            // Percent completion must be between 0 and 1
-            this.percentCompletion = (this.percentCompletion < 0) ? 0 : this.percentCompletion;
-            this.percentCompletion = (this.percentCompletion > 1) ? 1 : this.percentCompletion;
-
-            // Batch week must be > 0 and < the total number of weeks
-            this.batchWeek = (this.batchWeek < 0) ? 1 : this.batchWeek;
-            this.batchWeek = (this.batchWeek > totalWeeks) ? totalWeeks : this.batchWeek;
-          }
+    this.cs.getCurriculumByWeek(1).subscribe((values: CurriculumWeek) => {
+      this.curriculumWeek = values;
+      this.curriculumDay = values.curriculumDays;
+      this.curriculumDay = this.curriculumDay.sort((n1, n2) => {
+        if (n1.dayNum > n2.dayNum) {
+          return 1;
         }
-      );
-      this.todayIsOpen = true;
+
+        if (n1.dayNum < n2.dayNum) {
+          return -1;
+        }
+
+        return 0;
+      });
+    });
+  }
+
+/**
+* These method(s) associated with the ngOnInit()
+* Iterates the array, sets all as unselected.
+* Finally, sets the selected control class = active.
+* the users parameters
+* @param dayNum
+* @return boolean false associated with selected.
+* @author Marcin Salamon, Joseph Shannon | Spark1806-USF-Java | Steven Kelsey
+*/
+selectDay(dayNum: number) {
+    for (const day of this.dayArr) {
+      day.selected = false;
+    }
+    this.dayArr[dayNum].selected = true;
+  }
+
+/**
+* These method(s) associated with the ngOnInit()
+* Gets the current events of the day based on
+* the selected day
+* @param dayNumber
+* @return number
+* @author Marcin Salamon, Joseph Shannon | Spark1806-USF-Java | Steven Kelsey
+*/
+getCurrentDayEvents(dayNumber) {
+    let counter = 0;
+    for (const event of this.currentWeekEvents) {
+      if (new Date(event.startDateTime).getDay() === dayNumber) {
+        counter++;
+      }
+    }
+    return counter;
+  }
+
+  /**
+* These method(s) is associated with the ngOnInit()
+* Gets the current events of the week by setting
+* the users parameters
+* @param CalendarEvent
+* @return an array of this users events.
+* @author Marcin Salamon, Joseph Shannon | Spark1806-USF-Java | Steven Kelsey
+*/
+getCurrentWeekEvents(events: CalendarEvent[]): CalendarEvent[] {
+    const currentWeekEvents: CalendarEvent[] = [];
+    const week: Date[] = [];
+    const monday = new Date();
+    while (monday.getDay() > 1 && monday.getDay() !== 0) {
+      if (monday.getDay() === 0) {
+        monday.setDate(monday.getDate() + 1);
+      } else {
+        monday.setDate(monday.getDate() - 1);
+      }
+    }
+    for (let i = 0; i < 5; i++) {
+      const day = new Date(monday);
+      day.setDate(monday.getDate() + i);
+      week.push(day);
+    }
+    for (const event of events) {
+      for (const day of week) {
+        const eventDate: Date = new Date(event.startDateTime);
+        if (eventDate.getDate() === day.getDate() && eventDate.getMonth() === day.getMonth()) {
+          currentWeekEvents.push(event);
+        }
+      }
+    }
+    return currentWeekEvents;
+  }
+
+ /**
+* Method associated with the week at a glance bar
+* Clears the dataSource of old data, pushes
+* associated day values into the new array.
+* @param dayNumber
+* @return an array of this users events.
+* @author Marcin Salamon, Joseph Shannon | Spark1806-USF-Java | Steven Kelsey
+*/
+showDay(dayNumber) {
+    this.selectDay(dayNumber);
+    this.dataSource = [];
+    for (const event of this.currentWeekEvents) {
+      if (new Date(event.startDateTime).getDay() === dayNumber) {
+        this.dataSource.push(event);
+      }
     }
   }
 
-// function to select specific days of the week to display
-showThisDay() {
-  console.log('monday');
-}
-
-// function for if something is completed or in progress
-  statusToggle(sub, yesNo) {
-
-    sub.statusId = yesNo;
-
+/**
+* These method(s) associated with the view today button.
+* Gets the current events of the day by setting
+* the users day to the client's current day.
+* @param CalendarEvent
+* @return number.
+* @author Marcin Salamon, Joseph Shannon | Spark1806-USF-Java | Steven Kelsey
+*/
+showCurrentDay() {
+    this.showDay(new Date().getDay());
+    this.DashTitle = 'Today';
   }
-// function to flag an item
-  flagRow(sub) {
+/**
+* These method(s) associated with row controllers
+* Gets the current events of the week by setting
+* the users parameters
+* NOTE: Currently unpersisted, future usecase!
+* @param yesNoToggle to change the indicator.
+* @param sub to locate the row.
+* @return 1 for complete, 0 for incomplete.
+* @author Joseph Shannon | Spark1806-USF-Java | Steven Kelsey
+*/
+statusToggle(sub, yesNoToggle) {
+    sub.statusId = yesNoToggle;
+  }
 
+/**
+* These method(s) associated with row controllers
+* Gets the current events of the week by setting
+* the users parameters
+* NOTE: Currently unpersisted, future usecase!
+* @param sub to locate the row.
+* @return 1 for flagged, 0 for unflagged.
+* @author Joseph Shannon | Spark1806-USF-Java | Steven Kelsey
+*/
+flagRow(sub) {
     if (!sub.flaggedId) {
       sub.flaggedId = 1;
     } else {
@@ -163,13 +297,15 @@ showThisDay() {
     }
   }
 
-  /**
-   * This method is used t sort throught a list of batches. Batches
-   * are sorted by their start dates.
-   * @param a A batch
-   * @param b Another batch
-   */
-  compareBatches(a: Batch, b: Batch) {
+/**
+* These method(s) associated with row controllers
+* This method is used t sort throught a list of batches. Batches
+* are sorted by their start dates.
+* @param a batch
+* @param b batch to be compared against
+* @author | | Steven Kelsey
+*/
+compareBatches(a: Batch, b: Batch) {
     if (a.startDate < b.startDate) {
       return -1;
     }
@@ -228,4 +364,5 @@ showThisDay() {
     );
     this.editing = false;
   }
+
 }

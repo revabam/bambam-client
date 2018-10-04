@@ -24,7 +24,7 @@ export class CurriculumDayService {
    * @author - Chinedu Ozodi | 1806-Sep-18-USF-Java | Steven Kelsey
    */
   getAll(): Observable<CurriculumDay[]> {
-    return this.http.get<CurriculumDay[]>(environment.apiUrl + 'curriculum-days', HTTP_OPTIONS);
+    return this.http.get<CurriculumDay[]>(environment.apiUrl + 'curriculums/curriculums/days', HTTP_OPTIONS);
   }
 
   /**
@@ -32,7 +32,7 @@ export class CurriculumDayService {
    * @author - Chinedu Ozodi | 1806-Sep-18-USF-Java | Steven Kelsey
    */
   post(curriculumDay: CurriculumDay): Observable<CurriculumDay> {
-    return this.http.post<CurriculumDay>(environment.apiUrl + 'curriculum-days',
+    return this.http.post<CurriculumDay>(environment.apiUrl + 'curriculums/curriculums/days',
     curriculumDay, HTTP_OPTIONS);
   }
 
@@ -41,7 +41,7 @@ export class CurriculumDayService {
    * @author - Chinedu Ozodi | 1806-Sep-18-USF-Java | Steven Kelsey
    */
   put(curriculumDay: CurriculumDay): Observable<CurriculumDay> {
-    return this.http.put<CurriculumDay>(environment.apiUrl + 'curriculum-days',
+    return this.http.put<CurriculumDay>(environment.apiUrl + 'curriculums/curriculums/days',
     curriculumDay, HTTP_OPTIONS);
   }
 }
