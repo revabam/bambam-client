@@ -1,3 +1,5 @@
+import { SubTopicService } from './../../../services/subtopic.service';
+import { NavbarComponent } from './../../../shared-components/navbar/navbar.component';
 import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
 import { SubTopic } from './../../../models/subtopic';
 import { CurriculumDay } from './../../../models/curriculum-day';
@@ -17,16 +19,21 @@ export class CurriculumDayComponent implements OnInit {
   @Output() dayChange: EventEmitter<CurriculumDay> = new EventEmitter<CurriculumDay>();
 
   constructor(
-    public daySubTopicService: DaySubtopicService
+    public daySubTopicService: DaySubtopicService,
+    private subTopicService: SubTopicService
   ) { }
 
   ngOnInit() {
+    this.getAllSubTopicNames();
+  }
+
+  ngOnChange() {
+    console.log('change call');
   }
 
   drop(event: CdkDragDrop<any>) {
     if (!event.previousContainer || !event.previousContainer.data || !event.previousContainer.data.length) {
       // This means that it is a subtopic from the topic pool and should be converted into a day-subtopic
-      console.log('from topic pool');
       const daySubTopic: DaySubTopic = {
         dayId: this.day.id,
         index: event.currentIndex,
@@ -37,6 +44,8 @@ export class CurriculumDayComponent implements OnInit {
 
       // Saving daySubTopic to db
       this.daySubTopicService.post(daySubTopic).subscribe((savedDaySubTopic) => {
+        // reassigns the name variable because it is not being persisted to the db to avoid redundancy
+        savedDaySubTopic.name = event.previousContainer.data.name;
         this.day.daySubTopics.splice(event.currentIndex, 0, savedDaySubTopic);
         this.updateDaySubTopicIndexes();
       });
@@ -44,11 +53,9 @@ export class CurriculumDayComponent implements OnInit {
       // This is a transfer of daySubTopic from one day to either the same day or another day
       if (event.previousContainer === event.container) {
         // rearranges the daySubTopics
-        console.log('rearranging');
         this.onSubTopicRearranged(event);
       } else {
         // transfer from one day to another
-        console.log('transfering');
         transferArrayItem(event.previousContainer.data,
           event.container.data,
           event.previousIndex,
@@ -56,6 +63,14 @@ export class CurriculumDayComponent implements OnInit {
         this.updateDaySubTopicIndexes();
       }
     }
+    this.getAllSubTopicNames();
+  }
+
+  getAllSubTopicNames() {
+    this.day.daySubTopics.forEach( (daySubTopic) => {
+      const subTopic = this.subTopicService.subtopics.find( (x) => x.id === daySubTopic.subTopicId);
+      daySubTopic.name = subTopic.name;
+    });
   }
 
   updateDaySubTopicIndexes() {
@@ -73,9 +88,6 @@ export class CurriculumDayComponent implements OnInit {
    * @author - Chinedu Ozodi | 1806-Sep-18-USF-Java | Steven Kelsey
    */
   onSubTopicDrop(event: any) {
-    console.log('Recieved event');
-    console.log(event);
-    console.log(event.dragData);
     // TODO: needs to not just be added to the end, but the location the user dragged it to.
     this.day.daySubTopics.push(event.dragData);
     this.dayChange.emit(this.day);
@@ -86,8 +98,6 @@ export class CurriculumDayComponent implements OnInit {
    * @author - Chinedu Ozodi | 1806-Sep-18-USF-Java | Steven Kelsey
    */
   onSubTopicRearranged(event: any) {
-    console.log('subTopic rearranged');
-    console.log(event);
     const previousIndex: number = event.previousIndex;
     const currentIndex: number = event.currentIndex;
     const previousSubTopic = this.day.daySubTopics[previousIndex];
@@ -100,6 +110,7 @@ export class CurriculumDayComponent implements OnInit {
     // updates indexes
     this.updateDaySubTopicIndexes();
   }
+
   /**
    * Removes a subtopic from the subtopic list in this.day.
    * @param index index of the subtopic to remove

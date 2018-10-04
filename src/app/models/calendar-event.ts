@@ -10,6 +10,7 @@ export class CalendarEvent {
     description: string;
     statusId: number;
     startDateTime: Date;
+    version?: number;
     endDateTime: Date;
     subTopicId: number;
     trainerId: string;

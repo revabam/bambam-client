@@ -1,4 +1,4 @@
-import { BamUser } from './../../models/bam-user';
+import { BamUser } from 'src/app/models/bam-user';
 import { Component, OnInit, ViewChild, TemplateRef } from '@angular/core';
 import { UserService } from '../../services/user.service';
 import { Router } from '@angular/router';
@@ -25,9 +25,6 @@ export class LoginComponent implements OnInit {
   // This is used to display errors to the user
   errorMessage: string;
 
-  // This is used to get the user.
-  bamUser: BamUser;
-
   // Build the form controls.
   loginForm = new FormBuilder().group({
     email: new FormControl('', Validators.compose([
@@ -40,11 +37,11 @@ export class LoginComponent implements OnInit {
   // The list of error messages displayed in the mat-error elements
   loginValidationMessages = {
     'email': [
-      {type: 'required', message: 'Email is required'},
-      {type: 'email', message: 'Not a valid email'}
+      { type: 'required', message: 'Email is required' },
+      { type: 'email', message: 'Not a valid email' }
     ],
     'password': [
-      {type: 'required', message: 'Password is required'}
+      { type: 'required', message: 'Password is required' }
     ]
   };
 
@@ -59,7 +56,8 @@ export class LoginComponent implements OnInit {
   * is logged in and, if they are, sends them to the dashboard page.
   */
   ngOnInit() {
-    if (sessionStorage.getItem('user')) {
+    const user = JSON.parse(sessionStorage.getItem('user'));
+    if (user.id) {
       this.userService.user.next(JSON.parse(sessionStorage.getItem('user')));
       this.router.navigate(['dashboard']);
     }
@@ -100,17 +98,28 @@ export class LoginComponent implements OnInit {
 
       // First get the user's id token from cognito
       this.cognitoService.signIn(email, password).subscribe(
-        result => {
+        (result: any) => {
           if (result) {
+            console.log(result);
             // If there was an error
             if (result['message']) {
               this.errorMessage = 'Invalid credentials';
               return;
             }
+
+            const user: BamUser = {
+              id: result.jwtToken,
+              email: result.payload.email,
+              firstName: result.payload.given_name,
+              lastName: result.payload.family_name
+            };
+
             /**
              * This method will take the user attributes from cognito and create a bam user.
              */
-            this.bamUser = this.cognitoService.getUserAttributes();
+            this.userService.user.next(user);
+            this.cognitoService.bamUser = user;
+            sessionStorage.setItem('user', JSON.stringify(user));
             this.router.navigate(['dashboard']);
           }
         }
@@ -118,3 +127,4 @@ export class LoginComponent implements OnInit {
     }
   }
 }
+

@@ -1,7 +1,7 @@
+import { Batch } from './../../models/batch';
 import { Component, OnInit } from '@angular/core';
 import { BamUser } from '../../models/bam-user';
 import { Router } from '@angular/router';
-import { Batch } from '../../models/batch';
 import { BatchService } from '../../services/batch.service';
 import { Curriculum } from '../../models/curriculum';
 import { CurriculumService } from '../../services/curriculum.service';
@@ -13,13 +13,13 @@ import { CurriculumDay } from '../../models/curriculum-day';
 import { CognitoService } from '../../services/cognito.service';
 
 /**
- * This component is the dashboard page. It is the page that the
- * user is directed to after they login. It displays personal
- * information and batch information to the user.
- *
- * @author Bradley Walker | Khaleel Williams | 1806-Jun18-USF-Java | Wezley Singleton
- * @author Joey Shannon | Drake Mapel | 1806-Spark | Steven Kelsey
- */
+* This component is the dashboard page. It is the page that the
+* user is directed to after they login. It displays personal
+* information and batch information to the user.
+*
+* @author Bradley Walker | Khaleel Williams | 1806-Jun18-USF-Java | Wezley Singleton
+* @author Joey Shannon | Drake Mapel | 1806-Spark | Steven Kelsey
+*/
 
 @Component({
   selector: 'app-dashboard',
@@ -35,14 +35,9 @@ export class DashboardComponent implements OnInit {
   daySelected = new Date().setDate(new Date().getDate() + 1);
   calendarEvents = null;
   selectedDate = this.cs.getCurriculumByWeek(1);
-  currentBatch;
+  currentBatch: Batch;
 
-  user: BamUser = {
-    id: null,
-    firstName: '',
-    lastName: '',
-    email: ''
-  };
+  user: BamUser;
 
   batch;
   batchWeek: number;
@@ -55,12 +50,12 @@ export class DashboardComponent implements OnInit {
     { num: 1, icon: 'visibility' }
   ];
   DashTitle = 'Today';
-  todayIsOpen: boolean;
+  todayIsOpen = true;
   topicsIsOpen: boolean;
   list: string[];
   eventsThisWeek: CalendarEvent[];
   curriculumDay: CurriculumDay[];
-  curriculumWeek: CurriculumWeek[];
+  curriculumWeek: CurriculumWeek;
   selectedDay;
   currentWeekEvents: CalendarEvent[];
 
@@ -107,64 +102,6 @@ export class DashboardComponent implements OnInit {
     }
   ];
 
-  subsArr = [
-    {
-      'nameId': 1,
-      'topicName': 'For Loops',
-      'topicId': 1
-    },
-    {
-      'nameId': 2,
-      'topicName': 'While Loops',
-      'topicId': 2
-    },
-    {
-      'nameId': 3,
-      'topicName': 'Do While',
-      'topicId': 3
-    },
-    {
-      'nameId': 4,
-      'topicName': 'If statments',
-      'topicId': 4
-    },
-    {
-      'nameId': 5,
-      'topicName': 'Normalization',
-      'topicId': 2
-    },
-    {
-      'nameId': 6,
-      'topicName': 'Stored Procedures',
-      'topicId': 2
-    },
-    {
-      'nameId': 7,
-      'topicName': 'HTML elements',
-      'topicId': 3
-    },
-    {
-      'nameId': 8,
-      'topicName': 'JavaScript DOM manipulation',
-      'topicId': 3
-    },
-    {
-      'nameId': 9,
-      'topicName': 'Inline, internal, and external CSS',
-      'topicId': 3
-    },
-    {
-      'nameId': 10,
-      'topicName': 'Node',
-      'topicId': 4
-    },
-    {
-      'nameId': 11,
-      'topicName': 'Express APIs',
-      'topicId': 4
-    }
-  ];
-
   constructor(
     private router: Router,
     private batchService: BatchService,
@@ -187,8 +124,12 @@ export class DashboardComponent implements OnInit {
   }
 
   ngOnInit() {
-
-     this.user = this.cognito.getUserAttributes();
+    if (!sessionStorage.getItem('user')) {
+      this.router.navigate(['login']);
+    } else {
+      this.cognito.bamUser = JSON.parse(sessionStorage.getItem('user'));
+    }
+    this.user = JSON.parse(sessionStorage.getItem('user'));
 
     this.calendarService.getCalendarEventsByTrainerId(1).subscribe(response => {
       this.calendarEvents = response;
@@ -196,14 +137,16 @@ export class DashboardComponent implements OnInit {
       this.showCurrentDay();
     });
     this.batchService.getBatchByTrainer(1).subscribe(
-      result => {
+      (result: Batch[]) => {
+        console.log('batch');
+        console.log(result[0]);
         this.currentBatch = result[0];
       }
     );
 
-    this.cs.getCurriculumByWeek(1).subscribe((values: any) => {
+    this.cs.getCurriculumByWeek(1).subscribe((values: CurriculumWeek) => {
       this.curriculumWeek = values;
-      this.curriculumDay = values.curriculumDay;
+      this.curriculumDay = values.curriculumDays;
       this.curriculumDay = this.curriculumDay.sort((n1, n2) => {
         if (n1.dayNum > n2.dayNum) {
           return 1;
@@ -216,74 +159,33 @@ export class DashboardComponent implements OnInit {
         return 0;
       });
     });
-
-
-
-    //   this.eventsThisWeek = this.calendarService.getCalendarEventsByTrainerIdAndWeek(1, new Date());
-
-    if (!this.user) {
-      this.router.navigate(['login']);
-    } else {
-      /*
-        In our sprint, only trainers can use the program so there is no
-        need to check if the user is a trainer or not, But this is where
-        you might want to do that.
-      */
-      this.batchService.getBatchByTrainer(1).subscribe(
-        result => {
-          console.log(result);
-          this.currentBatch = result[0];
-        }
-      );
-
-      if (!this.user) {
-        this.router.navigate(['login']);
-      } else {
-        this.cognito.getUserAttributes();
-        /*
-          In our sprint, only trainers can use the program so there is no
-          need to check if the user is a trainer or not, But this is where
-          you might want to do that.
-        */
-        this.batchService.getBatchesByTrainerId(1).subscribe(
-          result => {
-            // If the result is not null and not empty
-            if (result && result.length !== 0) {
-              // Get the most recent batch
-              this.batch = result.sort(this.compareBatches)[result.length - 1];
-
-              // Figure out what week the batch is in
-              this.batchWeek = this.calculateWeeksBetween(new Date(this.batch.startDate), new Date()) + 1;
-              const totalWeeks = this.calculateWeeksBetween(new Date(this.batch.startDate), new Date(this.batch.endDate));
-
-              // Calculate the % progress
-              const totalTime = new Date(this.batch.endDate).getTime() - new Date(this.batch.startDate).getTime();
-              const elapsedTime = new Date().getTime() - new Date(this.batch.startDate).getTime();
-              this.percentCompletion = elapsedTime / totalTime;
-
-              // Percent completion must be between 0 and 1
-              this.percentCompletion = (this.percentCompletion < 0) ? 0 : this.percentCompletion;
-              this.percentCompletion = (this.percentCompletion > 1) ? 1 : this.percentCompletion;
-
-              // Batch week must be > 0 and < the total number of weeks
-              this.batchWeek = (this.batchWeek < 0) ? 1 : this.batchWeek;
-              this.batchWeek = (this.batchWeek > totalWeeks) ? totalWeeks : this.batchWeek;
-            }
-          }
-        );
-        this.todayIsOpen = true;
-      }
-    }
   }
 
-  selectDay(dayNum: number) {
+/**
+* These method(s) associated with the ngOnInit()
+* Iterates the array, sets all as unselected.
+* Finally, sets the selected control class = active.
+* the users parameters
+* @param dayNum
+* @return boolean false associated with selected.
+* @author Marcin Salamon, Joseph Shannon | Spark1806-USF-Java | Steven Kelsey
+*/
+selectDay(dayNum: number) {
     for (const day of this.dayArr) {
       day.selected = false;
     }
     this.dayArr[dayNum].selected = true;
   }
 
-  getCurrentDayEvents(dayNumber) {
+/**
+* These method(s) associated with the ngOnInit()
+* Gets the current events of the day based on
+* the selected day
+* @param dayNumber
+* @return number
+* @author Marcin Salamon, Joseph Shannon | Spark1806-USF-Java | Steven Kelsey
+*/
+getCurrentDayEvents(dayNumber) {
     let counter = 0;
     for (const event of this.currentWeekEvents) {
       if (new Date(event.startDateTime).getDay() === dayNumber) {
@@ -293,8 +195,15 @@ export class DashboardComponent implements OnInit {
     return counter;
   }
 
-  // Marcin
-  getCurrentWeekEvents(events: CalendarEvent[]): CalendarEvent[] {
+  /**
+* These method(s) is associated with the ngOnInit()
+* Gets the current events of the week by setting
+* the users parameters
+* @param CalendarEvent
+* @return an array of this users events.
+* @author Marcin Salamon, Joseph Shannon | Spark1806-USF-Java | Steven Kelsey
+*/
+getCurrentWeekEvents(events: CalendarEvent[]): CalendarEvent[] {
     const currentWeekEvents: CalendarEvent[] = [];
     const week: Date[] = [];
     const monday = new Date();
@@ -321,8 +230,15 @@ export class DashboardComponent implements OnInit {
     return currentWeekEvents;
   }
 
-  // Sets the DashTitle to the selected day of the week. - Joey
-  showDay(dayNumber) {
+ /**
+* Method associated with the week at a glance bar
+* Clears the dataSource of old data, pushes
+* associated day values into the new array.
+* @param dayNumber
+* @return an array of this users events.
+* @author Marcin Salamon, Joseph Shannon | Spark1806-USF-Java | Steven Kelsey
+*/
+showDay(dayNumber) {
     this.selectDay(dayNumber);
     this.dataSource = [];
     for (const event of this.currentWeekEvents) {
@@ -332,16 +248,42 @@ export class DashboardComponent implements OnInit {
     }
   }
 
-  // Marcin
-  showCurrentDay() {
+/**
+* These method(s) associated with the view today button.
+* Gets the current events of the day by setting
+* the users day to the client's current day.
+* @param CalendarEvent
+* @return number.
+* @author Marcin Salamon, Joseph Shannon | Spark1806-USF-Java | Steven Kelsey
+*/
+showCurrentDay() {
     this.showDay(new Date().getDay());
+    this.DashTitle = 'Today';
   }
-  // Changes the statusId of a particular event on screen. - Joey
-  statusToggle(sub, yesNo) {
-    sub.statusId = yesNo;
+/**
+* These method(s) associated with row controllers
+* Gets the current events of the week by setting
+* the users parameters
+* NOTE: Currently unpersisted, future usecase!
+* @param yesNoToggle to change the indicator.
+* @param sub to locate the row.
+* @return 1 for complete, 0 for incomplete.
+* @author Joseph Shannon | Spark1806-USF-Java | Steven Kelsey
+*/
+statusToggle(sub, yesNoToggle) {
+    sub.statusId = yesNoToggle;
   }
-  // Changes the flagged state of an item to mark it important - Joey
-  flagRow(sub) {
+
+/**
+* These method(s) associated with row controllers
+* Gets the current events of the week by setting
+* the users parameters
+* NOTE: Currently unpersisted, future usecase!
+* @param sub to locate the row.
+* @return 1 for flagged, 0 for unflagged.
+* @author Joseph Shannon | Spark1806-USF-Java | Steven Kelsey
+*/
+flagRow(sub) {
     if (!sub.flaggedId) {
       sub.flaggedId = 1;
     } else {
@@ -349,13 +291,15 @@ export class DashboardComponent implements OnInit {
     }
   }
 
-  /**
-   * This method is used t sort throught a list of batches. Batches
-   * are sorted by their start dates.
-   * @param a A batch
-   * @param b Another batch
-   */
-  compareBatches(a: Batch, b: Batch) {
+/**
+* These method(s) associated with row controllers
+* This method is used t sort throught a list of batches. Batches
+* are sorted by their start dates.
+* @param a batch
+* @param b batch to be compared against
+* @author | | Steven Kelsey
+*/
+compareBatches(a: Batch, b: Batch) {
     if (a.startDate < b.startDate) {
       return -1;
     }

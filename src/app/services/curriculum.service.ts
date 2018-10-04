@@ -27,23 +27,21 @@ const HTTP_OPTIONS = {
 })
 export class CurriculumService {
 
-
   // The dependency to be injected, in order to use an HttpClient.
   constructor(private http: HttpClient) { }
-   curriculums=this.getAll();
+   curriculums = this.getAll().subscribe();
 
 
    // get items by week.
    getCurriculumByWeek(id) {
-    return this.http.get(`http://localhost:9996/curriculums/weeks/${id}`, HTTP_OPTIONS)
-  } 
+    return this.http.get(`http://localhost:9996/curriculums/weeks/${id}`, HTTP_OPTIONS);
+  }
 
   /**
    * The function used to fetch all the curriculums from the server.
    */
   getAll(): Observable<Curriculum[]> {
-    this.curriculums= this.http.get<Curriculum[]>(environment.apiUrl + 'curriculums', HTTP_OPTIONS);
-    return this.curriculums;
+    return this.http.get<Curriculum[]>(environment.apiUrl + 'curriculums/curriculums', HTTP_OPTIONS);
   }
 
 
@@ -52,7 +50,7 @@ export class CurriculumService {
    */
   post(curriculum: Curriculum): Observable<Curriculum> {
     console.log('curriculum post:' + environment.apiUrl);
-    return this.http.post<Curriculum>(environment.apiUrl + 'curriculums',
+    return this.http.post<Curriculum>(environment.apiUrl + 'curriculums/curriculums',
       curriculum, HTTP_OPTIONS);
   }
 
@@ -60,7 +58,7 @@ export class CurriculumService {
    * The function used to update a curriculum on the server
    */
   put(curriculum: Curriculum): Observable<Curriculum> {
-    return this.http.put<Curriculum>(environment.apiUrl + 'curriculums',
+    return this.http.put<Curriculum>(environment.apiUrl + 'curriculums/curriculums',
       curriculum, HTTP_OPTIONS);
   }
 
@@ -69,7 +67,7 @@ export class CurriculumService {
    */
   deactivate(curriculum: Curriculum): Observable<Object> {
     curriculum.name = this.deactivateName(curriculum.name);
-    return this.http.put(environment.apiUrl + `curriculums/${curriculum.id}`,
+    return this.http.put(environment.apiUrl + `curriculums/curriculums/${curriculum.id}`,
       curriculum, HTTP_OPTIONS);
   }
 
@@ -78,7 +76,7 @@ export class CurriculumService {
    */
   reactivate(curriculum: Curriculum): Observable<Object> {
     curriculum.name = this.reactivateName(curriculum.name);
-    return this.http.put(environment.apiUrl + `curriculums/${curriculum.id}`,
+    return this.http.put(environment.apiUrl + `curriculums/curriculums/${curriculum.id}`,
       curriculum, HTTP_OPTIONS);
   }
 

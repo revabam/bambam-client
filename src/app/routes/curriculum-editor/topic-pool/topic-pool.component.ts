@@ -61,6 +61,7 @@ export class TopicPoolComponent implements OnInit {
   getAllSubtopics (): void {
     this.subtopicService.getAll().subscribe(subtopics => {
       this.subtopics = subtopics;
+      this.subtopicService.subtopics = subtopics;
     });
   }
 
