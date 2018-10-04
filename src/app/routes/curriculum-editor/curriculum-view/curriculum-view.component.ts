@@ -23,7 +23,6 @@ export class CurriculumViewComponent implements OnInit {
     const index = this.curriculum.curriculumWeeks.findIndex( x => x.weekNum === event.weekNum);
     this.curriculum.curriculumWeeks[index] = event;
     this.curriculumWeekService.put(event).subscribe( () => {
-      console.log('week updated');
     });
   }
 

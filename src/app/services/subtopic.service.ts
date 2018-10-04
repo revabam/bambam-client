@@ -58,16 +58,18 @@ export class SubTopicService {
   }
 
   /**
-   * Sets the names of the daySubTopics of a curriculum since it is not being persisted to the db
+   * Sets the names and parentTopicId of the daySubTopics of a curriculum since it is not being persisted to the db
    * @param curriculum the curriculum to update topic names
    * @author - Chinedu Ozodi | 1806-Sep-18-USF-Java | Steven Kelsey
    */
   setDayTopicNames(curriculum: Curriculum): Curriculum {
-    curriculum.curriculumWeeks.forEach( (week) => {
-      week.curriculumDays.forEach( (day) => {
-        day.daySubTopics.forEach ( (daySubTopic) => {
+    curriculum.curriculumWeeks.forEach((week) => {
+      week.curriculumDays.forEach((day) => {
+        day.daySubTopics.forEach((daySubTopic) => {
           if (this.subtopics) {
-            daySubTopic.name = this.subtopics.find( (subtopic) => subtopic.id === daySubTopic.subTopicId).name;
+            const subTopic = this.subtopics.find((subtopic) => subtopic.id === daySubTopic.subTopicId);
+            daySubTopic.name = subTopic.name;
+            daySubTopic.parentTopicId = subTopic.parentTopicId;
           }
         });
       });
@@ -75,48 +77,8 @@ export class SubTopicService {
     return curriculum;
   }
 
-  /**
-   * The function used to deactivate a SubTopic in the server
-   */
-  deactivate(subTopic: SubTopic): Observable<Object> {
-    subTopic.name = this.deactivateName(subTopic.name);
-    return this.http.put(environment.apiUrl + `curriculums/subtopic/${subTopic.id}`,
-      subTopic, HTTP_OPTIONS);
-  }
-
-  /**
-   * The function used to reactivate a SubTopic in the server
-   */
-  reactivate(subTopic: SubTopic): Observable<Object> {
-    subTopic.name = this.reactivateName(subTopic.name);
-    return this.http.put(environment.apiUrl + `curriculums/subtopic/${subTopic.id}`,
-      subTopic, HTTP_OPTIONS);
-  }
-
-  /**
-   * Helper function to append '(DEACTIVATED) ' to the
-   * beginning of the SubTopic name, to show that
-   * the SubTopic is deactivated.
-   * @param SubTopicName - The string that we want to
-   * append '(DEACTIVATED) ' to.
-   */
-  deactivateName(SubTopicName: string): string {
-    return '(DEACTIVATED) ' + SubTopicName;
-  }
-
-  /**
-   * Helper function to remove '(DEACTIVATED) ' from the
-   * beginning of the SubTopic name
-   * @param SubTopicName - The string that we want to
-   * append '(DEACTIVATED) ' to.
-   */
-  reactivateName(SubTopicName: string): string {
-    if (SubTopicName.indexOf('(DEACTIVATED) ') >= 0) {
-      SubTopicName = SubTopicName.substring(
-        SubTopicName.lastIndexOf('(DEACTIVATED) ')
-        + ('(DEACTIVATED) ').length
-      );
-    }
-    return SubTopicName;
+  deleteSubTopic(subTopic: SubTopic): Observable<SubTopic[]> {
+    return this.http.delete<SubTopic[]>(environment.zuulUrl + `curriculums/subtopic/${subTopic.id}`,
+      HTTP_OPTIONS);
   }
 }

@@ -153,8 +153,6 @@ export class CreateCurriculumComponent implements OnInit {
           this.saveWeek(curriculum, weekNum);
         } else {
           // done with all days and weeks, refresh page
-          console.log('Refreshing page');
-          // this.refresh.next();
         }
       }
     });

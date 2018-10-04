@@ -47,7 +47,7 @@ export class BoomComponent implements OnInit {
         {daySubTopics: [{statusId: 2}, {statusId: 2}]},
         {daySubTopics: [{statusId: 3}, {statusId: 2}]},
         {daySubTopics: [{statusId: 2}, {statusId: 4}]}]}]}];
-        
+
   completed: number[] = [];
   missed: number[] = [];
   canceled: number[] = [];
@@ -140,10 +140,6 @@ export class BoomComponent implements OnInit {
       this.missed.push(missed);
       this.canceled.push(canceled);
     }
-    console.log(this.weeks);
-    console.log(this.completed);
-    console.log(this.missed);
-    console.log(this.canceled);
     // update the data
     const clone = JSON.parse(JSON.stringify(this.barChartData));
     clone[0].data = this.completed;

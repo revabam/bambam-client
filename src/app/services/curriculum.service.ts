@@ -49,7 +49,6 @@ export class CurriculumService {
    * The function used to post a curriculum to a server
    */
   post(curriculum: Curriculum): Observable<Curriculum> {
-    console.log('curriculum post:' + environment.apiUrl);
     return this.http.post<Curriculum>(environment.apiUrl + 'curriculums/curriculums',
       curriculum, HTTP_OPTIONS);
   }

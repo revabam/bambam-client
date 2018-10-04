@@ -20,7 +20,7 @@
                 <span style="flex: 0.3 1 auto"></span>
               </mat-toolbar>
             </mat-card-header>
-            <mat-card-content>
+            <mat-card-content >
               <mat-accordion>
                 <mat-expansion-panel *ngFor="let cname of curriculumNames">
                   <mat-expansion-panel-header>
@@ -29,22 +29,14 @@
                     </mat-panel-title>
                   </mat-expansion-panel-header>
                   <div *ngFor="let curriculum of getCurriculumsByName(cname)">
-                    <mat-toolbar>
-                      <span *ngIf="curriculum.name === cname">
+                    <mat-toolbar style="font-size: .75vw">
+                      <span *ngIf="curriculum.name === cname" style="padding-right: 1vw">
                         Version: {{curriculum.version}}
-                        <div *ngIf="curriculum.status == 1">DRAFT</div>
-                        <div *ngIf="curriculum.status == 2">NEEDS APPROVAL</div>
-                        <div *ngIf="curriculum.status == 3">READ ONLY</div>
-                        <div *ngIf="curriculum.status == 4">MASTER</div>
-                      </span>
-                      <span *ngIf="curriculum.name !== cname">
-                        <del>Version: {{curriculum.version}}</del>
-                        <div *ngIf="curriculum.status == 1">DRAFT</div>
-                        <div *ngIf="curriculum.status == 2">NEEDS APPROVAL</div>
-                        <div *ngIf="curriculum.status == 3">READ ONLY</div>
-                        <div *ngIf="curriculum.status == 4">MASTER</div>
-                      </span>
-                      
+                        <span *ngIf="curriculum.status == 1">DRAFT</span>
+                        <span *ngIf="curriculum.status == 2">NEEDS APPROVAL</span>
+                        <span *ngIf="curriculum.status == 3">READ ONLY</span>
+                        <span *ngIf="curriculum.status == 4">MASTER</span>
+                      </span>                      
                       <span class="fill-remaining-space">
                       </span>
                       <span *ngIf="curriculum.name === cname">
