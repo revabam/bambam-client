@@ -21,9 +21,9 @@
 </ng-template>
 
 <br>
-<div class="row justify-content-center mx-4 pb-4" style="margin-top: 5%">
+<div class="row justify-content-center mx-4 pb-4" >
   <div class="col-md-2" *ngIf="showSideNav">
-    <mat-card id="currAll" style="border-radius: 20px 20px 20px 20px; box-shadow: 15px 15px 35px rgba(0, 0, 0, 0.555)" >
+    <mat-card id="currAll" style="border-radius: 20px 20px 20px 20px; box-shadow: 15px 15px 35px rgba(0, 0, 0, 0.555); margin-top: 50%" >
       <mat-card-header>
         <mat-card-title>
           <h4 style=" font-size: 1.7vw">Curriculums</h4>
@@ -57,7 +57,7 @@
     </mat-card>
   </div>
   <div class="col-md-10">
-    <mat-card style="border-radius: 20px 20px 20px 20px; box-shadow: 15px 15px 35px rgba(0, 0, 0, 0.555); width: 90% " >
+    <mat-card style="border-radius: 20px 20px 20px 20px; box-shadow: 15px 15px 35px rgba(0, 0, 0, 0.555); width: 90%; " >
       <mat-card-header class="text-center text-center align-content-center align-center justify-content-center">
         <mat-toolbar style="background-color: rgba(0, 0, 0, 0)">
           <button mat-button  mat-icon-button  (click)="toggleSideNav()">
@@ -72,23 +72,23 @@
                 <button mat-stroked-button >Today</button>
               </span>
               <span mwlCalendarNextView [view]="view" [(viewDate)]="viewDate" (viewDateChange)="activeDayIsOpen = false">
-                <button mat-raised-button color="primary">Next</button>
+                <button mat-raised-button >Next</button>
               </span>
             </span>
             <span style="flex: .1 1 auto;"></span>
           <span class="col-md-4">
-            <h3>{{ viewDate | calendarDate:(view + 'ViewTitle'):'en' }}</h3>
+            <h3 id="currentDate">{{ viewDate | calendarDate:(view + 'ViewTitle'):'en' }}</h3>
           </span>
           <span style="flex: .7 1 auto;"></span>
             <span class="btn-group">
               <span (click)="view = 'month'" [class.active]="view === 'month'">
-                <button mat-raised-button color="primary">Month</button>
+                <button mat-raised-button >Month</button>
               </span>
               <span (click)="view = 'week'" [class.active]="view === 'week'">
-                <button mat-raised-button color="primary">Week</button>
+                <button mat-raised-button >Week</button>
               </span>
               <span (click)="view = 'day'" [class.active]="view === 'day'">
-                <button mat-raised-button color="primary">Day</button>
+                <button mat-raised-button >Day</button>
               </span>
             </span>
             <span style="flex: 1 1 auto;"></span>

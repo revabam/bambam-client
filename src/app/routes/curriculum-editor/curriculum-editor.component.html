@@ -2,20 +2,19 @@
 <div class="p-5 m-auto">
   <div class="row">
     <div class="col-sm-3 mt-2">
-      <mat-tab-group>
-        <mat-tab label="Curriculum">
+      <mat-tab-group style="margin-left: -10vw">
+        <mat-tab  label="Curriculum"> 
           <mat-card>
             <mat-card-header>
               <mat-toolbar class="panel-bar">
                 <span style="flex: 1 1 auto"></span>
                 <span>
-
-                  <h4 class="m-0 p-0" style="font-size: 140%;">Curriculum</h4>
+                  <h4 class="m-0 p-0" style="font-size: 2vw;">Curriculum</h4>
                 </span>
                 <span style="flex: .6 .3 auto"></span>
                 <span>
                   <button mat-button color="accent" mat-icon-button aria-label="add" (click)="createNewCurriculumDialog()">
-                    <mat-icon color="secondary">add</mat-icon>
+                    <mat-icon >add</mat-icon>
                   </button>
                 </span>
                 <span style="flex: 0.3 1 auto"></span>
@@ -25,7 +24,7 @@
               <mat-accordion>
                 <mat-expansion-panel *ngFor="let cname of curriculumNames">
                   <mat-expansion-panel-header>
-                    <mat-panel-title>
+                    <mat-panel-title style="font-weight: bold; font-size: 1vw">
                       {{cname}}
                     </mat-panel-title>
                   </mat-expansion-panel-header>
@@ -71,7 +70,7 @@
           </mat-card>
         </mat-tab>
         <mat-tab label="Topic Pool">
-          <app-topic-pool></app-topic-pool>
+          <app-topic-pool ></app-topic-pool>
         </mat-tab>
       </mat-tab-group>
 
