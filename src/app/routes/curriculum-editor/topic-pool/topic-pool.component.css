@@ -1,3 +1,10 @@
+mat-card{
+  position: fixed;
+  margin-right: 20vw;
+  box-shadow: 5px 5px 20px rgba(212, 52, 3, 0.555);
+  width: 20%;
+}
+
 .fill-remaining-space {
   flex: 1 1 auto;
 }
@@ -19,6 +26,6 @@
 }
 
 .panel-bar {
-  background-color: lightgrey;
+  background-color: rgba(211, 211, 211, 0);
   font-size: 120%;
 }

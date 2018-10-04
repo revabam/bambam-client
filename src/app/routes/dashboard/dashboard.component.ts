@@ -13,13 +13,13 @@ import { CurriculumDay } from '../../models/curriculum-day';
 import { CognitoService } from '../../services/cognito.service';
 
 /**
- * This component is the dashboard page. It is the page that the
- * user is directed to after they login. It displays personal
- * information and batch information to the user.
- *
- * @author Bradley Walker | Khaleel Williams | 1806-Jun18-USF-Java | Wezley Singleton
- * @author Joey Shannon | Drake Mapel | 1806-Spark | Steven Kelsey
- */
+* This component is the dashboard page. It is the page that the
+* user is directed to after they login. It displays personal
+* information and batch information to the user.
+*
+* @author Bradley Walker | Khaleel Williams | 1806-Jun18-USF-Java | Wezley Singleton
+* @author Joey Shannon | Drake Mapel | 1806-Spark | Steven Kelsey
+*/
 
 @Component({
   selector: 'app-dashboard',
@@ -29,6 +29,11 @@ import { CognitoService } from '../../services/cognito.service';
 export class DashboardComponent implements OnInit {
   headerColumns: string[] = ['time', 'flagged', 'sub', 'control'];
   dataSource;
+<<<<<<< HEAD
+  topics = this.calendarService.getCalendarEvents(1);
+  currentBatch;
+  headerColumns: string[] = ['time', 'flagged', 'sub',  'control'];
+=======
   dayInfo;
   Today = new Date().setDate(new Date().getDate() + 1);
   Tomorrow = new Date().setDate(new Date().getDate() + 2);
@@ -37,6 +42,7 @@ export class DashboardComponent implements OnInit {
   selectedDate = this.cs.getCurriculumByWeek(1);
   currentBatch: Batch;
 
+>>>>>>> 69498f4c8a39b60d581260c421c2f0c439b923be
   user: BamUser;
 
   batch;
@@ -161,14 +167,31 @@ export class DashboardComponent implements OnInit {
     });
   }
 
-  selectDay(dayNum: number) {
+/**
+* These method(s) associated with the ngOnInit()
+* Iterates the array, sets all as unselected.
+* Finally, sets the selected control class = active.
+* the users parameters
+* @param dayNum
+* @return boolean false associated with selected.
+* @author Marcin Salamon, Joseph Shannon | Spark1806-USF-Java | Steven Kelsey
+*/
+selectDay(dayNum: number) {
     for (const day of this.dayArr) {
       day.selected = false;
     }
     this.dayArr[dayNum].selected = true;
   }
 
-  getCurrentDayEvents(dayNumber) {
+/**
+* These method(s) associated with the ngOnInit()
+* Gets the current events of the day based on
+* the selected day
+* @param dayNumber
+* @return number
+* @author Marcin Salamon, Joseph Shannon | Spark1806-USF-Java | Steven Kelsey
+*/
+getCurrentDayEvents(dayNumber) {
     let counter = 0;
     for (const event of this.currentWeekEvents) {
       if (new Date(event.startDateTime).getDay() === dayNumber) {
@@ -178,8 +201,15 @@ export class DashboardComponent implements OnInit {
     return counter;
   }
 
-  // Marcin
-  getCurrentWeekEvents(events: CalendarEvent[]): CalendarEvent[] {
+  /**
+* These method(s) is associated with the ngOnInit()
+* Gets the current events of the week by setting
+* the users parameters
+* @param CalendarEvent
+* @return an array of this users events.
+* @author Marcin Salamon, Joseph Shannon | Spark1806-USF-Java | Steven Kelsey
+*/
+getCurrentWeekEvents(events: CalendarEvent[]): CalendarEvent[] {
     const currentWeekEvents: CalendarEvent[] = [];
     const week: Date[] = [];
     const monday = new Date();
@@ -206,8 +236,15 @@ export class DashboardComponent implements OnInit {
     return currentWeekEvents;
   }
 
-  // Sets the DashTitle to the selected day of the week. - Joey
-  showDay(dayNumber) {
+ /**
+* Method associated with the week at a glance bar
+* Clears the dataSource of old data, pushes
+* associated day values into the new array.
+* @param dayNumber
+* @return an array of this users events.
+* @author Marcin Salamon, Joseph Shannon | Spark1806-USF-Java | Steven Kelsey
+*/
+showDay(dayNumber) {
     this.selectDay(dayNumber);
     this.dataSource = [];
     for (const event of this.currentWeekEvents) {
@@ -217,16 +254,42 @@ export class DashboardComponent implements OnInit {
     }
   }
 
-  // Marcin
-  showCurrentDay() {
+/**
+* These method(s) associated with the view today button.
+* Gets the current events of the day by setting
+* the users day to the client's current day.
+* @param CalendarEvent
+* @return number.
+* @author Marcin Salamon, Joseph Shannon | Spark1806-USF-Java | Steven Kelsey
+*/
+showCurrentDay() {
     this.showDay(new Date().getDay());
+    this.DashTitle = 'Today';
   }
-  // Changes the statusId of a particular event on screen. - Joey
-  statusToggle(sub, yesNo) {
-    sub.statusId = yesNo;
+/**
+* These method(s) associated with row controllers
+* Gets the current events of the week by setting
+* the users parameters
+* NOTE: Currently unpersisted, future usecase!
+* @param yesNoToggle to change the indicator.
+* @param sub to locate the row.
+* @return 1 for complete, 0 for incomplete.
+* @author Joseph Shannon | Spark1806-USF-Java | Steven Kelsey
+*/
+statusToggle(sub, yesNoToggle) {
+    sub.statusId = yesNoToggle;
   }
-  // Changes the flagged state of an item to mark it important - Joey
-  flagRow(sub) {
+
+/**
+* These method(s) associated with row controllers
+* Gets the current events of the week by setting
+* the users parameters
+* NOTE: Currently unpersisted, future usecase!
+* @param sub to locate the row.
+* @return 1 for flagged, 0 for unflagged.
+* @author Joseph Shannon | Spark1806-USF-Java | Steven Kelsey
+*/
+flagRow(sub) {
     if (!sub.flaggedId) {
       sub.flaggedId = 1;
     } else {
@@ -234,13 +297,15 @@ export class DashboardComponent implements OnInit {
     }
   }
 
-  /**
-   * This method is used t sort throught a list of batches. Batches
-   * are sorted by their start dates.
-   * @param a A batch
-   * @param b Another batch
-   */
-  compareBatches(a: Batch, b: Batch) {
+/**
+* These method(s) associated with row controllers
+* This method is used t sort throught a list of batches. Batches
+* are sorted by their start dates.
+* @param a batch
+* @param b batch to be compared against
+* @author | | Steven Kelsey
+*/
+compareBatches(a: Batch, b: Batch) {
     if (a.startDate < b.startDate) {
       return -1;
     }
