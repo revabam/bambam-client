@@ -1,7 +1,11 @@
-// Variables
+/**
+* Variables
+*/
 $radius: 13px 13px 13px 13px; // border radius
 
-// Specific mat-card editting
+/**
+* Specific mat-card editting
+*/
 mat-card{
     position: fixed;
     width: 72%;
@@ -11,6 +15,9 @@ mat-card{
     font-size: 4vw;
 }
 
+/**
+* styling for entire div in component
+*/
 .currV {
     display: flex;
     flex-direction: column;

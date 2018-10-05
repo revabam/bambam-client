@@ -1,6 +1,8 @@
 @import "~ngx-bootstrap/datepicker/bs-datepicker.css";
 
-// Variables
+/**
+* Variables
+*/
 // font
 $weight: bold; // font-weight
 $mid: center; // text-align
@@ -21,7 +23,9 @@ $w100: 100%; // width
     background: $wColor;
 }
 
-// styling for the whole batch sideNav card
+/**
+* styling for the whole batch sideNav card
+*/
 #sideCard{
     opacity: .8;
 }
@@ -29,7 +33,9 @@ $w100: 100%; // width
     opacity: 1;
 }
 
-// specific mat-card editting 
+/**
+* specific mat-card editting 
+*/
 mat-card{
     background-color: #ffffffe7;
     color: black;
@@ -38,12 +44,16 @@ mat-card{
     opacity: 1;
 }
 
-// all mat-card-headers related to dashboard
+/**
+* all mat-card-headers related to dashboard
+*/
 mat-card-header{
     font-size: 1.3vw;
 }
 
-// batch button above Today bar
+/**
+* batch button above Today bar
+*/
 #batch{
     background-color: $oColor;
     border-radius: $radius;
@@ -57,8 +67,9 @@ mat-card-header{
     font-size: 1.3vw;
 }
 
-
-// button configuration for specific button editting
+/**
+* button configuration for specific button editting
+*/
 button{
     background-color: $oColor;
     border-radius: $radius;
@@ -73,26 +84,34 @@ button{
     box-shadow:  $oColor $shadow;
   }
 
-// Week at a glance
+/**
+* Week at a glance
+*/
 #week{
   font-weight: $weight;
   font-size: 2vw;
   text-align: $mid;
 }
 
-// Welcome, 
+/**
+* Welcome, 
+*/
 #title{
   text-align: $mid;
   font-size: 2.5vw;
 }
 
-// mat-card for Welcome, and week at a glance
+/**
+* mat-card for Welcome, and week at a glance
+*/
 #card{
     width: 45%;
     margin-left: 27%;
 }
 
-// info displayed when the batch button is clicked
+/**
+* info displayed when the batch button is clicked
+*/
 #bInfo{
     font-weight: $weight;
     font-size: 1.1vw;
@@ -102,7 +121,9 @@ button{
     margin-top: 7%;
 }
 
-// editting for batch name when batch button is pressed
+/**
+* editting for batch name when batch button is pressed
+*/
 #batchHeader {
     background-color: rgb(218, 81, 2);
     text-align: $mid;
@@ -112,12 +133,16 @@ button{
     opacity: .9;
 }
 
-// editting the batch card height to fit the entire space
+/**
+* editting the batch card height to fit the entire space
+*/
 #sideNav{
     height: $w100;
 }
 
-// (left)  time badge displayed in the today section of the dashboard
+/**
+* (left)  time badge displayed in the today section of the dashboard
+*/
 #timeBadge1 {
     width: 25%;
     height: 35%;
@@ -125,7 +150,9 @@ button{
     font-size: .7vw;
     background-color: rgb(71, 71, 71);
 }
-// (right)  time badge displayed in the today section of the dashboard
+/**
+* (right)  time badge displayed in the today section of the dashboard
+*/
 #timeBadge2 {
     width: 25%;
     height: 35%;
@@ -134,13 +161,18 @@ button{
     background-color: orangered;
 }
 
-// check mark and exclamation mark 
+/**
+* check mark and exclamation mark
+*/
 .material-icons.matSpecs-24 {
     font-weight: $weight;
     font-size: 24px;
     color: rgba(0, 0, 0, 0.747)
 }
-// flag styling
+
+/**
+* flag styling
+*/
 .material-icons.flagColor-24 {
     font-weight: $weight;
     font-size: 24px;

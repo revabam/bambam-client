@@ -1,10 +1,14 @@
-// Variables
+/**
+* Variables
+*/
 $weight: bold; // font-weight
 $oColor: rgb(231, 94, 2); 
 $radius: 13px 13px 13px 13px; // border radius
 $shadow: 0px 0px 2px 2px; //shadow effect on buttons related to Calender
 
-// Specific button stylization
+/**
+* Specific button stylization
+*/
 button{
     background-color: $oColor;
     background-size: 20px;
@@ -17,7 +21,9 @@ button{
     font-size: .85vw;
   }
 
-// specific h6 font-size 
+/**
+* specific h6 font-size 
+*/
 h6{
 font-size: 1.2vw;
 }
