@@ -121,11 +121,9 @@ export class BoomComponent implements OnInit {
     this.missed = [];
     this.canceled = [];
     this.weeks = [];
-
     for (let j = 0; j < this.curriculums[curriculumId].curriculumWeeks.length; j++) {
       this.weeks.push(j + 1);
     }
-
     for (let j = 0; j < this.curriculums[curriculumId].curriculumWeeks.length; j++) {
       let completed = 0;
       let missed = 0;
@@ -156,7 +154,7 @@ export class BoomComponent implements OnInit {
 
   /**
    * Find the selected curriculum, event is the id of the selected curriculum
-   * @param number - finds the curriculum chosen by the user
+   * @param event - finds the curriculum chosen by the user which is number
    * @author Richard Iskra | 1806Spark-Jun25-USF-Java | Steven Kelsey
    */
   selectedCurriculum(event) {
@@ -170,7 +168,7 @@ export class BoomComponent implements OnInit {
 
   /**
    * Updates pie chart data when users enter a value in the percentage input field, event is the given percentile
-   *  @param number - percentile used to track progress of all batches
+   *  @param event - percentile used to track progress of all batches
    *  @author Richard Iskra | Eddie Grays | 1806Spark-Jun25-USF-Java | Steven Kelsey
    */
   percent(event) {
