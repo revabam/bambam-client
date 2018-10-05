@@ -32,8 +32,8 @@ import { Router } from '@angular/router';
  * statusId is numerical, correlates planned, completed, cancelled, missed
  * subTopicId is the id of the subTopic used for viewing details
  * flagged is used in dashboard to mark important events, numerical for different tiers
- *
  * @author Marcin Salamon | Spark1806-USF-Java | Steven Kelsey
+ * @author Kyle Smith | Aaron Mathews | Brandon Scoggins | 1806-Jun18-USF-Java | Wezley Singleton
  */
 export class CustomCalendarEvent implements CalendarEvent<any> {
   id?: string | number;
@@ -192,6 +192,7 @@ export class CalendarComponent implements OnInit, DoCheck {
   /**
    * Convert cirriculums into Material CalendarEvents so they can be dropped onto the calendar
    * and stored.
+   * @author Marcin Salamon | Spark1806-USF-Java | Steven Kelsey
    */
   convertCirriculum() {
     this.curriculumEvents = [];
@@ -239,6 +240,7 @@ export class CalendarComponent implements OnInit, DoCheck {
    * Built in method from angular material2 calendar.
    * Handles time changes for events.
    * @param param0 A wrapper object that stores the event, its new starting time, and ending time.
+   * @author Marcin Salamon | Spark1806-USF-Java | Steven Kelsey
    */
   eventTimesChanged({
     event,
@@ -260,7 +262,6 @@ export class CalendarComponent implements OnInit, DoCheck {
    * When the title of an event on the calendar is clicked, a modal is opened with relevant
    * information about the event (event name, description, time, etc.).
    * @param event The event that was clicked
-   *
    * @author Alicia Douglas | Spark1806-USF-Java | Steven Kelsey
    */
   openDialog(event: CustomCalendarEvent): void {
@@ -326,7 +327,6 @@ export class CalendarComponent implements OnInit, DoCheck {
    * opens the modal when user tries to insert the curriculum
    * @param name of the curriculum
    * @param date the date curriculum got dropped on
-   *
    * @author Marcin Salamon | Alex Moraga | Spark1806-USF-Java | Steven Kelsey
    */
   openEventInsertCurriculum(name: string, date: Date): Observable<any> {
@@ -337,7 +337,6 @@ export class CalendarComponent implements OnInit, DoCheck {
         startDate: date
       }
     });
-
     return dialogRef.afterClosed();
   }
 
@@ -345,7 +344,6 @@ export class CalendarComponent implements OnInit, DoCheck {
    * function takes in a direction in which to move events and then based on that moves them back or forth a day
    * if the new day falls on a Saturday or Sunday, it gets moved to next week instead
    * does not currently change start time
-   *
    * @param decision numerical decision whether to push future events back or forward a day
    * @param event event from which to start moving other events
    * @author Marcin Salamon | Spark1806-USF-Java | Steven Kelsey
@@ -378,7 +376,6 @@ export class CalendarComponent implements OnInit, DoCheck {
    * for the action.
    * @param action The action that took place (drag, drop, edit, delete, click)
    * @param event The event that the action happened on
-   *
    * @author Marcin Salamon | Spark1806-USF-Java | Steven Kelsey
    */
   handleEvent(action: string, event: CalendarEvent): void {
@@ -444,7 +441,6 @@ export class CalendarComponent implements OnInit, DoCheck {
 
   /**
    * Algorithm that handles where subtopics go on the calendar when first dropped,
-   *
    * @param id id for the object that will be dropped into the calendar
    * @param event that is dragged and dropped
    * @author Marcin Salamon | Alex Moraga | Spark1806-USF-Java | Steven Kelsey
@@ -518,9 +514,9 @@ export class CalendarComponent implements OnInit, DoCheck {
     }
     this.refresh.next();
   }
+
   /**
    * method that creates calendar events when dropped curriculum is dropped onto the calendar
-   *
    * @author Marcin Salamon | Spark1806-USF-Java | Steven Kelsey
    */
   generateEvents() {
@@ -587,6 +583,7 @@ export class CalendarComponent implements OnInit, DoCheck {
 
   /**
    * persists all events in the event array.
+   * @author Marcin Salamon | Spark1806-USF-Java | Steven Kelsey
    */
   persistEvents() {
     const eventsToPersist: CalEvent.CalendarEvent[] = [];
@@ -603,7 +600,6 @@ export class CalendarComponent implements OnInit, DoCheck {
         trainerId: this.user.id,
         flagged: event.flagged
       };
-
       eventsToPersist.push(ev);
     }
     this.calendarService.addCalendarEvents(eventsToPersist).subscribe(eventRes => {
@@ -629,7 +625,6 @@ export class CalendarComponent implements OnInit, DoCheck {
       subTopicId: +event.id,
       trainerId: this.user.id,
       flagged: event.flagged
-
     };
     this.calendarService.addCalendarEvent(calEvent).subscribe(eventRes => {
     },
@@ -639,6 +634,7 @@ export class CalendarComponent implements OnInit, DoCheck {
 
   /**
    * creates an event for the calander persisting the event and reloading the calendar.
+   * @author Marcin Salamon | Spark1806-USF-Java | Steven Kelsey
    */
   addEvent(): void {
     if (!this.eventExists(this.newSubtopicName)) {
@@ -664,9 +660,9 @@ export class CalendarComponent implements OnInit, DoCheck {
       this.openEventDuplicateDialog(this.newSubtopicName, this.newSubtopicDate);
     }
   }
+
   /**
    * check if event exists in the events array
-   *
    * @param title of the new event
    * @author Marcin Salamon | Spark1806-USF-Java | Steven Kelsey
    */
@@ -679,7 +675,3 @@ export class CalendarComponent implements OnInit, DoCheck {
     return false;
   }
 }
-
-/**
- * @author Kyle Smith | Aaron Mathews | Brandon Scoggins | 1806-Jun18-USF-Java | Wezley Singleton
- */

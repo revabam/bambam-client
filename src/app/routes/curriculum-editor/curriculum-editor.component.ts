@@ -15,7 +15,6 @@ import { MatIconRegistry } from '@angular/material/icon';
 import { DomSanitizer } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 
-
 @Component({
   selector: 'app-curriculum-editor',
   templateUrl: './curriculum-editor.component.html',
@@ -25,9 +24,7 @@ export class CurriculumEditorComponent implements OnInit {
   // Arrays of all the elements we're fetching from the server.
   curriculums: Curriculum[] = [];
   curriculumNames: string[] = [];
-
   selectedCurriculum: Curriculum;
-
   background = '';
 
   /**
@@ -111,6 +108,7 @@ export class CurriculumEditorComponent implements OnInit {
     }
     return count;
   }
+
   /**
    * Gets us distinct curriculum names from the list of all
    * curriculums
@@ -187,7 +185,6 @@ export class CurriculumEditorComponent implements OnInit {
           curriculumDayIds.push(curriculumDay.id.toString());
           // set as current curriculum
           this.selectedCurriculum = curriculum;
-
           // save the id's for drag and drop
           this.daySubTopicService.dragAndDropList = curriculumDayIds;
         }

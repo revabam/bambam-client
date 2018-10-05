@@ -39,7 +39,6 @@ export class StartMondayModalComponent implements OnInit {
   /**
    * returns decision if user doesn't want to start the curriculum on that day or previous Monday
    * default decision is NO
-   *
    *  @author Marcin Salamon | Alex Moraga | Spark1806-USF-Java | Steven Kelsey
    */
   close() {
@@ -48,7 +47,6 @@ export class StartMondayModalComponent implements OnInit {
 
   /**
    * marks the decision as MON and closes the modal
-   *
    * @author Marcin Salamon | Alex Moraga | Spark1806-USF-Java | Steven Kelsey
    */
   startOnMonday() {
@@ -58,7 +56,6 @@ export class StartMondayModalComponent implements OnInit {
 
   /**
    * returns the decision as CUR for day specified and closes the modal
-   *
    * @author Marcin Salamon | Spark1806-USF-Java | Steven Kelsey
    */
   startOnCurrentDay() {

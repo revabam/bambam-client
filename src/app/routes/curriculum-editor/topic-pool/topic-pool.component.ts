@@ -150,6 +150,7 @@ export class TopicPoolComponent implements OnInit {
     return this.topics.filter((topic) => this.hasTopic(search, topic)
       || this.inSearch(search, topic.name));
   }
+
   /*
    * collapseTopic, expandTopic, and isExpanded are functions
    * used to check and control the expansion of a topic panel
@@ -165,6 +166,7 @@ export class TopicPoolComponent implements OnInit {
   expandTopic(topicId: number): void {
     this.topicExpansions[`topic_${topicId}`] = true;
   }
+
   /**
    * Sets the value to false for a dictionary key with
    * the given topic id.
@@ -175,6 +177,7 @@ export class TopicPoolComponent implements OnInit {
   collapseTopic(topicId: number): void {
     this.topicExpansions[`topic_${topicId}`] = false;
   }
+
   /**
    * Checks whether or not a topic is expanded. If it
    * value in the dictionary is true, it is expanded,
@@ -187,6 +190,7 @@ export class TopicPoolComponent implements OnInit {
   isExpanded(topicId: number): boolean {
     return this.topicExpansions[`topic_${topicId}`] === true;
   }
+
   /**
    * Checks whether or not a word begins with a sequence of characters
    * A string with multiple words can be inputted into the function,
