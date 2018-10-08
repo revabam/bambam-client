@@ -9,6 +9,10 @@ import { CurriculumService } from '../../services/curriculum.service';
   templateUrl: './boom.component.html',
   styleUrls: ['./boom.scss']
 })
+
+/**
+ * @author Richard Iskra | Obosa Nosa-Igiebor | Eddie Grays | 1806Spark-Jun25-USF-Java | Steven Kelsey
+ */
 export class BoomComponent implements OnInit {
 
   events: any[] = [];
@@ -109,6 +113,7 @@ export class BoomComponent implements OnInit {
 
   /**
    *  get the progress of the selected batch
+   *  @param number - used to determin whih batch we want to track
    *  @author Richard Iskra | Obosa Nosa-Igiebor | 1806Spark-Jun25-USF-Java | Steven Kelsey
    */
   getWeeklyProgress(curriculumId) {
@@ -116,11 +121,9 @@ export class BoomComponent implements OnInit {
     this.missed = [];
     this.canceled = [];
     this.weeks = [];
-
     for (let j = 0; j < this.curriculums[curriculumId].curriculumWeeks.length; j++) {
       this.weeks.push(j + 1);
     }
-
     for (let j = 0; j < this.curriculums[curriculumId].curriculumWeeks.length; j++) {
       let completed = 0;
       let missed = 0;
@@ -150,7 +153,8 @@ export class BoomComponent implements OnInit {
   }
 
   /**
-   * Find the selected curriculum
+   * Find the selected curriculum, event is the id of the selected curriculum
+   * @param event - finds the curriculum chosen by the user which is number
    * @author Richard Iskra | 1806Spark-Jun25-USF-Java | Steven Kelsey
    */
   selectedCurriculum(event) {
@@ -163,7 +167,8 @@ export class BoomComponent implements OnInit {
   }
 
   /**
-   * Updates pie chart data when users enter a value in the percentage input field
+   * Updates pie chart data when users enter a value in the percentage input field, event is the given percentile
+   *  @param event - percentile used to track progress of all batches
    *  @author Richard Iskra | Eddie Grays | 1806Spark-Jun25-USF-Java | Steven Kelsey
    */
   percent(event) {
@@ -232,7 +237,3 @@ export class BoomComponent implements OnInit {
     this.getWeeklyProgress(0);
   }
 }
-
-/**
- * @author Richard Iskra | Obosa Nosa-Igiebor | Eddie Grays | 1806Spark-Jun25-USF-Java | Steven Kelsey
- */

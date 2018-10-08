@@ -33,6 +33,7 @@ export class CurriculumWeekComponent implements OnInit {
   /**
    * id called when a day has been changed
    * @param event the new day to update with
+   * @author - Chinedu Ozodi | 1806-Sep-18-USF-Java | Steven Kelsey
    */
   onDayChange(event: CurriculumDay) {
     const index = this.week.curriculumDays.findIndex(x => x.dayNum === event.dayNum);
@@ -74,5 +75,4 @@ export class CurriculumWeekComponent implements OnInit {
       });
     }
   }
-
 }
