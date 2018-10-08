@@ -1,21 +1,30 @@
-// Entire table, adding simple changes 
+/**
+* Entire table, adding simple changes 
+*/ 
 table{
     width: 100%; 
     margin-top: 5%;
  }
 
-// whole Overall Progress card edits
+/**
+* whole Overall Progress card edits 
+*/
  #dchart{
     height: 100%;
     width: 35%;
  }
-// whole Weekly Progress card edits
+ 
+/** 
+* whole Weekly Progress card edits 
+*/
  #bchart{
     height: 95%;
     width: 50%;
  }
 
-// Overall Progress specifc edits, whats housed inside the card
+/**
+* Overall Progress specifc edits, whats housed inside the card 
+*/
  .dcard{
     position: relative;
     bottom: 70px;
@@ -24,7 +33,10 @@ table{
     height: 450px;
     width: 96%;
  }
-// Weekly Progress specific edits, whats housed inside the card
+
+/**
+* Weekly Progress specific edits, whats housed inside the card 
+*/
  .bcard{
     margin: 15px;
     background-color: rgb(238, 238, 238);
@@ -32,14 +44,18 @@ table{
     width: 95%;
  }
 
-// Boom titles displayed above charts
+/**
+* Boom titles displayed above charts 
+*/
  .banner{
     text-align:center;
     margin-bottom: 15px;
     padding: 8px;
  }
 
-// Weekly progress trainer picker
+/**
+* Weekly progress trainer picker 
+*/
  #batchSelect{
     margin-top: 30px;
     margin-left: 31px;
@@ -47,7 +63,9 @@ table{
     font-weight: bold;
  }
 
-// Overall progress input percent
+/**
+* Overall progress input percent 
+*/
  .input{
     position: absolute;
     bottom: 30px;
