@@ -35,7 +35,6 @@ export class UserService {
   * @return       An Observable which will broadcast the BamUser when it is retrieved
   */
   getUserByEmail(email: string): Observable<BamUser> {
-    console.log('[LOG] - In UserService.getUserByEmail()');
     return this.http.get<BamUser>(environment.apiUrl + 'users?email=' + email, HTTP_OPTIONS);
   }
 
@@ -47,7 +46,6 @@ export class UserService {
   * @return       An Observable that will broadcast the BamUser when it has been inserted into the database
   */
   register(user: BamUser): Observable<BamUser> {
-    console.log('[LOG] - In UserService.register()');
     return this.http.post<BamUser>(environment.apiUrl + 'users', JSON.stringify(user), HTTP_OPTIONS);
   }
 
@@ -58,7 +56,6 @@ export class UserService {
    * @param user The updated user
    */
   updateInfo(user: BamUser): Observable<BamUser> {
-    console.log('[LOG] - In UserService.updateInfo()');
     return this.http.put<BamUser>(environment.apiUrl + `users/${user.id}`, JSON.stringify(user),  HTTP_OPTIONS);
   }
 }

@@ -27,10 +27,6 @@ export class CurriculumDayComponent implements OnInit {
     this.getAllSubTopicNames();
   }
 
-  ngOnChange() {
-    console.log('change call');
-  }
-
   drop(event: CdkDragDrop<any>) {
     if (!event.previousContainer || !event.previousContainer.data || !event.previousContainer.data.length) {
       // This means that it is a subtopic from the topic pool and should be converted into a day-subtopic
@@ -41,11 +37,11 @@ export class CurriculumDayComponent implements OnInit {
         parentTopicId: event.previousContainer.data.parentTopicId,
         subTopicId: event.previousContainer.data.id
       };
-
       // Saving daySubTopic to db
       this.daySubTopicService.post(daySubTopic).subscribe((savedDaySubTopic) => {
         // reassigns the name variable because it is not being persisted to the db to avoid redundancy
         savedDaySubTopic.name = event.previousContainer.data.name;
+        savedDaySubTopic.parentTopicId = event.previousContainer.data.parentTopicId;
         this.day.daySubTopics.splice(event.currentIndex, 0, savedDaySubTopic);
         this.updateDaySubTopicIndexes();
       });
@@ -66,6 +62,10 @@ export class CurriculumDayComponent implements OnInit {
     this.getAllSubTopicNames();
   }
 
+  /**
+   * Gets all subtopic names
+   * @author - Chinedu Ozodi | 1806-Sep-18-USF-Java | Steven Kelsey
+   */
   getAllSubTopicNames() {
     this.day.daySubTopics.forEach( (daySubTopic) => {
       const subTopic = this.subTopicService.subtopics.find( (x) => x.id === daySubTopic.subTopicId);
@@ -73,6 +73,10 @@ export class CurriculumDayComponent implements OnInit {
     });
   }
 
+  /**
+   * Updates the subtopic indexes
+   * @author - Chinedu Ozodi | 1806-Sep-18-USF-Java | Steven Kelsey
+   */
   updateDaySubTopicIndexes() {
     for (let i = 0; i < this.day.daySubTopics.length; i++) {
       const daySubTopic = this.day.daySubTopics[i];
@@ -92,6 +96,7 @@ export class CurriculumDayComponent implements OnInit {
     this.day.daySubTopics.push(event.dragData);
     this.dayChange.emit(this.day);
   }
+
   /**
    * Allows for drag and drop rearrangement of the subtopics in this.day
    * @param event event passed in from a drag and drop that gives information about the location of the dropped object
@@ -102,11 +107,9 @@ export class CurriculumDayComponent implements OnInit {
     const currentIndex: number = event.currentIndex;
     const previousSubTopic = this.day.daySubTopics[previousIndex];
     const currentSubTop = this.day.daySubTopics[currentIndex];
-
     // Swap the subtopics
     this.day.daySubTopics.splice(previousIndex, 1, currentSubTop);
     this.day.daySubTopics.splice(currentIndex, 1, previousSubTopic);
-
     // updates indexes
     this.updateDaySubTopicIndexes();
   }

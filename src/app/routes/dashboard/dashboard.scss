@@ -37,7 +37,7 @@ $w100: 100%; // width
 * specific mat-card editting 
 */
 mat-card{
-    background-color: #ffffffe7;
+    background-color: #ffffff;
     color: black;
     font-weight: $weight;
     border-radius: 20px 20px 20px 20px;
@@ -65,6 +65,7 @@ mat-card-header{
     width: 30%;
     height: $w100;
     font-size: 1.3vw;
+    margin-left: 5.5vw;
 }
 
 /**
@@ -78,7 +79,8 @@ button{
     border-style: outset;
     border-width: 3px;
     border-color: $oColor $shadow;
-    font-size: 1.3vw;
+    font-size: 1vw;
+    width: 7vw;
   }
   button:hover{
     box-shadow:  $oColor $shadow;
@@ -104,9 +106,15 @@ button{
 /**
 * mat-card for Welcome, and week at a glance
 */
+#wel{
+    width: 82%;
+    margin-left: 11.5%;
+}
+
 #card{
-    width: 45%;
+    width: 50%;
     margin-left: 27%;
+    border-radius: $radius;
 }
 
 /**

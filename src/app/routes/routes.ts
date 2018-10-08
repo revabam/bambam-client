@@ -16,27 +16,22 @@ export const appRoutes: Routes = [
         path: 'dashboard',
         component: DashboardComponent
     },
-
     {
         path: 'login',
         component: LoginComponent
     },
-
     {
         path: 'register',
         component: RegisterComponent
     },
-
     {
         path: 'calendar',
         component: CalendarComponent
     },
-
     {
         path: 'curriculum/editor',
         component: CurriculumEditorComponent
     },
-
     {
         path: 'boom',
         component: BoomComponent

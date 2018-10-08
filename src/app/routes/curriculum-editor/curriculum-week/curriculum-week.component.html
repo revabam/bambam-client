@@ -3,15 +3,16 @@
     <mat-panel-title style="font-weight: bold">
       Week #{{week.weekNum}}
     </mat-panel-title>
-    <mat-panel-description>
-      info graphics here
+    <mat-panel-description style="font-size: 8px">
+      <p *ngFor="let topic of objectKeys(topicInfo); let i = index;">
+        {{topic}}: {{topicInfo[topic]}} <span *ngIf='i < objectKeys(topicInfo).length - 1'>, <br> </span>
+      </p>
     </mat-panel-description>
   </mat-expansion-panel-header>
   <div class="container">
     <div class="row">
-      <div class="col-sm" *ngFor="let day of week.curriculumDays">
+      <div class="col" *ngFor="let day of week.curriculumDays" style="padding-right: 0%; padding-left: 0%">
         <app-curriculum-day [day]='day' (dayChange)="onDayChange($event)"></app-curriculum-day>
-        <!-- <app-curriculum-day [day]='day' [weekNum]='week.weekNum' (dayChange)="onDayChange($event)"></app-curriculum-day> -->
       </div>
     </div>
   </div>

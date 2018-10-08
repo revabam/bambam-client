@@ -1,41 +1,81 @@
-import { CognitoService } from './../../services/cognito.service';
 import { Curriculum } from './../../models/curriculum';
 import { SubTopicService } from './../../services/subtopic.service';
 import { Component, OnInit } from '@angular/core';
 import { BoomService } from '../../services/boom.service';
 import { CurriculumService } from '../../services/curriculum.service';
-import { Router } from '@angular/router';
-import { CognitoUser } from 'amazon-cognito-identity-js';
 
 @Component({
   selector: 'app-boom',
   templateUrl: './boom.component.html',
   styleUrls: ['./boom.scss']
 })
+
+/**
+ * @author Richard Iskra | Obosa Nosa-Igiebor | Eddie Grays | 1806Spark-Jun25-USF-Java | Steven Kelsey
+ */
 export class BoomComponent implements OnInit {
 
   events: any[] = [];
   batches: any[] = [];
-  curriculums: Curriculum[] = [];
+  curriculums: any[] = [{
+    name: 'Java 1', curriculumId: 1, curriculumWeeks: [
+      {curriculumDays: [
+        {daySubTopics: [{statusId: 2}, {statusId: 3}]},
+        {daySubTopics: [{statusId: 2}, {statusId: 4}]},
+        {daySubTopics: [{statusId: 2}, {statusId: 2}]}]},
+      {curriculumDays: [{daySubTopics: [{statusId: 2}, {statusId: 3}]},
+        {daySubTopics: [{statusId: 2}, {statusId: 2}]},
+        {daySubTopics: [{statusId: 2}, {statusId: 3}]}]},
+      {curriculumDays: [{daySubTopics: [{statusId: 2}, {statusId: 3}]},
+        {daySubTopics: [{statusId: 2}, {statusId: 2}]},
+        {daySubTopics: [{statusId: 4}, {statusId: 4}]}]}]},
+    {name: 'Java 2', curriculumId: 2, curriculumWeeks: [
+      {curriculumDays: [
+        {daySubTopics: [{statusId: 2}, {statusId: 3}]},
+        {daySubTopics: [{statusId: 2}, {statusId: 4}]},
+        {daySubTopics: [{statusId: 2}, {statusId: 4}]}]},
+      {curriculumDays: [{daySubTopics: [{statusId: 2}, {statusId: 3}]},
+        {daySubTopics: [{statusId: 2}, {statusId: 2}]},
+        {daySubTopics: [{statusId: 2}, {statusId: 4}]}]},
+      {curriculumDays: [{daySubTopics: [{statusId: 2}, {statusId: 2}]},
+        {daySubTopics: [{statusId: 2}, {statusId: 2}]},
+        {daySubTopics: [{statusId: 2}, {statusId: 3}]}]}]},
+    {name: 'Java 3', curriculumId: 3, curriculumWeeks: [{curriculumDays: [
+        {daySubTopics: [{statusId: 2}, {statusId: 2}]},
+        {daySubTopics: [{statusId: 2}, {statusId: 2}]},
+        {daySubTopics: [{statusId: 2}, {statusId: 3}]}]},
+    {curriculumDays: [{daySubTopics: [{statusId: 2}, {statusId: 2}]},
+        {daySubTopics: [{statusId: 4}, {statusId: 2}]},
+        {daySubTopics: [{statusId: 2}, {statusId: 4}]}]},
+    {curriculumDays: [{daySubTopics: [{statusId: 2}, {statusId: 2}]},
+        {daySubTopics: [{statusId: 2}, {statusId: 2}]},
+        {daySubTopics: [{statusId: 3}, {statusId: 2}]},
+        {daySubTopics: [{statusId: 2}, {statusId: 4}]}]}]}];
+
   completed: number[] = [];
   missed: number[] = [];
   canceled: number[] = [];
   weeks: number[] = [];
 
   constructor(
-    private router: Router,
     private boomServ: BoomService,
     private curriculumService: CurriculumService,
-    private subtopicService: SubTopicService,
-    private cognito: CognitoService
+    private subtopicService: SubTopicService
   ) { }
 
   // bar chart
   public barChartOptions: any = {
     scaleShowVerticalLines: false,
-    responsive: true
+    responsive: true,
+    scales: {
+      yAxes: [{
+        ticks: {
+          beginAtZero: true
+        }
+      }]
+    }
   };
-  public barChartLabels: number[] = this.weeks;
+  public barChartLabels: number[] = [];
   public barChartType = 'bar';
   public barChartLegend = true;
 
@@ -73,6 +113,7 @@ export class BoomComponent implements OnInit {
 
   /**
    *  get the progress of the selected batch
+   *  @param number - used to determin whih batch we want to track
    *  @author Richard Iskra | Obosa Nosa-Igiebor | 1806Spark-Jun25-USF-Java | Steven Kelsey
    */
   getWeeklyProgress(curriculumId) {
@@ -80,11 +121,9 @@ export class BoomComponent implements OnInit {
     this.missed = [];
     this.canceled = [];
     this.weeks = [];
-
     for (let j = 0; j < this.curriculums[curriculumId].curriculumWeeks.length; j++) {
-      this.weeks.push(j);
+      this.weeks.push(j + 1);
     }
-
     for (let j = 0; j < this.curriculums[curriculumId].curriculumWeeks.length; j++) {
       let completed = 0;
       let missed = 0;
@@ -110,23 +149,26 @@ export class BoomComponent implements OnInit {
     clone[1].data = this.missed;
     clone[2].data = this.canceled;
     this.barChartData = clone;
+    this.barChartLabels = this.weeks;
   }
 
   /**
-   * Find the selected curriculum
+   * Find the selected curriculum, event is the id of the selected curriculum
+   * @param event - finds the curriculum chosen by the user which is number
    * @author Richard Iskra | 1806Spark-Jun25-USF-Java | Steven Kelsey
    */
   selectedCurriculum(event) {
     const id = event.value;
     for (let i = 0; i < this.curriculums.length; i++) {
-      if (this.curriculums[i].id === id) {
+      if (this.curriculums[i].curriculumId === id) {
         this.getWeeklyProgress(i);
       }
     }
   }
 
   /**
-   * Updates pie chart data when users enter a value in the percentage input field
+   * Updates pie chart data when users enter a value in the percentage input field, event is the given percentile
+   *  @param event - percentile used to track progress of all batches
    *  @author Richard Iskra | Eddie Grays | 1806Spark-Jun25-USF-Java | Steven Kelsey
    */
   percent(event) {
@@ -161,43 +203,17 @@ export class BoomComponent implements OnInit {
   }
 
   ngOnInit() {
-    if (!sessionStorage.getItem('user')) {
-      this.router.navigate(['login']);
-    } else {
-      this.cognito.bamUser = JSON.parse(sessionStorage.getItem('user'));
-    }
-    this.boomServ.getAllEvents().subscribe(x => {
-      this.events = x;
-      console.log('events');
-      console.log(x);
-    });
-    this.boomServ.getAllBatches().subscribe(x => {
-      console.log('batches');
-      console.log(x);
-      this.batches = x;
-      this.curriculumService.getAll().subscribe ( (curriculums) => {
-        this.curriculums = curriculums;
-        this.subtopicService.getAll().subscribe( (subtopcs) => {
-          this.subtopicService.subtopics = subtopcs;
-          this.curriculums.forEach( (curriculum) => {
-            curriculum = this.subtopicService.setDayTopicNames(curriculum);
-          });
-          this.getData();
-        });
-      });
-    });
+    this.getWeeklyProgress(0);
   }
 
   /**
-   * Using the data obtained from ngOnInit, format the data for easier usage
+   * Format data gathered from the H2 database
    *  @author Richard Iskra | 1806Spark-Jun25-USF-Java | Steven Kelsey
    */
   getData() {
     while (this.events === [] || this.batches === [] || this.curriculums === []) {
     }
     for (let i = 0; i < this.curriculums.length; i++) {
-      console.log('curriculums');
-      console.log(this.curriculums);
       for (let j = 0; j < this.curriculums[i].curriculumWeeks.length; j++) {
         for (let k = 0; k < this.curriculums[i].curriculumWeeks[j].curriculumDays.length; k++) {
           for (let l = 0; l < this.curriculums[i].curriculumWeeks[j].curriculumDays[k].daySubTopics.length; l++) {
@@ -214,14 +230,10 @@ export class BoomComponent implements OnInit {
       }
       for (let n = 0; n < this.batches.length; n++) {
         if (this.batches[n].calendarCurriculum_id === this.curriculums[i].id) {
-          this.curriculums[i].name = this.batches[n].name;
+          this.curriculums[i].name = this.batches[n].name + ' ' + this.batches[n].version;
         }
       }
     }
     this.getWeeklyProgress(0);
   }
 }
-
-/**
- * @author Richard Iskra | Obosa Nosa-Igiebor | Eddie Grays | 1806Spark-Jun25-USF-Java | Steven Kelsey
- */

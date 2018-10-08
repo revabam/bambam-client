@@ -9,7 +9,6 @@ import { BamUser } from '../../models/bam-user';
  * This is the register component. It allows users to create their
  * own accounts. This component uses the cognito service to create
  * user records in the user pool.
- *
  * @author Bradley Walker | Karen Matney | 1806-Jun18-USF-Java | Wezley Singleton
  */
 @Component({
@@ -21,10 +20,8 @@ export class RegisterComponent implements OnInit {
   // This string is used when we check if the password field matches
   // the confirm password field
   message: string;
-
   // This string is used to display registration errors to the user
   errorMessage: string;
-
   // Building the form
   registrationForm = new FormBuilder().group({
     email: new FormControl('', Validators.compose([
@@ -35,7 +32,6 @@ export class RegisterComponent implements OnInit {
       Validators.minLength(8),
       // This is the best regex string I could find for password matching
       Validators.pattern('^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9]).+$')])),
-
     // This one isn't actually used for verifying validity at the moment,
     // but I'm leaving it here in case a future batch wants to change that.
     confirmPassword: new FormControl('', Validators.required),
@@ -49,7 +45,10 @@ export class RegisterComponent implements OnInit {
     ]))
   });
 
-  // Error messages to display to the user
+  /**
+   * Error messages to display to the user
+   * @author Bradley Walker | Karen Matney | 1806-Jun18-USF-Java | Wezley Singleton
+   */
   registrationValidationMessages = {
     'email': [
       {type: 'required', message: 'Email is required'},
@@ -83,6 +82,7 @@ export class RegisterComponent implements OnInit {
   * This method checks if the password field and confirm password field
   * match. If not, it sets the messages which is displayed as a mat-error
   * on the form.
+  * @author Bradley Walker | Karen Matney | 1806-Jun18-USF-Java | Wezley Singleton
   */
   checkMatch() {
     if (this.registrationForm.get('password').value !== this.registrationForm.get('confirmPassword').value) {
@@ -101,23 +101,19 @@ export class RegisterComponent implements OnInit {
   * conform to the password regex pattern, angular tries to display multiple
   * error messages under the field. The messages overflow onto the field below.
   * This way, only a single error message is actually shown.
-  *
   * @param  field The name of the field
-  * @return       The error message, if any
+  * @return string The error message, if any
   */
   getErrorMessage(field: string): string {
     let e = '';
-
     const validations = this.registrationValidationMessages[field];
     for (let i = 0; i < Object.keys(validations).length; i++) {
       const validation = validations[i];
-
       if (this.registrationForm.get('password').hasError(validation['type']) &&
       (this.registrationForm.get('password').dirty || this.registrationForm.get('password').touched)) {
         e = validation['message'];
       }
     }
-
     return e;
   }
 
@@ -125,11 +121,11 @@ export class RegisterComponent implements OnInit {
   * This method implements the registration functionality. It checks that
   * the input is valid and then makes the call to the cognito service to
   * register the user in the cognito user pool.
+  * @author Bradley Walker | Karen Matney | 1806-Jun18-USF-Java | Wezley Singleton
   */
   register() {
     // Clear the error message
     this.errorMessage = '';
-
     // Run the password match check
     this.checkMatch();
     // Check if there are any errors in the form

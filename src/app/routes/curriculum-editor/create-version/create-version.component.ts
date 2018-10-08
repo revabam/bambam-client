@@ -74,5 +74,4 @@ export class CreateVersionComponent {
     // After the curriculum is added, we're done with the modal.
     this.close();
   }
-
 }

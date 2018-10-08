@@ -38,6 +38,7 @@ export class DialogViewComponent implements OnInit {
 
   /**
    * Exits dialog view whenver cancel or ok is hit in the dialog view.
+   * @author Karen Matney | Khaleel Williams
    */
   close(): void {
     this.dialogRef.close();
@@ -52,7 +53,6 @@ export class DialogViewComponent implements OnInit {
       alert('Invalid Topic Name');
       return;
     }
-
     this.data['topicService'].getAll().subscribe(topics => {
       topics = topics.filter((topic) => this.topicName.toUpperCase()
         === this.data['topicService'].reactivateName(
@@ -68,9 +68,7 @@ export class DialogViewComponent implements OnInit {
         this.subtopics.forEach(subtopic => this.data['subtopicService'].add(subtopic, topics[0].id).subscribe(
           (addedSubtopic) => {
             this.data['subtopics'].push(addedSubtopic);
-            console.log('subtopic added');
-            console.log(addedSubtopic);
-        }));
+          }));
       }
       this.dialogRef.close();
     });
@@ -95,5 +93,4 @@ export class DialogViewComponent implements OnInit {
     }
     this.subtopics.push(this.subtopicName);
   }
-
 }

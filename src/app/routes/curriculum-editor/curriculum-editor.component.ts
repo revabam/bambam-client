@@ -1,3 +1,4 @@
+import { SubTopicService } from './../../services/subtopic.service';
 import { CognitoService } from './../../services/cognito.service';
 import { DaySubtopicService } from './../../services/day-subtopic.service';
 import { CurriculumWeekService } from './../../services/curriculum-week.service';
@@ -14,7 +15,6 @@ import { MatIconRegistry } from '@angular/material/icon';
 import { DomSanitizer } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 
-
 @Component({
   selector: 'app-curriculum-editor',
   templateUrl: './curriculum-editor.component.html',
@@ -24,9 +24,7 @@ export class CurriculumEditorComponent implements OnInit {
   // Arrays of all the elements we're fetching from the server.
   curriculums: Curriculum[] = [];
   curriculumNames: string[] = [];
-
   selectedCurriculum: Curriculum;
-
   background = '';
 
   /**
@@ -41,7 +39,7 @@ export class CurriculumEditorComponent implements OnInit {
     private domSanitizer: DomSanitizer,
     private curriculumService: CurriculumService,
     private curriculumDayService: CurriculumDayService,
-    private curriculumWeekService: CurriculumWeekService,
+    private subTopicService: SubTopicService,
     private daySubTopicService: DaySubtopicService,
     private router: Router,
     private cognito: CognitoService,
@@ -76,13 +74,14 @@ export class CurriculumEditorComponent implements OnInit {
   getAllCurriculums(): void {
     this.curriculumService.getAll().subscribe(curriculums => {
       this.curriculums = curriculums;
-      console.log('curriculums');
-      console.log(curriculums);
       this.curriculumNames = this.getUniqueNames();
     });
   }
 
   // here is where the master version of the curriculum is copied so that it can be edited
+  // Note: This function does not actually work, because each daySubTopic,
+  // day, week, the curriculum itself should all have new id's. A post to curriculum service does not automatically
+  // do that
   copyCurriculum(curriculum: Curriculum) {
     const copiedCurriculum: Curriculum = {
       name: curriculum.name,
@@ -109,6 +108,7 @@ export class CurriculumEditorComponent implements OnInit {
     }
     return count;
   }
+
   /**
    * Gets us distinct curriculum names from the list of all
    * curriculums
@@ -157,78 +157,39 @@ export class CurriculumEditorComponent implements OnInit {
    * @author - Chinedu Ozodi | 1806-Sep-18-USF-Java | Steven Kelsey
    */
   selectCurriculum(curriculum: Curriculum) {
+    curriculum = this.subTopicService.setDayTopicNames(curriculum);
     this.getAllCurriculumData(curriculum);
   }
 
   /**
-   * Gets all the days, weeks, and subtopics for a given curriculum. Also updates the drag and drop
+   * Sorts all the days, weeks, and subtopics for a given curriculum. Also updates the drag and drop
    * id list
    * @param curriculum the curriculum you wnat to eager load
    * @author - Chinedu Ozodi | 1806-Sep-18-USF-Java | Steven Kelsey
    */
   getAllCurriculumData(curriculum: Curriculum): Curriculum {
-    // reset curriculumWeeks
-    curriculum.curriculumWeeks = [];
-
     // this list is needed to allow drag and drop
     const curriculumDayIds: string[] = [];
-
-    // Get all daySubTopics, days, and weeks
-    this.daySubTopicService.getAll().subscribe((daySubTopics) => {
-      console.log('got all daySubtopics');
-      console.log(daySubTopics);
-      this.curriculumDayService.getAll().subscribe((curriculumDays) => {
-        console.log('got all days');
-        console.log(curriculumDays);
-        this.curriculumWeekService.getAll().subscribe((curriculumWeeks) => {
-          console.log('got all days');
-          console.log(curriculumWeeks);
-          // Add weeks to the curriculum
-          curriculumWeeks.forEach((week) => {
-            if (week.curriculumId === curriculum.id) {
-              curriculum.curriculumWeeks.push(week);
-            }
-          });
-          // sort week by weekNum
-          curriculum.curriculumWeeks.sort((a, b) => a.weekNum - b.weekNum);
-
-          // Add days to weeks
-          curriculum.curriculumWeeks.forEach((week) => {
-            week.curriculumDays = [];
-            curriculumDays.forEach((day) => {
-              if (day.weekId === week.id) {
-                week.curriculumDays.push(day);
-                // add to list of day id's for drag and drop
-                curriculumDayIds.push(day.id.toString());
-              }
-            });
-
-            // Sort day by dayNum
-            week.curriculumDays.sort((a, b) => a.dayNum - b.dayNum);
-
-            // Add subtopics to days
-            week.curriculumDays.forEach((day) => {
-              day.daySubTopics = [];
-              daySubTopics.forEach((daySubTopic) => {
-                if (daySubTopic.dayId === day.id) {
-                  day.daySubTopics.push(daySubTopic);
-                }
-              });
-
-              // sort saySubTopic by index
-              day.daySubTopics.sort((a, b) => a.index - b.index);
-            });
-          });
-
+    curriculum.curriculumWeeks = curriculum.curriculumWeeks.sort((a, b) => {
+      return a.weekNum - b.weekNum;
+    });
+    for (const curriculumWeek of curriculum.curriculumWeeks) {
+      curriculumWeek.curriculumDays = curriculumWeek.curriculumDays.sort((a, b) => {
+        return a.dayNum - b.dayNum;
+      });
+      for (const curriculumDay of curriculumWeek.curriculumDays) {
+        curriculumDay.daySubTopics = curriculumDay.daySubTopics.sort((a, b) => {
+          return a.index - b.index;
+        });
+        for (const daySubTopics of curriculumDay.daySubTopics) {
+          curriculumDayIds.push(curriculumDay.id.toString());
           // set as current curriculum
           this.selectedCurriculum = curriculum;
-
           // save the id's for drag and drop
           this.daySubTopicService.dragAndDropList = curriculumDayIds;
-        });
-      });
-    });
-
+        }
+      }
+    }
     return curriculum;
   }
 
