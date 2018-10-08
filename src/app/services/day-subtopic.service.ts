@@ -11,6 +11,14 @@ const HTTP_OPTIONS = {
   })
 };
 
+/**
+ * Since the environment variable are all over the place switching between the server side endpoints
+ * and the client side json server is slightly more tricky than it should be. To hit the json server
+ * make sure you are pointing to an environment variable that has the localhost port 3000 string and
+ * change the '/'s to '-'s for each endpoint
+ *
+ * @author Chinedu Ozodi | 1806-Sep-18-USF-Java | Steven Kelsey
+ */
 @Injectable({
   providedIn: 'root'
 })
@@ -21,7 +29,10 @@ export class DaySubtopicService {
    */
   dragAndDropList = [];
 
- // The dependency to be injected, in order to use an HttpClient.
+ /**
+  * The constructor for DaySubopicService
+  * @param http The dependency to be injected, in order to use an HttpClient.
+  */
  constructor(private http: HttpClient) { }
 
  /**
