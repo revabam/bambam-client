@@ -3,7 +3,6 @@ import { DashboardComponent } from '../routes/dashboard/dashboard.component';
 import { Routes } from '@angular/router';
 import { AppComponent } from '../app.component';
 import { CalendarComponent } from '../routes/calendar/calendar.component';
-import { CreateVersionComponent } from '../routes/curriculum-editor/create-version/create-version.component';
 import { CurriculumEditorComponent } from '../routes/curriculum-editor/curriculum-editor.component';
 import { BoomComponent } from '../routes/boom/boom.component';
 import { LoginComponent } from '../routes/login/login.component';
