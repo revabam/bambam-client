@@ -15,7 +15,7 @@ export class ForgottenPasswordComponent implements OnInit {
   }
   /**
     * This methods calls the Cognito Service to call the resetPassword method.
-    * @author Jasmine C. Onwuzulike
+    * @author Jasmine C. Onwuzulike | 1806Spark-Jun25-USF-Java | Steven Kelsey
     */
   reset() {
     const rest = this.cognito.resetPassword(this.email);

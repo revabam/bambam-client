@@ -1,14 +1,15 @@
-// Variables
-// font
-$weight: bold; 
-// color 
-$oColor: rgb(231, 94, 2); 
-$wColor: white; 
-// border
+/**
+ * Variables 
+ */
+$weight: bold; // font 
+$oColor: rgb(231, 94, 2);// color 
+$wColor: white; // color
 $radius: 13px 13px 13px 13px; // border radius
 $shadow: 0px 0px 2px 2px; //shadow effect on buttons related to Calender
 
-// styling for All mat-cards related curriculum
+/**
+* styling for All mat-cards related curriculum
+*/
 mat-card{
     position: fixed;
     border-radius: $radius;
@@ -17,9 +18,9 @@ mat-card{
     width: 20%;
 }
 
-
-
-// styling for the big + button on the curriculum tab 
+/**
+* styling for the big + button on the curriculum tab 
+*/
 #btn{
     background-color: $oColor;
     background-size: 20px;
@@ -34,7 +35,9 @@ mat-card{
     height: 2.5vw;
   }
 
-// all button styling for this page
+/**
+* all button styling for this page
+*/
 button{
     background-color: $oColor;
     border-radius: $radius; 
@@ -46,23 +49,32 @@ button{
     height: 1.8vw;
   }
 
-// specific mat-card styling
+/**
+* specific mat-card styling
+*/
 #curr{
     width: 20%;
     box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.555);
 }
 
+/**
+* row styling 
+*/
 .row{
     margin-top: 5%;
     width: 70%;
 }
 
-// all mat-toolbars of this component
+/**
+* all mat-toolbars of this component
+*/
 .mat-toolbar {
     background-color: rgba(0, 0, 0, 0.014);
 }
 
-// mat-expansion-panel of this component 
+/**
+* mat-expansion-panel of this component 
+*/
 .mat-expansion-panel-header {
     background-color: #fafafa;
 }
@@ -70,15 +82,17 @@ button{
     background-color: #fafafa;
     font-weight: $weight;
 }
+.panel-bar {
+    font-size: 120%;
+    margin-left: -20%;
+}
 
-// specific h2 styling 
+/**
+* specific h2 styling 
+*/
 h2{
     width: 200%;
     font-weight: $weight;
     opacity: .8;
 }
 
-.panel-bar {
-    font-size: 120%;
-    margin-left: -20%;
-}

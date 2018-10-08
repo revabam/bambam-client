@@ -92,17 +92,13 @@ export class CreateCurriculumComponent implements OnInit {
      * so that the user can see the changes.
      */
     this.data['curriculumService'].post(newCurriculum).subscribe((curr: Curriculum) => {
-      const newVersion = curr.version;
-
       if (curr !== undefined && curr !== null) {
         this.data['curriculums'].push(curr);
-
         // save weeks
         if (curr.numberOfWeeks > 0) {
           // save the first week, start from week 1
           this.saveWeek(curr, 1);
         }
-
       } else {
         this.data['curriculums'].push(newCurriculum);
       }

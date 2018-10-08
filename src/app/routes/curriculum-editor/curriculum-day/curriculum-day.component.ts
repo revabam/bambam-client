@@ -62,6 +62,10 @@ export class CurriculumDayComponent implements OnInit {
     this.getAllSubTopicNames();
   }
 
+  /**
+   * Gets all subtopic names
+   * @author - Chinedu Ozodi | 1806-Sep-18-USF-Java | Steven Kelsey
+   */
   getAllSubTopicNames() {
     this.day.daySubTopics.forEach( (daySubTopic) => {
       const subTopic = this.subTopicService.subtopics.find( (x) => x.id === daySubTopic.subTopicId);
@@ -69,6 +73,10 @@ export class CurriculumDayComponent implements OnInit {
     });
   }
 
+  /**
+   * Updates the subtopic indexes
+   * @author - Chinedu Ozodi | 1806-Sep-18-USF-Java | Steven Kelsey
+   */
   updateDaySubTopicIndexes() {
     for (let i = 0; i < this.day.daySubTopics.length; i++) {
       const daySubTopic = this.day.daySubTopics[i];
@@ -88,6 +96,7 @@ export class CurriculumDayComponent implements OnInit {
     this.day.daySubTopics.push(event.dragData);
     this.dayChange.emit(this.day);
   }
+
   /**
    * Allows for drag and drop rearrangement of the subtopics in this.day
    * @param event event passed in from a drag and drop that gives information about the location of the dropped object
@@ -98,11 +107,9 @@ export class CurriculumDayComponent implements OnInit {
     const currentIndex: number = event.currentIndex;
     const previousSubTopic = this.day.daySubTopics[previousIndex];
     const currentSubTop = this.day.daySubTopics[currentIndex];
-
     // Swap the subtopics
     this.day.daySubTopics.splice(previousIndex, 1, currentSubTop);
     this.day.daySubTopics.splice(currentIndex, 1, previousSubTopic);
-
     // updates indexes
     this.updateDaySubTopicIndexes();
   }

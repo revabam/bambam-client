@@ -19,11 +19,14 @@ export class CurriculumViewComponent implements OnInit {
   ngOnInit() {
   }
 
+   /**
+   * updates weeks when changed
+   * @author - Chinedu Ozodi | 1806-Sep-18-USF-Java | Steven Kelsey
+   */
   onWeekChange(event: CurriculumWeek) {
     const index = this.curriculum.curriculumWeeks.findIndex( x => x.weekNum === event.weekNum);
     this.curriculum.curriculumWeeks[index] = event;
     this.curriculumWeekService.put(event).subscribe( () => {
     });
   }
-
 }
