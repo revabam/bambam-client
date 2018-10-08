@@ -3,7 +3,6 @@ import { CognitoService } from './../../services/cognito.service';
 import { DaySubtopicService } from './../../services/day-subtopic.service';
 import { CurriculumWeekService } from './../../services/curriculum-week.service';
 import { CurriculumDay } from './../../models/curriculum-day';
-import { CreateVersionComponent } from '../../routes/curriculum-editor/create-version/create-version.component';
 import { Component, OnInit } from '@angular/core';
 import { CurriculumService } from '../../services/curriculum.service';
 import { Curriculum } from '../../models/curriculum';
@@ -81,10 +80,13 @@ export class CurriculumEditorComponent implements OnInit {
     });
   }
 
-  // here is where the master version of the curriculum is copied so that it can be edited
-  // Note: This function does not actually work, because each daySubTopic,
-  // day, week, the curriculum itself should all have new id's. A post to curriculum service does not automatically
-  // do that
+  /**
+   * Here is where the master version of the curriculum is copied so that it can be edited
+   * Note: This function does not actually work, because each daySubTopic,
+   * day, week, the curriculum itself should all have new id's. A post to curriculum service does not automatically
+   * do that
+   * @param curriculum the curriculum to copy
+   */
   copyCurriculum(curriculum: Curriculum) {
     const copiedCurriculum: Curriculum = {
       name: curriculum.name,
@@ -208,39 +210,6 @@ export class CurriculumEditorComponent implements OnInit {
      * in the modal.
      */
     const dialogRef = this.dialog.open(CreateCurriculumComponent,
-      /*
-      * An object is passed in as the second parameter, which
-      * defines properties of the dialog modal, as well as the
-      * data that we'll pass in for the modal component to access.
-      * We need to allow the child component to access the
-      * getCurriculumsByName so that the child component can get
-      * the highest version number and increment by one.
-      */
-      {
-        width: '600px',
-        data: {
-          curriculums: this.curriculums,
-          curriculumNames: this.curriculumNames,
-          topics: [],
-          curriculumService: this.curriculumService,
-          getCurriculumsByName: this.getCurriculumsByName
-        }
-      }
-    );
-  }
-
-  /**
-   * When we invoke this function, it opens up the modal that we use
-   * to create new versions of a curriculum.
-   * @author - Andrew Li | 1806-Jun-18-USF-Java | Wezley Singleton
-   */
-  openDialog(): void {
-    /*
-     * this.dialog is an injected dependency for the modal
-     * The open method passes in a component that we'll use
-     * in the modal.
-     */
-    const dialogRef = this.dialog.open(CreateVersionComponent,
       /*
       * An object is passed in as the second parameter, which
       * defines properties of the dialog modal, as well as the

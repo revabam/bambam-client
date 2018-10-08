@@ -40,7 +40,7 @@ export class CreateCurriculumComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: object,
     private curriculumDayService: CurriculumDayService,
     private curriculumWeekService: CurriculumWeekService,
-    ) { }
+  ) { }
 
 
   ngOnInit() {
@@ -71,26 +71,29 @@ export class CreateCurriculumComponent implements OnInit {
       status: 1,
     };
 
+    // Increments the version number if needed
+    let nameNum = 1;
+    for (let i = 0; i < this.data['curriculums'].length; i++) {
+      if (this.data['curriculums'][i].name === newCurriculum.name) {
+        if (this.data['curriculums'][i].version >= nameNum) {
+          nameNum += 1;
+        } else {
+          continue;
+        }
+      }
+    }
+
+    newCurriculum.version = nameNum;
+
     /**
      * After the Curriculum object is created, we make
      * an http post. Also, if the post is successful, we
      * push it to the parent component's curriculum array
      * so that the user can see the changes.
      */
-    this.data['curriculumService'].post(newCurriculum).subscribe( (curr: Curriculum) => {
+    this.data['curriculumService'].post(newCurriculum).subscribe((curr: Curriculum) => {
       const newVersion = curr.version;
-      let nameNum = 1;
-      for (let i = 0; i < this.data['curriculums'].length; i++) {
-        if (this.data['curriculums'][i].name === newCurriculum.name) {
-          if (this.data['curriculums'][i].version >= nameNum) {
-            nameNum += 1;
-          } else {
-            continue;
-          }
-        }
-      }
 
-      curr.version = nameNum;
       if (curr !== undefined && curr !== null) {
         this.data['curriculums'].push(curr);
 
