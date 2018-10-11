@@ -5,7 +5,10 @@
 export const environment = {
   production: false,
   envName: `dev`,
-  context: `http://localhost:4200`
+  context: `http://localhost:4200`,
+  apiUrl: 'http://localhost:8765/bam/',
+  curriculumUrl: 'http://localhost:9996/',
+  zuulUrl: 'http://localhost:8765/bam/'
 };
 
 /*

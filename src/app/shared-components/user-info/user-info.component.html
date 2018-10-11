@@ -1,0 +1,83 @@
+<mat-card >
+<mat-icon (click)="close()" style="margin-left: 95%">close</mat-icon>
+<mat-card-header>
+  <h4 style="font-size: 140%;">Personal Information</h4>
+  <span style="flex: 1 1 auto"></span>
+  <button mat-button (click)="toggleEdit()">Edit Profile
+    <mat-icon ></mat-icon>
+  </button>
+</mat-card-header>
+
+<mat-card-content>
+  <div *ngIf="!editing">
+    <mat-list dense>
+      <mat-list-item>
+        <div class="col-3">
+          <h6 >First Name: </h6>
+        </div>
+        <div class="col-9 text-left">
+          <h6>{{this.user.firstName}}</h6>
+        </div>
+      </mat-list-item>
+      <mat-list-item>
+        <div class="col-3">
+          <h6>Last Name: </h6>
+        </div>
+        <div class="col-9 text-left">
+          <h6>{{this.user.lastName}}</h6>
+        </div>
+      </mat-list-item>
+      <mat-list-item>
+        <div class="col-3">
+          <h6>Email:</h6>
+        </div>
+        <div class="col-9 text-left">
+          <h6>{{this.user.email}}</h6>
+        </div>
+      </mat-list-item>
+    </mat-list>
+    <div mat-actions style="opacity: 0;">
+      <button mat-raised-button (click)="cancelEdit()" class="mr-2">Cancel</button>
+      <button mat-raised-button (click)="saveChanges()">Ok</button>
+    </div>
+  </div>
+
+  <div *ngIf="editing">
+    <mat-list dense>
+      <mat-list-item>
+        <div class="col-3">
+          <h6>First Name: </h6>
+        </div>
+        <div class="col-9 text-left">
+          <mat-form-field class="example-full-width">
+            <input matInput [(ngModel)]="this.user.firstName" placeholder="First Name" maxlength="30">
+          </mat-form-field>
+        </div>
+      </mat-list-item>
+      <mat-list-item>
+        <div class="col-3">
+          <h6>Last Name: </h6>
+        </div>
+        <div class="col-9 text-left">
+          <mat-form-field class="example-full-width">
+            <input matInput [(ngModel)]="this.user.lastName" placeholder="Last Name" maxlength="30">
+          </mat-form-field>
+        </div>
+      </mat-list-item>
+      <mat-list-item>
+        <div class="col-3">
+          <h6>Email:</h6>
+        </div>
+        <div class="col-9 text-left">
+          <h6>{{ this.user.email }}</h6>
+        </div>
+      </mat-list-item>
+    </mat-list>
+    <div mat-actions>
+      <button mat-raised-button (click)="cancelEdit()" class="mr-2">Cancel</button>
+      <button mat-raised-button (click)="saveChanges()">Ok</button>
+    </div>
+  </div>
+</mat-card-content>
+
+</mat-card>

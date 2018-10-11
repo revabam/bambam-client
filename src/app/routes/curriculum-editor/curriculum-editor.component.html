@@ -1,0 +1,69 @@
+<br>
+<div class="p-5 m-auto">
+  <div class="row" style="margin-top: -3%">
+    <div class="col-sm-3 mt-2">
+      <mat-tab-group style="margin-left: -10vw; " [backgroundColor]="background" style="width: 20vw">
+        <mat-tab  label="Curriculum"> 
+          <mat-card>
+            <mat-card-header>
+              <mat-toolbar class="panel-bar">
+                <span style="flex: 1 1 auto"></span>
+                <span>
+                  <h4 class="m-0 p-0" style="font-size: 2vw;">Curriculum</h4>
+                </span>
+                <span style="flex: .6 .3 auto"></span>
+                <span>
+                  <button mat-button color="accent" mat-icon-button aria-label="add" (click)="createNewCurriculumDialog()">
+                    <mat-icon style="vertical-align: baseline;">add</mat-icon>
+                  </button>
+                </span>
+                <span style="flex: 0.3 1 auto"></span>
+              </mat-toolbar>
+            </mat-card-header>
+            <mat-card-content >
+              <mat-accordion>
+                <mat-expansion-panel *ngFor="let cname of curriculumNames">
+                  <mat-expansion-panel-header>
+                    <mat-panel-title style="font-weight: bold; font-size: 1vw">
+                      {{cname}}
+                    </mat-panel-title>
+                  </mat-expansion-panel-header>
+                  <div *ngFor="let curriculum of getCurriculumsByName(cname)">
+                    <mat-toolbar style="font-size: .75vw">
+                      <span *ngIf="curriculum.name === cname" style="padding-right: 1vw">
+                        Version: {{curriculum.version}}
+                        <span *ngIf="curriculum.status == 1">DRAFT</span>
+                        <span *ngIf="curriculum.status == 2">NEEDS APPROVAL</span>
+                        <span *ngIf="curriculum.status == 3">READ ONLY</span>
+                        <span *ngIf="curriculum.status == 4">MASTER</span>
+                      </span>                      
+                      <span class="fill-remaining-space">
+                      </span>
+                      <span *ngIf="curriculum.name === cname">
+                        <button mat-icon-button color="" (click)="selectCurriculum(curriculum)">
+                          <mat-icon color="secondary" style="vertical-align: baseline;">visibility</mat-icon>
+                        </button>
+                      </span>
+                      <span *ngIf="curriculum.name === cname">
+                        <button mat-icon-button color="" (click)="copyCurriculum(curriculum)">
+                          <mat-icon svgIcon="copy" style="vertical-align: top;"></mat-icon>
+                        </button>
+                      </span>
+                    </mat-toolbar>
+                  </div>
+                </mat-expansion-panel>
+              </mat-accordion>
+            </mat-card-content>
+          </mat-card>
+        </mat-tab>
+        <mat-tab label="Topic Pool">
+          <app-topic-pool ></app-topic-pool>
+        </mat-tab>
+      </mat-tab-group>
+
+    </div>
+    <div class="col-sm-auto mt-2 curriculum-view">
+      <app-curriculum-view [curriculum]='selectedCurriculum'></app-curriculum-view>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,96 @@
+<mat-card style="border-radius: 13px 13px 13px 13px;">
+  <mat-card-header style="margin-left: -2vw">
+    <mat-toolbar class="panel-bar">
+      <span>
+        <h4 class="m-0 p-0" style="font-size: 2vw;">Topics</h4>
+      </span>
+      <span style="flex: 0.3 1 auto"></span>
+      <span style="flex: 1 1 auto"></span><br>
+      <mat-form-field class="my-0 pb-0" style="width: 2vw;">
+        <input style="color: rgb(0, 0, 0)" matInput type="text" placeholder="Search Subtopic" [(ngModel)]="topicSearch">
+        <button mat-button *ngIf="value" matSuffix mat-icon-button aria-label="Clear" (click)="value=''">
+          <mat-icon>close</mat-icon>
+        </button>
+      </mat-form-field>
+      <span>
+        <button mat-button mat-icon-button aria-label="add" (click)="openNewDialog()">
+          <mat-icon>add</mat-icon>
+        </button>
+      </span>
+      <span style="flex: 0.3 1 auto"></span>
+    </mat-toolbar>
+  </mat-card-header>
+  <mat-card-content style="overflow: auto; height: 470px;">
+    <mat-accordion *ngIf="topicSearch.length < 2">
+      <mat-card-content>
+        <div *ngFor="let topic of topics">
+          <mat-expansion-panel [expanded]="isExpanded(topic.id)" (opened)="expandTopic(topic.id)" (closed)="collapseTopic(topic.id)">
+            <mat-expansion-panel-header>
+              <span style="font-weight: bold; font-size: .9vw">
+                {{topic.name}}
+              </span>
+              <span class="fill-remaining-space">
+              </span>
+              <span>
+                <button mat-icon-button (click)="deleteTopicById(topic)">
+                  <mat-icon>clear</mat-icon>
+                </button>
+              </span>
+            </mat-expansion-panel-header>
+            <cdk-drop [data]="subtopic" *ngFor="let subtopic of getSubtopicsByTopic(topic)" [connectedTo]="daySubtopicService.dragAndDropList">
+              <span cdkDrag>
+                <div *ngIf="(!topicSearch || ((subtopic.name | lowercase).indexOf(topicSearch | lowercase) >= 0))">
+                  <mat-toolbar>
+                    <span>
+                      <mat-icon>drag_indicator</mat-icon> {{(subtopic.name | slice:0:20) + ((subtopic.name.length > 20)
+                      ? "..." : "")}}
+                    </span>
+                    <span class="fill-remaining-space"></span>
+                    <span>
+                      <button mat-icon-button color="" (click)="deleteSubTopic(subtopic)">
+                        <mat-icon>clear</mat-icon>
+                      </button>
+                    </span>
+                  </mat-toolbar>
+                </div>
+                <div *ngIf="(!topicSearch || ((subtopic.name | lowercase).indexOf(topicSearch | lowercase) >= 0))">
+                  <mat-toolbar>
+                    <span class="fill-remaining-space"> </span>
+                  </mat-toolbar>
+                </div>
+              </span>
+            </cdk-drop>
+            <div *ngIf="getSubtopicsByTopic(topic).length == 0">
+              No Subtopics for {{ topic.name }}
+            </div>
+          </mat-expansion-panel>
+        </div>
+      </mat-card-content>
+    </mat-accordion>
+    <mat-accordion *ngIf="topicSearch.length > 1">
+      <mat-card-content>
+        <div *ngFor="let topic of searchTopics(topicSearch)">
+          <span>
+            {{topic.name}}
+          </span>
+          <span class="fill-remaining-space">
+          </span>
+          <mat-list *ngIf="hasTopic(topicSearch, topic)">
+            <mat-list-item *ngFor="let subtopic of searchSubtopics(topicSearch)">
+              <span>
+                {{subtopic.name}}
+              </span>
+              <span class="fill-remaining-space">
+              </span>
+              <span>
+                <button mat-icon-button (click)="deleteSubTopic(subtopic)">
+                  <mat-icon>clear</mat-icon>
+                </button>
+              </span>
+            </mat-list-item>
+          </mat-list>
+        </div>
+      </mat-card-content>
+    </mat-accordion>
+  </mat-card-content>
+</mat-card>

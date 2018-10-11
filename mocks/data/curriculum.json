@@ -1,0 +1,3466 @@
+{
+    "curriculums": [
+        {
+            "id": 1,
+            "name": "Java",
+            "version": 1,
+            "creatorId": "3",
+            "approvedById": "2",
+            "status": 1,
+            "dateCreated": 1538020800000,
+            "numberOfWeeks": 10,
+            "curriculumWeeks": [
+                {
+                    "id": 9,
+                    "weekNum": 9,
+                    "curriculumId": 1,
+                    "curriculumDays": [
+                        {
+                            "id": 42,
+                            "dayNum": 2,
+                            "weekId": 9,
+                            "daySubTopics": [
+                                {
+                                    "id": 98,
+                                    "dayId": 42,
+                                    "index": 2,
+                                    "subTopicId": 25
+                                },
+                                {
+                                    "id": 99,
+                                    "dayId": 42,
+                                    "index": 3,
+                                    "subTopicId": 26
+                                },
+                                {
+                                    "id": 97,
+                                    "dayId": 42,
+                                    "index": 1,
+                                    "subTopicId": 24
+                                }
+                            ]
+                        },
+                        {
+                            "id": 43,
+                            "dayNum": 3,
+                            "weekId": 9,
+                            "daySubTopics": [
+                                {
+                                    "id": 100,
+                                    "dayId": 43,
+                                    "index": 1,
+                                    "subTopicId": 27
+                                },
+                                {
+                                    "id": 102,
+                                    "dayId": 43,
+                                    "index": 3,
+                                    "subTopicId": 29
+                                },
+                                {
+                                    "id": 101,
+                                    "dayId": 43,
+                                    "index": 2,
+                                    "subTopicId": 28
+                                }
+                            ]
+                        },
+                        {
+                            "id": 44,
+                            "dayNum": 4,
+                            "weekId": 9,
+                            "daySubTopics": [
+                                {
+                                    "id": 103,
+                                    "dayId": 44,
+                                    "index": 1,
+                                    "subTopicId": 30
+                                },
+                                {
+                                    "id": 104,
+                                    "dayId": 44,
+                                    "index": 2,
+                                    "subTopicId": 31
+                                },
+                                {
+                                    "id": 105,
+                                    "dayId": 44,
+                                    "index": 3,
+                                    "subTopicId": 32
+                                }
+                            ]
+                        },
+                        {
+                            "id": 45,
+                            "dayNum": 5,
+                            "weekId": 9,
+                            "daySubTopics": [
+                                {
+                                    "id": 106,
+                                    "dayId": 45,
+                                    "index": 1,
+                                    "subTopicId": 33
+                                },
+                                {
+                                    "id": 107,
+                                    "dayId": 45,
+                                    "index": 2,
+                                    "subTopicId": 34
+                                },
+                                {
+                                    "id": 108,
+                                    "dayId": 45,
+                                    "index": 3,
+                                    "subTopicId": 35
+                                }
+                            ]
+                        },
+                        {
+                            "id": 41,
+                            "dayNum": 1,
+                            "weekId": 9,
+                            "daySubTopics": [
+                                {
+                                    "id": 94,
+                                    "dayId": 41,
+                                    "index": 1,
+                                    "subTopicId": 21
+                                },
+                                {
+                                    "id": 95,
+                                    "dayId": 41,
+                                    "index": 2,
+                                    "subTopicId": 22
+                                },
+                                {
+                                    "id": 96,
+                                    "dayId": 41,
+                                    "index": 3,
+                                    "subTopicId": 23
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "id": 8,
+                    "weekNum": 8,
+                    "curriculumId": 1,
+                    "curriculumDays": [
+                        {
+                            "id": 38,
+                            "dayNum": 3,
+                            "weekId": 8,
+                            "daySubTopics": [
+                                {
+                                    "id": 87,
+                                    "dayId": 38,
+                                    "index": 3,
+                                    "subTopicId": 14
+                                },
+                                {
+                                    "id": 86,
+                                    "dayId": 38,
+                                    "index": 2,
+                                    "subTopicId": 13
+                                },
+                                {
+                                    "id": 85,
+                                    "dayId": 38,
+                                    "index": 1,
+                                    "subTopicId": 12
+                                }
+                            ]
+                        },
+                        {
+                            "id": 36,
+                            "dayNum": 1,
+                            "weekId": 8,
+                            "daySubTopics": [
+                                {
+                                    "id": 81,
+                                    "dayId": 36,
+                                    "index": 2,
+                                    "subTopicId": 8
+                                },
+                                {
+                                    "id": 80,
+                                    "dayId": 36,
+                                    "index": 1,
+                                    "subTopicId": 7
+                                }
+                            ]
+                        },
+                        {
+                            "id": 39,
+                            "dayNum": 4,
+                            "weekId": 8,
+                            "daySubTopics": [
+                                {
+                                    "id": 90,
+                                    "dayId": 39,
+                                    "index": 3,
+                                    "subTopicId": 17
+                                },
+                                {
+                                    "id": 89,
+                                    "dayId": 39,
+                                    "index": 2,
+                                    "subTopicId": 16
+                                },
+                                {
+                                    "id": 88,
+                                    "dayId": 39,
+                                    "index": 1,
+                                    "subTopicId": 15
+                                }
+                            ]
+                        },
+                        {
+                            "id": 40,
+                            "dayNum": 5,
+                            "weekId": 8,
+                            "daySubTopics": [
+                                {
+                                    "id": 91,
+                                    "dayId": 40,
+                                    "index": 1,
+                                    "subTopicId": 18
+                                },
+                                {
+                                    "id": 93,
+                                    "dayId": 40,
+                                    "index": 3,
+                                    "subTopicId": 20
+                                },
+                                {
+                                    "id": 92,
+                                    "dayId": 40,
+                                    "index": 2,
+                                    "subTopicId": 19
+                                }
+                            ]
+                        },
+                        {
+                            "id": 37,
+                            "dayNum": 2,
+                            "weekId": 8,
+                            "daySubTopics": [
+                                {
+                                    "id": 84,
+                                    "dayId": 37,
+                                    "index": 3,
+                                    "subTopicId": 11
+                                },
+                                {
+                                    "id": 83,
+                                    "dayId": 37,
+                                    "index": 2,
+                                    "subTopicId": 10
+                                },
+                                {
+                                    "id": 82,
+                                    "dayId": 37,
+                                    "index": 1,
+                                    "subTopicId": 9
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "id": 1,
+                    "weekNum": 1,
+                    "curriculumId": 1,
+                    "curriculumDays": [
+                        {
+                            "id": 2,
+                            "dayNum": 2,
+                            "weekId": 1,
+                            "daySubTopics": [
+                                {
+                                    "id": 3,
+                                    "dayId": 2,
+                                    "index": 1,
+                                    "subTopicId": 3
+                                },
+                                {
+                                    "id": 4,
+                                    "dayId": 2,
+                                    "index": 2,
+                                    "subTopicId": 4
+                                }
+                            ]
+                        },
+                        {
+                            "id": 3,
+                            "dayNum": 3,
+                            "weekId": 1,
+                            "daySubTopics": [
+                                {
+                                    "id": 5,
+                                    "dayId": 3,
+                                    "index": 1,
+                                    "subTopicId": 1
+                                },
+                                {
+                                    "id": 6,
+                                    "dayId": 3,
+                                    "index": 2,
+                                    "subTopicId": 2
+                                }
+                            ]
+                        },
+                        {
+                            "id": 4,
+                            "dayNum": 4,
+                            "weekId": 1,
+                            "daySubTopics": [
+                                {
+                                    "id": 8,
+                                    "dayId": 4,
+                                    "index": 2,
+                                    "subTopicId": 4
+                                },
+                                {
+                                    "id": 7,
+                                    "dayId": 4,
+                                    "index": 1,
+                                    "subTopicId": 3
+                                }
+                            ]
+                        },
+                        {
+                            "id": 5,
+                            "dayNum": 5,
+                            "weekId": 1,
+                            "daySubTopics": [
+                                {
+                                    "id": 9,
+                                    "dayId": 5,
+                                    "index": 1,
+                                    "subTopicId": 5
+                                },
+                                {
+                                    "id": 10,
+                                    "dayId": 5,
+                                    "index": 2,
+                                    "subTopicId": 6
+                                }
+                            ]
+                        },
+                        {
+                            "id": 1,
+                            "dayNum": 1,
+                            "weekId": 1,
+                            "daySubTopics": [
+                                {
+                                    "id": 1,
+                                    "dayId": 1,
+                                    "index": 1,
+                                    "subTopicId": 1
+                                },
+                                {
+                                    "id": 2,
+                                    "dayId": 1,
+                                    "index": 2,
+                                    "subTopicId": 2
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "id": 3,
+                    "weekNum": 3,
+                    "curriculumId": 1,
+                    "curriculumDays": [
+                        {
+                            "id": 14,
+                            "dayNum": 4,
+                            "weekId": 3,
+                            "daySubTopics": [
+                                {
+                                    "id": 36,
+                                    "dayId": 14,
+                                    "index": 3,
+                                    "subTopicId": 32
+                                },
+                                {
+                                    "id": 34,
+                                    "dayId": 14,
+                                    "index": 1,
+                                    "subTopicId": 30
+                                },
+                                {
+                                    "id": 35,
+                                    "dayId": 14,
+                                    "index": 2,
+                                    "subTopicId": 31
+                                }
+                            ]
+                        },
+                        {
+                            "id": 15,
+                            "dayNum": 5,
+                            "weekId": 3,
+                            "daySubTopics": [
+                                {
+                                    "id": 37,
+                                    "dayId": 15,
+                                    "index": 1,
+                                    "subTopicId": 33
+                                },
+                                {
+                                    "id": 38,
+                                    "dayId": 15,
+                                    "index": 2,
+                                    "subTopicId": 34
+                                },
+                                {
+                                    "id": 39,
+                                    "dayId": 15,
+                                    "index": 3,
+                                    "subTopicId": 35
+                                }
+                            ]
+                        },
+                        {
+                            "id": 12,
+                            "dayNum": 2,
+                            "weekId": 3,
+                            "daySubTopics": [
+                                {
+                                    "id": 28,
+                                    "dayId": 12,
+                                    "index": 1,
+                                    "subTopicId": 24
+                                },
+                                {
+                                    "id": 29,
+                                    "dayId": 12,
+                                    "index": 2,
+                                    "subTopicId": 25
+                                },
+                                {
+                                    "id": 30,
+                                    "dayId": 12,
+                                    "index": 3,
+                                    "subTopicId": 26
+                                }
+                            ]
+                        },
+                        {
+                            "id": 11,
+                            "dayNum": 1,
+                            "weekId": 3,
+                            "daySubTopics": [
+                                {
+                                    "id": 26,
+                                    "dayId": 11,
+                                    "index": 2,
+                                    "subTopicId": 22
+                                },
+                                {
+                                    "id": 25,
+                                    "dayId": 11,
+                                    "index": 1,
+                                    "subTopicId": 21
+                                },
+                                {
+                                    "id": 27,
+                                    "dayId": 11,
+                                    "index": 3,
+                                    "subTopicId": 23
+                                }
+                            ]
+                        },
+                        {
+                            "id": 13,
+                            "dayNum": 3,
+                            "weekId": 3,
+                            "daySubTopics": [
+                                {
+                                    "id": 31,
+                                    "dayId": 13,
+                                    "index": 1,
+                                    "subTopicId": 27
+                                },
+                                {
+                                    "id": 33,
+                                    "dayId": 13,
+                                    "index": 3,
+                                    "subTopicId": 29
+                                },
+                                {
+                                    "id": 32,
+                                    "dayId": 13,
+                                    "index": 2,
+                                    "subTopicId": 28
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "id": 4,
+                    "weekNum": 4,
+                    "curriculumId": 1,
+                    "curriculumDays": [
+                        {
+                            "id": 19,
+                            "dayNum": 4,
+                            "weekId": 4,
+                            "daySubTopics": [
+                                {
+                                    "id": 49,
+                                    "dayId": 19,
+                                    "index": 1,
+                                    "subTopicId": 45
+                                },
+                                {
+                                    "id": 50,
+                                    "dayId": 19,
+                                    "index": 2,
+                                    "subTopicId": 46
+                                }
+                            ]
+                        },
+                        {
+                            "id": 17,
+                            "dayNum": 2,
+                            "weekId": 4,
+                            "daySubTopics": [
+                                {
+                                    "id": 43,
+                                    "dayId": 17,
+                                    "index": 1,
+                                    "subTopicId": 39
+                                },
+                                {
+                                    "id": 44,
+                                    "dayId": 17,
+                                    "index": 2,
+                                    "subTopicId": 40
+                                },
+                                {
+                                    "id": 45,
+                                    "dayId": 17,
+                                    "index": 3,
+                                    "subTopicId": 41
+                                }
+                            ]
+                        },
+                        {
+                            "id": 18,
+                            "dayNum": 3,
+                            "weekId": 4,
+                            "daySubTopics": [
+                                {
+                                    "id": 46,
+                                    "dayId": 18,
+                                    "index": 1,
+                                    "subTopicId": 42
+                                },
+                                {
+                                    "id": 48,
+                                    "dayId": 18,
+                                    "index": 3,
+                                    "subTopicId": 44
+                                },
+                                {
+                                    "id": 47,
+                                    "dayId": 18,
+                                    "index": 2,
+                                    "subTopicId": 43
+                                }
+                            ]
+                        },
+                        {
+                            "id": 16,
+                            "dayNum": 1,
+                            "weekId": 4,
+                            "daySubTopics": [
+                                {
+                                    "id": 42,
+                                    "dayId": 16,
+                                    "index": 3,
+                                    "subTopicId": 38
+                                },
+                                {
+                                    "id": 41,
+                                    "dayId": 16,
+                                    "index": 2,
+                                    "subTopicId": 37
+                                },
+                                {
+                                    "id": 40,
+                                    "dayId": 16,
+                                    "index": 1,
+                                    "subTopicId": 36
+                                }
+                            ]
+                        },
+                        {
+                            "id": 20,
+                            "dayNum": 5,
+                            "weekId": 4,
+                            "daySubTopics": [
+                                {
+                                    "id": 51,
+                                    "dayId": 20,
+                                    "index": 1,
+                                    "subTopicId": 47
+                                },
+                                {
+                                    "id": 52,
+                                    "dayId": 20,
+                                    "index": 2,
+                                    "subTopicId": 48
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "id": 7,
+                    "weekNum": 7,
+                    "curriculumId": 1,
+                    "curriculumDays": [
+                        {
+                            "id": 31,
+                            "dayNum": 1,
+                            "weekId": 7,
+                            "daySubTopics": [
+                                {
+                                    "id": 70,
+                                    "dayId": 31,
+                                    "index": 1,
+                                    "subTopicId": 1
+                                },
+                                {
+                                    "id": 71,
+                                    "dayId": 31,
+                                    "index": 2,
+                                    "subTopicId": 2
+                                }
+                            ]
+                        },
+                        {
+                            "id": 35,
+                            "dayNum": 5,
+                            "weekId": 7,
+                            "daySubTopics": [
+                                {
+                                    "id": 79,
+                                    "dayId": 35,
+                                    "index": 2,
+                                    "subTopicId": 6
+                                },
+                                {
+                                    "id": 78,
+                                    "dayId": 35,
+                                    "index": 1,
+                                    "subTopicId": 5
+                                }
+                            ]
+                        },
+                        {
+                            "id": 32,
+                            "dayNum": 2,
+                            "weekId": 7,
+                            "daySubTopics": [
+                                {
+                                    "id": 72,
+                                    "dayId": 32,
+                                    "index": 1,
+                                    "subTopicId": 3
+                                },
+                                {
+                                    "id": 73,
+                                    "dayId": 32,
+                                    "index": 2,
+                                    "subTopicId": 4
+                                }
+                            ]
+                        },
+                        {
+                            "id": 33,
+                            "dayNum": 3,
+                            "weekId": 7,
+                            "daySubTopics": [
+                                {
+                                    "id": 75,
+                                    "dayId": 33,
+                                    "index": 2,
+                                    "subTopicId": 2
+                                },
+                                {
+                                    "id": 74,
+                                    "dayId": 33,
+                                    "index": 1,
+                                    "subTopicId": 1
+                                }
+                            ]
+                        },
+                        {
+                            "id": 34,
+                            "dayNum": 4,
+                            "weekId": 7,
+                            "daySubTopics": [
+                                {
+                                    "id": 76,
+                                    "dayId": 34,
+                                    "index": 1,
+                                    "subTopicId": 3
+                                },
+                                {
+                                    "id": 77,
+                                    "dayId": 34,
+                                    "index": 2,
+                                    "subTopicId": 4
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "id": 10,
+                    "weekNum": 10,
+                    "curriculumId": 1,
+                    "curriculumDays": [
+                        {
+                            "id": 49,
+                            "dayNum": 4,
+                            "weekId": 10,
+                            "daySubTopics": [
+                                {
+                                    "id": 119,
+                                    "dayId": 49,
+                                    "index": 2,
+                                    "subTopicId": 46
+                                },
+                                {
+                                    "id": 118,
+                                    "dayId": 49,
+                                    "index": 1,
+                                    "subTopicId": 45
+                                }
+                            ]
+                        },
+                        {
+                            "id": 47,
+                            "dayNum": 2,
+                            "weekId": 10,
+                            "daySubTopics": [
+                                {
+                                    "id": 112,
+                                    "dayId": 47,
+                                    "index": 1,
+                                    "subTopicId": 39
+                                },
+                                {
+                                    "id": 113,
+                                    "dayId": 47,
+                                    "index": 2,
+                                    "subTopicId": 40
+                                },
+                                {
+                                    "id": 114,
+                                    "dayId": 47,
+                                    "index": 3,
+                                    "subTopicId": 41
+                                }
+                            ]
+                        },
+                        {
+                            "id": 46,
+                            "dayNum": 1,
+                            "weekId": 10,
+                            "daySubTopics": [
+                                {
+                                    "id": 110,
+                                    "dayId": 46,
+                                    "index": 2,
+                                    "subTopicId": 37
+                                },
+                                {
+                                    "id": 111,
+                                    "dayId": 46,
+                                    "index": 3,
+                                    "subTopicId": 38
+                                },
+                                {
+                                    "id": 109,
+                                    "dayId": 46,
+                                    "index": 1,
+                                    "subTopicId": 36
+                                }
+                            ]
+                        },
+                        {
+                            "id": 48,
+                            "dayNum": 3,
+                            "weekId": 10,
+                            "daySubTopics": [
+                                {
+                                    "id": 115,
+                                    "dayId": 48,
+                                    "index": 1,
+                                    "subTopicId": 42
+                                },
+                                {
+                                    "id": 116,
+                                    "dayId": 48,
+                                    "index": 2,
+                                    "subTopicId": 43
+                                },
+                                {
+                                    "id": 117,
+                                    "dayId": 48,
+                                    "index": 3,
+                                    "subTopicId": 44
+                                }
+                            ]
+                        },
+                        {
+                            "id": 50,
+                            "dayNum": 5,
+                            "weekId": 10,
+                            "daySubTopics": [
+                                {
+                                    "id": 120,
+                                    "dayId": 50,
+                                    "index": 1,
+                                    "subTopicId": 47
+                                },
+                                {
+                                    "id": 121,
+                                    "dayId": 50,
+                                    "index": 2,
+                                    "subTopicId": 48
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "id": 2,
+                    "weekNum": 2,
+                    "curriculumId": 1,
+                    "curriculumDays": [
+                        {
+                            "id": 9,
+                            "dayNum": 4,
+                            "weekId": 2,
+                            "daySubTopics": [
+                                {
+                                    "id": 19,
+                                    "dayId": 9,
+                                    "index": 1,
+                                    "subTopicId": 15
+                                },
+                                {
+                                    "id": 20,
+                                    "dayId": 9,
+                                    "index": 2,
+                                    "subTopicId": 16
+                                },
+                                {
+                                    "id": 21,
+                                    "dayId": 9,
+                                    "index": 3,
+                                    "subTopicId": 17
+                                }
+                            ]
+                        },
+                        {
+                            "id": 6,
+                            "dayNum": 1,
+                            "weekId": 2,
+                            "daySubTopics": [
+                                {
+                                    "id": 11,
+                                    "dayId": 6,
+                                    "index": 1,
+                                    "subTopicId": 7
+                                },
+                                {
+                                    "id": 12,
+                                    "dayId": 6,
+                                    "index": 2,
+                                    "subTopicId": 8
+                                }
+                            ]
+                        },
+                        {
+                            "id": 8,
+                            "dayNum": 3,
+                            "weekId": 2,
+                            "daySubTopics": [
+                                {
+                                    "id": 16,
+                                    "dayId": 8,
+                                    "index": 1,
+                                    "subTopicId": 12
+                                },
+                                {
+                                    "id": 17,
+                                    "dayId": 8,
+                                    "index": 2,
+                                    "subTopicId": 13
+                                },
+                                {
+                                    "id": 18,
+                                    "dayId": 8,
+                                    "index": 3,
+                                    "subTopicId": 14
+                                }
+                            ]
+                        },
+                        {
+                            "id": 10,
+                            "dayNum": 5,
+                            "weekId": 2,
+                            "daySubTopics": [
+                                {
+                                    "id": 24,
+                                    "dayId": 10,
+                                    "index": 3,
+                                    "subTopicId": 20
+                                },
+                                {
+                                    "id": 22,
+                                    "dayId": 10,
+                                    "index": 1,
+                                    "subTopicId": 18
+                                },
+                                {
+                                    "id": 23,
+                                    "dayId": 10,
+                                    "index": 2,
+                                    "subTopicId": 19
+                                }
+                            ]
+                        },
+                        {
+                            "id": 7,
+                            "dayNum": 2,
+                            "weekId": 2,
+                            "daySubTopics": [
+                                {
+                                    "id": 14,
+                                    "dayId": 7,
+                                    "index": 2,
+                                    "subTopicId": 10
+                                },
+                                {
+                                    "id": 15,
+                                    "dayId": 7,
+                                    "index": 3,
+                                    "subTopicId": 11
+                                },
+                                {
+                                    "id": 13,
+                                    "dayId": 7,
+                                    "index": 1,
+                                    "subTopicId": 9
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "id": 5,
+                    "weekNum": 5,
+                    "curriculumId": 1,
+                    "curriculumDays": [
+                        {
+                            "id": 24,
+                            "dayNum": 4,
+                            "weekId": 5,
+                            "daySubTopics": [
+                                {
+                                    "id": 60,
+                                    "dayId": 24,
+                                    "index": 2,
+                                    "subTopicId": 56
+                                },
+                                {
+                                    "id": 59,
+                                    "dayId": 24,
+                                    "index": 1,
+                                    "subTopicId": 55
+                                }
+                            ]
+                        },
+                        {
+                            "id": 25,
+                            "dayNum": 5,
+                            "weekId": 5,
+                            "daySubTopics": [
+                                {
+                                    "id": 61,
+                                    "dayId": 25,
+                                    "index": 1,
+                                    "subTopicId": 57
+                                },
+                                {
+                                    "id": 62,
+                                    "dayId": 25,
+                                    "index": 2,
+                                    "subTopicId": 58
+                                }
+                            ]
+                        },
+                        {
+                            "id": 23,
+                            "dayNum": 3,
+                            "weekId": 5,
+                            "daySubTopics": [
+                                {
+                                    "id": 57,
+                                    "dayId": 23,
+                                    "index": 1,
+                                    "subTopicId": 53
+                                },
+                                {
+                                    "id": 58,
+                                    "dayId": 23,
+                                    "index": 2,
+                                    "subTopicId": 54
+                                }
+                            ]
+                        },
+                        {
+                            "id": 21,
+                            "dayNum": 1,
+                            "weekId": 5,
+                            "daySubTopics": [
+                                {
+                                    "id": 53,
+                                    "dayId": 21,
+                                    "index": 1,
+                                    "subTopicId": 49
+                                },
+                                {
+                                    "id": 54,
+                                    "dayId": 21,
+                                    "index": 2,
+                                    "subTopicId": 50
+                                }
+                            ]
+                        },
+                        {
+                            "id": 22,
+                            "dayNum": 2,
+                            "weekId": 5,
+                            "daySubTopics": [
+                                {
+                                    "id": 56,
+                                    "dayId": 22,
+                                    "index": 2,
+                                    "subTopicId": 52
+                                },
+                                {
+                                    "id": 55,
+                                    "dayId": 22,
+                                    "index": 1,
+                                    "subTopicId": 51
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "id": 6,
+                    "weekNum": 6,
+                    "curriculumId": 1,
+                    "curriculumDays": [
+                        {
+                            "id": 29,
+                            "dayNum": 4,
+                            "weekId": 6,
+                            "daySubTopics": [
+                                {
+                                    "id": 67,
+                                    "dayId": 29,
+                                    "index": 1,
+                                    "subTopicId": 63
+                                }
+                            ]
+                        },
+                        {
+                            "id": 30,
+                            "dayNum": 5,
+                            "weekId": 6,
+                            "daySubTopics": [
+                                {
+                                    "id": 68,
+                                    "dayId": 30,
+                                    "index": 1,
+                                    "subTopicId": 64
+                                },
+                                {
+                                    "id": 69,
+                                    "dayId": 30,
+                                    "index": 2,
+                                    "subTopicId": 65
+                                }
+                            ]
+                        },
+                        {
+                            "id": 27,
+                            "dayNum": 2,
+                            "weekId": 6,
+                            "daySubTopics": [
+                                {
+                                    "id": 65,
+                                    "dayId": 27,
+                                    "index": 2,
+                                    "subTopicId": 61
+                                },
+                                {
+                                    "id": 64,
+                                    "dayId": 27,
+                                    "index": 1,
+                                    "subTopicId": 60
+                                }
+                            ]
+                        },
+                        {
+                            "id": 28,
+                            "dayNum": 3,
+                            "weekId": 6,
+                            "daySubTopics": [
+                                {
+                                    "id": 66,
+                                    "dayId": 28,
+                                    "index": 1,
+                                    "subTopicId": 62
+                                }
+                            ]
+                        },
+                        {
+                            "id": 26,
+                            "dayNum": 1,
+                            "weekId": 6,
+                            "daySubTopics": [
+                                {
+                                    "id": 63,
+                                    "dayId": 26,
+                                    "index": 1,
+                                    "subTopicId": 59
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": 2,
+            "name": "Java",
+            "version": 2,
+            "creatorId": "1",
+            "approvedById": "2",
+            "status": 1,
+            "dateCreated": 1538193600000,
+            "numberOfWeeks": 10,
+            "curriculumWeeks": [
+                {
+                    "id": 12,
+                    "weekNum": 2,
+                    "curriculumId": 2,
+                    "curriculumDays": [
+                        {
+                            "id": 59,
+                            "dayNum": 4,
+                            "weekId": 12,
+                            "daySubTopics": [
+                                {
+                                    "id": 136,
+                                    "dayId": 59,
+                                    "index": 1,
+                                    "subTopicId": 15
+                                }
+                            ]
+                        },
+                        {
+                            "id": 60,
+                            "dayNum": 5,
+                            "weekId": 12,
+                            "daySubTopics": [
+                                {
+                                    "id": 137,
+                                    "dayId": 60,
+                                    "index": 1,
+                                    "subTopicId": 16
+                                },
+                                {
+                                    "id": 138,
+                                    "dayId": 60,
+                                    "index": 2,
+                                    "subTopicId": 17
+                                }
+                            ]
+                        },
+                        {
+                            "id": 56,
+                            "dayNum": 1,
+                            "weekId": 12,
+                            "daySubTopics": [
+                                {
+                                    "id": 132,
+                                    "dayId": 56,
+                                    "index": 1,
+                                    "subTopicId": 11
+                                }
+                            ]
+                        },
+                        {
+                            "id": 57,
+                            "dayNum": 2,
+                            "weekId": 12,
+                            "daySubTopics": [
+                                {
+                                    "id": 133,
+                                    "dayId": 57,
+                                    "index": 1,
+                                    "subTopicId": 12
+                                },
+                                {
+                                    "id": 134,
+                                    "dayId": 57,
+                                    "index": 2,
+                                    "subTopicId": 13
+                                }
+                            ]
+                        },
+                        {
+                            "id": 58,
+                            "dayNum": 3,
+                            "weekId": 12,
+                            "daySubTopics": [
+                                {
+                                    "id": 135,
+                                    "dayId": 58,
+                                    "index": 1,
+                                    "subTopicId": 14
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "id": 11,
+                    "weekNum": 1,
+                    "curriculumId": 2,
+                    "curriculumDays": [
+                        {
+                            "id": 53,
+                            "dayNum": 3,
+                            "weekId": 11,
+                            "daySubTopics": [
+                                {
+                                    "id": 127,
+                                    "dayId": 53,
+                                    "index": 2,
+                                    "subTopicId": 6
+                                }
+                            ]
+                        },
+                        {
+                            "id": 51,
+                            "dayNum": 1,
+                            "weekId": 11,
+                            "daySubTopics": [
+                                {
+                                    "id": 122,
+                                    "dayId": 51,
+                                    "index": 1,
+                                    "subTopicId": 1
+                                },
+                                {
+                                    "id": 123,
+                                    "dayId": 51,
+                                    "index": 2,
+                                    "subTopicId": 2
+                                }
+                            ]
+                        },
+                        {
+                            "id": 55,
+                            "dayNum": 5,
+                            "weekId": 11,
+                            "daySubTopics": [
+                                {
+                                    "id": 131,
+                                    "dayId": 55,
+                                    "index": 2,
+                                    "subTopicId": 10
+                                }
+                            ]
+                        },
+                        {
+                            "id": 52,
+                            "dayNum": 2,
+                            "weekId": 11,
+                            "daySubTopics": [
+                                {
+                                    "id": 124,
+                                    "dayId": 52,
+                                    "index": 1,
+                                    "subTopicId": 3
+                                },
+                                {
+                                    "id": 125,
+                                    "dayId": 52,
+                                    "index": 2,
+                                    "subTopicId": 4
+                                },
+                                {
+                                    "id": 126,
+                                    "dayId": 52,
+                                    "index": 3,
+                                    "subTopicId": 5
+                                }
+                            ]
+                        },
+                        {
+                            "id": 54,
+                            "dayNum": 4,
+                            "weekId": 11,
+                            "daySubTopics": [
+                                {
+                                    "id": 130,
+                                    "dayId": 54,
+                                    "index": 3,
+                                    "subTopicId": 9
+                                },
+                                {
+                                    "id": 128,
+                                    "dayId": 54,
+                                    "index": 1,
+                                    "subTopicId": 7
+                                },
+                                {
+                                    "id": 129,
+                                    "dayId": 54,
+                                    "index": 2,
+                                    "subTopicId": 8
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "id": 19,
+                    "weekNum": 9,
+                    "curriculumId": 2,
+                    "curriculumDays": [
+                        {
+                            "id": 94,
+                            "dayNum": 4,
+                            "weekId": 19,
+                            "daySubTopics": [
+                                {
+                                    "id": 218,
+                                    "dayId": 94,
+                                    "index": 3,
+                                    "subTopicId": 32
+                                },
+                                {
+                                    "id": 217,
+                                    "dayId": 94,
+                                    "index": 2,
+                                    "subTopicId": 31
+                                },
+                                {
+                                    "id": 216,
+                                    "dayId": 94,
+                                    "index": 1,
+                                    "subTopicId": 30
+                                }
+                            ]
+                        },
+                        {
+                            "id": 92,
+                            "dayNum": 2,
+                            "weekId": 19,
+                            "daySubTopics": [
+                                {
+                                    "id": 210,
+                                    "dayId": 92,
+                                    "index": 1,
+                                    "subTopicId": 24
+                                },
+                                {
+                                    "id": 212,
+                                    "dayId": 92,
+                                    "index": 3,
+                                    "subTopicId": 26
+                                },
+                                {
+                                    "id": 211,
+                                    "dayId": 92,
+                                    "index": 2,
+                                    "subTopicId": 25
+                                }
+                            ]
+                        },
+                        {
+                            "id": 93,
+                            "dayNum": 3,
+                            "weekId": 19,
+                            "daySubTopics": [
+                                {
+                                    "id": 213,
+                                    "dayId": 93,
+                                    "index": 1,
+                                    "subTopicId": 27
+                                },
+                                {
+                                    "id": 214,
+                                    "dayId": 93,
+                                    "index": 2,
+                                    "subTopicId": 28
+                                },
+                                {
+                                    "id": 215,
+                                    "dayId": 93,
+                                    "index": 3,
+                                    "subTopicId": 29
+                                }
+                            ]
+                        },
+                        {
+                            "id": 95,
+                            "dayNum": 5,
+                            "weekId": 19,
+                            "daySubTopics": [
+                                {
+                                    "id": 221,
+                                    "dayId": 95,
+                                    "index": 3,
+                                    "subTopicId": 35
+                                },
+                                {
+                                    "id": 220,
+                                    "dayId": 95,
+                                    "index": 2,
+                                    "subTopicId": 34
+                                },
+                                {
+                                    "id": 219,
+                                    "dayId": 95,
+                                    "index": 1,
+                                    "subTopicId": 33
+                                }
+                            ]
+                        },
+                        {
+                            "id": 91,
+                            "dayNum": 1,
+                            "weekId": 19,
+                            "daySubTopics": [
+                                {
+                                    "id": 208,
+                                    "dayId": 91,
+                                    "index": 2,
+                                    "subTopicId": 22
+                                },
+                                {
+                                    "id": 207,
+                                    "dayId": 91,
+                                    "index": 1,
+                                    "subTopicId": 21
+                                },
+                                {
+                                    "id": 209,
+                                    "dayId": 91,
+                                    "index": 3,
+                                    "subTopicId": 23
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "id": 14,
+                    "weekNum": 4,
+                    "curriculumId": 2,
+                    "curriculumDays": [
+                        {
+                            "id": 67,
+                            "dayNum": 2,
+                            "weekId": 14,
+                            "daySubTopics": [
+                                {
+                                    "id": 158,
+                                    "dayId": 67,
+                                    "index": 2,
+                                    "subTopicId": 40
+                                },
+                                {
+                                    "id": 157,
+                                    "dayId": 67,
+                                    "index": 1,
+                                    "subTopicId": 39
+                                },
+                                {
+                                    "id": 159,
+                                    "dayId": 67,
+                                    "index": 3,
+                                    "subTopicId": 41
+                                }
+                            ]
+                        },
+                        {
+                            "id": 66,
+                            "dayNum": 1,
+                            "weekId": 14,
+                            "daySubTopics": [
+                                {
+                                    "id": 154,
+                                    "dayId": 66,
+                                    "index": 1,
+                                    "subTopicId": 36
+                                },
+                                {
+                                    "id": 156,
+                                    "dayId": 66,
+                                    "index": 3,
+                                    "subTopicId": 38
+                                },
+                                {
+                                    "id": 155,
+                                    "dayId": 66,
+                                    "index": 2,
+                                    "subTopicId": 37
+                                }
+                            ]
+                        },
+                        {
+                            "id": 70,
+                            "dayNum": 5,
+                            "weekId": 14,
+                            "daySubTopics": [
+                                {
+                                    "id": 166,
+                                    "dayId": 70,
+                                    "index": 2,
+                                    "subTopicId": 48
+                                },
+                                {
+                                    "id": 165,
+                                    "dayId": 70,
+                                    "index": 1,
+                                    "subTopicId": 47
+                                }
+                            ]
+                        },
+                        {
+                            "id": 68,
+                            "dayNum": 3,
+                            "weekId": 14,
+                            "daySubTopics": [
+                                {
+                                    "id": 160,
+                                    "dayId": 68,
+                                    "index": 1,
+                                    "subTopicId": 42
+                                },
+                                {
+                                    "id": 162,
+                                    "dayId": 68,
+                                    "index": 3,
+                                    "subTopicId": 44
+                                },
+                                {
+                                    "id": 161,
+                                    "dayId": 68,
+                                    "index": 2,
+                                    "subTopicId": 43
+                                }
+                            ]
+                        },
+                        {
+                            "id": 69,
+                            "dayNum": 4,
+                            "weekId": 14,
+                            "daySubTopics": [
+                                {
+                                    "id": 164,
+                                    "dayId": 69,
+                                    "index": 2,
+                                    "subTopicId": 46
+                                },
+                                {
+                                    "id": 163,
+                                    "dayId": 69,
+                                    "index": 1,
+                                    "subTopicId": 45
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "id": 15,
+                    "weekNum": 5,
+                    "curriculumId": 2,
+                    "curriculumDays": [
+                        {
+                            "id": 73,
+                            "dayNum": 3,
+                            "weekId": 15,
+                            "daySubTopics": [
+                                {
+                                    "id": 172,
+                                    "dayId": 73,
+                                    "index": 2,
+                                    "subTopicId": 54
+                                },
+                                {
+                                    "id": 171,
+                                    "dayId": 73,
+                                    "index": 1,
+                                    "subTopicId": 53
+                                }
+                            ]
+                        },
+                        {
+                            "id": 75,
+                            "dayNum": 5,
+                            "weekId": 15,
+                            "daySubTopics": [
+                                {
+                                    "id": 176,
+                                    "dayId": 75,
+                                    "index": 2,
+                                    "subTopicId": 58
+                                },
+                                {
+                                    "id": 175,
+                                    "dayId": 75,
+                                    "index": 1,
+                                    "subTopicId": 57
+                                }
+                            ]
+                        },
+                        {
+                            "id": 71,
+                            "dayNum": 1,
+                            "weekId": 15,
+                            "daySubTopics": [
+                                {
+                                    "id": 167,
+                                    "dayId": 71,
+                                    "index": 1,
+                                    "subTopicId": 49
+                                },
+                                {
+                                    "id": 168,
+                                    "dayId": 71,
+                                    "index": 2,
+                                    "subTopicId": 50
+                                }
+                            ]
+                        },
+                        {
+                            "id": 72,
+                            "dayNum": 2,
+                            "weekId": 15,
+                            "daySubTopics": [
+                                {
+                                    "id": 170,
+                                    "dayId": 72,
+                                    "index": 2,
+                                    "subTopicId": 52
+                                },
+                                {
+                                    "id": 169,
+                                    "dayId": 72,
+                                    "index": 1,
+                                    "subTopicId": 51
+                                }
+                            ]
+                        },
+                        {
+                            "id": 74,
+                            "dayNum": 4,
+                            "weekId": 15,
+                            "daySubTopics": [
+                                {
+                                    "id": 173,
+                                    "dayId": 74,
+                                    "index": 1,
+                                    "subTopicId": 55
+                                },
+                                {
+                                    "id": 174,
+                                    "dayId": 74,
+                                    "index": 2,
+                                    "subTopicId": 56
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "id": 16,
+                    "weekNum": 6,
+                    "curriculumId": 2,
+                    "curriculumDays": [
+                        {
+                            "id": 80,
+                            "dayNum": 5,
+                            "weekId": 16,
+                            "daySubTopics": [
+                                {
+                                    "id": 183,
+                                    "dayId": 80,
+                                    "index": 2,
+                                    "subTopicId": 65
+                                },
+                                {
+                                    "id": 182,
+                                    "dayId": 80,
+                                    "index": 1,
+                                    "subTopicId": 64
+                                }
+                            ]
+                        },
+                        {
+                            "id": 77,
+                            "dayNum": 2,
+                            "weekId": 16,
+                            "daySubTopics": [
+                                {
+                                    "id": 179,
+                                    "dayId": 77,
+                                    "index": 2,
+                                    "subTopicId": 61
+                                },
+                                {
+                                    "id": 178,
+                                    "dayId": 77,
+                                    "index": 1,
+                                    "subTopicId": 60
+                                }
+                            ]
+                        },
+                        {
+                            "id": 78,
+                            "dayNum": 3,
+                            "weekId": 16,
+                            "daySubTopics": [
+                                {
+                                    "id": 180,
+                                    "dayId": 78,
+                                    "index": 1,
+                                    "subTopicId": 62
+                                }
+                            ]
+                        },
+                        {
+                            "id": 79,
+                            "dayNum": 4,
+                            "weekId": 16,
+                            "daySubTopics": [
+                                {
+                                    "id": 181,
+                                    "dayId": 79,
+                                    "index": 1,
+                                    "subTopicId": 63
+                                }
+                            ]
+                        },
+                        {
+                            "id": 76,
+                            "dayNum": 1,
+                            "weekId": 16,
+                            "daySubTopics": [
+                                {
+                                    "id": 177,
+                                    "dayId": 76,
+                                    "index": 1,
+                                    "subTopicId": 59
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "id": 17,
+                    "weekNum": 7,
+                    "curriculumId": 2,
+                    "curriculumDays": [
+                        {
+                            "id": 85,
+                            "dayNum": 5,
+                            "weekId": 17,
+                            "daySubTopics": [
+                                {
+                                    "id": 191,
+                                    "dayId": 85,
+                                    "index": 1,
+                                    "subTopicId": 5
+                                },
+                                {
+                                    "id": 192,
+                                    "dayId": 85,
+                                    "index": 2,
+                                    "subTopicId": 6
+                                }
+                            ]
+                        },
+                        {
+                            "id": 83,
+                            "dayNum": 3,
+                            "weekId": 17,
+                            "daySubTopics": [
+                                {
+                                    "id": 189,
+                                    "dayId": 83,
+                                    "index": 2,
+                                    "subTopicId": 2
+                                },
+                                {
+                                    "id": 188,
+                                    "dayId": 83,
+                                    "index": 1,
+                                    "subTopicId": 1
+                                }
+                            ]
+                        },
+                        {
+                            "id": 82,
+                            "dayNum": 2,
+                            "weekId": 17,
+                            "daySubTopics": [
+                                {
+                                    "id": 186,
+                                    "dayId": 82,
+                                    "index": 1,
+                                    "subTopicId": 3
+                                },
+                                {
+                                    "id": 187,
+                                    "dayId": 82,
+                                    "index": 2,
+                                    "subTopicId": 4
+                                }
+                            ]
+                        },
+                        {
+                            "id": 84,
+                            "dayNum": 4,
+                            "weekId": 17,
+                            "daySubTopics": [
+                                {
+                                    "id": 190,
+                                    "dayId": 84,
+                                    "index": 1,
+                                    "subTopicId": 3
+                                },
+                                {
+                                    "id": 245,
+                                    "dayId": 84,
+                                    "index": 2,
+                                    "subTopicId": 4
+                                }
+                            ]
+                        },
+                        {
+                            "id": 81,
+                            "dayNum": 1,
+                            "weekId": 17,
+                            "daySubTopics": [
+                                {
+                                    "id": 185,
+                                    "dayId": 81,
+                                    "index": 2,
+                                    "subTopicId": 2
+                                },
+                                {
+                                    "id": 184,
+                                    "dayId": 81,
+                                    "index": 1,
+                                    "subTopicId": 1
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "id": 18,
+                    "weekNum": 8,
+                    "curriculumId": 2,
+                    "curriculumDays": [
+                        {
+                            "id": 86,
+                            "dayNum": 1,
+                            "weekId": 18,
+                            "daySubTopics": [
+                                {
+                                    "id": 193,
+                                    "dayId": 86,
+                                    "index": 1,
+                                    "subTopicId": 7
+                                },
+                                {
+                                    "id": 194,
+                                    "dayId": 86,
+                                    "index": 2,
+                                    "subTopicId": 8
+                                }
+                            ]
+                        },
+                        {
+                            "id": 90,
+                            "dayNum": 5,
+                            "weekId": 18,
+                            "daySubTopics": [
+                                {
+                                    "id": 206,
+                                    "dayId": 90,
+                                    "index": 3,
+                                    "subTopicId": 20
+                                },
+                                {
+                                    "id": 204,
+                                    "dayId": 90,
+                                    "index": 1,
+                                    "subTopicId": 18
+                                },
+                                {
+                                    "id": 205,
+                                    "dayId": 90,
+                                    "index": 2,
+                                    "subTopicId": 19
+                                }
+                            ]
+                        },
+                        {
+                            "id": 87,
+                            "dayNum": 2,
+                            "weekId": 18,
+                            "daySubTopics": [
+                                {
+                                    "id": 195,
+                                    "dayId": 87,
+                                    "index": 1,
+                                    "subTopicId": 9
+                                },
+                                {
+                                    "id": 197,
+                                    "dayId": 87,
+                                    "index": 3,
+                                    "subTopicId": 11
+                                },
+                                {
+                                    "id": 196,
+                                    "dayId": 87,
+                                    "index": 2,
+                                    "subTopicId": 10
+                                }
+                            ]
+                        },
+                        {
+                            "id": 88,
+                            "dayNum": 3,
+                            "weekId": 18,
+                            "daySubTopics": [
+                                {
+                                    "id": 198,
+                                    "dayId": 88,
+                                    "index": 1,
+                                    "subTopicId": 12
+                                },
+                                {
+                                    "id": 199,
+                                    "dayId": 88,
+                                    "index": 2,
+                                    "subTopicId": 13
+                                },
+                                {
+                                    "id": 200,
+                                    "dayId": 88,
+                                    "index": 3,
+                                    "subTopicId": 14
+                                }
+                            ]
+                        },
+                        {
+                            "id": 89,
+                            "dayNum": 4,
+                            "weekId": 18,
+                            "daySubTopics": [
+                                {
+                                    "id": 203,
+                                    "dayId": 89,
+                                    "index": 3,
+                                    "subTopicId": 17
+                                },
+                                {
+                                    "id": 201,
+                                    "dayId": 89,
+                                    "index": 1,
+                                    "subTopicId": 15
+                                },
+                                {
+                                    "id": 202,
+                                    "dayId": 89,
+                                    "index": 2,
+                                    "subTopicId": 16
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "id": 13,
+                    "weekNum": 3,
+                    "curriculumId": 2,
+                    "curriculumDays": [
+                        {
+                            "id": 62,
+                            "dayNum": 2,
+                            "weekId": 13,
+                            "daySubTopics": [
+                                {
+                                    "id": 142,
+                                    "dayId": 62,
+                                    "index": 1,
+                                    "subTopicId": 24
+                                },
+                                {
+                                    "id": 144,
+                                    "dayId": 62,
+                                    "index": 3,
+                                    "subTopicId": 26
+                                },
+                                {
+                                    "id": 143,
+                                    "dayId": 62,
+                                    "index": 2,
+                                    "subTopicId": 25
+                                }
+                            ]
+                        },
+                        {
+                            "id": 61,
+                            "dayNum": 1,
+                            "weekId": 13,
+                            "daySubTopics": [
+                                {
+                                    "id": 141,
+                                    "dayId": 61,
+                                    "index": 3,
+                                    "subTopicId": 23
+                                },
+                                {
+                                    "id": 140,
+                                    "dayId": 61,
+                                    "index": 2,
+                                    "subTopicId": 22
+                                },
+                                {
+                                    "id": 139,
+                                    "dayId": 61,
+                                    "index": 1,
+                                    "subTopicId": 21
+                                }
+                            ]
+                        },
+                        {
+                            "id": 65,
+                            "dayNum": 5,
+                            "weekId": 13,
+                            "daySubTopics": [
+                                {
+                                    "id": 153,
+                                    "dayId": 65,
+                                    "index": 3,
+                                    "subTopicId": 35
+                                },
+                                {
+                                    "id": 151,
+                                    "dayId": 65,
+                                    "index": 1,
+                                    "subTopicId": 33
+                                },
+                                {
+                                    "id": 152,
+                                    "dayId": 65,
+                                    "index": 2,
+                                    "subTopicId": 34
+                                }
+                            ]
+                        },
+                        {
+                            "id": 64,
+                            "dayNum": 4,
+                            "weekId": 13,
+                            "daySubTopics": [
+                                {
+                                    "id": 148,
+                                    "dayId": 64,
+                                    "index": 1,
+                                    "subTopicId": 30
+                                },
+                                {
+                                    "id": 149,
+                                    "dayId": 64,
+                                    "index": 2,
+                                    "subTopicId": 31
+                                },
+                                {
+                                    "id": 150,
+                                    "dayId": 64,
+                                    "index": 3,
+                                    "subTopicId": 32
+                                }
+                            ]
+                        },
+                        {
+                            "id": 63,
+                            "dayNum": 3,
+                            "weekId": 13,
+                            "daySubTopics": [
+                                {
+                                    "id": 147,
+                                    "dayId": 63,
+                                    "index": 3,
+                                    "subTopicId": 29
+                                },
+                                {
+                                    "id": 145,
+                                    "dayId": 63,
+                                    "index": 1,
+                                    "subTopicId": 27
+                                },
+                                {
+                                    "id": 146,
+                                    "dayId": 63,
+                                    "index": 2,
+                                    "subTopicId": 28
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "id": 20,
+                    "weekNum": 10,
+                    "curriculumId": 2,
+                    "curriculumDays": [
+                        {
+                            "id": 97,
+                            "dayNum": 2,
+                            "weekId": 20,
+                            "daySubTopics": [
+                                {
+                                    "id": 225,
+                                    "dayId": 97,
+                                    "index": 1,
+                                    "subTopicId": 39
+                                },
+                                {
+                                    "id": 227,
+                                    "dayId": 97,
+                                    "index": 3,
+                                    "subTopicId": 41
+                                },
+                                {
+                                    "id": 226,
+                                    "dayId": 97,
+                                    "index": 2,
+                                    "subTopicId": 40
+                                }
+                            ]
+                        },
+                        {
+                            "id": 100,
+                            "dayNum": 5,
+                            "weekId": 20,
+                            "daySubTopics": [
+                                {
+                                    "id": 233,
+                                    "dayId": 100,
+                                    "index": 1,
+                                    "subTopicId": 47
+                                },
+                                {
+                                    "id": 234,
+                                    "dayId": 100,
+                                    "index": 2,
+                                    "subTopicId": 48
+                                }
+                            ]
+                        },
+                        {
+                            "id": 96,
+                            "dayNum": 1,
+                            "weekId": 20,
+                            "daySubTopics": [
+                                {
+                                    "id": 223,
+                                    "dayId": 96,
+                                    "index": 2,
+                                    "subTopicId": 37
+                                },
+                                {
+                                    "id": 224,
+                                    "dayId": 96,
+                                    "index": 3,
+                                    "subTopicId": 38
+                                },
+                                {
+                                    "id": 222,
+                                    "dayId": 96,
+                                    "index": 1,
+                                    "subTopicId": 36
+                                }
+                            ]
+                        },
+                        {
+                            "id": 98,
+                            "dayNum": 3,
+                            "weekId": 20,
+                            "daySubTopics": [
+                                {
+                                    "id": 228,
+                                    "dayId": 98,
+                                    "index": 1,
+                                    "subTopicId": 42
+                                },
+                                {
+                                    "id": 230,
+                                    "dayId": 98,
+                                    "index": 3,
+                                    "subTopicId": 44
+                                },
+                                {
+                                    "id": 229,
+                                    "dayId": 98,
+                                    "index": 2,
+                                    "subTopicId": 43
+                                }
+                            ]
+                        },
+                        {
+                            "id": 99,
+                            "dayNum": 4,
+                            "weekId": 20,
+                            "daySubTopics": [
+                                {
+                                    "id": 232,
+                                    "dayId": 99,
+                                    "index": 2,
+                                    "subTopicId": 46
+                                },
+                                {
+                                    "id": 231,
+                                    "dayId": 99,
+                                    "index": 1,
+                                    "subTopicId": 45
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": 3,
+            "name": ".NET",
+            "version": 1,
+            "creatorId": "1",
+            "approvedById": "2",
+            "status": 1,
+            "dateCreated": 1538280000000,
+            "numberOfWeeks": 10,
+            "curriculumWeeks": [
+                {
+                    "id": 26,
+                    "weekNum": 6,
+                    "curriculumId": 3,
+                    "curriculumDays": [
+                        {
+                            "id": 128,
+                            "dayNum": 3,
+                            "weekId": 26,
+                            "daySubTopics": [
+                                {
+                                    "id": 294,
+                                    "dayId": 128,
+                                    "index": 1,
+                                    "subTopicId": 62
+                                }
+                            ]
+                        },
+                        {
+                            "id": 129,
+                            "dayNum": 4,
+                            "weekId": 26,
+                            "daySubTopics": [
+                                {
+                                    "id": 295,
+                                    "dayId": 129,
+                                    "index": 1,
+                                    "subTopicId": 63
+                                }
+                            ]
+                        },
+                        {
+                            "id": 127,
+                            "dayNum": 2,
+                            "weekId": 26,
+                            "daySubTopics": [
+                                {
+                                    "id": 293,
+                                    "dayId": 127,
+                                    "index": 2,
+                                    "subTopicId": 61
+                                },
+                                {
+                                    "id": 292,
+                                    "dayId": 127,
+                                    "index": 1,
+                                    "subTopicId": 60
+                                }
+                            ]
+                        },
+                        {
+                            "id": 130,
+                            "dayNum": 5,
+                            "weekId": 26,
+                            "daySubTopics": [
+                                {
+                                    "id": 297,
+                                    "dayId": 130,
+                                    "index": 2,
+                                    "subTopicId": 65
+                                },
+                                {
+                                    "id": 296,
+                                    "dayId": 130,
+                                    "index": 1,
+                                    "subTopicId": 64
+                                }
+                            ]
+                        },
+                        {
+                            "id": 126,
+                            "dayNum": 1,
+                            "weekId": 26,
+                            "daySubTopics": [
+                                {
+                                    "id": 291,
+                                    "dayId": 126,
+                                    "index": 1,
+                                    "subTopicId": 59
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "id": 29,
+                    "weekNum": 9,
+                    "curriculumId": 3,
+                    "curriculumDays": [
+                        {
+                            "id": 141,
+                            "dayNum": 1,
+                            "weekId": 29,
+                            "daySubTopics": [
+                                {
+                                    "id": 323,
+                                    "dayId": 141,
+                                    "index": 2,
+                                    "subTopicId": 22
+                                },
+                                {
+                                    "id": 322,
+                                    "dayId": 141,
+                                    "index": 1,
+                                    "subTopicId": 21
+                                },
+                                {
+                                    "id": 324,
+                                    "dayId": 141,
+                                    "index": 3,
+                                    "subTopicId": 23
+                                }
+                            ]
+                        },
+                        {
+                            "id": 143,
+                            "dayNum": 3,
+                            "weekId": 29,
+                            "daySubTopics": [
+                                {
+                                    "id": 330,
+                                    "dayId": 143,
+                                    "index": 3,
+                                    "subTopicId": 29
+                                },
+                                {
+                                    "id": 329,
+                                    "dayId": 143,
+                                    "index": 2,
+                                    "subTopicId": 28
+                                },
+                                {
+                                    "id": 328,
+                                    "dayId": 143,
+                                    "index": 1,
+                                    "subTopicId": 27
+                                }
+                            ]
+                        },
+                        {
+                            "id": 142,
+                            "dayNum": 2,
+                            "weekId": 29,
+                            "daySubTopics": [
+                                {
+                                    "id": 325,
+                                    "dayId": 142,
+                                    "index": 1,
+                                    "subTopicId": 24
+                                },
+                                {
+                                    "id": 327,
+                                    "dayId": 142,
+                                    "index": 3,
+                                    "subTopicId": 26
+                                },
+                                {
+                                    "id": 326,
+                                    "dayId": 142,
+                                    "index": 2,
+                                    "subTopicId": 25
+                                }
+                            ]
+                        },
+                        {
+                            "id": 145,
+                            "dayNum": 5,
+                            "weekId": 29,
+                            "daySubTopics": [
+                                {
+                                    "id": 334,
+                                    "dayId": 145,
+                                    "index": 1,
+                                    "subTopicId": 33
+                                },
+                                {
+                                    "id": 335,
+                                    "dayId": 145,
+                                    "index": 2,
+                                    "subTopicId": 34
+                                },
+                                {
+                                    "id": 336,
+                                    "dayId": 145,
+                                    "index": 3,
+                                    "subTopicId": 35
+                                }
+                            ]
+                        },
+                        {
+                            "id": 144,
+                            "dayNum": 4,
+                            "weekId": 29,
+                            "daySubTopics": [
+                                {
+                                    "id": 332,
+                                    "dayId": 144,
+                                    "index": 2,
+                                    "subTopicId": 31
+                                },
+                                {
+                                    "id": 331,
+                                    "dayId": 144,
+                                    "index": 1,
+                                    "subTopicId": 30
+                                },
+                                {
+                                    "id": 333,
+                                    "dayId": 144,
+                                    "index": 3,
+                                    "subTopicId": 32
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "id": 27,
+                    "weekNum": 7,
+                    "curriculumId": 3,
+                    "curriculumDays": [
+                        {
+                            "id": 135,
+                            "dayNum": 5,
+                            "weekId": 27,
+                            "daySubTopics": [
+                                {
+                                    "id": 306,
+                                    "dayId": 135,
+                                    "index": 1,
+                                    "subTopicId": 5
+                                },
+                                {
+                                    "id": 307,
+                                    "dayId": 135,
+                                    "index": 2,
+                                    "subTopicId": 6
+                                }
+                            ]
+                        },
+                        {
+                            "id": 131,
+                            "dayNum": 1,
+                            "weekId": 27,
+                            "daySubTopics": [
+                                {
+                                    "id": 299,
+                                    "dayId": 131,
+                                    "index": 2,
+                                    "subTopicId": 2
+                                },
+                                {
+                                    "id": 298,
+                                    "dayId": 131,
+                                    "index": 1,
+                                    "subTopicId": 1
+                                }
+                            ]
+                        },
+                        {
+                            "id": 133,
+                            "dayNum": 3,
+                            "weekId": 27,
+                            "daySubTopics": [
+                                {
+                                    "id": 303,
+                                    "dayId": 133,
+                                    "index": 2,
+                                    "subTopicId": 2
+                                },
+                                {
+                                    "id": 302,
+                                    "dayId": 133,
+                                    "index": 1,
+                                    "subTopicId": 1
+                                }
+                            ]
+                        },
+                        {
+                            "id": 134,
+                            "dayNum": 4,
+                            "weekId": 27,
+                            "daySubTopics": [
+                                {
+                                    "id": 305,
+                                    "dayId": 134,
+                                    "index": 2,
+                                    "subTopicId": 4
+                                },
+                                {
+                                    "id": 304,
+                                    "dayId": 134,
+                                    "index": 1,
+                                    "subTopicId": 3
+                                }
+                            ]
+                        },
+                        {
+                            "id": 132,
+                            "dayNum": 2,
+                            "weekId": 27,
+                            "daySubTopics": [
+                                {
+                                    "id": 301,
+                                    "dayId": 132,
+                                    "index": 2,
+                                    "subTopicId": 4
+                                },
+                                {
+                                    "id": 300,
+                                    "dayId": 132,
+                                    "index": 1,
+                                    "subTopicId": 3
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "id": 24,
+                    "weekNum": 4,
+                    "curriculumId": 3,
+                    "curriculumDays": [
+                        {
+                            "id": 117,
+                            "dayNum": 2,
+                            "weekId": 24,
+                            "daySubTopics": [
+                                {
+                                    "id": 272,
+                                    "dayId": 117,
+                                    "index": 2,
+                                    "subTopicId": 40
+                                },
+                                {
+                                    "id": 273,
+                                    "dayId": 117,
+                                    "index": 3,
+                                    "subTopicId": 41
+                                },
+                                {
+                                    "id": 271,
+                                    "dayId": 117,
+                                    "index": 1,
+                                    "subTopicId": 39
+                                }
+                            ]
+                        },
+                        {
+                            "id": 120,
+                            "dayNum": 5,
+                            "weekId": 24,
+                            "daySubTopics": [
+                                {
+                                    "id": 280,
+                                    "dayId": 120,
+                                    "index": 2,
+                                    "subTopicId": 48
+                                },
+                                {
+                                    "id": 279,
+                                    "dayId": 120,
+                                    "index": 1,
+                                    "subTopicId": 47
+                                }
+                            ]
+                        },
+                        {
+                            "id": 116,
+                            "dayNum": 1,
+                            "weekId": 24,
+                            "daySubTopics": [
+                                {
+                                    "id": 270,
+                                    "dayId": 116,
+                                    "index": 3,
+                                    "subTopicId": 38
+                                },
+                                {
+                                    "id": 269,
+                                    "dayId": 116,
+                                    "index": 2,
+                                    "subTopicId": 37
+                                },
+                                {
+                                    "id": 268,
+                                    "dayId": 116,
+                                    "index": 1,
+                                    "subTopicId": 36
+                                }
+                            ]
+                        },
+                        {
+                            "id": 119,
+                            "dayNum": 4,
+                            "weekId": 24,
+                            "daySubTopics": [
+                                {
+                                    "id": 277,
+                                    "dayId": 119,
+                                    "index": 1,
+                                    "subTopicId": 45
+                                },
+                                {
+                                    "id": 278,
+                                    "dayId": 119,
+                                    "index": 2,
+                                    "subTopicId": 46
+                                }
+                            ]
+                        },
+                        {
+                            "id": 118,
+                            "dayNum": 3,
+                            "weekId": 24,
+                            "daySubTopics": [
+                                {
+                                    "id": 274,
+                                    "dayId": 118,
+                                    "index": 1,
+                                    "subTopicId": 42
+                                },
+                                {
+                                    "id": 276,
+                                    "dayId": 118,
+                                    "index": 3,
+                                    "subTopicId": 44
+                                },
+                                {
+                                    "id": 275,
+                                    "dayId": 118,
+                                    "index": 2,
+                                    "subTopicId": 43
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "id": 22,
+                    "weekNum": 2,
+                    "curriculumId": 3,
+                    "curriculumDays": [
+                        {
+                            "id": 109,
+                            "dayNum": 4,
+                            "weekId": 22,
+                            "daySubTopics": [
+                                {
+                                    "id": 250,
+                                    "dayId": 109,
+                                    "index": 1,
+                                    "subTopicId": 15
+                                }
+                            ]
+                        },
+                        {
+                            "id": 107,
+                            "dayNum": 2,
+                            "weekId": 22,
+                            "daySubTopics": [
+                                {
+                                    "id": 247,
+                                    "dayId": 107,
+                                    "index": 1,
+                                    "subTopicId": 12
+                                },
+                                {
+                                    "id": 248,
+                                    "dayId": 107,
+                                    "index": 2,
+                                    "subTopicId": 13
+                                }
+                            ]
+                        },
+                        {
+                            "id": 110,
+                            "dayNum": 5,
+                            "weekId": 22,
+                            "daySubTopics": [
+                                {
+                                    "id": 251,
+                                    "dayId": 110,
+                                    "index": 1,
+                                    "subTopicId": 16
+                                },
+                                {
+                                    "id": 252,
+                                    "dayId": 110,
+                                    "index": 2,
+                                    "subTopicId": 17
+                                }
+                            ]
+                        },
+                        {
+                            "id": 106,
+                            "dayNum": 1,
+                            "weekId": 22,
+                            "daySubTopics": [
+                                {
+                                    "id": 246,
+                                    "dayId": 106,
+                                    "index": 1,
+                                    "subTopicId": 11
+                                }
+                            ]
+                        },
+                        {
+                            "id": 108,
+                            "dayNum": 3,
+                            "weekId": 22,
+                            "daySubTopics": [
+                                {
+                                    "id": 249,
+                                    "dayId": 108,
+                                    "index": 1,
+                                    "subTopicId": 14
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "id": 28,
+                    "weekNum": 8,
+                    "curriculumId": 3,
+                    "curriculumDays": [
+                        {
+                            "id": 139,
+                            "dayNum": 4,
+                            "weekId": 28,
+                            "daySubTopics": [
+                                {
+                                    "id": 317,
+                                    "dayId": 139,
+                                    "index": 2,
+                                    "subTopicId": 16
+                                },
+                                {
+                                    "id": 318,
+                                    "dayId": 139,
+                                    "index": 3,
+                                    "subTopicId": 17
+                                },
+                                {
+                                    "id": 316,
+                                    "dayId": 139,
+                                    "index": 1,
+                                    "subTopicId": 15
+                                }
+                            ]
+                        },
+                        {
+                            "id": 136,
+                            "dayNum": 1,
+                            "weekId": 28,
+                            "daySubTopics": [
+                                {
+                                    "id": 309,
+                                    "dayId": 136,
+                                    "index": 2,
+                                    "subTopicId": 8
+                                },
+                                {
+                                    "id": 308,
+                                    "dayId": 136,
+                                    "index": 1,
+                                    "subTopicId": 7
+                                }
+                            ]
+                        },
+                        {
+                            "id": 140,
+                            "dayNum": 5,
+                            "weekId": 28,
+                            "daySubTopics": [
+                                {
+                                    "id": 319,
+                                    "dayId": 140,
+                                    "index": 1,
+                                    "subTopicId": 18
+                                },
+                                {
+                                    "id": 320,
+                                    "dayId": 140,
+                                    "index": 2,
+                                    "subTopicId": 19
+                                },
+                                {
+                                    "id": 321,
+                                    "dayId": 140,
+                                    "index": 3,
+                                    "subTopicId": 20
+                                }
+                            ]
+                        },
+                        {
+                            "id": 137,
+                            "dayNum": 2,
+                            "weekId": 28,
+                            "daySubTopics": [
+                                {
+                                    "id": 310,
+                                    "dayId": 137,
+                                    "index": 1,
+                                    "subTopicId": 9
+                                },
+                                {
+                                    "id": 311,
+                                    "dayId": 137,
+                                    "index": 2,
+                                    "subTopicId": 10
+                                },
+                                {
+                                    "id": 312,
+                                    "dayId": 137,
+                                    "index": 3,
+                                    "subTopicId": 11
+                                }
+                            ]
+                        },
+                        {
+                            "id": 138,
+                            "dayNum": 3,
+                            "weekId": 28,
+                            "daySubTopics": [
+                                {
+                                    "id": 315,
+                                    "dayId": 138,
+                                    "index": 3,
+                                    "subTopicId": 14
+                                },
+                                {
+                                    "id": 314,
+                                    "dayId": 138,
+                                    "index": 2,
+                                    "subTopicId": 13
+                                },
+                                {
+                                    "id": 313,
+                                    "dayId": 138,
+                                    "index": 1,
+                                    "subTopicId": 12
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "id": 23,
+                    "weekNum": 3,
+                    "curriculumId": 3,
+                    "curriculumDays": [
+                        {
+                            "id": 112,
+                            "dayNum": 2,
+                            "weekId": 23,
+                            "daySubTopics": [
+                                {
+                                    "id": 257,
+                                    "dayId": 112,
+                                    "index": 2,
+                                    "subTopicId": 25
+                                },
+                                {
+                                    "id": 256,
+                                    "dayId": 112,
+                                    "index": 1,
+                                    "subTopicId": 24
+                                },
+                                {
+                                    "id": 258,
+                                    "dayId": 112,
+                                    "index": 3,
+                                    "subTopicId": 26
+                                }
+                            ]
+                        },
+                        {
+                            "id": 114,
+                            "dayNum": 4,
+                            "weekId": 23,
+                            "daySubTopics": [
+                                {
+                                    "id": 262,
+                                    "dayId": 114,
+                                    "index": 1,
+                                    "subTopicId": 30
+                                },
+                                {
+                                    "id": 263,
+                                    "dayId": 114,
+                                    "index": 2,
+                                    "subTopicId": 31
+                                },
+                                {
+                                    "id": 264,
+                                    "dayId": 114,
+                                    "index": 3,
+                                    "subTopicId": 32
+                                }
+                            ]
+                        },
+                        {
+                            "id": 115,
+                            "dayNum": 5,
+                            "weekId": 23,
+                            "daySubTopics": [
+                                {
+                                    "id": 266,
+                                    "dayId": 115,
+                                    "index": 2,
+                                    "subTopicId": 34
+                                },
+                                {
+                                    "id": 267,
+                                    "dayId": 115,
+                                    "index": 3,
+                                    "subTopicId": 35
+                                },
+                                {
+                                    "id": 265,
+                                    "dayId": 115,
+                                    "index": 1,
+                                    "subTopicId": 33
+                                }
+                            ]
+                        },
+                        {
+                            "id": 111,
+                            "dayNum": 1,
+                            "weekId": 23,
+                            "daySubTopics": [
+                                {
+                                    "id": 253,
+                                    "dayId": 111,
+                                    "index": 1,
+                                    "subTopicId": 21
+                                },
+                                {
+                                    "id": 254,
+                                    "dayId": 111,
+                                    "index": 2,
+                                    "subTopicId": 22
+                                },
+                                {
+                                    "id": 255,
+                                    "dayId": 111,
+                                    "index": 3,
+                                    "subTopicId": 23
+                                }
+                            ]
+                        },
+                        {
+                            "id": 113,
+                            "dayNum": 3,
+                            "weekId": 23,
+                            "daySubTopics": [
+                                {
+                                    "id": 259,
+                                    "dayId": 113,
+                                    "index": 1,
+                                    "subTopicId": 27
+                                },
+                                {
+                                    "id": 260,
+                                    "dayId": 113,
+                                    "index": 2,
+                                    "subTopicId": 28
+                                },
+                                {
+                                    "id": 261,
+                                    "dayId": 113,
+                                    "index": 3,
+                                    "subTopicId": 29
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "id": 30,
+                    "weekNum": 10,
+                    "curriculumId": 3,
+                    "curriculumDays": [
+                        {
+                            "id": 150,
+                            "dayNum": 5,
+                            "weekId": 30,
+                            "daySubTopics": [
+                                {
+                                    "id": 349,
+                                    "dayId": 150,
+                                    "index": 2,
+                                    "subTopicId": 48
+                                },
+                                {
+                                    "id": 348,
+                                    "dayId": 150,
+                                    "index": 1,
+                                    "subTopicId": 47
+                                }
+                            ]
+                        },
+                        {
+                            "id": 147,
+                            "dayNum": 2,
+                            "weekId": 30,
+                            "daySubTopics": [
+                                {
+                                    "id": 342,
+                                    "dayId": 147,
+                                    "index": 3,
+                                    "subTopicId": 41
+                                },
+                                {
+                                    "id": 340,
+                                    "dayId": 147,
+                                    "index": 1,
+                                    "subTopicId": 39
+                                },
+                                {
+                                    "id": 341,
+                                    "dayId": 147,
+                                    "index": 2,
+                                    "subTopicId": 40
+                                }
+                            ]
+                        },
+                        {
+                            "id": 149,
+                            "dayNum": 4,
+                            "weekId": 30,
+                            "daySubTopics": [
+                                {
+                                    "id": 347,
+                                    "dayId": 149,
+                                    "index": 2,
+                                    "subTopicId": 46
+                                },
+                                {
+                                    "id": 346,
+                                    "dayId": 149,
+                                    "index": 1,
+                                    "subTopicId": 45
+                                }
+                            ]
+                        },
+                        {
+                            "id": 148,
+                            "dayNum": 3,
+                            "weekId": 30,
+                            "daySubTopics": [
+                                {
+                                    "id": 345,
+                                    "dayId": 148,
+                                    "index": 3,
+                                    "subTopicId": 44
+                                },
+                                {
+                                    "id": 344,
+                                    "dayId": 148,
+                                    "index": 2,
+                                    "subTopicId": 43
+                                },
+                                {
+                                    "id": 343,
+                                    "dayId": 148,
+                                    "index": 1,
+                                    "subTopicId": 42
+                                }
+                            ]
+                        },
+                        {
+                            "id": 146,
+                            "dayNum": 1,
+                            "weekId": 30,
+                            "daySubTopics": [
+                                {
+                                    "id": 337,
+                                    "dayId": 146,
+                                    "index": 1,
+                                    "subTopicId": 36
+                                },
+                                {
+                                    "id": 339,
+                                    "dayId": 146,
+                                    "index": 3,
+                                    "subTopicId": 38
+                                },
+                                {
+                                    "id": 338,
+                                    "dayId": 146,
+                                    "index": 2,
+                                    "subTopicId": 37
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "id": 25,
+                    "weekNum": 5,
+                    "curriculumId": 3,
+                    "curriculumDays": [
+                        {
+                            "id": 121,
+                            "dayNum": 1,
+                            "weekId": 25,
+                            "daySubTopics": [
+                                {
+                                    "id": 282,
+                                    "dayId": 121,
+                                    "index": 2,
+                                    "subTopicId": 50
+                                },
+                                {
+                                    "id": 281,
+                                    "dayId": 121,
+                                    "index": 1,
+                                    "subTopicId": 49
+                                }
+                            ]
+                        },
+                        {
+                            "id": 124,
+                            "dayNum": 4,
+                            "weekId": 25,
+                            "daySubTopics": [
+                                {
+                                    "id": 288,
+                                    "dayId": 124,
+                                    "index": 2,
+                                    "subTopicId": 56
+                                },
+                                {
+                                    "id": 287,
+                                    "dayId": 124,
+                                    "index": 1,
+                                    "subTopicId": 55
+                                }
+                            ]
+                        },
+                        {
+                            "id": 125,
+                            "dayNum": 5,
+                            "weekId": 25,
+                            "daySubTopics": [
+                                {
+                                    "id": 289,
+                                    "dayId": 125,
+                                    "index": 1,
+                                    "subTopicId": 57
+                                },
+                                {
+                                    "id": 290,
+                                    "dayId": 125,
+                                    "index": 2,
+                                    "subTopicId": 58
+                                }
+                            ]
+                        },
+                        {
+                            "id": 123,
+                            "dayNum": 3,
+                            "weekId": 25,
+                            "daySubTopics": [
+                                {
+                                    "id": 285,
+                                    "dayId": 123,
+                                    "index": 1,
+                                    "subTopicId": 53
+                                },
+                                {
+                                    "id": 286,
+                                    "dayId": 123,
+                                    "index": 2,
+                                    "subTopicId": 54
+                                }
+                            ]
+                        },
+                        {
+                            "id": 122,
+                            "dayNum": 2,
+                            "weekId": 25,
+                            "daySubTopics": [
+                                {
+                                    "id": 284,
+                                    "dayId": 122,
+                                    "index": 2,
+                                    "subTopicId": 52
+                                },
+                                {
+                                    "id": 283,
+                                    "dayId": 122,
+                                    "index": 1,
+                                    "subTopicId": 51
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "id": 21,
+                    "weekNum": 1,
+                    "curriculumId": 3,
+                    "curriculumDays": [
+                        {
+                            "id": 104,
+                            "dayNum": 4,
+                            "weekId": 21,
+                            "daySubTopics": [
+                                {
+                                    "id": 241,
+                                    "dayId": 104,
+                                    "index": 1,
+                                    "subTopicId": 7
+                                },
+                                {
+                                    "id": 243,
+                                    "dayId": 104,
+                                    "index": 3,
+                                    "subTopicId": 9
+                                },
+                                {
+                                    "id": 242,
+                                    "dayId": 104,
+                                    "index": 2,
+                                    "subTopicId": 8
+                                }
+                            ]
+                        },
+                        {
+                            "id": 102,
+                            "dayNum": 2,
+                            "weekId": 21,
+                            "daySubTopics": [
+                                {
+                                    "id": 239,
+                                    "dayId": 102,
+                                    "index": 3,
+                                    "subTopicId": 5
+                                },
+                                {
+                                    "id": 237,
+                                    "dayId": 102,
+                                    "index": 1,
+                                    "subTopicId": 3
+                                },
+                                {
+                                    "id": 238,
+                                    "dayId": 102,
+                                    "index": 2,
+                                    "subTopicId": 4
+                                }
+                            ]
+                        },
+                        {
+                            "id": 105,
+                            "dayNum": 5,
+                            "weekId": 21,
+                            "daySubTopics": [
+                                {
+                                    "id": 244,
+                                    "dayId": 105,
+                                    "index": 1,
+                                    "subTopicId": 10
+                                }
+                            ]
+                        },
+                        {
+                            "id": 103,
+                            "dayNum": 3,
+                            "weekId": 21,
+                            "daySubTopics": [
+                                {
+                                    "id": 240,
+                                    "dayId": 103,
+                                    "index": 2,
+                                    "subTopicId": 6
+                                }
+                            ]
+                        },
+                        {
+                            "id": 101,
+                            "dayNum": 1,
+                            "weekId": 21,
+                            "daySubTopics": [
+                                {
+                                    "id": 235,
+                                    "dayId": 101,
+                                    "index": 1,
+                                    "subTopicId": 66
+                                },
+                                {
+                                    "id": 236,
+                                    "dayId": 101,
+                                    "index": 2,
+                                    "subTopicId": 68
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": 4,
+            "name": "SDET",
+            "version": 1,
+            "creatorId": "1",
+            "approvedById": "2",
+            "status": 1,
+            "dateCreated": 1538280000000,
+            "numberOfWeeks": 10,
+            "curriculumWeeks": [
+                {
+                    "id": 31,
+                    "weekNum": 1,
+                    "curriculumId": 4,
+                    "curriculumDays": []
+                },
+                {
+                    "id": 40,
+                    "weekNum": 10,
+                    "curriculumId": 4,
+                    "curriculumDays": []
+                },
+                {
+                    "id": 37,
+                    "weekNum": 7,
+                    "curriculumId": 4,
+                    "curriculumDays": []
+                },
+                {
+                    "id": 39,
+                    "weekNum": 9,
+                    "curriculumId": 4,
+                    "curriculumDays": []
+                },
+                {
+                    "id": 32,
+                    "weekNum": 2,
+                    "curriculumId": 4,
+                    "curriculumDays": []
+                },
+                {
+                    "id": 38,
+                    "weekNum": 8,
+                    "curriculumId": 4,
+                    "curriculumDays": []
+                },
+                {
+                    "id": 35,
+                    "weekNum": 5,
+                    "curriculumId": 4,
+                    "curriculumDays": []
+                },
+                {
+                    "id": 36,
+                    "weekNum": 6,
+                    "curriculumId": 4,
+                    "curriculumDays": []
+                },
+                {
+                    "id": 34,
+                    "weekNum": 4,
+                    "curriculumId": 4,
+                    "curriculumDays": []
+                },
+                {
+                    "id": 33,
+                    "weekNum": 3,
+                    "curriculumId": 4,
+                    "curriculumDays": []
+                }
+            ]
+        }
+    ]
+}

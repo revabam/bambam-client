@@ -1,5 +1,6 @@
-import { environment } from './../environments/environment';
+import { environment } from '../environments/environment';
 import { Component, OnInit } from '@angular/core';
+import { MatBottomSheetRef, MatBottomSheet } from '@angular/material';
 
 @Component({
   selector: 'app-root',
@@ -10,8 +11,7 @@ export class AppComponent implements OnInit {
 
   envName = environment.envName;
 
-  constructor() {}
+  constructor(private bottomSheet: MatBottomSheet) {}
 
   ngOnInit() {}
-
 }
