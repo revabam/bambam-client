@@ -1,15 +1,17 @@
 import { CurriculumViewComponent } from './routes/curriculum-editor/curriculum-view/curriculum-view.component';
 import { CreateCurriculumComponent } from './routes/curriculum-editor/create-curriculum/create-curriculum.component';
 import { HttpClientModule } from '@angular/common/http';
-import { NgModule, Component } from '@angular/core';
+import { NgModule, Component, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { MatAutocompleteModule, MatBadgeModule, MatBottomSheetModule, MatButtonModule,
+import {
+  MatAutocompleteModule, MatBadgeModule, MatBottomSheetModule, MatButtonModule,
   MatButtonToggleModule, MatCardModule, MatCheckboxModule, MatChipsModule, MatDatepickerModule,
   MatDialogModule, MatDividerModule, MatExpansionModule, MatGridListModule, MatIconModule, MatInputModule,
   MatListModule, MatMenuModule, MatNativeDateModule, MatPaginatorModule, MatProgressBarModule, MatProgressSpinnerModule,
   MatRadioModule, MatRippleModule, MatSelectModule, MatSidenavModule, MatSliderModule, MatSlideToggleModule, MatSnackBarModule,
   MatSortModule, MatStepperModule, MatTableModule, MatTabsModule, MatToolbarModule,
-  MatTooltipModule, MatTreeModule } from '@angular/material';
+  MatTooltipModule, MatTreeModule
+} from '@angular/material';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule } from '@angular/router';
@@ -22,7 +24,7 @@ import { BoomComponent } from './routes/boom/boom.component';
 import { CurriculumEditorComponent } from './routes/curriculum-editor/curriculum-editor.component';
 import { NgbModalModule } from '@ng-bootstrap/ng-bootstrap/modal/modal.module';
 import { CalendarModule } from 'angular-calendar';
-import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { DashboardComponent } from './routes/dashboard/dashboard.component';
 import { LoginComponent } from './routes/login/login.component';
 import { RegisterComponent } from './routes/register/register.component';
@@ -45,9 +47,7 @@ import { ForgottenPasswordComponent } from './routes/forgotten-password/forgotte
 import { CurriculumWeekComponent } from './routes/curriculum-editor/curriculum-week/curriculum-week.component';
 import { TopicPoolComponent } from './routes/curriculum-editor/topic-pool/topic-pool.component';
 import { NgDragDropModule } from 'ng-drag-drop';
-import {DragDropModule} from '@angular/cdk/drag-drop';
-
-
+import { DragDropModule } from '@angular/cdk/drag-drop';
 
 @NgModule({
   declarations: [
@@ -65,7 +65,7 @@ import {DragDropModule} from '@angular/cdk/drag-drop';
     EventDuplicateModalComponent,
     StartMondayModalComponent,
     DialogViewComponent,
-    UserInfoComponent,
+    UserInfoComponent, 
     TopicsComponent,
     CurriculumViewComponent,
     CurriculumDayComponent,
@@ -73,6 +73,7 @@ import {DragDropModule} from '@angular/cdk/drag-drop';
     TopicPoolComponent,
     ForgottenPasswordComponent
   ],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
   imports: [
     ChartsModule,
     NgbModule.forRoot(),
@@ -114,7 +115,7 @@ import {DragDropModule} from '@angular/cdk/drag-drop';
     MatTooltipModule,
     MatTreeModule,
     BrowserModule,
-    RouterModule.forRoot(appRoutes, {onSameUrlNavigation: 'reload'}),
+    RouterModule.forRoot(appRoutes, { onSameUrlNavigation: 'reload' }),
     FormsModule,
     BsDatepickerModule.forRoot(),
     TimepickerModule.forRoot(),
@@ -124,7 +125,7 @@ import {DragDropModule} from '@angular/cdk/drag-drop';
     NgbModalModule.forRoot(),
     FlatpickrModule.forRoot(),
     CalendarModule.forRoot(),
-    UserIdleModule.forRoot({idle: 600, timeout: 300, ping: 60}),
+    UserIdleModule.forRoot({ idle: 600, timeout: 300, ping: 60 }),
     ChartsModule
   ],
   exports: [
@@ -141,8 +142,8 @@ import {DragDropModule} from '@angular/cdk/drag-drop';
     UserService,
     CognitoService,
     BatchService,
-    {provide: LocationStrategy, useClass: PathLocationStrategy}
+    { provide: LocationStrategy, useClass: PathLocationStrategy }
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule {}
+export class AppModule { }
